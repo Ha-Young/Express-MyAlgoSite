@@ -1,0 +1,2 @@
+{"message":"::1 - - [22/Mar/2021:08:01:30 +0000] \"GET / HTTP/1.1\" 304 - \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36\"\n","level":"info"}
+{"message":"::1 - - [22/Mar/2021:08:01:31 +0000] \"GET /stylesheets/style.css HTTP/1.1\" 200 111 \"http://localhost:3000/\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36\"\n","level":"info"}
