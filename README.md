@@ -14,6 +14,12 @@
 
   - [ ] [MongoDB 설치](https://docs.mongodb.com/manual/installation/)
   - [ ] 로컬에서 데이터베이스 실행하기
+  
+## 프로젝트 실행 방법
+
+```sh
+npm run dev
+```
 
 ## 구현해야 할 사항들
 
