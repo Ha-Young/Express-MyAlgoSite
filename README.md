@@ -7,13 +7,6 @@
 ### npm
 
   - [ ] `npm install` 실행
-
-### MongoDB 설치하기
-
-4번 진행할때 설치하시면 됩니다. 직접 로컬에 설치하지 않고 [mlab](https://mlab.com)을 이용하셔도 됩니다.
-
-  - [ ] [MongoDB 설치](https://docs.mongodb.com/manual/installation/)
-  - [ ] 로컬에서 데이터베이스 실행하기
   
 ## 프로젝트 실행 방법
 
@@ -48,6 +41,13 @@ npm run dev
   - [ ] 현재 `/data/problems.json` 데이터를 저장하기 알맞은 Database Schema를 구상해보세요. [참고 링크](http://mongoosejs.com/docs/guide.html)
   - [ ] 현재 사용하는 `/data/problems.json` 데이터를 [mlab](https://mlab.com/) 혹은 로컬 MongoDB를 이용하여 본인의 데이터베이스에 import 시켜주세요.
   - [ ] `/data/problems.json`의 자료를 이용하던 모든 부분을 위에서 작업한 실제 데이터베이스를 이용하도록 수정해주세요.
+
+#### MongoDB 설치하기
+
+4번 진행할때 설치하시면 됩니다. 직접 로컬에 설치하지 않고 [mlab](https://mlab.com)을 이용하셔도 됩니다.
+
+  - [ ] [MongoDB 설치](https://docs.mongodb.com/manual/installation/)
+  - [ ] 로컬에서 데이터베이스 실행하기
 
 ### 5. Extra: AWS Elastic Beanstalk에 배포하기
 
