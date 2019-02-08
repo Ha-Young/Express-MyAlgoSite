@@ -49,10 +49,6 @@ npm run dev
   - [ ] [MongoDB 설치](https://docs.mongodb.com/manual/installation/)
   - [ ] 로컬에서 데이터베이스 실행하기
 
-### 5. Extra: AWS Elastic Beanstalk에 배포하기
-
-  - [ ] [AWS](https://aws.amazon.com/) Elastic Beanstalk을 이용하여 배포하여 보세요. [참고 문서](https://github.com/vanilla-coding/docs/wiki/Setting-up-AWS-Elastic-Beanstalk)
-
 ## Resources
 
 * [NodeJS](https://nodejs.org/api/)
