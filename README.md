@@ -2,19 +2,19 @@
 
 등록되어 있는 알고리즘 문제를 풀 수 있는 어플리케이션입니다.
 
-## 프로젝트 구성 요소
-
-### npm
-
-  - [ ] `npm install` 실행
-  
-## 프로젝트 실행 방법
+## Setup
 
 ```sh
-npm run dev
+yarn install
 ```
 
-## 구현해야 할 사항들
+## Development
+
+```sh
+yarn run dev
+```
+
+## TODO
 
 ### 1. GET `/`
 
@@ -36,21 +36,7 @@ npm run dev
   - [ ] 제출된 코드가 테스트를 통과하지 못했을 경우, `failure.ejs` 템플릿을 생성하여 결과를 보여주세요. 어떤 테스트가 통과하지 못하였는지에 대한 내용도 보여주세요.
   - [ ] 제출된 코드 실행 도중 문제가 발생했을 경우, 발생한 문제에 대한 메시지와 함께 `error.ejs` 템플릿을 보여주세요.
 
-### 4. MongoDB 이용하기
-
-  - [ ] 현재 `/data/problems.json` 데이터를 저장하기 알맞은 Database Schema를 구상해보세요. [참고 링크](http://mongoosejs.com/docs/guide.html)
-  - [ ] 현재 사용하는 `/data/problems.json` 데이터를 [mlab](https://mlab.com/) 혹은 로컬 MongoDB를 이용하여 본인의 데이터베이스에 import 시켜주세요.
-  - [ ] `/data/problems.json`의 자료를 이용하던 모든 부분을 위에서 작업한 실제 데이터베이스를 이용하도록 수정해주세요.
-
-#### MongoDB 설치하기
-
-4번 진행할때 설치하시면 됩니다. 직접 로컬에 설치하지 않고 [mlab](https://mlab.com)을 이용하셔도 됩니다.
-
-  - [ ] [MongoDB 설치](https://docs.mongodb.com/manual/installation/)
-  - [ ] 로컬에서 데이터베이스 실행하기
-
 ## Resources
 
 * [NodeJS](https://nodejs.org/api/)
 * [Express](https://expressjs.com/)
-* [Mongoose](http://mongoosejs.com/)
