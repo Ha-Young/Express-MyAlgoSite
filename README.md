@@ -36,7 +36,12 @@ yarn run dev
   - [ ] 제출된 코드가 테스트를 통과하지 못했을 경우, `failure.ejs` 템플릿을 생성하여 결과를 보여주세요. 어떤 테스트가 통과하지 못하였는지에 대한 내용도 보여주세요.
   - [ ] 제출된 코드 실행 도중 문제가 발생했을 경우, 발생한 문제에 대한 메시지와 함께 `error.ejs` 템플릿을 보여주세요.
 
+### 4. Advanced
+
+* Server Controller Unit Test 작성하기
+
 ## Resources
 
 * [NodeJS](https://nodejs.org/api/)
 * [Express](https://expressjs.com/)
+* [Project Structure](https://www.freecodecamp.org/news/how-to-write-a-production-ready-node-and-express-app-f214f0b17d8c/)
