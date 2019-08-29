@@ -20,6 +20,12 @@ yarn run dev or npm run dev
 
 기본적인 과제 프로젝트 구성을 따르되, [Project Structure](https://www.freecodecamp.org/news/how-to-write-a-production-ready-node-and-express-app-f214f0b17d8c/) 등의 인터넷 자료를 이용하여 자유롭게 변경하셔도 됩니다.
 
+## Resources
+
+- [CodeMirror](https://github.com/codemirror/CodeMirror): In-browser code editor
+- [Unit Testing Express Controller Part 1](https://www.techighness.com/post/unit-testing-expressjs-controller-part-1/)
+- [Unit Testing Express Controller Part 2](https://www.techighness.com/post/unit-testing-expressjs-controller-part-2/)
+
 ## TODO
 
 ### 1. GET `/`
@@ -53,8 +59,5 @@ yarn run dev or npm run dev
 
 * Server Unit Test 작성하기
 * `/data/problems.json`의 정보를 MongoDB를 이용하여 관리하기
-
-## Resources
-
-* [NodeJS](https://nodejs.org/api/)
-* [Express](https://expressjs.com/)
+* Deploy your Express application: [Heroku](https://www.heroku.com/), [Microsoft Azure](https://azure.microsoft.com/en-us/pricing/details/app-service/windows/), [Amazon Web Services](https://aws.amazon.com)(Elastic Beanstalk)
+* Deploy your MongoDB using cloud services: [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/lp/general)
