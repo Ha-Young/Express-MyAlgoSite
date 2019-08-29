@@ -60,5 +60,5 @@ yarn run dev or npm run dev
 
 * Server Unit Test 작성하기
 * `/data/problems.json`의 정보를 MongoDB를 이용하여 관리하기
-* Deploy your Express application: [Heroku](https://www.heroku.com/), [Microsoft Azure](https://azure.microsoft.com/en-us/pricing/details/app-service/windows/), [Amazon Web Services](https://aws.amazon.com)(Elastic Beanstalk)
+* Deploy your Express application: [Microsoft Azure](https://azure.microsoft.com/en-us/pricing/details/app-service/windows/), [Amazon Web Services](https://aws.amazon.com)(Elastic Beanstalk)
 * Deploy your MongoDB using cloud services: [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/lp/general)
