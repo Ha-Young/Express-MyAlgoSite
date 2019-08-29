@@ -1,3 +1,5 @@
+![Codewars](/codewars.png)
+
 # Codewars
 
 [Codewars](https://codewars.com)와 같이 등록되어 있는 알고리즘 문제를 풀 수 있는 어플리케이션입니다.
