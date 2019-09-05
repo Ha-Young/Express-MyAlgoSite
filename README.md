@@ -24,14 +24,16 @@ yarn run dev or npm run dev
 
 ### 1. GET `/login`
 
-  - [ ] Github 소셜 로그인 버튼이 보여져야 합니다.
+  - [ ] 로그인 버튼이 보여져야 합니다.
   - [ ] 로그인에 성공하면 `/` 페이지로 이동해야 합니다.
   - [ ] 로그인에 실패하면 `/login` 페이지로 다시 돌아와야 합니다.
   - [ ] 로그인 하지 않은 사용자는 로그인 페이지 이외의 그 어떤 페이지도 방문할 수 없어야 합니다.
+  - [ ] 소셜 로그인이나 일반 가입 및 로그인 중 본인의 취향에 따라 선택하여 로그인 기능을 구현하세요.
 
 #### Resource
 - [Passport Github](https://github.com/jaredhanson/passport-github)
 - [Passport Example](https://github.com/passport/express-4.x-facebook-example/blob/master/server.js)
+- [Authentication Flow](https://medium.com/createdd-notes/starting-with-authentication-a-tutorial-with-node-js-and-mongodb-25d524ca0359)
 
 ### 2. GET `/`
 
