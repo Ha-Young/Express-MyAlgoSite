@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('partials/head') %>
+  </head>
+  <body>
+    <%- include('partials/header') %>
+    
+    <div class="container">
+      <section class="problem-box">
+        <h3 class="problem-title">
+          <span>
+            Level
+            <%= problemDetail.difficulty_level %>
+          </span>
+          <%= problemDetail.title %>
+        </h3>
+        <ul>
+          <li>
+            정답자 수:
+            <%= problemDetail.completed_users %>
+          </li>
+        </ul>
+        <p class="problem-desc">
+          <%= problemDetail.description %>
+        </p>
+      </section>
+      <div class="solution-box">
+        <h3>SOLUTION</h3>
+        <form method="POST" action="/<%= problemDetail.id %>">
+          <textarea name="user_solution"></textarea>
+          <button type="submit">SUBMIT</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

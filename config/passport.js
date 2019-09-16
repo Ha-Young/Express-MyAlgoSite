@@ -16,14 +16,6 @@ module.exports = (passport) => {
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
       callbackURL: 'http://localhost:3000/login/github'
     }, function (accessToken, refreshToken, profile, done) {
-      // console.log('accessToken', accessToken);
-      // console.log('refreshToken', refreshToken);
-      // User.findOrCreate({ githubId: profile.id }, function (err, user) {
-      //   // 실패시 err를, 성공시 req.user를 반환
-      //   console.log(user, 'login성공');
-      //   return cb(err, user);
-      // });
-
       const socialId = profile.id;
       const nickname = profile.displayName;
       const profileImageUrl = profile.photos[0].value;

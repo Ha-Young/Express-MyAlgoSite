@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <%- include('partials/head') %>
   </head>
   <body>
-    <div class="login-box">
-      <h1>LOGIN</h1>
-      <a href="/login/github">Github login</a>
+    <div class="container">
+      <div class="login-box">
+        <h1>LOGIN</h1>
+        <a href="/login/github">Github login</a>
+      </div>
     </div>
   </body>
 </html>
