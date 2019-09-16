@@ -33,7 +33,7 @@ yarn run dev or npm run dev
 #### Resource
 - [Passport Github](https://github.com/jaredhanson/passport-github)
 - [Passport Example](https://github.com/passport/express-4.x-facebook-example/blob/master/server.js)
-- [Authentication Flow](https://medium.com/createdd-notes/starting-with-authentication-a-tutorial-with-node-js-and-mongodb-25d524ca0359)
+- [Authentication Flow](https://medium.com/createdd-notes/starting-with-authentication-a-tutorial-with-node-js-and-mongodb-25d524ca0359) (Research Hashing, Salting, Sessions, and Cookies)
 
 ### 2. GET `/`
 
