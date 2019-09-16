@@ -18,7 +18,7 @@ yarn run dev or npm run dev
 
 ## Project Structure
 
-기본적인 과제 프로젝트 구성을 따르되, [Project Structure](https://www.freecodecamp.org/news/how-to-write-a-production-ready-node-and-express-app-f214f0b17d8c/) 등의 인터넷 자료를 이용하여 자유롭게 변경하셔도 됩니다.
+기본적인 과제 프로젝트 구성을 따르되, [Project Structure](https://www.freecodecamp.org/news/how-to-write-a-production-ready-node-and-express-app-f214f0b17d8c/)등 인터넷 자료 혹은 기존 과제의 구조를 참고하여 자유롭게 변경하셔도 됩니다.
 
 ## TODO
 
@@ -45,8 +45,7 @@ yarn run dev or npm run dev
 
   - [ ] `problem_id`에 해당하는 문제의 상세 정보(문제 이름, 정답자 수, 문제 레벨, 그리고 문제에 대한 설명 등)을 화면에 보여주세요. UI 구성은 자유롭게 해주세요.
   - [ ] 문제에 대한 솔루션 코드를 입력할 수 있는 폼과 정답을 제출할 수 있는 버튼을 보여주세요.
-  - [ ] 해당 폼을 작성하여 "제출" 버튼을 눌렀을때, `POST /problems/:problem_id`로 솔루션 정보를 보내세요.
-  - [ ] 솔루션 정보를 보낼때는 [Form tag](https://www.w3schools.com/tags/tag_form.asp)의 기본 기능을 이용하세요.
+  - [ ] 해당 폼을 작성하여 "제출" 버튼을 눌렀을때, `POST /problems/:problem_id`로 솔루션 정보를 보내세요. **AJAX는 사용하지 마세요.**
 
 #### Resource
 - [CodeMirror](https://github.com/codemirror/CodeMirror): In-browser code editor
@@ -69,8 +68,7 @@ yarn run dev or npm run dev
 
 * Server Unit Test 작성하기
 * Deploy your Express application
-    * [Microsoft Azure](https://azure.microsoft.com/en-us/pricing/details/app-service/windows/): [가이드](/deployment.md)
-    * [Amazon Web Services](https://aws.amazon.com)(Elastic Beanstalk)
+    * [Microsoft Azure 가이드](/deployment.md)
 * Deploy your MongoDB using cloud services: [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/lp/general)
 
 #### Resources
