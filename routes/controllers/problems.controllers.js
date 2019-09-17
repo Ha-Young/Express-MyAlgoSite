@@ -20,11 +20,10 @@ exports.getAll = async function (req, res, next) {
 };
 
 exports.getProblemDetail = async function (req, res, next) {
-  const problemId = Number(req.params.problem_id);
+  const problemId = req.params.problem_id;
+
   try {
-    const problem = await Problem.find({
-      id: problemId
-    });
+    const problem = await Problem.findById(problemId);
 
     res.render('problem', {
       title: '바닐라코딩',
@@ -33,7 +32,7 @@ exports.getProblemDetail = async function (req, res, next) {
         platformName: res.req.user.platform_name,
         profileImageUrl: res.req.user.profile_image_url
       },
-      problemDetail: problem[0]
+      problemDetail: problem
     });
   } catch (err) {
     console.error(err);
@@ -41,11 +40,80 @@ exports.getProblemDetail = async function (req, res, next) {
 };
 
 exports.createUserSolution = async function (req, res, next) {
-  console.log('post requestttttt')
-  console.log(req.body);
   try {
-    
+    const userSolution = req.body.user_solution;
+    const problemId = req.params.problem_id;
+    const problem = await Problem.findById(problemId);
+    console.log('problem', problem);
+
+    let userResult;
+    const verifyUserSolution = problem.tests.find(test => {
+      const testParams = test.params;
+      const testResult = test.solution;
+
+      console.log('testParams',testParams);
+      console.log('user solution', userSolution);
+      let solution;
+      let result;
+      try {
+        solution = new Function('return ' + userSolution)();
+        console.log('solution',solution);
+        result = solution.apply(this, testParams);
+      } catch (err) {
+        console.log('msg',err.message);
+        console.log('stack',err.stack);
+        console.log('name',err.name)
+
+        res.render('failure', {
+          title: '바닐라코딩',
+            userInfo: {
+              username: res.req.user.nickname,
+              platformName: res.req.user.platform_name,
+              profileImageUrl: res.req.user.profile_image_url
+            },
+            expected: '-',
+            received: '-',
+            errorMsg: err.message,
+            errorStack: err.stack,
+            errorName: err.name
+        });
+      }
+
+      userResult = result;
+      return testResult !== result;
+    });
+
+    console.log(verifyUserSolution, userResult);
+    if (!verifyUserSolution) {
+      res.render('success', {
+        title: '바닐라코딩',
+        userInfo: {
+          username: res.req.user.nickname,
+          platformName: res.req.user.platform_name,
+          profileImageUrl: res.req.user.profile_image_url
+        }
+      });
+      console.log('모두통과!!');
+    } else {
+      res.render('failure', {
+        title: '바닐라코딩',
+        userInfo: {
+          username: res.req.user.nickname,
+          platformName: res.req.user.platform_name,
+          profileImageUrl: res.req.user.profile_image_url
+        },
+        expected: verifyUserSolution.solution,
+        received: userResult,
+        error: '-'
+      });
+      console.log(userResult + '이 아니고 '+verifyUserSolution.solution+'이 답이다.')
+    }
+
+
   } catch (err) {
+    console.log(err);
+
+    next(err);
     console.error(err);
   }
 };

@@ -6,18 +6,16 @@ const mongoose = require('mongoose');
 
  */
 const TestSchema = new mongoose.Schema({
-  code: String,
+  params: [mongoose.Schema.Types.Mixed],
   solution: mongoose.Schema.Types.Mixed
 });
 
 const ProblemSchema = new mongoose.Schema({
-  id: Number,
   title: String,
   completed_users: Number,
   difficulty_level: Number,
   description: String,
-  tests: [TestSchema],
-  user_solution: String
+  tests: [TestSchema]
 });
 
 module.exports = mongoose.model('Problem', ProblemSchema);

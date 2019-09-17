@@ -2,10 +2,12 @@
 <html>
   <head>
     <%- include('partials/head') %>
+    <link rel="stylesheet" href="/stylesheets/codemirror.css">
+    <link rel="stylesheet" href="/stylesheets/monokai.css">
   </head>
   <body>
     <%- include('partials/header') %>
-    
+
     <div class="container">
       <section class="problem-box">
         <h3 class="problem-title">
@@ -27,11 +29,24 @@
       </section>
       <div class="solution-box">
         <h3>SOLUTION</h3>
-        <form method="POST" action="/<%= problemDetail.id %>">
-          <textarea name="user_solution"></textarea>
+        <form method="POST" action="/problems/<%= problemDetail._id %>">
+          <textarea name="user_solution" id="code"></textarea>
           <button type="submit">SUBMIT</button>
         </form>
       </div>
     </div>
+
+    <script src="/javascripts/codemirror/codemirror.js"></script>
+    <script src="/javascripts/codemirror/javascript.js"></script>
+    <script>
+      const editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+        mode: "javascript",
+        lineNumbers: true,
+        lineWrapping: true,
+        tabSize: 2,
+        theme: 'monokai'
+      });
+
+    </script>
   </body>
 </html>

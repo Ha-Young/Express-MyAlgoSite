@@ -19,7 +19,7 @@
       <ul class="problems">
         <% for (let i = 0; i < problems.length; i++) { %>
           <li>
-            <a href="/problems/<%= problems[i].id %>">
+            <a href="/problems/<%= problems[i]._id %>">
               <span class="title">
                 <%= problems[i].title %>
               </span>

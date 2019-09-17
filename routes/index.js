@@ -9,7 +9,7 @@ router.get('/login', (req, res, next) => {
   res.render('login', { title: '바닐라코딩', error_msg: errorMsg });
 });
 
-router.get('/login/github', 
+router.get('/login/github',
   passport.authenticate('github', {
     successRedirect : '/',
     failureRedirect: '/login',
@@ -24,7 +24,7 @@ router.get('/logout', (req, res) => {
 });
 
 /* GET home page. */
-router.get('/', 
+router.get('/',
   require('connect-ensure-login').ensureLoggedIn(), problemsController.getAll);
 
 module.exports = router;

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('partials/head') %>
+  </head>
+  <body>
+    <%- include('partials/header') %>
+
+    <div class="container">
+      <p class="failure-msg">
+        테스트 실패
+        <br>Expected: <%= expected %>
+        <br>Received: <%= received %>
+      </p>
+      
+      <p class="error-msg msg">
+        <%= errorName %>: <%= errorMsg %>
+      </p>
+      <p class="error-msg stack">
+        <pre>
+          <%= errorStack %>
+        </pre>
+      </p>
+    </div>
+  </body>
+</html>
