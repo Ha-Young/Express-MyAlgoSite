@@ -1,10 +1,49 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const passport = require('passport');
+const session = require('express-session');
 
 const index = require('./routes/index');
+const authRouter = require('./routes/auth');
 
+const githubPassport = require('./passport');
 const app = express();
 
+//mongoose setup
+mongoose.connect('mongodb://localhost/test', {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+});
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function(){
+  console.log('We are connected!');
+});
+
+
+//middleware setup
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended:true }));
+app.set('views', './views');
+app.set('view engine', 'ejs');
+
+app.use(session({
+  secret: 'cat runner',
+  resave: true,
+  saveUninitialized: true
+}));
+
+githubPassport(passport);
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(express.static('public'));
+
 app.use('/', index);
+app.use('/auth', authRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
