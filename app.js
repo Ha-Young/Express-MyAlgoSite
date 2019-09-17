@@ -5,10 +5,11 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const path = require('path');
-
 const userPassport = require('./middlewares/passport');
+
 const index = require('./routes/index');
 const loginRouter = require('./routes/login');
+const problemsRouter = require('./routes/problems');
 
 require('dotenv').config();
 
@@ -40,6 +41,7 @@ userPassport(passport);
 
 app.use('/', index);
 app.use('/login', loginRouter);
+app.use('/problems', problemsRouter);
 app.get('/logout', function(req, res){
   req.logout();
   res.status(301).redirect('/login');

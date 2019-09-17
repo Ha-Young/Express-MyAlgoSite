@@ -6,9 +6,17 @@ const mongoose = require('mongoose');
 
  */
 const userSchema = new mongoose.Schema({
-  user_id: Number,
-  user_name: String,
-  signup_date: Date
+  user_id: {
+    type: Number,
+    required: true,
+    unique: true
+  },
+  username: {
+    type: String,
+    required: true
+  }
+}, {
+  timestamps: { createdAt: 'created_at' }
 });
 
 module.exports = mongoose.model('User', userSchema);

@@ -10,8 +10,7 @@ module.exports = function passport(passport) {
   async function(accessToken, refreshToken, profile, done) {
     const userData = {
       user_id: profile.id,
-      user_name: profile.username,
-      signup_date: new Date().toISOString()
+      username: profile.username
     };
 
     try {
