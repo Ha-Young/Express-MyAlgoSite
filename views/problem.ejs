@@ -3,7 +3,7 @@
   <head>
     <title>Codewars</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel="stylesheet" href="/lib/codemirror.css">
+    <link rel="stylesheet" href="/lib/codemirror.css" />
     <script src="/lib/codemirror.js"></script>
     <script src="/mode/javascript/javascript.js"></script>
   </head>
@@ -15,18 +15,12 @@
     <div className="code-container">
       <form
         class="code-form"
-        action="/problems/<%= problem.id %>"
+        action="/problems/<%= problem.problem_id %>"
         method="POST"
       >
         <h1>test</h1>
         <div class="problems">
-            <% problem.tests.forEach(function(test){ %>
-              <li>
-                <div><%= test.code %></div>
-                <div><%= test.solution %></div>
-              </li>
-            <% }) %>
-            <div><%= problem.title %></div>
+            <div><%= problem.problem_title %></div>
             <div><%= problem.completed_users %></div>
             <div><%= problem.difficulty_level %></div>
             <div><%= problem.description %></div>

@@ -1,0 +1,138 @@
+.root {
+  display: flex;
+  text-align: center;
+}
+
+.user-container {
+  width: 20%;
+}
+
+.problem-container {
+  width: 75%;
+  margin-left: 5%;
+}
+
+.user-title, .user-info {
+  line-height: 100px;
+  height: 100px;
+}
+
+.user-info {
+  display: flex;
+}
+
+.user-profile {
+  width: 50%;
+  padding-top: 20px;
+  margin-right: 10px;
+}
+
+.user-name {
+  font-size: 20px;
+}
+
+.user-info img {
+  width: 50px;
+}
+
+.user-report table {
+  margin-top: 20px;
+  width: 100%;
+}
+.logout-wrap {
+  margin-top: 20px;
+}
+
+.logout-btn{
+  width: 50%;
+  height: 50px;
+  line-height: 50px;
+  border: none;
+  background: black;
+  background-size: 200%;
+  text-decoration: none;
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
+  transition: .5s;
+}
+
+.logout-btn:hover {
+  opacity: 0.5;
+}
+
+.problem-container header {
+  height: 100px;
+  line-height: 100px;
+}
+
+.lvtap {
+  display: flex;
+  padding-bottom: 10px;
+}
+
+.tapname {
+  width: 25%;
+  cursor: pointer;
+  border-right: 1px solid gray;
+  transition: 0.3s;
+}
+
+.tapname:hover {
+  background-color: rgb(236, 236, 248);
+}
+
+.selected-tap {
+  background-color: rgb(228, 228, 247);
+}
+
+.content-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.content {
+  margin: 5px;
+  flex: 0 0 48%;
+  height: 100px;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+}
+
+.content a:visited {
+  color: black;
+}
+
+.content-top, .content-bottom {
+  position: relative;
+  height: 50px;
+}
+
+.content-title {
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 50px;
+}
+
+.content-success-number {
+  line-height: 50px;
+  font-size: 10px;
+}
+
+.content-level {
+  position: absolute;
+  left: 10px;
+  background-color: rgb(185, 226, 212);
+}
+
+.content-issuccess {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  background-color: rgb(232, 245, 207);
+}
+
+
+

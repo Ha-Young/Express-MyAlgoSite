@@ -2,33 +2,15 @@
 <html>
   <head>
     <title>Codewars</title>
+    <link rel='stylesheet' href='/stylesheets/login.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
     <div className="login-container">
-      <form
-        class="login-form"
-        action="/login/auth/github"
-        method="GET"
-      >
-        <h1>Login</h1>
-        <div class="txtb">
-          <input type="text" name="id" />
-          <span data-placeholder="Username"></span>
-        </div>
-
-        <div class="txtb">
-          <input type="password" name="pw" />
-          <span data-placeholder="Password"></span>
-        </div>
-
-        <input type="submit" class="logbtn" value="Login" />
-
-        <div class="bottom-text">
-          Don't have account? <a href="/signup">Sign up</a>
-        </div>
-      </form>
-      <button><a href="/login/github">github</a></button>
+      <div class="login-form">
+        <h1><img src="https://image.flaticon.com/icons/svg/25/25231.svg"></img>Git-Hub Login</h1>
+        <a class="logbtn" href="/login/github">Log-in</a>
+      </div>
     </div>
   </body>
 </html>

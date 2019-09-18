@@ -14,7 +14,15 @@ const userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true
-  }
+  },
+  profile_img_url: {
+
+  },
+  problems: [{
+    problem_id: Number,
+    status: String,
+    writed_code: String
+  }]
 }, {
   timestamps: { createdAt: 'created_at' }
 });

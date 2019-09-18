@@ -6,12 +6,12 @@ const Schema = mongoose.Schema;
 
  */
 const ProblemSchema = new Schema({
-  id: {
+  problem_id: {
     type: Number,
     required: true,
     unique: true
   },
-  title: {
+  problem_title: {
     type: String,
     required: true
   },
@@ -29,10 +29,10 @@ const ProblemSchema = new Schema({
   },
   tests: [
     {
-      code: {
-        type: String,
+      code: [{
+        type: Schema.Types.Mixed,
         required: true
-      },
+      }],
       solution: {
         type: Schema.Types.Mixed,
         required: true

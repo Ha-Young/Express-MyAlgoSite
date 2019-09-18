@@ -2,28 +2,76 @@
 <html>
   <head>
     <title>Codewars</title>
+    <link rel='stylesheet' href='/stylesheets/index.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1>Codewars</h1>
-    <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
-    <button><a href="/logout">logout</a></button>
-    <ul class="tabs">
-      <li>Level 1</li>
-      <li>Level 2</li>
-      <li>Level 3</li>
-    </ul>
-
-    <ul class="problems">
-      <% problems.forEach(function(problem){ %>
-        <a href="/problems/<%= problem.id %>">
-          <li>
-            <div><%= problem.title %></div>
-            <div><%= problem.completed_users %></div>
-            <div><%= problem.difficulty_level %></div>
-          </li>
-        </a>
-      <% }) %>
-    </ul>
+    <div class="root">
+      <div class="user-container">
+        <div class="user-title">
+          <h2>USER</h2>
+        </div>
+        <div class="user-info">
+          <div class="user-profile">
+            <img src="https://image.flaticon.com/icons/svg/25/25231.svg">
+          </div>
+          <div class="user-name">
+            <span>박한준</span>
+          </div>
+        </div>
+        <div class="user-report">
+          <table>
+            <tr>
+              <td>SUCCESSS!</td>
+              <td>0개</td>
+            </tr>
+            <tr>
+              <td>도전하세요!</td>
+              <td>0개</td>
+            </tr>
+          </table>
+          <div class="logout-wrap">
+            <button class="logout-btn">
+              <a href="/logout">logout</a>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="problem-container">
+        <header><h1>적군을 모두 물리치자</h1></header>
+        <div class="lvtap">
+          <div class="tapname selected-tap">
+            <span>All</span>
+          </div>
+          <div class="tapname">
+            <span>Lv 1</span>
+          </div>
+          <div class="tapname">
+            <span>Lv 2</span>
+          </div>
+          <div class="tapname">
+            <span>Lv 3</span>
+          </div>
+        </div>
+        <div class="content-container">
+        <% problems.forEach(function(problem){ %>
+          <div class="content">
+            <a href="/problems/<%= problem.problem_id %>">
+              <div class="content-top">
+                <span class="content-title"><%= problem.problem_title %></span>
+                <span class="content-level">lv <%= problem.difficulty_level %></span>
+              </div>
+              <div class="content-bottom">
+                <span class="content-success-number">
+                    success <%= problem.completed_users %> 명
+                </span>
+                <span class="content-issuccess">done!</span>
+              </div>
+            </a>
+          </div>
+        <% }) %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
