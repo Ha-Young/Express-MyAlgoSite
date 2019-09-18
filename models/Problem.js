@@ -12,7 +12,7 @@ const TestSchema = new mongoose.Schema({
 
 const ProblemSchema = new mongoose.Schema({
   title: String,
-  completed_users: Number,
+  completed_users: [String],
   difficulty_level: Number,
   description: String,
   tests: [TestSchema]

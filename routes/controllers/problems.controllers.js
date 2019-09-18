@@ -8,34 +8,35 @@ exports.getAll = async function (req, res, next) {
       success_msg: req.session.flash.success,
       title: '바닐라코딩',
       userInfo: {
-        username: res.req.user.nickname,
-        platformName: res.req.user.platform_name,
-        profileImageUrl: res.req.user.profile_image_url
+        username: req.user.nickname,
+        platformName: req.user.platform_name,
+        profileImageUrl: req.user.profile_image_url
       },
       problems
     });
   } catch (err) {
     console.error(err);
+    next(err);
   }
 };
 
 exports.getProblemDetail = async function (req, res, next) {
-  const problemId = req.params.problem_id;
-
   try {
+    const problemId = req.params.problem_id;
     const problem = await Problem.findById(problemId);
 
     res.render('problem', {
       title: '바닐라코딩',
       userInfo: {
-        username: res.req.user.nickname,
-        platformName: res.req.user.platform_name,
-        profileImageUrl: res.req.user.profile_image_url
+        username: req.user.nickname,
+        platformName: req.user.platform_name,
+        profileImageUrl: req.user.profile_image_url
       },
       problemDetail: problem
     });
   } catch (err) {
     console.error(err);
+    next(err);
   }
 };
 
@@ -83,14 +84,15 @@ exports.createUserSolution = async function (req, res, next) {
       return testResult !== result;
     });
 
-    console.log(verifyUserSolution, userResult);
     if (!verifyUserSolution) {
+      await Problem.update({ _id: problemId }, { $addToSet: { completed_users: req.user._id } });
+
       res.render('success', {
         title: '바닐라코딩',
         userInfo: {
-          username: res.req.user.nickname,
-          platformName: res.req.user.platform_name,
-          profileImageUrl: res.req.user.profile_image_url
+          username: req.user.nickname,
+          platformName: req.user.platform_name,
+          profileImageUrl: req.user.profile_image_url
         }
       });
       console.log('모두통과!!');
@@ -98,9 +100,9 @@ exports.createUserSolution = async function (req, res, next) {
       res.render('failure', {
         title: '바닐라코딩',
         userInfo: {
-          username: res.req.user.nickname,
-          platformName: res.req.user.platform_name,
-          profileImageUrl: res.req.user.profile_image_url
+          username: req.user.nickname,
+          platformName: req.user.platform_name,
+          profileImageUrl: req.user.profile_image_url
         },
         expected: verifyUserSolution.solution,
         received: userResult,
@@ -111,9 +113,7 @@ exports.createUserSolution = async function (req, res, next) {
 
 
   } catch (err) {
-    console.log(err);
-
-    next(err);
     console.error(err);
+    next(err);
   }
 };
