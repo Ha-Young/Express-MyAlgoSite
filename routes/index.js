@@ -5,17 +5,18 @@ const problemsController = require('./controllers/problems.controllers');
 
 /* GET login process */
 router.get('/login', (req, res, next) => {
-  const errorMsg = (req.session.flash) ? req.session.flash.failure : null;
-  res.render('login', { title: '바닐라코딩', error_msg: errorMsg });
+  res.render('login', { title: '바닐라코딩' });
 });
 
-router.get('/login/github',
-  passport.authenticate('github', {
-    successRedirect : '/',
-    failureRedirect: '/login',
-    failureFlash : true,
-    successFlash: "Welcome!"
-  }));
+router.get('/login/github', passport.authenticate('github', {
+  successRedirect : '/',
+  failureRedirect: '/login'
+}));
+
+router.get('/login/google', passport.authenticate('google', {
+  successRedirect : '/',
+  failureRedirect: '/login'
+}));
 
 /* GET logout process */
 router.get('/logout', (req, res) => {
@@ -25,6 +26,8 @@ router.get('/logout', (req, res) => {
 
 /* GET home page. */
 router.get('/',
-  require('connect-ensure-login').ensureLoggedIn(), problemsController.getAll);
+  require('connect-ensure-login').ensureLoggedIn(),
+  problemsController.getProblems
+);
 
 module.exports = router;

@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
-const flash = require('connect-flash');
 const index = require('./routes/index');
 const problems = require('./routes/problems');
 
@@ -39,8 +38,6 @@ app.use(session({
   // cookie: { maxAge: 60000 }
 }));
 
-app.use(flash());
-
 require('./config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
@@ -50,7 +47,7 @@ app.use('/problems', problems);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  const err = new Error('Not Found');
+  const err = new Error('Page Not Found');
   err.status = 404;
   next(err);
 });
@@ -63,7 +60,11 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error', { title: '바닐라코딩', message: 'Internal Server Error', errorStatus: 500 });
+  res.render('error', {
+    title: '바닐라코딩',
+    message: err.message || 'Internal Server Error',
+    errorStatus: err.status || 500
+  });
 });
 
 module.exports = app;

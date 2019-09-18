@@ -6,21 +6,18 @@
   <body>
     <%- include('partials/header') %>
 
-    <div class="container">
-      <p class="failure-msg">
-        테스트 실패
-        <br>Expected: <%= expected %>
-        <br>Received: <%= received %>
+    <div class="container msg">
+      <p class="basic-msg">
+        Test <strong class="line-color02">failed</strong>.
       </p>
-      
-      <p class="error-msg msg">
-        <%= errorName %>: <%= errorMsg %>
-      </p>
-      <p class="error-msg stack">
-        <pre>
-          <%= errorStack %>
-        </pre>
-      </p>
+      <div class="fail-box">
+        <ul class="fail-info">
+          <li class="expected">Expected: <%= expected %></li>
+          <li class="received">Received: <%= received %></li>
+        </ul>
+        
+        <pre class="error-msg stack"><%= err.stack %></pre>
+      </div>
     </div>
   </body>
 </html>

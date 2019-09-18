@@ -2,51 +2,41 @@
 <html>
   <head>
     <%- include('partials/head') %>
-    <link rel="stylesheet" href="/stylesheets/codemirror.css">
-    <link rel="stylesheet" href="/stylesheets/monokai.css">
+    <link rel="stylesheet" href="/stylesheets/codemirror/codemirror.css">
+    <link rel="stylesheet" href="/stylesheets/codemirror/monokai.css">
+    <link rel="stylesheet" href="/stylesheets/codemirror/duotone-dark.css">
+    <link rel="stylesheet" href="/stylesheets/problem.css">
   </head>
   <body>
     <%- include('partials/header') %>
 
     <div class="container">
-      <section class="problem-box">
-        <h3 class="problem-title">
-          <span>
-            Level
-            <%= problemDetail.difficulty_level %>
-          </span>
+      <section class="problem-box level-<%= problemDetail.difficulty_level %>">
+        <span class="info level">
+          Level
+          <%= problemDetail.difficulty_level %>
+        </span>
+        <span class="info completed">
+          <%= problemDetail.completed_users.length %>명 완료
+        </span>
+        <h2 class="problem-title">
           <%= problemDetail.title %>
-        </h3>
-        <ul>
-          <li>
-            정답자 수:
-            <%= problemDetail.completed_users.length %>
-          </li>
-        </ul>
+        </h2>
         <p class="problem-desc">
           <%= problemDetail.description %>
         </p>
       </section>
       <div class="solution-box">
-        <h3>SOLUTION</h3>
-        <form method="POST" action="/problems/<%= problemDetail._id %>">
+        <h3 class="solution-title">SOLUTION :</h3>
+        <form method="POST" action="/problems/<%= problemDetail._id %>" class="code-form">
           <textarea name="user_solution" id="code"></textarea>
-          <button type="submit">SUBMIT</button>
+          <button type="submit" class="btn-submit">SUBMIT</button>
         </form>
       </div>
     </div>
 
     <script src="/javascripts/codemirror/codemirror.js"></script>
     <script src="/javascripts/codemirror/javascript.js"></script>
-    <script>
-      const editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-        mode: "javascript",
-        lineNumbers: true,
-        lineWrapping: true,
-        tabSize: 2,
-        theme: 'monokai'
-      });
-
-    </script>
+    <script src="/javascripts/codemirror/codemirror-custom.js"></script>
   </body>
 </html>

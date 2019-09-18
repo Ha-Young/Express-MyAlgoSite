@@ -1,14 +1,25 @@
 <header class="gnb">
-  <h1>Codewars</h1>
-  <p>
-    <strong>
-      <%= userInfo.username %>
-    </strong>
-    님이
-    <strong>
-      <%= userInfo.platformName %>
-    </strong>
-    로 로그인하셨습니다.
-  </p>
-  <a href="/logout">Logout</a>
+  <h1 class="logo">
+    <a href="/">
+      Codewars
+    </a>
+  </h1>
+  <ul class="gnb-right">
+    <li class="mr10">
+      <div class="user-profile" style="background-image: url(<%= userInfo.profileImageUrl %>)"></div>
+    </li>
+    <li class="mr5">
+      <strong>
+        <%= userInfo.username %>
+      </strong>
+    </li>
+    <li class="dot mr5">
+      <strong>
+        <%= userInfo.platformName %>
+      </strong>
+    </li>
+    <li>
+      <a href="/logout" class="btn-logout">Logout</a>
+    </li>
+  </ul>
 </header>

@@ -1,19 +1,31 @@
 const Problem = require('../../models/Problem');
 
-exports.getAll = async function (req, res, next) {
+exports.getProblems = async function (req, res, next) {
   try {
-    const problems = await Problem.find();
+    let problems;
+    const params = req.headers.params;
 
-    res.render('index', {
-      success_msg: req.session.flash.success,
-      title: '바닐라코딩',
-      userInfo: {
-        username: req.user.nickname,
-        platformName: req.user.platform_name,
-        profileImageUrl: req.user.profile_image_url
-      },
-      problems
-    });
+    if (!params || params === 'all') {
+      problems = await Problem.find();
+
+      if (!params) {
+        res.render('index', {
+          title: '바닐라코딩',
+          userInfo: {
+            username: req.user.nickname,
+            platformName: req.user.platform_name,
+            profileImageUrl: req.user.profile_image_url
+          },
+          problems
+        });
+        return;
+      }
+
+      res.json({ problems });
+    } else {
+      problems = await Problem.find({ difficulty_level: Number(params) });
+      res.json({ problems });
+    }
   } catch (err) {
     console.error(err);
     next(err);
@@ -68,15 +80,13 @@ exports.createUserSolution = async function (req, res, next) {
         res.render('failure', {
           title: '바닐라코딩',
             userInfo: {
-              username: res.req.user.nickname,
-              platformName: res.req.user.platform_name,
-              profileImageUrl: res.req.user.profile_image_url
+              username: req.user.nickname,
+              platformName: req.user.platform_name,
+              profileImageUrl: req.user.profile_image_url
             },
             expected: '-',
             received: '-',
-            errorMsg: err.message,
-            errorStack: err.stack,
-            errorName: err.name
+            err,
         });
       }
 
@@ -106,7 +116,7 @@ exports.createUserSolution = async function (req, res, next) {
         },
         expected: verifyUserSolution.solution,
         received: userResult,
-        error: '-'
+        err: '-'
       });
       console.log(userResult + '이 아니고 '+verifyUserSolution.solution+'이 답이다.')
     }

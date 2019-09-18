@@ -4,10 +4,36 @@
     <%- include('partials/head') %>
   </head>
   <body>
+    <header class="gnb">
+      <h1 class="logo">
+        <a href="/">
+          Codewars
+        </a>
+      </h1>
+    </header>
     <div class="container">
       <div class="login-box">
-        <h1>LOGIN</h1>
-        <a href="/login/github">Github login</a>
+        <h2 class="basic-msg">
+          Welcome to <strong>Codewars</strong>!
+        </h2>
+        <p class="basic-msg">
+          Improve your <strong class="line-color01">coding skills</strong>,
+        </p>
+        <p class="basic-msg">
+          prepare for <strong class="line-color02">interviews</strong>,
+        </p>
+        <p class="basic-msg">
+          and get <strong class="line-color03">hired</strong>.
+        </p>
+
+        <ul class="login-list">
+          <li>
+            <a href="/login/github" class="btn-basic btn-github">Login with Github</a>
+          </li>
+          <li>
+            <a href="/login/google" class="btn-basic btn-google">Login with Google</a>
+          </li>
+        </ul>
       </div>
     </div>
   </body>

@@ -4,12 +4,14 @@
     <%- include('partials/head') %>
   </head>
   <body>
-    <div class="container">
+    <div class="container msg">
       <div class="error-box">
-        <h1><%= message %></h1>
-        <h2><%= errorStatus %></h2>
-        <p>Sorry. Something went wrong.</p>
-        <a href="/">Go back</a>
+        <h1 class="basic-msg">
+          <strong><%= errorStatus %></strong>
+        </h1>
+        <h2 class="basic-msg"><%= message %></h2>
+        <p class="apologize-msg">Sorry. Something went wrong.</p>
+        <a href="/" class="btn-basic">Go back</a>
       </div>
     </div>
   </body>

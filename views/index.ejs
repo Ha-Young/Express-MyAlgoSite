@@ -5,36 +5,53 @@
   </head>
   <body>
     <%- include('partials/header') %>
-    
-    <div><%= success_msg %></div>
-    <div class="container">
-      <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
 
+    <div class="container">
       <ul class="tabs">
-        <li>Level 1</li>
-        <li>Level 2</li>
-        <li>Level 3</li>
+        <li>
+          <button type="button" class="basic-msg level-all active-tab" data-level="all">
+            <strong class="line-color01">All</strong>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="basic-msg level-1" data-level="1">
+            <strong class="line-color03">Level 1</strong>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="basic-msg level-2" data-level="2">
+            <strong>Level 2</strong>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="basic-msg level-3" data-level="3">
+            <strong class="line-color02">Level 3</strong>
+          </button>
+        </li>
       </ul>
-  
-      <ul class="problems">
-        <% for (let i = 0; i < problems.length; i++) { %>
-          <li>
-            <a href="/problems/<%= problems[i]._id %>">
-              <span class="title">
-                <%= problems[i].title %>
-              </span>
-              <span>
-                정답자: 
-                <%= problems[i].completed_users.length %>
-              </span>
-              <span>
-                난이도: Level
-                <%= problems[i].difficulty_level %>
-              </span>
-            </a>
-          </li>
-        <% } %>
-      </ul>
+
+      <div class="problem-wrap">
+        <ul class="problems">
+          <% for (let i = 0; i < problems.length; i++) { %>
+            <li class="problem-box level-<%= problems[i].difficulty_level %>">
+              <a href="/problems/<%= problems[i]._id %>">
+                <span class="info level">
+                  Level
+                  <%= problems[i].difficulty_level %>
+                </span>
+                <span class="info completed">
+                  <%= problems[i].completed_users.length %>명 완료
+                </span>
+                <span class="title">
+                  <%= problems[i].title %>
+                </span>
+              </a>
+            </li>
+          <% } %>
+        </ul>
+      </div>
     </div>
+
+    <script src="/javascripts/index.js"></script>
   </body>
 </html>

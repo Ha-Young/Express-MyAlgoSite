@@ -1,8 +1,274 @@
+* {
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 400;
+  background: repeating-linear-gradient(
+    to right,
+    #000,
+    #000 4px,
+    #181818 4px,
+    #181818 90px
+  );
+  color: #fff;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 20px;
+}
+::-webkit-scrollbar-track-piece {
+  background-color: #000;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #333;
+}
+::-webkit-scrollbar-button {
+  display: none;
+}
+.gnb {
+  position: relative;
+  width: 100%;
+  padding: 0 20px;
+  height: 60px;
+  background: #000;
+}
+.gnb .logo {
+  display: inline-block;
+  margin: 0;
+  line-height: 60px;
+  letter-spacing: -1px;
+  font-weight: 700;
+  font-size: 28px;
+}
+.gnb .logo a {
+  color: #fff;
+}
+.login-box {
+  text-align: center;
+  padding: 60px;
+}
+.login-list {
+  margin-top: 70px;
+}
+.login-list > li {
+  margin-bottom: 20px;
+}
+.login-list > li:last-child {
+  margin-bottom: none;
+}
+.basic-msg {
+  margin: 10px 0;
+  font-size: 40px;
+  font-weight: 700;
+}
+.basic-msg strong {
+  position: relative;
+  display: inline-block;
+  font-weight: 300;
+  font-style: italic;
+}
+.basic-msg strong:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 7px;
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #FACD3D;
+  z-index: -1;
+  transition: 0.2s;
+}
+.basic-msg.active-tab strong:after,
+.basic-msg:hover strong:after {
+  bottom: 15px;
+  height: 8px;
+}
+.basic-msg .line-color01:after {
+  background: #5626C4;
+}
+.basic-msg .line-color02:after {
+  background: #E60576;
+}
+.basic-msg .line-color03:after {
+  background: #2CCCC3;
+}
+.btn-basic {
+  display: inline-block;
+  padding: 12px 25px 14px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  background: #5626C4;
+  border-radius: 5px;
+}
+.btn-github {
+  background: #fff;
+  color: #000;
+}
+.btn-google {
+  background: #E60576;
+}
+.gnb-right {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  top: 0;
+  right: 20px;
+  margin: 0;
+  line-height: 60px;
+  font-size: 14px;
+  font-weight: 300;
+}
+.mr5 {
+  margin-right: 5px;
+}
+.mr10 {
+  margin-right: 10px;
+}
+.gnb-right > .dot:before {
+  content: '·';
+}
+.gnb-right strong {
+  font-weight: 700;
+}
+.gnb-right .user-profile {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-position: center;
+  background-size: cover;
+}
+.btn-logout {
+  margin-left: 5px;
+  color: #fff;
+  font-weight: 400;
+}
+.btn-logout:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+.btn-logout:before {
+  content: '';
+  display: inline-block;
+  width: 1px;
+  height: 12px;
+  margin-right: 8px;
+  background: #888;
 }
 
-a {
-  color: #00B7FF;
+.container {
+  padding: 50px 20px;
+}
+.problems {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+.problems > .problem-box {
+  width: 49.2%;
+  margin: 10px 0;
+  background: #252525;
+}
+.problems > .problem-box a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 35px 20px;
+}
+.problem-box .title {
+  display: block;
+  margin-top: 15px;
+  font-weight: 700;
+  font-size: 26px;
+  color: #fff;
+}
+.problem-box .completed {
+  margin-left: 10px;
+  font-weight: 300;
+  font-size: 15px;
+  color: #888;
+}
+.problem-box .level {
+  display: inline-block;
+  padding: 3px 6px;
+  border-radius: 5px;
+  font-weight: 400;
+  font-size: 14px;
+}
+.level-1 .level {
+  color: #2CCCC3;
+  border: 2px solid #2CCCC3;
+}
+.level-2 .level {
+  color: #FACD3D;
+  border: 2px solid #FACD3D;
+}
+.level-3 .level {
+  color: #E60576;
+  border: 2px solid #E60576;
+}
+
+.container.msg {
+  text-align: center;
+}
+.fail-info > li {
+  line-height: 1.6;
+}
+.fail-info .expected {
+  color: #2CCCC3;
+}
+.fail-info .received {
+  color: #E60576;
+}
+.error-msg {
+  color: #E60576;
+}
+.fail-box {
+  margin-top: 50px;
+  padding: 20px;
+  text-align: left;
+  background: #252525;
+  overflow-x: auto;
+}
+.apologize-msg {
+  font-size: 20px;
+  color: #FACD3D;
+  font-weight: 700;
+}
+.error-box {
+  padding: 30px;
+}
+
+.tabs > li {
+  display: inline-block;
+  margin-right: 10px;
+}
+.tabs button {
+  border: none;
+  background: none;
+  color: #fff;
+  cursor: pointer;
+}
+.tabs button:focus {
+  outline: none;
+}
+
+@media (max-width: 600px) {
+  .problems > .problem-box {
+    width: 100%;
+  }
 }
