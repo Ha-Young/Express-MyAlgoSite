@@ -2,39 +2,32 @@
 <html>
   <head>
     <title>Codewars</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css'>
+    <link href="https://fonts.googleapis.com/css?family=Lobster|Ubuntu&display=swap" rel="stylesheet">
   </head>
   <body>
-    <h1>Codewars</h1>
-    <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
+    <div class="home">
+      <div class="header">
+        <div class="logo">Codewars</div>
+        <div class="user-logout">
+          <span class="hi">Hi, <%= user.name.givenName %></span>
+          <button class="logout-button" onClick="location.href='/logout'">Logout</button>
+        </div>
+      </div>
 
-    <ul class="tabs">
-      <li>Level 1</li>
-      <li>Level 2</li>
-      <li>Level 3</li>
-    </ul>
+      <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
 
-    <ul class="problems">
-      <li>
-        <div>피보나치 수열</div>
-        <div>정답자: 15명</div>
-        <div>난이도: Level 1</div>
-      </li>
-      <li>
-        <div>서울에서 김서방 찾기</div>
-        <div>정답자: 11명</div>
-        <div>난이도: Level 2</div>
-      </li>
-      <li>
-        <div>수박수박수박수박수</div>
-        <div>정답자: 12명</div>
-        <div>난이도: Level 2</div>
-      </li>
-      <li>
-        <div>하샤드 수</div>
-        <div>정답자: 5명</div>
-        <div>난이도: Level 3</div>
-      </li>
-    </ul>
+      <ul class="problems">
+        <% for(let i = 0; i < problem.length; i++) {%>
+          <a href='/problems/<%= problem[i].id%>'>
+            <li class='problem'>
+              <div class='title'><%= problem[i].title%></div>
+              <div class='completed'>문제푼사람: <%= problem[i].completed_users%></div>
+              <div class='level'>LV <%= problem[i].difficulty_level%></div>
+            </li>
+          </a>
+        <%}%>
+      </ul>
+    </div>
   </body>
 </html>
