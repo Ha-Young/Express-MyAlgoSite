@@ -1,12 +1,10 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
-/*
-
-  TODO: Fill in the model specification
-
- */
-const userSchema = new mongoose.Schema({
-
+const UserSchema = new mongoose.Schema({
+  userName: String,
+  googleId: String,
+  thumbnail: String
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', UserSchema);

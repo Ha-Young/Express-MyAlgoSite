@@ -1,12 +1,32 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 
+const passportSet = require('./routes/middlewares/googleAuthorize');
 const index = require('./routes/index');
+const googleAuth = require('./routes/googleAuth');
 
 const app = express();
 
-app.use('/', index);
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/app', {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+  useUnifiedTopology: true
+});
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() { console.log('connected') });
 
-// catch 404 and forward to error handler
+app.set('views', './views');
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+passportSet(app);
+
+app.use('/', index);
+app.use('/google', googleAuth);
+
 app.use(function(req, res, next) {
   const err = new Error('Not Found');
   err.status = 404;
