@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script src="/lib/codemirror.js"></script>
+    <link rel="stylesheet" href="/lib/codemirror.css" />
+    <script src="/lib/javascript.js"></script>
+    <title>바닐라코딩 프로그래머스</title>
+  </head>
+  <body>
+    <div>
+      <div class="header">
+        <div>
+          <span><%="난이도 : Level " + difficulty_level %></span>
+          <span><%= completed_users +"명 완료" %></span>
+        </div>
+        <h1 class="title"><%= title %></h1>
+        <div>
+          <span><%=username%></span>
+          <span><a href="/">뒤로가기</a></span>
+        </div>
+      </div>
+      <div class="problems-body">
+        <div class="description">
+          <div class="problems-desc"><span>문제설명</span></div>
+          <span class="description-context"><%= description %></span>
+          <div class="problems-desc"><span>제한사항</span></div>
+          <ul>
+            <% for(let i=0; i<limit.length; i++){%>
+              <li class="description-context"><%= limit[i] %></li>
+            <%}%>
+          </ul>
+          <div class="problems-desc"><span>입출력 예</span></div>
+          <table>
+            <tr>
+              <td>function(n)</td>
+              <td>return</td>
+            </tr>
+            <% for(let i=0; i<tests.length; i++){%>
+              <tr>
+                <td><%= tests[i].param%></td>
+                <td><%= tests[i].solution%></td>
+              </tr>
+            <%}%>
+          </table>
+        </div>
+        <div>
+          <div class="problems-solution"><span>solution.js</span></div>
+          <form method="POST" action="../problems/<%= id%>" class="code-form">
+            <textarea id="code-area" name="code"><%=initValue%></textarea>
+            <input class="code-submit" type="submit" value="submit" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="/javascripts/index.js"></script>
+</html>

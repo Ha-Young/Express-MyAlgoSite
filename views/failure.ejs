@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <title>바닐라코딩 프로그래머스</title>
+</head>
+<body>
+  <div class="header">
+      <span>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</span>
+      <div>
+        <span><%=username%></span>
+        <span><a onClick="history.go(-1);">문제로 돌아가기</a></span>
+      </div>
+  </div>
+  <div class="description">
+    <div style="height: 95vh">
+      <div class="failure-title">
+        <span>실패하였습니다 결과를 확인하고 다시 시도해 주세요!</span>
+      </div>
+      <div class="failure-body">
+        <% if(result === ""){%>
+          <span class="reference-error"><%= "ReferenceError: "+message %></span>
+        <%}%>
+        <% if(result !== ""){%>
+        <table style="margin: 0 auto;">
+          <tr>
+            <td><%=""%></td>
+            <td><%="정답"%></td>
+            <td><%="값"%></td>
+          </tr>
+          <% for(let i = 0; i<result.length; i++){ %>
+            <tr>
+              <td><%="test "+[i+1]%></td>
+              <td><%=result[i]%></td>
+              <td><%=userAnswer[i]%></td>
+            </tr>
+            <% if(result[i]===userAnswer[i]){ %>
+              <div class="failure-success-message">
+                <p><%="test "+[i+1]+"> "%></p>
+                <span><%="통과"%></span>
+              </div>
+              <%} else {%>
+              <div class="failure-fail-message">
+                <p><%="test "+[i+1]+"> "%></p>
+                <span><%="실행한 결괏값 '"+userAnswer[i]+"'이(가) 기댓값 '"+result[i] +"'와(과) 다릅니다."%></span>
+              </div>
+            <%} %>
+          <%}%>
+        </table>
+        <%}%>
+      </div>
+    </div>
+  </div>
+  <script src="/javascripts/failure.js"></script>
+</body>
+</html>
+

@@ -1,3 +1,29 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <title>바닐라코딩 프로그래머스</title>
+</head>
+<body>
+  <div class="error-container">
+  <img src="https://icon-library.net/images/sad-faces-icon/sad-faces-icon-17.jpg"/>
+  <div class="error-message">
+    <span><%= error.status%> :&nbsp;</span>
+    <span><%= error.message %></span>
+  </div>
+  <pre><%= error.stack %></pre>
+  <div class="error-sub">
+    <% if(error.status === 401){ %>
+      <div class="error-login">
+        <a href="/login">
+        <span>GO HOME</span>
+        </a>
+      </div>
+    <%} %>
+  </div>
+</div>
+</body>
+</html>
