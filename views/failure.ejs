@@ -1,0 +1,13 @@
+<h1>실패!</h1>
+<a href="/">다른문제풀기</a>
+<% if (!error) {%>
+  <% for (let i = 0; i < result.length; i++) {%>
+    <div>
+      <div><%=result[i].isAnswer%></div>
+      <div><%=result[i].expected%></div>
+      <div><%=result[i].insteadGot%></div>
+    </div>
+  <%}%>
+<%} else {%>
+<pre><h1>🧔<%= error %></h1></pre>
+<%}%>
