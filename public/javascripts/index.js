@@ -1,15 +1,28 @@
-var textarea = document.getElementById('editor');
-var editor = CodeMirror.fromTextArea(textarea, {
-    lineNumbers: true,
-    lineWrapping: true,
-    mode: "javascript",
-    theme: "default"
-});
+(function () {
+  const lvtap = document.querySelectorAll('.tapname');
 
-// editor.getDoc().setValue('function solution () {};');
+  lvtap.forEach(el => {
+    el.addEventListener('click', (event) => {
+      const selectedTap = document.querySelector('.selected-tap');
+      const selectedContent = document.querySelectorAll('.selected-content');
+      const content = document.querySelectorAll('.content');
 
-// var myCodeMirror = CodeMirror(editor, {
-//   value: "function solution () {}",
-//   mode:  "javascript"
-// });
+      selectedTap.classList.remove('selected-tap');
+      selectedContent.forEach(content => {
+        content.classList.remove('selected-content');
+      });
+
+      el.classList.add('selected-tap');
+
+      const selectedLevel = el.getAttribute('value');
+      content.forEach(node => {
+        if(node.getAttribute('value') === selectedLevel) {
+          node.classList.add('selected-content');
+        } else if (selectedLevel === 'all') {
+          node.classList.add('selected-content');
+        }
+      });
+    });
+  });
+})();
 

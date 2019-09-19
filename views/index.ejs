@@ -23,7 +23,7 @@
           <table>
             <tr>
               <td>SUCCESSS!</td>
-              <td><%= userSuccess %>개</td>
+              <td><%= successList.length %>개</td>
             </tr>
             <tr>
               <td>도전하세요!</td>
@@ -40,38 +40,41 @@
       <div class="problem-container">
         <header><h1>적군을 모두 물리치자</h1></header>
         <div class="lvtap">
-          <div class="tapname selected-tap">
+          <div class="tapname selected-tap" value="all">
             <span>All</span>
           </div>
-          <div class="tapname">
+          <div class="tapname" value="level1">
             <span>Lv 1</span>
           </div>
-          <div class="tapname">
+          <div class="tapname" value="level2">
             <span>Lv 2</span>
           </div>
-          <div class="tapname">
+          <div class="tapname" value="level3">
             <span>Lv 3</span>
           </div>
         </div>
         <div class="content-container">
-        <% problems.forEach(function(problem){ %>
-          <div class="content">
-            <a href="/problems/<%= problem._id %>">
-              <div class="content-top">
-                <span class="content-title"><%= problem.problem_title %></span>
-                <span class="content-level">lv <%= problem.difficulty_level %></span>
-              </div>
-              <div class="content-bottom">
-                <span class="content-success-number">
-                    success <%= problem.completed_users %> 명
-                </span>
-                <span class="content-issuccess">done!</span>
-              </div>
-            </a>
-          </div>
-        <% }) %>
+          <% problems.forEach(function(problem){ %>
+            <div class="content selected-content %>" value="level<%= problem.difficulty_level %>">
+              <a href="/problems/<%= problem._id %>">
+                <div class="content-top">
+                  <span class="content-title"><%= problem.problem_title %></span>
+                  <span class="content-level">lv <%= problem.difficulty_level %></span>
+                </div>
+                <div class="content-bottom">
+                  <span class="content-success-number">
+                      success <%= problem.completed_users %> 명
+                  </span>
+                  <% if(successList.includes(problem._id)){ %>
+                    <span class="content-success">done!</span>
+                  <% } %>
+                </div>
+              </a>
+            </div>
+          <% }) %>
         </div>
       </div>
     </div>
+    <script src="/javascripts/index.js"></script>
   </body>
 </html>

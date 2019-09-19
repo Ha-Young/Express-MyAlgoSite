@@ -93,7 +93,12 @@
   margin-top: 20px;
 }
 
+.content-container > .selected-content {
+  display: block;
+}
+
 .content {
+  display: none;
   margin: 5px;
   flex: 0 0 48%;
   height: 100px;
@@ -127,12 +132,9 @@
   background-color: rgb(185, 226, 212);
 }
 
-.content-issuccess {
+.content-success {
   position: absolute;
   top: 20px;
   right: 10px;
   background-color: rgb(232, 245, 207);
 }
-
-
-

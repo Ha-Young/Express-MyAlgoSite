@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const authenticateUser = require('./middlewares/authenticateUser');
 const {
+  getUserCode,
   getProgramInfo,
   setCodeCookie,
   executeCode,
@@ -10,7 +11,7 @@ const {
   updateSuccessUserToProblem
 } = require('./controllers/problem.controller');
 
-router.get('/:problemId', authenticateUser, getProgramInfo);
+router.get('/:problemId', authenticateUser, getUserCode, getProgramInfo);
 router.post('/:problemId',
   authenticateUser,
   setCodeCookie,

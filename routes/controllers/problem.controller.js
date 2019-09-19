@@ -2,14 +2,26 @@ const vm = require('vm');
 const User = require('../../models/User');
 const Problem = require('../../models/Problem');
 
+exports.getUserCode = async function (req, res, next) {
+  try {
+    const currentUser = await User.findOne({ _id : req.user._id });
+    const currentProblem = await currentUser.success_problems.find((problem => {
+      return problem.problem_id === req.params.problemId;
+    }));
+    req.writtenCode = currentProblem.written_code || req.cookies.writtenCode || 'function solution () {};';
+    next();
+  } catch (error) {
+    next();
+  }
+};
+
 exports.getProgramInfo = async function (req, res, next) {
-  const writtenCode = req.cookies.writtenCode || 'function solution () {};';
   try {
     const problem = await Problem.findOne({ _id : req.params.problemId });
     res.render('problem', {
       title: '바닐라코딩',
       problem,
-      writtenCode
+      writtenCode : req.writtenCode
     });
   } catch (error) {
     next();
@@ -57,6 +69,7 @@ exports.executeCode = async function (req, res, next) {
 
 
 exports.checkAnswer = function (req, res, next) {
+  console.log(req.resultMessages);
   const isRightCode = req.resultMessages.every((result) => {
     return result.isRightAnswer;
   })

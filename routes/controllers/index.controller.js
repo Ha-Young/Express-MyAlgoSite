@@ -3,18 +3,21 @@ const User = require('../../models/User');
 const Problem = require('../../models/Problem');
 
 exports.getProblemList = async (req, res, next) => {
+  res.clearCookie('writtenCode');
   try {
     const currentUser = await User.findOne({ _id : req.user._id });
     const problems = await Problem.find();
-    const userSuccess = currentUser.success_problems.length;
+    const successList = currentUser.success_problems.map(problem => {
+      return problem.problem_id;
+    });
 
     res.render('index', {
       title: '바닐라코딩',
       problems,
       userProfileImg: currentUser.profile_img_url,
       userName: currentUser.username,
-      userSuccess,
-      userChallenging: problems.length - userSuccess
+      successList,
+      userChallenging: problems.length - successList.length
     });
   } catch (error) {
     next();
@@ -33,7 +36,6 @@ exports.gitHubLoginCallback = passport.authenticate('github', {
 });
 
 exports.doLogout = (req, res, next) => {
-  res.clearCookie('writtenCode');
   req.logout();
   res.status(301).redirect('/login');
 };
