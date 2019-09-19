@@ -2,31 +2,40 @@
 <html>
   <head>
     <title>Codewars</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/problems.css' />
     <script src="/lib/codemirror.js"></script>
     <script src="/lib/mode/javascript.js"></script>
     <script src="/lib/addon/edit/closebrackets.js"></script>
-
+    <link href="https://fonts.googleapis.com/css?family=Lobster|Ubuntu&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/lib/codemirror.css" />
-    <link rel="stylesheet" href="/lib/theme/darcula.css" />
+    <link rel="stylesheet" href="/lib/theme/base16-light.css" />
   </head>
   <body>
-    <a href="/logout">Logout</a>
-    <h1>Codewars</h1>
-    <h2 class='title'><%= problem.title %></h2>
-    <div class=''><%= problem.difficulty_level %></div>
-    <div class=''><%= problem.completed_users %></div>
-    <div class=''><%= problem.description %></div>
-    <form method='POST' action=<%= `/problems/${problem._id}` %>>
-      <textarea id='demotext' name="code"></textarea>
-      <input type='submit' value='제출하기' />
-    </form>
+    <div class="container">
+      <%- include('partials/header') %>
+      <div class="problem-container">
+        <div class="problem-info">
+          <div class="level-info">
+            <div class='problem-level'>LV <%= problem.difficulty_level %></div>
+            <div class='problem-completed'><%= problem.completed_users %></div>
+          </div>
+          <div class='problem-title'><%= problem.title %></div>
+          <div class='problem-description'><%= problem.description %></div>
+          <button class="submit-button" type='submit' name="code-box">SUBMIT</button>
+        </div>
+        <div class="code-mirror">
+          <form id="code-box" method='POST' action=<%= `/problems/${problem._id}` %>>
+            <textarea id='codemirror' name="code"></textarea>
+          </form>
+        </div>
+      </div>
+    </div>
     <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById('demotext'), {
+      var editor = CodeMirror.fromTextArea(document.getElementById('codemirror'), {
         lineNumbers: true,
         autoCloseBrackets: true,
         mode: 'javascript',
-        theme: 'darcula'
+        theme: 'base16-light'
       });
     </script>
   </body>
