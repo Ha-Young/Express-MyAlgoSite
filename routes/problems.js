@@ -3,7 +3,7 @@ const router = express.Router();
 const authenticateUser = require('./middlewares/authenticateUser');
 const {
   getUserCode,
-  getProgramInfo,
+  getProblemInfo,
   setCodeCookie,
   executeCode,
   checkAnswer,
@@ -11,7 +11,7 @@ const {
   updateSuccessUserToProblem
 } = require('./controllers/problem.controller');
 
-router.get('/:problemId', authenticateUser, getUserCode, getProgramInfo);
+router.get('/:problemId', authenticateUser, getUserCode, getProblemInfo);
 router.post('/:problemId',
   authenticateUser,
   setCodeCookie,

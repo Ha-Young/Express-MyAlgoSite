@@ -1,9 +1,12 @@
 body{
   height: 100vh;
+  background-color: #253746;
+  color: white;
 }
 
 .problem-container {
   width: 100%;
+  border: 1px solid #172333;
 }
 
 .problem-title {
@@ -22,6 +25,7 @@ body{
 }
 
 .problem-content {
+  border: 1px solid #172333;
   display: flex;
 }
 
@@ -29,19 +33,27 @@ body{
   width: 50%;
 }
 
+.question-wrap {
+  width: 80%;
+  margin: 0 auto;
+}
+
 .question {
   border-bottom: 1px solid gray;
+  color: #B1C0CC;
   font-size: 15px;
   line-height: 25px;
   padding-bottom: 30px;
 }
 
 .testcase-title, .question-title {
+  color: white;
   text-align: center;
   font-size: 20px;
 }
 
 .testcase-wrap {
+  color: #B1C0CC;
   display: flex;
   text-align: center;
   font-size: 17px;
@@ -52,15 +64,19 @@ body{
   border-bottom: 1px solid gray;
 }
 
+.editor-wrap {
+  border: 4px solid #172333;
+}
+
 .formbtn-wrap {
   text-align: right;
 }
 
-.code-form input, .gobackbtn {
+.code-form input, .gobackbtn, .returnbtn {
   width: 80px;
   padding: 5px;
-  font-size: 20px;
-  background-color: rgb(0, 0, 0);
+  font-size: 15px;
+  background-color: #0078FF;
   border-radius: 10px;
   border: none;
   color: white;
@@ -70,4 +86,37 @@ body{
 .gobackbtn {
   position: absolute;
   left: 20px;;
+}
+
+.failure-wrap .success-wrap {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+.failure-wrap h1, .success-wrap h1 {
+  text-align: center;
+}
+
+.result-head, .result-row {
+  display: flex;
+}
+
+.correct-message {
+  width: 300px;
+  color: red;
+}
+.result-head > div, .result-row > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  width: 200px;
+  height: 90px;
+  border: 4px solid #172333;
+}
+
+.returnbtn-wrap {
+  width: 200px;
+  text-align: center;
+  margin: 20px auto;
 }

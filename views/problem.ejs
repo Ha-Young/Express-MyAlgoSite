@@ -23,31 +23,33 @@
       </div>
       <div class="problem-content">
         <div class="problem-question">
-          <div class="question">
-            <div class="question-title">PROBLEM</div>
-            <%= problem.description %>
-          </div>
-          <div class="testcase">
-            <div class="testcase-title">EXAMPLE</div>
-            <div class="testcase-wrap">
-              <div class="arguments">
-                <div>Execution</div>
-              </div>
-              <div class="solutions">
-                <div>Output</div>
-              </div>
+          <div class="question-wrap">
+            <div class="question">
+              <div class="question-title">PROBLEM</div>
+              <%= problem.description %>
             </div>
-            <% problem.tests.forEach(function(test){ %>
+            <div class="testcase">
+              <div class="testcase-title">EXAMPLE</div>
               <div class="testcase-wrap">
                 <div class="arguments">
-                  <div></div>
-                  <div><%= test.code %></div>
+                  <div>Execution</div>
                 </div>
                 <div class="solutions">
-                  <div><%= test.solution %></div>
+                  <div>Output</div>
                 </div>
               </div>
-            <% }) %>
+              <% problem.tests.forEach(function(test){ %>
+                <div class="testcase-wrap">
+                  <div class="arguments">
+                    <div></div>
+                    <div><%= test.code %></div>
+                  </div>
+                  <div class="solutions">
+                    <div><%= test.solution %></div>
+                  </div>
+                </div>
+              <% }) %>
+            </div>
           </div>
         </div>
         <div class="testform-wrap">

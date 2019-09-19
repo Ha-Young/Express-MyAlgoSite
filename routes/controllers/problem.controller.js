@@ -8,14 +8,24 @@ exports.getUserCode = async function (req, res, next) {
     const currentProblem = await currentUser.success_problems.find((problem => {
       return problem.problem_id === req.params.problemId;
     }));
-    req.writtenCode = currentProblem.written_code || req.cookies.writtenCode || 'function solution () {};';
+    if (currentProblem) {
+      req.writtenCode = currentProblem.written_code
+    } else {
+      req.writtenCode = req.cookies.writtenCode || 'function solution () {};';
+    }
+
     next();
   } catch (error) {
-    next();
+    if (error.name === 'CastError') {
+      next();
+    } else {
+      error.status = 500;
+      next(error);
+    }
   }
 };
 
-exports.getProgramInfo = async function (req, res, next) {
+exports.getProblemInfo = async function (req, res, next) {
   try {
     const problem = await Problem.findOne({ _id : req.params.problemId });
     res.render('problem', {
@@ -24,7 +34,12 @@ exports.getProgramInfo = async function (req, res, next) {
       writtenCode : req.writtenCode
     });
   } catch (error) {
-    next();
+    if (error.name === 'CastError') {
+      next();
+    } else {
+      error.status = 500;
+      next(error);
+    }
   }
 };
 
@@ -41,29 +56,38 @@ exports.executeCode = async function (req, res, next) {
   try {
     const problem = await Problem.findOne({ _id : req.params.problemId });
     const submittedFn = req.body.code;
-    problem.tests.forEach(test => {
-      const code = `${submittedFn} ${test.code}`;
-      const script = new vm.Script(code);
-      const context = vm.createContext({});
-      const submittedResult = script.runInContext(context, { timeout: 1000 });
-      const testResult = {
-        argument: test.code,
-        expectedResult: test.solution,
-        submittedResult
-      };
-      if (submittedResult !== test.solution) {
-        testResult.isRightAnswer = false;
-        testResult.correctMessage = `expected result is ${test.solution} but your result is ${submittedResult}`;
-      } else {
-        testResult.isRightAnswer = true;
-        testResult.correctMessage = `Correct! your result is ${submittedResult}`;
-      }
-      resultMessages.push(testResult);
-    });
-    req.resultMessages = resultMessages;
+    try {
+      problem.tests.forEach(test => {
+        const code = `${submittedFn} ${test.code}`;
+        const script = new vm.Script(code);
+        const context = vm.createContext({});
+        const submittedResult = script.runInContext(context, { timeout: 1000 });
+        const testResult = {
+          argument: test.code,
+          expectedResult: test.solution,
+          submittedResult
+        };
+        if (submittedResult !== test.solution) {
+          testResult.isRightAnswer = false;
+          testResult.correctMessage = `expected result is ${test.solution} but your result is ${submittedResult}`;
+        } else {
+          testResult.isRightAnswer = true;
+          testResult.correctMessage = `Correct! your result is ${submittedResult}`;
+        }
+        resultMessages.push(testResult);
+      });
+      req.resultMessages = resultMessages;
+    } catch (error) {
+      res.render('failure', { error });
+    }
     next();
   } catch (error) {
-    res.render('failure', { message : error.message });
+    if (error.name === 'CastError') {
+      next();
+    } else {
+      error.status = 500;
+      next(error);
+    }
   }
 };
 
@@ -76,7 +100,7 @@ exports.checkAnswer = function (req, res, next) {
   if (isRightCode) {
     next();
   } else {
-    res.render('failure', { message : '', resultMessages: req.resultMessages });
+    res.render('failure', { resultMessages: req.resultMessages });
   }
 };
 
@@ -107,7 +131,12 @@ exports.updateSuccessCodeToUser = async function (req, res, next) {
     }
 
   } catch (error) {
-    next();
+    if (error.name === 'CastError') {
+      next();
+    } else {
+      error.status = 500;
+      next(error);
+    }
   }
 };
 
@@ -119,6 +148,11 @@ exports.updateSuccessUserToProblem = async function (req, res, next) {
     );
     res.render('success');
   } catch (error) {
-    next();
+    if (error.name === 'CastError') {
+      next();
+    } else {
+      error.status = 500;
+      next(error);
+    }
   }
 };
