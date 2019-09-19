@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const passportSet = require('./routes/middlewares/googleAuthorize');
 const index = require('./routes/index');
 const googleAuth = require('./routes/googleAuth');
+const problems = require('./routes/problems');
 
 const app = express();
 
@@ -26,6 +27,7 @@ passportSet(app);
 
 app.use('/', index);
 app.use('/google', googleAuth);
+app.use('/problems', problems);
 
 app.use(function(req, res, next) {
   const err = new Error('Not Found');

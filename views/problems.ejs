@@ -14,15 +14,12 @@
     <h1>Codewars</h1>
     <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
 
-    <div class="problems">
-      <% problems.forEach(function(result){ %>
-        <div onclick="location.href='/problems/<%= result._id %>'">
-          <div><%= result.title %></div>
-          <div>정답자: <%= result.completed_users %></div>
-          <div>난이도: Level <%= result.difficulty_level %></div>
-          <div> ----------------- </div>
-        </div>
-      <%  }); %>
+    <div class="problem">
+      <div><%= problem.title %></div>
+      <div>정답자: <%= problem.completed_users %></div>
+      <div>난이도: Level <%= problem.difficulty_level %></div>
+      <div>설명: <%= problem.description %></div>
     </div>
+    <button>제출</button>
   </body>
 </html>

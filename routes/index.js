@@ -1,12 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const authCheck = require('./middlewares/checkAuth');
+const indexController = require('./controllers/index.controller');
 
 /* GET home page. */
-router.get('/', authCheck, (req, res, next) => {
-  res.render('index', { title: 'Vanilla', user: req.user });
-});
-
+router.get('/', authCheck, indexController.loadMain);
 router.get('/login', (req, res, next) => {
   res.render('login', { title: 'Vanilla'});
 });

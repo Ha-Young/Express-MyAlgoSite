@@ -8,23 +8,18 @@ const mongoose = require('mongoose');
 const ProblemSchema = new mongoose.Schema({
   id: Number,
   title: String,
-  completed_users: Number,
+  completed_users: {
+    type: Number,
+    default: 0 
+  },
   difficulty_level: Number,
   description: String,
   tests: [
     {
       code: String,
-      solution: Number
-    },
-    {
-      code: String,
-      solution: Number
-    },
-    {
-      code: String,
-      solution: Number
+      solution: {}
     }
-    ]
+  ]
 });
 
 module.exports = mongoose.model('Problem', ProblemSchema);
