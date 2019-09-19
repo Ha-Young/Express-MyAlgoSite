@@ -1,5 +1,3 @@
-
-
 var textarea = document.getElementById('editor');
 var editor = CodeMirror.fromTextArea(textarea, {
     lineNumbers: true,
@@ -7,7 +5,8 @@ var editor = CodeMirror.fromTextArea(textarea, {
     mode: "javascript",
     theme: "default"
 });
-editor.getDoc().setValue('function solution () {};');
+
+// editor.getDoc().setValue('function solution () {};');
 
 // var myCodeMirror = CodeMirror(editor, {
 //   value: "function solution () {}",

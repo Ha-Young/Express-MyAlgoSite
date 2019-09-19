@@ -1,6 +1,5 @@
 [
   {
-    "problem_id": 1,
     "problem_title": "피보나치 수열",
     "completed_users": 15,
     "difficulty_level": 1,
@@ -21,7 +20,6 @@
     ]
   },
   {
-    "problem_id": 2,
     "problem_title": "서울에서 김서방 찾기",
     "completed_users": 11,
     "difficulty_level": 2,
@@ -38,7 +36,6 @@
     ]
   },
   {
-    "problem_id": 3,
     "problem_title": "수박수박수박수박수",
     "completed_users": 12,
     "difficulty_level": 2,
@@ -55,7 +52,6 @@
     ]
   },
   {
-    "problem_id": 4,
     "problem_title": "하샤드 수",
     "completed_users": 5,
     "difficulty_level": 3,

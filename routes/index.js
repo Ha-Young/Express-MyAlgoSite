@@ -1,15 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const Problem = require('../models/Problem');
-const authenticateUser = require('../middlewares/authorization');
+const authenticateUser = require('./middlewares/authenticateUser');
+const {
+  getProblemList,
+  getLoginPage,
+  gitHubLogin,
+  gitHubLoginCallback,
+  doLogout
+} = require('./controllers/index.controller');
 
-/* GET home page. */
-router.get('/', authenticateUser, async (req, res, next) => {
-  const problems = await Problem.find();
-  res.render('index', {
-    title: '바닐라코딩',
-    problems
-  });
-});
+
+router.get('/', authenticateUser, getProblemList);
+router.get('/login', getLoginPage);
+router.get('/login/github', gitHubLogin);
+router.get('/login/github/callback', gitHubLoginCallback);
+router.get('/logout', doLogout);
 
 module.exports = router;

@@ -5,10 +5,9 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const path = require('path');
-const userPassport = require('./middlewares/passport');
+const userPassport = require('./routes/middlewares/passport');
 
-const index = require('./routes/index');
-const loginRouter = require('./routes/login');
+const indexRouter = require('./routes/index');
 const problemsRouter = require('./routes/problems');
 
 require('dotenv').config();
@@ -18,7 +17,9 @@ const db = mongoose.connection;
 
 mongoose.connect('mongodb://localhost:27017/codewars', {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+  useCreateIndex: true
 });
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
@@ -33,19 +34,20 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({ secret: process.env.SESSION_SECRET, cookie: { maxAge: 24 * 60 * 60 * 1000 }}));
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  cookie: { maxAge: 24 * 60 * 60 * 1000 },
+  resave: true,
+  saveUninitialized: true
+}));
+
 app.use(passport.initialize());
 app.use(passport.session()); //로그인 세션 유지
 
 userPassport(passport);
 
-app.use('/', index);
-app.use('/login', loginRouter);
+app.use('/', indexRouter);
 app.use('/problems', problemsRouter);
-app.get('/logout', function(req, res){
-  req.logout();
-  res.status(301).redirect('/login');
-});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

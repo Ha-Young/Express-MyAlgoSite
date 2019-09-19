@@ -8,20 +8,19 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
   user_id: {
     type: Number,
-    required: true,
-    unique: true
+    required: true
   },
   username: {
     type: String,
     required: true
   },
   profile_img_url: {
-
+    type: String
   },
-  problems: [{
-    problem_id: Number,
-    status: String,
-    writed_code: String
+  success_problems: [{
+    problem_id: String,
+    written_code: String,
+    updated_at: Date
   }]
 }, {
   timestamps: { createdAt: 'created_at' }

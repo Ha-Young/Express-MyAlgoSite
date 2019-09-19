@@ -1,5 +1,5 @@
 const GitHubStrategy = require('passport-github').Strategy;
-const User = require('../models/User');
+const User = require('../../models/User');
 
 module.exports = function passport(passport) {
   passport.use(new GitHubStrategy({
@@ -10,9 +10,9 @@ module.exports = function passport(passport) {
   async function(accessToken, refreshToken, profile, done) {
     const userData = {
       user_id: profile.id,
-      username: profile.username
+      username: profile.username,
+      profile_img_url: profile.photos[0].value
     };
-
     try {
       const targetUser = await User.findOne({ user_id : profile.id });
       if (targetUser) {

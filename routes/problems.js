@@ -1,35 +1,24 @@
 const express = require('express');
 const router = express.Router();
-const Problem = require('../models/Problem');
-const authenticateUser = require('../middlewares/authorization');
+const authenticateUser = require('./middlewares/authenticateUser');
+const {
+  getProgramInfo,
+  setCodeCookie,
+  executeCode,
+  checkAnswer,
+  updateSuccessCodeToUser,
+  updateSuccessUserToProblem
+} = require('./controllers/problem.controller');
 
-router.get('/:problemId', authenticateUser, async (req, res, next) => {
-  try {
-    const problem = await Problem.findOne({ problem_id : req.params.problemId });
-    res.render('problem', {
-      title: '바닐라코딩',
-      problem
-    });
-  } catch (error) {
-    next();
-  }
-});
-
-router.post('/:problemId', authenticateUser, async (req, res, next) => {
-  // const summittedFn = new Function('return :', req.body.code)();
-  try {
-    const result = [];
-    const problem = await Problem.findOne({ problem_id : req.params.problemId });
-    console.log(problem.tests.length)
-    problem.tests.forEach(test => {
-      console.log(test)
-    });
-  } catch (error) {
-    next();
-  }
-
-  res.render('failure');
-});
+router.get('/:problemId', authenticateUser, getProgramInfo);
+router.post('/:problemId',
+  authenticateUser,
+  setCodeCookie,
+  executeCode,
+  checkAnswer,
+  updateSuccessCodeToUser,
+  updateSuccessUserToProblem
+);
 
 module.exports = router;
 
@@ -37,7 +26,7 @@ module.exports = router;
 /*
 피보나치
 
-function soultion(a) {
+function solution(a) {
   let arr = [0,1];
   for (let i = 2; i <= a; i++ ) {
     arr.push(arr[i-1]+arr[i-2])
@@ -64,11 +53,16 @@ function solution(a) {
 김서방
 
 function solution(a) {
-
-   let findKim;
-   findKim = a.indexOf(‘Kim’);
-  return “김서방은 “+findKim+“에 있다“;
+  let findKim = a.indexOf('Kim');
+  return "김서방은 "+findKim+"에 있다";
 }
+
+function solution (a) {
+for (let i = 0; i < 1000000; i++) {
+}
+    let findKim = a.indexOf('Kim');
+  return "김서방은 "+findKim+"에 있다";
+};
 
 하샤드
 

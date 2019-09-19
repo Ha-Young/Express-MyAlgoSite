@@ -13,21 +13,21 @@
         </div>
         <div class="user-info">
           <div class="user-profile">
-            <img src="https://image.flaticon.com/icons/svg/25/25231.svg">
+            <img src="<%= userProfileImg %>">
           </div>
           <div class="user-name">
-            <span>박한준</span>
+            <span><%= userName %></span>
           </div>
         </div>
         <div class="user-report">
           <table>
             <tr>
               <td>SUCCESSS!</td>
-              <td>0개</td>
+              <td><%= userSuccess %>개</td>
             </tr>
             <tr>
               <td>도전하세요!</td>
-              <td>0개</td>
+              <td><%= userChallenging %>개</td>
             </tr>
           </table>
           <div class="logout-wrap">
@@ -56,7 +56,7 @@
         <div class="content-container">
         <% problems.forEach(function(problem){ %>
           <div class="content">
-            <a href="/problems/<%= problem.problem_id %>">
+            <a href="/problems/<%= problem._id %>">
               <div class="content-top">
                 <span class="content-title"><%= problem.problem_title %></span>
                 <span class="content-level">lv <%= problem.difficulty_level %></span>
