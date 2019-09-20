@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <%- include('./partials/head') %>
+  <body>
+    <%- include('./partials/header') %>
+    <div class="kata-wrapper">
+      <div class="kata-sub-details">
+        <%- include('./partials/problemDetails', { problem: problem }) %>
+      </div>
+      <div class="kata-body-wrapper">
+        <div class="details-wrapper">
+          <div class="failure-details">
+            <div class="kata-details-header">
+              <% const passed = results.filter(test => test === true) %>
+              <div class="kata-details-header">
+                passed: <%= passed.length %>
+                failed: <%= results.length - passed.length %>
+              </div>
+            </div>
+              <ul>
+                <% if (results) { %>
+                  <% for(let i = 0; i < results.length; i++) { %>
+                    <li>
+                      <% if (results[i] !== true) { %>
+                        <div class="fail-message">ⓘ Expected: '<%= tests[i].solution %>', instead got'<%= results[i] %>'</div>
+                      <% } else { %>
+                        <div class="success-massage">ⓘpassed</div>
+                        <% } %>
+                      </li>
+                  <% } %>
+                <% } else { %>
+                  <li class="fail-err-message"> <%= errMessage %><br><br> <%= errStack %> </li>
+                <% } %>
+              </ul>
+            <!-- <div>powered by</div> -->
+          </div>
+        </div>
+        <div class="code-mirror-wrapper">
+          <form
+            class="code-mirror"
+            action="/problems/<%= problem._id %>/solution"
+            method="POST"
+          >
+            <div class="code-mirror-solution"> solution:</div>
+            <textarea id="code" name="solution"></textarea>
+            <div class="code-mirror-solution"> Sample Test:</div>
+            <div id="code-sample"></div>
+            <% const problemTests = problem.tests %>
+            <button type="submit" class="submit"> ▶ ATTEMPT </button>
+            <a href="/problems/<%= problem._id %>" class="try-again"> ▷ TRY AGAIN </a>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="/lib/codemirror/codemirror-5.48.4.js"></script>
+    <script src="/javascripts/javascript.js"></script>
+    <script src="/lib/codemirror/codeEditor.js"></script>
+    <script>
+      const sampleEditor = CodeMirror(document.getElementById('code-sample'), {
+        mode: "javascript",
+        lineNumbers: true,
+        lineWrapping: true,
+        matchBrackets: true,
+        theme: 'base16-dark',
+      });
+
+      let sampleTestCode = '';
+      <% problemTests.forEach(test => { %>
+        sampleTestCode += `<%- test.code %>; <%- test.solution %> \n\n`;
+      <% }) %>
+
+      sampleEditor.getDoc().setValue(sampleTestCode);
+      sampleEditor.setSize(null, 180);
+    </script>
+  </body>
+</html>

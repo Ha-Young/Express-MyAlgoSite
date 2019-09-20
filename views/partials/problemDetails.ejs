@@ -1,0 +1,10 @@
+<div>
+  <% const problemDifficulty = problem.difficulty_level %>
+  <span class="problem-difficuty difficulty<%= problemDifficulty %>"><%= problem.difficulty_level %> kyu </span>
+  <a href="/problems/<%= problem._id %>" class="problem-title"> <%= problem.title %> </a>
+</div>
+<div class="problem-sub-details">
+  <span>ꉦ Algorithm</span>
+  <span class="problem-completed-user">⊙ <%= problem.completed_users.length %></span>
+  <span>ꆜ <%= problem.writer %></span>
+</div>

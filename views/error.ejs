@@ -1,3 +1,19 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <%- include('./partials/header') %>
+    <div class="err-wrapper">
+      <h2 class="err-status"><%= error.status %></h2>
+      <% if (error.status !== 500) { %>
+        <div class="err-title"><%= error.message %></div>
+      <% } else {%>
+        <div class="err-title">서버에 문제가 발생했습니다.<br> 잠시 후에 다시 시도해주세요.</div>
+      <% } %>
+      <a href="/" class="err-home">Back Home</a>
+    </div>
+  </body>
+</html>
