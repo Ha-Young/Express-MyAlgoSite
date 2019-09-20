@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/codeMirror/codemirror.css' />
+    <link rel='stylesheet' href='/codeMirror/theme/dracula.css' />
+    <link href='https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap' rel='stylesheet'>
+  </head>
+  <body>
+    <div class='wrap'>
+      <header class='sub-header'>
+        <h1><a href='/'>Codewars</a></h1>
+        <% include ./partials/header %>
+      </header>
+      <div class='problem-area'>
+        <div class='info-wrap'>
+          <p class='title'><%= problem.title %>
+            <span><%= '🌟'.repeat(problem.difficultyLevel) %></span>
+          </p>
+          <p class='completed-users'>completed users: <%= problem.completedUsers %></p>
+          <p class='description'><%= problem.description %></p>
+        </div>
+        <form action=<%= `/problems/${problem._id}` %> method='POST' class='form-code'>
+          <textarea class='code-editor' name='code'>
+            <%= problem.code %>
+          </textarea>
+          <div class='button-area'>
+            <input type='submit' value='Submit' class='submit'>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script type='text/javascript' src='/codeMirror/codemirror.js'></script>
+    <script type='text/javascript' src='/codeMirror/mode/javascript/javascript.js'></script>
+    <script>
+      const formText =  '<%= problem.form %>';
+
+      CodeMirror.fromTextArea(document.querySelector('.code-editor'), {
+        mode: 'javascript',
+        theme: 'dracula',
+        tabSize: 2,
+        lineNumbers: true,
+      }).setValue(formText);
+    </script>
+  </body>
+</html>

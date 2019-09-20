@@ -3,38 +3,40 @@
   <head>
     <title>Codewars</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href='https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap' rel='stylesheet'>
   </head>
   <body>
-    <h1>Codewars</h1>
-    <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
-
-    <ul class="tabs">
-      <li>Level 1</li>
-      <li>Level 2</li>
-      <li>Level 3</li>
-    </ul>
-
-    <ul class="problems">
-      <li>
-        <div>피보나치 수열</div>
-        <div>정답자: 15명</div>
-        <div>난이도: Level 1</div>
-      </li>
-      <li>
-        <div>서울에서 김서방 찾기</div>
-        <div>정답자: 11명</div>
-        <div>난이도: Level 2</div>
-      </li>
-      <li>
-        <div>수박수박수박수박수</div>
-        <div>정답자: 12명</div>
-        <div>난이도: Level 2</div>
-      </li>
-      <li>
-        <div>하샤드 수</div>
-        <div>정답자: 5명</div>
-        <div>난이도: Level 3</div>
-      </li>
-    </ul>
+    <div class='wrap'>
+      <header>
+        <% include ./partials/header %>
+        <h1><a href="/">Codewars</a></h1>
+      </header>
+      <table class='problem-tbl'>
+        <colgroup>
+          <col style='width:40px'>
+          <col style='width:640px'>
+          <col style='width:160px'>
+          <col style='width:160px'>
+        </colgroup>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Difficulty</th>
+            <th>completed</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(var i=0; i < problems.length; i++) { %>
+            <tr>
+              <td><%= i + 1 %></td>
+              <td><a href='<%= `/problems/${problems[i]._id}` %>'><%= problems[i].title %></a></td>
+              <td><%= '🌟'.repeat(problems[i].difficultyLevel) %></td>
+              <td><%= problems[i].completedUsers %></td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
   </body>
 </html>

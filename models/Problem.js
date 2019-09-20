@@ -6,7 +6,20 @@ const mongoose = require('mongoose');
 
  */
 const ProblemSchema = new mongoose.Schema({
-
+  title: String,
+  completedUsers: {
+    type: Number,
+    default: 0
+  },
+  form: String,
+  difficultyLevel: Number,
+  description: String,
+  tests: [
+    {
+      code: String,
+      solution: mongoose.Schema.Types.Mixed,
+    }
+  ]
 });
 
 module.exports = mongoose.model('Problem', ProblemSchema);

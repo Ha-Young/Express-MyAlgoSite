@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href='https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap' rel='stylesheet'>
+  </head>
+  <body>
+    <div class='wrap'>
+      <header class='sub-header'>
+        <h1><a href='/'>Codewars</a></h1>
+        <% include ./partials/header %>
+      </header>
+      <p class='result-title'>failure</p>
+      <div class='result-info'>
+        <% if(error){ %>
+          <pre>
+            <%= error.stack %>
+          </pre>
+        <% } %>
+
+        <% if(results){ %>
+          <ul>
+            <% for(var i=0; i < results.length; i++) { %>
+              <li class=<%= results[i].isPassed ? 'success' : 'failure' %> >
+                  <span><b>expected</b> '<%= results[i].expected %>' </span>
+                  <span><b>instead got</b> '<%= results[i].insteadGot %>' </span>
+              </li>
+            <% } %>
+          </ul>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>

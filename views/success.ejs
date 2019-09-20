@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href='https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap' rel='stylesheet'>
+  </head>
+  <body>
+    <div class='wrap'>
+      <header class='sub-header'>
+        <h1><a href='/'>Codewars</a></h1>
+        <% include ./partials/header %>
+      </header>
+      <p class='result-title'>success</p>
+      <div class='result-info'>
+        <ul>
+          <% for(var i=0; i < results.length; i++) { %>
+            <li class='success' >
+                <span><b>expected</b> '<%= results[i].expected %>' </span>
+                <span><b>instead got</b> '<%= results[i].insteadGot %>' </span>
+            </li>
+          <% } %>
+        </ul>
+      </div>
+      <a href="/" class='go-btn'>GO TO MAIN</a>
+    </div>
+  </body>
+</html>

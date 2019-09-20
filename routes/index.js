@@ -1,9 +1,29 @@
 const express = require('express');
 const router = express.Router();
+const authController = require('./controllers/authController');
+const problemController = require('./controllers/problemController');
 
-/* GET home page. */
-router.get('/', (req, res, next) => {
-  res.render('index', { title: '바닐라코딩' });
-});
+router.get('/',
+  authController.isLoggedIn,
+  problemController.getAll
+);
+
+router.get('/login',
+  authController.isNotLoggedIn,
+  authController.renderLogin
+);
+
+router.get('/auth/google',authController.authenticateGoogle);
+
+router.get('/auth/google/callback',
+  authController.failureGoogleLogin,
+  authController.successGoogleLogin
+);
+
+router.get('/logout', authController.logout);
+
+router.get('/problems/:problem_id', problemController.getProblem);
+
+router.post('/problems/:problem_id', problemController.checkProblem);
 
 module.exports = router;
