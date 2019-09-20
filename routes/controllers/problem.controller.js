@@ -1,32 +1,37 @@
 const vm = require('vm');
 const User = require('../../models/User');
 const Problem = require('../../models/Problem');
+const objectId = require('mongoose').Types.ObjectId;
 
 exports.getUserCode = async function (req, res, next) {
   try {
+    if (!objectId.isValid(req.user._id) || !objectId.isValid(req.params.problemId)) {
+      next();
+    }
+
     const currentUser = await User.findOne({ _id : req.user._id });
     const currentProblem = await currentUser.success_problems.find((problem => {
       return problem.problem_id === req.params.problemId;
     }));
     if (currentProblem) {
-      req.writtenCode = currentProblem.written_code
+      req.writtenCode = currentProblem.written_code;
     } else {
       req.writtenCode = req.cookies.writtenCode || 'function solution () {};';
     }
 
     next();
   } catch (error) {
-    if (error.name === 'CastError') {
-      next();
-    } else {
-      error.status = 500;
-      next(error);
-    }
+    error.status = 500;
+    next(error);
   }
 };
 
 exports.getProblemInfo = async function (req, res, next) {
   try {
+    if (!objectId.isValid(req.params.problemId)) {
+      next();
+    }
+
     const problem = await Problem.findOne({ _id : req.params.problemId });
     res.render('problem', {
       title: '바닐라코딩',
@@ -34,12 +39,8 @@ exports.getProblemInfo = async function (req, res, next) {
       writtenCode : req.writtenCode
     });
   } catch (error) {
-    if (error.name === 'CastError') {
-      next();
-    } else {
-      error.status = 500;
-      next(error);
-    }
+    err.status = 500;
+    next(error);
   }
 };
 
@@ -54,6 +55,10 @@ exports.setCodeCookie = function (req, res, next) {
 exports.executeCode = async function (req, res, next) {
   const resultMessages = [];
   try {
+    if (!objectId.isValid(req.params.problemId)) {
+      next();
+    }
+
     const problem = await Problem.findOne({ _id : req.params.problemId });
     const submittedFn = req.body.code;
     try {
@@ -82,18 +87,13 @@ exports.executeCode = async function (req, res, next) {
     }
     next();
   } catch (error) {
-    if (error.name === 'CastError') {
-      next();
-    } else {
-      error.status = 500;
-      next(error);
-    }
+    error.status = 500;
+    next(error);
   }
 };
 
 
 exports.checkAnswer = function (req, res, next) {
-  console.log(req.resultMessages);
   const isRightCode = req.resultMessages.every((result) => {
     return result.isRightAnswer;
   })
@@ -107,6 +107,10 @@ exports.checkAnswer = function (req, res, next) {
 
 exports.updateSuccessCodeToUser = async function (req, res, next) {
   try {
+    if (!objectId.isValid(req.user._id)) {
+      next();
+    }
+
     const targetUser = await User.findById(req.user._id);
     const successProblems = targetUser.success_problems.findIndex((problem => {
       return problem.problem_id === req.params.problemId;
@@ -120,7 +124,7 @@ exports.updateSuccessCodeToUser = async function (req, res, next) {
       .push({
         problem_id: req.params.problemId,
         written_code : req.body.code,
-        updated_at : new Date().toISOString(),
+        updated_at : new Date().toISOString()
       });
     targetUser.save();
 
@@ -131,28 +135,24 @@ exports.updateSuccessCodeToUser = async function (req, res, next) {
     }
 
   } catch (error) {
-    if (error.name === 'CastError') {
-      next();
-    } else {
-      error.status = 500;
-      next(error);
-    }
+    error.status = 500;
+    next(error);
   }
 };
 
 exports.updateSuccessUserToProblem = async function (req, res, next) {
   try {
+    if (!objectId.isValid(req.params.problemId)) {
+      next();
+    }
+
     await Problem.findByIdAndUpdate(
       req.params.problemId,
-      { $inc: { completed_users: 1 }  }
+      { $inc: { completed_users: 1 } }
     );
     res.render('success');
   } catch (error) {
-    if (error.name === 'CastError') {
-      next();
-    } else {
-      error.status = 500;
-      next(error);
-    }
+    error.status = 500;
+    next(error);
   }
 };

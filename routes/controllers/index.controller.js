@@ -1,5 +1,6 @@
 const passport = require('passport');
 const userPassport = require('../middlewares/passport');
+const objectId = require('mongoose').Types.ObjectId;
 const User = require('../../models/User');
 const Problem = require('../../models/Problem');
 
@@ -8,6 +9,9 @@ userPassport(passport);
 exports.getProblemList = async (req, res, next) => {
   res.clearCookie('writtenCode');
   try {
+    if (!objectId.isValid(req.user._id)) {
+      next();
+    }
     const currentUser = await User.findOne({ _id : req.user._id });
     const problems = await Problem.find();
     const successList = currentUser.success_problems.map(problem => {
@@ -23,11 +27,8 @@ exports.getProblemList = async (req, res, next) => {
       userChallenging: problems.length - successList.length
     });
   } catch (error) {
-    if (error.name === 'CastError') {
-      next();
-    } else {
-      next(error);
-    }
+    err.status = 500;
+    next(error);
   }
 };
 

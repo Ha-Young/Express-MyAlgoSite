@@ -22,8 +22,7 @@ const userSchema = new mongoose.Schema({
     written_code: String,
     updated_at: Date
   }]
-}, {
-  timestamps: { createdAt: 'created_at' }
+}, { timestamps: { createdAt: 'created_at' }
 });
 
 userSchema.plugin(findOrCreate);

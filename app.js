@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const path = require('path');
 const logger = require('morgan');
-const favicon = require('serve-favicon')
+const favicon = require('serve-favicon');
 
 const indexRouter = require('./routes/index');
 const problemsRouter = require('./routes/problems');
@@ -43,7 +43,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(logger('combined'));
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(favicon(path.join(__dirname, 'public', 'images', 'codewars.ico')))
+app.use(favicon(path.join(__dirname, 'public', 'images', 'codewars.ico')));
 
 app.use(cookieParser());
 app.use(session({
@@ -75,8 +75,9 @@ app.use(function(err, req, res, next) {
   if (err.status === 500) {
     err.message = 'Sorry... Internal Server ERROR..';
   }
+
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', { error : err });
 });
 
 module.exports = app;

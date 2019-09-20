@@ -2,7 +2,7 @@
   const lvtap = document.querySelectorAll('.tapname');
 
   lvtap.forEach(el => {
-    el.addEventListener('click', (event) => {
+    el.addEventListener('click', () => {
       const selectedTap = document.querySelector('.selected-tap');
       const selectedContent = document.querySelectorAll('.selected-content');
       const content = document.querySelectorAll('.content');
