@@ -1,16 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const Problem = require('../models/Problem');
-const util = require('util');
 const vm = require('vm');
+const mongoose = require('mongoose');
+
 
 router.get('/:problem_id',
   function (req, res, next) {
+    if (!mongoose.Types.ObjectId.isValid(req.params.problem_id)) {
+      return next();
+    }
     Problem.findOne({ _id: req.params.problem_id }, function(err, problem) {
-      try {
+      if (!err) {
         res.render('problem', { user: req.user, problem });
-      } catch (err) {
-        res.next();
+      } else {
+        next(err);
       }
     });
   }
@@ -18,6 +22,9 @@ router.get('/:problem_id',
 
 router.post('/:problem_id',
   function (req, res, next) {
+    if (!mongoose.Types.ObjectId.isValid(req.params.problem_id)) {
+      return next();
+    }
     Problem.findOne({ _id: req.params.problem_id }, function(err, problem) {
       try {
         const code = req.body.code;
