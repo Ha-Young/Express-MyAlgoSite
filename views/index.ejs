@@ -5,39 +5,45 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <a href='/login'>Login with GitHub</a>
-    <a href='/auth/logout'>Logout with GitHub</a>
-    <link rel="stylesheet" href="">
-    <h1>Codewars</h1>
-    <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
-
-    <ul class="tabs">
-      <li>Level 1</li>
-      <li>Level 2</li>
-      <li>Level 3</li>
-    </ul>
-
-    <ul class="problems">
-      <li>
-        <div>피보나치 수열</div>
-        <div>정답자: 15명</div>
-        <div>난이도: Level 1</div>
-      </li>
-      <li>
-        <div>서울에서 김서방 찾기</div>
-        <div>정답자: 11명</div>
-        <div>난이도: Level 2</div>
-      </li>
-      <li>
-        <div>수박수박수박수박수</div>
-        <div>정답자: 12명</div>
-        <div>난이도: Level 2</div>
-      </li>
-      <li>
-        <div>하샤드 수</div>
-        <div>정답자: 5명</div>
-        <div>난이도: Level 3</div>
-      </li>
-    </ul>
+    <div class='navbar'>
+      <%if(user){%>
+        <%-include('navbar')%>
+      <%}%>
+    </div>
+    <div class='main-section'>
+      <div class='header'>
+        <h1>Codewars</h1>
+        <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
+      </div>
+      <div class='info-section'>
+        <div class='info-wrapper'>
+          <ul class='level-list'>
+            <p class=type>DIFFICULTY</p>
+            <li class=level-style>Level 1</li>
+            <li class=level-style>Level 2</li>
+            <li class=level-style>Level 3</li>
+          </ul>
+        </div>
+      </div>
+      <div class='item-section'>
+        <ul class='problem-list'>
+          <%if(problems){
+            for(let i = 0; i < problems.length; i++){%>
+              <li class='problem'>
+                <a href='/problems/<%=problems[i]._id %>'>
+                  <p class='type'>PROBLEM</p>
+                  <h2><%= problems[i].title %></h2>
+                  <p>
+                    <span>Completed</span>
+                    <span><%= problems[i].completed_users %></span>
+                    <span>users</span>
+                  </p>
+                  <p></p><span class='level-style'>Level <%= problems[i].difficulty_level %></span></p>
+                </a>
+              </li>
+            <%}}%>
+          </ul>
+      </div>
+    </div>
   </body>
 </html>

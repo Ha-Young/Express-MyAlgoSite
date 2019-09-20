@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <link rel='stylesheet' href='/stylesheets/navbar.css' />
+  </head>
+  <body>
+    <div class='navbar'>
+      <span id='navigation'>
+        <a id='to-problems' href='/' >Problems</a>
+        <%if(problem){%>
+          <span id='problem-title'><%=`> ${problem.title}`%></span>
+        <%}%>
+      </span>
+      <div class='user-info'>
+        <span id='user-name'>Hi, <%= user.displayName %></span>
+        <a id='logout' href='/auth/logout' >SIGN OUT</a>
+      </div>
+    </div>
+  </body>
+</html>

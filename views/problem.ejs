@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Problem</title>
+    <link rel='stylesheet' href='/stylesheets/problem.css' />
+    <script src='/codemirror/lib/codemirror.js'></script>
+    <link rel='stylesheet' href='/codemirror/lib/codemirror.css'/>
+    <script src='/codemirror/mode/javascript/javascript.js'></script>
+    <script src='/codemirror/addon/edit/closebrackets.js'></script>
+    <link rel='stylesheet' href='/codemirror/theme/dracula.css'>
+  </head>
+  <body>
+    <div class='navbar'>
+      <%if(user){%>
+      <%-include('navbar')%>
+      <%}%>
+    </div>
+    <div class='main-section'>
+      <%if(problem){%>
+      <div class='guide-section'>
+        <h1>
+          <span class='level-style'>Level<%= problem.difficulty_level %></span>
+          <span><%= problem.title %></span>
+        </h1>
+        <h2>문제설명</h2>
+        <p><%= problem.description %></p>
+      </div>
+      <div class='run-section'>
+        <div class='CodeMirror'>
+          <form method='POST' action=<%=`/problems/${problem._id}`%> id='form'>
+            <textarea id='editor' name='code'>
+            </textarea>
+          </form>
+        </div>
+      </div>
+      <div class='button-section'>
+        <button type='submit' form='form' id='submit-code'>ATTEMPT</button>
+      </div>
+      <%}%>
+    </div>
+    <script>
+      var functionName = '<%= problem.form.functionName %>';
+      var arguments = '<%= problem.form.arguments %>';
+      CodeMirror.fromTextArea(document.getElementById('editor'), {
+        mode:'javascript',
+        theme:'dracula',
+        autoCloseBrackets: true,
+        lineNumbers: true,
+        tapSize: 1
+      }).setValue(`function ${functionName} (${arguments}) {}`);
+      </script>
+  </body>
+</html>

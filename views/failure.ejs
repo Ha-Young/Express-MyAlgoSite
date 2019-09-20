@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Success</title>
+    <link rel='stylesheet' href='/stylesheets/result.css' />
+  </head>
+  <body>
+    <link rel='stylesheet' href=''>
+    <h1>Try Again 🐶</h1>
+    <%if(errorMessage){%>
+      <pre><%= errorMessage %></pre>
+    <%}%>
+
+    <ul>
+      <% if(results){
+        for(let i = 0; i < results.length; i++){%>
+          <li>
+            <div><%= results[i].code %></div>
+            <h2><%= results[i].code %></h2>
+            <p>Expected: <%= results[i].expected %></p>
+            <p>Instead got: <%= String(results[i].insteadGot) %></p>
+          </li>
+      <%}}%>
+    </ul>
+
+  </body>
+</html>
