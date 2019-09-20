@@ -4,22 +4,35 @@
     <meta charset='utf-8' />
     <title>Codewars</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src='/javascripts/codemirror.js'></script>
+    <link rel='stylesheet' href='/stylesheets/codemirror.css'>
+    <link rel='stylesheet' href='/stylesheets/solarized.css'>
+    <script src='/codeMirror/javascript.js'></script>
   </head>
   <body>
     <h1><%= title %></h1>
     <a class='google-btn' href='/logout'>Logout
     </a>
-    <img height="45" width="45" src='<%= user.thumbnail %>' />
+    <img height='45' width='45' src='<%= user.thumbnail %>' />
     <h1><%= user.userName %></h1>
     <h1>Codewars</h1>
     <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
 
-    <div class="problem">
+    <div class='problem'>
       <div><%= problem.title %></div>
       <div>정답자: <%= problem.completed_users %></div>
       <div>난이도: Level <%= problem.difficulty_level %></div>
       <div>설명: <%= problem.description %></div>
     </div>
-    <button>제출</button>
+    <form action='/problems/<%= problem._id %>' method='POST'>
+      <textarea id='codeEditor' name='solution'></textarea>
+      <input type='submit' value='제출'>
+    </form>
   </body>
+  <script>
+    const myCodeMirror = CodeMirror(document.getElementById('codeEditor'), {
+      mode: 'javascript',
+      theme: 'solarized light'
+    });
+  </script>
 </html>
