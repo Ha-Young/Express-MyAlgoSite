@@ -3,8 +3,8 @@
 module.exports = {
   google: {
     clientID:
-      '563778490290-i3fia9ngp5b75ugvndp45hmm9adlc6l1.apps.googleusercontent.com',
-    clientSecret: 'PHAhBVKzAytJoXvfy_bBxus_',
+      process.env.client_ID,
+    clientSecret: process.env.clientSecret,
   },
   mongodb: {
     dbURI:
