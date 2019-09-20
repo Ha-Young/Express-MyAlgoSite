@@ -1,0 +1,83 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 50px;
+  min-width: 700px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background:#FEEED4;
+}
+
+.container {
+  height: 80vh;
+  background: #FEF7EC;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.problem-info {
+  margin: 20px 70px 70px 0px;
+  padding: 30px;
+  overflow: auto;
+  background: #FFFFFF;
+  border-radius: 0px 20px 20px 0px;
+  box-shadow: 2px 2px 1px #e7e7e7e7;
+}
+
+.level-info {
+  display: flex;
+}
+
+.problem-level {
+  padding: 4px 10px 3px 10px;
+  width: 50px;
+  text-align: center;
+  background-color: #32CFA5;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+.problem-title {
+  margin: 5px;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* .problem-description {
+  width: 
+}
+ */
+
+
+
+.submit-button {
+  margin: 10px;
+  width: 100px;
+  height: 30px;
+  line-height: 30px;
+  border: none;
+  border-radius: 40px;
+  background: #FFD984;
+  color: #1A1A1B;
+  font-family: 'Ubuntu';
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.submit-button:hover {
+  cursor: pointer;
+}
+
+
+.code-mirror {
+  position: relative;
+  width: 100%;
+  overflow: auto;
+  /* width: 400px; */
+  /* min-width: 350px; */
+  /* min-width: 80vw; */
+  /* min-width: 40vw; */
+}

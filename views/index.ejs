@@ -2,26 +2,36 @@
 <html>
   <head>
     <title>Codewars</title>
+    <link rel='stylesheet' href='/stylesheets/header.css'>
     <link rel='stylesheet' href='/stylesheets/style.css'>
     <link href="https://fonts.googleapis.com/css?family=Lobster|Ubuntu&display=swap" rel="stylesheet">
   </head>
   <body>
     <div class="container">
-        <%- include('partials/header') %>
-
-      <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
-
-      <ul class="problems">
-        <% for(let i = 0; i < problem.length; i++) {%>
-          <a href='/problems/<%= problem[i].id%>'>
-            <li class='problem'>
-              <div class='title'><%= problem[i].title%></div>
-              <div class='completed'>문제푼사람: <%= problem[i].completed_users%></div>
-              <div class='level'>LV <%= problem[i].difficulty_level%></div>
-            </li>
-          </a>
-        <%}%>
-      </ul>
+      <%- include('partials/header') %>
+      <div class="main">
+        <div class="main-title">
+          <h2>코딩 전쟁이 일어난다.<br> 모든 대원들, 전투 준비!</h2>
+        </div>
+      </div>
+      <div class="second">
+        <div>
+          codewars
+        </div>
+        <div class="problem-container">
+          <ul class="problem-list">
+            <% for(let i = 0; i < problem.length; i++) {%>
+              <li class='problem'>
+                <a href='/problems/<%= problem[i].id%>'>
+                  <div class='level'>LV <%= problem[i].difficulty_level%></div>
+                  <div class='title'><%= problem[i].title%></div>
+                  <div class='completed'>문제푼사람: <%= problem[i].completed_users%></div>
+                </a>
+              </li>
+            <%}%>
+          </ul>
+        </div>
+      </div>
     </div>
   </body>
 </html>

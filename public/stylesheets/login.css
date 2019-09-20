@@ -1,0 +1,42 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background:#FEF7EC;
+  height: 800px;
+  display: flex;
+  align-items: center;
+}
+
+.login-box {
+  margin: 0 auto;
+  width: 350px;
+  height: 500px;
+  background: #FFFFFF;
+  border-radius: 20px;
+  box-shadow: 5px 5px 10px #e7e7e7e7;
+  text-align: center;
+}
+
+.login-title {
+  height: 270px;
+  line-height: 270px;
+  font-family: 'Lobster';
+  font-size: 3rem;
+}
+
+.login-google {
+  width: 200px;
+  height: 50px;
+  background: #FFD984;
+  border: none;
+  border-radius: 40px;
+  font-family: 'Ubuntu';
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.login-google:hover {
+  cursor: pointer;
+}

@@ -1,0 +1,61 @@
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: #1A1A1B;
+  text-decoration: none;
+}
+
+header {
+  padding: 50px;
+  height: 40px;
+  line-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  text-align: left;
+  font-family: 'Lobster';
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.user-logout {
+  height: 30px;
+  line-height: 30px;
+  display: flex;
+  align-self: center;
+  justify-content: space-between;
+}
+
+.photo {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+}
+
+.hi {
+  padding: 0px 30px 0px 10px;
+  font-family: 'Ubuntu';
+  font-size: 0.9rem;
+}
+
+.logout-button {
+  width: 100px;
+  height: 30px;
+  line-height: 30px;
+  border: none;
+  border-radius: 40px;
+  background: #1A1A1B;
+  color: #FFFFFF;
+  font-family: 'Ubuntu';
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.logout-button:hover {
+  cursor: pointer;
+}
