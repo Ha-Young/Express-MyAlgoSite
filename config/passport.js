@@ -16,7 +16,7 @@ module.exports = (passport) => {
   passport.use(new GithubStrategy({
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: 'http://localhost:3000/login/github'
+      callbackURL: process.env.GITHUB_REDIRECT_URL
     }, function (accessToken, refreshToken, profile, done) {
       const socialId = profile.id;
       const nickname = profile.username;
@@ -29,7 +29,7 @@ module.exports = (passport) => {
   passport.use(new GoogleStrategy({
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: 'http://localhost:3000/login/google',
+      callbackURL: process.env.GOOGLE_REDIRECT_URL,
       scope: ['openid', 'profile', 'email']
     }, function (accessToken, refreshToken, profile, done) {
         const socialId = profile.id;

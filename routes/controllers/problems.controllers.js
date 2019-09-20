@@ -73,7 +73,7 @@ exports.createUserSolution = async function (req, res, next) {
         const userScript = new vm.Script(userSolution + testCode);
         const context = vm.createContext();
 
-        result = userScript.runInThisContext(context);
+        result = userScript.runInContext(context, { timeout: 10000 });
       } catch (err) {
         res.render('failure', {
           title: '바닐라코딩',
