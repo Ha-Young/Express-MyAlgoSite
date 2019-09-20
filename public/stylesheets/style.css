@@ -1,8 +1,294 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  line-height: 1;
+}
+
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00B7FF;
+  text-decoration: none;
+}
+
+.wrap {
+  min-width: 100vw;
+  min-height: 100vh;
+  background: #2c2d44;
+  background-image: -moz-linear-gradient(45deg, #3f3251 2%, #002025 100%);
+  background-image: -webkit-linear-gradient(45deg, #3f3251 2%, #002025 100%);
+  background-image: linear-gradient(45deg, #3f3251 2%, #002025 100%);
+}
+
+/* header */
+header {
+  position: relative;
+}
+
+header h1 {
+  padding: 80px 0 140px 0;
+  text-align: center;
+}
+
+header h1 a {
+  display: inline-block;
+  font-size: 82px;
+  text-align: center;
+  font-family: "Press Start 2P";
+  color: #fff;
+}
+
+header .utils {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 48px;
+  padding: 42px 20px 42px 20px;
+}
+
+header .logout {
+  color: #a9a6a6;
+}
+
+header .profile {
+  width:40px;
+  margin-left: 25px;
+  border-radius: 50%;
+}
+
+header .name {
+  padding-left: 10px;
+  color: #dfdddd;
+}
+
+header.sub-header h1 {
+  position: absolute;
+  top: 50%;
+  left: 30px;
+  transform: translateY(-50%);
+  padding: 0;
+  font-size: 20px;
+}
+
+header.sub-header h1 a {
+  font-size: 20px;
+}
+
+/* login */
+.btn-google {
+  display: block;
+  width: 160px;
+  margin: 0 auto;
+  font-family: "Press Start 2P";
+  line-height: 22px;
+  text-align: center;
+  color: #f8dbf2;
+  border-spacing: 0;
+  border-collapse: separate;
+  border-image-slice: 2;
+  border-image-width: 3;
+  border-image-repeat: space;
+  border-image-source: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="5" height="5" xmlns="http://www.w3.org/2000/svg"><path d="M2 1 h1 v1 h-1 z M1 2 h1 v1 h-1 z M3 2 h1 v1 h-1 z M2 3 h1 v1 h-1 z" fill="rgb(255,255,255)" /></svg>');
+  border-image-outset: 2;
+  border-style: solid;
+}
+
+/* problem */
+.problem-area {
+  display: flex;
+}
+
+.info-wrap {
+  width: 50%;
+  padding: 20px 10px;
+  height: calc(100vh - 134px);
+  color: #fff;
+  border-spacing: 0;
+  border-collapse: separate;
+  border-image-slice: 2;
+  border-image-width: 3;
+  border-image-repeat: space;
+  border-image-source: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="5" height="5" xmlns="http://www.w3.org/2000/svg"><path d="M2 1 h1 v1 h-1 z M1 2 h1 v1 h-1 z M3 2 h1 v1 h-1 z M2 3 h1 v1 h-1 z" fill="rgb(255,255,255)" /></svg>');
+  border-image-outset: 2;
+  border-style: solid;
+}
+
+.info-wrap .title {
+  margin-bottom: 10px;
+  font-size: 30px;
+  line-height: 50px;
+  color: #fff;
+  border-bottom: 3px solid #fff;
+}
+
+.info-wrap .description {
+  padding-top: 28px;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.form-code {
+  width: 50%;
+  height: calc(100vh - 134px);
+}
+
+.form-code .CodeMirror {
+  height: 100%;
+}
+
+.problem-tbl {
+  margin: 0 auto;
+  border-spacing: 0;
+  border-collapse: separate;
+  border-image-slice: 2;
+  border-image-width: 3;
+  border-image-repeat: space;
+  border-image-source: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="5" height="5" xmlns="http://www.w3.org/2000/svg"><path d="M2 1 h1 v1 h-1 z M1 2 h1 v1 h-1 z M3 2 h1 v1 h-1 z M2 3 h1 v1 h-1 z" fill="rgb(255,255,255)" /></svg>');
+  border-image-outset: 2;
+  border-style: solid;
+  border-color: #fff;
+}
+
+.problem-tbl th,
+.problem-tbl td {
+  border-right: 4px solid #fff;
+}
+
+.problem-tbl tr > th:last-child,
+.problem-tbl tr td:last-child {
+  border-right: 0;
+}
+
+.problem-tbl th {
+  font-family: "Press Start 2P";
+  font-size: 12px;
+  line-height: 47px;
+  color: #fff;
+  border-bottom: 3px solid #fff;
+}
+
+.problem-tbl td {
+  line-height: 26px;
+  color: #fff;
+}
+
+.problem-tbl tbody tr:hover {
+  background-color: rgba(218, 216, 216, 0.1);
+}
+
+.problem-tbl td a {
+  display: block;
+  width: 100%;
+  color: #fff;
+  padding: 12px;
+}
+
+.problem-tbl td:nth-child(1) {
+  text-align: center;
+}
+
+.problem-tbl td:nth-child(3) {
+  text-align: center;
+}
+
+.problem-tbl td:nth-child(4) {
+  text-align: center;
+}
+
+.form-code .button-area {
+  text-align: right;
+}
+
+.form-code .submit {
+  padding: 18px 40px;
+  font-family: "Press Start 2P";
+  color: #fff;
+  background: none;
+  border-spacing: 0;
+  border-collapse: separate;
+  border-image-slice: 2;
+  border-image-width: 6;
+  border-image-repeat: space;
+  border-image-source: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="5" height="5" xmlns="http://www.w3.org/2000/svg"><path d="M2 1 h1 v1 h-1 z M1 2 h1 v1 h-1 z M3 2 h1 v1 h-1 z M2 3 h1 v1 h-1 z" fill="rgb(255,255,255)" /></svg>');
+  border-image-outset: 2;
+  border-style: solid;
+  border-color: #fff;
+  cursor: pointer;
+}
+
+/* error */
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction:column;
+  width: 100%;
+  height: 100vh;
+  font-family: "Press Start 2P";
+  color: #fff;
+}
+
+.error .status {
+  font-size: 150px;
+  line-height: 200px;
+}
+
+.error .message {
+  color: #d1cdcd;
+  font-size: 50px;
+  line-height: 120px;
+}
+
+.go-btn {
+  display: block;
+  width: 140px;
+  margin: 30px auto 0;
+  padding: 7px 0;
+  font-family: "Press Start 2P";
+  color: #f8dbf2;
+}
+
+/* result */
+.result-title {
+  font-family: "Press Start 2P";
+  font-size: 33px;
+  text-align: center;
+  line-height: 100px;
+  color: #fff;
+}
+
+.result-info {
+  width: 80%;
+  min-height: 500px;
+  margin: 0 auto;
+  padding: 20px 38px 50px;
+  color: #fff;
+  border-spacing: 0;
+  border-collapse: separate;
+  border-image-slice: 2;
+  border-image-width: 3;
+  border-image-repeat: space;
+  border-image-source: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="5" height="5" xmlns="http://www.w3.org/2000/svg"><path d="M2 1 h1 v1 h-1 z M1 2 h1 v1 h-1 z M3 2 h1 v1 h-1 z M2 3 h1 v1 h-1 z" fill="rgb(255,255,255)" /></svg>');
+  border-image-outset: 2;
+  border-style: solid;
+}
+
+.result-info pre {
+  white-space: pre-line;
+  word-wrap: break-word;
+  line-height: 20px;
+}
+
+.result-info li {
+  line-height: 24px;
+}
+
+.result-info li.success {
+  color: #eaec97;
+}
+
+.result-info li.failure {
+  color: red;
 }

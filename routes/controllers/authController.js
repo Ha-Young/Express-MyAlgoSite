@@ -9,7 +9,7 @@ exports.isLoggedIn = (req, res, next) => {
 };
 
 exports.isNotLoggedIn = (req, res, next) => {
-  if(req.isAuthenticated()) res.status(301).redirect('/');
+  if(req.isAuthenticated()) return res.status(301).redirect('/');
 
   next();
 };
