@@ -2,8 +2,8 @@
 <html>
   <head>
     <title>Codewars</title>
-    <link rel='stylesheet' href='/stylesheets/header.css'>
-    <link rel='stylesheet' href='/stylesheets/problems.css' />
+    <link rel="stylesheet" href="/stylesheets/header.css">
+    <link rel="stylesheet" href="/stylesheets/problems.css" />
     <script src="/lib/codemirror.js"></script>
     <script src="/lib/mode/javascript.js"></script>
     <script src="/lib/addon/edit/closebrackets.js"></script>
@@ -13,30 +13,30 @@
   </head>
   <body>
     <div class="container">
-      <%- include('partials/header') %>
+      <%- include("partials/header") %>
       <div class="problem-container">
         <div class="problem-info">
           <div class="level-info">
-            <div class='problem-level'>LV <%= problem.difficulty_level %></div>
-            <div class='problem-completed'><%= problem.completed_users %></div>
+            <div class="problem-level">LV <%= problem.difficulty_level %></div>
+            <div class="problem-completed"><%= problem.completed_users %></div>
           </div>
-          <div class='problem-title'><%= problem.title %></div>
-          <div class='problem-description'><%= problem.description %></div>
-          <button class="submit-button" type='submit' form="code-box">SUBMIT</button>
+          <div class="problem-title"><%= problem.title %></div>
+          <div class="problem-description"><%= problem.description %></div>
+          <button class="submit-button" type="submit" form="code-box">SUBMIT</button>
         </div>
         <div class="code-mirror">
-          <form id="code-box" method='POST' action=<%= `/problems/${problem._id}` %>>
-            <textarea id='codemirror' name="code"></textarea>
+          <form id="code-box" method="POST" action=<%= `/problems/${problem._id}` %>>
+            <textarea id="codemirror" name="code"></textarea>
           </form>
         </div>
       </div>
     </div>
     <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById('codemirror'), {
+      var editor = CodeMirror.fromTextArea(document.getElementById("codemirror"), {
         lineNumbers: true,
         autoCloseBrackets: true,
-        mode: 'javascript',
-        theme: 'base16-light'
+        mode: "javascript",
+        theme: "base16-light"
       });
     </script>
   </body>

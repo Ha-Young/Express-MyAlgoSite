@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const Problem = require('../models/Problem')
+const Problem = require('../models/Problem');
 
 const authCheck = (req, res, next) => {
-  if (!req.user){
+  if (!req.user) {
     res.redirect('/login');
   } else {
     next();
@@ -12,7 +12,7 @@ const authCheck = (req, res, next) => {
 
 /* GET home page. */
 router.get('/', authCheck, (req, res, next) => {
-  Problem.find().then((problem) => {
+  Problem.find().then(problem => {
     res.render('index', { user: req.user, problem });
   });
 });
@@ -25,6 +25,5 @@ router.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/login');
 });
-
 
 module.exports = router;

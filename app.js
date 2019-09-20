@@ -24,10 +24,12 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
-app.use(cookieSession({
-  maxAge: 24 * 60 * 60 *1000,
-  keys: [COOKIE_KEY]
-}));
+app.use(
+  cookieSession({
+    maxAge: 24 * 60 * 60 * 1000,
+    keys: [COOKIE_KEY]
+  })
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
