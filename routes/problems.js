@@ -47,7 +47,7 @@ router.post('/:id', async (req, res, next) => {
           failure.push(`테스트 ${index}의 실행결과: Expected '${item.solution}' to be '${result}'.`);
         }
       } catch(err) {
-        res.render('failure', {
+        return res.render('failure', {
           err,
           failure,
           id: req.params.id
