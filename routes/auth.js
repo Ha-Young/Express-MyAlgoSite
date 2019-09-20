@@ -11,13 +11,13 @@ router.get('/github',
 router.get('/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }), function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/');
+    res.status(301).redirect('/');
 });
 
 router.get('/logout', (req, res, next) => {
   req.logout();
   req.session.destroy();
-  res.redirect('/');
+  res.status(301).redirect('/');
 });
 
 module.exports = router;
