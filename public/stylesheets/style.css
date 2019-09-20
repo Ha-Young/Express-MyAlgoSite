@@ -1,8 +1,209 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0;
+  background: #303133;
+  font-family: 'Lato', 'Helvetica Neue', 'Helvetica', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.2px;
 }
 
-a {
-  color: #00B7FF;
+.header {
+  display: flex;
+  padding: 15px 10px;
+}
+
+.horizontal-list {
+  list-style: none;
+  padding-top: 20px;
+  margin: 0;
+  margin-left: auto;
+  padding: 0;
+  display: inline-block;
+}
+
+.horizontal-list li {
+  display: inline-block;
+  margin: 0 10px 0 0;
+  vertical-align: top;
+}
+
+.horizontal-list li a {
+  color: #fff;
+  font-size: 18px;
+  text-decoration: none;
+  padding: 10px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+main,
+header {
+  max-width: 960px;
+  margin: 30px auto;
+  padding: 0 10px;
+  color: white;
+}
+
+.nav-thumb {
+  width: 40px;
+  height: 40px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.sidenav {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #111; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.logo-square {
+  width: 70px;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.side-menu-img {
+  background: #222222;
+  position: fixed;
+  width: 54px;
+  left: 1px;
+  top: 1px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  transition: margin-left 0.5s;
+  padding: 20px;
+}
+
+.problem-container {
+  margin-bottom: 20px;
+}
+
+.problem-description {
+  margin: 10px 0px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav a {
+    font-size: 18px;
+  }
+}
+
+h2 {
+  color: #f1f1f1;
+}
+
+.problems-list li a,
+.problems-list li {
+  text-decoration: none;
+  color: #f1f1f1;
+  list-style: none;
+}
+
+.problems-list {
+  padding: 0px;
+}
+
+.problems-item {
+  display: block;
+  height: auto;
+  border: 0.5px solid white;
+  border-radius: 10px;
+  margin: 20px 0px;
+  width: 100%;
+  padding: 0px;
+}
+
+.problem-div {
+  padding: 40px;
+}
+
+.problems-container {
+  margin: 0 auto;
+  width: 75%;
+}
+
+.problem-level {
+  display: inline-block;
+  background-color: white;
+  color: black;
+  width: 80px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.problem-title {
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.problem-level,
+.problem-title {
+  font-size: 20px;
+}
+
+.problem-header {
+  margin-bottom: 5px;
+}
+
+form {
+  height: 500px;
+}
+
+form button {
+  font-size: 18px;
+  margin: 10px auto;
+  width: 80px;
+  display: block;
+  border-radius: 10px;
+}
+
+.CodeMirror {
+  margin: 0 auto;
+  border: 1px solid #eee;
+  width: 90%;
+  font-size: 15px;
+  min-height: 100% !important;
+}
+
+.passedTest {
+  color: lightgreen;
+}
+
+.failedTest {
+  color: crimson;
 }

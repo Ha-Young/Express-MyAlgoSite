@@ -5,27 +5,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel='stylesheet' href='/stylesheets/style.css' />
-  <title>Failure</title>
+  <title>Login</title>
 
 </head>
 
 <body>
   <div class="header">
     <!-- Use any element to open the sidenav -->
-    <img onmouseover="openNav()" class="logo-square"
-      src="https://www.codewars.com/assets/logos/logo-square-red-big-c74ae0e7a89b33acd3beb1f08229630391934650e3bbd30ddc40e8be5bbfc71e.png"
-      alt="codewars_logo">
+    <img class='side-menu-img' onmouseenter="openNav()" src="/images/codewars-sidebar.png" alt="codewars-sidebar">
+
     <ul class="horizontal-list">
-      <% if (user !== undefined) { %>
+      <% if (user) { %>
       <li><a href="/auth/logout">Logout</a></li>
       <% } else { %>
       <li><a href="/auth/login">Login</a></li>
       <% } %>
       <li><a href="/">Homepage</a></li>
-      <% if (user !== undefined) { %>
-      <li><a href="/profile"><%= user.username %></a></li>
-      <li><img class='nav-thumb' src="<%= user.thumbnail %>" alt="user_thumbnail"></li>
-      <% } %>
+      <li><img class='nav-thumb' src="<%= user.thumbnail %>" alt="user_thumbnail"><a href="/profile"><%= user.username %></a></li>
     </ul>
   </div>
 
@@ -38,10 +34,13 @@
   </div>
 
   <header>
-    <h1><%= message %></h1>
+    <h1>Welcome to your profile, <%= user.username %></h1>
   </header>
   <main>
-    <h2>ERROR STATUS: <%= error.status %></h2>
+    <img src="<%= user.thumbnail %>" alt="user_thumbnail" />
+    <p>
+      extra information about you.
+    </p>
   </main>
 
   <script>

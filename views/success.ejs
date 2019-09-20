@@ -5,45 +5,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel='stylesheet' href='/stylesheets/style.css' />
-  <title>Failure</title>
-
+  <title>Success</title>
 </head>
 
 <body>
   <div class="header">
     <!-- Use any element to open the sidenav -->
-    <img onmouseover="openNav()" class="logo-square"
-      src="https://www.codewars.com/assets/logos/logo-square-red-big-c74ae0e7a89b33acd3beb1f08229630391934650e3bbd30ddc40e8be5bbfc71e.png"
-      alt="codewars_logo">
+    <img class='side-menu-img' onmouseenter="openNav()" src="/images/codewars-sidebar.png" alt="codewars-sidebar">
+
     <ul class="horizontal-list">
-      <% if (user !== undefined) { %>
+      <% if (user) { %>
       <li><a href="/auth/logout">Logout</a></li>
       <% } else { %>
       <li><a href="/auth/login">Login</a></li>
       <% } %>
       <li><a href="/">Homepage</a></li>
-      <% if (user !== undefined) { %>
       <li><a href="/profile"><%= user.username %></a></li>
       <li><img class='nav-thumb' src="<%= user.thumbnail %>" alt="user_thumbnail"></li>
-      <% } %>
     </ul>
   </div>
 
   <div id="mySidenav" class="sidenav" onmouseleave="closeNav()">
-
-    <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
     <a href="/">Home</a>
     <a href="/"><i class="fab fa-kickstarter-k"></i> Kata</a>
     <a href="/profile">Profile</a>
   </div>
 
   <header>
-    <h1><%= message %></h1>
+    <h1>축하합니다! 문제를 성공적으로 완료했습니다!</h1>
   </header>
-  <main>
-    <h2>ERROR STATUS: <%= error.status %></h2>
-  </main>
-
   <script>
     function openNav() {
       document.getElementById("mySidenav").style.width = "250px";

@@ -1,40 +1,69 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Codewars</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1>Codewars</h1>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <title>Codewars</title>
+
+</head>
+
+<body>
+  <div class="header">
+    <!-- Use any element to open the sidenav -->
+    <img class='side-menu-img' onmouseenter="openNav()" src="/images/codewars-sidebar.png" alt="codewars-sidebar">
+
+    <ul class="horizontal-list">
+      <% if (user) { %>
+      <li><a href="/auth/logout">Logout</a></li>
+      <% } else { %>
+      <li><a href="/auth/login">Login</a></li>
+      <% } %>
+      <li><a href="/">Homepage</a></li>
+      <li><img class='nav-thumb' src="<%= user.thumbnail %>" alt="user_thumbnail"><a
+          href="/profile"><%= user.username %></a></li>
+    </ul>
+  </div>
+
+  <div id="mySidenav" class="sidenav" onmouseleave="closeNav()">
+
+    <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
+    <a href="/">Home</a>
+    <a href="/"><i class="fab fa-kickstarter-k"></i> Kata</a>
+    <a href="/profile">Profile</a>
+  </div>
+  <div class='problems-container'>
     <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
 
-    <ul class="tabs">
-      <li>Level 1</li>
-      <li>Level 2</li>
-      <li>Level 3</li>
+    <ul class="problems-list">
+      <% for (var i=0; i < problems.length; i++) { %>
+      <li class="problems-item">
+        <div class="problem-div">
+          <a href="/problem/<%= problems[i]._id %>">
+            <div class="problem-header"><span class='problem-level'>Level <%= problems[i].difficulty_level %></span>
+              <span class="problem-title"><%= problems[i].title %></span></div>
+            <div>정답자: <%= problems[i].completed_users %>명 </div>
+            <div><%= problems[i].description %> </div>
+          </a>
+        </div>
+      </li>
+      <% } %>
     </ul>
+  </div>
+</body>
 
-    <ul class="problems">
-      <li>
-        <div>피보나치 수열</div>
-        <div>정답자: 15명</div>
-        <div>난이도: Level 1</div>
-      </li>
-      <li>
-        <div>서울에서 김서방 찾기</div>
-        <div>정답자: 11명</div>
-        <div>난이도: Level 2</div>
-      </li>
-      <li>
-        <div>수박수박수박수박수</div>
-        <div>정답자: 12명</div>
-        <div>난이도: Level 2</div>
-      </li>
-      <li>
-        <div>하샤드 수</div>
-        <div>정답자: 5명</div>
-        <div>난이도: Level 3</div>
-      </li>
-    </ul>
-  </body>
+<script>
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+  }
+
+  /* Set the width of the side navigation to 0 */
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+  }
+
+</script>
+<script src="https://kit.fontawesome.com/3f39b7ae50.js" crossorigin="anonymous"></script>
+
 </html>

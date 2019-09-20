@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <title><%= problem.title %></title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/codemirror.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/mode/javascript/javascript.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/addon/edit/closebrackets.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/addon/display/placeholder.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/addon/selection/active-line.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/codemirror.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/theme/dracula.css" />
+</head>
+
+<body>
+  <div class="header">
+    <!-- Use any element to open the sidenav -->
+    <img class='side-menu-img' onmouseenter="openNav()" src="/images/codewars-sidebar.png" alt="codewars-sidebar">
+
+    <ul class="horizontal-list">
+      <% if (user) { %>
+      <li><a href="/auth/logout">Logout</a></li>
+      <% } else { %>
+      <li><a href="/auth/login">Login</a></li>
+      <% } %>
+      <li><a href="/">Homepage</a></li>
+      <li><img class='nav-thumb' src="<%= user.thumbnail %>" alt="user_thumbnail"><a
+          href="/profile"><%= user.username %></a></li>
+    </ul>
+  </div>
+
+  <div id="mySidenav" class="sidenav" onmouseleave="closeNav()">
+
+    <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
+    <a href="/">Home</a>
+    <a href="/"><i class="fab fa-kickstarter-k"></i> Kata</a>
+    <a href="/profile">Profile</a>
+  </div>
+
+  <main>
+    <div class='problem-container'>
+      <div><span class='problem-level'>Level <%= problem.difficulty_level %></span> <span
+          class="problem-title"><%= problem.title %></span></div>
+      <div class='problem-description'><%= problem.description %></div>
+    </div>
+    <form action='/problem/<%= problem._id %>' method='POST'>
+      <textarea id='code' name='code'></textarea>
+      <button class='submit-button' type="submit">Submit</button>
+    </form>
+
+    <script>
+      var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('code'), {
+        mode: "javascript",
+        theme: "dracula",
+        lineNumbers: true,
+        autoCloseBrackets: true,
+        styleActiveLine: true,
+        indentWithTabs: true,
+        lineWrapping: true,
+      }).setValue('function <%= problem.fnName %>(n) {\n  // your code goes here.\n  // lets get crackin !!\n  return n;\n}');
+    </script>
+    <script>
+      function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+      }
+
+      /* Set the width of the side navigation to 0 */
+      function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+      }
+    </script>
+    <script src="https://kit.fontawesome.com/3f39b7ae50.js" crossorigin="anonymous"></script>
+  </main>
+</body>
+
+</html>
