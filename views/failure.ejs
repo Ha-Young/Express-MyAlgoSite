@@ -29,22 +29,10 @@
     <a href="/profile">Profile</a>
   </div>
 
-  <script>
-    function openNav() {
-      document.getElementById("mySidenav").style.width = "250px";
-    }
-
-    /* Set the width of the side navigation to 0 */
-    function closeNav() {
-      document.getElementById("mySidenav").style.width = "0";
-    }
-  </script>
-  <script src="https://kit.fontawesome.com/3f39b7ae50.js" crossorigin="anonymous"></script>
-
   <header>
     <h1>이런, 다시 시도해보시길 바랍니다!</h1>
   </header>
-  
+
   <main>
     <pre>
       <% if (error !== undefined) { %>
@@ -62,5 +50,14 @@
     </pre>
   </main>
 </body>
+
+<script>
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+  }
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+  }
+</script>
 
 </html>
