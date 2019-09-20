@@ -3,6 +3,11 @@ const GitHubStrategy = require('passport-github').Strategy;
 const User = require('../models/User');
 
 module.exports = function passport(passport) {
+  if(!process.env.NODE_ENV){
+    process.env.clientID = process.env.AzureClientID;
+    process.env.clientSecret = process.env.AzureClientSecret;
+    process.env.callbackURL = process.env.AzurecallbackURL;
+  }
   passport.use(
     new GitHubStrategy(
       {

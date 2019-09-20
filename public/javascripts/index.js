@@ -4,4 +4,4 @@ let editor = CodeMirror.fromTextArea(document.getElementById('code-area'), {
   linkWrapping: true,
   matchBrackets: true
 });
-editor.setSize(750, 672);
+editor.setSize(750, 870);

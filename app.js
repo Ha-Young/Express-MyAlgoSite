@@ -4,21 +4,12 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
-const index = require('./routes/index');
+const indexRouter = require('./routes/index');
+const problemsRouter = require('./routes/problems')
 const app = express();
 const passport = require('passport');
 const userPassport = require('./middleware/passport');
 require('dotenv').config();
-
-mongoose.connect(process.env.uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
-const db = mongoose.connection;
-db.on('error', console.error);
-db.once('open', () => {
-  console.log('connected to mongodb server');
-});
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
@@ -44,7 +35,8 @@ app.set('view engine', 'ejs');
 
 app.use(morgan('dev'));
 
-app.use('/', index);
+app.use('/', indexRouter);
+app.use('/problems', problemsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -61,7 +53,26 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
+  if(err.status === 500){
+    err.status = "";
+    err.message = "internal server error";
+  }
   res.render('error');
 });
+
+if(!process.env.NODE_ENV){
+  process.env.uri = process.env.ATLAS_URI
+}
+
+mongoose.connect(process.env.uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+const db = mongoose.connection;
+db.on('error', console.error);
+db.once('open', () => {
+  console.log('connected to mongodb server');
+});
+
 
 module.exports = app;

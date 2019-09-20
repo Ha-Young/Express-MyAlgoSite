@@ -114,7 +114,7 @@ body {
 .problems-body{
   display: flex;
   flex-direction: row;
-  height: 94vh;
+  height: 95vh;
   width: 100%;
 }
 .problems-body ul{
@@ -149,6 +149,7 @@ body {
   justify-content: space-around;
   align-items: center;
   height: 80vh;
+  width: 94%;
 }
 #output {
   background-color: grey;
