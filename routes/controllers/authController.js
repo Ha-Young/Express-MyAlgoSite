@@ -2,18 +2,16 @@ const passport = require('passport');
 
 exports.isLoggedIn = (req, res, next) => {
   if(req.isAuthenticated()){
-    next();
-    return;
+    return next();
   }
 
   res.status(301).redirect('/login');
 };
 
 exports.isNotLoggedIn = (req, res, next) => {
-  if(req.isAuthenticated()) res.redirect('/');
+  if(req.isAuthenticated()) res.status(301).redirect('/');
 
   next();
-  return;
 };
 
 exports.renderLogin = (req, res) => {
