@@ -9,49 +9,69 @@
     <div class="container">
       <ul class="tabs">
         <li>
-          <button type="button" class="basic-msg level-all active-tab" data-level="all">
+          <a href="/" class="basic-msg level lv-all">
             <strong class="line-color01">All</strong>
-          </button>
+          </a>
         </li>
         <li>
-          <button type="button" class="basic-msg level-1" data-level="1">
+          <a href="/level/1" class="basic-msg level lv1">
             <strong class="line-color03">Level 1</strong>
-          </button>
+          </a>
         </li>
         <li>
-          <button type="button" class="basic-msg level-2" data-level="2">
+          <a href="/level/2" class="basic-msg level lv2">
             <strong>Level 2</strong>
-          </button>
+          </a>
         </li>
         <li>
-          <button type="button" class="basic-msg level-3" data-level="3">
+          <a href="/level/3" class="basic-msg level lv3">
             <strong class="line-color02">Level 3</strong>
-          </button>
+          </a>
+        </li>
+        <li>
+          <a href="/level/4" class="basic-msg level lv4">
+            <strong class="line-color01">Level 4</strong>
+          </a>
         </li>
       </ul>
 
       <div class="problem-wrap">
         <ul class="problems">
-          <% for (let i = 0; i < problems.length; i++) { %>
-            <li class="problem-box level-<%= problems[i].difficulty_level %>">
-              <a href="/problems/<%= problems[i]._id %>">
-                <span class="info level">
-                  Level
-                  <%= problems[i].difficulty_level %>
-                </span>
-                <span class="info completed">
-                  <%= problems[i].completed_users.length %>명 완료
-                </span>
-                <span class="title">
-                  <%= problems[i].title %>
-                </span>
-              </a>
-            </li>
+          <% if (problems === 'No-Data') { %>
+            <li class="no-data problem-box">NO DATA</li>
+          <% }  else {%>
+            <% for (let i = 0; i < problems.length; i++) { %>
+              <li class="problem-box level-<%= problems[i].difficulty_level %>">
+                <a href="/problems/<%= problems[i]._id %>">
+                  <span class="info level">
+                    Level
+                    <%= problems[i].difficulty_level %>
+                  </span>
+                  <span class="info completed">
+                    <%= problems[i].completed_users.length %>명 완료
+                  </span>
+                  <span class="title">
+                    <%= problems[i].title %>
+                  </span>
+                </a>
+              </li>
+            <% } %>
           <% } %>
         </ul>
       </div>
     </div>
 
-    <script src="/javascripts/index.js"></script>
+    <script>
+      const level = "<%= level  %>";
+      let $activeTab;
+
+      if (level) {
+        $activeTab = document.querySelector(`.lv${level}`);
+      } else {
+        $activeTab = document.querySelector(`.lv-all`);
+      }
+
+      $activeTab.classList.add('active-tab');
+    </script>
   </body>
 </html>

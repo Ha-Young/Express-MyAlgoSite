@@ -17,7 +17,7 @@ body {
     to right,
     #000,
     #000 4px,
-    #181818 4px,
+    #212121 4px,
     #181818 90px
   );
   color: #fff;
@@ -30,10 +30,20 @@ body {
   background-color: #000;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: #333;
+  background-color: #444;
 }
 ::-webkit-scrollbar-button {
   display: none;
+}
+
+.no-data {
+  width: 100% !important;
+  min-height: 140px;
+  font-weight: 700;
+  font-size: 70px;
+  text-align: center;
+  line-height: 140px;
+  color: rgba(255, 255, 255, 0.15);
 }
 .gnb {
   position: relative;
@@ -103,6 +113,7 @@ body {
 .basic-msg .line-color03:after {
   background: #2CCCC3;
 }
+
 .btn-basic {
   display: inline-block;
   padding: 12px 25px 14px;
@@ -111,6 +122,14 @@ body {
   color: #fff;
   background: #5626C4;
   border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+.btn-basic:focus {
+  outline: none;
+}
+.btn-basic.space-top {
+  margin-top: 70px;
 }
 .btn-github {
   background: #fff;
@@ -181,13 +200,14 @@ body {
 .problems > .problem-box {
   width: 49.2%;
   margin: 10px 0;
-  background: #252525;
+  background: #333;
 }
 .problems > .problem-box a {
   display: block;
   width: 100%;
   height: 100%;
   padding: 35px 20px;
+  font-size: 0;
 }
 .problem-box .title {
   display: block;
@@ -221,28 +241,63 @@ body {
   color: #E60576;
   border: 2px solid #E60576;
 }
-
+.txt-red {
+  color: #E60576;
+}
+.txt-green {
+  color: #2CCCC3;
+}
 .container.msg {
   text-align: center;
 }
-.fail-info > li {
-  line-height: 1.6;
-}
-.fail-info .expected {
-  color: #2CCCC3;
+.fail-info > span {
+  display: block;
 }
 .fail-info .received {
-  color: #E60576;
+  margin: 5px 0 10px;
 }
-.error-msg {
-  color: #E60576;
+.success-msg.title,
+.error-msg.title {
+  position: relative;
+  padding-left: 10px;
+  color: #fff;
 }
-.fail-box {
+.success-msg.title:before,
+.error-msg.title:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 3px;
+  height: 100%;
+  background: #E60576;
+}
+.success-msg.title:before {
+  background: #2CCCC3;
+}
+.error-msg.stack {
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #E60576;
+}
+.scroll-x {
+  display: block;
+  padding-bottom: 10px;
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.code-list > li {
+  margin-bottom: 45px;
+}
+.code-list > li:last-child {
+  margin-bottom: 0;
+}
+.basic-box {
   margin-top: 50px;
   padding: 20px;
   text-align: left;
-  background: #252525;
-  overflow-x: auto;
+  background: #333;
 }
 .apologize-msg {
   font-size: 20px;
@@ -253,18 +308,15 @@ body {
   padding: 30px;
 }
 
+.tabs {
+  margin-bottom: 30px;
+}
 .tabs > li {
   display: inline-block;
-  margin-right: 10px;
+  margin-right: 15px;
 }
-.tabs button {
-  border: none;
-  background: none;
+.tabs .level {
   color: #fff;
-  cursor: pointer;
-}
-.tabs button:focus {
-  outline: none;
 }
 
 @media (max-width: 600px) {

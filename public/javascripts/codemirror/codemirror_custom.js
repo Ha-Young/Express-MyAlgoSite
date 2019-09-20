@@ -5,3 +5,5 @@ const editor = CodeMirror.fromTextArea(document.getElementById('code'), {
   tabSize: 2,
   theme: 'duotone-dark'
 });
+
+editor.setValue('function solution (param) {\n  // Your code...\n}');

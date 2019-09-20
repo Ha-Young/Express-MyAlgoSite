@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const ensureLogin = require('connect-ensure-login');
 const problemsController = require('./controllers/problems.controllers');
 
 /* GET login process */
@@ -19,14 +20,19 @@ router.get('/login/google', passport.authenticate('google', {
 }));
 
 /* GET logout process */
-router.get('/logout', (req, res) => {
+router.get('/logout', (req, res, next) => {
   req.logout();
   res.redirect('/');
 });
 
 /* GET home page. */
 router.get('/',
-  require('connect-ensure-login').ensureLoggedIn(),
+  ensureLogin.ensureLoggedIn(),
+  problemsController.getProblems
+);
+
+router.get('/level/:level',
+  ensureLogin.ensureLoggedIn(),
   problemsController.getProblems
 );
 

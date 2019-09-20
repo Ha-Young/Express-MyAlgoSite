@@ -1,31 +1,31 @@
+const vm = require('vm');
 const Problem = require('../../models/Problem');
 
 exports.getProblems = async function (req, res, next) {
   try {
+    const level = req.params.level;
     let problems;
-    const params = req.headers.params;
 
-    if (!params || params === 'all') {
-      problems = await Problem.find();
-
-      if (!params) {
-        res.render('index', {
-          title: '바닐라코딩',
-          userInfo: {
-            username: req.user.nickname,
-            platformName: req.user.platform_name,
-            profileImageUrl: req.user.profile_image_url
-          },
-          problems
-        });
-        return;
-      }
-
-      res.json({ problems });
+    if (level) {
+      problems = await Problem.find({ difficulty_level: Number(level) });
     } else {
-      problems = await Problem.find({ difficulty_level: Number(params) });
-      res.json({ problems });
+      problems = await Problem.find();
     }
+
+    if (!problems.length) {
+      problems = 'No-Data';
+    }
+
+    res.render('index', {
+      title: '바닐라코딩',
+      userInfo: {
+        username: req.user.nickname,
+        platformName: req.user.platform_name,
+        profileImageUrl: req.user.profile_image_url
+      },
+      problems,
+      level: level
+    });
   } catch (err) {
     console.error(err);
     next(err);
@@ -48,6 +48,10 @@ exports.getProblemDetail = async function (req, res, next) {
     });
   } catch (err) {
     console.error(err);
+
+    if (err.name === 'CastError') {
+      err.status = 404;
+    }
     next(err);
   }
 };
@@ -57,26 +61,20 @@ exports.createUserSolution = async function (req, res, next) {
     const userSolution = req.body.user_solution;
     const problemId = req.params.problem_id;
     const problem = await Problem.findById(problemId);
-    console.log('problem', problem);
 
     let userResult;
+
     const verifyUserSolution = problem.tests.find(test => {
-      const testParams = test.params;
+      const testCode = test.code;
       const testResult = test.solution;
 
-      console.log('testParams',testParams);
-      console.log('user solution', userSolution);
-      let solution;
       let result;
       try {
-        solution = new Function('return ' + userSolution)();
-        console.log('solution',solution);
-        result = solution.apply(this, testParams);
-      } catch (err) {
-        console.log('msg',err.message);
-        console.log('stack',err.stack);
-        console.log('name',err.name)
+        const userScript = new vm.Script(userSolution + testCode);
+        const context = vm.createContext();
 
+        result = userScript.runInThisContext(context);
+      } catch (err) {
         res.render('failure', {
           title: '바닐라코딩',
             userInfo: {
@@ -86,7 +84,8 @@ exports.createUserSolution = async function (req, res, next) {
             },
             expected: '-',
             received: '-',
-            err,
+            testCode,
+            errStack: err.stack
         });
       }
 
@@ -95,7 +94,7 @@ exports.createUserSolution = async function (req, res, next) {
     });
 
     if (!verifyUserSolution) {
-      await Problem.update({ _id: problemId }, { $addToSet: { completed_users: req.user._id } });
+      await Problem.updateOne({ _id: problemId }, { $addToSet: { completed_users: req.user._id } });
 
       res.render('success', {
         title: '바닐라코딩',
@@ -103,9 +102,9 @@ exports.createUserSolution = async function (req, res, next) {
           username: req.user.nickname,
           platformName: req.user.platform_name,
           profileImageUrl: req.user.profile_image_url
-        }
+        },
+        testCode: problem.tests
       });
-      console.log('모두통과!!');
     } else {
       res.render('failure', {
         title: '바닐라코딩',
@@ -116,12 +115,10 @@ exports.createUserSolution = async function (req, res, next) {
         },
         expected: verifyUserSolution.solution,
         received: userResult,
-        err: '-'
+        testCode: verifyUserSolution.code,
+        errStack: '-'
       });
-      console.log(userResult + '이 아니고 '+verifyUserSolution.solution+'이 답이다.')
     }
-
-
   } catch (err) {
     console.error(err);
     next(err);

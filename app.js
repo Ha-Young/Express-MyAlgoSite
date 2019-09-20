@@ -11,7 +11,7 @@ require('dotenv').config();
 const app = express();
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/codewars', {
+mongoose.connect(process.env.MONGODB_ATLAS_CREDENTIAL, {
   useNewUrlParser: true,
   useFindAndModify: false,
   useUnifiedTopology: true
@@ -34,8 +34,7 @@ app.use(cookieParser());
 app.use(session({
   secret: process.env.SESSION_SECRET_KEY,
   resave: false,
-  saveUninitialized: true,
-  // cookie: { maxAge: 60000 }
+  saveUninitialized: true
 }));
 
 require('./config/passport')(passport);
@@ -47,7 +46,7 @@ app.use('/problems', problems);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  const err = new Error('Page Not Found');
+  const err = new Error();
   err.status = 404;
   next(err);
 });
@@ -62,7 +61,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
     title: '바닐라코딩',
-    message: err.message || 'Internal Server Error',
+    message: (err.status === 404) ? 'Page Not Found' : 'Internal Server Error',
     errorStatus: err.status || 500
   });
 });

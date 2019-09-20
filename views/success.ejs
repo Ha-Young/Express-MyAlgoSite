@@ -13,7 +13,22 @@
       <p class="basic-msg">
         All tests <strong class="line-color03">passed</strong>.
       </p>
-      <a href="/" class="btn-basic">Go Back</a>
+      <div class="basic-box">
+        <ul class="code-list">
+          <% for (let i = 0; i < testCode.length; i++) { %>
+          <li>
+            <p class="success-msg title">
+              <strong>Test Code:</strong>
+              <%= testCode[i].code %>
+            </p>
+            <p class="txt-green">
+              Result: <%= testCode[i].solution %>
+            </p>
+          </li>
+          <% } %>
+        </ul>
+      </div>
+      <a href="/" class="btn-basic space-top">List</a>
     </div>
   </body>
 </html>

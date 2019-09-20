@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 
  */
 const TestSchema = new mongoose.Schema({
-  params: [mongoose.Schema.Types.Mixed],
+  code: String,
   solution: mongoose.Schema.Types.Mixed
 });
 

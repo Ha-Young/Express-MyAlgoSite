@@ -10,14 +10,20 @@
       <p class="basic-msg">
         Test <strong class="line-color02">failed</strong>.
       </p>
-      <div class="fail-box">
-        <ul class="fail-info">
-          <li class="expected">Expected: <%= expected %></li>
-          <li class="received">Received: <%= received %></li>
-        </ul>
-        
-        <pre class="error-msg stack"><%= err.stack %></pre>
+      <div class="basic-box">
+        <p class="error-msg title">
+          <strong>Test Code:</strong>
+          <%= testCode %>
+        </p>
+        <pre class="error-msg stack fail-info txt-red">
+<span class="txt-green">Expected: <%= expected %></span><span class="received txt-red">Received: <%= received %></span>
+<span class="scroll-x"><%= errStack %></span>
+        </pre>
       </div>
+      <button type="button" class="btn-basic space-top btn-back">Go Back</button>
     </div>
+    <script>
+      document.querySelector('.btn-back').addEventListener('click', () => history.back());
+    </script>
   </body>
 </html>

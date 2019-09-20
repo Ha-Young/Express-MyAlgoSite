@@ -1,6 +1,7 @@
 const GithubStrategy = require('passport-github').Strategy;
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
 const User = require('../models/User');
+
 require('dotenv').config();
 
 module.exports = (passport) => {
