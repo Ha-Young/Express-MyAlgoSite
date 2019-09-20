@@ -22,8 +22,8 @@ router.get('/auth/google/callback',
 
 router.get('/logout', authController.logout);
 
-router.get('/problems/:problem_id', problemController.getProblem);
+router.get('/problems/:problem_id', authController.isLoggedIn, problemController.getProblem);
 
-router.post('/problems/:problem_id', problemController.checkProblem);
+router.post('/problems/:problem_id', authController.isLoggedIn, problemController.checkProblem);
 
 module.exports = router;
