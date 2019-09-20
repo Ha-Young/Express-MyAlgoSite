@@ -8,7 +8,7 @@
     <div class="header">
         <span>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</span>
         <div>
-          <span><%=username%></span>
+          <span><%= username %></span>
           <span><a href="/logout">로그아웃</a></span>
         </div>
     </div>
@@ -19,11 +19,11 @@
       </div>
       <div class="problem-box">
         <% for(var i=0; i<problem.length; i++){ %>
-          <div class="problems" data-set="<%=problem[i].id%>">
-          <a href="/problems/<%=problem[i].id%>">
+          <div class="problems" data-set="<%= problem[i].id %>">
+          <a href="/problems/<%= problem[i].id %>">
             <div class="problems-title"><%= problem[i].title %></div>
             <div class="problems-sub-title">
-            <li><%= "정답자 : " + problem[i].completed_users +"명 완료"%></li>
+            <li><%= "정답자 : " + problem[i].completed_users +"명 완료" %></li>
             <li><%= "난이도 : Level " + problem[i].difficulty_level %></li>
           </div>
           </a>

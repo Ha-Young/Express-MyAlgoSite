@@ -5,18 +5,18 @@
     "completed_users" : 15,
     "difficulty_level" : 1,
     "description" : "피보나치 수는 F(0) = 0, F(1) = 1일 때, 1 이상의 n에 대하여 F(n) = F(n-1) + F(n-2) 가 적용되는 수 입니다. 2 이상의 n이 입력되었을 때, n번째 피보나치 수를 1234567으로 나눈 나머지를 리턴하는 함수, solution을 완성해 주세요.",
-    "limit" : [ 
+    "limit" : [
         "n은 1이상, 100000이하인 자연수 입니다."
     ],
-    "tests" : [ 
+    "tests" : [
         {
             "param" : "solution(3)",
             "solution" : 2
-        }, 
+        },
         {
             "param" : "solution(2)",
             "solution" : 1
-        }, 
+        },
         {
             "param" : "solution(1)",
             "solution" : 1
@@ -29,16 +29,16 @@
   "completed_users" : 11,
   "difficulty_level" : 2,
   "description" : "String형 배열 seoul의 element중 Kim의 위치 x를 찾아, 김서방은 x에 있다는 String을 반환하는 함수, solution을 완성하세요. seoul에 Kim은 오직 한 번만 나타나며 잘못된 값이 입력되는 경우는 없습니다.",
-  "limit" : [ 
-      "seoul은 길이 1이상, 1000 이하인 배열입니다", 
-      "seoul의 원소의 길이 1이상. 20 이하인 문자열입니다.", 
+  "limit" : [
+      "seoul은 길이 1이상, 1000 이하인 배열입니다",
+      "seoul의 원소의 길이 1이상. 20 이하인 문자열입니다.",
       "Kim은 반드시 seoul 안에 포함되어 있습니다."
   ],
-  "tests" : [ 
+  "tests" : [
       {
           "param" : "solution(['Jane', 'Kim'])",
           "solution" : "김서방은 1에 있다"
-      }, 
+      },
       {
           "param" : "solution(['Jane', 'Huh', 'Kim'])",
           "solution" : "김서방은 2에 있다"
@@ -51,14 +51,14 @@
   "completed_users" : 12,
   "difficulty_level" : 2,
   "description" : "길이가 n이고, 수박수박수박수....와 같은 패턴을 유지하는 문자열을 리턴하는 함수, solution을 완성하세요. 예를들어 n이 4이면 수박수박을 리턴하고 3이라면 수박수를 리턴하면 됩니다.\n제한 조건\nn은 길이 10,000이하인 자연수입니다.",
-  "limit" : [ 
+  "limit" : [
       "n은 길이 10,000이하인 자연수입니다."
   ],
-  "tests" : [ 
+  "tests" : [
       {
           "param" : "solution(3)",
           "solution" : "수박수"
-      }, 
+      },
       {
           "param" : "solution(4)",
           "solution" : "수박수박"
@@ -71,14 +71,14 @@
   "completed_users" : 5,
   "difficulty_level" : 3,
   "description" : "양의 정수 x가 하샤드 수이려면 x의 자릿수의 합으로 x가 나누어져야 합니다. 예를 들어 18의 자릿수 합은 1+8=9이고, 18은 9로 나누어 떨어지므로 18은 하샤드 수입니다. 자연수 n을 입력받아 n이 하샤드 수인지 아닌지 검사하는 함수, solution을 완성해주세요.",
-  "limit" : [ 
+  "limit" : [
       "x는 1이상, 10000 이하인 정수입니다."
   ],
-  "tests" : [ 
+  "tests" : [
       {
           "param" : "solution(10)",
           "solution" : true
-      }, 
+      },
       {
           "param" : "solution(11)",
           "solution" : false

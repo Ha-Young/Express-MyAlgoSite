@@ -11,17 +11,17 @@
   <div style="height:100%">
     <div class="header">
       <div>
-        <span><%="난이도 : Level " + difficulty_level %></span>
+        <span><%= "난이도 : Level " + difficulty_level %></span>
         <span><%= completed_users +"명 완료" %></span>
       </div>
       <h1 class="title"><%= title %></h1>
       <div>
-        <span><%=username%></span>
+        <span><%= username %></span>
         <span><a href="#" onClick="history.go(-1);">다시풀기</a></span>
       </div>
     </div>
     <div class="success-body">
-      <span>정답입니다~!! 고생하셨어요 :) </span>
+      <span> 정답입니다~!! 고생하셨어요 :) </span>
       <img src="http://image.chosun.com/sitedata/image/201706/16/2017061601949_0.jpg"/>
       <a class="return-to-problem" href="#" onClick="history.go(-2);">문제로 돌아가기</a>
     </div>

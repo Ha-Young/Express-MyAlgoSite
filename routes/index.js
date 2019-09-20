@@ -1,9 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User');
-const Problem = require('../models/Problem');
-const auth = require('../middleware/auth');
-const vm = require('vm');
+const auth = require('./middleware/auth');
 
 const {
   getProblemList,

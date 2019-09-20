@@ -23,9 +23,14 @@ exports.getProblemInfo = async (req, res, next) => {
   } catch (e) {
     next();
   }
-}
+};
 
-exports.postProblem = async (req, res) => {
+exports.setCookies = (req, res, next) => {
+  res.cookie('codeCookie', req.body.code);
+  next();
+};
+
+exports.postProblemInfo = async (req, res) => {
   const problemInfo = await Problem.findOne({
     id: Number(req.params.problem_id)
   });
@@ -86,7 +91,6 @@ exports.postProblem = async (req, res) => {
       completed_users: problemInfo.completed_users
     });
   } else {
-    await res.cookie('codeCookie', req.body.code);
     res.render('failure', {
       username: req.user.username,
       title: problemInfo.title,
@@ -97,4 +101,4 @@ exports.postProblem = async (req, res) => {
       userAnswer: userAnswer
     });
   }
-}
+};

@@ -26,7 +26,7 @@ exports.getProblemList = async (req, res, next) => {
   }
 };
 
-exports.login = async (req, res, next) => {
+exports.login = async (req, res, ne2xt) => {
   res.render('login');
 };
 
@@ -40,4 +40,4 @@ exports.githubCallback = passport.authenticate('github', {
 exports.logOut = (req, res) => {
   req.logOut();
   res.status(301).redirect('/login');
-}
+};

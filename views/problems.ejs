@@ -14,12 +14,12 @@
     <div>
       <div class="header">
         <div>
-          <span><%="난이도 : Level " + difficulty_level %></span>
+          <span><%= "난이도 : Level " + difficulty_level %></span>
           <span><%= completed_users +"명 완료" %></span>
         </div>
         <h1 class="title"><%= title %></h1>
         <div>
-          <span><%=username%></span>
+          <span><%= username %></span>
           <span><a href="/">뒤로가기</a></span>
         </div>
       </div>
@@ -29,7 +29,7 @@
           <span class="description-context"><%= description %></span>
           <div class="problems-desc"><span>제한사항</span></div>
           <ul>
-            <% for(let i=0; i<limit.length; i++){%>
+            <% for(let i=0; i<limit.length; i++ ){%>
               <li class="description-context"><%= limit[i] %></li>
             <%}%>
           </ul>
@@ -39,7 +39,7 @@
               <td>function(n)</td>
               <td>return</td>
             </tr>
-            <% for(let i=0; i<tests.length; i++){%>
+            <% for(let i=0; i<tests.length; i++ ){%>
               <tr>
                 <td><%= tests[i].param%></td>
                 <td><%= tests[i].solution%></td>
@@ -50,7 +50,7 @@
         <div>
           <div class="problems-solution"><span>solution.js</span></div>
           <form method="POST" action="../problems/<%= id%>" class="code-form">
-            <textarea id="code-area" name="code"><%=initValue%></textarea>
+            <textarea id="code-area" name="code"><%= initValue %></textarea>
             <input class="code-submit" type="submit" value="submit" />
           </form>
         </div>
