@@ -3,17 +3,13 @@ const GitHubStrategy = require('passport-github').Strategy;
 const User = require('../../models/User');
 
 module.exports = function passport(passport) {
-  if(!process.env.NODE_ENV){
-    process.env.clientID = process.env.AzureClientID;
-    process.env.clientSecret = process.env.AzureClientSecret;
-    process.env.callbackURL = process.env.AzurecallbackURL;
-  }
+
   passport.use(
     new GitHubStrategy(
       {
-        clientID: process.env.clientID,
-        clientSecret: process.env.clientSecret,
-        callbackURL: process.env.callbackURL
+        clientID: process.env.CLIENT_ID,
+        clientSecret: process.env.CLIENT_SECRET,
+        callbackURL: process.env.CALL_BACK_URL
       },
       async function(accessToken, refreshToken, profile, cb) {
         const userData = {

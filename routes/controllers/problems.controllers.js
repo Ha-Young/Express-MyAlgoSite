@@ -30,18 +30,28 @@ exports.setCookies = (req, res, next) => {
   next();
 };
 
-exports.postProblemInfo = async (req, res) => {
-  const problemInfo = await Problem.findOne({
-    id: Number(req.params.problem_id)
-  });
-  const userInfo = await User.findOne({ id: Number(req.user.id) });
-
+exports.postProblemInfo = async (req, res, next) => {
+  let problemInfo = [];
+  let userInfo = [];
   let result = [];
   let userAnswer = [];
 
+  try {
+    problemInfo = await Problem.findOne({
+      id: Number(req.params.problem_id)
+    });
+    userInfo = await User.findOne({ id: Number(req.user.id) });
+  } catch (error) {
+    if (error.name === 'CastError') {
+      next();
+    } else {
+      next(error);
+    }
+  }
+
   for (let i = 0; i < problemInfo.tests.length; i++) {
     try {
-      code = `${req.body.code} ${problemInfo.tests[i].param}`;
+      const code = `${req.body.code} ${problemInfo.tests[i].param}`;
       const script = new vm.Script(code);
       const context = vm.createContext({});
       var answer = script.runInContext(context, { timeout: 10000 });
@@ -65,24 +75,17 @@ exports.postProblemInfo = async (req, res) => {
     }
   }
 
-  function checkTrue(checkVal) {
-    return checkVal === true;
-  }
-
   if (result.every(checkTrue)) {
-    let dup = true;
+    let dupId = true;
     for (let i = 0; i < userInfo.collect_problem.length; i++) {
       if (
         Number(userInfo.collect_problem[i]) === Number(req.params.problem_id)
       ) {
-        dup = false;
+        dupId = false;
       }
     }
-    if (dup) {
-      await User.findOneAndUpdate(
-        { id: Number(req.user.id) },
-        { $push: { collect_problem: Number(req.params.problem_id) } }
-      );
+    if (dupId) {
+      addCorrectProblem(req.user.id, req.params.problem_id);
     }
     res.render('success', {
       username: req.user.username,
@@ -102,3 +105,22 @@ exports.postProblemInfo = async (req, res) => {
     });
   }
 };
+
+function checkTrue(checkVal) {
+  return checkVal === true;
+}
+
+async function addCorrectProblem(userId, problemId) {
+  try {
+    await User.findOneAndUpdate(
+      { id: Number(userId) },
+      { $push: { collect_problem: Number(problemId) } }
+    );
+  } catch (error) {
+    if (error.name === 'CastError') {
+      next();
+    } else {
+      next(error);
+    }
+  }
+}

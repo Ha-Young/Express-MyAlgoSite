@@ -1,17 +1,22 @@
 const passport = require('passport');
 const User = require('../../models/User');
 const Problem = require('../../models/Problem');
+const objectId = require('mongoose').Types.ObjectId;
 
 exports.getProblemList = async (req, res, next) => {
   if (req.cookies.codeCookie) {
     res.clearCookie('codeCookie');
   }
   try {
+    if (!objectId.isValid(Number(req.user.id))) {
+      next();
+    }
+
     const target = await User.findOne({ id: Number(req.user.id) });
     if (target) {
-      Problem.find(function(err, problem) {
-        if (err) {
-          throw new Error(e.message);
+      Problem.find(function(error, problem) {
+        if (error) {
+          throw new Error(error.message);
         }
         res.render('index', {
           length: problem.length,
@@ -21,8 +26,12 @@ exports.getProblemList = async (req, res, next) => {
         });
       });
     }
-  } catch (err) {
-    next(err);
+  } catch (error) {
+    if (error.name === 'CastError') {
+      next();
+    } else {
+      next(error);
+    }
   }
 };
 

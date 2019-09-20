@@ -11,6 +11,20 @@ const passport = require('passport');
 const userPassport = require('./routes/middleware/passport');
 require('dotenv').config();
 
+if (!process.env.NODE_ENV) {
+  process.env.uri = process.env.ATLAS_URI;
+}
+
+mongoose.connect(process.env.uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+const db = mongoose.connection;
+db.on('error', console.error);
+db.once('open', () => {
+  console.log('connected to mongodb server');
+});
+
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -49,24 +63,9 @@ app.use(function(err, req, res, next) {
 
   res.status(err.status || 500);
   if (err.status === 500) {
-    err.status = '';
-    err.message = 'internal server error';
+    err.message = 'Internal Server Error ';
   }
   res.render('error');
-});
-
-if (!process.env.NODE_ENV) {
-  process.env.uri = process.env.ATLAS_URI;
-}
-
-mongoose.connect(process.env.uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
-const db = mongoose.connection;
-db.on('error', console.error);
-db.once('open', () => {
-  console.log('connected to mongodb server');
 });
 
 module.exports = app;
