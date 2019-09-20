@@ -58,6 +58,10 @@
   transition: .5s;
 }
 
+.logout-btn > a {
+  color: #fff;
+}
+
 .logout-btn:hover {
   opacity: 0.5;
 }

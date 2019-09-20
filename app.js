@@ -7,15 +7,17 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const path = require('path');
-const userPassport = require('./routes/middlewares/passport');
+const logger = require('morgan');
+const favicon = require('serve-favicon')
 
 const indexRouter = require('./routes/index');
 const problemsRouter = require('./routes/problems');
 
-const mongoose = require('mongoose');
-
 const { production, development } = require('./config/env');
 const currentEnv = process.env.NODE_ENV || 'development';
+
+const app = express();
+const mongoose = require('mongoose');
 
 const db = mongoose.connection;
 const dbServerUrl = currentEnv === 'development' ? development.mongoDBUrl : production.mongoDBUrl;
@@ -33,15 +35,17 @@ db.once('open', function() {
   console.log('mongo DB connected!');
 });
 
-const app = express();
-
-
 app.set('view engine', 'ejs');
 
-app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(logger('combined'));
+
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(favicon(path.join(__dirname, 'public', 'images', 'codewars.ico')))
+
+app.use(cookieParser());
 app.use(session({
   secret: process.env.SESSION_SECRET,
   cookie: { maxAge: 24 * 60 * 60 * 1000 },
@@ -50,9 +54,7 @@ app.use(session({
 }));
 
 app.use(passport.initialize());
-app.use(passport.session()); //로그인 세션 유지
-
-userPassport(passport);
+app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/problems', problemsRouter);
@@ -67,12 +69,15 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
-  res.locals.message = err.status ? err.message : 'Internal Server Error';
+  res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
   // render the error page
+  if (err.status === 500) {
+    err.message = 'Sorry... Internal Server ERROR..';
+  }
   res.status(err.status || 500);
   res.render('error');
+
 });
 
 module.exports = app;

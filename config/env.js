@@ -14,6 +14,6 @@ const production = {
   mongoDBUrl : process.env.MONGODB_SERVER_URL
 };
 
-exports.production = production
-exports.development = development
+exports.production = production;
+exports.development = development;
 

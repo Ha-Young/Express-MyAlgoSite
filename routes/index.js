@@ -9,7 +9,6 @@ const {
   doLogout
 } = require('./controllers/index.controller');
 
-
 router.get('/', authenticateUser, getProblemList);
 router.get('/login', getLoginPage);
 router.get('/login/github', gitHubLogin);
