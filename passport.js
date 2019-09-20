@@ -2,7 +2,6 @@ const User = require("./models/User");
 const shortid = require("shortid");
 const bcrypt = require("bcrypt");
 require('dotenv').config();
-//process.env.
 module.exports = function(app) {
   var passport = require("passport"),
     LocalStrategy = require("passport-local").Strategy,
