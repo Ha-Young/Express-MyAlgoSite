@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>CodeWars</title>
     <link rel="stylesheet" href="/stylesheets/style.css" type="text/css" />
+    <script src="/lib/codemirror/codemirror-5.48.4.js"></script>
+    <link rel="stylesheet" href="/lib/codemirror/codemirror-5.48.4.css" />
+    <script src="/lib/codemirror/javascript-5.48.4.js"></script>
   </head>
   <body>
     <header>
@@ -31,10 +34,24 @@
         <% } %>
       </div>
     </header>
-    <section class="information">
-      <h1><%= error.message %></h1>
-      <h2><%= error.status %></h2>
-      <p><a class="button" href="/">메인으로 이동</a></p>
+    <section class="section-test">
+      <div class="problem">
+        <p class="title"><%= problem.title %></p>
+        <p class="level">Level <%= problem.difficulty_level %></p>
+        <p class="complete"><%= problem.completed_users %>명 완료</p>
+        <p class="description"><%= problem.description %></p>
+      </div>
+      <div class="editor">
+        <form
+          method="POST"
+          action="../problems/<%= problem._id%>/solution"
+          class="code-form"
+        >
+          <textarea id="code-area" name="solution"></textarea>
+          <input class="code-submit" type="submit" value="submit" />
+        </form>
+      </div>
     </section>
+    <script src="/javascripts/index.js"></script>
   </body>
 </html>

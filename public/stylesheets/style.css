@@ -1,8 +1,267 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: #495057;
+  padding: 20px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
 }
 
 a {
-  color: #00B7FF;
+  text-decoration: none;
+}
+
+p {
+  margin: 0;
+}
+
+header {
+  position: relative;
+  background: #fff;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  padding: 20px 40px;
+  display: flex;
+}
+
+header a {
+  font-size: 0;
+}
+
+.logo {
+  width: 100px;
+  height: 19px;
+}
+
+.slogan {
+  margin-left: 20px;
+  font-size: 12px;
+  line-height: 19px;
+  color: #868e96;
+}
+
+.section-login {
+  min-width: 300px;
+  width: 30%;
+  margin: 100px auto;
+  background: #fff;
+  padding: 50px 20px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+}
+
+.section-user {
+  margin-left: auto;
+  font-size: 0;
+}
+
+.section-user a {
+  background: #e03131;
+  font-size: 16px;
+  padding: 20px;
+  color: #fff;
+}
+
+.section-user .profile {
+  position: relative;
+  font-size: 16px;
+  margin-right: 20px;
+}
+
+.section-user .profile img {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  vertical-align: bottom;
+  border: 1px solid #868e96;
+  box-sizing: border-box;
+  left: -50px;
+  top: -10px;
+}
+
+.section-login .title {
+  margin: 40px 0 5px;
+  font-size: 20px;
+  color: #212529;
+}
+
+.section-login p {
+  font-size: 14px;
+  color: #adb5bd;
+}
+
+.section-login .login {
+  margin-top: 90px;
+}
+
+.btn-login-google {
+  display: block;
+  padding: 20px;
+  background: #e03131;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  font-size: 20px;
+  font-weight: 100;
+  text-align: center;
+}
+
+.section-problems {
+  background: #ff6b6b;
+}
+
+.section-problems a {
+  width: 100%;
+  display: block;
+}
+
+.section-problems ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 10px;
+}
+
+.section-problems li {
+  background: #fff;
+  margin: 20px 1%;
+  padding: 30px;
+  width: 23%;
+  border-radius: 4px;
+  box-sizing: border-box;
+  border: 1px solid #e9ecef;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.section-problems li:hover {
+  position: relative;
+  top: -2px;
+}
+
+.title {
+  color: #e03131;
+  margin-bottom: 20px;
+}
+.level {
+  color: #868e96;
+  padding: 5px 0;
+}
+
+.complete {
+  color: #495057;
+  padding: 2px 0;
+}
+
+.description {
+  color: #495057;
+  padding: 10px 0;
+  border-top: 1px solid #ced4da;
+  margin-top: 10px;
+}
+
+.section-test {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.section-test .problem {
+  width: 50%;
+  padding: 30px;
+  background: #e9ecef;
+  box-sizing: border-box;
+}
+
+.section-test .editor {
+  width: 50%;
+}
+
+.code-submit {
+  display: block;
+  width: 100%;
+  padding: 20px;
+  background: #e03131;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 100;
+  text-align: center;
+}
+
+.information {
+  background: #e9ecef;
+  text-align: center;
+  padding: 100px 20px;
+  min-height: 200px;
+}
+
+.information h1 {
+  font-weight: normal;
+}
+
+.information .results {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.information .results li {
+  position: relative;
+  width: 25%;
+  text-align: left;
+  padding: 20px;
+  border: 1px solid #adb5bd;
+  margin: 10px 5px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.information .results .message {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  color: #e03131;
+}
+
+.button {
+  display: inline-block;
+  background: #e03131;
+  color: #fff;
+  margin: 20px;
+  padding: 10px 20px;
+}
+
+@media screen and (max-width: 600px) {
+  body {
+    padding: 0;
+    margin: 0;
+  }
+  .slogan {
+    display: none;
+  }
+  .name {
+    display: none;
+  }
+  .section-problems {
+    background: none;
+  }
+  .section-problems ul {
+    margin: 10px;
+  }
+  .section-problems li {
+    width: 100%;
+    margin: 2% 1%;
+  }
+
+  .section-test .problem {
+    width: 100%;
+  }
+  .section-test .editor {
+    width: 100%;
+  }
 }

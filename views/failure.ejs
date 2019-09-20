@@ -32,9 +32,27 @@
       </div>
     </header>
     <section class="information">
-      <h1><%= error.message %></h1>
-      <h2><%= error.status %></h2>
-      <p><a class="button" href="/">메인으로 이동</a></p>
+      <h1>안타깝네요. 다시 한번 풀어보세요!</h1>
+      <% if (message) { %>
+      <p><%= message %></p>
+      <% } %>
+      <ul class="results">
+        <% if(results) { %> <% results.forEach(function(result, index){ %>
+        <li>
+          <p><%= index+1 %>번 테스트</p>
+          <p class="message"><%= result.message %></p>
+          <p>기대값 : <%= result.expect %></p>
+          <p>결과값 : <%= result.answer %></p>
+        </li>
+        <% }) } %>
+      </ul>
+      <p><a class="button back">다시풀기</a></p>
     </section>
   </body>
+  <script>
+    const btnBack = document.querySelector('.back');
+    btnBack.addEventListener('click', () => {
+      history.back();
+    });
+  </script>
 </html>
