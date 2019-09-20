@@ -1,6 +1,5 @@
 const passport = require('passport');
 const urls = require('../../constants');
-require('dotenv').config();
 
 exports.login = (req, res, err) => {
   res.render('login');

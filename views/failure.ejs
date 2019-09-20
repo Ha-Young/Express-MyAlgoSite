@@ -17,22 +17,21 @@
                 failed: <%= results.length - passed.length %>
               </div>
             </div>
-              <ul>
-                <% if (results) { %>
-                  <% for(let i = 0; i < results.length; i++) { %>
-                    <li>
-                      <% if (results[i] !== true) { %>
-                        <div class="fail-message">ⓘ Expected: '<%= tests[i].solution %>', instead got'<%= results[i] %>'</div>
-                      <% } else { %>
-                        <div class="success-massage">ⓘpassed</div>
-                        <% } %>
-                      </li>
-                  <% } %>
-                <% } else { %>
-                  <li class="fail-err-message"> <%= errMessage %><br><br> <%= errStack %> </li>
+            <ul>
+              <% if (results) { %>
+                <% for(let i = 0; i < results.length; i++) { %>
+                  <li>
+                    <% if (results[i] !== true) { %>
+                      <div class="fail-message">ⓘ Expected: '<%= tests[i].solution %>', instead got'<%= results[i] %>'</div>
+                    <% } else { %>
+                      <div class="success-massage">ⓘpassed</div>
+                      <% } %>
+                    </li>
                 <% } %>
-              </ul>
-            <!-- <div>powered by</div> -->
+              <% } else { %>
+                <li class="fail-err-message"> <%= errMessage %><br><br> <%= errStack %> </li>
+              <% } %>
+            </ul>
           </div>
         </div>
         <div class="code-mirror-wrapper">
