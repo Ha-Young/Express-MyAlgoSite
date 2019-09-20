@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="/stylesheets/style.css" />
-  <title><%= title %></title>
+  <title>Document</title>
 </head>
 
 <body>
@@ -21,22 +24,10 @@
       </ul>
     </div>
   </div>
-  <div class="problems-container">
-    <ul>
-      <% problems.forEach(problem => { %>
-      <li class="problem-lists">
-        <a href="/problems/<%= problem._id %>">
-          <div class="problem-title"><%= problem.title %></div>
-          <% if(problem.completed_users) { %>
-          <div class="problem-completed"><%= problem.completed_users %>명 완료</div>
-          <% } else { %>
-          <div class="problem-completed">0명 완료</div>
-          <% } %>
-          <div class="problem-level"><%= problem.difficulty_level %>레벨</div>
-        </a>
-      </li>
-      <% }) %>
-    </ul>
+  <div class="success-container">
+    <div class="blank-space"></div>
+    <p>정답입니다! 모두 통과하셨습니다.</p>
+    <a href="/">홈으로 돌아가기</a>
   </div>
 </body>
 

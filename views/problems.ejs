@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="/lib/codemirror/codemirror-5.48.4.js"></script>
+  <link rel="stylesheet" href="/lib/codemirror/codemirror-5.48.4.css">
+  <link rel="stylesheet" href="/lib/codemirror/codemirror-theme.css">
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <script src="/lib/codemirror/codemirror-javascript-mode.js"></script>
+  <title><%= problem.title %></title>
+</head>
+
+<body>
+  <div class="navigation">
+    <a href="/"><img class="navigation-logo" src="https://hackernoon.com/hn-images/1*JKnTVQpjUXPvLd0SELatTg.png"
+        alt="codewars logo" /></a>
+    <span class="navigation-text">코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</span>
+    <div class="navigation-login-btn">
+      <ul class="navigation-login-list">
+        <% if (user) { %>
+        <li><a href="/auth/logout">Logout</a></li>
+        <% } else { %>
+        <li><a href="/auth/login">Login</a></li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+  <div class="problem-container">
+    <div class="show-problem-wrapper">
+      <div class="show-problem-title"><%= problem.title %></div>
+      <div class="show-problem-explanation">문제 설명</div>
+      <div class="show-problem-description"><%= problem.description %></div>
+    </div>
+    <div class="problem-code-wrapper">
+      <form method="POST" action="../problems/<%= problem._id%>/solution" class="code-form">
+        <div class="code-circle">
+          <span class="red circle"></span>
+          <span class="yellow circle"></span>
+          <span class="green circle"></span>
+        </div>
+        <textarea id="code-area" name="solution"></textarea>
+        <button class="code-submit" type="submit" value="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</body>
+<script src="/javascripts/index.js"></script>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="navigation">
+    <a href="/"><img class="navigation-logo" src="https://hackernoon.com/hn-images/1*JKnTVQpjUXPvLd0SELatTg.png"
+        alt="codewars logo" /></a>
+    <span class="navigation-text">코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</span>
+    <div class="navigation-login-btn">
+      <ul class="navigation-login-list">
+        <% if (user) { %>
+        <li><a href="/auth/logout">Logout</a></li>
+        <% } else { %>
+        <li><a href="/auth/login">Login</a></li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+  <div class="failure-container">
+    <div class="blank-space"></div>
+    <% if(locals.err) { %>
+    <div class="error"><%= err %></div>
+    <% } else { %>
+    <p class="failure-title">모든 테스트를 통과하지 못했습니다!</p>
+    <ul>
+      <% results.forEach(result => { %>
+      <li class="failure-lists">
+        <div class="failure-result">실행 결과 > <%= result.message %></div>
+        <div class="failure-expect-value">기댓값 > <%= result.expectValue %></div>
+        <div class="failure-result-value">결과값 > <%= result.resultValue %></div>
+      </li>
+      <% }) %>
+    </ul>
+    <% } %>
+    <a href="/">홈으로 돌아가기</a>
+  </div>
+</body>
+
+</html>
