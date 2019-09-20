@@ -26,6 +26,14 @@ a:hover {
   color: black;
 }
 
+.level-style {
+  color: #4164fb;
+  border: 3px solid #4164fb;
+  border-radius: 3px;
+  padding: 0 10px;
+  margin-left: 5px;
+}
+
 .main-section {
   width: 100%;
   border: 3px solid #4164fb;
