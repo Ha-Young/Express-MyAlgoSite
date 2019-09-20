@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
  */
 const userSchema = new mongoose.Schema({
   googleId: String,
+  photo: String,
   displayName: String,
   name: { familyName: String, givenName: String},
   provider: String,
