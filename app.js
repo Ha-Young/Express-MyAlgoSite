@@ -13,14 +13,11 @@ const favicon = require('serve-favicon');
 const indexRouter = require('./routes/index');
 const problemsRouter = require('./routes/problems');
 
-const { production, development } = require('./config/env');
-const currentEnv = process.env.NODE_ENV || 'development';
-
 const app = express();
 const mongoose = require('mongoose');
 
 const db = mongoose.connection;
-const dbServerUrl = currentEnv === 'development' ? development.mongoDBUrl : production.mongoDBUrl;
+const dbServerUrl = process.env.MONGODB_SERVER_URL;
 
 mongoose.connect(dbServerUrl, {
   useNewUrlParser: true,

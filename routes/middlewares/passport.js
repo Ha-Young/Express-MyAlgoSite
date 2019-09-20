@@ -2,12 +2,10 @@ require('dotenv').config();
 
 const GitHubStrategy = require('passport-github').Strategy;
 const User = require('../../models/User');
-const { production, development } = require('../../config/env');
 
-const currentEnv = process.env.NODE_ENV || 'development';
-const clientID = currentEnv === 'development' ? development.githubClientID : production.githubClientID;
-const clientSecret = currentEnv === 'development' ? development.githubClientSecret : production.githubClientSecret;
-const callbackURL = currentEnv === 'development' ? development.githubAuthCallback : production.githubAuthCallback;
+const clientID = process.env.GITHUB_CLIENT_ID;
+const clientSecret = process.env.GITHUB_CLIENT_SECRET;
+const callbackURL = process.env.GITHUB_AUTH_CALLBACK;
 
 module.exports = function passport(passport) {
   passport.use(new GitHubStrategy({
