@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/lib/codemirror.css'>
+    <link rel='stylesheet' href='/lib/theme/dracula.css'>
+    <script src='/lib/codemirror.js'></script>
+    <script src='/lib/mode/javascript.js'></script>
+  </head>
+  <body>
+    <div class='wrap'>
+      <%- include('partials/header') %>
+
+      <div class='solution'>
+        <div class='problems-view'>
+          <p class='tit'><%= problem.title %></p>
+          <p class='level'>Level <%= problem.difficulty_level %> ⋅ <%= problem.completed_users %>명 완료</p>
+          <p class='desc'><%= problem.description %></p>
+
+          <div class='btn'>
+            <a href='/'>문제 리스트</a>
+          </div>
+        </div>
+
+        <div class='problems-code'>
+          <form action='/problems/<%= problem._id %>' method='post'>
+            <textarea id='editor' name='contents'>function solution () {}</textarea>
+
+            <input type='submit' value='제출'>
+          </form>
+        </div>
+
+        <script>
+          var editor = CodeMirror.fromTextArea(document.getElementById('editor'), {
+            lineNumbers: true,
+            lineWrapping: true,
+            autoCloseTags: true,
+            mode: 'javascript',
+            theme: 'dracula'
+          });
+        </script>
+      </div>
+    </div>
+  </body>
+</html>

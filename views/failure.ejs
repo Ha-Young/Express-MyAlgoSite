@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class='wrap'>
+      <%- include('partials/header') %>
+
+      <h2>Failure</h2>
+
+      <% for (var i = 0; i < failure.length; i++) { %>
+          <p>
+            <%= failure[i] %>
+          </p>
+      <% } %>
+
+      <% if (err) { %>
+        <pre><%= err.stack %></pre>
+      <% } %>
+
+      <div class='btn'>
+        <a href='/problems/<%= id %>'>다시 풀기</a> | <a href='/'>문제 리스트</a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,8 +1,148 @@
 body {
+  background: #303133;
+  color: #efefef;
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00B7FF;
+  font-size: 12px;
+  color: #C0C0C0;
+  text-decoration: none;
+}
+
+.login {
+  width: 300px;
+  margin: 100px auto;
+  padding: 50px 25px;
+  min-height: 300px;
+  background: rgba(0,0,0,0.6) !important;
+
+}
+
+.login .logo-square {
+  background: transparent url(https://www.codewars.com/assets/logos/logo-square-red-big-c74ae0e7a89b33acd3beb1f08229630391934650e3bbd30ddc40e8be5bbfc71e.png) top left no-repeat;
+  width: 180px;
+  height: 212px;
+  margin: 0 auto 60px;
+}
+
+.login a {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 5px;
+  background: rgba(0,0,0,0.8);
+  color: #BB432C;
+  font-size: 12px;
+  text-decoration: none;
+  text-align: center;
+}
+
+header {
+  position: relative;
+  overflow: hidden;
+  text-align: right;
+  margin-bottom: 50px;
+}
+
+header h1 {
+  background: transparent url(https://www.codewars.com/assets/logos/logo-square-red-big-c74ae0e7a89b33acd3beb1f08229630391934650e3bbd30ddc40e8be5bbfc71e.png) top left no-repeat;
+  background-size: cover;
+  width: 50px;
+  height: 58px;;
+  color: #000;
+}
+
+header .users {
+  position: absolute;
+  right: 0;
+  top: 20px;
+}
+
+header .users .username {
+  font-size: 12px;
+}
+
+header .users .signout {
+  color: #fff;
+  font-size: 12px;
+}
+
+.wrap {
+  margin: 0 auto;
+}
+
+.problems {
+  margin: 0;
+  padding: 0;
+}
+
+.problems li {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  list-style: none;
+  padding-bottom: 10px;
+}
+
+.problems li .tit {
+  font-size: 20px;
+  color: #efefef;
+  font-weight: bold;
+}
+
+.problems li .level {
+  font-size: 12px;
+  color: #C0C0C0;
+}
+
+.solution {
+  display: flex;
+  justify-content: space-around;
+  overflow: hidden;
+  padding: 20px;
+  background: rgba(0,0,0,0.2) !important;
+}
+
+.solution a {
+  color: #fff;
+  font-size: 12px;
+}
+
+.problems-view {
+  float: left;
+  width: 50%;
+}
+
+.problems-view .tit {
+  font-size: 20px;
+  font-weight: bold;
+  color: #efefef;
+  margin: 0;
+}
+
+.problems-view .level {
+  font-size: 11px;
+}
+
+.problems-view .desc {
+  line-height: 20px;
+}
+
+.problems-code {
+  float: left;
+  width: 50%;
+  display: box;
+}
+
+.problems-code input[type=submit] {
+  margin: 20px 0 0;
+  background: none;
+  border: 1px solid #efefef;
+  border-radius: 5px;
+  font-size: 12px;
+  color: #efefef;
+  float: right;
+}
+
+.btn {
+  margin: 50px 0 0;
 }

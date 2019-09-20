@@ -2,12 +2,12 @@ require('dotenv').config();
 
 const express = require('express');
 const mongoose = require('mongoose');
-// const cookieSession = require('cookie-session');
 const passport = require('passport');
 
 const index = require('./routes/index');
 const login = require('./routes/login');
 const auth = require('./routes/auth');
+const problems = require('./routes/problems');
 
 const app = express();
 
@@ -15,14 +15,8 @@ const app = express();
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
-// app.use(cookieSession({
-//   maxAge: 24 * 60 * 60* 1000,
-//   keys: [process.env.COOKIE_KEY]
-// }));
-
 
 require('./config/passport')(passport);
-
 
 
 mongoose.connect(process.env.DATABASE_URL, {
@@ -54,17 +48,12 @@ app.use(require('express-session')({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.use(helmet.hsts({
-//   maxAge: 10886400000,
-//   includeSubdomains: true
-// }));
-
-
 app.use(express.static('public'));
 
 app.use('/', index);
 app.use('/login', login);
 app.use('/auth', auth);
+app.use('/problems', problems);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
