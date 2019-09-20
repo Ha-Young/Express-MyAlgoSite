@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Codewars</title>
+    <link rel='stylesheet' href='/stylesheets/header.css'>
     <link rel='stylesheet' href='/stylesheets/problems.css' />
     <script src="/lib/codemirror.js"></script>
     <script src="/lib/mode/javascript.js"></script>
@@ -21,7 +22,7 @@
           </div>
           <div class='problem-title'><%= problem.title %></div>
           <div class='problem-description'><%= problem.description %></div>
-          <button class="submit-button" type='submit' name="code-box">SUBMIT</button>
+          <button class="submit-button" type='submit' form="code-box">SUBMIT</button>
         </div>
         <div class="code-mirror">
           <form id="code-box" method='POST' action=<%= `/problems/${problem._id}` %>>
