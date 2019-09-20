@@ -1,7 +1,8 @@
 const User = require("./models/User");
 const shortid = require("shortid");
 const bcrypt = require("bcrypt");
-require('dotenv').config();
+require("dotenv").config();
+
 module.exports = function(app) {
   var passport = require("passport"),
     LocalStrategy = require("passport-local").Strategy,
@@ -26,7 +27,6 @@ module.exports = function(app) {
         passwordField: "password"
       },
       async function(username, password, done) {
-        console.log("시작");
         const loginUser = await User.findOne({
           userName: username
         });
@@ -45,7 +45,6 @@ module.exports = function(app) {
     )
   );
 
-  var googleCredentials = require("./config/google.json");
   passport.use(
     new GoogleStrategy(
       {
