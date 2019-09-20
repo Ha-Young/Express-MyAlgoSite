@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <link rel='stylesheet' href='/stylesheets/success.css' />
+  </head>
+  <body>
+    <div class='content-wrapper'>
+      <div class="content">
+          <h2 class="test-result">You've won!!</h2>
+            <div class="test-result-detail-wrapper">
+                <% for(var i = 0; i < result.length; i++) { %>
+                  <div class="test-result-detail">
+                      <p class="test-result-detail-title">
+                        TEST <%= i + 1 %> 
+                      </p>
+                      <p class="test-result-detail-expected">
+                        Expected value : <strong><%= result[i].expect %></strong>
+                      </p>
+                      <p class="test-result-detail-output">
+                        Output value : <strong><%= result[i].your_answer %></strong>
+                      </p>
+                      <p class="test-result-detail-result">
+                        Result : <strong class="result-strong"><%= result[i].result%></strong>
+                      </p>
+                  </div>
+                <% } %>
+            </div>
+            <div class="test-result-btn-wrapper">
+                <a class="test-result-btn1" href="/">다른 문제 풀기</a>
+                <a class="test-result-btn2" href="/problems/<%= problem._id%>">다시 풀기</a>
+            </div>
+      </div>
+      <div class="content-bg">
+
+      </div>
+      </div>
+  </body>  
+</html>

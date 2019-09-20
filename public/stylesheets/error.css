@@ -1,0 +1,24 @@
+body {
+  font-family: "Roboto", sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
+  width: 100%;
+  padding: 0;
+  background-color: #efefef;
+}
+.content-wrapper {
+  width: 70%;
+  height: 100vh;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 150px;
+}
+.content-wrapper-message {
+  font-size: 75px;
+  color: #d32f2f;
+  margin: 10px 0 0 0;
+}
+.content-wrapper-status {
+  font-size: 55px;
+  color: #d32f2f;
+  margin: 10px 0 0 0;
+}

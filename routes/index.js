@@ -1,9 +1,17 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
+const problemsController = require("./controllers/problems.controller");
 
-/* GET home page. */
-router.get('/', (req, res, next) => {
-  res.render('index', { title: '바닐라코딩' });
-});
+router.get(
+  "/",
+  (req, res, next) => {
+    if (req.user) {
+      next();
+    } else {
+      res.redirect("/login");
+    }
+  },
+  problemsController.getAll
+);
 
 module.exports = router;

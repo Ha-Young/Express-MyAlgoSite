@@ -1,0 +1,28 @@
+body {
+  font-family: "Roboto", sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
+  width: 100%;
+  padding: 0;
+}
+a:link {
+  color: black;
+  text-decoration: none;
+}
+a:visited {
+  color: black;
+  text-decoration: none;
+}
+a:hover {
+  color: black;
+  text-decoration: none;
+}
+.problems {
+  padding: 0;
+}
+.level_list {
+  font-size: 24px;
+}
+.level_list .active_level {
+  font-weight: bold;
+  text-decoration: line-through;
+}

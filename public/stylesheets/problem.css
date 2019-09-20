@@ -1,0 +1,98 @@
+body {
+  font-family: "Roboto", sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
+  width: 100%;
+  padding: 0;
+}
+a:link {
+  color: black;
+  text-decoration: none;
+}
+a:visited {
+  color: black;
+  text-decoration: none;
+}
+a:hover {
+  color: black;
+  text-decoration: none;
+}
+.problems {
+  padding: 0;
+}
+.problem {
+  display: block;
+  padding: 20px;
+  margin: 20px 0;
+  cursor: pointer;
+  background-color: #ffffff;
+  opacity: 0.5;
+  border: 1px solid #efefef;
+  border-radius: 10px;
+}
+.problem:hover {
+  opacity: 1;
+}
+.problems_level {
+  width: 60px;
+  color: #ffffff;
+  font-size: 14px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+}
+.problem .problems_title {
+  font-weight: bold;
+  font-size: 36px;
+  margin: 0 0 10px 0;
+}
+.title_level1 {
+  color: #0091ea;
+}
+.title_level2 {
+  color: #4caf50;
+}
+.title_level3 {
+  color: #f9a825;
+}
+.title_level4 {
+  color: #d32f2f;
+}
+.problem_level1 {
+  background-color: #0091ea;
+}
+.problem_level2 {
+  background-color: #4caf50;
+}
+.problem_level3 {
+  background-color: #f9a825;
+}
+.problem_level4 {
+  background-color: #d32f2f;
+}
+.problems_completed-wrapper {
+}
+.problems_completed-wrapper::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.problems_flag {
+  width: 30px;
+  margin-right: 10px;
+  float: left;
+}
+.problem .problems_completed {
+  font-size: 18px;
+  font-weight: bold;
+  color: #d32f2f;
+  float: left;
+  padding: 0;
+  margin: 0;
+}
+.problems_des {
+  line-height: 1.8;
+  background-color: #efefef;
+  padding: 10px;
+  border-radius: 10px;
+}

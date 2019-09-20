@@ -1,0 +1,135 @@
+body {
+  font-family: "Roboto", sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
+  width: 100%;
+  padding: 0;
+}
+.header {
+  position: fixed;
+  padding: 10px 30px 30px 30px;
+  background-color: #dfdfdf;
+  box-sizing: border-box;
+  width: 100%;
+  height: 10vh;
+  z-index: 999;
+  opacity: 0.9;
+}
+.header::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.logo-wrapper {
+  padding: 40px 0 0 0;
+  float: left;
+}
+.login-wrapper {
+  float: right;
+  text-align: right;
+}
+.header-logo {
+  width: 240px;
+}
+.login-wrapper .logout {
+  display: block;
+  background-color: #000000;
+  color: #ffffff;
+  text-align: center;
+  padding: 10px 0;
+  border-radius: 5px;
+  font-weight: bold;
+}
+.login-wrapper .logout:hover {
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #000000;
+}
+.content-wrapper {
+  padding-top: 10vh;
+  width: 100%;
+  height: 100vh;
+}
+.content-wrapper::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.content {
+  float: left;
+  width: 50%;
+  height: 80vh;
+  padding: 40px;
+  box-sizing: border-box;
+}
+.level_list .all {
+  float: left;
+  margin-right: 20px;
+}
+.level_list .list_level1 {
+  float: left;
+  margin-right: 20px;
+  color: #0091ea;
+}
+.level_list .list_level2 {
+  float: left;
+  margin-right: 20px;
+  color: #4caf50;
+}
+.level_list .list_level3 {
+  float: left;
+  margin-right: 20px;
+  color: #f9a825;
+}
+.level_list .list_level4 {
+  float: left;
+  margin-right: 10px;
+  color: #d32f2f;
+}
+.level_list::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.content-info {
+  position: fixed;
+  top: 150px;
+  right: 10px;
+  width: 50%;
+  height: 80vh;
+}
+.content-level {
+  background: no-repeat url("/img/bg-0.jpg");
+  background-size: cover;
+  background-position: center;
+  background-color: black;
+}
+.content-levelall {
+  background: no-repeat url("/img/bg-0.jpg");
+  background-size: cover;
+  background-position: center;
+  background-color: black;
+}
+.content-level1 {
+  background: no-repeat url("/img/bg-1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-color: black;
+}
+.content-level2 {
+  background: no-repeat url("/img/bg-2.jpg");
+  background-size: cover;
+  background-position: center;
+  background-color: black;
+}
+.content-level3 {
+  background: no-repeat url("/img/bg-3.jpg");
+  background-size: cover;
+  background-position: center;
+  background-color: black;
+}
+.content-level4 {
+  background: no-repeat url("/img/bg-4.jpg");
+  background-size: cover;
+  background-position: center;
+  background-color: black;
+}

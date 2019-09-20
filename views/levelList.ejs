@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR|Roboto&display=swap" rel="stylesheet">
+    <link rel='stylesheet' href='/stylesheets/levelList.css' />
+  </head>
+  <body>
+    <ul class="problems">
+      <% if(level === 'all' || !level) { %>
+        <div class="level_list">
+            <% for(var i = 0; i < 5; i++) { %>
+              <% if(i === 0) { %>
+                <a href="/problems/all" class="all active_level">All</a> 
+              <% } else { %>
+                <a href="/problems/<%= i%>" class="list_level<%= i%>">level <%= i%></a>
+                <% } %>
+              <% } %>
+        </div>
+        <% } else { %>
+          <div class="level_list">
+            <% for(var i = 0; i < 5; i++) { %>
+              <% if(Number(level) === i) { %>
+                <a href="/problems/<%= i%>" class="list_level<%= i%> active_level">level <%= i%></a> 
+                <% } else if ( i === 0) {%>
+                  <a href="/problems/all" class="all">All</a> 
+                <% } else { %>
+                <a href="/problems/<%= i%>" class="list_level<%= i%>">level <%= i%></a>
+                <% } %>
+              <% } %>
+        </div>
+        <% } %>
+    </ul>
+  </body>
+</html>

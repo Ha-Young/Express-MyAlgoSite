@@ -1,0 +1,98 @@
+body {
+  font-family: "Roboto", sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
+  width: 100%;
+  padding: 0;
+}
+.content-wrapper {
+  width: 100%;
+}
+.content-wrapper::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.content {
+  box-sizing: border-box;
+  padding: 30px;
+  width: 50%;
+  float: left;
+}
+.test-result {
+  color: #0091ea;
+  font-size: 40px;
+}
+.test-result-detail {
+  padding: 20px;
+  box-sizing: border-box;
+  margin: 20px 0;
+  background-color: #efefef;
+  border-radius: 20px;
+}
+.test-result-detail-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+}
+.test-result-detail-expected {
+  margin: 0;
+}
+.test-result-detail-output {
+  margin: 0;
+}
+.test-result-detail-result {
+  margin: 0;
+}
+.result-strong {
+  color: #0091ea;
+}
+.test-result-btn-wrapper {
+}
+.test-result-btn-wrapper::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.test-result-btn-wrapper .test-result-btn1 {
+  display: block;
+  background-color: #000000;
+  color: #ffffff;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  float: right;
+  margin: 0 10px;
+  text-decoration: none;
+}
+.test-result-btn-wrapper .test-result-btn1:hover {
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #000000;
+}
+.test-result-btn-wrapper .test-result-btn2 {
+  display: block;
+  background-color: #000000;
+  color: #ffffff;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  float: right;
+  margin: 0 10px;
+  text-decoration: none;
+}
+.test-result-btn-wrapper .test-result-btn2:hover {
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #000000;
+}
+.content-bg {
+  width: 50%;
+  float: left;
+  height: 100vh;
+  background: no-repeat url("../img/success2.png");
+  background-size: contain;
+  background-position: center;
+  background-color: #efefef;
+}

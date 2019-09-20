@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR|Roboto&display=swap" rel="stylesheet">
+    <link rel='stylesheet' href='/stylesheets/problemDetail.css' />
+    <script src="/codemirror/lib/codemirror.js"></script>
+    <link href="/codemirror/lib/codemirror.css" rel="stylesheet"/>
+    <script src="/codemirror/mode/xml/xml.js"></script>
+    <script src="/codemirror/addon/edit/closetag.js"></script>
+    <link href="/codemirror/theme/seti.css" rel="stylesheet"/>
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo-wrapper">
+        <a href="/">
+          <img class="header-logo" src="/img/logo.png"/>
+        </a>
+      </div>
+      <div class="login-wrapper">
+        <p><strong> <%= username %></strong> 님 안녕하세요!</p>
+        <a class="logout" href="/logout">로그아웃</a>
+      </div>
+    </header>
+    <div class="content-wrapper">
+        <div class="content">
+            <ul class='problems'>
+              <p class='problems_level problems_detail_<%= problem.difficulty_level %>'>
+                LEVEL <%= problem.difficulty_level %>
+              </p>  
+              <a class='problems_title problems_title_<%= problem.difficulty_level %>'>
+                <%= problem.title %>
+              </a>
+              <div class="problems_completed-wrapper">
+                  <img class="problems_flag" src="/img/flag.png"/>
+                  <p class="problems_completed"><%= problem.completed_users %>명 완료</p>
+              </div>
+              <p class="problems_des"><%= problem.description %></p>
+              <h2>입출력 예</h2>
+              <div class="problems-exam">
+                <div class="problems-exam-title">
+                  <div class="problems-exam-fuc">
+                    <p>실행 함수</p>
+                  </div>
+                  <div class="problems-exam-res">
+                    <p>결과</p>
+                  </div>
+                </div>
+                <% for(var i = 0; i < problem.tests.length; i++) { %>
+                  <div class="problems-exam-title">
+                      <p class="problems-exam-fuc"><%= problem.tests[i].code %></p>
+                      <p class="problems-exam-res"><%= problem.tests[i].solution %></p>
+                  </div>
+                <% } %>
+              </div>
+            </ul>
+        </div>
+        <div class="content-info">
+          <div class="content-info-editor">
+              <form action='/problems/<%= problem._id%>' method='POST'>
+                <textarea id='editor' name='solution'>function solution(n) {
+  //Your code here..
+  var answer = '';
+  return answer;
+}
+                  </textarea>
+                <script>
+                  var editor = CodeMirror.fromTextArea(document.getElementById('editor'), {
+                    mode : 'javascript',
+                    theme :'seti',
+                    lineNumbers: true,
+                    autoClossTags: true
+                  });
+                  editor.setSize("700", "800");
+                </script>
+                <br>
+                <div class="submit-btn-wrapper">
+                  <input class="submit-btn" type='submit' value="Sudmit"/>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+  </body>
+</html>
