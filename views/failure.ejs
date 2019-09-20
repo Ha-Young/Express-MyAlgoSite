@@ -13,22 +13,24 @@
           <div><%= error.message %></div>
         <% } else { %>
           <h1>Failed to pass. Please correct the code and try again.</h1>
-          <div class="result-head">
-            <div>test</div>
-            <div>expected</div>
-            <div>submitted</div>
-            <div class="correct-message">correctMessage</div>
-            <div>isRightAnswer</div>
-          </div>
-          <% resultMessages.forEach(function(result, i){ %>
-            <div class="result-row">
-              <div>test <%=i + 1 %></div>
-              <div><%=result.expectedResult %></div>
-              <div><%=result.submittedResult %></div>
-              <div class="correct-message"><%=result.correctMessage %></div>
-              <div><%=result.isRightAnswer %></div>
+          <div class="result-table">
+            <div class="result-head">
+              <div>test</div>
+              <div>expected</div>
+              <div>submitted</div>
+              <div class="correct-message">correctMessage</div>
+              <div>isRightAnswer</div>
             </div>
-          <% }) %>
+            <% resultMessages.forEach(function(result, i){ %>
+              <div class="result-row">
+                <div>test <%=i + 1 %></div>
+                <div><%=result.expectedResult %></div>
+                <div><%=result.submittedResult %></div>
+                <div class="correct-message"><%=result.correctMessage %></div>
+                <div><%=result.isRightAnswer %></div>
+              </div>
+            <% }) %>
+          </div>
         <% } %>
         <div class="returnbtn-wrap">
           <a class="returnbtn" href="javascript:history.back()">문제로 돌아가기</a>

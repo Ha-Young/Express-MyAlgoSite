@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 
 const passport = require('passport');
@@ -10,13 +12,15 @@ const userPassport = require('./routes/middlewares/passport');
 const indexRouter = require('./routes/index');
 const problemsRouter = require('./routes/problems');
 
-require('dotenv').config();
-
 const mongoose = require('mongoose');
+
+const { production, development } = require('./config/env');
+const currentEnv = process.env.NODE_ENV || 'development';
+
 const db = mongoose.connection;
+const dbServerUrl = currentEnv === 'development' ? development.mongoDBUrl : production.mongoDBUrl;
 
-
-mongoose.connect(process.env.MONGODB_SERVER_URL, {
+mongoose.connect(dbServerUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
@@ -30,6 +34,7 @@ db.once('open', function() {
 });
 
 const app = express();
+
 
 app.set('view engine', 'ejs');
 
@@ -62,7 +67,7 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
-  res.locals.message = err.message;
+  res.locals.message = err.status ? err.message : 'Internal Server Error';
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page

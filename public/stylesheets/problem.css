@@ -1,11 +1,12 @@
 body{
-  height: 100vh;
+  height: calc(100vh - 50px);
   background-color: #253746;
   color: white;
 }
 
 .problem-container {
   width: 100%;
+  height: calc(100% - 100px);
   border: 1px solid #172333;
 }
 
@@ -27,6 +28,7 @@ body{
 .problem-content {
   border: 1px solid #172333;
   display: flex;
+  height: calc(100% - 50px);
 }
 
 .problem-question, .testform-wrap {
@@ -35,14 +37,21 @@ body{
 
 .question-wrap {
   width: 80%;
+  height: 100%;
   margin: 0 auto;
+}
+
+.testcase {
+  height: 50%;
 }
 
 .question {
   border-bottom: 1px solid gray;
   color: #B1C0CC;
+  height: 50%;
   font-size: 15px;
   line-height: 25px;
+  padding-top: 30px;
   padding-bottom: 30px;
 }
 
@@ -70,6 +79,7 @@ body{
 
 .formbtn-wrap {
   text-align: right;
+  padding-right: 30px;
 }
 
 .code-form input, .gobackbtn, .returnbtn {
@@ -89,12 +99,16 @@ body{
 }
 
 .failure-wrap .success-wrap {
-  width: 1000px;
   margin: 0 auto;
 }
 
 .failure-wrap h1, .success-wrap h1 {
   text-align: center;
+}
+
+.result-table {
+  width: 800px;
+  margin: 0 auto;
 }
 
 .result-head, .result-row {

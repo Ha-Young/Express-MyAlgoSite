@@ -19,7 +19,6 @@ exports.getUserCode = async function (req, res, next) {
     if (error.name === 'CastError') {
       next();
     } else {
-      error.status = 500;
       next(error);
     }
   }
@@ -37,7 +36,6 @@ exports.getProblemInfo = async function (req, res, next) {
     if (error.name === 'CastError') {
       next();
     } else {
-      error.status = 500;
       next(error);
     }
   }
@@ -85,7 +83,6 @@ exports.executeCode = async function (req, res, next) {
     if (error.name === 'CastError') {
       next();
     } else {
-      error.status = 500;
       next(error);
     }
   }
@@ -134,7 +131,6 @@ exports.updateSuccessCodeToUser = async function (req, res, next) {
     if (error.name === 'CastError') {
       next();
     } else {
-      error.status = 500;
       next(error);
     }
   }
@@ -151,7 +147,6 @@ exports.updateSuccessUserToProblem = async function (req, res, next) {
     if (error.name === 'CastError') {
       next();
     } else {
-      error.status = 500;
       next(error);
     }
   }
