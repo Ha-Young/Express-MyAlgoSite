@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset='utf-8'>
-    <title>Code-Wars-ErrorPage</title>
+    <title>Code-Wars-Login</title>
     <style>
       body{
         font-family: arial;
@@ -36,6 +36,13 @@
         padding: 0 10px;
         color: #333;
       }
+      .google-btn{
+        color: #fff;
+        text-decoration: none;
+        font-size: 18px;
+        padding: 10px;
+        background: #ff5353;
+      }
     </style>
   </head>
   <body>
@@ -50,13 +57,21 @@
         <% } %>
       </ul>
     </nav>
+    <% if (user) { %>
     <header>
-      <h1><%= message %></h1>
-      <h2><%= error.status %></h2>
-      <pre><%= error.stack %></pre>
+      <h1>You are already Logged in.</h1>
+    </header>
+    <% } else { %>
+    <header>
+      <h1>Login with Google only!!</h1>
+      <h2>Press the Button below.</h2>
     </header>
     <main>
-      <img src='https://images.unsplash.com/flagged/photo-1560854350-13c0b47a3180?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60' height='270px' />
+      <a class='google-btn' href='/auth/google'>Google+</a>
+      <p>
+        <img src='https://images.unsplash.com/photo-1541846476-153596ce1e61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2734&q=80' height='500px' />
+      </p>
     </main>
+    <% } %>
   </body>
 </html>

@@ -1,1 +1,10 @@
 node_modules
+
+keys.js
+server.js
+problems1.ejs
+problems2.ejs
+problems3.ejs
+problems4.ejs
+index.ejs
+User.js
