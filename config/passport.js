@@ -42,23 +42,4 @@ module.exports = (passport) => {
       done(err, false)
     }
   }));
-  // (accessToken, refreshToken, profile, done) => {
-  //   User.findOne({githubId: profile.id})
-  //     .then((currentUser) => {
-  //       if (currentUser) {
-  //         done(null, currentUser);
-  //       } else {
-  //         const newUser = new User({
-  //           username: profile.username,
-  //           githubId: profile.id
-  //         });
-
-  //         newUser
-  //           .save()
-  //           .then((newUser) => done(null, newUser))
-  //           .catch(err => done(err, false));
-  //       }
-  //     })
-  //     .catch(err => done(err, false));
-  // }));
 }
