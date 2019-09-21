@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
-/*
-
-  TODO: Fill in the model specification
-
- */
-const userSchema = new mongoose.Schema({
-
+const Schema = mongoose.Schema;
+const UserSchema = new Schema({
+  userName : String,
+  googleId: String,
+  thumbnail: String,
+  locale: String
 });
 
-module.exports = mongoose.model('User', userSchema);
+const User = mongoose.model('user', UserSchema);
+module.exports = User;
