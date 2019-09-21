@@ -1,74 +1,62 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Codewars</title>
-    <link rel='stylesheet' href='/stylesheets/problem.css' />
-    <link rel="stylesheet" href="/lib/codemirror/lib/codemirror.css" />
-    <link rel="stylesheet" href="/lib/codemirror/lib/codemirror-theme.css" />
-    <script src="/lib/codemirror/lib/codemirror.js"></script>
-    <script src="/lib/codemirror/mode/javascript/javascript.js"></script>
-  </head>
-  <body>
-    <div class="problem-title">
-      <a href="/"><button class="gobackbtn">목록으로</button></a>
-      <h1><%= problem.problem_title %></h1>
+<% include ./partial/head %>
+<div class="problem-title">
+  <a href="/"><button class="gobackbtn">목록으로</button></a>
+  <h1><%= problem.problem_title %></h1>
+</div>
+<div class="problem-container">
+  <div class="problem-info">
+    <div class="problem-level">
+      <span>Level : <%= problem.difficulty_level %></span>
     </div>
-    <div class="problem-container">
-      <div class="problem-info">
-        <div class="problem-level">
-          <span>Level : <%= problem.difficulty_level %></span>
+    <div class="complete-users">
+      <span>Complete Users : <%= problem.completed_users %> 명</span>
+    </div>
+  </div>
+  <div class="problem-content">
+    <div class="problem-question">
+      <div class="question-wrap">
+        <div class="question">
+          <div class="question-title">PROBLEM</div>
+          <%= problem.description %>
         </div>
-        <div class="complete-users">
-          <span>Complete Users : <%= problem.completed_users %> 명</span>
-        </div>
-      </div>
-      <div class="problem-content">
-        <div class="problem-question">
-          <div class="question-wrap">
-            <div class="question">
-              <div class="question-title">PROBLEM</div>
-              <%= problem.description %>
+        <div class="testcase">
+          <div class="testcase-title">EXAMPLE</div>
+          <div class="testcase-wrap">
+            <div class="arguments">
+              <div>Execution</div>
             </div>
-            <div class="testcase">
-              <div class="testcase-title">EXAMPLE</div>
-              <div class="testcase-wrap">
-                <div class="arguments">
-                  <div>Execution</div>
-                </div>
-                <div class="solutions">
-                  <div>Output</div>
-                </div>
+            <div class="solutions">
+              <div>Output</div>
+            </div>
+          </div>
+          <% problem.tests.forEach(function(test){ %>
+            <div class="testcase-wrap">
+              <div class="arguments">
+                <div></div>
+                <div><%= test.code %></div>
               </div>
-              <% problem.tests.forEach(function(test){ %>
-                <div class="testcase-wrap">
-                  <div class="arguments">
-                    <div></div>
-                    <div><%= test.code %></div>
-                  </div>
-                  <div class="solutions">
-                    <div><%= test.solution %></div>
-                  </div>
-                </div>
-              <% }) %>
+              <div class="solutions">
+                <div><%= test.solution %></div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="testform-wrap">
-          <form
-            class="code-form"
-            action="/problems/<%= problem._id %>"
-            method="POST"
-          >
-          <div class="editor-wrap">
-            <textarea id="editor" name="code"><%= writtenCode %></textarea>
-          </div>
-          <div class="formbtn-wrap">
-            <input type="submit" class="submitbtn" value="submit" />
-          </div>
-          </form>
+          <% }) %>
         </div>
       </div>
     </div>
-    <script src="/javascripts/problem.js"></script>
-  </body>
-</html>
+    <div class="testform-wrap">
+      <form
+        class="code-form"
+        action="/problems/<%= problem._id %>"
+        method="POST"
+      >
+      <div class="editor-wrap">
+        <textarea id="editor" name="code"><%= writtenCode %></textarea>
+      </div>
+      <div class="formbtn-wrap">
+        <input type="submit" class="submitbtn" value="submit" />
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script src="/javascripts/problem.js"></script>

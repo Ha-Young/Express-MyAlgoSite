@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const GitHubStrategy = require('passport-github').Strategy;
-const User = require('../../models/User');
+const User = require('../models/User');
 
 const clientID = process.env.GITHUB_CLIENT_ID;
 const clientSecret = process.env.GITHUB_CLIENT_SECRET;

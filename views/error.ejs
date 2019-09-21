@@ -1,23 +1,15 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Codewars</title>
-    <link rel='stylesheet' href='/stylesheets/error.css' />
-  </head>
-  <body>
-    <div id="clouds">
-        <div class="cloud x1"></div>
-        <div class="cloud x1_5"></div>
-        <div class="cloud x2"></div>
-        <div class="cloud x3"></div>
-        <div class="cloud x4"></div>
-        <div class="cloud x5"></div>
-    </div>
-    <div class='c'>
-        <div class='_404'><%= error.status %></div>
-        <hr>
-        <div class='_2'><%= error.message %></div>
-        <a class='btn' href='/'>메인으로</a>
-    </div>
-  </body>
-</html>
+<% include ./partial/head %>
+<div id="clouds">
+  <div class="cloud x1"></div>
+  <div class="cloud x1_5"></div>
+  <div class="cloud x2"></div>
+  <div class="cloud x3"></div>
+  <div class="cloud x4"></div>
+  <div class="cloud x5"></div>
+</div>
+<div class='error-container'>
+  <div class='error-status'><%= error.status %></div>
+  <hr>
+  <div class='error-message'><%= error.message %></div>
+  <a class='mainbtn' href='/'>메인으로</a>
+</div>

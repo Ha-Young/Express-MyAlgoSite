@@ -1,10 +1,7 @@
 const passport = require('passport');
-const userPassport = require('../middlewares/passport');
 const objectId = require('mongoose').Types.ObjectId;
 const User = require('../../models/User');
 const Problem = require('../../models/Problem');
-
-userPassport(passport);
 
 exports.getProblemList = async (req, res, next) => {
   res.clearCookie('writtenCode');

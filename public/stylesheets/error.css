@@ -7,7 +7,7 @@ body{
   overflow: hidden;
 }
 
-.c{
+.error-container{
   text-align: center;
   display: block;
   position: relative;
@@ -15,7 +15,7 @@ body{
   margin:100px auto;
 }
 
-._404{
+.error-status{
   font-size: 220px;
   position: relative;
   display: inline-block;
@@ -24,36 +24,14 @@ body{
   letter-spacing: 15px;
 }
 
-._1{
-  text-align:center;
-  display:block;
-  position:relative;
-  letter-spacing: 12px;
-  font-size: 4em;
-  line-height: 80%;
-}
-
-._2{
+.error-message{
   text-align:center;
   display:block;
   position: relative;
   font-size: 20px;
 }
 
-.text{
-  font-size: 70px;
-  text-align: center;
-  position: relative;
-  display: inline-block;
-  margin: 19px 0px 0px 0px;
-  /* top: 256.301px; */
-  z-index: 3;
-  width: 100%;
-  line-height: 1.2em;
-  display: inline-block;
-}
-
-.btn{
+.mainbtn{
   background-color: rgb( 255, 255, 255 );
   position: relative;
   display: inline-block;
@@ -65,11 +43,6 @@ body{
   color:#33cc99;
   text-decoration: none;
   margin-right: 10px
-}
-
-.right{
-  float:right;
-  width:60%;
 }
 
 hr{

@@ -2,13 +2,15 @@ require('dotenv').config();
 
 const express = require('express');
 
-const passport = require('passport');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const path = require('path');
 const logger = require('morgan');
 const favicon = require('serve-favicon');
+
+const passport = require('passport');
+const userPassport = require('./authorization/passport');
 
 const indexRouter = require('./routes/index');
 const problemsRouter = require('./routes/problems');
@@ -32,12 +34,14 @@ db.once('open', function() {
   console.log('mongo DB connected!');
 });
 
+userPassport(passport);
+
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(logger('combined'));
+app.use(logger('short'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'codewars.ico')));
