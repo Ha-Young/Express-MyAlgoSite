@@ -1,5 +1,4 @@
 {
   "appService.showBuildDuringDeployPrompt": false,
-  "appService.defaultWebAppToDeploy": "/subscriptions/3b3f5148-646f-4a94-a91c-b819b14f4f3a/resourceGroups/tests/providers/Microsoft.Web/sites/codewars-sample",
   "appService.deploySubpath": ""
 }
