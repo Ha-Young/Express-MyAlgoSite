@@ -6,9 +6,13 @@ var bodyParser = require("body-parser");
 var session = require("express-session");
 var FileStore = require("session-file-store")(session);
 var falsh = require("connect-flash");
+require("dotenv").config();
 
-var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/test", { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_CONNECT, {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+  useUnifiedTopology: true
+});
 
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));

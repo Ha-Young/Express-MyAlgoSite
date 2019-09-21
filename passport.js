@@ -32,6 +32,7 @@ module.exports = function(app) {
         });
         if (loginUser) {
           bcrypt.compare(password, loginUser.pwd, function(err, result) {
+            console.log(result);
             if (result) {
               return done(null, loginUser);
             } else {
