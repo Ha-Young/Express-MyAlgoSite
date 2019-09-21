@@ -7,7 +7,7 @@
   width: 20%;
 }
 
-.problem-container {
+.problem-list {
   width: 75%;
   margin-left: 5%;
 }
@@ -66,7 +66,7 @@
   opacity: 0.5;
 }
 
-.problem-container header {
+.problem-list header {
   height: 100px;
   line-height: 100px;
 }
