@@ -14,7 +14,7 @@ const ProblemSchema = new mongoose.Schema({
   description: String,
   tests: [
     {
-      code: [Mixed],
+      code: Mixed,
       solution: Mixed
     }
   ]
