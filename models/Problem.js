@@ -6,7 +6,10 @@ const mongoose = require('mongoose');
 
  */
 const ProblemSchema = new mongoose.Schema({
-  id: Number,
+  id: {
+    type: Number,
+    required: true
+  },
   title: String,
   completed_users: Number,
   difficulty_level: Number,
