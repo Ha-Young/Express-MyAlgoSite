@@ -6,8 +6,21 @@
   </head>
   <body>
     <link rel='stylesheet' href=''>
-    <h1>YAY!!! Success Party 🐶</h1>
-    <h1>🎉🎉🎉🎉🎉🎉🎉🎉</h1>
+    <h1>YAY!!!  Congratulations🎉🎉🎉🎉🎉🎉🎉🎉</h1>
+    <h2 class=font-green>All tests are passed</h2>
+
+    <ul>
+        <% if(results){
+          for(let i = 0; i < results.length; i++){%>
+            <li>
+              <h2><%= results[i].code %></h2>
+              <p>Expected: <%= results[i].expected %></p>
+              <p>Instead got: <%= String(results[i].insteadGot) %></p>
+              <p class='font-green'>Result: Passed</p>
+            </li>
+        <%}}%>
+      </ul>
+
     <div class="return-btn-wrap">
         <a class="return-btn" href="/">HOME</a>
     </div>

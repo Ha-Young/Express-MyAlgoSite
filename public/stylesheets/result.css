@@ -33,3 +33,7 @@ body {
 .return-btn:hover {
   background-color: #273ea3ab;
 }
+
+.text-align-center{
+  text-align: center;
+}
