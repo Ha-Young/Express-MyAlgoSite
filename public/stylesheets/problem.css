@@ -15,10 +15,12 @@
   line-height: 50px;
   text-align: center;
 }
+
 .problem-info {
   height: 50px;
   line-height: 50px;
 }
+
 .problem-level, .complete-users {
   float: right;
   width: 200px;
@@ -96,7 +98,7 @@
 .gobackbtn {
   position: absolute;
   top: 20px;
-  left: 20px;;
+  left: 20px;
 }
 
 .failure-wrap .success-wrap {
@@ -122,6 +124,7 @@
   width: 300px;
   color: red;
 }
+
 .result-head > div, .result-row > div {
   display: flex;
   justify-content: center;

@@ -1,4 +1,4 @@
-const authenticateUser = async (req, res, next) => {
+const authenticateUser = (req, res, next) => {
   if (req.isAuthenticated()) {
     next();
   } else {

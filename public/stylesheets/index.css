@@ -39,11 +39,12 @@
   margin-top: 20px;
   width: 100%;
 }
+
 .logout-wrap {
   margin-top: 20px;
 }
 
-.logout-btn{
+.logout-btn {
   width: 50%;
   height: 50px;
   line-height: 50px;

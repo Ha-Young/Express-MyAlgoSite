@@ -1,4 +1,5 @@
 require('dotenv').config();
+//production environment..??
 
 const express = require('express');
 
@@ -10,7 +11,7 @@ const logger = require('morgan');
 const favicon = require('serve-favicon');
 
 const passport = require('passport');
-const userPassport = require('./authorization/passport');
+const setPassport = require('./authorization/passport');
 
 const indexRouter = require('./routes/index');
 const problemsRouter = require('./routes/problems');
@@ -19,9 +20,9 @@ const app = express();
 const mongoose = require('mongoose');
 
 const db = mongoose.connection;
-const dbServerUrl = process.env.MONGODB_SERVER_URL;
+const MONGODB_SERVER_URL = process.env.MONGODB_SERVER_URL;
 
-mongoose.connect(dbServerUrl, {
+mongoose.connect(MONGODB_SERVER_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
@@ -34,7 +35,7 @@ db.once('open', function() {
   console.log('mongo DB connected!');
 });
 
-userPassport(passport);
+setPassport(passport);
 
 app.set('view engine', 'ejs');
 
@@ -51,7 +52,7 @@ app.use(session({
   secret: process.env.SESSION_SECRET,
   cookie: { maxAge: 24 * 60 * 60 * 1000 },
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: false
 }));
 
 app.use(passport.initialize());
@@ -73,12 +74,9 @@ app.use(function(err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
   // render the error page
-  if (err.status === 500) {
-    err.message = 'Sorry... Internal Server ERROR..';
-  }
-
-  res.status(err.status || 500);
-  res.render('error', { error : err });
+  err.message = 'Sorry... Internal Server ERROR..';
+  err.status = err.status || 500;
+  res.render('error', { err });
 });
 
 module.exports = app;

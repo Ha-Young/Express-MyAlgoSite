@@ -3,25 +3,25 @@ require('dotenv').config();
 const GitHubStrategy = require('passport-github').Strategy;
 const User = require('../models/User');
 
-const clientID = process.env.GITHUB_CLIENT_ID;
-const clientSecret = process.env.GITHUB_CLIENT_SECRET;
-const callbackURL = process.env.GITHUB_AUTH_CALLBACK;
+const CLIENT_ID = process.env.GITHUB_CLIENT_ID;
+const CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
+const AUTH_CALLBACK_URL = process.env.GITHUB_AUTH_CALLBACK;
 
 module.exports = function passport(passport) {
   passport.use(new GitHubStrategy({
-    clientID,
-    clientSecret,
-    callbackURL
+    clientID: CLIENT_ID,
+    clientSecret: CLIENT_SECRET,
+    callbackURL: AUTH_CALLBACK_URL
   },
   async function(accessToken, refreshToken, profile, done) {
     const userData = {
       user_id: profile.id,
-      username: profile.username,
+      name: profile.username,
       profile_img_url: profile.photos[0].value
     };
     try {
-      const targetUser = await User.findOrCreate({ user_id : profile.id }, userData);
-      done(null, targetUser.doc);
+      const user = await User.findOrCreate({ user_id : profile.id }, userData);
+      done(null, user.doc);
     } catch (error) {
       done(error);
     }
@@ -31,7 +31,7 @@ module.exports = function passport(passport) {
     cb(null, user);
   });
 
-  passport.deserializeUser(function(obj, cb) {
-    cb(null, obj);
+  passport.deserializeUser(function(user, cb) {
+    cb(null, user);
   });
-}
+};

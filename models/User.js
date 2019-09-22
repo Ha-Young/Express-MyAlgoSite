@@ -6,19 +6,22 @@ const findOrCreate = require('mongoose-findorcreate');
 
  */
 const userSchema = new mongoose.Schema({
-  user_id: {
+  user_id: { // user_id가 필요한 이유..
     type: Number,
     required: true
   },
-  username: {
+  name: {
     type: String,
     required: true
   },
   profile_img_url: {
     type: String
   },
-  success_problems: [{
-    problem_id: String,
+  solved_problems: [{
+    problem_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Problem'
+    },
     written_code: String,
     updated_at: Date
   }]

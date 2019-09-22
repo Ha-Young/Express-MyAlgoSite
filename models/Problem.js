@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 
  */
 const ProblemSchema = new Schema({
-  problem_title: {
+  title: {
     type: String,
     required: true
   },

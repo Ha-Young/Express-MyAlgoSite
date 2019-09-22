@@ -50,6 +50,8 @@ yarn run dev or npm run dev
   - 서버 내부적인 문제가 발생했을 경우, 500 Internal Server Error 메시지를 표기합니다.
 
 ### 6. EXAMPLES
+https://welcomecodewars.azurewebsites.net
+
 ![](login.gif)
 ![](success.gif)
 ![](main.gif)

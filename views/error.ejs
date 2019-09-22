@@ -1,17 +1,9 @@
 <% include ./partial/head %>
 <div class="error-body">
-  <div id="clouds">
-    <div class="cloud x1"></div>
-    <div class="cloud x1_5"></div>
-    <div class="cloud x2"></div>
-    <div class="cloud x3"></div>
-    <div class="cloud x4"></div>
-    <div class="cloud x5"></div>
-  </div>
   <div class='error-container'>
-    <div class='error-status'><%= error.status %></div>
+    <div class='error-status'><%= err.status %></div>
     <hr>
-    <div class='error-message'><%= error.message %></div>
+    <div class='error-message'><%= err.message %></div>
     <a class='mainbtn' href='/'>메인으로</a>
   </div>
 </div>

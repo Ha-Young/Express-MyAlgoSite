@@ -1,45 +1,60 @@
 const vm = require('vm');
 const User = require('../../models/User');
 const Problem = require('../../models/Problem');
-const objectId = require('mongoose').Types.ObjectId;
+const ObjectId = require('mongoose').Types.ObjectId;
+
+exports.getProblemList = async (req, res, next) => {
+  res.clearCookie('writtenCode');
+  try {
+    const problems = await Problem.find();
+    const successList = req.user.solved_problems.map(problem => problem.problem_id);
+
+    res.render('index', {
+      title: '바닐라코딩',
+      problems,
+      userProfileImg: req.user.profile_img_url,
+      userName: req.user.name,
+      successList,
+      userChallenging: problems.length - successList.length
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 exports.getUserCode = async function (req, res, next) {
   try {
-    if (!objectId.isValid(req.user._id) || !objectId.isValid(req.params.problemId)) {
-      next();
+    if (!ObjectId.isValid(req.user._id) || !ObjectId.isValid(req.params.problemId)) {
+      return next();
     }
-
-    const currentUser = await User.findOne({ _id : req.user._id });
-    const currentProblem = await currentUser.success_problems.find((problem => {
-      return problem.problem_id === req.params.problemId;
-    }));
+    const currentProblem = req.user.solved_problems.find(problem =>
+      problem.problem_id === req.params.problemId
+    );
     if (currentProblem) {
-      req.writtenCode = currentProblem.written_code;
+      res.locals.writtenCode = currentProblem.written_code;
     } else {
-      req.writtenCode = req.cookies.writtenCode || 'function solution () {};';
+      res.locals.writtenCode = req.cookies.writtenCode || 'function solution () {};';
     }
 
     next();
   } catch (error) {
-    error.status = 500;
     next(error);
   }
 };
 
 exports.getProblemInfo = async function (req, res, next) {
   try {
-    if (!objectId.isValid(req.params.problemId)) {
-      next();
+    if (!ObjectId.isValid(req.params.problemId)) {
+      return next();
     }
 
     const problem = await Problem.findOne({ _id : req.params.problemId });
     res.render('problem', {
       title: '바닐라코딩',
       problem,
-      writtenCode : req.writtenCode
+      writtenCode : res.locals.writtenCode
     });
   } catch (error) {
-    err.status = 500;
     next(error);
   }
 };
@@ -51,12 +66,11 @@ exports.setCodeCookie = function (req, res, next) {
   next();
 };
 
-
 exports.executeCode = async function (req, res, next) {
   const resultMessages = [];
   try {
-    if (!objectId.isValid(req.params.problemId)) {
-      next();
+    if (!ObjectId.isValid(req.params.problemId)) {
+      return next();
     }
 
     const problem = await Problem.findOne({ _id : req.params.problemId });
@@ -81,52 +95,48 @@ exports.executeCode = async function (req, res, next) {
         }
         resultMessages.push(testResult);
       });
-      req.resultMessages = resultMessages;
+      res.locals.resultMessages = resultMessages;
     } catch (error) {
       res.render('failure', { error });
     }
     next();
   } catch (error) {
-    error.status = 500;
     next(error);
   }
 };
 
-
 exports.checkAnswer = function (req, res, next) {
-  const isRightCode = req.resultMessages.every((result) => {
-    return result.isRightAnswer;
-  })
+  const isRightCode = res.locals.resultMessages.every(result => result.isRightAnswer);
+
   if (isRightCode) {
     next();
   } else {
-    res.render('failure', { resultMessages: req.resultMessages });
+    res.render('failure', { resultMessages: res.locals.resultMessages });
   }
 };
 
-
 exports.updateSuccessCodeToUser = async function (req, res, next) {
   try {
-    if (!objectId.isValid(req.user._id)) {
-      next();
+    if (!ObjectId.isValid(req.user._id)) {
+      return next();
     }
 
     const targetUser = await User.findById(req.user._id);
-    const successProblems = targetUser.success_problems.findIndex((problem => {
-      return problem.problem_id === req.params.problemId;
-    }));
+    const successProblems = targetUser.solved_problems.findIndex(problem =>
+      problem.problem_id === req.params.problemId
+    );
 
     if (successProblems > -1) {
-      await targetUser.success_problems[successProblems].remove();
+      await targetUser.solved_problems[successProblems].remove();
     }
 
-    await targetUser.success_problems
+    targetUser.solved_problems
       .push({
         problem_id: req.params.problemId,
         written_code : req.body.code,
         updated_at : new Date().toISOString()
       });
-    targetUser.save();
+    await targetUser.save();
 
     if (successProblems === -1) {
       next();
@@ -135,15 +145,14 @@ exports.updateSuccessCodeToUser = async function (req, res, next) {
     }
 
   } catch (error) {
-    error.status = 500;
     next(error);
   }
 };
 
 exports.updateSuccessUserToProblem = async function (req, res, next) {
   try {
-    if (!objectId.isValid(req.params.problemId)) {
-      next();
+    if (!ObjectId.isValid(req.params.problemId)) {
+      return next();
     }
 
     await Problem.findByIdAndUpdate(
@@ -152,7 +161,6 @@ exports.updateSuccessUserToProblem = async function (req, res, next) {
     );
     res.render('success');
   } catch (error) {
-    error.status = 500;
     next(error);
   }
 };
