@@ -52,7 +52,7 @@ router.post('/problems/:problem_id', (req, res, next) => {
           vm.createContext(sandbox);
           const script = new vm.Script(codes);
           const userCodeValue = script.runInContext(sandbox, { timeout: 500 });
-          const isAnswer = userCodeValue === el.solution ? true : false;
+          const isAnswer = userCodeValue === el.solution;
           if (!hasWrongAnswer && !isAnswer) {
             hasWrongAnswer = true;
           }
