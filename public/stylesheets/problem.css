@@ -56,9 +56,10 @@ a:hover {
 }
 
 .guide-section {
+  height: calc(100vh - 100px);
+  width: 40%;
   border: 3px solid #4164fb;
   padding: 20px;
-  height: calc(100vh - 100px);
   overflow-y: scroll;
   box-sizing: border-box;
 }
