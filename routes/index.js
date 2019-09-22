@@ -69,7 +69,7 @@ router.post('/problems/:problem_id', (req, res, next) => {
           : res.render('success', { results });
       } else {
         res.render('failure', {
-          errorMessage: 'user의 코드에 function solution이 없습니다',
+          errorMessage: 'There is no function solution in usercode',
           results: []
         });
       }
