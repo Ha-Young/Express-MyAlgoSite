@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel='stylesheet' href='public/stylesheets/style.css' />
   <title>Failure</title>
 </head>
 
 <body>
-  <div class="header">
+  <div class="web-header">
     <img onmouseover="openNav()" class="logo-square"
       src="https://www.codewars.com/assets/logos/logo-square-red-big-c74ae0e7a89b33acd3beb1f08229630391934650e3bbd30ddc40e8be5bbfc71e.png"
       alt="codewars_logo">
@@ -29,7 +29,7 @@
 
   <div id="mySidenav" class="sidenav" onmouseleave="closeNav()">
     <a href="/">Home</a>
-    <a href="/"><i class="fab fa-kickstarter-k"></i> Kata</a>
+    <a href="/">Kata</a>
     <a href="/profile">Profile</a>
   </div>
 
@@ -41,14 +41,7 @@
   </main>
 </body>
 
-<script>
-  function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-  }
+<script type="text/javascript" src="../utils/side-nav.js"></script>
 
-  function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-  }
-</script>
 
 </html>

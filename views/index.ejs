@@ -4,13 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel='stylesheet' href='/public/stylesheets/style.css' />
+  <script type="text/javascript" src="/utils/side-nav.js"></script>
   <title>Codewars</title>
 </head>
 
 <body>
-  <div class="header">
-    <img class='side-menu-img' onmouseenter="openNav()" src="/images/codewars-sidebar.png" alt="codewars-sidebar">
+  <div class="web-header">
     <ul class="horizontal-list">
       <% if (user) { %>
       <li><a href="/auth/logout">Logout</a></li>
@@ -23,9 +23,11 @@
     </ul>
   </div>
 
+  <img class='side-menu-img' onmouseenter="openNav()" src="/public/images/codewars-sidebar.png" alt="codewars-sidebar">
+  
   <div id="mySidenav" class="sidenav" onmouseleave="closeNav()">
     <a href="/">Home</a>
-    <a href="/"><i class="fab fa-kickstarter-k"></i> Kata</a>
+    <a href="/">Kata</a>
     <a href="/profile">Profile</a>
   </div>
 
@@ -48,15 +50,5 @@
     </ul>
   </div>
 </body>
-
-<script>
-  function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-  }
-
-  function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-  }
-</script>
 
 </html>

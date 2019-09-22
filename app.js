@@ -6,7 +6,7 @@ const authRoutes = require('./routes/auth-routes');
 const profileRoutes = require('./routes/profile-routes');
 const problemRoutes = require('./routes/problem-routes');
 
-const passportSetup = require('./config/passport-setup');
+require('./config/passport-setup');
 const mongoose = require('mongoose');
 const keys = require('./config/keys');
 const cookieSession = require('cookie-session');
@@ -15,7 +15,7 @@ const passport = require('passport');
 const app = express();
 const bodyParser = require('body-parser');
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

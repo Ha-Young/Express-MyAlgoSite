@@ -3,8 +3,8 @@
 module.exports = {
   google: {
     clientID:
-      process.env.client_ID,
-    clientSecret: process.env.clientSecret,
+      process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
   },
   mongodb: {
     dbURI:

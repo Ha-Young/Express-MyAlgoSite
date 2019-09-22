@@ -2,27 +2,24 @@ const router = require('express').Router();
 const mongoose = require('mongoose');
 const Problem = require('../models/Problem');
 
-const util = require('util');
 const vm = require('vm');
 
 var _every = require('lodash.every');
 var _filter = require('lodash.filter');
+var ensureAuthenticated = require('../utils/ensure-auth')
 
-const authCheck = (req, res, next) => {
-  if (!req.user) {
-    res.redirect('/auth/login');
-  } else {
-    next();
-  }
-};
-
-router.get('/', authCheck, (req, res, next) => {
+router.get('/', ensureAuthenticated, (req, res, next) => {
   res.send('you are at a detailed problem page');
 });
 
-router.get('/:problem_id', authCheck, (req, res, next) => {
+router.get('/:problem_id', ensureAuthenticated, (req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.problem_id)) {
-    return next();
+    try {
+      throw new Error ('Not Found');
+    } catch (err) {
+      err.status = 404
+    }
+    return next(err);
   }
   Problem.findById(req.params.problem_id)
     .then(data => {
@@ -39,7 +36,7 @@ router.get('/:problem_id', authCheck, (req, res, next) => {
     });
 });
 
-router.post('/:problem_id', authCheck, (req, res, next) => {
+router.post('/:problem_id', ensureAuthenticated, (req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.problem_id)) {
     return next();
   }
@@ -57,7 +54,7 @@ router.post('/:problem_id', authCheck, (req, res, next) => {
             { timeout: 12000 }
           );
         } catch (err) {
-          return res.status(301).render('failure', {
+          return res.status(302).render('failure', {
             user: req.user,
             problem: data,
             error: err,
@@ -72,10 +69,10 @@ router.post('/:problem_id', authCheck, (req, res, next) => {
       }
       if (_every(results, { result: true })) {
         return res
-          .status(301)
+          .status(302)
           .render('success', { user: req.user, problem: data });
       } else {
-        return res.status(301).render('failure', {
+        return res.status(302).render('failure', {
           user: req.user,
           problem: data,
           failedTests: _filter(results, {

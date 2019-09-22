@@ -1,0 +1,17 @@
+<div class="header">
+  <img onmouseover="openNav()" class="logo-square"
+    src="https://www.codewars.com/assets/logos/logo-square-red-big-c74ae0e7a89b33acd3beb1f08229630391934650e3bbd30ddc40e8be5bbfc71e.png"
+    alt="codewars_logo">
+  <ul class="horizontal-list">
+    <% if (user !== undefined) { %>
+    <li><a href="/auth/logout">Logout</a></li>
+    <% } else { %>
+    <li><a href="/auth/login">Login</a></li>
+    <% } %>
+    <li><a href="/">Homepage</a></li>
+    <% if (user !== undefined) { %>
+    <li><a href="/profile"><%= user.username %></a></li>
+    <li><img class='nav-thumb' src="<%= user.thumbnail %>" alt="user_thumbnail"></li>
+    <% } %>
+  </ul>
+</div>

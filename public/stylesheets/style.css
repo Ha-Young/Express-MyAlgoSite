@@ -6,7 +6,7 @@ body {
   letter-spacing: 0.2px;
 }
 
-.header {
+.web-header {
   display: flex;
   padding: 15px 10px;
 }
@@ -200,10 +200,10 @@ form button {
   min-height: 100% !important;
 }
 
-.passedTest {
+.passed-test {
   color: lightgreen;
 }
 
-.failedTest {
+.failed-test {
   color: crimson;
 }
