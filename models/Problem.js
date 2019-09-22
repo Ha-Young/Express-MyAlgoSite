@@ -15,7 +15,12 @@ const ProblemSchema = new mongoose.Schema({
     functionName: String,
     arguments: mongoose.Schema.Types.Mixed
   },
-  tests: Array
+  tests: [
+    {
+      code: String,
+      solution: mongoose.Schema.Types.Mixed
+    }
+  ]
 });
 
 module.exports = mongoose.model('Problem', ProblemSchema);
