@@ -42,18 +42,51 @@ a:hover {
   box-sizing: border-box;
 }
 
+.guide-run-wrapper {
+  width: 100%;
+  border: 3px solid #4164fb;
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+.guide-run{
+  box-sizing: border-box;
+  flex: 1 4 auto;
+}
+
 .guide-section {
   border: 3px solid #4164fb;
   padding: 20px;
-  width: 30%;
   height: calc(100vh - 100px);
   overflow-y: scroll;
   box-sizing: border-box;
 }
 
+.size-handler{
+  width: 20px;
+  padding: 0;
+  cursor: ew-resize;
+  flex: 0 0 auto;
+  background-size: 20px 10%;
+  border: 3px solid #4164fb;
+  background-color: #4164fb;
+  background-image: url(../images/grippie-vertical.png);
+}
+
+.size-handler:hover{
+  background-image: url(../images/grippie-vertical-hover.png);
+}
+
+.size-handler::before {
+  content: '';
+  display: block;
+  height: 100%;
+  border: 3px solid #4164fb;
+}
+
 .run-section {
   border: 3px solid #4164fb;
-  width: 70%;
   height: calc(100vh - 100px);
   overflow-y: scroll;
   box-sizing: border-box;
@@ -83,6 +116,7 @@ a:hover {
 }
 #submit-code:hover {
   background-color: #273ea3ab;
+  color: white;
 }
 
 .modal {

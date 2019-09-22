@@ -16,21 +16,23 @@
       <%}%>
     </div>
     <div class='main-section'>
-      <%if(problem){%>
-      <div class='guide-section'>
-        <h1>
-          <span class='level-style'>Level<%= problem.difficulty_level %></span>
-          <span><%= problem.title %></span>
-        </h1>
-        <h2>문제설명</h2>
-        <p><%= problem.description %></p>
-      </div>
-      <div class='run-section'>
-        <div class='CodeMirror'>
-          <form method='POST' action=<%=`/problems/${problem._id}`%> id='form'>
-            <textarea id='editor' name='code'>
-            </textarea>
-          </form>
+      <div class='guide-run-wrapper'>
+        <%if(problem){%>
+        <div class='guide-section guide-run' id='guide'>
+          <h1>
+            <span class='level-style'><span>Level</span><%= problem.difficulty_level %></span>
+            <span><%= problem.title %></span>
+          </h1>
+          <h2>문제설명</h2>
+          <p><%= problem.description %></p>
+        </div>
+        <div class='size-handler'></div>
+        <div class='run-section guide-run'>
+          <div class='CodeMirror'>
+            <form method='POST' action=<%=`/problems/${problem._id}`%> id='form'>
+              <textarea id='editor' name='code'></textarea>
+            </form>
+          </div>
         </div>
       </div>
       <div class='button-section'>
@@ -48,6 +50,34 @@
         lineNumbers: true,
         tapSize: 1
       }).setValue(`function ${functionName} (${arguments}) {}`);
-      </script>
+
+      //size handler
+      var isHandlerDragging = false;
+      var handler = document.querySelector('.size-handler');
+      var wrapper = handler.closest('.guide-run-wrapper');
+      var guideSection = wrapper.querySelector('.guide-run');
+
+      document.addEventListener('mousedown', function(e) {
+        if (e.target === handler) {
+          isHandlerDragging = true;
+        }
+      });
+
+      document.addEventListener('mousemove', function(e) {
+        if (!isHandlerDragging) {
+          return false;
+        }
+        var containerOffsetLeft = wrapper.offsetLeft;
+        var pointerRelativeXpos = e.clientX - containerOffsetLeft;
+        var guideSectionMinWidth = 60;
+        guideSection.style.width = (Math.max(guideSectionMinWidth, pointerRelativeXpos - 8)) + 'px';
+        guideSection.style.flexGrow = 0;
+      });
+
+      document.addEventListener('mouseup', function(e) {
+        isHandlerDragging = false;
+      });
+
+    </script>
   </body>
 </html>
