@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Success</title>
+    <title>Failure</title>
     <link rel='stylesheet' href='/stylesheets/result.css' />
   </head>
   <body>
@@ -13,15 +13,26 @@
 
     <ul>
       <% if(results){
-        for(let i = 0; i < results.length; i++){%>
+        for(let i = 0; i < results.length; i++){
+          let resultDsc;
+          let className;
+          if(results[i].isAnswer){
+            resultDsc = 'Passed';
+            className = 'font-green';
+          }else{
+            resultDsc = 'Failed';
+            className = 'font-red';
+          }%>
           <li>
-            <div><%= results[i].code %></div>
             <h2><%= results[i].code %></h2>
             <p>Expected: <%= results[i].expected %></p>
             <p>Instead got: <%= String(results[i].insteadGot) %></p>
+            <p class = <%= className %>>Result: <%= resultDsc %></p>
           </li>
       <%}}%>
     </ul>
-
+    <div class="return-btn-wraper">
+      <a class="return-btn" href="javascript:history.back()">Back</a>
+    </div>
   </body>
 </html>

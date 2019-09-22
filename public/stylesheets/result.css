@@ -1,9 +1,35 @@
 body {
   color: #203349;
   margin: 0;
-  padding: 0;
+  height: 100vh;
   font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
   list-style: none;
   padding: 30px;
   border: 50px solid #4164fb;
+  box-sizing: border-box;
+}
+
+.font-green {
+  color: green;
+}
+
+.font-red {
+  color: red;
+}
+
+.return-btn {
+  position: absolute;
+  right: calc(30px + 50px);
+  bottom: calc(30px + 50px);
+  background-color: #4164fb;
+  color: white;
+  padding: 15px;
+  border-radius: 3px;
+  font-size: 16px;
+  text-decoration: none !important;
+  cursor: pointer;
+}
+
+.return-btn:hover {
+  background-color: #273ea3ab;
 }
