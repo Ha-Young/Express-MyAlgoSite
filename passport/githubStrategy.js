@@ -28,7 +28,7 @@ module.exports = passport => {
             return done(null, newUser);
           }
         } catch (err) {
-          console.err(err);
+          done(err)
         }
       }
     )
