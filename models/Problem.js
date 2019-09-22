@@ -6,16 +6,38 @@ const mongoose = require('mongoose');
 
  */
 const Mixed = mongoose.Schema.Types.Mixed;
+
 const ProblemSchema = new mongoose.Schema({
-  title: String,
-  completed_users: Array,
-  difficulty_level: Number,
-  writer: String,
-  description: String,
+  title: {
+    type: String,
+    required: true
+  },
+  completed_users: {
+    type: Array,
+    required: true
+  },
+  difficulty_level: {
+    type: Number,
+    required: true
+  },
+  writer: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
   tests: [
     {
-      code: Mixed,
-      solution: Mixed
+      code: {
+        type: Mixed,
+        required: true
+      },
+      solution: {
+        type: Mixed,
+        required: true
+      }
     }
   ]
 });

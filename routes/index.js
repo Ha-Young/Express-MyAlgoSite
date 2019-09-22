@@ -1,13 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const ensureLoggedIn = require('./middleware/ensureLogin');
 
 /* GET home page. */
-router.get('/', (req, res, next) => {
-  if (!req.user) {
-    res.redirect('/auth');
-  } else {
-    res.redirect('/problems');
-  }
+router.get('/', ensureLoggedIn, (req, res, next) => {
+  res.redirect('/problems');
 });
 
 module.exports = router;

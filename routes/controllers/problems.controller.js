@@ -12,8 +12,8 @@ exports.getAll = async (req, res, next) => {
 
 exports.getOne = async (req, res, next) => {
   try {
-    const curProblem = await Problem.findById(req.params.problem_id);
-    res.render('problem', { problem: curProblem });
+    const problem = await Problem.findById(req.params.problem_id);
+    res.render('problem', { problem: problem });
   } catch(err) {
     next(err);
   }
@@ -21,10 +21,10 @@ exports.getOne = async (req, res, next) => {
 
 exports.checkSolution = async (req, res, next) => {
   try {
-    var curProblem = await Problem.findById(req.params.problem_id);
+    var problem = await Problem.findById(req.params.problem_id);
 
     try {
-      var results = curProblem.tests.map(test => {
+      var results = problem.tests.map(test => {
         const script = new vm.Script(`try { ${req.body.solution} ${test.code} } catch (err) { throw new Error(err) }`);
         const context = vm.createContext({});
 
@@ -36,33 +36,33 @@ exports.checkSolution = async (req, res, next) => {
       });
     } catch(err) {
       res.render('failure', {
-        problem: curProblem,
-        tests: curProblem.tests,
+        problem: problem,
+        tests: problem.tests,
         results: null,
         errStack: err.stack,
         errMessage: err.message
       });
     }
 
-    const isfailed = results.filter(result => result !== true);
+    const allPassed = results.every(result => result === true);
 
-    if (isfailed.length) {
+    if (!allPassed) {
       res.render('failure', {
-        problem: curProblem,
-        tests: curProblem.tests,
+        problem: problem,
+        tests: problem.tests,
         results: results
       });
     } else {
-      const isProblemSolved = curProblem.completed_users.find(user => user === req.user.username);
+      const isProblemSolved = problem.completed_users.find(user => user === req.user.username);
 
       if (!isProblemSolved) {
-        curProblem.completed_users.push(req.user.username);
-        curProblem.save();
+        problem.completed_users.push(req.user.username);
+        problem.save();
       }
 
       res.render('success', {
-        problem: curProblem,
-        tests: curProblem.tests
+        problem: problem,
+        tests: problem.tests
       });
     }
   } catch(err) {

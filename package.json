@@ -22,5 +22,8 @@
     "passport-github": "^1.1.0",
     "passport-google-oauth": "^2.0.0",
     "serve-favicon": "~2.4.5"
+  },
+  "devDependencies": {
+    "vscode-linter": "^0.2.2"
   }
 }

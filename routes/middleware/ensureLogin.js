@@ -1,7 +1,9 @@
-exports.isLoggedIn = (req, res, next) => {
+const ensureLoggedIn = (req, res, next) => {
   if(req.isAuthenticated()){
-   next();
+    next();
   } else {
-    res.redirect('/');
+    res.redirect('/auth');
   }
 };
+
+module.exports = ensureLoggedIn;
