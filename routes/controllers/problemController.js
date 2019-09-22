@@ -37,9 +37,10 @@ exports.checkProblem = async (req, res, next) => {
   try {
     const problem = await Problems.findOne({ _id: targetId });
     let isAllPassed = true;
+
     try {
       results = problem.tests.map(test => {
-        let code = `${req.body.code} ${test.code}`;
+        const code = `${req.body.code} ${test.code}`;
         const script = new vm.Script(code);
         const context = vm.createContext({});
         const result = script.runInNewContext(context, { timeout: 1000 });
@@ -57,11 +58,7 @@ exports.checkProblem = async (req, res, next) => {
       return res.render('failure', { results: null, user: req.user, error });
     }
 
-    if (isAllPassed) {
-      res.render('success', { error: null, user: req.user, results });
-    } else {
-      res.render('failure', { error: null, user: req.user, results });
-    }
+    res.render(isAllPassed ? 'success': 'failure', { error: null, user: req.user, results });
   } catch (error) {
     next(error);
   }
