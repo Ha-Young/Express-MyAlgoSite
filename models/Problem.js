@@ -6,16 +6,34 @@ const mongoose = require('mongoose');
 
  */
 const TestSchema = new mongoose.Schema({
-  code: String,
-  solution: mongoose.Schema.Types.Mixed
-});
+  code: {
+    type: String,
+    required: true
+  },
+  solution: {
+    type: mongoose.Schema.Types.Mixed,
+    required: true
+  }
+}, { _id: false });
 
 const ProblemSchema = new mongoose.Schema({
-  title: String,
+  title: {
+    type: String,
+    required: true
+  },
   completed_users: [String],
-  difficulty_level: Number,
-  description: String,
-  tests: [TestSchema]
+  difficulty_level: {
+    type: Number,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
+  tests: {
+    type: [TestSchema],
+    required: true
+  }
 });
 
 module.exports = mongoose.model('Problem', ProblemSchema);

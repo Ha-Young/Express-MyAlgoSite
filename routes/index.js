@@ -4,7 +4,6 @@ const passport = require('passport');
 const ensureLogin = require('connect-ensure-login');
 const problemsController = require('./controllers/problems.controllers');
 
-/* GET login process */
 router.get('/login', (req, res, next) => {
   res.render('login', { title: '바닐라코딩' });
 });
@@ -19,13 +18,11 @@ router.get('/login/google', passport.authenticate('google', {
   failureRedirect: '/login'
 }));
 
-/* GET logout process */
 router.get('/logout', (req, res, next) => {
   req.logout();
   res.redirect('/');
 });
 
-/* GET home page. */
 router.get('/',
   ensureLogin.ensureLoggedIn(),
   problemsController.getProblems

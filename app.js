@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 const session = require('express-session');
 const passport = require('passport');
 const index = require('./routes/index');
@@ -36,6 +37,8 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
+
+app.use(logger("short"));
 
 require('./config/passport')(passport);
 app.use(passport.initialize());

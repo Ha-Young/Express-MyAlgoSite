@@ -63,13 +63,7 @@
 
     <script>
       const level = "<%= level  %>";
-      let $activeTab;
-
-      if (level) {
-        $activeTab = document.querySelector(`.lv${level}`);
-      } else {
-        $activeTab = document.querySelector(`.lv-all`);
-      }
+      let $activeTab = document.querySelector(level ? `.lv${level}` : '.lv-all');
 
       $activeTab.classList.add('active-tab');
     </script>

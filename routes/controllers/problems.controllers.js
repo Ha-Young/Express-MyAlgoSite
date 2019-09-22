@@ -4,13 +4,7 @@ const Problem = require('../../models/Problem');
 exports.getProblems = async function (req, res, next) {
   try {
     const level = req.params.level;
-    let problems;
-
-    if (level) {
-      problems = await Problem.find({ difficulty_level: Number(level) });
-    } else {
-      problems = await Problem.find();
-    }
+    let problems = await Problem.find(level ? { difficulty_level: Number(level) } : {});
 
     if (!problems.length) {
       problems = 'No-Data';
@@ -24,7 +18,7 @@ exports.getProblems = async function (req, res, next) {
         profileImageUrl: req.user.profile_image_url
       },
       problems,
-      level: level
+      level
     });
   } catch (err) {
     console.error(err);
@@ -75,7 +69,7 @@ exports.createUserSolution = async function (req, res, next) {
 
         result = userScript.runInContext(context, { timeout: 10000 });
       } catch (err) {
-        res.render('failure', {
+        return res.render('failure', {
           title: '바닐라코딩',
             userInfo: {
               username: req.user.nickname,
