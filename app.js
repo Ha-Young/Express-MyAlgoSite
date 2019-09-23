@@ -2,12 +2,15 @@ const express = require('express');
 const authRoutes = require('./routes/auth');
 const profileRoutes = require('./routes/profile');
 const problemsRoutes = require('./routes/problems');
-const passportSetup = require('./config/passport-setup');
 const mongoose = require('mongoose');
-const keys = require('./config/keys');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const problem = require('./models/Problem');
+
+require('./config/passport-setup');
+require('dotenv').config();
+const SESSION_COOKIE_KEY = process.env.SESSION_COOKIE_KEY;
+const MONGODB_URI = process.env.MONGODB_URI;
 
 const app = express();
 
@@ -15,13 +18,13 @@ app.set('view engine', 'ejs');
 
 app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000,
-  keys: [keys.session.cookieKey]
+  keys: [SESSION_COOKIE_KEY]
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect(keys.mongodb.dbURI, () => {
+mongoose.connect(MONGODB_URI, () => {
   console.log('connected to mongodb');
 });
 

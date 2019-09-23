@@ -1,0 +1,5 @@
+{
+    "appService.showBuildDuringDeployPrompt": false,
+    "appService.defaultWebAppToDeploy": "/subscriptions/45d542ec-30cd-4772-89b3-781f35c656da/resourceGroups/code-wars/providers/Microsoft.Web/sites/code-wars",
+    "appService.deploySubpath": ""
+}
