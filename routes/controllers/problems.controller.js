@@ -45,8 +45,8 @@ exports.checkSolution = async function(req, res, next) {
   }
 
   try {
-    const validation = ObjectId.isValid(req.params.problem_id);
-    if (!validation) {
+    const isValid = ObjectId.isValid(req.params.problem_id);
+    if (!isValid) {
       return next();
     }
 
@@ -59,11 +59,11 @@ exports.checkSolution = async function(req, res, next) {
         displayErrors: true,
         timeout: 2000
       });
-      if (answer === test.solution) {
-        return { message: 'success', expect: test.solution, answer };
-      } else {
-        return { message: 'failure', expect: test.solution, answer };
-      }
+      return {
+        message: answer === test.solution ? 'success' : 'failure',
+        expect: test.solution,
+        answer
+      };
     });
 
     if (results.every(result => result.message === 'success')) {

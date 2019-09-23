@@ -10,10 +10,10 @@ require('./config/passport');
 require('dotenv').config();
 
 const SESSION_COOKIE_KEY = process.env.SESSION_COOKIE_KEY;
-const MONGODB_URI = process.env.MONGODB_URI;
+const DATABASE_URI = process.env.DATABASE_URI;
 
 mongoose.connect(
-  `${MONGODB_URI}`,
+  DATABASE_URI,
   {
     useNewUrlParser: true,
     useFindAndModify: false,
@@ -60,7 +60,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error', { user: req.user });
+  res.render('error');
 });
 
 module.exports = app;

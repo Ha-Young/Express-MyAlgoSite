@@ -1,0 +1,23 @@
+<header>
+  <a href="/">
+    <img
+      class="logo"
+      src="https://www.co.midland.tx.us/ImageRepository/Document?documentId=1230"
+      alt="codewars"
+    />
+  </a>
+  <p class="slogan">
+    코딩 전쟁이 일어난다! 모든 대원들 전투준비!
+  </p>
+  <div class="section-user">
+    <% if (user) { %>
+    <span class="profile">
+      <img src="<%= user.thumbnail %>" alt="<%= user.username %>" />
+      <span class="name"><%= user.username %></span>
+    </span>
+    <a href="/login/logout">Logout</a>
+    <% } else { %>
+    <a href="/login">Login</a>
+    <% } %>
+  </div>
+</header>
