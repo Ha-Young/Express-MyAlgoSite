@@ -39,7 +39,7 @@
         lineWrapping: true,
         matchBrackets: true,
         theme: 'base16-dark',
-      });
+      }).setSize(null, 180);
 
       let sampleTestCode = '';
       <% problemTests.forEach(test => { %>
@@ -47,7 +47,6 @@
       <% }) %>
 
       sampleEditor.getDoc().setValue(sampleTestCode);
-      sampleEditor.setSize(null, 180);
     </script>
   </body>
 </html>

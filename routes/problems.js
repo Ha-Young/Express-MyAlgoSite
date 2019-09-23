@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const ensureLoggedIn = require('./middleware/ensureLogin');
+const authentication = require('./middleware/authentication');
 const problemsController = require('./controllers/problems.controller');
 
-router.get('/', ensureLoggedIn, problemsController.getAll);
-router.get('/:problem_id', ensureLoggedIn, problemsController.getOne);
-router.post('/:problem_id/solution', ensureLoggedIn, problemsController.checkSolution);
+router.get('/', authentication.ensureLoggedIn, problemsController.getAll);
+router.get('/:problem_id', authentication.ensureLoggedIn, problemsController.getOne);
+router.post('/:problem_id/solution', authentication.ensureLoggedIn, problemsController.checkSolution);
 
 module.exports = router;

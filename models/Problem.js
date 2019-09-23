@@ -31,7 +31,7 @@ const ProblemSchema = new mongoose.Schema({
   tests: [
     {
       code: {
-        type: Mixed,
+        type: String,
         required: true
       },
       solution: {

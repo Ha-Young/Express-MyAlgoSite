@@ -19,7 +19,7 @@ module.exports = passport => {
         done(null, user);
       }
     } catch(err) {
-      next(err);
+      done(err);
     }
   });
 
@@ -46,7 +46,7 @@ module.exports = passport => {
           done(null, newUser);
         }
       } catch(err) {
-        next(err);
+        done(err);
       }
     }
   ));
@@ -74,7 +74,7 @@ module.exports = passport => {
           done(null, newUser);
         }
       } catch(err) {
-        next(err);
+        done(err);
       }
     }
   ));

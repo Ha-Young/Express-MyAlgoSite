@@ -25,13 +25,13 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 
 app.use(express.static('public'));
-app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.use(session({
   secret: process.env.SECRET_KEY,
-  resave: true,
-  saveUninitialized: true
+  resave: false,
+  saveUninitialized: false
 }));
 require('./config/passport')(passport);
 app.use(passport.initialize());
