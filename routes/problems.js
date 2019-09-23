@@ -8,7 +8,7 @@ router.get('/:id', async (req, res) => {
     problem => problem.id === parseInt(req.params.id)
   );
 
-  res.render('problems', { user: req.user, problems, index: findIndex });
+  res.render('problems', { user: req.user, problems, findIndex });
 });
 
 router.post('/success', async (req, res) => {
@@ -18,7 +18,7 @@ router.post('/success', async (req, res) => {
     problem => problem.id === parseInt(req.params.id)
   );
 
-  res.render('success', { user: req.user, problems, index: findIndex });
+  res.render('success', { user: req.user, problems, findIndex });
 });
 
 module.exports = router;

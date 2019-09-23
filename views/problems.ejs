@@ -91,14 +91,14 @@
     </nav>
     <% if (user) { %>
     <main>
-      <h1>Problem <%= problems[index].id %></h1>
-      <h2>Title: <%= problems[index].title %></h2>
+      <h1>Problem <%= problems[findIndex].id %></h1>
+      <h2>Title: <%= problems[findIndex].title %></h2>
 
       <div class='problems'>
         <ul>
-          <li>Description: <%= problems[index].description %></li>
-          <li>정답자: <%= problems[index].completed_users %>명</li>
-          <li>난이도: Level <%= problems[index].difficulty_level %></li>
+          <li>Description: <%= problems[findIndex].description %></li>
+          <li>정답자: <%= problems[findIndex].completed_users %>명</li>
+          <li>난이도: Level <%= problems[findIndex].difficulty_level %></li>
         </ul>
       </div>
 
