@@ -5,11 +5,11 @@ const User = require('../../models/User');
 const config = require('../../config');
 
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  done(null, user);
 });
 
-passport.deserializeUser((id, done) => {
-  User.findById(id).then(user => {
+passport.deserializeUser((user, done) => {
+  User.findById(user).then(user => {
     done(null, user);
   });
 });
@@ -42,7 +42,7 @@ passport.use(
 const setup = (app) => {
   app.use(session({
     secret: config.sessionSecret,
-    resave: true,
+    resave: false,
     saveUninitialized: false
   }));
   app.use(passport.initialize());

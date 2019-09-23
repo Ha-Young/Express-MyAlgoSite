@@ -6,13 +6,17 @@ const Problem = require('../models/Problem');
 router.get('/:problem_id', authCheck, async (req, res, next) => {
   try {
     const problem = await Problem.findOne({ _id: req.params.problem_id });
-    res.render('problems', {
-      title: 'Vanilla',
-      user: req.user,
-      problem: problem
-    });
+    if (problem) {
+      res.render('problems', {
+        title: 'Vanilla',
+        user: req.user,
+        problem: problem
+      });
+    } else {
+      res.status(400).send({ error: 'invalid Problem id' });
+    }
   } catch(err) {
-    res.status(400).send({ error: 'invalid Problem id' });
+    res.status(500).send({ error: 'internal server error' });
   }
 });
 
@@ -49,3 +53,23 @@ router.post('/:problem_id', authCheck, async (req, res, next) => {
 });
 
 module.exports = router;
+
+/*
+
+const solution = () => { return 2; };
+
+*/
+//
+// const code = req.body.solution+ test.code;
+// const script = new vm.Script(code);
+// const context = vm.createdContext({});
+// const answer = script.runInContext(context, {timeout: 100 });
+
+//const script = new vm.Script(req.body.solution + problem.tests[0].code);
+// const result = script.runInContext(vm.createContext({}));
+
+// const sandbox = {};
+// const code = req.body.solution + problem.tests[0].code;
+// const script = new vm.Script(code);
+// const context = vm.createContext(sandbox);
+// console.log(script.runInContext(context));
