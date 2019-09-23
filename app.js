@@ -11,11 +11,7 @@ const passport = require('passport');
 const userPassport = require('./routes/middleware/passport');
 require('dotenv').config();
 
-if (!process.env.NODE_ENV) {
-  process.env.uri = process.env.ATLAS_URI;
-}
-
-mongoose.connect(process.env.uri, {
+mongoose.connect(process.env.DB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });

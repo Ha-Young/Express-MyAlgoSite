@@ -1,21 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const Problem = require('../models/Problem');
-const auth = require('./middleware/auth');
+const {ensureGuest} = require('./middleware/auth');
 const {
   getProblemInfo,
   postProblemInfo,
   setCookies
 } = require('./controllers/problems.controllers');
 
-router.post('/newproblem', function(req, res, next) {
-  const newProblem = new Problem(req.body);
-  newProblem.save();
+router.post('/newproblem', async function(req, res, next) {
+  await new Problem(req.body).save();
   res.send('ok');
 });
 
-router.get('/:problem_id', auth, getProblemInfo);
+router.get('/:problem_id', ensureGuest, getProblemInfo);
 
-router.post('/:problem_id', auth, setCookies, postProblemInfo);
+router.post('/:problem_id', ensureGuest, setCookies, postProblemInfo);
 
 module.exports = router;

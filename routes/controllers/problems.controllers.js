@@ -20,19 +20,23 @@ exports.getProblemInfo = async (req, res, next) => {
       limit: target.limit,
       initValue: initValue
     });
-  } catch (e) {
-    next();
+  } catch (error) {
+    if (error.name === 'CastError') {
+      return next();
+    } else {
+      return next(error);
+    }
   }
 };
 
 exports.setCookies = (req, res, next) => {
   res.cookie('codeCookie', req.body.code);
-  next();
+  return next();
 };
 
 exports.postProblemInfo = async (req, res, next) => {
-  let problemInfo = [];
-  let userInfo = [];
+  let problemInfo = Object;
+  let userInfo = Object;
   let result = [];
   let userAnswer = [];
 
@@ -40,12 +44,13 @@ exports.postProblemInfo = async (req, res, next) => {
     problemInfo = await Problem.findOne({
       id: Number(req.params.problem_id)
     });
+    console.log(problemInfo);
     userInfo = await User.findOne({ id: Number(req.user.id) });
   } catch (error) {
     if (error.name === 'CastError') {
-      next();
+      return next();
     } else {
-      next(error);
+      return next(error);
     }
   }
 
@@ -75,7 +80,7 @@ exports.postProblemInfo = async (req, res, next) => {
     }
   }
 
-  if (result.every(checkTrue)) {
+  if (result.every(Boolean)) {
     let dupId = true;
     for (let i = 0; i < userInfo.collect_problem.length; i++) {
       if (
@@ -106,10 +111,6 @@ exports.postProblemInfo = async (req, res, next) => {
   }
 };
 
-function checkTrue(checkVal) {
-  return checkVal === true;
-}
-
 async function addCorrectProblem(userId, problemId) {
   try {
     await User.findOneAndUpdate(
@@ -118,9 +119,9 @@ async function addCorrectProblem(userId, problemId) {
     );
   } catch (error) {
     if (error.name === 'CastError') {
-      next();
+      return next();
     } else {
-      next(error);
+      return next(error);
     }
   }
 }

@@ -9,7 +9,7 @@ exports.getProblemList = async (req, res, next) => {
   }
   try {
     if (!objectId.isValid(Number(req.user.id))) {
-      next();
+      return next();
     }
 
     const target = await User.findOne({ id: Number(req.user.id) });
@@ -28,14 +28,14 @@ exports.getProblemList = async (req, res, next) => {
     }
   } catch (error) {
     if (error.name === 'CastError') {
-      next();
+      return next();
     } else {
-      next(error);
+      return next(error);
     }
   }
 };
 
-exports.login = async (req, res, ne2xt) => {
+exports.login = (req, res) => {
   res.render('login');
 };
 
@@ -46,7 +46,7 @@ exports.githubCallback = passport.authenticate('github', {
   sucessRedirect: '/'
 });
 
-exports.logOut = (req, res) => {
+exports.logout = (req, res) => {
   req.logOut();
   res.status(301).redirect('/login');
 };

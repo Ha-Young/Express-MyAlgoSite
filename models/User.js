@@ -3,23 +3,22 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
   {
-    id : {
-      type : Number,
-      required : true,
-      unique : true
+    id: {
+      type: Number,
+      required: true,
+      unique: true
     },
     username: {
       type: String,
-      required: true,
+      required: true
     },
-    collect_problem : [],
-    profileUrl : String,
+    collect_problem: []
   },
   {
     timestamps: true
   }
 );
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model('User', userSchema);
 
 module.exports = User;

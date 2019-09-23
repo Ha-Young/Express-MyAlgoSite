@@ -1,16 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('./middleware/auth');
+const {ensureAuthenticated, ensureGuest} = require('./middleware/auth');
 
 const {
   getProblemList,
   login,
   loginGithub,
   githubCallback,
-  logOut
+  logout
 } = require('./controllers/index.controllers');
 
-router.get('/', auth, getProblemList);
+router.get('/', ensureAuthenticated, getProblemList);
 
 router.get('/login', login);
 
@@ -20,6 +20,6 @@ router.get('/login/github/callback', githubCallback, function(req, res) {
   res.redirect('/');
 });
 
-router.get('/logout', logOut);
+router.get('/logout', logout);
 
 module.exports = router;
