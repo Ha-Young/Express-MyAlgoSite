@@ -1,11 +1,7 @@
 node_modules
-
-keys.js
 server.js
-
-problems1.ejs
-problems2.ejs
-problems3.ejs
-problems4.ejs
-
-index.ejs
+/views/problems1.ejs
+/views/problems2.ejs
+/views/problems3.ejs
+/views/problems4.ejs
+/views/index.ejs

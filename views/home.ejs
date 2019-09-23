@@ -3,54 +3,7 @@
   <head>
     <meta charset='utf-8'>
     <title>Code-Wars</title>
-    <style>
-      body{
-        font-family: arial;
-        margin: 0;
-      }
-      nav{
-        background: #ff5353;
-        padding: 20px 10px;
-      }
-      nav ul{
-        max-width: 960px;
-        margin: 0 auto;
-        padding: 0;
-      }
-      nav li{
-        list-style-type: none;
-        display: inline-block;
-        margin: 0 10px 0 0;
-      }
-      nav a{
-        color: #fff;
-        font-size: 18px;
-        background: rgba(255,255,255,0.2);
-        text-decoration: none;
-        padding: 10px;
-        display: block;
-      }
-      main, header{
-        max-width: 960px;
-        margin: 30px auto;
-        padding: 0 10px;
-        color: #333;
-      }
-      .problems ul{
-        border: 1px solid black;
-        background-color: #ffd5d5;
-        margin-top: 20px;
-        margin-bottom: 40px;
-      }
-      .problems a{
-        text-decoration: none;
-      }
-      .problems li{
-        color: black;
-        font-size: 18px;
-        padding: 10px;
-      }
-    </style>
+    <link href="/stylesheets/style.css" rel="stylesheet" type="text/css">
   </head>
   <body>
     <nav>
@@ -66,11 +19,9 @@
     </nav>
     <% if (user) { %>
     <main>
-      <h1>Codewars</h1>
+      <h1>swnam</h1>
+      <img src='https://hackernoon.com/hn-images/1*JKnTVQpjUXPvLd0SELatTg.png' width='958px' />
       <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
-
-      <img src='https://gitlab.com/vanilla-coding/bootcamp/backend/codewars/raw/master/codewars.png' width='956px' />
-
       <h2>원하는 문제를 클릭하세요! 당신의 도움이 필요합니다!</h2>
 
       <div class='problems'>
@@ -88,6 +39,7 @@
     </main>
     <% } else { %>
     <header>
+      <h1>Welcome to swnam-codewars.</h1>
       <h1>You can use our services after Login.</h1>
       <h2>If you want to use our page Press the Button above.</h2>
       <img src='https://images.unsplash.com/photo-1459347268516-3ed71100e718?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80' height='500px' />

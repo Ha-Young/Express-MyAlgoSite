@@ -31,6 +31,7 @@ mongoose.connect(MONGODB_URI, () => {
 app.use('', authRoutes);
 app.use('/profile', profileRoutes);
 app.use('/problems', problemsRoutes);
+app.use(express.static(__dirname + '/public'));
 
 app.get('/', async (req, res) => {
   const problems = await problem.find({});
