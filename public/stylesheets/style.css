@@ -31,8 +31,9 @@ header {
   align-items: center;
   padding: 20px 0;
 }
-header h1 {
+header a {
   color: #bb432c;
+  text-decoration: none;
 }
 header .login-button {
   border: 1px solid #bb432c;

@@ -1,24 +1,17 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Codewars</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <%- include('partial/header') -%>
-    <ul class="problems">
-      <%
-        for (let i = 0; i < problems.length; i++) {
-        const { id, title, completed_users, difficulty_level, description } = problems[i];
-      %>
-        <li>
-          <h3>
-            <a href="/problems/<%=id%>"><%=title%></a>
-          </h3>
-          <p>Level: <%=difficulty_level%></p>
-          <p>Completed: <%=completed_users%></p>
-        </li>
-      <% } %>
-    </ul>
-  </body>
-</html>
+<%- include('partial/head') -%>
+<h2 class="quote">코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
+<ul class="problems">
+  <%
+    for (let i = 0; i < problems.length; i++) {
+    const { id, title, completed_users, difficulty_level, description } = problems[i];
+  %>
+    <li>
+      <h3>
+        <a href="/problems/<%=id%>"><%=title%></a>
+      </h3>
+      <p>Level: <%=difficulty_level%></p>
+      <p>Completed: <%=completed_users%></p>
+    </li>
+  <% } %>
+</ul>
+<%- include('partial/tail') -%>
