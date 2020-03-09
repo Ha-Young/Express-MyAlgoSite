@@ -71,13 +71,28 @@ header .login-button {
   border: 1px solid #bb432c;
   padding: 15px;
 }
-.problem-detail .title {
+.problem-detail .header {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 30px;
+}
+.problem-detail .header ul {
+  display: flex;
+}
+.problem-detail .header ul li {
+  margin-left: 15px;
 }
 .problem-detail .description strong {
   display: block;
   margin-bottom: 10px;
 }
-.editor {
+.problem-detail form button{
+  display: block;
+  width: 100%;
+  background-color: transparent;
+  color: #bb432c;
+  font-size: 18px;
+}
+.problem-detail .editor {
   margin: 15px 0;
 }
