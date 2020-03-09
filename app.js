@@ -1,12 +1,14 @@
+const dotenv = require('dotenv');
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const passport = require('passport');
-const index = require('./routes/index');
-const dotenv = require('dotenv');
+const globalRoutes = require('./routes/global');
+const problemsRoutes = require('./routes/problems');
 const { localsMiddleware } = require('./middlewares');
 
 dotenv.config();
+
 require('./db');
 
 const app = express();
@@ -27,7 +29,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(localsMiddleware);
-app.use('/', index);
+
+app.use('/', globalRoutes);
+app.use('/problems', problemsRoutes);
+
 require('./passport');
 
 // catch 404 and forward to error handler

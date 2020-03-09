@@ -8,7 +8,7 @@ dotenv.config();
 passport.use(new GitHubStrategy({
     clientID: process.env.GH_ID,
     clientSecret: process.env.GH_SECRET,
-    callbackURL: 'http://localhost:3000/auth/github/callback'
+    callbackURL: process.env.GH_CALLBACK_URL
   },
   async function (_, __, profile, cb) {
     let user;
