@@ -18,6 +18,10 @@ router.post('/problems/:problem_id', (req, res, next) => {
   const code = req.body.code;
 
   res.send(code);
-})
+});
+
+router.get('/login', (req, res, next) => {
+  res.render('login');
+});
 
 module.exports = router;
