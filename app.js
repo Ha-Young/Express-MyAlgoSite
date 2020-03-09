@@ -1,17 +1,34 @@
 const express = require('express');
+const session = require('express-session');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 const index = require('./routes/index');
+const dotenv = require('dotenv');
+const { localsMiddleware } = require('./middlewares');
+
+dotenv.config();
+require('./db');
 
 const app = express();
+
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true
+}));
 
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(localsMiddleware);
 app.use('/', index);
-app.use(express.static('public'));
+require('./passport');
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

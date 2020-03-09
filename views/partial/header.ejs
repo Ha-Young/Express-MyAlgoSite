@@ -1,4 +1,8 @@
 <header>
   <h1><a href="/">Codewars</a></h1>
-  <a href="/login" class="login-button">Login</a>
+  <% if (user) { %>
+    <a href="/logout" class="login-button logout">Logout</a>
+  <% } else { %>
+    <a href="/login" class="login-button">Login</a>
+  <% } %>
 </header>
