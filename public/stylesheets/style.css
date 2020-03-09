@@ -1,8 +1,64 @@
+/*
+  RESET
+*/
+* {
+  margin: 0;
+  padding: 0;
+}
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  background-color: #444;
+  color: #f1f1f1;
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+}
+ul, ol {
+  list-style: none;
+}
+a {
+  color: #2c5ebb;
 }
 
-a {
-  color: #00B7FF;
+/*
+  HEADER
+*/
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
+header h1 {
+  color: #bb432c;
+}
+header .login-button {
+  border: 1px solid #bb432c;
+  color: #bb432c;
+  padding: 0 10px;
+}
+.quote {
+  padding: 15px;
+  border-left: 3px solid #666;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/*
+  index
+*/
+
+.problems li {
+  border: 1px solid #f1f1f1;
+  padding: 5px;
+  margin-bottom: 15px;
+}
+.problems li:last-child {
+  margin-bottom: 0;
+}
+.problems h3 a {
+  display: block;
+  line-height: 2;
 }
