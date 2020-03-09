@@ -1,10 +1,48 @@
+require('dotenv').config();
 const express = require('express');
-
+const session = require('express-session');
+const path = require('path');
 const index = require('./routes/index');
+const login = require('./routes/login');
+const logout = require('./routes/logout');
+const passportSetup = require('./config/passport');
+const mongoose = require('mongoose');
+const keys = require('./config/keys');
+const passport = require('passport');
+const bodyParser = require('body-parser');
+
 
 const app = express();
 
+app.set('trust proxy', 1)
+app.use(session({
+  secret: 'fdsfafaf',
+  resave: false,
+  saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+mongoose.connect(keys.mongoDB.dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
+  console.log('connected to mongodb');
+});
+
+app.use(express.static('public'));
+
+
+app.use('/login', login);
 app.use('/', index);
+app.use('/logout', logout);
+
+// app.use()
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

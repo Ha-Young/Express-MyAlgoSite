@@ -1,9 +1,25 @@
 const express = require('express');
 const router = express.Router();
+// const CodeMirror = require('codemirror');
+// let cm = new CodeMirror.fromTextArea(document.findElementById("editor"), { lineNumbers: true });
 
-/* GET home page. */
+
+// const authCheck = (req, res, next) => {
+//   if (!req.session.passport) {
+//     res.redirect('/login');
+//   } else {
+//     next();
+//   }
+// }
+
 router.get('/', (req, res, next) => {
-  res.render('index', { title: '바닐라코딩' });
+  if (!req.session.passport) {
+    res.render('login', { hasLoggedIn: false })
+  } else {
+    res.render('index', { hasLoggedIn: true });
+  }
+  // res.render('index');
 });
 
 module.exports = router;
+

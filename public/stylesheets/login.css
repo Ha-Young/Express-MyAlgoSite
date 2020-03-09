@@ -1,0 +1,44 @@
+
+body {
+  width: 80%;
+  margin: 0 auto;
+  background: #303133; 
+}
+
+nav {
+  justify-content: center;
+  align-items: center;
+  background: #222222;
+  min-height: 100px;
+  max-height: 150px;
+}
+
+nav li {
+  text-decoration: none;
+  color: white;
+  margin-right: 50px;
+  font-size: 50px;
+  line-height: 140px;
+}
+
+ul {
+  text-decoration: none;
+  list-style-type: none;
+  display: flex;
+}
+
+main {
+  background: #303133;
+  min-height: 650px;
+  color:white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+p {
+  font-size: 60px;
+  text-align: center;
+  margin-right: 30px;
+}
+
