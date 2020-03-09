@@ -7,7 +7,17 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/problems/:problem_id', (req, res, next) => {
-  res.render('problemDetail');
+  const id = Number(req.params.problem_id);
+  const problem = problems.find(problem => problem.id === id);
+
+  res.render('problemDetail', { problem });
 });
+
+router.post('/problems/:problem_id', (req, res, next) => {
+  const id = Number(req.params.problem_id);
+  const code = req.body.code;
+
+  res.send(code);
+})
 
 module.exports = router;

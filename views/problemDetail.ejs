@@ -1,2 +1,27 @@
 <%- include('partial/head') -%>
+<%
+  const { id, title, completed_users, difficulty_level, description } = problem;
+%>
+<script src="/javascripts/codemirror-5.52.0.js"></script>
+<link rel="stylesheet" href="/stylesheets/codemirror-5.52.0.css">
+
+<section class="problem-detail">
+  <h3 class="title"><%= title %></h3>
+  <p class="description box">
+    <strong>문제 설명</strong>
+    <%= description %>
+  </p>
+  <form class="editor" action="/problems/<%= id %>" method="POST">
+    <textarea id="code" name="code"></textarea>
+    <button type="submit">제출</button>
+  </form>
+</section>
+
+<script>
+  var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    mode: {name: "changes"},
+    lineNumbers: true,
+    indentUnit: 4
+  });
+</script>
 <%- include('partial/tail') -%>

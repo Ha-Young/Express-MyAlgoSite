@@ -63,3 +63,21 @@ header .login-button {
   display: block;
   line-height: 2;
 }
+
+/*
+  problem-detail
+*/
+.box {
+  border: 1px solid #bb432c;
+  padding: 15px;
+}
+.problem-detail .title {
+  margin-bottom: 30px;
+}
+.problem-detail .description strong {
+  display: block;
+  margin-bottom: 10px;
+}
+.editor {
+  margin: 15px 0;
+}
