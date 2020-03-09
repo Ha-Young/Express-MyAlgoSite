@@ -1,8 +1,22 @@
+const path = require('path');
 const express = require('express');
-
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const expressLayouts = require('express-ejs-layouts');
 const index = require('./routes/index');
 
 const app = express();
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, './views'));
+app.use(express.static(path.join(__dirname, './public')));
+app.use(expressLayouts);
+app.use(bodyParser.urlencoded());
+mongoose.connect('mongodb://localhost/codewars', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false
+});
 
 app.use('/', index);
 

@@ -1,8 +1,30 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+@import './reset.css';
+@import './header.css';
+@import './login.css';
+
+* {
+  /* user-select: none; */
 }
 
 a {
-  color: #00B7FF;
+  color: inherit;
+  text-decoration: none;
 }
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  margin-top: 50px;
+  font-family: 'Noto Sans KR', 'Noto Sans', sans-serif;
+  width: 100%;
+  height: calc(100% - 50px);
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+}
+
