@@ -1,0 +1,38 @@
+body {
+  background-color: #2F3133;
+}
+
+.form-container {
+  background-color: #252729;
+  margin: 0 auto;
+  margin-top: 50px;
+  text-align: center;
+  width: 300px;
+  height: 500px;
+  border-radius: 3px;
+}
+
+.form-container img {
+  margin-top: 50px;
+}
+
+.login-form {
+  width: 40%;
+  text-align: center;
+  margin: 20% auto;
+}
+
+.login-form input, button {
+  display: block;
+  margin: 0 auto;
+}
+
+.login-form button {
+  width: 120px;
+  height: 30px;
+  color: rgb(187, 67, 44);
+  border-radius: 5px;
+  background-color: #0B0B0B;
+  border: 0;
+  outline: none;
+}

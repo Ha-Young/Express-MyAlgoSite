@@ -1,0 +1,62 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #2F3133;
+  color: rgb(197, 200, 198);
+}
+
+.header {
+  width: 100%;
+  height: 60px;
+  background-color: #212121;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header ul {
+  background-color: #212121;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.header ul img{
+  width: 57px;
+}
+
+.header ul li {
+  background-color: #212121;
+}
+
+.problems-container {
+  width: 1000px;
+  height: 500px;
+  background-color: #212121;
+  margin: 100px auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.problem {
+  background-color: #212121;
+  padding: 15px;
+}
+
+.problem-title {
+  background-color: #212121;
+  font-size: 30px;
+}
+
+.problem-count {
+  background-color: #212121;
+  font-size: 20px;
+}
+
+.problem-level {
+  background-color: #212121;
+  font-size: 20px;
+}
