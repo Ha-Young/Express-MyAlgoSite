@@ -1,10 +1,51 @@
 const express = require('express');
+const passport = require('passport');
+const path = require('path');
+const session = require('express-session');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
+
+require('dotenv').config();
 
 const index = require('./routes/index');
+const loginPath = require('./routes/login');
+const setPassport = require('./middleware/passport');
 
 const app = express();
 
+mongoose.connect(process.env.MONGO_DB_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false
+});
+
+const db = mongoose.connection;
+
+db.on('error', function(){
+    console.log('MongoDB Connection Failed!');
+});
+db.once('open', function() {
+    console.log('MongoDB Connected! Success!');
+});
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended : false }));
+app.use(session({
+  secret: process.env.SESSION_KEY,
+  resave:true,
+  saveUninitialized:true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+setPassport(passport);
+
 app.use('/', index);
+app.use('/login', loginPath);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
