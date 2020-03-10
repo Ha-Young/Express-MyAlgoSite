@@ -3,6 +3,10 @@ const fs = require('fs');
 const router = express.Router();
 const Problem = require('../models/Problem');
 const strings = require('../constants/moduleExports');
+// const  expect  = require('chai').expect;;
+// const filltheArray = require('../test/problem1');
+
+
 
 router.get('/:problem_id', async (req, res, next) => {
   testId = req.params.problem_id;
@@ -17,8 +21,9 @@ router.post('/:problem_id', async (req, res, next) => {
 
   const code = req.body.code;
   const id = req.params.problem_id;
-  const path = `./tests/problem${id}.js`;
+  const path = `./test/problem${id}.js`;
   const moduleString = strings[id];
+
 
   // console.log(moduleString)
   fs.truncate(path, 0, () => {
@@ -26,7 +31,7 @@ router.post('/:problem_id', async (req, res, next) => {
     temp.splice(0, 0, code);
     const testString = temp.join('\n');
     fs.appendFile(path, testString, function() {
-      console.log(22222222222);
+ 
     });
   });
 

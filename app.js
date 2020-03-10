@@ -37,12 +37,20 @@ mongoose.connect(keys.mongoDB.dbURI, { useNewUrlParser: true, useUnifiedTopology
 
 app.use(express.static('public'));
 
+const checkAuthentication = (req, res, next) => {
+  if(req.isAuthenticated()){
+    next();
+  } else{
+    res.redirect('/login');
+  }
+};
+
 
 
 app.use('/login', login);
-app.use('/', index);
-app.use('/logout', logout);
-app.use('/problems', problems);
+app.use('/', checkAuthentication, index);
+app.use('/logout', checkAuthentication, logout);
+app.use('/problems', checkAuthentication, problems);
 
 
 
