@@ -15,7 +15,11 @@ router.get('/github', passport.authenticate('github', {
 }));
 
 router.get('/github/redirect', passport.authenticate('github'), (req, res) => {
-  res.send('callback uri');
+  if (req.user) {
+    res.redirect('/');
+  } else {
+    res.redirect('/auth');
+  }
 });
 
 

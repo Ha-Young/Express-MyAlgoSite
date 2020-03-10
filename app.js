@@ -1,5 +1,14 @@
 const express = require('express');
+const path = require("path");
 const mongoose = require('mongoose');
+const cookieSession = require('cookie-session');
+const passport = require('passport');
+const bodyParser = require('body-parser');
+
+const keys = require('./config/keys');
+const index = require('./routes/index');
+const authRoutes = require('./routes/auth-routes');
+require('./config/passport-setup');
 
 mongoose.connect('mongodb://localhost/users', { useNewUrlParser: true }, err => {
   if (err) {
@@ -9,18 +18,20 @@ mongoose.connect('mongodb://localhost/users', { useNewUrlParser: true }, err => 
   }
 });
 
-const index = require('./routes/index');
-const authRoutes = require('./routes/auth-routes');
-const passportSetup= require('./config/passport-setup');
-
-const bodyParser = require('body-parser');
 const app = express();
-const path = require("path");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "./views"));
 app.use(express.static(path.join(__dirname, "./public")));
 app.use(bodyParser.json());
+
+app.use(cookieSession({
+  maxAge: 24 * 60 * 60 * 1000,
+  keys: [keys.session.cookieKey]
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', index);
 app.use('/auth', authRoutes);
