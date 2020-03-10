@@ -16,11 +16,11 @@
 
     <ul class="problems">
       <% for(let i of jdata) { %>
-      <li>
+      <a href=/problems/<%= i.id %>>
         <div><%= i.title %></div>
         <div>정답자: <%= i.completed_users %></div>
         <div>난이도: Level <%= i.difficulty_level %></div>
-      </li>
+      </a>
       <% } %>
     </ul>
   </body>

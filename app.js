@@ -8,6 +8,7 @@ const passport = require('passport');
 
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
+const problemsRouter = require('./routes/problems');
 const schemas = require('./models');
 const passportConfig = require('./passport');
 passportConfig(passport);
@@ -39,6 +40,7 @@ app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
+app.use('/problems', problemsRouter);
 
 app.use(function (req, res, next) {
   const err = new Error('Not Found');
