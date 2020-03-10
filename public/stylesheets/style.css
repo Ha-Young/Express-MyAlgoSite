@@ -43,7 +43,7 @@ header .login-button {
 .quote {
   padding: 15px;
   border-left: 3px solid #666;
-  color: #666;
+  color: #f1f1f1;
   margin-bottom: 20px;
 }
 
@@ -71,16 +71,12 @@ header .login-button {
   border: 1px solid #bb432c;
   padding: 15px;
 }
-.problem-detail .header {
+.problem-detail ul {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
-.problem-detail .header ul {
-  display: flex;
-}
-.problem-detail .header ul li {
-  margin-left: 15px;
+.problem-detail ul li {
+  margin-right: 15px;
 }
 .problem-detail .description strong {
   display: block;

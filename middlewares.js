@@ -4,7 +4,7 @@ function localsMiddleware (req, res, next) {
 }
 
 function onlyPrivate (req, res, next) {
-  if (true) {
+  if (req.user) {
     next();
   } else {
     res.redirect('/');

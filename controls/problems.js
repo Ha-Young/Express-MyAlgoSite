@@ -8,7 +8,7 @@ const getHome = async (req, res, next) => {
   try {
     const problems = await Problem.find();
 
-    res.render('index', { problems });
+    res.render('index', { title: '코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!', problems });
   } catch (err) {
     console.log(err);
   }
@@ -19,7 +19,7 @@ const getProblemsDetail = async (req, res, next) => {
     const id = req.params.problem_id;
     const problem = await Problem.findById(id);
 
-    res.render('problemDetail', { problem });
+    res.render('problemDetail', { title: problem.title, problem });
   } catch (err) {
     console.log(err);
   }
@@ -58,16 +58,22 @@ const postProblemsDetail = async (req, res, next) => {
       }
 
       if(result) {
-        console.log('All tests passed!');
+        res.redirect('/success');
       } else {
-        console.log('All tests should passed!');
+        res.redirect('/failure');
       }
     });
-
-    res.send(code);
   } catch (err) {
     console.log(err);
   }
 };
 
-module.exports = { getHome, getProblemsDetail, postProblemsDetail };
+const getSuccess = (req, res) => {
+  res.render('success', { title: '테스트를 모두 통과했습니다.' });
+};
+
+const getFailure = (req, res) => {
+  res.render('failure', { title: '테스트를 통과하지 못했습니다.' });
+};
+
+module.exports = { getHome, getProblemsDetail, postProblemsDetail, getSuccess, getFailure };
