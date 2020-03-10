@@ -14,10 +14,10 @@ cm.setSize(1000,450);
 
 // console.log(submitButton)
 // console.log(testNumber);
-submitButton.addEventListener('click', () => {
-  const ss = cm.getDoc().getValue();
-  console.log(ss)
-});
+// submitButton.addEventListener('click', () => {
+//   const ss = cm.getDoc().getValue();
+//   console.log(ss)
+// });
 
 
  // cm.getDoc().setValue('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz');

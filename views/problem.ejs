@@ -2,10 +2,10 @@
 <html>
   <head>
     <title>Codewars</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/mode/javascript/javascript.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/codemirror.min.js"></script>
-    <link rel='stylesheet' href='/stylesheets/problem.css' />
     <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/codemirror.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/mode/javascript/javascript.min.js"></script>
+    <link rel='stylesheet' href='/stylesheets/problem.css' />
     <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/theme/dracula.min.css">
   </head>
   <body>
@@ -26,10 +26,8 @@
           <li>설명: <%= test.description %>
         </ul>
       </div>
-      <!-- <p><%= test.description %></p> -->
-
-      <textarea id="editor"><%= test.defaultValue %></textarea>
-      <form action="", method="post">
+      <form action="<%= test.id %>", method="post">
+        <textarea id="editor" name="code"><%= test.defaultValue %></textarea>
         <button type="submit" class="submitButton">제출</button>
       </form>
       <script src="/javascripts/problem.js"></script>
