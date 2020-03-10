@@ -1,8 +1,13 @@
-const problems =  require('../models/sample_problems.json');
+const Problems = require('../models/Problem');
 
-const getProblemsDetail = (req, res, next) => {
-  const id = Number(req.params.problem_id);
-  const problem = problems.find(problem => problem.id === id);
+const getHome = async (req, res, next) => {
+  const problems = await Problems.find();
+  res.render('index', { problems });
+};
+
+const getProblemsDetail = async (req, res, next) => {
+  const id = req.params.problem_id;
+  const problem = await Problems.findById(id);
 
   res.render('problemDetail', { problem });
 };
@@ -14,4 +19,4 @@ const postProblemsDetail = (req, res, next) => {
   res.send(code);
 };
 
-module.exports = { getProblemsDetail, postProblemsDetail };
+module.exports = { getHome, getProblemsDetail, postProblemsDetail };
