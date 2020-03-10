@@ -1,0 +1,17 @@
+.responsive {
+  width: 64rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (max-width: 64rem) {
+  .responsive {
+    width: 48rem;
+  }
+}
+
+@media (max-width: 48rem) {
+  .responsive {
+    width: 100%;
+  }
+}

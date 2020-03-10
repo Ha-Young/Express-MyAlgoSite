@@ -1,0 +1,9 @@
+header.header
+  .header__wrapper.responsive
+    div Codewars
+      if loggedUser
+        p #{loggedUser.name}님 안녕하세요!
+        a(href="/logout") 로그아웃
+      else
+        a(href="/login") 로그인
+.header__spacer

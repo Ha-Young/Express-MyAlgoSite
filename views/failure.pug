@@ -1,0 +1,9 @@
+extends layouts/main
+
+block content
+  if error
+    pre #{error.stack}
+  if failureTestsIndex
+    each index in failureTestsIndex
+      p #{index + 1}번 테스트 실패!
+  a(href=problem._id) 다시 풀러 가자!!

@@ -1,0 +1,10 @@
+extends layouts/main
+
+block content
+  ul.problem-list
+    each problem in problems
+      li
+        a(href=`/problems/${problem._id}`)
+          div #{problem.title}
+          div 정답자: #{problem.completedUsers}명
+          div 난이도: Level #{problem.difficultyLevel}
