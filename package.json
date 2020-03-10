@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "nodemon ./bin/www",
     "dev": "NODE_ENV=development nodemon ./bin/www"
   },
   "dependencies": {
@@ -12,8 +12,11 @@
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
     "express": "^4.17.1",
+    "mongoose": "^5.9.4",
     "morgan": "~1.9.0",
     "nodemon": "^1.19.1",
+    "passport": "^0.4.1",
+    "passport-github": "^1.1.0",
     "serve-favicon": "~2.4.5"
   }
 }
