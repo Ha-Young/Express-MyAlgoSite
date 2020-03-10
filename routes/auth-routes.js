@@ -7,8 +7,9 @@ router.get('/', (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
-  res.send('logging out')
-});
+  req.logout();
+  res.redirect('/auth');
+});  
 
 router.get('/github', passport.authenticate('github', {
   scope: ['profile']
