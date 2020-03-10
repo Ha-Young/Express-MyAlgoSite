@@ -4,9 +4,9 @@ const logoutButton = document.querySelector('.logout');
 
 if (textArea) {
   CodeMirror.fromTextArea(textArea, {
-    mode: {name: 'changes'},
     lineNumbers: true,
-    indentUnit: 4
+    indentUnit: 2,
+    tabSize: 2
   });
 }
 
