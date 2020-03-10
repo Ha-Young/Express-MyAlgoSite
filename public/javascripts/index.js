@@ -4,6 +4,7 @@ const logoutButton = document.querySelector('.logout');
 
 if (textArea) {
   CodeMirror.fromTextArea(textArea, {
+    mode: 'javascript',
     lineNumbers: true,
     indentUnit: 2,
     tabSize: 2

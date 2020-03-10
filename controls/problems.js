@@ -1,21 +1,31 @@
 const fs = require('fs');
 const path = require('path');
-const Problems = require('../models/Problem');
+const Problem = require('../models/Problem');
+const Test = require('../models/Test');
 
 const getHome = async (req, res, next) => {
-  const problems = await Problems.find();
-  res.render('index', { problems });
+  try {
+    const problems = await Problem.find();
+
+    res.render('index', { problems });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 const getProblemsDetail = async (req, res, next) => {
-  const id = req.params.problem_id;
-  const problem = await Problems.findById(id);
+  try {
+    const id = req.params.problem_id;
+    const problem = await Problem.findById(id);
 
-  res.render('problemDetail', { problem });
+    res.render('problemDetail', { problem });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 const postProblemsDetail = async (req, res, next) => {
-  const id = Number(req.params.problem_id);
+  const id = req.params.problem_id;
   const code = req.body.code;
   const handledCode = code + '\nmodule.exports = solution;\n';
 
@@ -26,8 +36,9 @@ const postProblemsDetail = async (req, res, next) => {
     );
 
     const solution = require('../solutions/solution');
+    const problem = await Problem.findById(id).populate('tests');
 
-    solution();
+    console.log(problem.tests);
 
     res.send(code);
   } catch (err) {
