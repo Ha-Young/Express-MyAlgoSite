@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include ./includes/head.ejs %>
+  </head>
+  <body>
+    <%- include ./includes/header.ejs %>
+    <div class="container">
+      <div class="problem-container">
+        <div class="problem-info-boxs">
+          <div class="problem-info-top">
+            <div class="problem-title"><%= problem.title %></div>
+            <div class="problem-infos">
+              <div class="problem-difficulty-level">Level <%= problem.difficulty_level %></div>
+              <div class="problem-completed-users"><%= problem.completed_users %>명 완료</div>
+            </div>
+          </div>
+          <div class="problem-description">
+            <%= problem.description %>
+          </div>
+        </div>
+        <form class="problem-code-form" action="/problem/<%= problem.id %>" method="POST">
+          <input type="text" />
+          <input class="submitButton" type="submit" value="코드 제출" />
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

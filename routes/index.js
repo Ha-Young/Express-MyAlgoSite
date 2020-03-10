@@ -1,10 +1,11 @@
 const express = require('express');
 const passport = require('passport');
+const Problem = require('../models/Problem');
 const router = express.Router();
 
-/* GET home page. */
-router.get('/', (req, res, next) => {
-  res.render('index');
+router.get('/', async (req, res, next) => {
+  const problemList = await Problem.find({});
+  res.render('index', { problemList });
 });
 
 router.get('/login', (req, res, next) => {
@@ -16,10 +17,19 @@ router.get('/logout', (req, res, next) => {
   res.redirect('/');
 });
 
+router.get('/problem/:problem_id', async (req, res, next) => {
+  const {
+    params: { problem_id: problemId }
+  } = req;
+
+  const problem = await Problem.findOne({ id: problemId });
+
+  res.render('problem', { problem });
+});
+
 router.get('/auth/github', passport.authenticate('github'));
 
 router.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login' }), (req, res) => {
-  // Successful authentication, redirect home.
   res.redirect('/');
 });
 

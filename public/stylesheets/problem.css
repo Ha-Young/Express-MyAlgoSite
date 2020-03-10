@@ -1,0 +1,81 @@
+.container > .problem-container {
+  width: 100%;
+  height: calc(100% - 60px);
+  margin-bottom: 60px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.container > .problem-container > .problem-info-boxs {
+  min-width: 400px;
+  width: 45%;
+  align-self: baseline;
+  margin: 30px 0px;
+}
+
+.container > .problem-container > .problem-info-boxs > .problem-info-top {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.container > .problem-container > .problem-info-boxs > .problem-info-top > .problem-title {
+  margin-left: 15px;
+  font-size: 30px;
+}
+
+.container > .problem-container > .problem-info-boxs > .problem-info-top > .problem-infos {
+  text-align: center;
+  margin-right: 10px;
+  font-size: 20px;
+}
+.container > .problem-container > .problem-info-boxs > .problem-info-top > .problem-infos > div:not(:last-child) {
+  margin-bottom: 15px;
+}
+
+.container > .problem-container > .problem-info-boxs > .problem-description {
+  padding: 20px;
+  word-break: keep-all;
+  line-height: 150%;
+  font-size: 20px;
+}
+
+.container > .problem-container > .problem-code-form {
+  min-width: 400px;
+  width: 45%;
+  height: 95%;
+  margin: 30px 0px;
+  background-color: lemonchiffon;
+}
+
+.container > .problem-container > .problem-code-form > input[type='text'] {
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+}
+
+.container > .problem-container > .problem-code-form > .submitButton {
+  font-size: 30px;
+  font-weight: bolder;
+  position: fixed;
+  color: white;
+  bottom: 0%;
+  left: 0;
+  height: 60px;
+  width: 100%;
+  background: #ee9ca7;
+  background: -webkit-linear-gradient(to left, #ffdde1, #ee9ca7);
+  background: linear-gradient(to left, #ffdde1, #ee9ca7);
+  cursor: pointer;
+  opacity: 1;
+  transition: 0.2s opacity;
+}
+
+.container > .problem-container > .problem-code-form > .submitButton:hover {
+  opacity: 0.8;
+}
