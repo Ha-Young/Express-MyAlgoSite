@@ -1,8 +1,116 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+* {
+  margin: 0px;
+  padding: 0px;
+  background-color: #424242;
+  font-family: 'Baloo Chettan 2', 'Gamja Flower', cursive;
+  color: #c0c0c0;
+  font-size: 20px;
 }
 
-a {
-  color: #00B7FF;
+.login, h1 {
+  color: #bb432c;
+  font-size: 1.5rem;
+}
+
+.problemLevel {
+  color: #bb432c;
+}
+
+/* [login] */
+.loginBody {
+  display: flex;
+  justify-content: center;
+  margin-top: 180px;
+}
+
+.loginSession {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  padding: 60px 25px 25px 25px ;
+  background-color: #282828;
+}
+
+.loginSession img, .loginSession a {
+  padding: 10px;
+}
+
+.loginSession img {
+  background-color: transparent;
+}
+
+.loginSession a {
+  width: 230px;
+  border-radius: 5px;
+  background-color: #151616;
+  text-align: center;
+  text-decoration: none;
+}
+
+.loginSession a:hover {
+  background-color: #0b0c0c;
+}
+
+/* [main - header] */
+.mainHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.mainHeader a {
+  padding: 0;
+  text-decoration: none;
+}
+
+.mainHeader a:hover {
+  text-decoration: underline;
+}
+
+.userInfo {
+  display: flex;
+  list-style: none;
+  height: 30px;
+}
+
+.userInfo li {
+  margin: 3px;
+  padding: 1px;
+}
+
+.userImg {
+  width: 25px;
+  height: 25px;
+}
+
+/* [main - section] */
+.mainSection {
+  margin: 7px;
+}
+
+.mainSection ul {
+  margin: 15px 2px;
+  padding: 2px;
+}
+
+.problems li {
+  display: flex;
+  align-items: flex-end;
+  list-style: none;
+  margin: 3px;
+}
+
+.problems li div {
+  margin: 0px 5px
+}
+
+.problemTitle a {
+  color: #efefef;
+}
+
+.problemInfo div {
+  font-size: 0.8rem;
 }

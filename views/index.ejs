@@ -3,38 +3,43 @@
   <head>
     <title>Codewars</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan+2|Gamja+Flower&display=swap" rel="stylesheet"></head>
   <body>
-    <h1>Codewars</h1>
-    <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
-
-    <ul class="tabs">
-      <li>Level 1</li>
-      <li>Level 2</li>
-      <li>Level 3</li>
-    </ul>
-
-    <ul class="problems">
-      <li>
-        <div>피보나치 수열</div>
-        <div>정답자: 15명</div>
-        <div>난이도: Level 1</div>
-      </li>
-      <li>
-        <div>서울에서 김서방 찾기</div>
-        <div>정답자: 11명</div>
-        <div>난이도: Level 2</div>
-      </li>
-      <li>
-        <div>수박수박수박수박수</div>
-        <div>정답자: 12명</div>
-        <div>난이도: Level 2</div>
-      </li>
-      <li>
-        <div>하샤드 수</div>
-        <div>정답자: 5명</div>
-        <div>난이도: Level 3</div>
-      </li>
-    </ul>
+    <header class="mainHeader">
+      <a href="/"><h1>CODEWARS</h1></a>
+      <% if (!!users[0]) { %>
+        <ul class="userInfo">
+          <% users.forEach(function(userInfo){ %>
+            <li><a href="/logout">Logout</a></li>
+            <li><img class="userImg" src="<%= userInfo.imageUrl %>" /></li>
+            <li><a href="<%= userInfo.githubUrl %>"><%= userInfo.name %></a></li>
+            <li>( 1️⃣<%= userInfo.solved_level.difficulty_level_one %></li>
+            <li>2️⃣<%= userInfo.solved_level.difficulty_level_two %></li>
+            <li>3️⃣<%= userInfo.solved_level.difficulty_level_two %> )</li>
+          <% }) %>
+        </ul>
+      <% } %>
+    </header>
+    <hr />
+    <section class="mainSection">
+      <% if (problems.length) { %>
+        <% problems.forEach(function(problem){ %>
+          <ul class="problems">
+            <li>
+              <div class="problemLevel">Level <%= problem.difficulty_level %></div>
+              <div class="problemTitle">
+                <a href="/problem/<%= problem._id %>"><%= problem.title %></a>
+              </div>
+            </li>
+            <li><div><%= problem.description %></div></li>
+            <li class="problemInfo">
+              <div>☑️ Made: <%= problem.made %></div>
+              <div>☑️ Completed: <%= problem.completed_users %></div>
+              <div>☑️ Recommendation: <%= problem.recommendation %></div>
+            </li>
+          </ul>
+        <% }) %>
+      <% } %>
+    </section>
   </body>
 </html>
