@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const Problem = require('../models/Problem');
 const Test = require('../models/Test');
+const every = require('async/every');
 
 const getHome = async (req, res, next) => {
   try {
@@ -37,8 +38,31 @@ const postProblemsDetail = async (req, res, next) => {
 
     const solution = require('../solutions/solution');
     const problem = await Problem.findById(id).populate('tests');
+    const tests = problem.tests;
 
-    console.log(problem.tests);
+    every(tests, (item, callback) => {
+      const testTemplate = 
+        'module.exports = function (solution) {'
+      +   `return ${item.code} == ${item.solution};`
+      + '}';
+      fs.writeFile(
+        path.join(__dirname, '../solutions/test.js'),
+        testTemplate,
+        (err) => {
+          callback(err, require('../solutions/test')(solution));
+        }
+      )
+    }, function (err, result) {
+      if(err) {
+        console.log(err);
+      }
+
+      if(result) {
+        console.log('All tests passed!');
+      } else {
+        console.log('All tests should passed!');
+      }
+    });
 
     res.send(code);
   } catch (err) {
