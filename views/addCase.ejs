@@ -1,0 +1,13 @@
+<%- include('partial/head') -%>
+<form action="/problems/<%= id %>/addCase" method="post">
+  <fieldset>
+    <label for="question">실행 코드</label>
+    <input id="question" type="text" name="question">
+  </fieldset>
+  <fieldset>
+    <label for="answer">정답</label>
+    <input id="answer" type="text" name="answer">
+  </fieldset>
+  <button type="submit">제출</button>
+</form>
+<%- include('partial/tail') -%>

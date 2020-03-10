@@ -14,6 +14,27 @@ const getHome = async (req, res, next) => {
   }
 };
 
+const getAddCase = (req, res, next) => {
+  const id = req.params.problem_id;
+  res.render('addCase', { title: '케이스 추가하기', id })
+}
+
+const postAddCase = async (req, res, next) => {
+  const id = req.params.problem_id;
+  const { question, answer } = req.body;
+  const problem = await Problem.findById(id);
+
+  const newTest = await Test.create({
+    code: question,
+    solution: answer
+  });
+
+  problem.tests.push(newTest.id);
+  await problem.save();
+
+  res.redirect(`/problems/${id}`);
+};
+
 const getProblemsDetail = async (req, res, next) => {
   try {
     const id = req.params.problem_id;
@@ -43,7 +64,7 @@ const postProblemsDetail = async (req, res, next) => {
     every(tests, (item, callback) => {
       const testTemplate = 
         'module.exports = function (solution) {'
-      +   `return ${item.code} == ${item.solution};`
+      +   `return ${item.code} == '${item.solution}';`
       + '}';
       fs.writeFile(
         path.join(__dirname, '../solutions/test.js'),
@@ -76,4 +97,4 @@ const getFailure = (req, res) => {
   res.render('failure', { title: '테스트를 통과하지 못했습니다.' });
 };
 
-module.exports = { getHome, getProblemsDetail, postProblemsDetail, getSuccess, getFailure };
+module.exports = { getHome, getAddCase, postAddCase, getProblemsDetail, postProblemsDetail, getSuccess, getFailure };
