@@ -1,22 +1,36 @@
-const path = require('path');
 const express = require('express');
-const mongoose = require('mongoose');
+const path = require('path');
 const bodyParser = require('body-parser');
-const expressLayouts = require('express-ejs-layouts');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const passport = require('passport');
+const middlewares = require('./middleware');
 const index = require('./routes/index');
+require('./passport');
 
 const app = express();
 
+middlewares.onMongoose();
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, './views'));
 app.use(express.static(path.join(__dirname, './public')));
-app.use(expressLayouts);
 app.use(bodyParser.urlencoded());
-mongoose.connect('mongodb://localhost/codewars', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false
-});
+
+app.use(
+  session({
+    secret: 'wKhgw3WcOGV5KDM4kRxl3I0bquW1GoWW',
+    resave: false,
+    saveUninitialized: true,
+    store: new MongoStore({
+      url: 'mongodb://localhost/codewars',
+      collection: 'sessions'
+    })
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(middlewares.setLocals);
 
 app.use('/', index);
 
@@ -35,7 +49,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', { message: err.message });
 });
 
 module.exports = app;

@@ -1,0 +1,18 @@
+<header class="header">
+  <a href="/" class="title"><div>Codewars</div></a>
+  <% if (loggedUser) {%>
+  <div class="header-right-box">
+    <div class="user-info-box">
+      <img class="user-info-avatar" src=<%= loggedUser.avatarUrl %>>
+      <span><%= loggedUser.name %></span>
+    </div>
+    <a href="/logout" class="login-button">Logout</a>
+  </div>
+  <% } else {%>
+
+  <div class="header-right-box">
+    <a href="/login" class="login-button">Login</a>
+  </div>
+
+  <% } %>
+</header>
