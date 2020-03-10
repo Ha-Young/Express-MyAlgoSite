@@ -7,7 +7,7 @@ const authCheck = (req, res, next) => {
   } else {
     next();
   }
-}
+};
 
 router.get('/', authCheck, (req, res, next) => {
   req.logOut();

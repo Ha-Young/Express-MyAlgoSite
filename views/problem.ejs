@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/codemirror.min.js"></script>
+    <link rel='stylesheet' href='/stylesheets/problem.css' />
+    <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/codemirror.min.css">
+    <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/theme/dracula.min.css">
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><img src="https://www.softlab.ntua.gr/~nickie/images/logo/codewars.png" width="150px" height="150px"></li>
+          <li><a href="/logout">LOG OUT</a></li>
+          <li>PROBLEM</li>
+      </ul>
+    </nav>
+    <main>
+      <div class="introBox">
+        <ul>
+          <li class="testNumber">문제번호: <%= test.id %></li>
+          <li>문제 : <%= test.title %></li>
+          <li>완료한 사람: <%= test.completed_users %></li>
+          <li>레벨: <%= test.level %></li>
+          <li>설명: <%= test.description %>
+        </ul>
+      </div>
+      <!-- <p><%= test.description %></p> -->
+
+      <textarea id="editor"><%= test.defaultValue %></textarea>
+      <form action="", method="post">
+        <button type="submit" class="submitButton">제출</button>
+      </form>
+      <script src="/javascripts/problem.js"></script>
+    </main>
+  </body>
+</html>

@@ -10,13 +10,17 @@ const TestSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  solution: {
+  githubid: {
     type: String,
     required: true
   }
 });
 
 const ProblemSchema = new mongoose.Schema({
+  id: {
+    type: Number,
+    required: true
+  },
   title: {
     type: String,
     required: true
@@ -30,6 +34,10 @@ const ProblemSchema = new mongoose.Schema({
     require: true
   },
   description: {
+    type: String,
+    required: true
+  },
+  defaultValue: {
     type: String,
     required: true
   },

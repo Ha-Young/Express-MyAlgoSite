@@ -1,7 +1,7 @@
 require('dotenv').config();
 const passport = require('passport');
 const GitHubStrategy = require('passport-github').Strategy;
-const keys = require('./keys');
+// const keys = require('./keys');
 const User = require('../models/User');
 
 passport.serializeUser((user, done) => {
@@ -21,16 +21,13 @@ passport.use(new GitHubStrategy({
   clientSecret: '31c5907aabb8eacf067774a811205caedd8ea86e',
   callbackURL: '/login/github/callback'
 }, async (accessToken, refreshToken, profile, cb) => {
-  const user = await User.findOne({ username: profile.username });
-  if (user) {
-    cb(null, user);
-  } else {
-    const newUser = await new User({
-      githubid: profile.id,
-      username: profile.username
-    }).save();
-    cb(null, newUser);
-  }
+    const user = await User.findOne({ username: profile.username });
+    if (user) {
+      cb(null, user);
+    } else {
+      const newUser = await new User({ githubid: profile.id, username: profile.username }).save();
+      cb(null, newUser);
+    }
   }
 ));
 

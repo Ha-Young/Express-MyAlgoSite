@@ -5,12 +5,13 @@ const path = require('path');
 const index = require('./routes/index');
 const login = require('./routes/login');
 const logout = require('./routes/logout');
+const problems = require('./routes/problems');
+
 const passportSetup = require('./config/passport');
 const mongoose = require('mongoose');
 const keys = require('./config/keys');
 const passport = require('passport');
 const bodyParser = require('body-parser');
-
 
 const app = express();
 
@@ -28,7 +29,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views',path.join(__dirname, 'views'));
 
 mongoose.connect(keys.mongoDB.dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
   console.log('connected to mongodb');
@@ -37,11 +38,13 @@ mongoose.connect(keys.mongoDB.dbURI, { useNewUrlParser: true, useUnifiedTopology
 app.use(express.static('public'));
 
 
+
 app.use('/login', login);
 app.use('/', index);
 app.use('/logout', logout);
+app.use('/problems', problems);
 
-// app.use()
+
 
 
 // catch 404 and forward to error handler

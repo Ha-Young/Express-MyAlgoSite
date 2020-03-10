@@ -31,6 +31,7 @@ main {
   min-height: 650px;
   color:white;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -45,3 +46,7 @@ p {
   font-size: 30px;
 }
 
+.CodeMirror {
+  font-family: Arial, monospace;
+  font-size: 20px;
+}

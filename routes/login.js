@@ -1,29 +1,29 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-
-// const authCheck = (req, res, next) => {
-//   if (!req.session.passport) {
-//     res.redirect('/login');
-//   } else {
-//     next();
-//   }
-// }
+const sample_problems = require('../models/sample_problems.json');
+const User = require('../models/User');
+const Problem = require('../models/Problem');
 
 router.get('/', (req, res, next) => {
-  if (!req.session.passport) {
-    res.render('/login', { hasLoggedIn: false });
+  if (Object.keys(req.session).length === 1) {
+    res.render('login', { hasLoggedIn: false });
   } else {
-    res.render('login', { hasLoggedIn: true });
+    if (Object.keys(req.session.passport).length) {
+      res.render('login', { hasLoggedIn: true });
+    } else {
+      res.render('login', { hasLoggedIn: false });
+    }
   }
 });
-
 
 router.get('/github', passport.authenticate('github', {
   scope: []
 }));
 
-router.get('/github/callback', passport.authenticate('github'),(req, res) => {
+router.get('/github/callback', passport.authenticate('github'),async (req, res) => {
+  await Problem.deleteMany({});
+  Problem.insertMany(sample_problems);
   res.redirect('/');
 });
 

@@ -9,7 +9,6 @@
   "dependencies": {
     "body-parser": "~1.18.2",
     "chai": "^4.2.0",
-    "codemirror": "^5.52.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",

@@ -2,10 +2,7 @@
 <html>
   <head>
     <title>Codewars</title>
-    <script src="/node_modules/codemirror/mode/javascript/javascript.js"></script>
-    <script src="/node_modules/codemirror/lib/codemirror.js"></script>
-    <link rel='stylesheet' href='/stylesheets/login.css' />
-    <link rel='stylesheet' href="/node_modules/codemirror/lib/codemirror.css">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
     <nav>
@@ -17,12 +14,16 @@
     </nav>
     <main>
       <div>
+        <% for (let i = 0; i < problems.length; i++) { %>
+          <div class="testBox">
+            <ul>
+              <li>문제 :<a href="problems/<%= problems[i].id %>"><%= problems[i].title %></a></li>
+              <li>완료한 사람: <%= problems[i].completed_users %></li>
+              <li>레벨: <%= problems[i].level %></li>
+            </ul>
+          </div>
+        <% } %>
       </div>
-      <script>
-          var myCodeMirror = CodeMirror(document.body);
-      </script>
-
     </main>
-   
   </body>
 </html>
