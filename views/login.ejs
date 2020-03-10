@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Codewars</h1>
+    <h2><%= title %></h2>
+    <form action='/login' method="get">
+        Id <input type="text" name='email' ><br>
+        password <input type="password">
+    </form>
+    <button>회원가입</button>
+    <button>로그인</button>
+    <a href="/auth/github" >github 로그인</a>
+  </body>
+</html>
