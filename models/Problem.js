@@ -10,12 +10,7 @@ const ProblemSchema = new mongoose.Schema({
   completed_users: Number,
   difficulty_level: Number,
   description: String,
-  tests: [
-    {
-      type: mongoose.Types.ObjectId,
-      ref: "Test",
-    }
-  ]
+  tests: [{ type: mongoose.Types.ObjectId, ref: "Test" }]
 });
 
 module.exports = mongoose.model('Problem', ProblemSchema);
