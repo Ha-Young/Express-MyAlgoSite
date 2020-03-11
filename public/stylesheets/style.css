@@ -41,28 +41,31 @@ a {
 }
 
 .tabs {
-  /* display: inline-grid; */
-  width: 150px;
   padding-top: 20px;
   border-right: 2px #D9D9D9 solid;
   font-size: 20px;
 }
 
 .tabs > div {
-  padding-top: 20px;
+  width: 150px;
+  padding-top: 10px;
 }
 
 .tabs > div > a {
+  display: block;
+  text-align: center;
+  width: 75px;
   border: 3px solid #737373;
   padding: 3px;
   color: #737373;
-  transition: all ease 0.3s;
+  text-decoration: none;
 }
 
 .tabs > div > a:hover {
   background-color: #737373;
   color: white;
   cursor: pointer;
+  transition: all ease 0.3s;
 }
 
 .problem-list {
@@ -82,12 +85,12 @@ a {
   background-color: #8C3030;
   text-decoration: none;
   color: white;
-  transition: all ease 0.3s;
 }
 
 .problem:hover {
   background-color: rgb(85, 27, 27);
   cursor: pointer;
+  transition: all ease 0.3s;
 }
 
 .problem-level {
