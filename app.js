@@ -31,7 +31,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.set('view engine', 'ejs');
 app.set('views',path.join(__dirname, 'views'));
 
-mongoose.connect(keys.mongoDB.dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
+mongoose.connect(keys.mongoDB.dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }, () => {
   console.log('connected to mongodb');
 });
 

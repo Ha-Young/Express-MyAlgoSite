@@ -2,58 +2,62 @@ const express = require('express');
 const fs = require('fs');
 const router = express.Router();
 const Problem = require('../models/Problem');
-const strings = require('../constants/moduleExports');
-// const  expect  = require('chai').expect;;
+const vm = require('vm');
 // const filltheArray = require('../test/problem1');
-
-
 
 router.get('/:problem_id', async (req, res, next) => {
   testId = req.params.problem_id;
   const test = await Problem.findOne({ id: testId });
-  // console.log(test);
   res.render('problem', { test: test });
 });
 
-router.post('/:problem_id', async (req, res, next) => {
-  // console.log(req)
-  // console.log(exportString[req.params.problem_id]);
-
+const validateUserSolution = async (req, res, next) => {
   const code = req.body.code;
-  const id = req.params.problem_id;
-  const path = `./test/problem${id}.js`;
-  const moduleString = strings[id];
-
-
-  // console.log(moduleString)
-  fs.truncate(path, 0, () => {
-    const temp = moduleString.split('\n');
-    temp.splice(0, 0, code);
-    const testString = temp.join('\n');
-    fs.appendFile(path, testString, function() {
+  // console.log(code)
+  const problemId = req.params.problem_id;
+  const problem = await Problem.findOne({ id: problemId });
+  const userCode = new Function(`return ${code}`)();
+  console.log(problemId)
+  const errResults = [];
+  const correctResults = [];
+  let isArray = false; 
  
-    });
+  problem.tests.forEach((problem) => {
+    let userResult = ''
+    if (problem.parameters.length > 1) {
+      userResult = userCode(...problem.parameters);
+    } else {
+      userResult = userCode(problem.parameters[0]);
+    }
+
+    if (problem.solution.length > 1) {
+      isArray = true;
+      if (problem.solution.join('') !== userResult.join('')) {
+        errResults.push(userResult);
+        correctResults.push(problem.solution);
+      }
+    } else {
+      if (problem.solution[0] !== userResult) {
+        errResults.push(userResult);
+        correctResults.push(problem.solution[0]);
+      }
+    }
+    console.log(errResults);
   });
 
- 
-  
+  if (!errResults.length) {
+    // const problem = await Problem.findOneAndUpdate({ id: problemId }, { $inc: { completed_users : 1 }});
+    console.log(problem);
+    res.render('success');
+  } else {
+    // console.log(isArray)
+    res.render('failure', { err: errResults, solution: correctResults, array: isArray });
+  }
+}; 
 
-  // const ss = fs.readFileSync('./tests/problem1.js').toString();
 
 
-
-    // fs.readFile(code, 'utf8')
-  // console.log(`./tests/problem${id}`)
-
-  // fs.truncate('./tests/problem1.js', 0, function() {
-  //   console.log(33333333333333333333);
-  // });
-
-  // const ss = fs.readFileSync('./tests/problem1.js').toString();
-  // fs.appendFile('./tests/problem1.js', code, function() {
-  //   console.log(22222222222)
-  // });
-  
+router.post('/:problem_id', validateUserSolution, async (req, res, next) => {
 
 });
 

@@ -14,7 +14,8 @@ passport.deserializeUser((id, done) => {
   });
 });
 
-
+//c7c7f4510b35c7a03e14
+//'31c5907aabb8eacf067774a811205caedd8ea86e'
 ////process.env.session 
 passport.use(new GitHubStrategy({
   clientID: 'c7c7f4510b35c7a03e14',

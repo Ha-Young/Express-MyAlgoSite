@@ -1,21 +1,5 @@
 const mongoose = require('mongoose');
 
-/*
-
-  TODO: Fill in the model specification
-
- */
-const TestSchema = new mongoose.Schema({
-  code: {
-    type: String,
-    required: true
-  },
-  githubid: {
-    type: String,
-    required: true
-  }
-});
-
 const ProblemSchema = new mongoose.Schema({
   id: {
     type: Number,
@@ -41,7 +25,18 @@ const ProblemSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  tests: [TestSchema]
+  tests: [{
+    parameters: {
+      type: Array
+    },
+    solution: {
+      type: Array,
+      required: true
+    },
+    solved: {
+      type: Boolean
+    }
+  }]
 });
 
 module.exports = mongoose.model('Problem', ProblemSchema);
