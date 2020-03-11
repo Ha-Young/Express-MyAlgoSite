@@ -1,0 +1,12 @@
+html
+  head
+    title Home
+    meta(charset='utf-8')
+  body
+    h1= title
+    form(action='/logout', method='POST')
+      input(type='submit', value='로그아웃')
+    ul
+      each problem in problems
+        a(href= '/problem/' + problem._id)
+          li #{problem.title} - 정답자: #{problem.completed_users} - level: #{problem.difficulty_level}

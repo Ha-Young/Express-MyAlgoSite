@@ -1,0 +1,17 @@
+html
+  head
+    title Problem
+    meta(charset='utf-8')
+    link(rel='stylesheet' href='/codemirror/lib/codemirror.css')
+    link(rel='stylesheet' href='/codemirror/theme/midnight.css')
+  body
+    h1= problemInfo.title
+    div 난이도: #{problemInfo.difficulty_level}
+    div 정답자 수: #{problemInfo.completed_users}
+    div= problemInfo.description
+    form(action='/problem/' + problemInfo._id, method='POST')
+      textarea#codemirror
+      input(type="submit" name="solving-submit")
+    script(src='/codemirror/lib/codemirror.js')
+    script(src='/codemirror/mode/javascript/javascript.js')
+    script(type='text/javascript' src='/javascripts/index.js')
