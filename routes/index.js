@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-// const inputProblems = require('../models/inputProblems');
 const Problem = require('../models/Problem');
-const sample_problems = require('../models/sample_problems.json')
+const problems = require('../models/problems.json');
+
+const app = express();
 
 /* GET home page. */
 const isAuthenticated = function (req, res, next) {
@@ -13,13 +14,25 @@ const isAuthenticated = function (req, res, next) {
 };
 
 router.get('/', isAuthenticated, async (req, res, next) => {
-  const problems = JSON.parse(JSON.stringify(sample_problems));
-  const problemsParse = await Problem.find();
+  const problemsParse = JSON.parse(JSON.stringify(problems));
+  const problemsInDataBase = await Problem.find();
 
-  if (!problemsParse.length) {
-    problems.forEach(async problem => await new Problem(problem).save());
+  // app.locals.title = "home";
+  // app.locals.user = req.user.username;
+  // app.locals.problems = problemsParse;
+
+  // console.log('/ res' , app)
+
+  if (!problemsInDataBase.length) {
+    problemsParse.forEach(async problem => await new Problem(problem).save());
   } 
-  res.render('index', { user: req.user.username });
+  // res.render('index');
+
+  res.render('index', {
+    user: req.user.username,
+    problems: problemsParse,
+    title: "home"
+  });
 });
 
 module.exports = router;

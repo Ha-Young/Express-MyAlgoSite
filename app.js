@@ -1,16 +1,17 @@
 const express = require('express');
 const path = require("path");
 const mongoose = require('mongoose');
-const cookieSession = require('cookie-session');
-const passport = require('passport');
 const bodyParser = require('body-parser');
+const passport = require('passport');
+const cookieSession = require('cookie-session');
 
 const keys = require('./config/keys');
 const index = require('./routes/index');
-const authRoutes = require('./routes/auth-routes');
+const auth = require('./routes/auth');
+const problems = require('./routes/problems');
 require('./config/passport-setup');
 
-mongoose.connect('mongodb://localhost/users', { useNewUrlParser: true }, err => {
+mongoose.connect('mongodb://localhost/codewars', { useNewUrlParser: true }, err => {
   if (err) {
     console.log(err);
   } else {
@@ -34,7 +35,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', index);
-app.use('/auth', authRoutes);
+app.use('/auth', auth);
+app.use('/problems', problems);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
