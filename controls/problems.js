@@ -74,14 +74,14 @@ const postProblemsDetail = async (req, res, next) => {
         }
       )
     }, function (err, result) {
-      if(err) {
+      if (err) {
         console.log(err);
       }
 
-      if(result) {
-        res.redirect('/success');
+      if (result) {
+        res.redirect(`/success?problem_id=${id}`);
       } else {
-        res.redirect('/failure');
+        res.redirect(`/failure?problem_id=${id}`);
       }
     });
   } catch (err) {
@@ -90,11 +90,15 @@ const postProblemsDetail = async (req, res, next) => {
 };
 
 const getSuccess = (req, res) => {
-  res.render('success', { title: '테스트를 모두 통과했습니다.' });
+  const id = req.query.problem_id;
+
+  res.render('success', { title: '테스트를 모두 통과했습니다.', id });
 };
 
 const getFailure = (req, res) => {
-  res.render('failure', { title: '테스트를 통과하지 못했습니다.' });
+  const id = req.query.problem_id;
+
+  res.render('failure', { title: '테스트를 통과하지 못했습니다.', id });
 };
 
 module.exports = { getHome, getAddCase, postAddCase, getProblemsDetail, postProblemsDetail, getSuccess, getFailure };
