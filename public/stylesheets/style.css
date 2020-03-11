@@ -1,4 +1,4 @@
-* {
+body {
   margin: 0px;
   padding: 0px;
   background-color: #424242;
@@ -7,13 +7,30 @@
   font-size: 20px;
 }
 
-.login, h1 {
+.login, .mainTitle, .testMessage {
   color: #bb432c;
   font-size: 1.5rem;
 }
 
 .problemLevel {
   color: #bb432c;
+}
+
+.signUp, .successSection a {
+  color: white;
+}
+
+.loginSection a, .successSection a {
+  width: 230px;
+  border-radius: 5px;
+  background-color: #151616;
+  text-align: center;
+  text-decoration: none;
+}
+
+.loginSection a:hover, .successSection a:hover {
+  background-color: #0b0c0c;
+  text-decoration: underline;
 }
 
 /* [login] */
@@ -23,7 +40,7 @@
   margin-top: 180px;
 }
 
-.loginSession {
+.loginSection {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,24 +50,12 @@
   background-color: #282828;
 }
 
-.loginSession img, .loginSession a {
+.loginSection img, .loginSection a {
   padding: 10px;
 }
 
-.loginSession img {
+.loginSection img {
   background-color: transparent;
-}
-
-.loginSession a {
-  width: 230px;
-  border-radius: 5px;
-  background-color: #151616;
-  text-align: center;
-  text-decoration: none;
-}
-
-.loginSession a:hover {
-  background-color: #0b0c0c;
 }
 
 /* [main - header] */
@@ -76,6 +81,16 @@
   height: 30px;
 }
 
+.userInfo a {
+  text-decoration: none;
+  color: #c0c0c0;
+}
+
+.userInfo, .mainTitle {
+  margin: 0px;
+  padding: 0px;
+}
+
 .userInfo li {
   margin: 3px;
   padding: 1px;
@@ -96,21 +111,60 @@
   padding: 2px;
 }
 
-.problems li {
+.problemWrapper {
+  margin: 10px;
+  padding: 0px;
+}
+
+.problemWrapper li {
   display: flex;
-  align-items: flex-end;
   list-style: none;
   margin: 3px;
 }
 
-.problems li div {
-  margin: 0px 5px
+.problemWrapper li div {
+  margin: 0px 5px 0px 0px
 }
 
-.problemTitle a {
+.problemTitleMain a {
   color: #efefef;
 }
 
 .problemInfo div {
   font-size: 0.8rem;
+}
+
+.problemTitleDetail {
+  font-size: 2rem;
+}
+
+.problemTest {
+  flex-direction: column;
+}
+
+button[type=submit] {
+  margin: 10px;
+  width: 100px;
+  height: 50px;
+  border-radius: 2px;
+  border-style: none;
+  background-color: #151616;
+  color: white;
+  font-size: 1.2rem;
+}
+
+button[type=submit]:hover {
+  cursor: pointer;
+}
+
+/* [success, failure] */
+.successSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.testMessage {
+  font-size: 8rem;
+  text-align: center;
 }

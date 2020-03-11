@@ -6,19 +6,30 @@ const mongoose = require('mongoose');
 
  */
 const userSchema = new mongoose.Schema({
-  name: String,
-  githubId: String,
-  githubUrl: String,
+  name: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  githubId: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  githubUrl: {
+    type: String,
+    unique: true
+  },
   imageUrl: String,
   solved_level: {
-    difficulty_level_one: Number,
-    difficulty_level_two: Number,
-    difficulty_level_three: Number,
+    difficulty_level_one: { type: Number, default: 0 },
+    difficulty_level_two: { type: Number, default: 0 },
+    difficulty_level_three: { type: Number, default: 0 },
   },
-  solved_all_cout: Number,
+  solved_all_cout: { type: Number, default: 0 },
   solved: [
     {
-      type: mongoose.Schema.Types.ObjectId,
+      type: mongoose.ObjectId,
       ref: "Problem"
     }
   ]

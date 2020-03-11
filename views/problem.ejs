@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan+2|Gamja+Flower&display=swap" rel="stylesheet">
+    <script src="/codemirror/codemirror.js"></script>
+    <link rel="stylesheet" href="/codemirror/codemirror.css">
+    <link rel="stylesheet" href="/codemirror/darcula.css">
+    <script src="/codemirror/javascript.js"></script>
+  </head>
+  <body>
+    <%- include('header') %>
+    <hr />
+    <section class="problemSection">
+      <article>
+        <% if (problem.length) { %>
+          <% problem.forEach(function(problemInfo){ %>
+            <ul class="problemWrapper">
+              <li class="problemTitleDetail"><%= problemInfo.title %></li>
+              <li class="problemInfo">
+                <div>☑️ Level <%= problemInfo.difficulty_level %></div>
+                <div>☑️ Made: <%= problemInfo.made %></div>
+                <div>☑️ Completed: <%= problemInfo.completed_users %></div>
+              </li>
+              <li><%= problemInfo.description %></li>
+              <li class="problemTest">
+                <div>< Example ></Example></div>
+                <% problemInfo.tests.forEach(function(test){ %>
+                  <div><%= test.code %> => <%= test.solution %></div>
+                <% }) %>
+              </li>
+            </ul>
+          <% }) %>
+        <% } %>
+      </article>
+      <article>
+        <form class="codeFrom" action="/problem/<%= problem[0]._id %>" method="post">
+          <textarea id="editor" name="solution">function solution() { }</textarea>
+          <button type="submit">Submit</button>
+        </form>
+      </article>
+    </section>
+    <script>
+      const myCodeMirror = CodeMirror.fromTextArea(document.querySelector('#editor'), {
+        mode:  "javascript",
+        theme: "darcula",
+        lineNumbers: true,
+        lineWrapping: true,
+        tabSize: 2,
+      });
+
+      myCodeMirror.setSize('auto', 300);
+    </script>
+  </body>
+</html>

@@ -16,6 +16,8 @@ exports.GITHUB_CLIENT_SECRET = GITHUB_CLIENT_SECRET;
 exports.CALLBACK_URL = CALLBACK_URL;
 
 const index = require('./routes/index');
+const auth = require('./routes/auth');
+const problem = require('./routes/problem');
 
 const app = express();
 
@@ -28,10 +30,7 @@ mongoose.connect('mongodb://localhost:27017/codewars', {
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => {
-  console.log('Connected to Mongo database..');
-});
-
+db.once('open', () => console.log('Connected to Mongo database..'));
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, './views'));
@@ -47,6 +46,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', index);
+app.use('/auth', auth);
+app.use('/problem', problem);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
