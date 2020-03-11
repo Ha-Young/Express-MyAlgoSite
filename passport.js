@@ -18,7 +18,7 @@ passport.use(new GitHubStrategy({
       user = await User.findOne({ githubId: id });
 
       if(!user) {
-        user = new User({
+        user = await User.create({
           githubId: id
         });
         await User.save();
