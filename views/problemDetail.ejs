@@ -1,6 +1,6 @@
 <%- include('partial/head') -%>
 <%
-  const { id, title, completed_users, difficulty_level, description } = problem;
+  const { id, title, completed_users, difficulty_level, description, params } = problem;
 %>
 
 <section class="problem-detail">
@@ -14,7 +14,7 @@
   </div>
   <form action="/problems/<%= id %>" method="POST" id="editor-form">
     <div class="editor">
-      <textarea id="code" name="code">function solution () {
+      <textarea id="code" name="code">function solution (<%= params.join(', ') %>) {
   // Your code..
 }</textarea>
     </div>
