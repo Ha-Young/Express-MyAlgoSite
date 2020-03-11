@@ -6,3 +6,11 @@ body {
 a {
   color: #00B7FF;
 }
+
+.problem {
+  padding: 20px;
+  background-color: darkgrey;
+  border: solid 1px gray;
+  font-size: larger;
+  font-weight: bolder;
+}

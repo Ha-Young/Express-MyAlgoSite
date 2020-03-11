@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    <% problem.forEach(el => { %>
+    <h1><%= el.title %></h1>
+    <span><%= el.type %></span>
+    <span><%= el.difficulty_level %></span>
+    <div><%= el.discription %></div>
+    <div><%= el.note %></div>
+    <% })%>
+  </body>
+</html>
