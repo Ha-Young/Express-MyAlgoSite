@@ -4,7 +4,13 @@ const index = require('./routes/index');
 
 const app = express();
 
+app.set('view engine', 'ejs');
+
 app.use('/', index);
+
+app.get('/login',function(req,res){
+  res.end('github login process');
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
