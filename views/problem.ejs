@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PROBLEM</title>
+    <script src='/codemirror/lib/codemirror.js'></script>
+    <link rel='stylesheet' href='/codemirror/lib/codemirror.css'>
+    <script src='/codemirror/mode/javascript.js'></script>
+
+    <link rel='stylesheet' href='/stylesheets/style.css'>
+    
+  </head>
+  <body>
+    <div>
+      <a href='/'>
+        <button>GO BACK TO MAIN</button>
+      </a>
+    </div>
+    <div>ID : <%= problem.id %></div>
+    <div><%= problem.title %></div>
+    <div><%= problem.completed_users %></div>
+    <div><%= problem.difficulty_level %></div>
+    <div><%= problem.description %></div>
+    <div id='codemirror'></div>
+    <div>
+      <form method='POST' action=<%= `/problems/${problem.id}` %>>
+        <input 
+          id='codeInput'
+          type='text'
+          name='code'
+          value='function solution(n) {
+            if (n == 0) return 0;
+            if (n == 1) return 1;
+            return solution(n - 1) + solution(n - 2);
+          }'
+        />
+        <!-- value= ... SHOULD BE REPLACED WITH solution(){}-->
+        <button type='submit'>Submit</button>
+      </form>
+    </div>
+    <script>
+      const myCodeMirror = CodeMirror.fromTextArea(document.getElementById('codeInput'),{
+        lineNumbers: true,
+        mode: 'javascript',
+      })
+    </script>
+  </body>
+</html>
