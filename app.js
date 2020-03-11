@@ -33,10 +33,6 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-//첫 화면
-// 로그인 되었을시 => 홈
-// 로그인 안되었을시 => auth
-// 판단 방법 ?
 app.use('/', index);
 app.use('/auth', authRoutes);
 

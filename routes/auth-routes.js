@@ -2,13 +2,13 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 
-router.get('/', (req, res) => {
+router.get('/login', (req, res) => {
   res.render('login');
 });
 
 router.get('/logout', (req, res) => {
   req.logout();
-  res.redirect('/auth');
+  res.redirect('/auth/login');
 });  
 
 router.get('/github', passport.authenticate('github', {
@@ -19,7 +19,7 @@ router.get('/github/redirect', passport.authenticate('github'), (req, res) => {
   if (req.user) {
     res.redirect('/');
   } else {
-    res.redirect('/auth');
+    res.redirect('/auth/login');
   }
 });
 

@@ -22,7 +22,7 @@ passport.use(
     User.findOne({ githubId: profile.id })
       .then(currentUser => {
         if (currentUser) {
-          console.log('already have the user ', currentUser);
+          // console.log('already have the user ', currentUser);
           done(null, currentUser);
         } else {
           new User({
@@ -30,7 +30,7 @@ passport.use(
             githubId: profile.id,
             photo: profile.photos[0].value
           }).save().then(newUser => {
-            console.log('new user', newUser);
+            // console.log('new user', newUser);
             done(null, newUser);
           });
         }
