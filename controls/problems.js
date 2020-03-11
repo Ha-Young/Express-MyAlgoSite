@@ -58,7 +58,7 @@ const getProblemsDetail = async (req, res, next) => {
 const postProblemsDetail = async (req, res, next) => {
   const id = req.params.problem_id;
   const code = req.body.code;
-  const solutionProvider = new Function('return ' + code);
+  const solutionProvider = new Function(`return ${code}`);
   const originSolution = solutionProvider();
 
   try {
