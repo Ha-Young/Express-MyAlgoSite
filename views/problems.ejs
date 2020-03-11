@@ -1,0 +1,20 @@
+<div class="problem-list">
+  <% problems.map(problem => { %>
+    <% href = `/problem/${problem.id}` %>
+    <a
+      class="problem"
+      href="<%- href %>">
+      <div class="problem-level">
+        <%= problem.difficulty_level %>
+      </div>
+      <div class="problem-info">
+        <div class="problem-title">
+          <%= problem.title %>
+        </div>
+        <div class="problem-completed">
+          Completed <%= problem.completed_users %> times
+        </div>
+      </div>
+    </a>
+  <% }) %>
+</div>

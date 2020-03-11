@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/codemirror/lib/codemirror.css" />
+    <link rel="stylesheet" href="/codemirror/theme/dracula.css" />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src='/codemirror/lib/codemirror.js'></script>
+    <script src='/codemirror/mode/javascript/javascript.js'></script>
+  </head>
+  <body>
+    <%- include('header') %>
+    <% action = `/problem/${problem.id}` %>
+    <% onclick = event => event.preventdefault() %>
+    <div class="container">
+      <div class="problem-description-container">
+        <div class="problem-description-title"><%= problem.title %></div>
+        <div class="problem-description"><%= problem.description %></div>
+      </div>
+      <form class="problem-answer" action="<% action %>" method="POST">
+        <textarea id="code" name="code"><%= problem.preset %></textarea>
+        <input type="submit" value="SUBMIT" onclick=<% onclick %> />
+      </form>
+    </div>
+
+    <script src="/javascripts/index.js"></script>
+  </body>
+</html>

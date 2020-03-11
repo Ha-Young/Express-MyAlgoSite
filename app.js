@@ -1,10 +1,25 @@
+const path = require('path');
 const express = require('express');
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
 const index = require('./routes/index');
+const problems = require('./routes/problems');
 
 const app = express();
 
+mongoose.connect("mongodb://localhost:27017/codewars", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
+app.set("view engine", "ejs");
+app.use(bodyParser.urlencoded());
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use('/', index);
+app.use('/login', index);
+app.use('/problem', problems);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
