@@ -31,6 +31,7 @@ app.use(session({ secret: process.env.SESSION_SECRET_KEY, resave: false, saveUni
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
 
 app.use('/', index);
 app.use('/login', login);

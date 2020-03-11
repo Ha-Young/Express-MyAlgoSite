@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <link rel="stylesheet" href="/stylesheets/failure.css">
+    </head>
+    <body>
+      <% include ./header %>
+      <h1>실패</h1>
+      <h2 class="problem-title"><%= problemTitle %></h2>
+      <% if (errorMessage) { %>
+        <h2 class="error-message"><%= errorMessage %></h2>
+        <h2 class="error-stack"><%= errorStack %></h2>
+      <% } else { %>
+        <% for (var i = 0; i < failureTests.length; i++) { %> 
+          <div class="failure">
+            <div>
+              <span><%= i + 1 %>.</span>
+              <span><%= failureTests[i][0] %></span>
+              <span class="problem-expected">expected</span>
+              <span><%= failureTests[i][1] %></span>
+            </div>
+            <div>
+              <span class="problem-actual">actual</span>
+              <span><%= failureTests[i][2] %></span>
+            </div>
+          </div> 
+        <% } %>
+      <% } %>
+    </body>
+  </html>

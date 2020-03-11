@@ -19,7 +19,7 @@
               <p><%= problemData.description %></p>
             </div>
             <div class="solution">
-              <form action="">
+              <form action="/problems/<%= problemData._id %>" method="POST">
                 <textarea id="editor" name="solution"></textarea>
                 <button type="submit">제출</button>
               </form>

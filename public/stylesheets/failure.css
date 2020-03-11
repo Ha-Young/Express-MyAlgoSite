@@ -1,0 +1,48 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #2F3133;
+  color: rgb(197, 200, 198);
+  text-align: center;
+}
+
+
+h1 {
+  margin: 50px 0;
+  font-size: 50px;
+}
+
+.failure {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.problem-title {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.problem-expected {
+  color: green;
+  margin-left: 5px;
+}
+
+.problem-actual {
+  color: red;
+  margin-left: 5px;
+}
+
+.error-message {
+  font-size: 30px;
+  color: red;  
+  margin-bottom: 30px;
+}
+
+.error-stack {
+  width: 40%;
+  color: red;
+  margin: 0 auto;
+}
