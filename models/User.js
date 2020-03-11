@@ -6,7 +6,20 @@ const mongoose = require('mongoose');
 
  */
 const userSchema = new mongoose.Schema({
-  
+  username: {
+    type: String,
+    unique: true,
+    required: true,
+    trim: true
+  },
+  github_id: {
+    type: String,
+    unique: true,
+    required: true,
+  },
+  solvedProblems: {
+    type: Array
+  }
 });
 
 module.exports = mongoose.model('User', userSchema);

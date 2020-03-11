@@ -4,12 +4,16 @@ const Problem = require('../models/Problem');
 
 /* GET home page. */
 router.get('/', async(req, res, next) => {
-  if (!req.session.passport) {
-    return res.redirect('/login');
+  try {
+    if (!req.user) {
+      return res.redirect('/login');
+    }
+  
+    const problems = await Problem.find();
+    res.render('index', { problems });
+  } catch(err) {
+    next(err);
   }
-
-  const problems = await Problem.find();
-  res.render('index', { problems });
 });
 
 module.exports = router;

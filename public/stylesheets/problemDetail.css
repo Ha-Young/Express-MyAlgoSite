@@ -1,0 +1,51 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #2F3133;
+  color: rgb(197, 200, 198);
+}
+
+.wrapper {
+  margin: 20px;
+}
+
+.container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.description {
+  width: 47%;
+}
+
+.description h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.solution {
+  width: 47%;
+}
+
+.problem-detail-title {
+  font-size: 35px;
+}
+
+form button {
+  width: 120px;
+  height: 30px;
+  color: rgb(187, 67, 44);
+  border-radius: 5px;
+  background-color: #0B0B0B;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+}
+
+textarea {
+  width: 100%;
+  height: 500px;
+}

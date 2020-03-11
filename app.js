@@ -3,7 +3,8 @@ const express = require('express');
 const session = require('express-session');
 const index = require('./routes/index');
 const login = require('./routes/login');
-const problem = require('./routes/problem');
+const logout = require('./routes/logout');
+const problems = require('./routes/problems');
 const path = require('path');
 const passport = require('passport');
 const bodyParser = require('body-parser');
@@ -14,7 +15,8 @@ const app = express();
 
 mongoose.connect('mongodb://localhost/codewars', {
   useNewUrlParser: true, 
-  useUnifiedTopology: true 
+  useUnifiedTopology: true ,
+  useCreateIndex: true,
 });
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
@@ -32,7 +34,8 @@ app.use(bodyParser.json());
 
 app.use('/', index);
 app.use('/login', login);
-app.use('/problem', problem);
+app.use('/logout', logout);
+app.use('/problems', problems);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

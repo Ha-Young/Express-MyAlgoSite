@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <link rel="stylesheet" href="/stylesheets/problemDetail.css">
+    </head>
+    <body>
+      <% include ./header %>
+      <% if (problemData) { %>
+        <div class="wrapper">
+          <h2 class="problem-detail-title"><%= problemData.title %></h2>
+          <span class="problem-level">level <%= problemData.difficulty_level %></span>
+          <span><%= problemData.solution_count %></span>
+          <span><%= problemData.completed_users %>명 완료</span>
+          <div class="container">
+            <div class="description">
+              <h3>Description</h3>
+              <p><%= problemData.description %></p>
+            </div>
+            <div class="solution">
+              <form action="">
+                <textarea name="solution"></textarea>
+                <button type="submit">제출</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      <% } %>
+    </body>
+  </html>

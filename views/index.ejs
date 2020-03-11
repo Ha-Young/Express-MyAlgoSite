@@ -5,23 +5,14 @@
     <link rel='stylesheet' href='/stylesheets/index.css' />
   </head>
   <body>
-    <header class="header">
-      <ul>
-        <li>
-          <img src="https://gitlab.com/uploads/-/system/project/avatar/12144548/codewars-logo.png" alt="codewars">
-        </li>
-        <li>user</li>
-      </ul>
-    </header>
+    <% include ./header %>
     <div class="problems-container">
       <% problems.forEach(problem => { %> 
         <div class="problem">
           <h2 class="problem-title"><%= problem.title %></h2>
-          <p class="problem-count">solution count: <%= problem.solution_count %></p>
-          <p class="problem-level">level: <%= problem.difficulty_level %></p>
-          <form action=`/problem` method="GET">
-            <button type="submit">TRAIN</button>
-          </form>
+          <p class="problem-count"><%= problem.solution_count %>명 완료</p>
+          <p class="problem-level">level <%= problem.difficulty_level %></p>
+          <a href="/problems/<%= problem._id %>">TRAIN</a>
         </div> 
       <% }) %>
     </div>
