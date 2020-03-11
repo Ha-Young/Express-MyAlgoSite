@@ -16,6 +16,12 @@ const getHome = async (req, res, next) => {
 
 const getAddCase = (req, res, next) => {
   const id = req.params.problem_id;
+
+  if (!id) {
+    res.redirect('/');
+    return;
+  }
+
   res.render('addCase', { title: '케이스 추가하기', id })
 }
 
@@ -36,8 +42,14 @@ const postAddCase = async (req, res, next) => {
 };
 
 const getProblemsDetail = async (req, res, next) => {
+  const id = req.params.problem_id;
+
+  if (!id) {
+    res.redirect('/');
+    return;
+  }
+
   try {
-    const id = req.params.problem_id;
     const problem = await Problem.findById(id);
 
     res.render('problemDetail', { title: problem.title, problem });
@@ -64,8 +76,9 @@ const postProblemsDetail = async (req, res, next) => {
     every(tests, (item, callback) => {
       const testTemplate = 
         'module.exports = function (solution) {'
-      +   `return ${item.code} == '${item.solution}';`
+      +   `return ${item.code} === ${item.solution};`
       + '}';
+
       fs.writeFile(
         path.join(__dirname, '../solutions/test.js'),
         testTemplate,
@@ -92,11 +105,21 @@ const postProblemsDetail = async (req, res, next) => {
 const getSuccess = (req, res) => {
   const id = req.query.problem_id;
 
+  if (!id) {
+    res.redirect('/');
+    return;
+  }
+
   res.render('success', { title: '테스트를 모두 통과했습니다.', id });
 };
 
 const getFailure = (req, res) => {
   const id = req.query.problem_id;
+
+  if (!id) {
+    res.redirect('/');
+    return;
+  }
 
   res.render('failure', { title: '테스트를 통과하지 못했습니다.', id });
 };
