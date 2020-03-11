@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+// const findOrCreate = require('mongoose-find-or-create');
 
 /*
 
@@ -6,7 +7,8 @@ const mongoose = require('mongoose');
 
  */
 const userSchema = new mongoose.Schema({
-
+githubId: String
 });
 
+// userSchema.plugin(findOrCreate);
 module.exports = mongoose.model('User', userSchema);
