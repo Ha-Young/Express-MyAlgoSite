@@ -1,8 +1,5 @@
-const fs = require('fs');
-const path = require('path');
 const Problem = require('../models/Problem');
 const Test = require('../models/Test');
-const every = require('async/every');
 
 const getHome = async (req, res, next) => {
   try {
@@ -61,42 +58,30 @@ const getProblemsDetail = async (req, res, next) => {
 const postProblemsDetail = async (req, res, next) => {
   const id = req.params.problem_id;
   const code = req.body.code;
-  const handledCode = code + '\nmodule.exports = solution;\n';
+  const solutionProvider = new Function('return ' + code);
+  const originSolution = solutionProvider();
 
   try {
-    await fs.writeFileSync(
-      path.join(__dirname, '../solutions/solution.js'),
-      handledCode
-    );
-
-    const solution = require('../solutions/solution');
     const problem = await Problem.findById(id).populate('tests');
     const tests = problem.tests;
+    let isPassTests = true;
 
-    every(tests, (item, callback) => {
-      const testTemplate = 
-        'module.exports = function (solution) {'
-      +   `return ${item.code} === ${item.solution};`
-      + '}';
+    for (let i = 0; i < tests.length; i++) {
+      const { code, solution } = tests[i];
+      const fn = new Function ('solution', 'return ' + code)
+        .bind(null, originSolution);
 
-      fs.writeFile(
-        path.join(__dirname, '../solutions/test.js'),
-        testTemplate,
-        (err) => {
-          callback(err, require('../solutions/test')(solution));
-        }
-      )
-    }, function (err, result) {
-      if (err) {
-        console.log(err);
+      if(fn() !== solution) {
+        isPassTests = false;
+        break;
       }
+    }
 
-      if (result) {
-        res.redirect(`/success?problem_id=${id}`);
-      } else {
-        res.redirect(`/failure?problem_id=${id}`);
-      }
-    });
+    if(isPassTests) {
+      res.redirect(`/success?problem_id=${id}`);
+    } else {
+      res.redirect(`/failure?problem_id=${id}`);
+    }
   } catch (err) {
     console.log(err);
   }
