@@ -10,6 +10,7 @@
 
   <div>
     <h1><% problem.title %></h1>
+    
     <ul>
       <li>
         <span>이름 <%= problem.title %></span>
@@ -24,6 +25,11 @@
         <span>설명 <%= problem.description %></span>
       </li>
     </ul>
+    
+    <form action='<%= problem.id %>' method='POST'>
+      <input name="problem_solution"></textarea>
+      <button type='submit'>제출</button>
+    </form>
   </div>
 </body>
 
