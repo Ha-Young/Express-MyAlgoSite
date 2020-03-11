@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const app = express();
+const bodyParser = require("body-parser");
 
 const index = require('./routes/index');
 const login = require('./routes/login');
@@ -24,7 +25,8 @@ db.once("open", function() {
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, './views'));
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, "./public")));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // github login
 const session = require('express-session');
@@ -68,7 +70,6 @@ app.post('/login/github',
 app.get('/login/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }),
   function(req, res) {
-    console.log(req.session);
     res.redirect('/');
   }
 );
@@ -81,7 +82,6 @@ app.post('/logout', function(req, res, next) {
 });
 
 app.use('/problem', problem);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

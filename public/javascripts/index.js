@@ -3,5 +3,4 @@ const editor = CodeMirror.fromTextArea(document.getElementById('codemirror'), {
   mode:  "javascript",
   theme: "midnight"
 });
-
 editor.setSize(700, 300);

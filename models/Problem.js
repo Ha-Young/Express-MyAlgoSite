@@ -11,6 +11,7 @@ const ProblemSchema = new mongoose.Schema({
   completed_users: Number,
   difficulty_level: Number,
   description: String,
+  func: String,
   tests: Array
 });
 

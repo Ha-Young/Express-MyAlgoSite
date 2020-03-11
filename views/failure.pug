@@ -1,0 +1,13 @@
+html
+  head
+    title Fail
+    meta(charset='utf-8')
+  body
+    h1 Fail ㅠㅠ
+    if failureList
+      ul
+        each failure in failureList
+          li Failed test: #{failure.testCode} - Expected: #{failure.expected} - instead got: #{failure.instead}
+    if error
+      div= error.message
+      pre= error.stack
