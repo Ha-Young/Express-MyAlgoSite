@@ -2,17 +2,29 @@
 <html>
 
 <head>
-  <title>problem</title>
+  <title><%= title %></title>
 </head>
 
 <body>
   <%- include('partials/header') %>
-  <!-- <a href="/">home</a> -->
-  <!-- 해당 문제 이름 -->
-  <h1>해당 문제</h1>
 
-
-
+  <div>
+    <h1><% problem.title %></h1>
+    <ul>
+      <li>
+        <span>이름 <%= problem.title %></span>
+      </li>
+      <li>
+        <span>레벨 <%= problem.difficulty_level %></span>
+      </li>
+      <li>
+        <span>완료 인원 <%= problem.completed_users %></span>
+      </li>
+      <li>
+        <span>설명 <%= problem.description %></span>
+      </li>
+    </ul>
+  </div>
 </body>
 
 </html>

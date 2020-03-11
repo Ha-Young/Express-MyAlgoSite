@@ -1,9 +1,19 @@
 <header>
   <nav>
     <ul>
-      <li><span><%= user %></span></li>
-      <li><a href="/auth/logout">로그아웃</a></li>
+      <li>
+        <a href="/">Home</a>
+      </li>
+      <li>
+        <a href="/auth/logout">로그아웃</a>
+      </li>
+      <li>
+        <% if (user) { %>
+        <span><%= user %></span>
+        <% } %>
+      </li>
     </ul>
   </nav>
+
   <h1>Codewars</h1>
 </header>

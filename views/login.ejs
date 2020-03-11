@@ -7,18 +7,12 @@
 </head>
 
 <body>
-  <nav>
-    <ul>
-      <!-- <li><a href="/auth/logout">logout</a></li> -->
-      <!-- <li><a href="/auth">login</a></li> -->
-      <!-- <li><a href="/">home</a></li> -->
-    </ul>
-  </nav>
-  <header>
-    <h1>로그인</h1>
-  </header>
-  <main>
+  <%- include('partials/header') %>
+
+  <div>
+    <h3>github으로 로그인</h3>
     <a class="github-button" href="/auth/github">github</a>
-  </main>
+  </div>
 </body>
+
 </html>
