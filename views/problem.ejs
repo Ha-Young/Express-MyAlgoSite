@@ -25,9 +25,8 @@
         <span>설명 <%= problem.description %></span>
       </li>
     </ul>
-    
     <form action='<%= problem.id %>' method='POST'>
-      <input name="problem_solution"></textarea>
+      <textarea name='problem_solution' cols="50" rows="10"></textarea>
       <button type='submit'>제출</button>
     </form>
   </div>

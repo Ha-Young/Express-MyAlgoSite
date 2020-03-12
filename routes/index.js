@@ -23,11 +23,6 @@ router.get('/', isAuthenticated, async (req, res, next) => {
       problemsParse.forEach(async problem => await new Problem(problem).save());
     }
 
-    // app.locals.title = "home";
-    // app.locals.user = "req.user.username";
-    // app.locals.problems = "problemsParse";
-    // res.render('index');
-
     res.render('index', {
       title: "home",
       user: req.user.username,
