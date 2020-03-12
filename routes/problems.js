@@ -2,56 +2,54 @@ const express = require('express');
 const { VM } = require('vm2');
 
 const Problem = require('../models/Problem');
+const { isAuthenticated } = require('../routes/middlewares/authorization');
+const { setProblemById } = require('../utils/index');
 
 const router = express.Router();
 
-router.get('*', (req, res, next) => {
-  if (req.session.isLogined) {
-    next();
-  } else {
-    res.render('login', {
-      isLogined: req.session.isLogined,
-      message: '로그인이 필요합니다'
-    });
-  }
-});
+router.get('/:problem_id', isAuthenticated, async (req, res) => {
+  const problem = await setProblemById(req, res);
 
-router.get('/:problem_id', async (req, res) => {
-  const problem = (await Problem.find({ id: req.params.problem_id }))[0];
   res.render('problem', {
     problem,
-    isLogined: req.session.isLogined,
+    isLogined: req.isAuthenticated(),
   });
 });
 
-router.post('/:problem_id', async (req, res) => {
-  const result = [];
-  const problem = (await Problem.find({ id: req.params.problem_id }))[0];
+router.post('/:problem_id', isAuthenticated, async (req, res) => {
+  const problem = await setProblemById(req, res);
   const vm = new VM({ sandbox: {} });
-  vm.run(`const solution = ${req.body.code};`);
+  let result = true;
+
+  try {
+    vm.run(`const solution = ${req.body.code};`);
+  } catch (error) {
+    res.render('result', {
+      error,
+      problem,
+      message: '틀렸습니다',
+      isLogined: req.isAuthenticated()
+    });
+  };
 
   problem.tests.forEach(test => {
-    const answer = vm.run(test.code);
-    if (answer === test.solution) {
-      result.push(true);
-    } else {
-      result.push(false);
-    }
+    try {
+      const answer = vm.run(test.code);
+      result = result && (answer === test.solution)
+    } catch (error) {
+      res.render('failure', {
+        error,
+        problem,
+        isLogined: req.isAuthenticated()
+      });
+    };
   });
 
-  if (result.some(res => !res)) {
-    res.render('result', {
-      isLogined: req.session.isLogined,
-      message: '틀렸습니다',
-      problem
-    });
-  } else {
-    res.render('result', {
-      isLogined: req.session.isLogined,
-      message: '맞았습니다',
-      problem
-    });
-  }
+  res.render(result ? 'success' : 'failure', {
+    problem,
+    error: undefined,
+    isLogined: req.isAuthenticated()
+  });
 });
 
 module.exports = router;

@@ -3,13 +3,21 @@
   <head>
     <title>Codewars</title>
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
+    <% const href = `/problem/${problem.id}` %>
     <%- include('header') %>
-    <div class="container">
-      <div>failed ㅠㅠ</div>
-      <a href="/">home</a>
+    <div class="container result-container">
+      <div class="result-message">틀렸습니다</div>
+      <% if (error) { %>
+        <div class="error-box">
+          <div class="error-title"><%= error %></div>
+          <div><%= error.stack %></div>
+        </div>
+      <% } %>
+      <a href="/">메인 페이지로</a>
+      <a href="<%= href %>">다시 풀어보기</a>
     </div>
   </body>
 </html>

@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 
  */
 const userSchema = new mongoose.Schema({
-  id: String,
+  _id: String,
   displayName: String,
   username: String,
   profileUrl: String,

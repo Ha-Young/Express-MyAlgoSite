@@ -1,43 +1,44 @@
 const express = require('express');
 const User = require('../models/User');
 const Problem = require('../models/Problem');
+const { setProblems } = require('../utils/index')
+const { setMainPageMessage } = require('../utils/index');
+const { isAuthenticated } = require('../routes/middlewares/authorization');
 
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {
-  const problems = await Problem.find();
-  let message = '';
 
-  if (req.session.isLogined) {
-    const user = (await User.find({ id: req.session.passport.user }))[0];
-    message = `Hello, ${user.displayName}`;
-  }
+  const problems = await setProblems(req, res);
+  const message = await setMainPageMessage(req, res);
 
   res.render('index', { 
     problems,
     message,
-    isLogined: req.session.isLogined
+    isLogined: req.isAuthenticated()
    });
 });
 
 router.get('/login', (req, res) => {
   res.render('login', {
-    isLogined: req.session.isLogined,
+    isLogined: req.isAuthenticated(),
     message: 'Login'
   });
 });
 
-router.get('/logout', (req, res) => {
-  req.session.destroy(err => {
-    res.redirect('/');
-  });
+router.get('/logout', isAuthenticated, (req, res) => {
+  req.logout();
+  res.redirect('/');
 });
 
 router.get('/:level', async (req, res, next) => {
-  const problems = await Problem.find({ difficulty_level: req.params.level });
+  const problems = await setProblems(req, res, { difficulty_level: req.params.level });
+  const message = await setMainPageMessage(req, res);
+  
   res.render('index', {
     problems,
-    isLogined: req.session.isLogined,
+    message,
+    isLogined: req.isAuthenticated()
   });
 });
 

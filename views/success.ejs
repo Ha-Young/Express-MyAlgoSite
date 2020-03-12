@@ -3,13 +3,13 @@
   <head>
     <title>Codewars</title>
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
     <% const href = `/problem/${problem.id}` %>
     <%- include('header') %>
     <div class="container result-container">
-      <div class="result-message"><%= message %></div>
+      <div class="result-message">맞았습니다</div>
       <a href="/">메인 페이지로</a>
       <a href="<%= href %>">다시 풀어보기</a>
     </div>

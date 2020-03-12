@@ -9,7 +9,6 @@ a {
 }
 
 .container {
-  display: flex;
   position: relative;
   margin: auto;
   padding-top: 150px;
@@ -45,7 +44,6 @@ a {
 }
 
 .home-container {
-  display: block;
   padding-top: 0px;
 }
 
@@ -69,7 +67,6 @@ a {
 }
 
 .login-container {
-  display: block;
   position: relative;
   z-index: 0;
   width: 100%;
@@ -162,6 +159,10 @@ a {
   font-size: 20px;
 }
 
+.problem-container {
+  display: flex;
+}
+
 .problem-description-container {
   padding: 30px;
 }
@@ -210,7 +211,6 @@ input[type=submit]:hover {
 }
 
 .result-container {
-  display: block;
   margin-left: 300px;
 }
 
@@ -225,4 +225,22 @@ input[type=submit]:hover {
 .result-message {
   margin-bottom: 50px;
   font-size: 80px;
+}
+
+.error-box {
+  display: block;
+  width: 500px;
+  margin-bottom: 20px;
+  color: rgb(143, 18, 18);
+}
+
+.error-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.error-container > div {
+  position: relative;
+  width: 800px;
+  font-size: 15px;
 }
