@@ -94,6 +94,8 @@ const postProblemsDetail = async (req, res, next) => {
 const getSuccess = (req, res) => {
   const { id } = req.session.context;
 
+  req.session.context = {};
+
   if (!id) {
     res.redirect('/');
     return;
@@ -104,6 +106,8 @@ const getSuccess = (req, res) => {
 
 const getFailure = (req, res) => {
   const { id, test, expect, result } = req.session.context;
+
+  req.session.context = {};
 
   if (!id) {
     res.redirect('/');
