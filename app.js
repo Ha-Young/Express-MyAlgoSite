@@ -1,5 +1,6 @@
 const dotenv = require('dotenv');
 const express = require('express');
+const morgan = require('morgan');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const passport = require('passport');
@@ -13,6 +14,7 @@ require('./db');
 
 const app = express();
 
+app.use(morgan('dev'));
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
