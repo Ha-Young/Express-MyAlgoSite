@@ -1,17 +1,23 @@
 const express = require('express');
 const router = express.Router();
 const verifyLogin = require('./middlewares/authorization').verifyLogin;
-const fs = require('fs');
-const path = require('path');
+const Problem = require('../models/Problem');
+const errors = require('../lib/errors');
 
-const rawdata = fs.readFileSync(path.join(__dirname, '../models/sample_problems.json'));
-const problems = JSON.parse(rawdata);
+router.get('/', verifyLogin, async (req, res, next) => {
+  let problems;
+  try {
+    problems = await Problem.find({}).exec();
+  } catch (err) {
+    next(
+      new errors.GeneralError(err.message)
+    );
+  }
 
-router.get('/', verifyLogin, (req, res, next) => {
-// router.get('/', (req, res, next) => { // I have removed verifyLogin, for covnenience
   res.render('index', { 
     title: '바닐라코딩',
-    problems
+    problems,
+    user: req.user
   });
 });
 

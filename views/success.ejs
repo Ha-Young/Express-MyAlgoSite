@@ -1,8 +1,17 @@
+<head>
+  <link rel='stylesheet' href='/stylesheets/style.css'>
+  <link rel='stylesheet' href='/stylesheets/success.css'>
+</head>
 <body>
-  <h>CONGRATULATIONS! YOU HAVE SOLVED THE PROBLEM!!</h>
-  <p><%= problem.title %></p>
-  <p>SOLVED BY <%= problem.completed_users %> USERS</p>
-  <a href="/">
-    <button>GO TO MAIN</button>
-  </a>
+  <div class="container">
+    <h1>
+      🎉🎉 CONGRATULATIONS! 🎉🎉<br/>
+      YOU HAVE SOLVED <%= problem.title %>!!
+    </h1>
+    <p></p>
+    <h2>It is now solved by <%= problem.completed_users %> ⚔️ brave users like you</h2>
+    <a href="/">
+      <button class="primary_button">GO TO MAIN</button>
+    </a>
+  </div>
 </body>

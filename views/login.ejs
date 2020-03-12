@@ -2,10 +2,27 @@
 <html>
   <head>
     <title>Login</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel='stylesheet' href='/stylesheets/login.css'/>
   </head>
   <body>
-    <form action='/login/github' method='GET'>
-      <button type="submit">GITHUB LOGIN</button>
-    </form>
+    <div class='login_container'>
+      <h1></h1>
+        <p id='login_headline'>
+          // Welcome back, warrior.<br/>
+          // Sign in to take part in the Code War.
+          <!-- <span class='green_text'>console</span>.<span class='yellow_text'>log</span>(<span class='orange_text'>'Welcome back, warrior.'</span>);<br/>
+          <span class='green_text'>console</span>.<span class='yellow_text'>log</span>(<span class='orange_text'>'Sign in to take part in the Code War.'</span>)<br/> -->
+        </p>
+        <div id='login_github_container'>
+          <form action='/login/github' method='GET'>
+            <button class='login_button' type="submit">
+              
+              <span class='yellow_text'>signIn</span>(<img id='github_logo_image' src='/images/github_logo.png'/>
+              <span class='light_blue_text'>GitHub</span>);
+            </button>
+          </form>
+        </div>
+    </div>
   </body>
 </html>

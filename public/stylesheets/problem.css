@@ -1,0 +1,12 @@
+.container {
+  width: 80%;
+}
+
+.code_input_container {
+  border: 1px solid lightgrey;
+}
+
+#code_input {
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}

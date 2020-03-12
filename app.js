@@ -4,45 +4,45 @@ const express = require('express');
 const path = require('path');
 const passport = require('passport');
 const GitHubStrategy = require('passport-github').Strategy;
-
 const index = require('./routes/index');
 const problems = require('./routes/problems');
-
 const User = require('./models/User');
 const Problem = require('./models/Problem');
+const errors = require("./lib/errors");
+const mongoose = require('mongoose');
 
-// load default problems, if [problems] collection is empty
-const storeProblems = async () => {
-  const hasProblems = await Problem.countDocuments({}).exec();
-  if (hasProblems) return;
+mongoose.connect(process.env.DB_ADDRESS, {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 10000
+});
 
-  const sampleProblems = require('./models/sample_problems.json');
-  for (let i = 0; i < sampleProblems.length; i++) {
-    await new Problem(sampleProblems[i]).save();
-  }
-}
-storeProblems();
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log('DB connected!');
+  const storeSampleProblems = async () => {
+    try {
+      const hasProblems = await Problem.countDocuments({}).exec();
+      if (hasProblems) return;
 
-async function findOrCreateUser(profile, cb) {
-  try {
-    let user = await User.findOne({ githubId: profile.id });
-    if (!user) {
-      try {
-        user = new User({
-          githubId: profile.id,
-          name: profile.name
-        });
-        await user.save();
-      } catch (err) {
-        err.displayMessage = 'error during creating a user';
-        throw new Error(err);
+      const sampleProblems = require('./models/sample_problems.json');
+
+      if (!Array.isArray(sampleProblems) || !sampleProblems.length) {
+        throw new errors.GeneralError('Invalid [sampleProblems.json] file');
       }
+
+      for (let i = 0; i < sampleProblems.length; i++) {
+        await new Problem(sampleProblems[i]).save();
+      }
+      console.log('Stored sample problems in DB');
+    } catch (err) {
+      throw new errors.GeneralError(err.message);
     }
-    return cb(null, user);
-  } catch (err) {
-    next(err);
   }
-}
+  storeSampleProblems();
+});
 
 passport.use(new GitHubStrategy({
     clientID: process.env.CLIENT_ID,
@@ -50,6 +50,28 @@ passport.use(new GitHubStrategy({
     callbackURL: "http://localhost:3000/login/github/callback"
   },
   async function(accessToken, refreshToken, profile, cb) {
+    async function findOrCreateUser(profile, cb) {
+      try {
+        let user = await User.findOne({ githubId: profile.id });
+        if (!user) {
+          try {
+            user = new User({
+              githubId: profile._json.id,
+              name: profile._json.name,
+              avatarUrl: profile._json.avatar_url
+            });
+            await user.save();
+          } catch (err) {
+            throw new Error('Error occured while creating a user');
+          }
+        }
+        return cb(null, user);
+      } catch (err) {
+        next(
+          new errors.GeneralError(err.message)
+        )
+      }
+    }
     return await findOrCreateUser(profile, cb);
   })
 );
@@ -76,8 +98,10 @@ app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveU
 app.use(passport.initialize());
 app.use(passport.session());
 
-// maybe I can move those login in to routes/login.js ?
+app.use('/', index);
+
 app.get('/login', (req, res, next) => {
+  // console.log(' I AM HERE LOGIN ');
   res.render('login');
 });
 
@@ -90,41 +114,26 @@ app.get(
   (req, res) => res.redirect('/')
 );
 
-app.use('/', index);
 app.use('/problems', problems);
 
-app.get('/error', (req, res, next) => {
-  const err = req.session.error;
-  
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-  res.locals.message = err.message;
 
-  res.status(err.status).render('error');
+app.get('/error', (req, res, next) => {
+  const error = req.session.error;
+  res.render('error', { error });
 });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+  return next(
+    new errors.PageNotFoundError('Page Not Found')
+  );
 });
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  // res.locals.message = err.message;
-  // res.locals.error = req.app.get('env') === 'development' ? err : { status: err.status };
-
-  // render the error page
-  // res.status(err.status || 500);
-  // res.render('error');
-  
-  // console.log(err.message);
-
-  req.session.error = req.app.get('env') === 'development' ? err : {};
+  console.log("I AM HERE ERROR");
   err.status = err.status || 500;
-
-  // console.log(req.session.error);
+  req.session.error = err;
   res.status(err.status).redirect('/error');
 });
 

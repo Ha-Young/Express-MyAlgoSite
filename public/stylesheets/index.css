@@ -1,0 +1,16 @@
+/* .header {
+  position: absolute;
+} */
+
+.header_profile {
+  display: inline-block;
+  text-align: center;
+}
+
+.header_profile_userAvatar {
+  width: 50px;
+}
+
+.problem {
+  margin: 20px;
+}

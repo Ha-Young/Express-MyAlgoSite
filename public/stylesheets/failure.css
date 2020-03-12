@@ -1,0 +1,14 @@
+.container {
+  text-align: center;
+}
+
+.failure_detail_container {
+  text-align: left;
+  background-color: lightgrey;
+}
+
+.failure_detail_text {
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  color: red;
+}

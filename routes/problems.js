@@ -2,30 +2,42 @@ const express = require('express');
 const router = express.Router();
 const verifyLogin = require('./middlewares/authorization').verifyLogin;
 const Problem = require('../models/Problem');
-// const User = require('../models/User');
-const {VM} = require('vm2');
+const errors = require('../lib/errors');
+const assert = require('assert').strict;
+const { expect, AssertionError } = require('chai');
+const { VM } = require('vm2');
 const vm = new VM({
-  console: 'inherit',
-  timeout: 2000,
-  sandbox: {}
+  timeout: 1000,
+  sandbox: {
+    expect
+  }
 });
 
+router.get('/:problem_id', verifyLogin, async (req, res, next) => {
+  let problem;
+  try {
+    problem = await Problem.findOne({ id: req.params.problem_id }).exec();
+  } catch (err) {
+    next(
+      new errors.GeneralError('Error while finding a problem')
+    );
+  }
 
-// router.get('/:problem_id', async (req, res, next) => { // I have removed verifyLogin for convenience
-router.get('/:problem_id', verifyLogin, async (req, res, next) => { // should be recovered
-  const problem = await Problem.findOne({ id: req.params.problem_id }).exec();
   res.render('problem', { problem });
 });
 
 router.post('/:problem_id', verifyLogin, async (req, res, next) => {
-// router.post('/:problem_id', async (req, res, next) => {
-
+  const ERROR_TYPE = {
+    FAILED: 'failed'
+  }
 
   let problem;
   try {
     problem = await Problem.findOne({ id: req.params.problem_id }).exec();
   } catch (err) {
-    console.error('error occured during find a problem');
+    next(
+      new errors.GeneralError('Error while finding a problem')
+    );
   }
 
   const tests = problem.tests;
@@ -34,41 +46,61 @@ router.post('/:problem_id', verifyLogin, async (req, res, next) => {
   
   for (let i = 0; i < tests.length; i++) {
     const testCode = tests[i].code;
-    const solution = tests[i].solution;
+    let solution = tests[i].solution;
+
+    // console.log(testCode, typeof solution);
+
+    try {
+      eval(solution);
+    } catch (err) {
+      solution = "'" + solution + "'";
+    }
 
     codeToRun += `\n
-      if (${testCode} !== ${solution}) {
-        const userSolution = ${testCode};
-        const error = new Error();
-        error.message = 'expected ${testCode.toString()} to be ${solution}, but received ' + userSolution;
-        error.type = 'failed';
-        throw error;
-      }`
+      expect(${testCode}, "${testCode}").to.eql(${solution});
+      \n
+    `
+
+  // solution to number1
+  // function solution(n) {
+  //   if (n == 0) return 0;
+  //   if (n == 1) return 1;
+  //   return solution(n - 1) + solution(n - 2);            
+  // }
+
+  // solution to number5
+  //   function filter_list(l) {
+  //     const result = [];
+  
+  //     for (let i = 0; i < l.length; i++) {
+  //         if(typeof l[i] === 'number') {
+  //             result.push(l[i]);
+  //         }
+  //     }
+  
+  //     return result;
+  // }
+
   }
 
-  const problemId = problem.id;
   try {
     vm.run(codeToRun);
-    // add user's code to user's solved
-    
-    // add problem's completed_users
-    const filter = { id: problemId };
+    const filter = { id: problem.id };
     const update = { $inc: { completed_users: 1 } }
-    let problem = await Problem.findOneAndUpdate(filter, update, {
+    problem = await Problem.findOneAndUpdate(filter, update, {
       new: true 
     }).exec();
     res.status(200).render('success', { problem });
-
-  } catch (err) { // failure.ejs
+  } catch (err) {
     let detail;
-    if (err.type === 'failed') {
-      detail= 'user failed on a test : ' + err.message
+    if (err instanceof AssertionError) {
+      detail = err.message;
     } else {
       detail = err.message + '\n' + err.stack;
     }
-    // add user's code to user's incomplete
-    res.status(200).render('failure', { detail, problemId });
+      // detail = err.message + '\n' + err.stack;
+    res.status(200).render('failure', { problem, detail });
   }
-})
+});
 
 module.exports = router;

@@ -7,40 +7,34 @@
     <script src='/codemirror/mode/javascript.js'></script>
 
     <link rel='stylesheet' href='/stylesheets/style.css'>
-    
+    <link rel='stylesheet' href='/stylesheets/problem.css'>
   </head>
   <body>
-    <div>
-      <a href='/'>
-        <button>GO BACK TO MAIN</button>
-      </a>
-    </div>
-    <div>ID : <%= problem.id %></div>
-    <div><%= problem.title %></div>
-    <div><%= problem.completed_users %></div>
-    <div><%= problem.difficulty_level %></div>
-    <div><%= problem.description %></div>
-    <div id='codemirror'></div>
-    <div>
+    <div class="container">
+      <div>
+        <a href='/'>
+          <button class="secondary_button">GO BACK TO MAIN</button>
+        </a>
+      </div>
+      <div class="problem_detail_container">
+        <h2><%= problem.title %></h2>
+        <div>Solved by <%= problem.completed_users %> users</div>
+        <div>Difficulty level : <%= problem.difficulty_level %></div>
+        <div><%= problem.description %></div>
+        <hr/>
+      </div>
+      <div id='codemirror'></div>
       <form method='POST' action=<%= `/problems/${problem.id}` %>>
-        <input 
-          id='codeInput'
-          type='text'
-          name='code'
-          value='function solution(n) {
-            if (n == 0) return 0;
-            if (n == 1) return 1;
-            return solution(n - 1) + solution(n - 2);
-          }'
-        />
-        <!-- value= ... SHOULD BE REPLACED WITH solution(){}-->
-        <button type='submit'>Submit</button>
+        <div class="code_input_container">
+        <input id='code_input' type='text' name='code' value='function solution(n) { }'/>
+        </div>
+        <button class="primary_button" type='submit'>Submit</button>
       </form>
     </div>
-    <script>
-      const myCodeMirror = CodeMirror.fromTextArea(document.getElementById('codeInput'),{
+        <script>
+      const myCodeMirror = CodeMirror.fromTextArea(document.getElementById('code_input'),{
         lineNumbers: true,
-        mode: 'javascript',
+        mode: 'javascript'
       })
     </script>
   </body>
