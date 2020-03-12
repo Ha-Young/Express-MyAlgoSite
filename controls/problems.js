@@ -1,6 +1,6 @@
+const vm = require('vm');
 const Problem = require('../models/Problem');
 const Test = require('../models/Test');
-const vm = require('vm');
 
 const getHome = async (req, res, next) => {
   try {
@@ -8,7 +8,9 @@ const getHome = async (req, res, next) => {
 
     res.render('index', { title: '코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!', problems });
   } catch (err) {
-    console.log(err);
+    err.status = 500;
+    err.message = 'Internal Server Error';
+    next(err);
   }
 };
 
@@ -24,18 +26,24 @@ const getAddCase = (req, res, next) => {
 }
 
 const postAddCase = async (req, res, next) => {
-  const id = req.params.problem_id;
-  const { question, answer } = req.body;
-  const problem = await Problem.findById(id);
-  const newTest = await Test.create({
-    code: question,
-    solution: answer
-  });
+  try {
+    const id = req.params.problem_id;
+    const { question, answer } = req.body;
+    const problem = await Problem.findById(id);
+    const newTest = await Test.create({
+      code: question,
+      solution: answer
+    });
 
-  problem.tests.push(newTest.id);
-  await problem.save();
+    problem.tests.push(newTest.id);
+    await problem.save();
 
-  res.redirect(`/problems/${id}`);
+    res.redirect(`/problems/${id}`);
+  } catch (err) {
+    err.status = 500;
+    err.message = 'Internal Server Error';
+    next(err);
+  }
 };
 
 const getProblemsDetail = async (req, res, next) => {
@@ -51,15 +59,15 @@ const getProblemsDetail = async (req, res, next) => {
 
     res.render('problemDetail', { title: problem.title, problem });
   } catch (err) {
-    console.log(err);
+    err.status = 500;
+    err.message = 'Internal Server Error';
+    next(err);
   }
 };
 
 const postProblemsDetail = async (req, res, next) => {
   const id = req.params.problem_id;
   const submitedCode = req.body.code;
-  // const solutionProvider = new Function(`return ${code}`);
-  // const originSolution = solutionProvider();
 
   try {
     const problem = await Problem.findById(id).populate('tests');
@@ -68,10 +76,20 @@ const postProblemsDetail = async (req, res, next) => {
     let context;
 
     for (let i = 0; i < tests.length; i++) {
-      const { code, solution } = tests[i];
-      const script = new vm.Script(`${submitedCode}\nresult = ${code};\n${code} === expect;`);
-      context = vm.createContext({ id, expect: solution, test: code });
       try {
+        const { code, solution } = tests[i];
+        const script = new vm.Script(
+          `${submitedCode}\n` +
+          `result = ${code};\n` +
+          `${code} === expect;`
+        );
+
+        context = vm.createContext({
+          id,
+          expect: solution,
+          test: code
+        });
+
         const result = script.runInContext(context);
 
         if (!result) {
@@ -95,7 +113,9 @@ const postProblemsDetail = async (req, res, next) => {
       res.redirect(`/failure`);
     }
   } catch (err) {
-    console.log(err);
+    err.status = 500;
+    err.message = 'Internal Server Error';
+    next(err);
   }
 };
 
@@ -128,4 +148,12 @@ const getFailure = (req, res) => {
   });
 };
 
-module.exports = { getHome, getAddCase, postAddCase, getProblemsDetail, postProblemsDetail, getSuccess, getFailure };
+module.exports = {
+  getHome,
+  getAddCase,
+  postAddCase,
+  getProblemsDetail,
+  postProblemsDetail,
+  getSuccess,
+  getFailure
+};
