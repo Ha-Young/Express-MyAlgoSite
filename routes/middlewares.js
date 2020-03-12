@@ -1,3 +1,4 @@
+const util = require('util');
 const vm = require('vm');
 const sample_problems = require('../models/sample_problems.json');
 
@@ -25,12 +26,20 @@ exports.isSeccesss = (req, res, next) => {
         script.runInNewContext(context);
     });
 
-    console.log(problemTestList)
-    console.log(contexts);
+    let sulutionFn = Object.keys(contexts[0])[0];
 
-    if (true) {
-        next();
-    } else {
-        res.render('failure');
+    let testValue = [];
+
+    for (let i = 0; i < problemTestList.length; i++) {
+        const sandbox = {};
+        let changeTestValue = vm.runInNewContext(problemTestList[i].code, sandbox);
+        testValue.push([changeTestValue, problemTestList[i].solution]);
     }
+
+    for (let i = 0; i < testValue.length; i++) {
+        if (contexts[0][sulutionFn](testValue[i][0]) !== testValue[i][1]) {
+            res.render('failure');
+        }
+    }
+    next();
 }
