@@ -16,11 +16,12 @@ body {
   color: #bb432c;
 }
 
-.signUp, .successSection a {
+.signUp, .resultSection a {
   color: white;
 }
 
-.loginSection a, .successSection a {
+.loginSection a, .resultSection a {
+  margin: 10px 0px;
   width: 230px;
   border-radius: 5px;
   background-color: #151616;
@@ -28,7 +29,11 @@ body {
   text-decoration: none;
 }
 
-.loginSection a:hover, .successSection a:hover {
+button[type=submit]:hover, .goBackButton:hover {
+  cursor: pointer;
+}
+
+.loginSection a:hover, .resultSection a:hover {
   background-color: #0b0c0c;
   text-decoration: underline;
 }
@@ -142,29 +147,41 @@ body {
   flex-direction: column;
 }
 
-button[type=submit] {
+button[type=submit], .goBackButton {
   margin: 10px;
   width: 100px;
   height: 50px;
-  border-radius: 2px;
+  border-radius: 8px;
   border-style: none;
   background-color: #151616;
   color: white;
   font-size: 1.2rem;
 }
 
-button[type=submit]:hover {
-  cursor: pointer;
+.probelmButtons {
+  display: flex;
+}
+
+.goBackButton {
+  line-height: 50px;
+  text-align: center;
 }
 
 /* [success, failure] */
-.successSection {
+.resultSection {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .testMessage {
-  font-size: 8rem;
+  font-size: 6rem;
+  margin: 20px;
   text-align: center;
+}
+
+.results {
+  margin: 30px 5px;
+  padding: 0px;
+  list-style: none;
 }

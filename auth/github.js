@@ -1,7 +1,5 @@
 const passport = require('passport');
 const GitHubStrategy = require('passport-github').Strategy;
-const mongoose = require('mongoose');
-const createError = require('http-errors');
 const User = require('../models/User');
 const { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, CALLBACK_URL } = require('../app');
 
@@ -11,12 +9,8 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    if (mongoose.Types.ObjectId.isValid(id)) {
-      const user = await User.findById(id);
-      done(null, user);
-    } else {
-      done(createError(404, 'User Not Found'));
-    }
+    const user = await User.findById(id);
+    done(null, user);
   } catch (err) {
     done(err);
   }
@@ -39,28 +33,21 @@ passport.use(new GitHubStrategy({
         githubId: profile.id,
         githubUrl: profile.profileUrl,
         imageUrl: profile.photos[0].value,
-        solved_level: {
-          difficulty_level_one: 0,
-          difficulty_level_two: 0,
-          difficulty_level_three: 0,
-        },
-        solved_all_cout: 0,
+        solvedAllCount: 0,
+        solvedLevelOne: 0,
+        solvedLevelTwo: 0,
+        solvedLevelThree: 0,
         solved: [],
       };
-  
+
       const options = {
         new: true,
-        upsert: true
       };
 
       const user = await User.findOneAndUpdate(loginedUser, newUser, options);
-      if (user) {
-        done(null, user)
-      } else {
-        done(createError(404, 'User Not Found'));
-      }
+      done(null, user);
     } catch (err) {
-      done(err)
+      done(err);
     }
   }
 ));

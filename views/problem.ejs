@@ -2,15 +2,15 @@
 <html>
   <head>
     <title>Codewars</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan+2|Gamja+Flower&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan+2|Gamja+Flower&display=swap" rel="stylesheet" />
     <script src="/codemirror/codemirror.js"></script>
-    <link rel="stylesheet" href="/codemirror/codemirror.css">
-    <link rel="stylesheet" href="/codemirror/darcula.css">
+    <link rel="stylesheet" href="/codemirror/codemirror.css" />
+    <link rel="stylesheet" href="/codemirror/darcula.css" />
     <script src="/codemirror/javascript.js"></script>
   </head>
   <body>
-    <%- include('header') %>
+    <%- include('./partials/header') %>
     <hr />
     <section class="problemSection">
       <article>
@@ -19,15 +19,15 @@
             <ul class="problemWrapper">
               <li class="problemTitleDetail"><%= problemInfo.title %></li>
               <li class="problemInfo">
-                <div>☑️ Level <%= problemInfo.difficulty_level %></div>
+                <div>☑️ Level <%= problemInfo.difficultyLevel %></div>
                 <div>☑️ Made: <%= problemInfo.made %></div>
-                <div>☑️ Completed: <%= problemInfo.completed_users %></div>
+                <div>☑️ Completed: <%= problemInfo.completedUsers %></div>
               </li>
               <li><%= problemInfo.description %></li>
               <li class="problemTest">
                 <div>< Example ></Example></div>
                 <% problemInfo.tests.forEach(function(test){ %>
-                  <div><%= test.code %> => <%= test.solution %></div>
+                  <div><%= test.code %> => <%= JSON.stringify(test.solution) %></div>
                 <% }) %>
               </li>
             </ul>
@@ -35,14 +35,17 @@
         <% } %>
       </article>
       <article>
-        <form class="codeFrom" action="/problem/<%= problem[0]._id %>" method="post">
+        <form action="/problem/<%= problem[0]._id %>" method="post">
           <textarea id="editor" name="solution">function solution() { }</textarea>
-          <button type="submit">Submit</button>
+          <div class="probelmButtons">
+            <button type="submit">Submit</button>
+            <div class="goBackButton">Go Back</div>
+          </div>
         </form>
       </article>
     </section>
     <script>
-      const myCodeMirror = CodeMirror.fromTextArea(document.querySelector('#editor'), {
+      const myCodeMirror = CodeMirror.fromTextArea(document.querySelector("#editor"), {
         mode:  "javascript",
         theme: "darcula",
         lineNumbers: true,
@@ -50,7 +53,11 @@
         tabSize: 2,
       });
 
-      myCodeMirror.setSize('auto', 300);
+      myCodeMirror.setSize("auto", 300);
+
+      document.querySelector(".goBackButton").addEventListener("click", () => {
+        window.history.back();
+      });
     </script>
   </body>
 </html>

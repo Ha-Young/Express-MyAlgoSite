@@ -10,11 +10,11 @@ const ProblemSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  completed_users: {
+  completedUsers: {
     type: Number,
     required: true,
   },
-  difficulty_level: {
+  difficultyLevel: {
     type: Number,
     required: true,
   },

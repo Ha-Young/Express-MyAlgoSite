@@ -1,8 +1,8 @@
 [
   {
     "title": "피보나치 수열",
-    "completed_users": 15,
-    "difficulty_level": 1,
+    "completedUsers": 15,
+    "difficultyLevel": 1,
     "description": "피보나치 수는 F(0) = 0, F(1) = 1일 때, 1 이상의 n에 대하여 F(n) = F(n-1) + F(n-2) 가 적용되는 수 입니다.",
     "tests": [
       {
@@ -22,8 +22,8 @@
   },
   {
     "title": "서울에서 김서방 찾기",
-    "completed_users": 11,
-    "difficulty_level": 2,
+    "completedUsers": 11,
+    "difficultyLevel": 2,
     "description": "String형 배열 seoul의 element중 Kim의 위치 x를 찾아, 김서방은 x에 있다는 String을 반환하는 함수, solution을 완성하세요. seoul에 Kim은 오직 한 번만 나타나며 잘못된 값이 입력되는 경우는 없습니다.",
     "tests": [
       {
@@ -43,8 +43,8 @@
   },
   {
     "title": "수박수박수박수박수",
-    "completed_users": 12,
-    "difficulty_level": 2,
+    "completedUsers": 12,
+    "difficultyLevel": 2,
     "description": "길이가 n이고, 수박수박수박수....와 같은 패턴을 유지하는 문자열을 리턴하는 함수, solution을 완성하세요. 예를들어 n이 4이면 수박수박을 리턴하고 3이라면 수박수를 리턴하면 됩니다.\n제한 조건\nn은 길이 10,000이하인 자연수입니다.",
     "tests": [
       {
@@ -64,8 +64,8 @@
   },
   {
     "title": "Sum of positive",
-    "completed_users": 10,
-    "difficulty_level": 1,
+    "completedUsers": 10,
+    "difficultyLevel": 1,
     "description": "You get an array of numbers, return the sum of all of the positives ones. (Example [1,-4,7,12] => 1 + 7 + 12 = 20 ) If there is nothing to sum, the sum is default to 0.",
     "tests": [
       {
@@ -89,8 +89,8 @@
   },
   {
     "title": "Even or Odd",
-    "completed_users": 100,
-    "difficulty_level": 1,
+    "completedUsers": 100,
+    "difficultyLevel": 1,
     "description": "Create a function (or write a script in Shell) that takes an integer as an argument and returns 'Even' for even numbers or 'Odd' for odd numbers.",
     "tests": [
       {
@@ -114,71 +114,71 @@
   },
   {
     "title": "Shortest Word",
-    "completed_users": 11,
-    "difficulty_level": 3,
+    "completedUsers": 11,
+    "difficultyLevel": 3,
     "description": "Simple, given a string of words, return the length of the shortest word(s). String will never be empty and you do not need to account for different data types.",
     "tests": [
       {
         "code": "solution('bitcoin take over the world maybe who knows perhaps')",
-        "solution": "3"
+        "solution": 3
       },
       {
         "code": "solution('turns out random test cases are easier than writing out basic ones')",
-        "solution": "2"
+        "solution": 2
       },
       {
         "code": "solution('sekeeeessqk aa wwkkxk')",
-        "solution": "1"
+        "solution": 1
       }
     ],
     "made": "Minsun"
   },
   {
     "title": "List Filtering",
-    "completed_users": 2,
-    "difficulty_level": 3,
+    "completedUsers": 2,
+    "difficultyLevel": 3,
     "description": "In this kata you will create a function that takes a list of non-negative integers and strings and returns a new list with the strings filtered out.",
     "tests": [
       {
         "code": "solution([1, 2, 'a', 'b'])",
-        "solution": "[1, 2]"
+        "solution": [1, 2]
       },
       {
         "code": "solution([1, 'a', 'b', 0, 15])",
-        "solution": "[1, 0, 15]"
+        "solution": [1, 0, 15]
       },
       {
         "code": "solution([1, 2, 'aasf', '1', '123', 123])",
-        "solution": "[1, 2, 123]"
+        "solution": [1, 2, 123]
       }
     ],
     "made": "Minsun"
   },
   {
     "title": "Remove the minimum",
-    "completed_users": 50,
-    "difficulty_level": 3,
+    "completedUsers": 50,
+    "difficultyLevel": 3,
     "description": "Given an array of integers, remove the smallest value. If there are multiple elements with the same value, remove the one with a lower index. If you get an empty array/list, return an empty array/list.",
     "tests": [
       {
         "code": "solution([1, 2, 3, 4, 5])",
-        "solution": "[2, 3, 4, 5]"
+        "solution": [2, 3, 4, 5]
       },
       {
         "code": "solution([5, 3, 2, 1, 4])",
-        "solution": "[5, 3, 2, 4]"
+        "solution": [5, 3, 2, 4]
       },
       {
         "code": "solution([2, 2, 1, 2, 1])",
-        "solution": "[2, 2, 2, 1]"
+        "solution": [2, 2, 2, 1]
       }
     ],
     "made": "Minsun"
   },
   {
     "title": "Complementary DNA",
-    "completed_users": 77,
-    "difficulty_level": 3,
+    "completedUsers": 77,
+    "difficultyLevel": 3,
     "description": "In DNA strings, symbols 'A' and 'T' are complements of each other, as 'C' and 'G'. You have function with one side of the DNA (string, except for Haskell); you need to get the other complementary side. DNA strand is never empty or there is no DNA at all (again, except for Haskell).",
     "tests": [
       {

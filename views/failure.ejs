@@ -1,24 +1,33 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Success</title>
+    <title>Fail</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
     <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan+2|Gamja+Flower&display=swap" rel="stylesheet" />
   </head>
   <body>
     <section class="resultSection">
       <h1 class="testMessage"><%= message %></h1>
-      <a href="/problem" class="homeButton">Go Home</a>
-      <article>
-        <% if (results.length) { %>
+      <a href="/problem">Go Home</a>
+      <a href="#" class="goBack">Try again</a>
+      <% if (!!results && results.length) { %>
+        <article>
           <ul class="results">
             <% results.forEach((result, index) => { %>
               <li>[Test <%= index + 1 %>]</li>
               <li>expected <u><big>"<%= result[0] %>"</big></u> to equal <u><big>"<%= result[1] %>".</big></u></li>
             <% }) %>
           </ul>
-        <% } %>
-      </article>
+        </article>
+      <% } %>
+      <% if (!!stack) { %>
+        <pre><%= stack %></pre>
+      <% } %>
     </section>
+    <script>
+      document.querySelector(".goBack").addEventListener("click", () => {
+        window.history.back();
+      });
+    </script>
   </body>
 </html>

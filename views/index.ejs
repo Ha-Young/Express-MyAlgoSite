@@ -2,17 +2,18 @@
 <html>
   <head>
     <title>Codewars</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan+2|Gamja+Flower&display=swap" rel="stylesheet"></head>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan+2|Gamja+Flower&display=swap" rel="stylesheet" />
+  </head>
   <body>
-    <%- include('header') %>
+    <%- include('./partials/header') %>
     <hr />
     <section class="mainSection">
       <% if (problems.length) { %>
         <% problems.forEach(function(problem){ %>
           <ul class="problemWrapper">
             <li>
-              <div class="problemLevel">Level <%= problem.difficulty_level %></div>
+              <div class="problemLevel">Level <%= problem.difficultyLevel %></div>
               <div class="problemTitleMain">
                 <a href="/problem/<%= problem._id %>"><%= problem.title %></a>
               </div>
@@ -20,7 +21,7 @@
             <li><div><%= problem.description %></div></li>
             <li class="problemInfo">
               <div>☑️ Made: <%= problem.made %></div>
-              <div>☑️ Completed: <%= problem.completed_users %></div>
+              <div>☑️ Completed: <%= problem.completedUsers %></div>
             </li>
           </ul>
         <% }) %>

@@ -1,0 +1,15 @@
+<header class="mainHeader">
+  <a href="/"><h1 class="mainTitle">CODEWARS</h1></a>
+  <% if (!!user[0]) { %>
+    <ul class="userInfo">
+      <% user.forEach((userInfo) => { %>
+        <li><a href="/logout">Logout</a></li>
+        <li><img class="userImg" src="<%= userInfo.imageUrl %>" /></li>
+        <li><a href="<%= userInfo.githubUrl %>"><%= userInfo.name %></a></li>
+        <li>( 1️⃣<%= userInfo.solvedLevelOne %></li>
+        <li>2️⃣<%= userInfo.solvedLevelTwo %></li>
+        <li>3️⃣<%= userInfo.solvedLevelThree %> )</li>
+      <% }) %>
+    </ul>
+  <% } %>
+</header>
