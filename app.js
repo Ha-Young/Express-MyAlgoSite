@@ -6,24 +6,17 @@ const index = require('./routes/index');
 const login = require('./routes/login');
 const logout = require('./routes/logout');
 const problems = require('./routes/problems');
-
-const passportSetup = require('./config/passport');
 const mongoose = require('mongoose');
-const keys = require('./config/keys');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 
 const app = express();
 
 app.set('trust proxy', 1)
-app.use(session({
-  secret: 'fdsfafaf',
-  resave: false,
-  saveUninitialized: true
-}));
 
-app.use(passport.initialize());
-app.use(passport.session());
+mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }, () => {
+  console.log('connected to mongodb');
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -31,11 +24,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.set('view engine', 'ejs');
 app.set('views',path.join(__dirname, 'views'));
 
-mongoose.connect(keys.mongoDB.dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }, () => {
-  console.log('connected to mongodb');
-});
-
 app.use(express.static('public'));
+
+app.use(session({
+  secret: process.env.SCRET,
+  resave: false,
+  saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+require('./config/passport');
 
 const checkAuthentication = (req, res, next) => {
   if(req.isAuthenticated()){
@@ -45,15 +45,10 @@ const checkAuthentication = (req, res, next) => {
   }
 };
 
-
-
 app.use('/login', login);
 app.use('/', checkAuthentication, index);
 app.use('/logout', checkAuthentication, logout);
 app.use('/problems', checkAuthentication, problems);
-
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

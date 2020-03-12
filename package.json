@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "NODE_ENV=development nodemon ./bin/www",
+    "dev": "nodemon ./bin/www",
     "build": "mocha --require @babel/register --reporter mocha-junit-reporter --reporter-options mochaFile=./report.xml",
     "test": "mocha --require @babel/register --reporter spec"
   },

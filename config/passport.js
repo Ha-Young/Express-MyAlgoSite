@@ -1,7 +1,5 @@
-require('dotenv').config();
 const passport = require('passport');
 const GitHubStrategy = require('passport-github').Strategy;
-// const keys = require('./keys');
 const errors = require("../lib/error");
 const User = require('../models/User');
 
@@ -9,17 +7,15 @@ passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
-passport.deserializeUser((id, done) => {
-  User.findById(id).then((user) => {
-    done(null, user);
-  });
+passport.deserializeUser(async (id, done) => {
+  const user = await User.findById(id);
+  done(null, user);
 });
 
-////process.env.session 
 passport.use(new GitHubStrategy({
-  clientID: 'c7c7f4510b35c7a03e14',
-  clientSecret: '31c5907aabb8eacf067774a811205caedd8ea86e',
-  callbackURL: '/login/github/callback'
+  clientID: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET,
+  callbackURL: 'http://localhost:3000/login/github/callback'
 }, async (accessToken, refreshToken, profile, cb) => {
     try {
       const user = await User.findOne({ githubid: profile.id });

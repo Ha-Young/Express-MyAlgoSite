@@ -27,13 +27,13 @@ const ProblemSchema = new mongoose.Schema({
   },
   tests: [{
     parameters: {
-      type: Array
+      type: String
     },
     solution: {
       type: Array,
       required: true
     },
-    solved: {
+    isArgString: {
       type: Boolean
     }
   }]

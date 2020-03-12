@@ -13,16 +13,20 @@
       </ul>
     </nav>
     <main>
-      <ul>
-        <% for (let i = 0; i < err.length; i++) { %>
-          <% if (array) { %>
-            <li>정답은 배열안에 <%= solution[i] %> 가 있어야 하지만 <%= err[i] %>가 있는걸로 나왔습니다.</li>
-          <% } else { %> 
-            <li>정답은 <%= solution[i] %> 이지만 <%= err[i] %>가 나왔습니다.</li>
+      <% if (err) { %>
+        <pre>에러입니다.<%= err.stack %> </pre>
+      <% } else { %> 
+        <ul>
+          <% for (let i = 0; i < wrongResults.length; i++) { %>
+            <% if (array) { %>
+              <li>정답은 배열안에 <%= solution[i] %> 가 있어야 하지만 <%= wrongResults[i] %>가 있는걸로 나왔습니다.</li>
+            <% } else { %> 
+              <li>정답은 <%= solution[i] %> 이지만 <%= wrongResults[i] %>가 나왔습니다.</li>
+            <% } %>
           <% } %>
-        <% } %>
-        <li>분발해주세요!!!!!!!!!!!!!!!!!</li>
-      </ul>
+          <li>분발해주세요!!!!!!!!!!!!!!!!!</li>
+        </ul>
+      <% } %>
     </main>
   </body>
 </html>
