@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>failure</title>
+</head>
+
+<body>
+  <%- include('partials/header') %>
+
+  <div>
+    <ul>
+      <h3>문제를 틀리셨습니다 ! </h3>
+      <% wrongProblem.forEach(problem => { %>
+      <li>
+        <span>문제 번호 <%= problem.number %></span>
+        <span>제출한 답 <%= problem.clientResult %></span>
+        <span>정답 <%= problem.result %></span>
+      </li>
+      <%  }) %>
+    </ul>
+  </div>
+</body>
+
+</html>

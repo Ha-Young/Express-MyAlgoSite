@@ -9,6 +9,8 @@ const keys = require('./config/keys');
 const index = require('./routes/index');
 const auth = require('./routes/auth');
 const problems = require('./routes/problems');
+// const success = require('./routes/success');
+// const failure = require('./routes/failure');
 require('./config/passport-setup');
 
 mongoose.connect('mongodb://localhost/codewars', { useNewUrlParser: true }, err => {
@@ -37,6 +39,8 @@ app.use(passport.session());
 app.use('/', index);
 app.use('/auth', auth);
 app.use('/problems', problems);
+// app.use('/success', success);
+// app.use('/failure', failure);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

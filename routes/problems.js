@@ -6,10 +6,8 @@ const vm = require('vm');
 router.get('/:problem_id', async (req, res) => {
   try {
     const problem = await Problem.findOne({ id: req.params.problem_id });
-    console.log(problem);
 
     res.render('problem', {
-      title: "problem",
       user: req.user.username,
       problem
     });
@@ -33,14 +31,21 @@ router.post('/:problem_id', async (req, res) => {
     if (result !== clientResult) {
       wrongProblem.push({
         number: index + 1,
-        clientResult: clientResult,
-        result: testCode.solution
+        clientResult,
+        result,
       });
     }
   });
 
-  
-  // console.log(wrongProblem);
+  if (wrongProblem.length) {
+    res.locals.wrongProblem = wrongProblem;
+    res.render('failure', {
+      user: req.user.username,
+      wrongProblem
+    });
+  } else {
+    res.render('success', {user: req.user.username});
+  }
 });
 
 module.exports = router;
