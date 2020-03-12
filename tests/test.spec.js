@@ -32,3 +32,22 @@ describe('GET /', () => {
 
     })
 })
+
+describe('GET /:problem_id', ()=>{
+    describe('성공시', ()=> {
+        it('200을 응답한다.', (done)=>{
+
+        })
+        it('문제 페이지를 render한다.', (done)=>{
+
+        })
+    })
+})
+
+describe('POST /:problem_id', ()=>{
+    describe('성공시', ()=>{
+        it('성공페이지를 보여준다.', ()=> {
+
+        })
+    })
+})

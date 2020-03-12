@@ -1,27 +1,25 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Codewars</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1>Codewars</h1>
-    <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
 
-    <ul class="tabs">
-      <li>Level 1</li>
-      <li>Level 2</li>
-      <li>Level 3</li>
-    </ul>
+<head>
+  <title>Codewars</title>
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+</head>
 
-    <ul class="problems">
-      <% for(let i of jdata) { %>
-      <a href=/problems/<%= i.id %>>
+<body>
+  <h1>Codewars</h1>
+  <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
+
+    <% for(let i of jdata) { %>
+    <div class="problems">
+      <a href="/problems/<%= i.id %>">
         <div><%= i.title %></div>
         <div>정답자: <%= i.completed_users %></div>
         <div>난이도: Level <%= i.difficulty_level %></div>
       </a>
-      <% } %>
-    </ul>
-  </body>
+    </div>
+    <% } %>
+
+</body>
+
 </html>

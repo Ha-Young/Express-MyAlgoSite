@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>problem</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/codemirror.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/theme/darcula.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/codemirror.min.js"></script>
@@ -15,28 +16,12 @@
             <div>정답자 수: <%= completed_users %></div>
             <div>문제 레벨: <%= level %></div>
             <div>문제 설명: <%= description %></div>
-            <form method="post" action="/problems/<%= problem_id %>">
+            <form class="formBox"  method="post" action="/problems/<%= problem_id %>">
                 <textarea id="codemirrorTextarea" name='submitValue'>function solution</textarea>
                 <input class="submitButton" type="submit" name="submit" value="send">
             </form>
         </div>
     </div>
-
-
-
-    <script>
-        const codemirrorTextarea = document.getElementById('codemirrorTextarea');
-
-        const editor = CodeMirror.fromTextArea(
-            codemirrorTextarea , {
-            mode: 'javascript',
-            lineNumbers: true,
-            theme: 'darcula',
-        });
-        
-        editor.on('change', ()=>{
-            const textareaValue = editor.getValue();
-        })
-    </script>
+    <script src="/javascripts/index.js"></script>
 </body>
 </html>

@@ -1,8 +1,40 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #282525;
+  color: whitesmoke;
+  text-align: center;
+}
+
+.githubLoginBtn {
+  border: 1px solid whitesmoke;
+  border-radius: 1em;
+  padding: 10px;
+  color: #fefbfbd1;
+}
+
+.submitButton {
+  border: 1px solid whitesmoke;
+  border-radius: 1em;
+  margin: 40px;
+}
+
+.problems {
+  margin: 10px;
+  border: 1px solid whitesmoke;
+  border-radius: 1em;
+  padding: 50px;
+  color: #fefbfbd1;
+}
+
+.formBox {
+  text-align: left;
 }
 
 a {
-  color: #00B7FF;
+  color: whitesmoke;
+}
+
+h1 {
+  color:whitesmoke;
 }

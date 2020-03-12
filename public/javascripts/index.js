@@ -1,10 +1,12 @@
+const codemirrorTextarea = document.getElementById('codemirrorTextarea');
+
 const editor = CodeMirror.fromTextArea(
-    document.getElementById('codemirrorTextarea'), {
+    codemirrorTextarea , {
     mode: 'javascript',
     lineNumbers: true,
     theme: 'darcula',
 });
 
 editor.on('change', ()=>{
-    console.log('------value ghk------', editor.getValue());
+    const textareaValue = editor.getValue();
 })
