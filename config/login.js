@@ -1,3 +1,5 @@
+const userGithubId = {};
+
 // const express = require('express');
 // const app = express();
 // const passport = require('passport');
@@ -29,3 +31,4 @@
 // 		}
 // 	)
 // );
+moudle.exports = { userGithubId };
