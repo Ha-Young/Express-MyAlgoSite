@@ -48,6 +48,14 @@ exports.isSeccesss = (req, res, next) => {
     }
 
     for (let i = 0; i < testValue.length; i++) {
+        try {
+            contexts[0][solutionFn](testValue[i][0])
+        } catch (err) {
+            return res.render('failure', {
+                failmessage: err,
+                error: err.stack
+            })
+        }
         if (contexts[0][solutionFn](testValue[i][0]) !== testValue[i][1]) {
             return res.render('failure', {
                 failmessage: `${solutionFn}(${testValue[i][0]})결과값은 ${contexts[0][solutionFn](testValue[i][0])}이 아니라 ${testValue[i][1]}어야 합니다`,
