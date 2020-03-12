@@ -33,11 +33,6 @@ passport.use(new GitHubStrategy({
         githubId: profile.id,
         githubUrl: profile.profileUrl,
         imageUrl: profile.photos[0].value,
-        solvedAllCount: 0,
-        solvedLevelOne: 0,
-        solvedLevelTwo: 0,
-        solvedLevelThree: 0,
-        solved: [],
       };
 
       const options = {
