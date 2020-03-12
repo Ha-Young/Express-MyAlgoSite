@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const globalRoutes = require('./routes/global');
 const problemsRoutes = require('./routes/problems');
-const { localsMiddleware } = require('./middlewares');
+const { unsetContext, localsMiddleware } = require('./middlewares');
 
 dotenv.config();
 
@@ -28,6 +28,7 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(unsetContext);
 app.use(localsMiddleware);
 
 app.use('/', globalRoutes);

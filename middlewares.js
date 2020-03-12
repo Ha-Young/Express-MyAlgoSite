@@ -1,3 +1,12 @@
+function unsetContext (req, res, next) {
+  const url = req.url;
+
+  if(url !== '/failure' && url !== '/success') {
+    req.session.context = {};
+  }
+
+  next();
+}
 function localsMiddleware (req, res, next) {
   res.locals.user = req.user;
   next();
@@ -19,4 +28,4 @@ function onlyPublic (req, res, next) {
   }
 }
 
-module.exports = { localsMiddleware, onlyPrivate, onlyPublic };
+module.exports = { unsetContext, localsMiddleware, onlyPrivate, onlyPublic };

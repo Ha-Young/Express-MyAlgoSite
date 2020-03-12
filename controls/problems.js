@@ -1,5 +1,6 @@
 const Problem = require('../models/Problem');
 const Test = require('../models/Test');
+const vm = require('vm');
 
 const getHome = async (req, res, next) => {
   try {
@@ -26,7 +27,6 @@ const postAddCase = async (req, res, next) => {
   const id = req.params.problem_id;
   const { question, answer } = req.body;
   const problem = await Problem.findById(id);
-
   const newTest = await Test.create({
     code: question,
     solution: answer
@@ -57,30 +57,34 @@ const getProblemsDetail = async (req, res, next) => {
 
 const postProblemsDetail = async (req, res, next) => {
   const id = req.params.problem_id;
-  const code = req.body.code;
-  const solutionProvider = new Function(`return ${code}`);
-  const originSolution = solutionProvider();
+  const submitedCode = req.body.code;
+  // const solutionProvider = new Function(`return ${code}`);
+  // const originSolution = solutionProvider();
 
   try {
     const problem = await Problem.findById(id).populate('tests');
     const tests = problem.tests;
     let isPassTests = true;
+    let context;
 
     for (let i = 0; i < tests.length; i++) {
       const { code, solution } = tests[i];
-      const fn = new Function ('solution', 'return ' + code)
-        .bind(null, originSolution);
+      const script = new vm.Script(`${submitedCode}\nresult = ${code};\n${code} === expect;`);
+      context = vm.createContext({ id, expect: solution, test: code });
+      const result = script.runInContext(context);
 
-      if(fn() !== solution) {
+      if (!result) {
         isPassTests = false;
         break;
       }
     }
 
+    req.session.context = context;
+
     if(isPassTests) {
-      res.redirect(`/success?problem_id=${id}`);
+      res.redirect(`/success`);
     } else {
-      res.redirect(`/failure?problem_id=${id}`);
+      res.redirect(`/failure`);
     }
   } catch (err) {
     console.log(err);
@@ -88,7 +92,7 @@ const postProblemsDetail = async (req, res, next) => {
 };
 
 const getSuccess = (req, res) => {
-  const id = req.query.problem_id;
+  const { id } = req.session.context;
 
   if (!id) {
     res.redirect('/');
@@ -99,14 +103,20 @@ const getSuccess = (req, res) => {
 };
 
 const getFailure = (req, res) => {
-  const id = req.query.problem_id;
+  const { id, test, expect, result } = req.session.context;
 
   if (!id) {
     res.redirect('/');
     return;
   }
 
-  res.render('failure', { title: '테스트를 통과하지 못했습니다.', id });
+  res.render('failure', {
+    title: '테스트를 통과하지 못했습니다.',
+    id,
+    test,
+    expect,
+    result
+  });
 };
 
 module.exports = { getHome, getAddCase, postAddCase, getProblemsDetail, postProblemsDetail, getSuccess, getFailure };
