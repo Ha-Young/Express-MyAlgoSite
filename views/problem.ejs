@@ -12,7 +12,6 @@
   <body>
     <%- include('header') %>
     <% action = `/problem/${problem.id}` %>
-    <% onclick = event => event.preventdefault() %>
     <div class="container">
       <div class="problem-description-container">
         <div class="problem-description-title"><%= problem.title %></div>
@@ -20,7 +19,7 @@
       </div>
       <form class="problem-answer" action="<% action %>" method="POST">
         <textarea id="code" name="code"><%= problem.preset %></textarea>
-        <input type="submit" value="SUBMIT" onclick=<% onclick %> />
+        <input type="submit" value="SUBMIT" />
       </form>
     </div>
 

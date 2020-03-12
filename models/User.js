@@ -9,8 +9,7 @@ const userSchema = new mongoose.Schema({
   id: String,
   displayName: String,
   username: String,
-  prifileUrl: String,
-  emails: String,
+  profileUrl: String,
   avatar_url: String
 });
 

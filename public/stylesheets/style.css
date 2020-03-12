@@ -19,25 +19,87 @@ a {
 
 .header-container {
   position: absolute;
+  z-index: 1;
+  text-align: center;
   width: 80px;
   height: 100%;
   font-weight: bold;
+  color: #3F3F3F;
   background-color: #3f3f3f;
+}
+
+.header-login {
+  display: inline-block;
+  position: relative;
+  margin-top: 25px;
+  font-size: 17px;
+  font-weight: normal;
+  color: rgb(172, 172, 172);
+  text-decoration: none;
 }
 
 .logo {
   width: 60px;
   margin-top: 20px;
-  margin-left: 10px;
   text-decoration: none;
+}
+
+.home-container {
+  display: block;
+  padding-top: 0px;
+}
+
+.hello {
+  display: block;
+  height: 150px;
+  text-align: center;
+  line-height: 150px;
+  font-size: 50px;
+  font-weight: bold;
+  color: #2e2e2e;
 }
 
 .shell-container {
   display: flex;
   position: relative;
   margin: auto;
+  padding-left: 80px;
   width: 80%;
   height: 100%;
+}
+
+.login-container {
+  display: block;
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.login-sub-container {
+  margin: auto;
+  width: 480px;
+  height: 200px;
+  padding-top: 50px;
+  background-color: #fcfcfc;
+}
+
+.login-sub-container > div {
+  font-size: 50px;
+  color: rgb(44, 44, 44);
+  margin-bottom: 50px;
+}
+
+.login-sub-container > a {
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 20px;
+  background-color: #2e2e2e;
+  color: #F2F2F2;
+  text-decoration: none;
+  border-radius: 5px;
 }
 
 .tabs {
@@ -145,4 +207,22 @@ input[type=submit]:hover {
   color: #F2F2F2;
   background-color: #838383;
   border: 1px #838383 solid;
+}
+
+.result-container {
+  display: block;
+  margin-left: 300px;
+}
+
+.result-container > a {
+  display: block;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.result-message {
+  margin-bottom: 50px;
+  font-size: 80px;
 }

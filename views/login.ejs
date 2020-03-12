@@ -3,12 +3,18 @@
   <head>
     <title>Codewars</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://kit.fontawesome.com/49f652a05a.js" crossorigin="anonymous"></script>
   </head>
   <body>
     <%- include('header') %>
-    <div>login page</div>
-    <div>
-      <a href="">github login</a>
+    <div class="container login-container">
+      <div class="login-sub-container">
+        <div><%= message %></div>
+        <a href="/auth/github">
+          <i class="fab fa-github" ></i>
+          Login with github
+        </a>
+      </div>
     </div>
   </body>
 </html>

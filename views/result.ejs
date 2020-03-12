@@ -6,10 +6,12 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+    <% const href = `/problem/${problem.id}` %>
     <%- include('header') %>
-    <div class="container">
-      <div>success!</div>
-      <a href="/">home</a>
+    <div class="container result-container">
+      <div class="result-message"><%= message %></div>
+      <a href="/">메인 페이지로</a>
+      <a href="<%= href %>">다시 풀어보기</a>
     </div>
   </body>
 </html>
