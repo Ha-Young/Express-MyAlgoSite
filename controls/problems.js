@@ -71,11 +71,19 @@ const postProblemsDetail = async (req, res, next) => {
       const { code, solution } = tests[i];
       const script = new vm.Script(`${submitedCode}\nresult = ${code};\n${code} === expect;`);
       context = vm.createContext({ id, expect: solution, test: code });
-      const result = script.runInContext(context);
+      try {
+        const result = script.runInContext(context);
 
-      if (!result) {
+        if (!result) {
+          isPassTests = false;
+          break;
+        }
+      } catch (err) {
         isPassTests = false;
-        break;
+        context.error = err.message;
+        req.session.context = context;
+        res.redirect(`/failure`);
+        return;
       }
     }
 
@@ -94,8 +102,6 @@ const postProblemsDetail = async (req, res, next) => {
 const getSuccess = (req, res) => {
   const { id } = req.session.context;
 
-  req.session.context = {};
-
   if (!id) {
     res.redirect('/');
     return;
@@ -105,9 +111,7 @@ const getSuccess = (req, res) => {
 };
 
 const getFailure = (req, res) => {
-  const { id, test, expect, result } = req.session.context;
-
-  req.session.context = {};
+  const { id, test, expect, result, error } = req.session.context;
 
   if (!id) {
     res.redirect('/');
@@ -119,7 +123,8 @@ const getFailure = (req, res) => {
     id,
     test,
     expect,
-    result
+    result,
+    error
   });
 };
 

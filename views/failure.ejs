@@ -1,7 +1,13 @@
 <%- include('partial/head') -%>
-<div class="box">
-  <h3>Test case: <%= test %></h3>
-  <h4>Expected: <%= expect %>, instead got: <%= result %></h4>
-</div>
+<% if (error) { %>
+  <div class="box">
+    <h3><%= error %></h3>
+  </div>
+<% } else { %>
+  <div class="box">
+    <h3>Test case: <%= test %></h3>
+    <h4>Expected: <%= expect %>, instead got: <%= result %></h4>
+  </div>
+<% } %>
 <a href="/problems/<%= id %>">문제로 돌아가기</a>
 <%- include('partial/tail') -%>
