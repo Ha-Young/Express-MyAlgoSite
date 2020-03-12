@@ -3,7 +3,6 @@ const router = express.Router();
 const Problem = require('../models/Problem');
 
 router.get('/', async (req, res, next) => {
-  console.log(22222)
   if(req.isAuthenticated()){
     const problems = await Problem.find({});
     res.render('index', { hasLoggedIn: true, problems: problems });

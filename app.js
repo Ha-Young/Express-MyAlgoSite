@@ -46,7 +46,7 @@ const checkAuthentication = (req, res, next) => {
 };
 
 app.use('/login', login);
-app.use('/', checkAuthentication, index);
+app.use('/', index);
 app.use('/logout', checkAuthentication, logout);
 app.use('/problems', checkAuthentication, problems);
 

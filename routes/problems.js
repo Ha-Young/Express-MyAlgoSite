@@ -67,6 +67,4 @@ router.post('/:problem_id', async (req, res, next) => {
   }
 });
 
-
 module.exports = router;
-
