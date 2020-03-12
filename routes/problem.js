@@ -60,25 +60,30 @@ router.post('/:problem_id', ensureAuthenticated, async (req, res, next) => {
       if (!isValid) {
         return res.render('failure', { message: 'Fail! Try again! :)', stack: undefined, results });
       } else {
-        const completedUsers = problem[0].completedUsers + 1;
-        await Problem.findOneAndUpdate({ _id: problemId }, { completedUsers });
-        
-        const solvedAllCount = req.user.solvedAllCount + 1;
-        let { solvedLevelOne, solvedLevelTwo, solvedLevelThree } = req.user;
-        const problemLevel = problem[0].difficultyLevel;
-        const userId = req.user._id;
-        
-        if (problemLevel === 1) {
-          solvedLevelOne++;
-          await User.findOneAndUpdate({ _id: userId }, { solvedAllCount, solvedLevelOne, });
-        } else if (problemLevel === 2) {
-          solvedLevelTwo++;
-          await User.findOneAndUpdate({ _id: userId }, { solvedAllCount, solvedLevelTwo });
-        } else {
-          solvedLevelThree++;
-          await User.findOneAndUpdate({ _id: userId }, { solvedAllCount, solvedLevelThree });
-        }
+        const user = req.user;
+        const isSolvedUser = user.solved.some((test) => test.toString() === problemId);
+        if (!isSolvedUser) {
+          const completedUsers = problem[0].completedUsers + 1;
+          await Problem.findOneAndUpdate({ _id: problemId }, { completedUsers });
 
+          const solvedAllCount = user.solvedAllCount + 1;
+          let { _id, solvedLevelOne, solvedLevelTwo, solvedLevelThree } = req.user;
+          const problemLevel = problem[0].difficultyLevel;
+
+          let updatedUser = null;
+          if (problemLevel === 1) {
+            solvedLevelOne++;
+            updatedUser = await User.findOneAndUpdate({ _id }, { solvedAllCount, solvedLevelOne, });
+          } else if (problemLevel === 2) {
+            solvedLevelTwo++;
+            updatedUser = await User.findOneAndUpdate({ _id }, { solvedAllCount, solvedLevelTwo });
+          } else {
+            solvedLevelThree++;
+            updatedUser = await User.findOneAndUpdate({ _id }, { solvedAllCount, solvedLevelThree });
+          }
+          updatedUser.solved.push(problemId);
+          await updatedUser.save();
+        }
         res.render('success', { message: 'Success :)', results });
       }
     } catch (err) {
@@ -90,33 +95,3 @@ router.post('/:problem_id', ensureAuthenticated, async (req, res, next) => {
 });
 
 module.exports = router;
-
-
-
-function solution(a) {
-	if(a % 2 === 0) {
-    return 'Even'
-  } else {
-  	return 'Odd';
-  }
-}
-
-
-function solution(arr) {
-  let temp = arr[0];
-  let index = 0;
-  for (let i = 1; i < arr.length; i++) {
-    if (temp > arr[i]) {
-      temp = arr[i];
-      index = i;
-    }
-  }
-  arr.splice(index, 1);
-  return arr;
-}
-
-function solution(arr) {
-  return arr.filter((ele) => {
-    return typeof ele === 'number';
-  });
-}
