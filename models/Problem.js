@@ -16,7 +16,6 @@ const testSchema = new Schema({
 const ProblemSchema = new Schema({
   title: {
     type: String,
-    unique: true,
     required: true
   },
   completedUsers: {

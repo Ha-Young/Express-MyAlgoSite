@@ -4,9 +4,8 @@ import passportLocalMongoose from 'passport-local-mongoose';
 const { Schema, model } = mongoose;
 
 const userSchema = new Schema({
-  name: {
-    type: String,
-    unique: true,
+  githubId: {
+    type: Number,
     required: true
   },
   email: {
@@ -14,12 +13,10 @@ const userSchema = new Schema({
     unique: true,
     required: true
   },
-  githubId: {
-    type: Number,
-    unique: true,
+  name: {
+    type: String,
     required: true
-  },
-  avatarUrl: String
+  }
 });
 
 userSchema.plugin(passportLocalMongoose, { usernameField: 'email' });

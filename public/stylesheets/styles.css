@@ -1,4 +1,32 @@
-@import './reset.css';
-@import './header.css';
-@import "./responsive.css";
-@import "./login.css";
+.problem-card-1::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 1rem;
+  display: block;
+  width: 2.5rem;
+  height: 0.1875rem;
+  background-color: #2196F3;
+}
+
+.problem-card-2::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 1rem;
+  display: block;
+  width: 2.5rem;
+  height: 0.1875rem;
+  background-color: #1976D2;
+}
+
+.problem-card-3::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 1rem;
+  display: block;
+  width: 2.5rem;
+  height: 0.1875rem;
+  background-color: #9C27B0;
+}

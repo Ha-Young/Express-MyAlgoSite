@@ -12,25 +12,6 @@ block content
       textarea.problem__code #{problem.initialCode}
     div
       form.problem__form(action=`/problems/${problem._id}` method='POST')
-        input.problem__input(type='hidden' name='string_code' value=problem.initialCode)
+        input.problem__input(type='hidden' name='user_code' value=problem.initialCode)
         button(type='submit') 코드 채점하고 제출
-  script.
-    const code = CodeMirror.fromTextArea
-    (document.querySelector('.problem__code'), { 
-      mode: 'javascript',
-      theme: 'material-darker',
-      tabSize: 2,
-      scrollbarStyle: 'overlay',
-      lineNumbers: true
-    });
-
-    code.on('change', e => {
-      document.querySelector('.problem__input').value = code.getValue();
-    })
-
-    //- const $form = document.querySelector('.problem__form');
-    //- form.addEventListener('submit', e => {
-    //-   const stringCode = code.getValue();
-    //-   const functionCode = new Function(`return ${stringCode}`)();
-
-    //- })
+  script(src='/javascripts/problem.js')

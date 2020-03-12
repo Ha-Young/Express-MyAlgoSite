@@ -1,18 +1,20 @@
 doctype html
 html
   head
-    link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU", crossorigin="anonymous")
-    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/codemirror.min.css")
-    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/theme/material-darker.min.css")
-    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/addon/scroll/simplescrollbars.min.css")
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title= title ? `${title} | programmers` : 'programmers'
+    link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.5.0/css/all.css' integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU', crossorigin='anonymous')
+    link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/codemirror.min.css')
+    link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/theme/material-darker.min.css')
+    link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/addon/scroll/simplescrollbars.min.css')
+    link(rel='stylesheet' href='https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css')
     link(rel="stylesheet", href="/stylesheets/styles.css")
-    title= title ? `${title} | codewars` : 'codewars'
-    meta(charset="utf-8")
-  body   
+    meta(charset='utf-8')
+  body
     include ../partials/header
-    main
-      script(src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/codemirror.min.js")
-      script(src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/mode/javascript/javascript.min.js")
-      script(src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/mode/css/css.min.js")
-      script(src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/addon/scroll/simplescrollbars.min.js")
+    main(class='container mx-auto px-4')
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/codemirror.min.js')
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/mode/javascript/javascript.min.js')
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/addon/scroll/simplescrollbars.min.js')
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/addon/edit/closebrackets.min.js')
       block content

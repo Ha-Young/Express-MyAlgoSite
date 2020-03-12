@@ -1,10 +1,11 @@
 extends layouts/main
 
 block content
-  ul.problem-list
+  ul(class='problem-block flex flex-wrap')
     each problem in problems
-      li
-        a(href=`/problems/${problem._id}`)
-          div #{problem.title}
-          div 정답자: #{problem.completedUsers}명
-          div 난이도: Level #{problem.difficultyLevel}
+      li(class='relative w-full md:w-1/2 px-4')
+        div(class=`problem-card-${problem.difficultyLevel} w-full pt-4 pb-4 md:pb-6 border-t border-gray-300`)
+          a(href=`/problems/${problem._id}`)
+            h4(class='text-gray-800 text-lg md:text-xl font-bold hover:text-blue-500') #{problem.title}
+          h6(class='mt-1 mb-2 text-gray-500 font-bold text-sm') #{problem.completedUsers}명 완료
+          i(class='fab fa-node-js fa-lg ml-1 text-gray-500')

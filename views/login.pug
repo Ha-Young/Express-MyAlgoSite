@@ -1,9 +1,9 @@
 extends layouts/main
 
 block content
-  .responsive
-    .login
-      h2.login__title
-      .login__social
-        button.login__github-btn
-          a(href='/auth/github') Github으로 계속하기
+  div(class='flex flex-col max-w-xs mx-auto')
+    h2(class='self-center mb-8 text-gray-800 text-2xl md:text-3xl font-bold') 로그인
+    a(href='/auth/github')
+      button(class='w-full h-10 px-3 py-2 rounded bg-gray-900 hover:bg-black' type='button')
+        i(class='fab fa-github fa-lg float-left mt-1 text-white')
+        span(class='text-white') Github으로 계속하기

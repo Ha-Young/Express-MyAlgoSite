@@ -1,9 +1,7 @@
-header.header
-  .header__wrapper.responsive
-    div Codewars
-      if loggedUser
-        p #{loggedUser.name}님 안녕하세요!
-        a(href="/logout") 로그아웃
-      else
-        a(href="/login") 로그인
-.header__spacer
+header(class='flex items-center px-4 py-2 mb-8')
+  a(class='flex-1' href='/')
+    img(width=182 height=34 src='/img/programmers_logo.png' alt='header logo')
+  if loggedUser
+    a(class='text-gray-800 font-bold md:text-xl hover:text-blue-500' href="/logout") 로그아웃
+  else
+    a(class='text-gray-800 font-bold md:text-xl hover:text-blue-500' href="/login") 개발자 로그인

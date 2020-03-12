@@ -1,5 +1,5 @@
 import express from 'express';
-import checkLoggedIn from './middlewares/checkLoggedIn';
+import { checkLoggedIn } from './middlewares/auth';
 import * as problemsCtrl from './controllers/problems.controller';
 
 const problems = express.Router();
