@@ -2,18 +2,19 @@
 <html>
   <head>
     <title>Codewars</title>
-  <body>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan+2|Gamja+Flower&display=swap" rel="stylesheet" />
+  </head>
+  <body class="errorWrapper">
     <% if (error.status !== 500) { %>
-      <% if (message === 'User Not Found') { %>
+      <% if (message === 'Problem Not Found') { %>
         <h1>Sorry, Users does not exist. Go home again. :)</h1>
-      <% } else if (message === 'Problem Not Found') { %>
-        <h1>Sorry, Problem does not exist. Go home again. :)</h1>
       <% } else { %>
         <h1>This is not the web page you are looking for. Go home again. :)</h1>
       <% } %>
     <% } else { %>
       <h1>There was an error on the server. Please try again in a moment. :)</h1>
     <% } %>
-    <a href="/">Go Home</a>
+    <div class="homeButton"><a href="/" >Go Home</a></div>
   </body>
 </html>

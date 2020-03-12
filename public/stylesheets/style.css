@@ -12,15 +12,15 @@ body {
   font-size: 1.5rem;
 }
 
-.problemLevel {
+.problemLevel, .errorWrapper h1 {
   color: #bb432c;
 }
 
-.signUp, .resultSection a {
+.signUp, .resultSection a, .homeButton a {
   color: white;
 }
 
-.loginSection a, .resultSection a {
+.loginSection a, .resultSection a, .homeButton, .homeButton a {
   margin: 10px 0px;
   width: 230px;
   border-radius: 5px;
@@ -33,7 +33,7 @@ button[type=submit]:hover, .goBackButton:hover {
   cursor: pointer;
 }
 
-.loginSection a:hover, .resultSection a:hover {
+.loginSection a:hover, .resultSection a:hover, .homeButton:hover {
   background-color: #0b0c0c;
   text-decoration: underline;
 }
@@ -184,4 +184,12 @@ button[type=submit], .goBackButton {
   margin: 30px 5px;
   padding: 0px;
   list-style: none;
+}
+
+/* [error] */
+.errorWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
