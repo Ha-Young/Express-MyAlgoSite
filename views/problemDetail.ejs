@@ -20,7 +20,9 @@
     </div>
     <div class="button-wrap">
       <button type="submit" class="box" id="submitButton">제출</button>
-      <a href="/problems/<%= id %>/addCase">테스트 케이스 추가하기</a>
+      <% if (user.isAdmin) { %>
+        <a href="/problems/<%= id %>/addCase">테스트 케이스 추가하기</a>
+      <% } %>
     </div>
   </form>
 </section>
