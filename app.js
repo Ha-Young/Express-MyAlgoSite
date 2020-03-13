@@ -17,7 +17,7 @@ exports.CALLBACK_URL = CALLBACK_URL;
 
 const index = require('./routes/index');
 const auth = require('./routes/auth');
-const problem = require('./routes/problem');
+const problems = require('./routes/problems');
 
 const app = express();
 
@@ -47,7 +47,7 @@ app.use(passport.session());
 
 app.use('/', index);
 app.use('/auth', auth);
-app.use('/problem', problem);
+app.use('/problems', problems);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
