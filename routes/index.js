@@ -10,7 +10,7 @@ router.get('/', verifyLogin, async (req, res, next) => {
     problems = await Problem.find({}).exec();
   } catch (err) {
     next(
-      new errors.GeneralError(err.message)
+      new errors.GeneralError('Error occured while fetching problems from DB' + err)
     );
   }
 

@@ -4,24 +4,29 @@ const express = require('express');
 const path = require('path');
 const passport = require('passport');
 const GitHubStrategy = require('passport-github').Strategy;
+const mongoose = require('mongoose');
+
+const login = require('./routes/login');
 const index = require('./routes/index');
 const problems = require('./routes/problems');
+const errors = require('./lib/errors');
 const User = require('./models/User');
 const Problem = require('./models/Problem');
-const errors = require("./lib/errors");
-const mongoose = require('mongoose');
 
 mongoose.connect(process.env.DB_ADDRESS, {
   useNewUrlParser: true,
   useFindAndModify: false,
   useUnifiedTopology: true,
-  serverSelectionTimeoutMS: 10000
+  serverSelectionTimeoutMS: 5000
 });
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log('DB connected!');
+
+  // This is included only for the convenience of reviewers,
+  // and can be excluded in the live production.
   const storeSampleProblems = async () => {
     try {
       const hasProblems = await Problem.countDocuments({}).exec();
@@ -30,7 +35,7 @@ db.once('open', function() {
       const sampleProblems = require('./models/sample_problems.json');
 
       if (!Array.isArray(sampleProblems) || !sampleProblems.length) {
-        throw new errors.GeneralError('Invalid [sampleProblems.json] file');
+        throw new Error('Invalid [sampleProblems.json] file');
       }
 
       for (let i = 0; i < sampleProblems.length; i++) {
@@ -38,7 +43,7 @@ db.once('open', function() {
       }
       console.log('Stored sample problems in DB');
     } catch (err) {
-      throw new errors.GeneralError(err.message);
+      throw new errors.GeneralError(err);
     }
   }
   storeSampleProblems();
@@ -47,7 +52,7 @@ db.once('open', function() {
 passport.use(new GitHubStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/login/github/callback"
+    callbackURL: 'http://localhost:3000/login/github/callback'
   },
   async function(accessToken, refreshToken, profile, cb) {
     async function findOrCreateUser(profile, cb) {
@@ -62,14 +67,14 @@ passport.use(new GitHubStrategy({
             });
             await user.save();
           } catch (err) {
-            throw new Error('Error occured while creating a user');
+            throw new Error('Error occured while creating a user \n' + err);
           }
         }
         return cb(null, user);
       } catch (err) {
-        next(
-          new errors.GeneralError(err.message)
-        )
+        return next(
+          new errors.GeneralError(err)
+        );
       }
     }
     return await findOrCreateUser(profile, cb);
@@ -93,48 +98,29 @@ app.use(express.static(path.join(__dirname, './public')));
 app.use(require('morgan')('combined'));
 app.use(require('cookie-parser')());
 app.use(require('body-parser').urlencoded({ extended: true }));
-app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+app.use(require('express-session')({
+  secret: 'keyboard cat', resave: true,
+  saveUninitialized: true 
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', index);
-
-app.get('/login', (req, res, next) => {
-  // console.log(' I AM HERE LOGIN ');
-  res.render('login');
-});
-
-app.get('/login/github',
-  passport.authenticate('github'));
-
-app.get(
-  '/login/github/callback',
-  passport.authenticate('github', { failureRedirect: '/login'}),
-  (req, res) => res.redirect('/')
-);
-
+app.use('/login', login);
 app.use('/problems', problems);
-
-
-app.get('/error', (req, res, next) => {
-  const error = req.session.error;
-  res.render('error', { error });
-});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   return next(
-    new errors.PageNotFoundError('Page Not Found')
+    new errors.PageNotFoundError(req.originalUrl)
   );
 });
 
 // error handler
 app.use(function(err, req, res, next) {
-  console.log("I AM HERE ERROR");
   err.status = err.status || 500;
-  req.session.error = err;
-  res.status(err.status).redirect('/error');
+  res.status(err.status).render('error', { err });
 });
 
 module.exports = app;

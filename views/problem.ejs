@@ -10,13 +10,13 @@
     <link rel='stylesheet' href='/stylesheets/problem.css'>
   </head>
   <body>
-    <div class="container">
+    <div class='container'>
       <div>
         <a href='/'>
-          <button class="secondary_button">GO BACK TO MAIN</button>
+          <button class='secondary_button'>GO BACK TO MAIN</button>
         </a>
       </div>
-      <div class="problem_detail_container">
+      <div class='problem_detail_container'>
         <h2><%= problem.title %></h2>
         <div>Solved by <%= problem.completed_users %> users</div>
         <div>Difficulty level : <%= problem.difficulty_level %></div>
@@ -25,17 +25,17 @@
       </div>
       <div id='codemirror'></div>
       <form method='POST' action=<%= `/problems/${problem.id}` %>>
-        <div class="code_input_container">
+        <div class='code_input_container'>
         <input id='code_input' type='text' name='code' value='function solution(n) { }'/>
         </div>
-        <button class="primary_button" type='submit'>Submit</button>
+        <button class='primary_button' type='submit'>Submit</button>
       </form>
     </div>
-        <script>
-      const myCodeMirror = CodeMirror.fromTextArea(document.getElementById('code_input'),{
-        lineNumbers: true,
-        mode: 'javascript'
-      })
+      <script>
+        const myCodeMirror = CodeMirror.fromTextArea(document.getElementById('code_input'),{
+          lineNumbers: true,
+          mode: 'javascript'
+        });
     </script>
   </body>
 </html>

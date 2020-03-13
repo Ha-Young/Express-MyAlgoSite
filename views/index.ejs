@@ -6,20 +6,20 @@
     <link rel='stylesheet' href='/stylesheets/index.css' />
   </head>
   <body>
-    <div class="container">
-      <div class="header">
-        <div class="header_profile">
+    <div class='container'>
+      <div class='header'>
+        <div class='header_profile'>
           <div>
-            <img class="header_profile_userAvatar" src= <%= user.avatarUrl %> />
+            <img class='header_profile_userAvatar' src=<%= user.avatarUrl %>/>
           </div>
-          <span class="header_profile_username"><%= user.name %></span>
+          <span class='header_profile_username'><%= user.name %></span>
         </div>
       </div>
       <h1>Codewars</h1>
-      <ul class="problems">
+      <ul class='problems'>
         <% problems.forEach(problem =>{ %>
-          <li class="problem">
-            <a href= <%= `/problems/${problem.id}` %> >
+          <li class='problem'>
+            <a href=<%= `/problems/${problem.id}` %>>
               <div><%= problem.title %></div>
             </a>
             <div>solved by <%= problem.completed_users %> users</div>
@@ -27,8 +27,6 @@
           </li>
         <% }); %>
       </ul>
-
     </div>
-    
   </body>
 </html>

@@ -3,18 +3,18 @@
   <link rel='stylesheet' href='/stylesheets/failure.css'>
 </head>
 <body>
-  <div class="container">
+  <div class='container'>
     <h1>
       👎 FAILED! <br/>
       Your code for <%= problem.title %> didn't pass tests.
     </h1>
-    <div class="failure_detail_container">
+    <div class='failure_detail_container'>
       <p>OUTPUT: </p>
-      <p class="failure_detail_text"><%= detail %></p>
+      <p class='failure_detail_text'><%= detail %></p>
     </div>
     <h2>It is already solved by <%= problem.completed_users %> ⚔️ brave users</h2>
-    <a href= <%= `/problems/${problem.id}` %> >
-      <button class="primary_button">GO TO PROBLEM</button>
+    <a href=<%= `/problems/${problem.id}` %>>
+      <button class='primary_button'>GO TO PROBLEM</button>
     </a>
   </div>
 </body>
