@@ -1,14 +1,13 @@
 const express = require('express');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 const index = require('./routes/index');
 const login = require('./routes/login');
 const problems = require('./routes/problems');
 const passport = require('passport');
+const keys = require('./config/keys');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/genius', { useNewUrlParser: true, useUnifiedTopology: true })
- .then(() => console.log('connected successful'))
- .catch((err) => console.log(err));
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -23,8 +22,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.use(new GoogleStrategy({
-  clientID: "734053947240-k8spbsl29su6u3ircvhdm2rqg8eu1mce.apps.googleusercontent.com",
-  clientSecret: "om5mdhrrWFI5_pHeyZkkeVF2",
+  clientID: keys.google.clientID,
+  clientSecret: keys.google.clientSecret,
   callbackURL: "/"
   },
   function(accessToken, refreshToken, profile, done) {
