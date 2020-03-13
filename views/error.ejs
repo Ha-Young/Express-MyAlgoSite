@@ -2,14 +2,13 @@
 <html>
   <head>
     <title>Codewars</title>
+    <link rel="shortcut icon" href="http://www.google.com/s2/favicons?domain_url=http://www.codewars.com">
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
     <div class="container error-container">
+      <div class="error-status"><%= error.status %></div>
       <h1><%= message %></h1>
-      <div>
-        <pre><%= error.stack %></pre>
-      </div>
     </div>
   </body>
 </html>

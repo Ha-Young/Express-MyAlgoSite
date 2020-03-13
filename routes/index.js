@@ -1,22 +1,19 @@
 const express = require('express');
-const User = require('../models/User');
-const Problem = require('../models/Problem');
-const { setProblems } = require('../utils/index')
-const { setMainPageMessage } = require('../utils/index');
-const { isAuthenticated } = require('../routes/middlewares/authorization');
 
 const router = express.Router();
 
-router.get('/', async (req, res, next) => {
+const { findUser, findProblems } = require('../routes/middlewares/utils');
+const { isAuthenticated } = require('../routes/middlewares/authorization');
 
-  const problems = await setProblems(req, res);
-  const message = await setMainPageMessage(req, res);
+router.get('/', findProblems, findUser, async (req, res, next) => {
+    const problems = res.locals.problems;
+    const user = res.locals.user;
 
-  res.render('index', { 
-    problems,
-    message,
-    isLogined: req.isAuthenticated()
-   });
+    res.render('index', { 
+      user,
+      problems,
+      isLogined: req.isAuthenticated()
+     });
 });
 
 router.get('/login', (req, res) => {
@@ -31,13 +28,13 @@ router.get('/logout', isAuthenticated, (req, res) => {
   res.redirect('/');
 });
 
-router.get('/:level', async (req, res, next) => {
-  const problems = await setProblems(req, res, { difficulty_level: req.params.level });
-  const message = await setMainPageMessage(req, res);
+router.get('/:level', findProblems, findUser, async (req, res, next) => {
+  const problems = res.locals.problems;
+  const user = res.locals.user;
   
   res.render('index', {
+    user,
     problems,
-    message,
     isLogined: req.isAuthenticated()
   });
 });

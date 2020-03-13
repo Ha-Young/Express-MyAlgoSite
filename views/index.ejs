@@ -2,13 +2,14 @@
 <html>
   <head>
     <title>Codewars</title>
+    <link rel="shortcut icon" href="http://www.google.com/s2/favicons?domain_url=http://www.codewars.com">
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
     <%- include('header') %>
     <div class="container home-container">
       <div class="hello">
-        <%= message %>
+        <%= user ? `Hello, ${user.displayName}`: '' %>
       </div>
       <div class="shell-container">
         <div class="tabs">

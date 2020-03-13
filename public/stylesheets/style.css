@@ -179,6 +179,22 @@ a {
   color: #3f3f3f;
 }
 
+.problem-sub-container {
+  margin-top: 50px;
+  text-align: right;
+}
+
+.problem-sub > p {
+  display: inline-block;
+  margin-bottom: 0px;
+}
+
+.p-title {
+  width: 130px;
+  font-weight: bold;
+  color: #3f3f3f;
+}
+
 .problem-title {
   margin-bottom: 20px;
   font-size: 20px;
@@ -240,7 +256,14 @@ input[type=submit]:hover {
 }
 
 .error-container > div {
+  display: inline-block;
   position: relative;
-  width: 800px;
-  font-size: 15px;
+  width: 170px;
+  font-size: 80px;
+  font-weight: bold;
+}
+
+.error-container > h1 {
+  display: inline-block;
+  font-size: 40px;
 }
