@@ -21,4 +21,18 @@
 
 .header ul li {
   background-color: #212121;
+  margin-left: 10px;
+}
+
+.logout {
+  width: 120px;
+  height: 30px;
+  color: rgb(187, 67, 44);
+  border-radius: 5px;
+  background-color: #0B0B0B;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 4px 8px;
 }

@@ -10,7 +10,6 @@
 .problems-container {
   width: 1000px;
   height: 500px;
-  background-color: #212121;
   margin: 100px auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -19,6 +18,8 @@
 .problem {
   background-color: #212121;
   padding: 15px;
+  margin: 25px;
+  border-radius: 3px;
 }
 
 .problem-title {
@@ -34,4 +35,21 @@
 .problem-level {
   background-color: #212121;
   font-size: 20px;
+}
+
+.train {
+  width: 120px;
+  height: 30px;
+  color: rgb(187, 67, 44);
+  border-radius: 5px;
+  background-color: #0B0B0B;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 8px 16px;
+  position: relative;
+  top: 50px;
+  left: 317px;
+  font-size: 22px;
 }
