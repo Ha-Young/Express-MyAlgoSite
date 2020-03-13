@@ -1,0 +1,58 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10vh 20vw;
+}
+
+.test-section {
+  width: 60vw;
+  height: 80vh;
+  box-shadow: 0.2rem 0.2rem 0.5rem white;
+  border-radius: 0.5rem;
+  text-align: center;
+  padding: 2rem 5rem;
+}
+
+.test-result {
+  width: 100%;
+  font-size: 2.5rem;
+  color: #00B7FF;
+}
+
+.test-log-container {
+  border: 0.1rem solid grey;
+  height: 70%;
+  margin-bottom: 3%;
+}
+
+.test-log {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.test-log-result {
+  width: 10%;
+  border-right: 0.1rem dotted grey;
+}
+
+.test-log-info {
+  width: 90%;
+  text-align: left;
+}
+
+.test-log-result, .test-log-info {
+  border-bottom: 0.1rem solid grey;
+  margin-bottom: 0.5rem;
+}
+
+.test-result-buttons {
+  border: 1px soild white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+p {
+  margin: 0.5rem;
+}

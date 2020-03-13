@@ -1,12 +1,32 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-/*
-
-  TODO: Fill in the model specification
-
- */
-const userSchema = new mongoose.Schema({
-
+const userSchema = new Schema({
+  githubId: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  userName: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true
+  },
+  avatarUrl: {
+    type: String,
+    unique: true,
+    trim: true
+  },
+  profileUrl: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  solved: {
+    type: [ mongoose.Types.ObjectId ],
+    default: []
+  }
 });
 
 module.exports = mongoose.model('User', userSchema);

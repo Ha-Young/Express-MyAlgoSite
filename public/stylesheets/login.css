@@ -1,0 +1,22 @@
+.login-section {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  align-items: center;
+  height: 90vh;
+}
+
+.login-logo {
+  width: 30rem;
+  margin-bottom: 5rem;
+}
+
+.login {
+  display: flex;
+  align-items: center;
+}
+
+.github-logo {
+  width: 3rem;
+  margin-right: 1rem;
+}

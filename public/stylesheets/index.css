@@ -1,0 +1,29 @@
+.problem-list {
+  padding: 5rem 10rem;
+}
+
+.problem {
+  margin-bottom: 3rem;
+  border-top: 1px solid #c6c6c6;
+  padding: 0 3rem;
+}
+
+.problem:hover {
+  cursor: pointer;
+}
+
+.problem:hover > .problem-title {
+  color: #00B7FF;
+  transition: all 0.5s;
+}
+
+.problem-title {
+  font-size: 2.5rem;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.problem-info > span {
+  font-size: 1.4rem;
+  margin-right: 1rem;
+}

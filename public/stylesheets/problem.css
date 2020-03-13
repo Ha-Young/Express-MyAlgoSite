@@ -1,0 +1,41 @@
+.problem-section {
+  padding: 2rem;
+  display: flex;
+  font-size: 1.4rem;
+}
+
+.problem-description {
+  width: 50%;
+  overflow: scroll;
+}
+
+.problem-description::-webkit-scrollbar {
+    display: none;
+  }
+
+.problem-description > h4 {
+  color: white;
+}
+
+.problem-title {
+  color: #00B7FF;
+  font-size: 3rem;
+  margin-top: 0;
+}
+
+form {
+  width: 50%;
+}
+
+.submit-button {
+  color: red;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  color: white;
+  background-color: red;
+  cursor: pointer;
+  transition: background-color 0.5s;
+  border-radius: 5px;
+}

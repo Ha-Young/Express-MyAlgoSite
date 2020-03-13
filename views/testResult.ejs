@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <link href='https://fonts.googleapis.com/css?family=Sen&display=swap' rel='stylesheet'>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel='stylesheet' href='/stylesheets/testResult.css'>
+  <title>Result</title>
+</head>
+<body>
+  <section class='test-section'>
+    <h1 class='test-result'><%= testResult %></h1>
+    <div class='test-log-container'>
+      <% for (let i = 0; i < testLog.length; i++) { %>
+        <div class='test-log'>
+          <div class='test-log-result'>
+            <p>테스트 <%= i + 1 %></p>
+            <p><%= testLog[i][0] %></p>
+          </div>
+          <div class='test-log-info'>
+            <p>기대값: <%= testLog[i][1] %></p>
+            <p>결과값: <%= testLog[i][2] %></p>
+          </div>
+        </div>
+      <% } %>
+    </div>
+    <div class='test-result-buttons'>
+      <button class='button'>문제 다시 풀기</button>
+      <button class='button'>메인 화면으로</button>
+    </div>
+  </section>
+  <script src='/javascripts/testResult.js'></script>
+</body>
+</html>

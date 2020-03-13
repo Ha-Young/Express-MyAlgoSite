@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <link rel='stylesheet' href='/stylesheets/style.css'>
+  <link rel='stylesheet' href='/stylesheets/problem.css'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/codemirror.min.css'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/theme/darcula.min.css'>
+  <title>Problems</title>
+</head>
+<body>
+  <section class='problem-section'>
+    <div class='problem-description'>
+      <button class='home-button'>메인으로</button>
+      <h1 class='problem-title'><%= problem.title %></h1>
+      <h4>[문제 설명]</h4>
+      <p><%= problem.description %></p>
+      <h4>[제한 사항]</h4>
+      <% for (const restriction of problem.restrictions) { %>
+        <p>* <%= restriction %></p>
+      <% } %>
+      <h4>[입출력 예]</h4>
+      <% for (const example of problem.examples) { %>
+        <% for (const field of example) { %>
+          <p>[<%= Object.keys(field)[0] %>] : <%= Object.values(field)[0] %></p>
+        <% } %>
+      <% } %>
+      <h4>[입출력 예 설명]</h4>
+      <% for (const description of problem.examplesDescription) { %>
+        <p>* <%= description %></p>
+      <% } %>
+      <h4><a href='<%= problem.reference %>'>[출처]</a></h4>
+    </div>
+
+    <form action='<%= path %>/<%= problem.problemId %>' method='POST'>
+      <textarea name='textarea' id='textarea'><%= textarea %></textarea>
+      <input type='submit' class='submit-button' value='테스트 실행'>
+    </form>
+
+  </section>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/codemirror.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/mode/javascript/javascript.min.js'></script>
+  <script src='/javascripts/problem.js'></script>
+</body>
+</html>

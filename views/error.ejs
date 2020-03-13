@@ -1,3 +1,30 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <link rel='stylesheet' href='/stylesheets/style.css'>
+  <title>Document</title>
+  <style>
+    body {
+      height: 95vh;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 4rem;
+    }
+  </style>
+</head>
+<body>
+  <h1><%= message %></h1>
+  <button>메인으로 돌아가기</button>
+  <script>
+    const button = document.querySelector('button');
+    button.addEventListener('click', () => {
+      location.assign(location.origin);
+    });
+  </script>
+</body>
+</html>
+
