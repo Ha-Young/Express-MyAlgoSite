@@ -7,7 +7,11 @@
   </head>
   <body>
     <section class="resultSection">
-      <h1 class="testMessage"><%= message %></h1>
+      <% if (message === "solution is not defined") { %>
+        <h1 class="testMessage">"Please enter the function's name as 'solution'."</h1>
+      <% } else { %>
+        <h1 class="testMessage"><%= message %></h1>
+      <% } %>
       <a href="/problems">Go Home</a>
       <a href="#" class="goBack">Try again</a>
       <% if (!!results && results.length) { %>
@@ -21,7 +25,7 @@
         </article>
       <% } %>
       <% if (!!stack) { %>
-        <pre><%= stack %></pre>
+        <div class="failErrorStack"><%= stack %></div>
       <% } %>
     </section>
     <script>

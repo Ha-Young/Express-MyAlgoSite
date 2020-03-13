@@ -186,6 +186,10 @@ button[type=submit], .goBackButton {
   list-style: none;
 }
 
+.failErrorStack {
+  margin: 10px;
+}
+
 /* [error] */
 .errorWrapper {
   display: flex;

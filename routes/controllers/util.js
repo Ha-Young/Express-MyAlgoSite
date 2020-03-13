@@ -18,22 +18,28 @@ exports.excuteCode = (tests, inputedSolution) => {
 }
 
 exports.updateUserRecords = async (userId, solvedLevel, totalCount, lvOneCount, lvTwoCount, lvThreeCount) => {
-  let user = null;
   const solvedAllCount = totalCount + 1;
   const solvedLevelOne =  lvOneCount + 1;
   const solvedLevelTwo = lvTwoCount + 1;
   const solvedLevelThree = lvThreeCount + 1;
+  const loginedUser = { _id: userId };
+  const updateRecords = { solvedAllCount };
+  const options = { new: true };
   if (solvedLevel === 1) {
-    user = await User.findOneAndUpdate({ _id: userId }, { solvedAllCount, solvedLevelOne });
+    updateRecords.solvedLevelOne = solvedLevelOne;
   } else if (solvedLevel === 2) {
-    user = await User.findOneAndUpdate({ _id: userId }, { solvedAllCount, solvedLevelTwo });
-  } else {
-    user = await User.findOneAndUpdate({ _id: userId }, { solvedAllCount, solvedLevelThree });
+    updateRecords.solvedLevelTwo = solvedLevelTwo;
+  } else if (solvedLevel === 3) {
+    updateRecords.solvedLevelThree = solvedLevelThree;
   }
+  const user = await User.findOneAndUpdate(loginedUser, updateRecords, options);
   return user;
 }
 
 exports.updateProblemRecords = async (problemId, beforeRecords) => {
   const updatedCompletedUsers = beforeRecords + 1;
-  await Problem.findOneAndUpdate({ _id: problemId }, { completedUsers: updatedCompletedUsers });
+  const solvedProblem = { _id: problemId };
+  const updateRecordes = { completedUsers: updatedCompletedUsers };
+  const options = { new: true };
+  await Problem.findOneAndUpdate(solvedProblem, updateRecordes, options);
 }
