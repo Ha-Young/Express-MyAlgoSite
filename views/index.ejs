@@ -13,7 +13,7 @@
     <ul class='problems'>
       <% problems.forEach(problem => { %>
       <li>
-        <a class='problem-info' href='problems/<%= problem.id %>'>
+        <a class='problem-info' href=<%= `problems/${problem.id}` %>>
           <span>이름 <%= problem.title %></span>
           <span>레벨 <%= problem.difficulty_level %></span>
           <span>완료 인원 <%= problem.completed_users %></span>

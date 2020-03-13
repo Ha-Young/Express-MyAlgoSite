@@ -9,16 +9,26 @@
   <%- include('partials/header') %>
 
   <div>
+    <% if (wrongProblem) { %>
     <ul>
       <h3>문제를 틀리셨습니다 ! </h3>
       <% wrongProblem.forEach(problem => { %>
       <li>
-        <span>문제 번호 <%= problem.number %></span>
+        <span>문제 번호 <%= problem.testNo %></span>
         <span>제출한 답 <%= problem.clientResult %></span>
         <span>정답 <%= problem.result %></span>
       </li>
       <%  }) %>
     </ul>
+
+    <% } else {%>
+    <h3>제출 코드 에러</h3>
+    <span><%= error %></span>
+    <% } %>
+
+    <button>
+      <a href=<% `/problems/problem${problemId}` %>>문제 계속 풀기</a>
+    </button>
   </div>
 </body>
 

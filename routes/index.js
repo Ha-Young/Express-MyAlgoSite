@@ -4,8 +4,6 @@ const router = express.Router();
 const Problem = require('../models/Problem');
 const problems = require('../models/problems.json');
 
-const app = express();
-
 /* GET home page. */
 const isAuthenticated = function (req, res, next) {
   if (req.isAuthenticated())
