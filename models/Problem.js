@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const ProblemSchema = new mongoose.Schema({
-  id: { type: Number, required: true, unique: true },
+  id: { type: Number, required: true },
   title: { type: String, required: true },
   completed_users: { type: Number, required: true, default: 0, min: 0 },
   difficulty_level: { type: Number, required: true, min: 1 },
