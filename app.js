@@ -1,19 +1,21 @@
 const path = require("path");
 const express = require("express");
 const passport = require("passport");
+const session =require("express-session");
 const githubStrategy = require("passport-github");
 const keys = require("./config/keys");
 const index = require("./routes/index");
 const login = require("./routes/login");
 const problem= require("./routes/problem");
+const User= require("./models/User")
 
 // const userGithubId = require("./config/");
-global.loginState = {};
 
 passport.serializeUser((user, cb) => {
-  cb(null, user);
+  cb(null, user._id);
 });
-passport.deserializeUser((user, cb) => {
+passport.deserializeUser(async (id, cb) => {
+  const user= await User.findById(id);
   cb(null, user);
 });
 
@@ -24,17 +26,32 @@ passport.use(
       clientSecret: keys.github.CLIENT_SECRET,
       callbackURL: "/login/github/callback"
     },
-    (aceessTocken, refreshToken, profile, cb) => {
-      user = { ...profile };
-      global.loginState.githubId = user._json.login;
-      return cb(null, profile);
+    async (aceessTocken, refreshToken, profile, cb) => {
+      const userInfo = { ...profile };
+
+      const user= await User.findOne({id:userInfo._json.id});
+      if(user){
+        console.log('존재합니다');
+        cb(null,user);
+      }else{
+        const newUser=await new User({githubId:userInfo._json.login , id:userInfo._json.id}).save();
+        console.log('생성합니다.');
+        cb(null,newUser);
+      }
+
+      // return cb(null, profile);
     }
   )
 );
 const app = express();
+app.use(session({secret:keys.session.KEY, cookie:{maxAge:60000}}));
+app.use(express.urlencoded());
+app.use(express.json());
+
 app.set("view engine", "ejs");
-app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, "./public")));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/", index);
 app.use("/login", login);

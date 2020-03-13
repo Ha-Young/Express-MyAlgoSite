@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const passport = require("passport");
 const keys = require("../config/keys");
+
 router.get("/", (req, res) => {
   res.render("login");
 });

@@ -7,7 +7,8 @@ const mongoose = require("mongoose");
 
  */
 const userSchema = new mongoose.Schema({
-  githubId: String
+  githubId: String,
+  id: String
 });
 
 // userSchema.plugin(findOrCreate);

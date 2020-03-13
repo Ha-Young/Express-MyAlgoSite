@@ -2,29 +2,17 @@
 <html>
   <head>
     <title>Codewars</title>
-    <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+    <link rel="stylesheet" href="stylesheets/style.css" />
   </head>
   <body>
+    <%- include('header',{login:login}); %>
     <h1><%=title %></h1>
-    <%if (login){ %>
-    <p>유저: <%= login %></p>
-    <a href="/logout">logout</a>
-    <% } else { %>
-    <a href="/login">login</a>
-    <% } %>
     <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
-    <!-- 
-    <ul class="tabs">
-      <li>Level 1</li>
-      <li>Level 2</li>
-      <li>Level 3</li>
-    </ul> -->
-
     <ul class="problems">
       <% for(var i=0; i < problems.length; i++) { %>
 
       <li>
-        <form method="GET" action="/problem/:<%=problems[i].id%>" method="GET">
+        <form method="GET" action="/problem/<%=problems[i].id%>" method="GET">
           <div><input type="submit" value="문제 : <%=problems[i].title%>" /></div>
           <div>정답자: <%=problems[i].completed_users|| 0%></div>
           <div>난이도: <%=problems[i].difficulty_level%></div>
@@ -33,11 +21,4 @@
       <% } %>
     </ul>
   </body>
-  <script>
-    function showDetail(el) {
-      const problemId = el.dataset;
-      // fetch('/problems);
-      // console.log(problemId.id);
-    }
-  </script>
 </html>

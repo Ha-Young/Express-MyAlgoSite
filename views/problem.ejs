@@ -1,0 +1,31 @@
+<html>
+<head>
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <script src='/codemirror/lib/codemirror.js'/></script>
+  <link rel='stylesheet' href='/codemirror/lib/codemirror.css' />
+  <script src='/codemirror/mode/javascript/javascript.js'/></script>
+  <link href='/codemirror/theme/dracula.css' rel='stylesheet'/>
+
+</head>
+<body>
+  <div class="wrapper">
+    <div class='problem'>
+      <div class='problem-title'>문제: <%= problem.title %></div>
+      <div>정답자 수:<%= problem.completed_users %></div>
+      <div>난이도:<%= problem.difficulty_level %></div>
+      <div><%- problem.description %></div>
+    </div>
+      <form class='solution'id='solution-form' method="POST" action="/problem/<%= problem.id %>">
+      <textarea name='solutionCode' id='editor'>//start here</textarea>
+      </form>
+    <button type="submit" form="solution-form">코드 제출</button>
+  </div>
+  <script>
+    var editor=CodeMirror.fromTextArea
+    (document.getElementById('editor'),{
+      mode: "javascript",
+      theme:"dracula"
+    });
+  </script>
+</body>
+</html>

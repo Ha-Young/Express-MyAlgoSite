@@ -12,10 +12,7 @@ router.get("/", async (req, res, next) => {
       next(err);
     });
   }
-  // TODO✅: 일단 JSON 를 넣어서 보여줄것
-  // TODO: app.js 에서 데이터 베이스 연결하고 실제 데이ㅌ 베이스에는 샘플을 한번만 저장
-  // TODO : 이곳에서는 problems를 db에서  모조리 불러다가 보여주면 됨 .
-  res.render("index", { title: "코드전쟁", problems: problems, login: global.loginState.githubId });
+  res.render("index", { title: "코드전쟁", problems: problems, login: req.user.githubId });
 });
 
 module.exports = router;
