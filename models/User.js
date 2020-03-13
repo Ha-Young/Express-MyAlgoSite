@@ -6,7 +6,18 @@ const mongoose = require('mongoose');
 
  */
 const userSchema = new mongoose.Schema({
-
+  "ID": {
+    type: Number
+  },
+  "Name": {
+    type: String
+  },
+  "Image URL": {
+    type: String
+  },
+  "Email": {
+    type: String
+  }
 });
 
 module.exports = mongoose.model('User', userSchema);
