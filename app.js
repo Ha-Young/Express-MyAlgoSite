@@ -8,6 +8,7 @@ const problems = require('./routes/problems');
 const path = require('path');
 const passport = require('passport');
 const bodyParser = require('body-parser');
+const createError = require('http-errors')
 const mongoose = require('mongoose');
 const db = mongoose.connection;
 
@@ -31,7 +32,7 @@ app.use(session({ secret: process.env.SESSION_SECRET_KEY, resave: false, saveUni
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({ extended:true }));
 
 app.use('/', index);
 app.use('/login', login);
@@ -40,15 +41,15 @@ app.use('/problems', problems);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  const err = new Error('Not Found');
-  err.status = 404;
+  const err = createError(404, 'Not Found');
+
   next(err);
 });
 
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
-  res.locals.message = err.message;
+  console.log('asdasd', res.locals)
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page

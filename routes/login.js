@@ -9,7 +9,7 @@ passport.use(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET_KEY,
-      callbackURL: 'http://localhost:3000/login/auth/github/callback'
+      callbackURL: 'http://localhost:3000/login/auth/github/callback',
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
@@ -36,11 +36,11 @@ passport.use(
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
-passport.deserializeUser(async(userId, done) => {
+passport.deserializeUser(async (userId, done) => {
   try {
     const user = await User.findOne({ github_id: userId });
     done(null, user);
-  } catch(err) {
+  } catch (err) {
     done(err);
   }
 });
@@ -51,7 +51,9 @@ router.get('/', (req, res) => {
 
 router.get('/auth/github', passport.authenticate('github'));
 
-router.get('/auth/github/callback', passport.authenticate('github', {
+router.get(
+  '/auth/github/callback',
+  passport.authenticate('github', {
     failureRedirect: '/login',
     successRedirect: '/',
   })

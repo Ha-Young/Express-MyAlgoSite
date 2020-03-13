@@ -4,11 +4,13 @@ const Problem = require('../models/Problem');
 
 /* GET home page. */
 router.get('/', async(req, res, next) => {
+  if (!req.user) return res.redirect('/login');
+
   try {
-    if (!req.user) return res.redirect('/login');
-  
     const problems = await Problem.find();
-    res.render('index', { problems, username: req.user.username });
+    const username = req.user.username;
+
+    res.render('index', { problems, username });
   } catch(err) {
     next(err);
   }
