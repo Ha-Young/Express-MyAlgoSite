@@ -28,14 +28,12 @@ passport.use(
       const userInfo = { ...profile };
       const user = await User.findOne({ id: userInfo._json.id });
       if (user) {
-        console.log("존재합니다");
         cb(null, user);
       } else {
         const newUser = await new User({
           githubId: userInfo._json.login,
           id: userInfo._json.id
         }).save();
-        console.log("생성합니다.");
         cb(null, newUser);
       }
     }
@@ -43,17 +41,19 @@ passport.use(
 );
 
 const app = express();
+app.use(session({ secret: keys.session.KEY, cookie: { maxAge: 60000 } }));
 app.use(express.urlencoded());
 app.use(express.json());
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "./public")));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use("/", index);
 app.use("/login", login);
 app.use("/problem", problem);
 
-app.use(session({ secret: keys.session.KEY, cookie: { maxAge: 60000 } }));
-app.use(passport.initialize());
-app.use(passport.session());
+
 
 const mongoose = require("mongoose");
 
