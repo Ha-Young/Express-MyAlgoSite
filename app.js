@@ -4,8 +4,11 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const passport = require('passport');
+
 const middlewares = require('./middleware');
 const index = require('./routes/index');
+const problem = require('./routes/problem.js');
+
 require('./passport');
 
 const app = express();
@@ -18,36 +21,32 @@ app.use(bodyParser.urlencoded());
 
 app.use(
   session({
-    secret: 'wKhgw3WcOGV5KDM4kRxl3I0bquW1GoWW',
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     store: new MongoStore({
-      url: 'mongodb://localhost/codewars',
+      url: process.env.MONGO_URL,
       collection: 'sessions'
     })
   })
 );
 app.use(passport.initialize());
 app.use(passport.session());
-
 app.use(middlewares.setLocals);
 
 app.use('/', index);
+app.use('/problem', problem);
 
-// catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  const err = new Error('Not Found');
+  const err = new Error('페이지를 찾을 수 없습니다.');
   err.status = 404;
   next(err);
 });
 
-// error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
   res.status(err.status || 500);
   res.render('error', { message: err.message });
 });

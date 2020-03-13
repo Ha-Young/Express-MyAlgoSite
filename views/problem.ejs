@@ -9,7 +9,9 @@
       <div class="problem-container">
         <div class="problem-info-boxs">
           <div class="problem-info-top">
-            <div class="problem-title"><%= problem.title %></div>
+            <div class="problem-title">
+              <%= problem.title %>
+            </div>
             <div class="problem-infos">
               <div class="problem-difficulty-level">Level <%= problem.difficulty_level %></div>
               <div class="problem-completed-users"><%= problem.completed_users %>명 완료</div>
@@ -20,10 +22,21 @@
           </div>
         </div>
         <form class="problem-code-form" action="/problem/<%= problem.id %>" method="POST">
-          <input type="text" />
+          <textarea id="editor" name="user-solution"><%= problem.default_function %></textarea>
           <input class="submitButton" type="submit" value="코드 제출" />
         </form>
       </div>
     </div>
+    <script src="/javascripts/codemirror.js"></script>
+    <script src="/javascripts/mode/javascript/javascript.js"></script>
+    <link rel="stylesheet" href="/stylesheets/codemirror.css" />
+    <link rel="stylesheet" href="/stylesheets/panda-syntax.css" />
+    <script>
+      CodeMirror.fromTextArea(document.getElementById('editor'), {
+        lineNumbers: true,
+        mode: { name: 'javascript', globalVars: true },
+        theme: 'panda-syntax'
+      });
+    </script>
   </body>
 </html>

@@ -8,8 +8,13 @@
     <div class="container">
       <div class="error-container">
         <div class="error-box">
-          <span><%= error.status %></span>
-          <span><%= error.message %></span>
+          <div class="error-infos">
+            <div><%= error.status %></div>
+            <div><%= error.message %></div>
+            <div class="error-redirect-box">
+              <a href="/" class="error-redirect-button">돌아가기</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>

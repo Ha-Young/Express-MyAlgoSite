@@ -13,8 +13,8 @@ passport.deserializeUser((user, done) => {
 passport.use(
   new GithubStrategy(
     {
-      clientID: 'ea0bf89577cd50fcd386',
-      clientSecret: '9df8db22c33eb5c4f8a29db533ef694a8fef3caf',
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
       callbackURL: 'http://localhost:3000/auth/github/callback'
     },
     async (accessToken, refreshToken, profile, done) => {
@@ -23,7 +23,7 @@ passport.use(
       } = profile;
 
       if (!email) {
-        const error = new Error('이메일이 비공개로 설정되어있습니다. 로그인 및 가입을 위해 다시 한 번 확인해주세요.');
+        const error = new Error('Github의 이메일이 비공개로 처리되어있습니다. Public email을 설정해주세요.');
         return done(error);
       }
 

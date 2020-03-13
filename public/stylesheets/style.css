@@ -4,6 +4,8 @@
 @import './login.css';
 @import './error.css';
 @import './problem.css';
+@import './success.css';
+@import './failure.css';
 
 * {
   user-select: none;
@@ -31,5 +33,9 @@ body {
 }
 
 input {
+  border: none;
+}
+
+button {
   border: none;
 }
