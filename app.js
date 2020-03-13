@@ -7,6 +7,7 @@ const passport = require('passport');
 const { unsetContext, localsMiddleware } = require('./middlewares');
 const globalRoutes = require('./routes/global');
 const problemsRoutes = require('./routes/problems');
+const errors = require('./lib/error');
 
 dotenv.config();
 
@@ -40,15 +41,13 @@ require('./passport');
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+  next(new errors.NotFoundError('Not Found'));
 });
 
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
-  res.locals.message = err.message;
+  res.locals.message = err.displayMessage;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page

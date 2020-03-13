@@ -2,6 +2,7 @@ const GitHubStrategy = require('passport-github').Strategy;
 const passport = require('passport');
 const dotenv = require('dotenv');
 const User = require('./models/User');
+const errors = require('./lib/error');
 
 dotenv.config();
 
@@ -24,11 +25,8 @@ passport.use(new GitHubStrategy({
         await User.save();
       }
     } catch (err) {
-      err.status = 500;
-      err.message = 'Internal Server Error';
-      next(err);
+      next(new errors.GeneralError(err.message));
     }
-
     cb(null, user);
   }
 ));
@@ -43,8 +41,6 @@ passport.deserializeUser(async function(id, done) {
 
     done(null, user);
   } catch (err) {
-    err.status = 500;
-    err.message = 'Internal Server Error';
-    next(err);
+    next(new errors.GeneralError(err.message));
   }
 });

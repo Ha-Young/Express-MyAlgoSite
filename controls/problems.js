@@ -1,6 +1,7 @@
 const vm = require('vm');
 const Problem = require('../models/Problem');
 const Test = require('../models/Test');
+const errors = require('../lib/error');
 
 const getHome = async (req, res, next) => {
   try {
@@ -8,9 +9,7 @@ const getHome = async (req, res, next) => {
 
     res.render('index', { title: '코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!', problems });
   } catch (err) {
-    err.status = 500;
-    err.message = 'Internal Server Error';
-    next(err);
+    next(new errors.GeneralError(err.message));
   }
 };
 
@@ -29,6 +28,19 @@ const postAddCase = async (req, res, next) => {
   try {
     const id = req.params.problem_id;
     const { question, answer } = req.body;
+
+    if (question === "" || answer === "") {
+      throw new errors.ValidationError(`입력한 값이 빈 문자열입니다.`, question && answer);
+    }
+    
+    if (question.trim() !== question) {
+      throw new errors.ValidationError('입력한 code값이 유효하지 않습니다.', question);
+    }
+
+    if (answer.trim() !== answer) {
+      throw new errors.ValidationError('입력한 solution값이 유효하지 않습니다.', answer);
+    }
+
     const problem = await Problem.findById(id);
     const newTest = await Test.create({
       code: question,
@@ -40,9 +52,17 @@ const postAddCase = async (req, res, next) => {
 
     res.redirect(`/problems/${id}`);
   } catch (err) {
-    err.status = 500;
-    err.message = 'Internal Server Error';
-    next(err);
+    if (err instanceof errors.ValidationError) {
+      return next(err);
+    }
+
+    if (err instanceof mongoose.Error.ValidationError) {
+      return next(
+        new errors.ValidationError(err.message, err.errors.owner.path)
+      );
+    }
+
+    next(new errors.GeneralError(err.message));
   }
 };
 
@@ -59,17 +79,14 @@ const getProblemsDetail = async (req, res, next) => {
 
     res.render('problemDetail', { title: problem.title, problem });
   } catch (err) {
-    err.status = 500;
-    err.message = 'Internal Server Error';
-    next(err);
+    next(new errors.GeneralError(err.message));
   }
 };
 
 const postProblemsDetail = async (req, res, next) => {
-  const id = req.params.problem_id;
-  const submitedCode = req.body.code;
-
   try {
+    const id = req.params.problem_id;
+    const submitedCode = req.body.code;
     const problem = await Problem.findById(id).populate('tests');
     const tests = problem.tests;
     let isPassTests = true;
@@ -113,9 +130,7 @@ const postProblemsDetail = async (req, res, next) => {
       res.redirect(`/failure`);
     }
   } catch (err) {
-    err.status = 500;
-    err.message = 'Internal Server Error';
-    next(err);
+    next(new errors.GeneralError(err.message));
   }
 };
 
