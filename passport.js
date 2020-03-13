@@ -23,7 +23,7 @@ passport.use(
       } = profile;
 
       if (!email) {
-        const error = new Error('Github의 이메일이 비공개로 처리되어있습니다. Public email을 설정해주세요.');
+        const error = new Error('Github의 이메일이 비공개로 설정되어있습니다. Public email을 설정해주세요.');
         return done(error);
       }
 
