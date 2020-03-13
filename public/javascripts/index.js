@@ -9,4 +9,4 @@ const editor = CodeMirror.fromTextArea(
 
 editor.on('change', ()=>{
     const textareaValue = editor.getValue();
-})
+});

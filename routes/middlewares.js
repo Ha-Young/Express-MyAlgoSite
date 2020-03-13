@@ -11,17 +11,17 @@ exports.isLoggedIn = (req, res, next) => {
 }
 
 exports.isSeccesss = (req, res, next) => {
-    
-    const problem = sample_problems.filter((el) => {
+
+    const problem = sample_problems.find((el) => {
         return el.id === Number(req.params.problem_id)
-    })[0];
-    
+    });
+
     const problemTestList = problem.tests;
-    
+
     try {
         new vm.Script(req.body.submitValue);
     } catch (err) {
-        if(err) {
+        if (err) {
             return res.render('failure', {
                 failmessage: err,
                 error: err.stack
@@ -58,7 +58,9 @@ exports.isSeccesss = (req, res, next) => {
         }
         if (contexts[0][solutionFn](testValue[i][0]) !== testValue[i][1]) {
             return res.render('failure', {
-                failmessage: `${solutionFn}(${testValue[i][0]})결과값은 ${contexts[0][solutionFn](testValue[i][0])}이 아니라 ${testValue[i][1]}어야 합니다`,
+                failmessage: `${solutionFn}(${testValue[i][0]})결과값은 
+                ${contexts[0][solutionFn](testValue[i][0])}이 아니라 
+                ${testValue[i][1]}어야 합니다`,
                 error: ''
             });
         }
