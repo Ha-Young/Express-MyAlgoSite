@@ -1,0 +1,12 @@
+.logout-button {
+  display: block;
+  float: right;
+  height: 30px;
+  margin: 34px 30px 0 0;
+  padding: 0 10px;
+  border: 1px solid #bb432c;
+  border-radius: 2px;
+  font-size: 14px;
+  line-height: 28px;
+  color: #bb432c;
+}

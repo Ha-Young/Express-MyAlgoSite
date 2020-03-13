@@ -1,0 +1,23 @@
+.error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.error > h2 {
+  margin: 0;
+  font-size: 160px;
+  line-height: 110px;
+  color: #bb432c;
+  text-align: center;
+}
+
+.error > h3 {
+  margin: 60px 0 0 0;
+  font-weight: 400;
+  font-size: 35px;
+  line-height: 30px;
+  color: #bb432c;
+  text-align: center;
+}

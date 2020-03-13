@@ -1,40 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Codewars</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1>Codewars</h1>
-    <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
 
-    <ul class="tabs">
-      <li>Level 1</li>
-      <li>Level 2</li>
-      <li>Level 3</li>
-    </ul>
+<head>
+  <title>Codewars</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel='stylesheet' href='/stylesheets/index.css' />
+</head>
 
-    <ul class="problems">
-      <li>
-        <div>피보나치 수열</div>
-        <div>정답자: 15명</div>
-        <div>난이도: Level 1</div>
-      </li>
-      <li>
-        <div>서울에서 김서방 찾기</div>
-        <div>정답자: 11명</div>
-        <div>난이도: Level 2</div>
-      </li>
-      <li>
-        <div>수박수박수박수박수</div>
-        <div>정답자: 12명</div>
-        <div>난이도: Level 2</div>
-      </li>
-      <li>
-        <div>하샤드 수</div>
-        <div>정답자: 5명</div>
-        <div>난이도: Level 3</div>
-      </li>
-    </ul>
-  </body>
+<body>
+  <%- include('partials/logo') %>
+  <%- include('partials/logout') %>
+
+  <div class='problems-list'>
+
+    <% for (let i = 0; i < allProblems.length; i++) { %>
+      <div class='problem'>
+        <a href='/problems/<%= allProblems[i].id %>'>
+          <strong><%= allProblems[i].title %></strong>
+          <ul>
+            <li>Level : <%= allProblems[i].difficulty_level %></li>
+            <li>Completed Users : <%= allProblems[i].completed_users || 0 %></li>
+          </ul>
+        </a>
+      </div>
+    <% } %>
+    
+  </div>
+</body>
+
 </html>

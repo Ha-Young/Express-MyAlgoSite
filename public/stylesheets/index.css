@@ -1,0 +1,63 @@
+.problems-list {
+  display: flex;
+  width: 100%;
+  padding: 30px;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+}
+
+.problem {
+  width: calc(100% / 2 - 10px);
+  margin: 0 20px 20px 0;
+  background-color: rgba(0,0,0,.2);
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.problem:hover {
+  background-color: rgba(0,0,0,.3);
+}
+
+.problem:nth-of-type(2n) {
+  margin-right: 0;
+}
+
+.problem > a {
+  display: block;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.problem > a > strong {
+  color: #fff;
+}
+
+.problem > a > ul {
+  display: flex;
+  margin: 10px 0 0 0;
+  padding: 0;
+}
+
+.problem > a > ul > li {
+  display: flex;
+  font-size: 14px;
+  color: #888;
+}
+
+.problem > a > ul > li:not(:last-of-type)::after {
+  display: flex;
+  width: 1px;
+  height: 10px;
+  margin: 6px 12px;
+  background: #888;
+  content: '';
+}
+
+.problem > a > p {
+  margin: 10px 0 0 0;
+  font-size: 14px;
+  line-height: 26px;
+  color: #888;
+  word-wrap: break-word;
+  word-break: keep-all;
+}

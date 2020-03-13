@@ -1,3 +1,23 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Codewars</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel='stylesheet' href='/stylesheets/error.css' />
+</head>
+
+<body>
+  <div class='error'>
+    <h2><%= error.status %></h2>
+
+    <% if (error.status === 500) { %>
+      <h3>Internal Server Error</h3>
+    <% } else { %>
+      <h3><%= message %></h3>
+    <% } %>
+    
+  </div>
+</body>
+
+</html>

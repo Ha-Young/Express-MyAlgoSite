@@ -1,8 +1,71 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,700&display=swap');
+
+html,
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  min-width: 850px;
+  margin: 0;
+  padding: 0;
+  background: #303133;
+  font-family: 'Noto Sans KR', sans-serif;
+  box-sizing: border-box;
 }
 
 a {
-  color: #00B7FF;
+  text-decoration: none;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
+}
+
+button:focus {
+  outline: none;
+}
+
+.button-red {
+  background-color: #bb432c;
+  border-radius: 4px;
+  color: #fff;
+  transition: background-color 0.2s;
+}
+
+.button-red:hover {
+  background-color: #9a2f1a;
+}
+
+.logo {
+  display: inline-block;
+  height: 36px;
+  margin: 30px 0 0 30px;
+}
+
+.logo > * {
+  float: left;
+}
+
+.logo > h1 {
+  margin: 0 0 0 15px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 36px;
+  color: #fff;
+}
+
+.logout-button {
+  display: block;
+  float: right;
+  height: 30px;
+  margin: 34px 30px 0 0;
+  padding: 0 10px;
+  border: 1px solid #bb432c;
+  border-radius: 2px;
+  font-size: 14px;
+  line-height: 28px;
+  color: #bb432c;
 }

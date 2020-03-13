@@ -1,0 +1,57 @@
+.problems-box {
+  display: flex;
+  height: calc(100vh - 71px);
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.problems-description {
+  width: calc(40% - 10px);
+  margin-right: 20px;
+}
+
+.problems-description > h2 {
+  margin: 0;
+  color: #fff;
+}
+
+.problems-description > ul {
+  display: flex;
+  margin: 14px 0;
+  padding: 0;
+}
+
+.problems-description > ul > li {
+  display: flex;
+  color: #888;
+}
+
+.problems-description > ul > li:not(:last-of-type)::after {
+  display: flex;
+  width: 1px;
+  height: 12px;
+  margin: 8px 18px;
+  background: #888;
+  content: '';
+}
+
+.problems-description > p {
+  margin: 0;
+  line-height: 28px;
+  color: #888;
+  word-wrap: break-word;
+  word-break: keep-all;
+}
+
+.editor {
+  width: calc(60% - 10px);
+  height: 100%;
+}
+
+.button-attempt {
+  float: right;
+  width: 120px;
+  height: 40px;
+  margin-top: 20px;
+  font-size: 14px;
+}

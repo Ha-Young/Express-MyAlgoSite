@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Codewars</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel='stylesheet' href='/stylesheets/problems.css' />
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.css' />
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/theme/ayu-dark.min.css' />
+</head>
+
+<body>
+  <%- include('partials/logo') %>
+  <%- include('partials/logout') %>
+
+  <div class='problems-box'>
+
+    <div class='problems-description'>
+      <h2><%= problem.title %></h2>
+      <ul>
+        <li>Level : <%= problem.difficulty_level %></li>
+        <li>Completed Users : <%= problem.completed_users || 0 %></li>
+      </ul>
+      <p><%= problem.description %></p>
+    </div>
+    
+    <div class='editor'>
+      <form action='/problems/<%= problem.id %>' method='post'>
+        <textarea name='solution'>function solution() {&#13;&#10;&#13;&#10;}</textarea>
+        <button type='submit' class='button-red button-attempt'>ATTEMPT</button>
+      </form>
+    </div>
+
+  </div>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/mode/javascript/javascript.min.js'></script>
+  <script src='/javascripts/codemirror.js'></script>
+
+</body>
+
+</html>

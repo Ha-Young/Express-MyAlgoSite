@@ -1,0 +1,32 @@
+.failure {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.failure > h3 {
+  margin: 0;
+  font-size: 45px;
+  color: #fff;
+  text-align: center;
+}
+
+.fail {
+  margin-top: 40px;
+  padding: 20px 25px;
+  border: 1px solid #bb432c;
+  box-sizing: border-box;
+}
+
+.fail *:not(div) {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  line-height: 26px;
+  color: #bb432c;
+}
+
+.fail > div:not(:last-of-type) {
+  margin-bottom: 20px;
+}

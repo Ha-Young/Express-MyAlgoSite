@@ -1,73 +1,133 @@
 [
   {
     "id": 1,
-    "title": "피보나치 수열",
-    "completed_users": 15,
+    "title": "서울에서 김서방 찾기",
+    "completed_users": 11978,
     "difficulty_level": 1,
-    "description": "피보나치 수는 F(0) = 0, F(1) = 1일 때, 1 이상의 n에 대하여 F(n) = F(n-1) + F(n-2) 가 적용되는 수 입니다.",
+    "description": "String형 배열 seoul의 element중 Kim의 위치 x를 찾아, 김서방은 x에 있다는 String을 반환하는 함수, solution을 완성하세요. seoul에 Kim은 오직 한 번만 나타나며 잘못된 값이 입력되는 경우는 없습니다.",
     "tests": [
       {
-        "code": "solution(3)",
-        "solution": 2
+        "code": "solution(['Jane', 'Kim'])",
+        "answer": "김서방은 1에 있다"
       },
       {
-        "code": "solution(2)",
-        "solution": 1
-      },
-      {
-        "code": "solution(1)",
-        "solution": 1
+        "code": "solution(['Jane', 'Davin', 'Kim'])",
+        "answer": "김서방은 2에 있다"
       }
     ]
   },
   {
     "id": 2,
-    "title": "서울에서 김서방 찾기",
-    "completed_users": 11,
-    "difficulty_level": 2,
-    "description": "String형 배열 seoul의 element중 Kim의 위치 x를 찾아, 김서방은 x에 있다는 String을 반환하는 함수, solution을 완성하세요. seoul에 Kim은 오직 한 번만 나타나며 잘못된 값이 입력되는 경우는 없습니다.",
+    "title": "완주하지 못한 선수",
+    "completed_users": 15881,
+    "difficulty_level": 1,
+    "description": "수많은 마라톤 선수들이 마라톤에 참여하였습니다. 단 한 명의 선수를 제외하고는 모든 선수가 마라톤을 완주하였습니다. 마라톤에 참여한 선수들의 이름이 담긴 배열 participant와 완주한 선수들의 이름이 담긴 배열 completion이 주어질 때, 완주하지 못한 선수의 이름을 return 하도록 solution 함수를 작성해주세요.",
     "tests": [
       {
-        "code": "solution(['Jane', 'Kim'])",
-        "solution": "김서방은 1에 있다"
+        "code": "solution(['leo', 'kiki', 'eden'], ['eden', 'kiki'])",
+        "answer": "leo"
       },
       {
-        "code": "solution(['Jane', 'Huh', 'Kim'])",
-        "solution": "김서방은 2에 있다"
+        "code": "solution(['marina', 'josipa', 'nikola', 'vinko', 'filipa'], ['josipa', 'filipa', 'marina', 'nikola'])",
+        "answer": "vinko"
+      },
+      {
+        "code": "solution(['mislav', 'stanko', 'mislav', 'ana'], ['stanko', 'ana', 'mislav'])",
+        "answer": "mislav"
       }
     ]
   },
   {
     "id": 3,
-    "title": "수박수박수박수박수",
-    "completed_users": 12,
-    "difficulty_level": 2,
-    "description": "길이가 n이고, 수박수박수박수....와 같은 패턴을 유지하는 문자열을 리턴하는 함수, solution을 완성하세요. 예를들어 n이 4이면 수박수박을 리턴하고 3이라면 수박수를 리턴하면 됩니다.\n제한 조건\nn은 길이 10,000이하인 자연수입니다.",
+    "title": "모의고사",
+    "completed_users": 9808,
+    "difficulty_level": 1,
+    "description": "수포자는 수학을 포기한 사람의 준말입니다. 수포자 삼인방은 모의고사에 수학 문제를 전부 찍으려 합니다. 수포자는 1번 문제부터 마지막 문제까지 다음과 같이 찍습니다. 1번 수포자가 찍는 방식: 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, ... 2번 수포자가 찍는 방식: 2, 1, 2, 3, 2, 4, 2, 5, 2, 1, 2, 3, 2, 4, 2, 5, ... 3번 수포자가 찍는 방식: 3, 3, 1, 1, 2, 2, 4, 4, 5, 5, 3, 3, 1, 1, 2, 2, 4, 4, 5, 5, ... 1번 문제부터 마지막 문제까지의 정답이 순서대로 들은 배열 answers가 주어졌을 때, 가장 많은 문제를 맞힌 사람이 누구인지 배열에 담아 return 하도록 solution 함수를 작성해주세요.",
     "tests": [
       {
-        "code": "solution(3)",
-        "solution": "수박수"
+        "code": "solution([1, 2, 3, 4, 5])",
+        "answer": [1]
       },
       {
-        "code": "solution(4)",
-        "solution": "수박수박"
+        "code": "solution([1, 3, 2, 4, 2])",
+        "answer": [1, 2, 3]
       }
     ]
   },
   {
     "id": 4,
-    "title": "하샤드 수",
-    "solution_count": 5,
-    "difficulty_level": 3,
-    "description": "양의 정수 x가 하샤드 수이려면 x의 자릿수의 합으로 x가 나누어져야 합니다. 예를 들어 18의 자릿수 합은 1+8=9이고, 18은 9로 나누어 떨어지므로 18은 하샤드 수입니다. 자연수 n을 입력받아 n이 하샤드 수인지 아닌지 검사하는 함수, solution을 완성해주세요.",
+    "title": "K번째수",
+    "completed_users": 13631,
+    "difficulty_level": 2,
+    "description": "배열 array의 i번째 숫자부터 j번째 숫자까지 자르고 정렬했을 때, k번째에 있는 수를 구하려 합니다. 예를 들어 array가 [1, 5, 2, 6, 3, 7, 4], i = 2, j = 5, k = 3이라면 1. array의 2번째부터 5번째까지 자르면 [5, 2, 6, 3]입니다. 2. 1에서 나온 배열을 정렬하면 [2, 3, 5, 6]입니다.] 3. 2에서 나온 배열의 3번째 숫자는 5입니다. 배열 array, [i, j, k]를 원소로 가진 2차원 배열 commands가 매개변수로 주어질 때, commands의 모든 원소에 대해 앞서 설명한 연산을 적용했을 때 나온 결과를 배열에 담아 return 하도록 solution 함수를 작성해주세요.",
     "tests": [
       {
-        "code": "solution(10)",
-        "solution": true
+        "code": "solution([1, 5, 2, 6, 3, 7, 4], [[2, 5, 3], [4, 4, 1], [1, 7, 3]])",
+        "answer": [5, 6, 3]
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "2016년",
+    "completed_users": 10592,
+    "difficulty_level": 2,
+    "description": "2016년 1월 1일은 금요일입니다. 2016년 a월 b일은 무슨 요일일까요? 두 수 a ,b를 입력받아 2016년 a월 b일이 무슨 요일인지 리턴하는 함수, solution을 완성하세요. 요일의 이름은 일요일부터 토요일까지 각각 SUN,MON,TUE,WED,THU,FRI,SAT 입니다. 예를 들어 a=5, b=24라면 5월 24일은 화요일이므로 문자열 TUE를 반환하세요.",
+    "tests": [
+      {
+        "code": "solution(5, 24)",
+        "answer": "TUE"
       },
       {
-        "code": "solution(11)",
-        "solution": false
+        "code": "solution(11, 27)",
+        "answer": "SUN"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "가운데 글자 가져오기",
+    "completed_users": 13964,
+    "difficulty_level": 2,
+    "description": "단어 s의 가운데 글자를 반환하는 함수, solution을 만들어 보세요. 단어의 길이가 짝수라면 가운데 두글자를 반환하면 됩니다.",
+    "tests": [
+      {
+        "code": "solution('abcde')",
+        "answer": "c"
+      },
+      {
+        "code": "solution('qwer')",
+        "answer": "we"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "title": "타일 장식물",
+    "completed_users": 1063,
+    "difficulty_level": 3,
+    "description": "대구 달성공원에 놀러 온 지수는 최근에 새로 만든 타일 장식물을 보게 되었다. 타일 장식물은 정사각형 타일을 붙여 만든 형태였는데, 한 변이 1인 정사각형 타일부터 시작하여 마치 앵무조개의 나선 모양처럼 점점 큰 타일을 붙인 형태였다. 타일 장식물의 일부를 그리면 다음과 같다.",
+    "tests": [
+      {
+        "code": "solution(5)",
+        "answer": 26
+      },
+      {
+        "code": "solution(6)",
+        "answer": 42
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "title": "디스크 컨트롤러",
+    "completed_users": 1299,
+    "difficulty_level": 3,
+    "description": "하드디스크는 한 번에 하나의 작업만 수행할 수 있습니다. 디스크 컨트롤러를 구현하는 방법은 여러 가지가 있습니다. 가장 일반적인 방법은 요청이 들어온 순서대로 처리하는 것입니다.",
+    "tests": [
+      {
+        "code": "solution([[0, 3], [1, 9], [2, 6]])",
+        "answer": 9
       }
     ]
   }

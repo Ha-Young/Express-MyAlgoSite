@@ -1,0 +1,21 @@
+.success {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.success > h3 {
+  margin: 0;
+  font-size: 45px;
+  color: #fff;
+  text-align: center;
+}
+
+.success > a {
+  display: block;
+  height: 50px;
+  margin-top: 40px;
+  padding: 0 100px;
+  line-height: 45px;
+}
