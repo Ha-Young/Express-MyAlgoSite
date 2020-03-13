@@ -7,17 +7,17 @@ const Problem = require('../models/Problem');
 
 router.get('/login', create, (req, res, next) => {
   res.status(200).render('login', {
-     title: '로그인하셔야 이용하실 수 있습니다' 
+    title: '로그인하셔야 이용하실 수 있습니다'
   });
 });
 
 router.get('/', isLoggedIn, (req, res, next) => {
-  Problem.find((err, problemData)=>{
+  Problem.find((err, problemData) => {
     res.status(302).render('index', {
-      title: '바닐라코딩', 
+      title: '바닐라코딩',
       problemData
-   });
-  })
+    });
+  });
 });
 
 module.exports = router;

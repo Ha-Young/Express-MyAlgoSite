@@ -7,7 +7,7 @@ router.get('/:problem_id', isLoggedIn, (req, res, next) => {
 
     const id = Number(req.params.problem_id);
 
-    Problem.findOne({ id: id}).then((el)=>{
+    Problem.findOne({ id: id }).then((el) => {
         const result = el;
 
         if (!result) {
@@ -24,6 +24,7 @@ router.get('/:problem_id', isLoggedIn, (req, res, next) => {
             level: result.difficulty_level,
             description: result.description
         });
+
     });
 
 });

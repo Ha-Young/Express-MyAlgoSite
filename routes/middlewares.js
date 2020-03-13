@@ -3,8 +3,8 @@ const vm = require('vm');
 const Problem = require('../models/Problem');
 const sample_problems = require('../models/sample_problems.json');
 
-exports.create = async function(req, res, next)  {
-    for(let i=0; i < sample_problems.length; i++) {
+exports.create = async function (req, res, next) {
+    for (let i = 0; i < sample_problems.length; i++) {
         await new Problem(sample_problems[i]).save();
     }
     next();
@@ -20,7 +20,7 @@ exports.isLoggedIn = (req, res, next) => {
 
 exports.isSeccesss = (req, res, next) => {
 
-    Problem.findOne({id: req.params.problem_id}).then((el)=>{
+    Problem.findOne({ id: req.params.problem_id }).then((el) => {
         const problemTestList = el.tests;
 
         try {
@@ -33,25 +33,25 @@ exports.isSeccesss = (req, res, next) => {
                 });
             }
         }
-    
+
         const script = new vm.Script(req.body.submitValue);
-    
+
         let contexts = [{}];
-    
+
         contexts.forEach((context) => {
             script.runInNewContext(context);
         });
-    
+
         let solutionFn = Object.keys(contexts[0])[0];
-    
+
         let testValue = [];
-    
+
         for (let i = 0; i < problemTestList.length; i++) {
             const sandbox = {};
             let changeTestValue = vm.runInNewContext(problemTestList[i].code, sandbox);
             testValue.push([changeTestValue, problemTestList[i].solution]);
         }
-    
+
         for (let i = 0; i < testValue.length; i++) {
             try {
                 contexts[0][solutionFn](testValue[i][0])
@@ -72,5 +72,5 @@ exports.isSeccesss = (req, res, next) => {
         }
         next();
     })
-    
+
 }
