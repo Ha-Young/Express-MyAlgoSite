@@ -7,6 +7,9 @@
     "start": "node --experimental-modules --es-module-specifier-resolution=node app",
     "dev": "set NODE_ENV=development&&nodemon --experimental-modules --es-module-specifier-resolution=node app"
   },
+  "engines": {
+    "node": "12.14.0"
+  },
   "eslintConfig": {
     "parserOptions": {
       "ecmaVersion": 2020,
