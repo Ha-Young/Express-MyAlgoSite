@@ -3,17 +3,18 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import express from 'express';
-import mongoose from 'mongoose';
+import connectMongo from 'connect-mongo';
+import compression from 'compression';
 import hpp from 'hpp';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import expressSession from 'express-session';
-import connectMongo from 'connect-mongo';
+import mongoose from 'mongoose';
 import passport from 'passport';
 import createError from 'http-errors';
 import passportConfig from './config/passport';
 import dbConfig from './config/db';
-import { setLocalsLoggedUser } from './routes/middlewares/auth';
+import { getLocalsLoggedUser } from './routes/middlewares/auth';
 import homeRouter from './routes/home';
 import authRouter from './routes/auth';
 import problemsRouter from './routes/problems';
@@ -27,6 +28,7 @@ const MongoStore = connectMongo(expressSession);
 app.set('view engine', 'pug');
 app.set('views', './views');
 
+app.use(compression());
 app.use(hpp());
 app.use(helmet());
 app.use(morgan('dev'));
@@ -46,7 +48,7 @@ app.use(expressSession({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(setLocalsLoggedUser);
+app.use(getLocalsLoggedUser);
 
 app.use('/', homeRouter);
 app.use('/auth', authRouter);
@@ -62,6 +64,6 @@ app.use((err, req, res, next) => {
   res.render('error');
 });
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log('✔️  Listening on port', process.env.PORT);
 });

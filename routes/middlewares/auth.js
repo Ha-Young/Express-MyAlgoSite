@@ -3,7 +3,7 @@ export const checkLoggedIn = (req, res, next) => {
   else res.redirect(302, '/login');
 };
 
-export const setLocalsLoggedUser = (req, res, next) => {
+export const getLocalsLoggedUser = (req, res, next) => {
   res.locals.loggedUser = req.user || null;
   next();
 };

@@ -8,13 +8,13 @@ html
     link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/theme/material-darker.min.css')
     link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/addon/scroll/simplescrollbars.min.css')
     link(rel='stylesheet' href='https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css')
-    link(rel="stylesheet", href="/stylesheets/styles.css")
+    link(rel="stylesheet", href="/stylesheets/style.css")
     meta(charset='utf-8')
   body
     include ../partials/header
     main(class='container mx-auto px-4')
-      script(src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/codemirror.min.js')
-      script(src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/mode/javascript/javascript.min.js')
-      script(src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/addon/scroll/simplescrollbars.min.js')
-      script(src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/addon/edit/closebrackets.min.js')
+      script(async src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/codemirror.min.js')
+      script(async src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/mode/javascript/javascript.min.js')
+      script(async src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/addon/scroll/simplescrollbars.min.js')
+      script(async src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/addon/edit/closebrackets.min.js')
       block content

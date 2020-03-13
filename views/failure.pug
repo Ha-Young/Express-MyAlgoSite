@@ -1,8 +1,8 @@
 extends layouts/main
 
 block content
-  if error
-    pre #{error.stack}
+  if errorStack
+    pre #{errorStack}
   if failureTestsIndex
     each index in failureTestsIndex
       p #{index + 1}번 테스트 실패!

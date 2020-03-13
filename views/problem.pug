@@ -1,17 +1,21 @@
 extends layouts/main
 
 block content
-  div
-    h2.problem__title #{problem.title}
-  div
-    div
-      h6 문제 설명
-      p.problem__description #{problem.description}
-    div
-      h2.problem__language solution.js
-      textarea.problem__code #{problem.initialCode}
-    div
-      form.problem__form(action=`/problems/${problem._id}` method='POST')
-        input.problem__input(type='hidden' name='user_code' value=problem.initialCode)
-        button(type='submit') 코드 채점하고 제출
+  div(class='bg-dracula')
+    div(class='flex h-16 px-4 border-b border-black')
+      div(class='pt-6 border-b-2 border-white')
+        h5(class='text-sm md:text-base text-white font-bold') #{problem.title}
+      div(class='self-center ml-auto')
+        button(class='px-4 py-2 rounded bg-gray-700 hover:bg-gray-800 text-sm md:text-base text-white font-bold cursor-default') Javascript
+    div(class='flex flex-wrap')
+      div(class='w-full md:w-5/12 p-4')
+        h6(class='mb-4 text-sm text-white font-bold') 문제 설명
+        p(class='text-gray-500') #{problem.description}
+      div(class='w-full md:w-7/12 border-l border-black')
+        h6(class='mb-4 p-4 p-r-0 border-t md:border-t-0 border-b border-black text-white text-sm font-bold') solution.js
+        textarea(class='problem-code') #{problem.initialCode}
+    div(class='flex p-4 border-t border-black')
+      form(class='ml-auto' action=`/problems/${problem._id}` method='POST')
+        input(class='problem-input' type='hidden' name='user_code' value=problem.initialCode)
+        button(class='px-4 py-2 rounded bg-blue-600 hover:bg-blue-700 text-sm md:text-base text-white font-bold' type='submit') 코드 채점하고 제출
   script(src='/javascripts/problem.js')

@@ -20,10 +20,12 @@ const ProblemSchema = new Schema({
   },
   completedUsers: {
     type: Number,
-    required: true
+    default: 0
   },
   difficultyLevel: {
     type: Number,
+    min: 1,
+    max: 5,
     required: true
   },
   description: {

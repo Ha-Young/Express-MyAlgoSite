@@ -1,5 +1,5 @@
-const $code = document.querySelector('.problem__code');
-const $input = document.querySelector('.problem__input');
+const $code = document.querySelector('.problem-code');
+const $input = document.querySelector('.problem-input');
 
 const code = CodeMirror.fromTextArea($code, {
   mode: 'javascript',

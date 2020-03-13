@@ -5,7 +5,7 @@
   "prviate": true,
   "scripts": {
     "start": "node --experimental-modules --es-module-specifier-resolution=node app",
-    "dev": "nodemon --experimental-modules --es-module-specifier-resolution=node app"
+    "dev": "set NODE_ENV=development&&nodemon --experimental-modules --es-module-specifier-resolution=node app"
   },
   "eslintConfig": {
     "parserOptions": {
@@ -67,8 +67,8 @@
   },
   "dependencies": {
     "codemirror": "^5.52.0",
+    "compression": "^1.7.4",
     "connect-mongo": "^3.2.0",
-    "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.0",

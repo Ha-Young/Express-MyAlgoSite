@@ -31,7 +31,7 @@ export const renderProblem = (req, res) => {
   res.render('problem', { title: `문제 연습 - ${problem.title}` });
 };
 
-export const confirmSolution = async (req, res, next) => {
+export const confirmSolution = (req, res, next) => {
   const { problem } = res.locals;
   const { user_code: userCode } = req.body;
   const vm = new vm2.VM();
@@ -52,7 +52,8 @@ export const confirmSolution = async (req, res, next) => {
         failureTestsIndex.push(i);
       }
     } catch (error) {
-      return res.render('failure', { error });
+      const errorStack = error.stack.split('at ')[0];
+      return res.render('failure', { errorStack });
     }
   }
 

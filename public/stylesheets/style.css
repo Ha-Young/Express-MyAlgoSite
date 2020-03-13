@@ -1,3 +1,7 @@
+.bg-dracula {
+  background-color: #212121;
+}
+
 .problem-card-1::before {
   content: '';
   position: absolute;
