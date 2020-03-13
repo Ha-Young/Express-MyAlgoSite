@@ -1,6 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const Problem = require('../models/Problem');
+const { VM } = require('vm2');
+const vm = new VM({
+  timeout: 5000,
+  sandbox: {}
+});
 
 router.get('/:id', async (req, res, next) => {
   if (!req.user) return res.redirect('/login');
@@ -24,25 +29,23 @@ router.post('/:id', async (req, res, next) => {
     params: { id },
   } = req;
   const failureTests = [];
-  const { title: problemTitle } = await Problem.findById(id);
+  const problem = await Problem.findById(id);
   const tests = problem.tests;
   const username = req.user.username;
 
   try {
     tests.forEach(test => {
-      const makeSolution = new Function(`return ${receivedSolution}`);
-      const solution = makeSolution();
-      const result = eval(test.code);
+      const code = `${receivedSolution} ${test.code}`;
+      const result = vm.run(code);
 
       if (result !== test.solution) failureTests.push([test.code, test.solution, result]);
     });
 
-    if (!failureTests.length)
-      return res.render('success', { username });
+    if (!failureTests.length) return res.render('success', { username });
 
     res.render('failure', {
       failureTests,
-      problemTitle,
+      problemTitle: problem.title,
       username,
       errorMessage: null
     });
@@ -50,17 +53,17 @@ router.post('/:id', async (req, res, next) => {
     if (
       err instanceof SyntaxError ||
       err instanceof TypeError ||
-      err instanceof ReferenceError
+      err instanceof ReferenceError ||
+      err.message === 'Script execution timed out.'
     ) {
-      res.render('failure', {
-        problemTitle,
+      return res.render('failure', {
+        problemTitle: problem.title,
         username,
         errorMessage: err.message,
         errorStack: err.stack
       });
-    } else {
-      next(err);
     }
+    next(err);
   }
 });
 

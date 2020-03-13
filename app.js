@@ -14,7 +14,7 @@ const db = mongoose.connection;
 
 const app = express();
 
-mongoose.connect('mongodb://localhost/codewars', {
+mongoose.connect(process.env.MONGODB_URL, {
   useNewUrlParser: true, 
   useUnifiedTopology: true ,
   useCreateIndex: true,
@@ -28,7 +28,11 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname + '/views'));
 app.use(express.static(path.join(__dirname, "./public")));
 
-app.use(session({ secret: process.env.SESSION_SECRET_KEY, resave: false, saveUninitialized: true }));
+app.use(session({ 
+  secret: process.env.SESSION_SECRET_KEY,
+  resave: false,
+  saveUninitialized: true
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json());
@@ -49,7 +53,7 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
-  console.log('asdasd', res.locals)
+  res.locals.message = error.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
