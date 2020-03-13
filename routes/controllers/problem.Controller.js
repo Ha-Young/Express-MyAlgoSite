@@ -15,8 +15,7 @@ exports.getProblemId = async function (req, res, next) {
 };
 
 exports.showProblem = async function (req, res, next) {
-  //const problem = res.locals.problem;
-  const { problem } = res.locals;
+  const problem = res.locals.problem;
 
   try {
     res.render('problem', problem );
@@ -26,63 +25,59 @@ exports.showProblem = async function (req, res, next) {
 }
 
 exports.checkProblem = async function (req, res, next) {
-  const problem = req.session.problem;
-  const userCode = req.body.code;
-  const vm = new VM();
-  const checkedFailure = [];
+  try{
+    const problem = req.session.problem;
+    const userCode = req.body.code;
+    const vm = new VM();
+    const checkedFailure = [];
+    const checkedError = [];
+    const problemId = req.params.problem_id;
 
-  if(typeof(userCode) !== 'string'){
-    throw new Error();
-  }
+    if(typeof(userCode) !== 'string'){
+      throw new Error('invalid code value');
+    }
 
-  try {
-    for(let i = 0; i < problem.tests.length; i++){
-      const test = problem.tests[i];
-
-      try {
+    try {
+      for(let i = 0; i < problem.tests.length; i++){
+        const test = problem.tests[i];
         const script = new VMScript(`${userCode} ${test.code}`, 'vm.js');
         const userSolution = vm.run(script);
 
         if(JSON.stringify(userSolution) !== JSON.stringify(test.solution)){
-          checkedFailure.push({ result: false});
+          checkedFailure.push({
+            case : test.code,
+            expect : test.solution,
+            result : userSolution || 'undefined'
+          });
         }
-      } catch(err) {
-        checkedFailure.push({ })
-        res.locals.result = false;
-        res.locals.errMessage = err.message;
-        res.locals.errStack = err.stack;
-        next();
       }
+    } catch(err) {
+      const errObj = {};
+      Error.captureStackTrace(errObj);
+      checkedError.push({
+        errMessage : err.message,
+        err : err,
+        errstack : err.stack
+      })
     }
-    if(!checkedFailure.length){
-      res.locals.result = true;
-      next();
+
+    //궁금해서 주석처리했어요. 지금처럼 삼항연산자가 길어질경우에는 안쓰는게 좋을까요?
+    //checkedFailure.length ? res.render('failure', { failInfo : checkedFailure, errorInfo : checkedError, problemId }) : res.render('success', { problemId });
+    if(checkedFailure.length || checkedError.length){
+      res.render('failure', {
+        failInfo : checkedFailure,
+        errorInfo : checkedError,
+        problemId
+      });
+    } else {
+      res.render('success', { problemId });
     }
   } catch(err) {
     next(err);
   }
 
-  //수박수박수 알고리즘 정답
+  // 수박수박수 알고리즘 정답
   // function solution(n){
   //   return '수박'.repeat(n/2) + (n%2 === 1 ? '수' : '');
   // }
-  // try {
-  //   problem.test.forEach((test) => {
-  //     //const script = new VMScript(`${userCode}`)
-  //     if(userCode(test.code) === test.code){return 'hi'}
-  //   })
-  // } catch (err) {
-  //   next(err);
-  // }
-}
-
-exports.showResult = async function (req, res, next){
-  const result = res.locals.result;
-  const errMessage = res.locals.errMessage;
-  const errStack = res.locals.errStack;
-
-  console.log('rrr', result);
-
-  result ? res.render('success') : res.render('failure', { errMessage, errStack });
-
 }

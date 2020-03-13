@@ -6,9 +6,28 @@
   </head>
   <body>
     <button><a href="/logout">LOGOUT</a></button>
-    <h2>Failure!</h2>
+    <div class="title">[SYSTEM] 전투에서 실패하였습니다</div>
 
-    <div> <%= errMessage %></div>
-    <div> <%= errStack %></div>
+
+    <% if(failInfo.length){ %>
+      <% failInfo.forEach((info) => { %>
+        <div class="failBox">
+          <div>외계인 정보 : <%= info.case %></div>
+          <div>처치하는 순서 : <%= info.expect %></div>
+          <div>당신이 실행한 순서 : <%= info.result %></div>
+        </div>
+      <% }) %>
+        <button class="button"><a href="/problems/<%= problemId %>"> 다시 도전하기! </a></button>
+        <button class="button"><a href="/"> 다른 외계인 처치하기! </a></button>
+    <% } %>
+
+    <% if(errorInfo.length){ %>
+      <div class="errorBox">
+        <div>당신이 한눈판사이에 외계인이 도망갔습니다 !</div>
+        <div>도망간 이유 : <%= errorInfo[0].err %></div>
+        <button class="button"><a href="/problems/<%= problemId %>"> 다시 도전하기! </a></button>
+        <button class="button"><a href="/"> 다른 외계인 처치하기! </a></button>
+      </div>
+    <% } %>
   </body>
 </html>

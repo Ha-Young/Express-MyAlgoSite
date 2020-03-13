@@ -6,18 +6,15 @@
   </head>
   <body>
     <button><a href="/logout">LOGOUT</a></button>
-    <h2>Kill your ENEMY !</h2>
+    <div class="title">[SYSTEM] 우주의 평화를 위협하는 외계인을 처치하세요!</div>
 
-
-    <div>check.... <%= problems %></div>
-    
     <ul class="problemsBox">
       <% problems.forEach((problem) => { %>
         <li>
           <div class="problems"><a href="/problems/<%= problem._id %>">
-            <div> 타이틀 : <%= problem.title %></div>
-            <div> 정답자 : <%= problem.completedUsers %></div>
-            <div> 난이도 : <%= problem.difficultyLevel %></div>
+            <div> 외계인 이름 : <%= problem.title %></div>
+            <div> 지금까지 처치한 대원 : <%= problem.completedUsers %></div>
+            <div> 추정 외계인 난이도 : <%= problem.difficultyLevel %></div>
           </a></div>
         </li>
       <% })%>

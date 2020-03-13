@@ -5,5 +5,5 @@ const editor = CodeMirror.fromTextArea(document.getElementById("codearea"), {
   lineWrapping: true,
   tabSize: 2,
   extraKeys: {"Ctrl-Space": "autocomplete"},
-  value: codearea.value //document.documentElement.innerHTML
+  value: codearea.value
 });
