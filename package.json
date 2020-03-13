@@ -2,7 +2,7 @@
   "type": "module",
   "name": "programmers",
   "version": "1.0.0",
-  "prviate": true,
+  "private": true,
   "scripts": {
     "start": "node --experimental-modules --es-module-specifier-resolution=node app",
     "dev": "set NODE_ENV=development&&nodemon --experimental-modules --es-module-specifier-resolution=node app"
