@@ -52,7 +52,7 @@ db.once('open', function() {
 passport.use(new GitHubStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: 'http://localhost:3000/login/github/callback'
+    callbackURL: `http://${process.env.HTTP_HOST}/login/github/callback`
   },
   async function(accessToken, refreshToken, profile, cb) {
     async function findOrCreateUser(profile, cb) {
