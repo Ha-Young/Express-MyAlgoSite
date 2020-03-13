@@ -7,7 +7,7 @@ module.exports = (passport) => {
     passport.use(new GithubStrategy({
         clientID: process.env.GITHUB_CLIENT_ID,
         clientSecret: process.env.GITHUB_CLIENT_SECRET,
-        callbackURL: "http://localhost:3000/auth/github/callback"
+        callbackURL: process.env.GITHUB_CALLBACKURL
     }, async (accessToken, refreshToken, profile, cb) => {
         try {
             const user = await User.findOne({ id: profile.id });
@@ -26,6 +26,5 @@ module.exports = (passport) => {
             console.log(err);
             cb(err);
         }
-    }));
-    
+    }));  
 }

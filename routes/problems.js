@@ -7,8 +7,12 @@ router.get('/:problem_id', isLoggedIn, (req, res, next) => {
     const result = problemData.find((el) => {
         return String(el.id) === req.params.problem_id
     });
-
-    res.render('problem', {
+    if (!result) {
+        const err = new Error('Not Found');
+        err.status = 404;
+        next(err);
+    }
+    res.status(302).render('problem', {
         title: 'Q',
         problem_id: result.id,
         problemTitle: result.title,
@@ -16,10 +20,10 @@ router.get('/:problem_id', isLoggedIn, (req, res, next) => {
         level: result.difficulty_level,
         description: result.description
     });
-})
+});
 
 router.post('/:problem_id', isSeccesss, (req, res, next) => {
-    res.render('success');
+    res.status(302).render('success');
 });
 
 module.exports = router;

@@ -25,7 +25,7 @@ exports.isSeccesss = (req, res, next) => {
             return res.render('failure', {
                 failmessage: err,
                 error: err.stack
-            })
+            });
         }
     }
 
@@ -54,7 +54,7 @@ exports.isSeccesss = (req, res, next) => {
             return res.render('failure', {
                 failmessage: err,
                 error: err.stack
-            })
+            });
         }
         if (contexts[0][solutionFn](testValue[i][0]) !== testValue[i][1]) {
             return res.render('failure', {

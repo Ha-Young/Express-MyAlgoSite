@@ -25,13 +25,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(session({
-  resave: true,  // 세션객체에 수정사항이 없더라도 저장을 할지 말지
-  saveUninitialized: false, // 처음 빈 세션객체라도 저장할 할지 말지
+  resave: true,
+  saveUninitialized: false, 
   secret: process.env.COOKIE_SECRET,
   cookie: {
     maxAge: 1000 * 60,
     httpOnly: true,
-    secure: false, // https 를 쓸지 말지
+    secure: false,
   }
 }));
 app.use(passport.initialize());

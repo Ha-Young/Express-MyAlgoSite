@@ -6,7 +6,3 @@ const editor = CodeMirror.fromTextArea(
     lineNumbers: true,
     theme: 'darcula',
 });
-
-editor.on('change', ()=>{
-    const textareaValue = editor.getValue();
-});

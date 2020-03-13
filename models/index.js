@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 module.exports = () => {
 
-    const connect = () => { 
+    const connect = () => {
         mongoose.connect('mongodb://localhost:27017/codewars', { useNewUrlParser: true });
     }
 
@@ -19,5 +19,5 @@ module.exports = () => {
 
     require('./User');
     require('./Problem');
-    
+
 }
