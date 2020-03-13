@@ -27,20 +27,25 @@ passport.use(new GitHubStrategy({
       const loginedUser = {
         githubId: profile.id,
       };
-  
-      const newUser = {
-        name: profile.username,
-        githubId: profile.id,
-        githubUrl: profile.profileUrl,
-        imageUrl: profile.photos[0].value,
-      };
 
-      const options = {
-        new: true,
-      };
-
-      const user = await User.findOneAndUpdate(loginedUser, newUser, options);
-      done(null, user);
+      const user = await User.find(loginedUser);
+      if (user.length) {
+        return done(null, user[0]);
+      } else {
+        const userInfo = new User({
+          name: profile.username,
+          githubId: profile.id,
+          githubUrl: profile.profileUrl,
+          imageUrl: profile.photos[0].value,
+          solvedAllCount: 0,
+          solvedLevelOne: 0,
+          solvedLevelTwo: 0,
+          solvedLevelThree: 0,
+          solved: []
+        });
+        const user = await User.create(userInfo);
+        done(null, user);
+      }
     } catch (err) {
       done(err);
     }

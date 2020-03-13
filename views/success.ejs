@@ -14,7 +14,7 @@
           <ul class="results">
             <% results.forEach((result, index) => { %>
               <li>[Test <%= index + 1 %>]</li>
-              <li>expected <u><big>"<%= result[0] %>"</big></u> to equal <u><big>"<%= result[1] %>".</big></u></li>
+              <li>expected <u><big>"<%= JSON.stringify(result[0]) %>"</big></u> to equal <u><big>"<%= JSON.stringify(result[1]) %>".</big></u></li>
             <% }) %>
           </ul>
         <% } %>

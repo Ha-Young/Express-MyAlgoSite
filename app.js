@@ -10,6 +10,7 @@ const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
 const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
 const CALLBACK_URL = process.env.CALLBACK_URL;
 const MY_SECRET = process.env.MY_SECRET;
+const ATLAS_URI = process.env.ATLAS_URI;
 
 exports.GITHUB_CLIENT_ID = GITHUB_CLIENT_ID;
 exports.GITHUB_CLIENT_SECRET = GITHUB_CLIENT_SECRET;
@@ -21,7 +22,7 @@ const problems = require('./routes/problems');
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/codewars', {
+mongoose.connect(ATLAS_URI, {
   useNewUrlParser: true,
   useFindAndModify: false,
   useCreateIndex: true,
