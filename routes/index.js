@@ -12,7 +12,8 @@ router.get("/", async (req, res, next) => {
       next(err);
     });
   }
-  res.render("index", { title: "코드전쟁", problems: problems, login: req.user.githubId });
+  const githubId= req.user? req.user.githubId :undefined;
+  res.render("index", { title: "코드전쟁", problems: problems, login: githubId });
 });
 
 module.exports = router;

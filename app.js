@@ -9,8 +9,6 @@ const login = require("./routes/login");
 const problem= require("./routes/problem");
 const User= require("./models/User")
 
-// const userGithubId = require("./config/");
-
 passport.serializeUser((user, cb) => {
   cb(null, user._id);
 });

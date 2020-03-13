@@ -1,11 +1,11 @@
-<div> <%= problem.title %></div>
-<div> 테스트 실패</div>
+<div>[문제]<%= problem.title %></div>
+<div>테스트 실패</div>
 
 <ul class="tests">
   <% for(var i=0; i < results.length; i++) { %>
   <li>
-      <div>test<%=i%>:<%=results[i].pass?'✅':'❌'%></div>
-      <div><%=results[i].error%></div>
+    <div>test<%=i%>:<%=results[i].pass?'✅':'❌' %></div>
+    <div><%=results[i].error%></div>
   </li>
   <% } %>
 </ul>
