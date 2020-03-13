@@ -39,10 +39,9 @@ div ul {
   list-style-type: none;
 }
 
-ul li a{
+ul li a, h1 a{
   text-decoration: none;
 }
-
 
 div ul li a:active {
   color: white;
@@ -72,3 +71,10 @@ p {
   color: white;
 }
 
+h1 a {
+  color: #898c8a;
+}
+
+h1 a:hover {
+  color: white;
+}

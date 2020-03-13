@@ -13,8 +13,8 @@
       </ul>
     </nav>
     <main>
-      <% if (err) { %>
-        <pre>에러입니다.<%= err.stack %> </pre>
+      <% if (error) { %>
+        <pre>에러입니다.<%= error.stack %> </pre>
       <% } else { %> 
         <ul>
           <% for (let i = 0; i < wrongResults.length; i++) { %>

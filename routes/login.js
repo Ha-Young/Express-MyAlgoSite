@@ -1,10 +1,10 @@
 const express = require('express');
-const router = express.Router();
 const passport = require('passport');
+const router = express.Router();
 
 router.get('/', async(req, res, next) => {
-  try{
-    if(req.isAuthenticated()){
+  try {
+    if (req.isAuthenticated()) {
       res.render('login', { hasLoggedIn: true });
     } else{
       res.render('login', { hasLoggedIn: false });

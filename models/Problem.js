@@ -3,38 +3,38 @@ const mongoose = require('mongoose');
 const ProblemSchema = new mongoose.Schema({
   id: {
     type: Number,
-    required: true
+    required: true,
   },
   title: {
     type: String,
-    required: true
+    required: true,
   },
   level: {
     type: Number,
-    required: true
+    required: true,
   },
   completed_users: {
     type: Number,
-    require: true
+    require: true,
   },
   description: {
     type: String,
-    required: true
+    required: true,
   },
   defaultValue: {
     type: String,
-    required: true
+    required: true,
   },
   tests: [{
     parameters: {
-      type: String
+      type: String,
     },
     solution: {
       type: Array,
-      required: true
+      required: true,
     },
     isArgString: {
-      type: Boolean
+      type: Boolean,
     }
   }]
 });

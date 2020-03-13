@@ -23,7 +23,7 @@ passport.use(new GitHubStrategy({
         cb(null, user);
       } else {
         const user = await User.findOne({ username: profile.username });
-        var reg = /[^A-PS-Z0-9]+/i;
+        const reg = /[^A-PS-Z0-9]+/i;
         if (user) throw new errors.DuplicateError('중복된 값에러', '이름');
         if (reg.test(profile.username)) throw new errors.ValidationError('잘못된 유저이름', '유저이름');
         const newUser = await new User({ githubid: profile.id, username: profile.username }).save();
