@@ -24,29 +24,6 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log('DB connected!');
-
-  // This is included only for the convenience of reviewers,
-  // and can be excluded in the live production.
-  const storeSampleProblems = async () => {
-    try {
-      const hasProblems = await Problem.countDocuments({}).exec();
-      if (hasProblems) return;
-
-      const sampleProblems = require('./models/sample_problems.json');
-
-      if (!Array.isArray(sampleProblems) || !sampleProblems.length) {
-        throw new Error('Invalid [sampleProblems.json] file');
-      }
-
-      for (let i = 0; i < sampleProblems.length; i++) {
-        await new Problem(sampleProblems[i]).save();
-      }
-      console.log('Stored sample problems in DB');
-    } catch (err) {
-      throw new errors.GeneralError(err);
-    }
-  }
-  storeSampleProblems();
 });
 
 passport.use(new GitHubStrategy({
