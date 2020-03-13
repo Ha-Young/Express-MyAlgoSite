@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const passport = require('passport');
 const path = require('path');
@@ -6,17 +7,15 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 
-require('dotenv').config();
-
 const index = require('./routes/index');
-const loginPath = require('./routes/login');
+const logOut = require('./routes/logOut');
+const problems = require('./routes/problems');
 const setPassport = require('./middleware/passport');
 
 const app = express();
 
 mongoose.connect(process.env.MONGO_DB_URL, {
   useNewUrlParser: true,
-  useUnifiedTopology: true,
   useFindAndModify: false
 });
 
@@ -37,15 +36,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : false }));
 app.use(session({
   secret: process.env.SESSION_KEY,
-  resave:true,
-  saveUninitialized:true
+  cookie: { maxAge: 60 * 60 * 1000 },
+  resave: true,
+  saveUninitialized: true
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 setPassport(passport);
 
 app.use('/', index);
-app.use('/login', loginPath);
+app.use('/logout', logOut);
+app.use('/problems', problems);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>problem</title>
+    <link rel="stylesheet" href="/codemirror/lib/codemirror.css"/>
+    <link rel="stylesheet" href="/codemirror/theme/darcula.css"/>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+  </head>
+  <body>
+    <button><a href="/logout">LOGOUT</a></button>
+    <div class="problemTitle"><%= problem.title %></div>
+      <div class="problemBox">
+        <div>✨Completed User : <%= problem.completedUsers %></div>
+        <div>⭐️Level : <%= problem.difficultyLevel %></div>
+        <div>❔How to use? </div>
+        <div> <%= problem.description %> </div>
+        <div>check.... <%= problem %></div>
+      </div>
+      <div class="formBox">
+        <form action="/problems/<%= problem._id %>" method="POST">
+          <label for="textarea"> 전투준비... </label>
+          <textarea id="codearea" name="code"></textarea>
+          <button type="submit">전투!</button>
+        </form>
+      </div>
+    <script src="/codemirror/lib/codemirror.js"></script>
+    <script src="/codemirror/mode/javascript/javascript.js"></script>
+    <script src="/javascripts/index.js"></script>
+  </body>
+</html>
