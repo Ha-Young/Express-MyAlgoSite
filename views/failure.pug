@@ -2,12 +2,32 @@ html
   head
     title Fail
     meta(charset='utf-8')
+    link(
+      rel='stylesheet'
+      href='/stylesheets/style.css'
+    )
   body
-    h1 Fail ㅠㅠ
-    if failureList
-      ul
-        each failure in failureList
-          li Failed test: #{failure.testCode} - Expected: #{failure.expected} - instead got: #{failure.instead}
-    if error
-      div= error.message
-      pre= error.stack
+    div.app
+          div.header
+            h1
+              a(href='/') HOME
+            form.right(action='/logout', method='POST')
+              input.button(type='submit', value='로그아웃')
+          div.resultContainer
+            h1 Fail...
+            div.result
+              if failureList
+                ul
+                  each failure in failureList
+                    li.failList
+                      span Failed test: #{failure.testCode}
+                      br
+                      span - Expected: #{failure.expected}, instead got: #{failure.instead}
+                input.largeButton(
+                  type='button'
+                  value='다시 풀기'
+                  onClick='location.href="javascript:history.back(-1)"'
+                )
+              if error
+                div= error.name
+                div= error.message

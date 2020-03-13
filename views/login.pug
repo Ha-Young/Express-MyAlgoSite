@@ -1,22 +1,16 @@
-//- <!DOCTYPE html>
-//- <html>
-//-   <head>
-//-     <title>Document</title>
-//-     <link rel='stylesheet' href='/stylesheets/style.css' />
-//-   </head>
-//-   <body>
-//-     <h1><%= title %></h1>
-//-     <form action="/login/github" method="POST">
-//-       <input type="submit">
-//-     </form>
-//-   </body>
-//- </html>
-
 html
   head
     title Document
     meta(charset='utf-8')
+    link(
+      rel='stylesheet'
+      href='/stylesheets/style.css'
+    )
   body
-    h1= title
-    form(action='/login/github', method='POST')
-      input(type='submit')
+    div.app
+        div.header
+          h1 로그인 후 이용해주세요
+        div.container
+          img.avatar(src="/image/avatar.png", alt="login")
+          form(action='/login/github', method='POST')
+            input.largeButton(type='submit' value='로그인하기')

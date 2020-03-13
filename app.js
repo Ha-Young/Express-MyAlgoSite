@@ -2,33 +2,31 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const app = express();
-const bodyParser = require("body-parser");
+const bodyParser = require('body-parser');
 
 const index = require('./routes/index');
 const login = require('./routes/login');
 const problem = require('./routes/problem');
 
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-mongoose.connect("mongodb://localhost:27017/codewars", {
+mongoose.connect('mongodb://localhost:27017/codewars', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
 
 const db = mongoose.connection;
 
-db.on("error", console.error.bind(console, "connection error:"));
-
-db.once("open", function() {
-  console.log("Connected to database..");
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log('Connected to database..');
 });
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, './views'));
-app.use(express.static(path.join(__dirname, "./public")));
+app.use(express.static(path.join(__dirname, './public')));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// github login
 const session = require('express-session');
 const passport = require('passport');
 const GitHubStrategy = require('passport-github');
@@ -45,7 +43,7 @@ app.use(passport.session());
 passport.use(new GitHubStrategy.Strategy({
     clientID: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: "http://127.0.0.1:3000/login/github/callback"
+    callbackURL: 'http://127.0.0.1:3000/login/github/callback'
   },
   function(accessToken, refreshToken, profile, cb) {
     return cb(null, profile);
@@ -59,7 +57,6 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(user, done) {
   done(null, user);
 });
-// github login
 
 app.use('/', index);
 app.use('/login', login);
@@ -75,30 +72,26 @@ app.get('/login/github/callback',
 );
 
 app.post('/logout', function(req, res, next) {
-  req.session.destroy(function(){
+  req.session.destroy(() => {
     req.session;
-    });
+  });
   res.redirect('/login');
 });
 
 app.use('/problem', problem);
 
-// catch 404 and forward to error handler
 app.use(function(req, res, next) {
   const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
-// error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', { error: err.displayMessage });
 });
 
 module.exports = app;

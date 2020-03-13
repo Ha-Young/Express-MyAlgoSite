@@ -1,12 +1,9 @@
 const mongoose = require('mongoose');
 
-/*
-
-  TODO: Fill in the model specification
-
- */
-const userSchema = new mongoose.Schema({
-
+const UserSchema = new mongoose.Schema({
+  displayName: { type: String, required: true },
+  profileUrl: { type: String, required: true },
+  username: { type: String, unique: true }
 });
 
 module.exports = mongoose.model('User', userSchema);

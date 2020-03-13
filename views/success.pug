@@ -2,6 +2,19 @@ html
   head
     title Success
     meta(charset='utf-8')
+    link(
+      rel='stylesheet'
+      href='/stylesheets/style.css'
+    )
   body
-    h1 Success!
-    input(type='button' value='HOME' onclick="location.href='/'")
+    div.app
+        div.header
+          h1
+            a(href='/') HOME
+          form.right(action='/logout', method='POST')
+            input.button(type='submit', value='로그아웃')
+        div.resultContainer
+          h1 Success!!!
+          img.avatar2(src='/image/success.png', alt='success')
+          br
+          input.largeButton(type='button' value='홈으로' onclick="location.href='/'")

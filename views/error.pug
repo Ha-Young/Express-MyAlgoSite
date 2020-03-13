@@ -1,12 +1,18 @@
-//- <h1><%= message %></h1>
-//- <h2><%= error.status %></h2>
-//- <pre><%= error.stack %></pre>
-
 html
   head
     title Error
     meta(charset='utf-8')
+    link(
+      rel='stylesheet'
+      href='/stylesheets/style.css'
+    )
   body
-    h1= message
-    h2= error.status
-    pre= error.stack
+    div.app
+      div.header
+        h1
+          a(href='/') HOME
+        form.right(action='/logout', method='POST')
+          input.button(type='submit', value='로그아웃')
+      div.resultContainer
+        h1 Error
+        h2= error

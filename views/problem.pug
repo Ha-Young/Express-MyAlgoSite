@@ -10,25 +10,39 @@ html
       rel='stylesheet'
       href='/codemirror/theme/midnight.css'
     )
-  body
-    h1= problemInfo.title
-    div 난이도: #{problemInfo.difficulty_level}
-    div 정답자 수: #{problemInfo.completed_users}
-    div= problemInfo.description
-    form#submitForm(
-      action='/problem/' + problemInfo._id
-      method='POST'
+    link(
+      rel='stylesheet'
+      href='/stylesheets/style.css'
     )
-      textarea#codemirror(
-        name='submitCode'
-      ) function solution() {
-        |
-        |   //..
-        | }
-      input(
-        type='submit'
-        value='제출하기'
-      )
+  body
+    div.app
+      div.header
+        h1
+          a(href='/') HOME
+        form.right(action='/logout', method='POST')
+          input.button(type='submit', value='로그아웃')
+      div.container
+        div.question
+          span.title= problemInfo.title
+          span.level Lv.#{problemInfo.difficulty_level}
+          br
+          span.count #{problemInfo.completed_users}명이 해결한 문제
+          div.description= problemInfo.description
+        div.solve
+          form#submitForm(
+            action='/problem/' + problemInfo._id
+            method='POST'
+          )
+            textarea#codemirror(
+              name='submitCode'
+            ) function solution() {
+              |
+              |   //..
+              | }
+            input.largeButton(
+              type='submit'
+              value='제출하기'
+            )
     script(
       type='text/javascript'
       src='/codemirror/lib/codemirror.js'

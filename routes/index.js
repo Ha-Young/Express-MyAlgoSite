@@ -13,10 +13,13 @@ const authenticateUser = (req, res, next) => {
 router.get('/', authenticateUser, async (req, res, next) => {
   try {
     const problems = await Problem.find().lean();
-    console.log(problems.length);
-    res.render('index', { title: 'HOME', problems });
-  } catch(e) {
-    next(e);
+
+    if(!problems.length) {
+      res.render('index', { noProblems: 'There is no quiz registered'});
+    }
+    res.render('index', { problems });
+  } catch(err) {
+    next(err);
   }
 });
 
