@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "NODE_ENV=development nodemon ./bin/www"
+    "dev": "NODE_ENV=development nodemon ./bin/www",
+    "test": "mocha spec"
   },
   "dependencies": {
     "bcrypt": "^4.0.1",
@@ -24,5 +25,10 @@
     "passport": "^0.4.1",
     "passport-github": "^1.1.0",
     "serve-favicon": "~2.4.5"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^7.1.0",
+    "supertest": "^4.0.2"
   }
 }
