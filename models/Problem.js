@@ -7,14 +7,14 @@ const ProblemSchema = new mongoose.Schema({
   completed_users: Number,
   difficulty_level: { type: Number, required: true },
   discription: String,
-  note: String,
-  test: [
+  notes: Array,
+  tests: [
     {
       exampleCode: String,
-      soiution: String
+      solution: mongoose.SchemaTypes.Mixed
     }
   ],
-  attemptedCode: { type: String, required: true },
+  attemptedCode: { type: mongoose.SchemaTypes.Mixed },
   attemptedAt: Date
 });
 

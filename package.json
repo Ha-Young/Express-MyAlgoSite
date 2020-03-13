@@ -15,12 +15,15 @@
     "ejs": "~2.5.7",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
+    "lodash": "^4.17.15",
     "mongoose": "^5.9.3",
     "mongoose-findorcreate": "^3.0.0",
     "morgan": "~1.9.0",
     "nodemon": "^1.19.1",
     "passport": "^0.4.1",
     "passport-github": "^1.1.0",
-    "serve-favicon": "~2.4.5"
+    "pretty-error": "^2.1.1",
+    "serve-favicon": "~2.4.5",
+    "vm": "^0.1.0"
   }
 }

@@ -9,7 +9,7 @@ const createError = require('http-errors');
 const GitHubStrategy = require('passport-github').Strategy;
 
 const index = require('./routes/index');
-const User = require('./models/User')
+const User = require('./models/User');
 
 const app = express();
 
@@ -26,7 +26,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
 
 app.use(express.static(path.join(__dirname, '/public')));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: true,
@@ -75,6 +75,7 @@ app.get('/auth/github/callback',
 );
 
 app.get('/problem/:problem_id', index);
+app.post('/problem/:problem_id', index);
 
 app.use(function(req, res, next) {
   next(createError(404, 'Not Found'));
