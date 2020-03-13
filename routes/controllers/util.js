@@ -11,7 +11,7 @@ exports.excuteCode = (tests, inputedSolution) => {
     `
     const script = new vm.Script(code);
     const { solution } = test;
-    const result = script.runInNewContext();
+    const result = script.runInNewContext(undefined, { timeout: 7000 });
     results.push([solution, result]);
   });
   return results;
