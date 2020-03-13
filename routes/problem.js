@@ -25,16 +25,14 @@ router.post("/:id", async (req, res) => {
       "}catch(err){ console.log(err);\nerror=err;}";
     try {
       vm.runInContext(code, context);
-    } catch (err) {
-    }
+    } catch (err) {}
     return { pass: test.solution == context.result, error: context.error };
   });
   const passAll = results.every(result => result.pass);
   if (passAll) {
-    res.render("success", {problem,results});
+    res.render("success", { problem, results });
   } else {
-    res.render("failure",{problem,results} );
+    res.render("failure", { problem, results });
   }
-
 });
 module.exports = router;

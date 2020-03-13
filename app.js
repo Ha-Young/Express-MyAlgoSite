@@ -1,22 +1,22 @@
+require("dotenv").config();
 const path = require("path");
 const express = require("express");
 const passport = require("passport");
-const session =require("express-session");
+const session = require("express-session");
 const githubStrategy = require("passport-github");
 const keys = require("./config/keys");
 const index = require("./routes/index");
 const login = require("./routes/login");
-const problem= require("./routes/problem");
-const User= require("./models/User")
+const problem = require("./routes/problem");
+const User = require("./models/User");
 
 passport.serializeUser((user, cb) => {
   cb(null, user._id);
 });
 passport.deserializeUser(async (id, cb) => {
-  const user= await User.findById(id);
+  const user = await User.findById(id);
   cb(null, user);
 });
-
 passport.use(
   new githubStrategy(
     {
@@ -26,41 +26,39 @@ passport.use(
     },
     async (aceessTocken, refreshToken, profile, cb) => {
       const userInfo = { ...profile };
-
-      const user= await User.findOne({id:userInfo._json.id});
-      if(user){
-        console.log('존재합니다');
-        cb(null,user);
-      }else{
-        const newUser=await new User({githubId:userInfo._json.login , id:userInfo._json.id}).save();
-        console.log('생성합니다.');
-        cb(null,newUser);
+      const user = await User.findOne({ id: userInfo._json.id });
+      if (user) {
+        console.log("존재합니다");
+        cb(null, user);
+      } else {
+        const newUser = await new User({
+          githubId: userInfo._json.login,
+          id: userInfo._json.id
+        }).save();
+        console.log("생성합니다.");
+        cb(null, newUser);
       }
-
-      // return cb(null, profile);
     }
   )
 );
+
 const app = express();
-app.use(session({secret:keys.session.KEY, cookie:{maxAge:60000}}));
 app.use(express.urlencoded());
 app.use(express.json());
-
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "./public")));
-app.use(passport.initialize());
-app.use(passport.session());
-
 app.use("/", index);
 app.use("/login", login);
 app.use("/problem", problem);
 
-// const passportSetup = require('./config/passport_setup');
+app.use(session({ secret: keys.session.KEY, cookie: { maxAge: 60000 } }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 const mongoose = require("mongoose");
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/codewars", {
+  .connect(process.env.DB_URL, {
     useNewUrlParser: true
   })
   .then(() => {

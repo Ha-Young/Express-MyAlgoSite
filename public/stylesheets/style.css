@@ -8,7 +8,7 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 header {
-  display:flex;
+  display: flex;
   flex-direction: row-reverse;
   align-items: center;
   height: 50px;
@@ -17,10 +17,10 @@ header {
 
 .button-login {
   display: block;
-  background :white;
+  background: white;
   height: fit-content;
-  margin-right:20px;
-  padding:10px;
+  margin-right: 20px;
+  padding: 10px;
 }
 
 h1,

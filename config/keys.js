@@ -1,9 +1,11 @@
-module.exports={
-	github: {
-		CLIENT_ID: '71ea4459593409029487',
-		CLIENT_SECRET: 'bada7d23354d5192b5090fa598666d6312347b51'
-	},
-	session:{
-		KEY:"vanillacodingakstp"
-	}
+require('dotenv').config();
+
+module.exports = {
+  github: {
+    CLIENT_ID: process.env.GITHUB_CLIENT_ID,
+    CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET
+  },
+  session: {
+    KEY: process.env.SESSION_KEY
+  }
 };

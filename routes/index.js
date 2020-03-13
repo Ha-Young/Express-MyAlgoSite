@@ -12,7 +12,7 @@ router.get("/", async (req, res, next) => {
       next(err);
     });
   }
-  const githubId= req.user? req.user.githubId :undefined;
+  const githubId = req.user ? req.user.githubId : undefined;
   res.render("index", { title: "코드전쟁", problems: problems, login: githubId });
 });
 

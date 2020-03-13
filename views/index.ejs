@@ -17,7 +17,7 @@
           <div><input type="submit" value="문제 : <%=problems[i].title%>" /></div>
           <%} else {%>
           <div>
-            <input type="button" onclick=pop() value="문제 : <%=problems[i].title%>" />
+            <input type="button" onclick="pop()" value="문제 : <%=problems[i].title%>" />
           </div>
           <%}%>
           <div>정답자: <%=problems[i].completed_users|| 0%></div>
@@ -27,8 +27,8 @@
       <% } %>
     </ul>
     <script>
-      function pop(){
-        alert('로그인후 사용이 가능합니다');
+      function pop() {
+        alert("로그인후 사용이 가능합니다");
       }
     </script>
   </body>
