@@ -1,2 +1,4 @@
-const editor = CodeMirror(document.querySelector('.codeEditor'));
-console.log('editor', editor);
+const editor = CodeMirror.fromTextArea(document.getElementById('codeEditor'), {
+  lineNumbers: true,
+  theme: 'material'
+});
