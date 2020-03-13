@@ -1,7 +1,13 @@
 const express = require('express');
-const router = express.Router();
-const { getAddCase, postAddCase, getProblemsDetail, postProblemsDetail } = require('../controls/problems');
 const { onlyPrivate } = require('../middlewares');
+const {
+  getAddCase,
+  postAddCase,
+  getProblemsDetail,
+  postProblemsDetail
+} = require('../controls/problems');
+
+const router = express.Router();
 
 router.get('/:problem_id/addCase', onlyPrivate, getAddCase);
 

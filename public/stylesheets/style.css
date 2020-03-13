@@ -27,7 +27,7 @@ ul, ol {
   list-style: none;
 }
 a {
-  color: #80a0dd;
+  color: var(--anchor-color);
 }
 
 /*

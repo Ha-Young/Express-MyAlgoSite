@@ -4,9 +4,9 @@ const morgan = require('morgan');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const { unsetContext, localsMiddleware } = require('./middlewares');
 const globalRoutes = require('./routes/global');
 const problemsRoutes = require('./routes/problems');
-const { unsetContext, localsMiddleware } = require('./middlewares');
 
 dotenv.config();
 

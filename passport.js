@@ -24,7 +24,9 @@ passport.use(new GitHubStrategy({
         await User.save();
       }
     } catch (err) {
-      console.log(err);
+      err.status = 500;
+      err.message = 'Internal Server Error';
+      next(err);
     }
 
     cb(null, user);
@@ -41,6 +43,8 @@ passport.deserializeUser(async function(id, done) {
 
     done(null, user);
   } catch (err) {
-    console.log(err);
+    err.status = 500;
+    err.message = 'Internal Server Error';
+    next(err);
   }
 });

@@ -1,9 +1,10 @@
 const express = require('express');
-const router = express.Router();
 const passport = require('passport');
 const { getHome, getSuccess, getFailure } = require('../controls/problems');
 const { getLogin, getLogout, getGithubLogin, getGithubCallback } = require('../controls/users');
 const { onlyPrivate, onlyPublic } = require('../middlewares');
+
+const router = express.Router();
 
 /* GET home page. */
 router.get('/', getHome);

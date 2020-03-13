@@ -7,6 +7,7 @@ function unsetContext (req, res, next) {
 
   next();
 }
+
 function localsMiddleware (req, res, next) {
   res.locals.user = req.user;
   next();
