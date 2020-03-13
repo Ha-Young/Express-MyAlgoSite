@@ -4,7 +4,7 @@ const router = express.Router();
 /* GET home page. */
 router.get('/', async (req, res, next) => {
   if(!req.user) return res.status(302).redirect('login');
-  res.status(302).redirect('/problem');
+  res.status(302).redirect('/problems');
 });
 
 router.get('/login', (req, res, next) => {

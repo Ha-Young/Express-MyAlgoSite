@@ -6,7 +6,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
+const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
 const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
 const CALLBACK_URL = process.env.CALLBACK_URL;
 const MY_SECRET = process.env.MY_SECRET;

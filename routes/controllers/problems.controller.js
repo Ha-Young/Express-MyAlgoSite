@@ -33,7 +33,7 @@ exports.solvedSelectedProblem = async (req, res, next) => {
     const problemId = req.params.problem_id;
     const isValidProblem = mongoose.Types.ObjectId.isValid(problemId);
     if (!isValidProblem) return next(createError(404, 'Problem Not Found'));
-    
+
     const problem = await Problem.find({ _id: problemId });
     const tests = problem[0].tests;
     try {
