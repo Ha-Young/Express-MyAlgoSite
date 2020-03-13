@@ -13,7 +13,7 @@ nav {
   max-height: 150px;
 }
 
-nav li {
+nav li a{
   text-decoration: none;
   color: white;
   margin-right: 50px;
@@ -25,6 +25,10 @@ ul {
   text-decoration: none;
   list-style-type: none;
   display: flex;
+}
+
+ul li {
+  text-decoration: none;
 }
 
 main {
@@ -42,3 +46,12 @@ p {
   margin-right: 30px;
 }
 
+.logIn {
+  color: #898c8a;
+  font-size: 40px;
+  margin-left: 83px;
+}
+
+.logIn:hover {
+  color: white;
+}

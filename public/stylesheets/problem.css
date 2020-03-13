@@ -13,7 +13,6 @@ nav {
 }
 
 nav li {
-  text-decoration: none;
   color: white;
   margin-right: 50px;
   font-size: 50px;
@@ -21,9 +20,21 @@ nav li {
 }
 
 nav ul {
-  text-decoration: none;
   list-style-type: none;
   display: flex;
+}
+
+li, a{
+  text-decoration: none;
+  list-style-type: none;
+}
+
+div ul li a:active {
+  color: white;
+}
+
+div ul li a:visited {
+  color: white;
 }
 
 main {
@@ -49,4 +60,14 @@ p {
 .CodeMirror {
   font-family: Arial, monospace;
   font-size: 20px;
+}
+
+.logOut {
+  color: #898c8a;
+  font-size: 40px;
+  margin-left: 40px;
+}
+
+.logOut:hover {
+  color: white;
 }

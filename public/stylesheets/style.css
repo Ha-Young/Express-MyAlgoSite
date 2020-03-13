@@ -35,6 +35,23 @@ main {
   align-items: center;
 }
 
+div ul {
+  list-style-type: none;
+}
+
+ul li a{
+  text-decoration: none;
+}
+
+
+div ul li a:active {
+  color: white;
+}
+
+div ul li a:visited {
+  color: white;
+}
+
 p {
   font-size: 60px;
   text-align: center;
@@ -43,5 +60,15 @@ p {
 
 .testBox {
   font-size: 30px;
+}
+
+.logOut {
+  color: #898c8a;
+  font-size: 40px;
+  margin-left: 40px;
+}
+
+.logOut:hover {
+  color: white;
 }
 
