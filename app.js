@@ -9,6 +9,7 @@ const path = require('path');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const createError = require('http-errors')
+const error = require('./lib/error');
 const mongoose = require('mongoose');
 const db = mongoose.connection;
 
@@ -45,9 +46,9 @@ app.use('/problems', problems);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  const err = createError(404, 'Not Found');
+  // const err = createError(404, 'Not Found');
 
-  next(err);
+  next(new error.PageNotFoundError());
 });
 
 // error handler
@@ -55,10 +56,9 @@ app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', { message: err.displayMessage });
 });
 
 module.exports = app;

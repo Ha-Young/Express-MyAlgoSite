@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Problem = require('../models/Problem');
+const error = require('../lib/error');
 const { checkUser } = require('../middlewares/checkUser');
 const { VM } = require('vm2');
 const vm = new VM({
@@ -16,7 +17,9 @@ router.get('/:id', checkUser, async (req, res, next) => {
 
     res.render('problemDetail', { username, problemData });
   } catch (err) {
-    next(err);
+    if (err.name === 'CastError') return next(new error.CastError());
+    
+    next(new error.GeneralError());
   }
 });
 
@@ -42,8 +45,8 @@ router.post('/:id', checkUser, async (req, res, next) => {
 
     res.render('failure', {
       failureTests,
-      problemTitle: problem.title,
       username,
+      problemTitle: problem.title,
       errorMessage: null
     });
   } catch (err) {
@@ -54,13 +57,15 @@ router.post('/:id', checkUser, async (req, res, next) => {
       err.message === 'Script execution timed out.'
     ) {
       return res.render('failure', {
-        problemTitle: problem.title,
         username,
+        problemTitle: problem.title,
         errorMessage: err.message,
         errorStack: err.stack
       });
     }
-    next(err);
+    if (err.name === 'CastError') return next(new error.CastError());
+    
+    next(new error.GeneralError());
   }
 });
 
