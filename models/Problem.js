@@ -14,7 +14,10 @@ const ProblemSchema = new Schema({
     index: true
   },
   completedUsers: {
-    type: Array,
+    type: [{
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }],
     required: true,
     default: []
   },

@@ -38,7 +38,7 @@ exports.checkUserSolution = async (req, res, next) => {
     const currentProblem = await Problem.findOneAndUpdate({ problemId }, { userInput }, { new: true });
     const [ testResult, testLog ] = runTest(userInput, currentProblem.tests);
 
-    if (testResult.slice(0, 2) === '성공') {
+    if (testResult.isPassed) {
       const currentUser = await User.findById(userId);
 
       if (currentUser.solved.indexOf(currentProblem._id) === -1) {
@@ -52,7 +52,7 @@ exports.checkUserSolution = async (req, res, next) => {
       }
     }
 
-    res.render('testResult', { testResult, testLog });
+    res.render('testResult', { testResult: testResult.message, testLog });
   } catch(err) {
     if (err instanceof mongoose.Error.DocumentNotFoundError) {
       return next(new errors.SaveError(err.message));
