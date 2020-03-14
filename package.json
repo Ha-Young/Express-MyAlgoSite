@@ -7,6 +7,8 @@
     "dev": "NODE_ENV=development nodemon ./bin/www"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
+    "body-parser": "^1.19.0",
     "codemirror": "^5.52.0",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
@@ -16,14 +18,10 @@
     "passport-github": "^1.1.0",
     "pug": "^2.0.4",
     "serve-favicon": "~2.4.5",
+    "pretty-error": "^2.1.1",
     "vm2": "^3.8.4"
   },
   "devDependencies": {
-    "body-parser": "^1.19.0",
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.6.9",
-    "nodemon": "^2.0.2",
-    "dotenv": "^8.2.0",
-    "pretty-error": "^2.1.1"
+    "nodemon": "^2.0.2"
   }
 }
