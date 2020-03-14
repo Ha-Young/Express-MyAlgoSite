@@ -6,8 +6,7 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-const index = require('./routes/index');
-const logOut = require('./routes/logOut');
+const home = require('./routes/home');
 const problems = require('./routes/problems');
 const setPassport = require('./middleware/passport');
 
@@ -43,8 +42,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 setPassport(passport);
 
-app.use('/', index);
-app.use('/logout', logOut);
+app.use('/', home);
+app.use('/logout', home);
 app.use('/problems', problems);
 
 app.use(function(req, res, next) {
