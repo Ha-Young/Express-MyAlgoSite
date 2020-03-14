@@ -19,10 +19,9 @@ passport.use(new GitHubStrategy({
         user = await User.create({
           githubId: id
         });
-        await User.save();
       }
     } catch (err) {
-      next(new errors.GeneralError(err.message));
+      return cb(err);
     }
     cb(null, user);
   }
