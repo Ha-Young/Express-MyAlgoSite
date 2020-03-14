@@ -16,14 +16,6 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/login', (req, res, next) => {
-  try {
-    res.render('socialLogin');
-  } catch (error) {
-    next(new errors.GeneralError(error));
-  }
-})
-
 router.get('/problem/:problem_id', async (req, res, next) => {
   const problemId = req.params.problem_id;
 

@@ -1,4 +1,7 @@
 require('dotenv').config();
+require('./config/passport');
+require('./config/mongoose');
+
 const express = require('express');
 const session = require('express-session');
 
@@ -6,24 +9,26 @@ const path = require('path');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const createError = require('http-errors');
-const index = require('./routes/index');
+
+const login = require('./routes/login');
+const problem = require('./routes/problem');
 
 const app = express();
-
-require('./config/passport');
-require('./config/mongoose');
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
 
-app.use(express.static(path.join(__dirname, '/public')));
 app.use(bodyParser.urlencoded());
+app.use(express.static(path.join(__dirname, '/public')));
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: true,
   saveUninitialized: false,
   cookie: { maxAge: 1000 * 60 * 5 }
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 const authenticateUser = (req, res, next) => {
   if (req.isAuthenticated()) {
@@ -33,8 +38,8 @@ const authenticateUser = (req, res, next) => {
   }
 };
 
-app.get('/', authenticateUser, index);
-app.get('/login', index);
+app.get('/', authenticateUser, problem);
+app.get('/login', login);
 app.get('/auth/github', passport.authenticate('github'));
 app.get('/auth/github/callback',
   passport.authenticate('github', {
@@ -43,8 +48,8 @@ app.get('/auth/github/callback',
   })
 );
 
-app.get('/problem/:problem_id', index);
-app.post('/problem/:problem_id', index);
+app.get('/problem/:problem_id', problem);
+app.post('/problem/:problem_id', problem);
 
 app.use(function(req, res, next) {
   next(createError(404, 'Not Found'));
