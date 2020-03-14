@@ -13,8 +13,6 @@ router.get('/home', findProblems, findUser, async (req, res, next) => {
   const problems = res.locals.problems;
   const user = res.locals.user;
 
-  console.log(req.session);
-
   res.render('index', { 
     user,
     problems,

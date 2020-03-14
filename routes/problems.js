@@ -1,5 +1,4 @@
 const express = require('express');
-const { VM } = require('vm2');
 
 const { isAuthenticated } = require('../routes/middlewares/authorization');
 const { findProblemById, setSolutionResult } = require('../routes/middlewares/utils');
