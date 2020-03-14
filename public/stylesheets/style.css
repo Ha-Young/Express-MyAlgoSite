@@ -4,13 +4,15 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: greenyellow;
 }
 
 .problem {
   padding: 20px;
-  background-color: darkgrey;
-  border: solid 1px gray;
+  width: 600px;
+  height:80px;
+  background-color: ivory;
+  border: solid 1px salmon;
   font-size: larger;
   font-weight: bolder;
 }

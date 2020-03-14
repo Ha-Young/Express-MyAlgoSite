@@ -7,13 +7,14 @@ class CodewarsError extends Error {
 
     this.status = status;
     this.displayMessage = displayMessage;
-
+    console.log(displayMessage, 'displayMessage')
     console.log(
-      `[STATUS: ${this.status}]
+      `
+      STATUS: ${this.status}
 
       ${message}
 
-      [Error Stack]
+      Error Stack:
 
       ${pe.render(this)}
       `
@@ -22,8 +23,8 @@ class CodewarsError extends Error {
 }
 
 class ValidationError extends CodewarsError {
-  constructor(message, field) {
-    super(message, 400, `유효하지 않은 ${field}값 입니다.`)
+  constructor(message) {
+    super(message, 400)
   }
 }
 

@@ -8,11 +8,11 @@ const bodyParser = require('body-parser');
 const createError = require('http-errors');
 const GitHubStrategy = require('passport-github').Strategy;
 
+const CodewarsError = require('./helpers/error');
 const index = require('./routes/index');
 const User = require('./models/User');
 
 const app = express();
-
 const mongoose = require('mongoose');
 
 mongoose.connect(process.env.DB_URL, {
@@ -71,7 +71,10 @@ app.get('/', authenticateUser, index);
 app.get('/login', index);
 app.get('/auth/github', passport.authenticate('github'));
 app.get('/auth/github/callback',
-  passport.authenticate('github', { failureRedirect: '/login', successRedirect: '/' })
+  passport.authenticate('github', {
+    failureRedirect: '/login',
+    successRedirect: '/'
+  })
 );
 
 app.get('/problem/:problem_id', index);
@@ -82,11 +85,12 @@ app.use(function(req, res, next) {
 });
 
 app.use(function(err, req, res, next) {
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  CodewarsError(err, res);
+  // res.locals.message = err.message;
+  // res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  res.status(err.status || 500);
-  res.render('error');
+  // res.status(err.status || 500);
+  // res.render('error');
 });
 
 module.exports = app;

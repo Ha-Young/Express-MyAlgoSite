@@ -1,47 +1,37 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="/codemirror-5.52.0/lib/codemirror.js"></script>
     <link rel="stylesheet" href="/codemirror-5.52.0/lib/codemirror.css">
-    <link rel="stylesheet" href="/codemirror-5.52.0/theme/night.css.css">
-    <script src="/codemirror-5.52.0/mode/javascript/javascript.js"></script>
+    <link rel="stylesheet" href="/codemirror-5.52.0/theme/midnight.css">
   </head>
   <body>
     <% problem.forEach(el => { %>
       <h1><%= el.title %></h1>
 
-      <div class="container">
-        <div><%= `Type: ${el.type}` %></div>
-        <div><%= `Level: ${el.difficulty_level}` %></div>
-        <div class="description">
-          <%= `Description: ${el.discription}` %>
-        </div>
-
-        <% el.notes.forEach((note, idx) => { %>
-          <div><%= `Note ${idx + 1}: ${note}` %></div>
-        <% }) %>
-
-        <% el.tests.forEach((test, idx) => { %>
-          <div><%= `입출력 예 ${idx + 1}: ${test.exampleCode}` %></div>
-          <div><%= `return "${test.solution}"` %></div>
-        <% }) %>
-
-        <form action="/problem/<%= el.id %>" method="POST" name="codeForm">
-          <textarea id='code' name="codeInput"></textarea>
-
-          <input type="submit" value="submit">
-          <a href="/">Home</a>
-        </form>
+      <div><%= `Type: ${el.type}` %></div>
+      <div><%= `Level: ${el.difficulty_level}` %></div>
+      <div class="description">
+        <%= `Description: ${el.discription}` %>
       </div>
+
+      <% el.notes.forEach((note, idx) => { %>
+        <div><%= `Note ${idx + 1}: ${note}` %></div>
+      <% }) %>
+
+      <% el.tests.forEach((test, idx) => { %>
+        <div><%= `입출력 예 ${idx + 1}: ${test.exampleCode}` %></div>
+        <div><%= `return "${test.solution}"` %></div>
+      <% }) %>
+
+      <form action="/problem/<%= el.id %>" method="POST" name="codeForm">
+        <textarea id='code' name="codeInput"></textarea>
+        <input type="submit" value="submit">
+        <a href="/">Home</a>
+      </form>
     <% })%>
-        <script>
-          var editor = CodeMirror.fromTextArea(document.getElementById('code'), {
-            mode: 'javascript',
-            lineNumbers: true,
-            value: document.documentElement.innerHTML,
-            theme: 'night'
-          });
-          editor.getDoc().setValue(`function solution () {}`)
-        </script>
+
+    <script src="/codemirror-5.52.0/lib/codemirror.js"></script>
+    <script src="/javascripts/index.js"></script>
+    <script src="/codemirror-5.52.0/mode/javascript/javascript.js"></script>
   </body>
 </html>
