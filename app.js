@@ -6,21 +6,12 @@ const path = require('path');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const createError = require('http-errors');
-const GitHubStrategy = require('passport-github').Strategy;
-
-const ValidationError = require('./helpers/error');
 const index = require('./routes/index');
-const User = require('./models/User');
 
 const app = express();
-const mongoose = require('mongoose');
 
-mongoose.connect(process.env.DB_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false
-});
+require('./config/passport');
+require('./config/mongoose');
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
@@ -30,34 +21,9 @@ app.use(bodyParser.urlencoded());
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: true,
-  saveUninitialized: false
+  saveUninitialized: false,
+  cookie: { maxAge: 1000 * 60 * 5 }
 }));
-app.use(passport.initialize());
-app.use(passport.session());
-
-passport.use(new GitHubStrategy({
-  clientID: process.env.GITHUB_CLIENT_ID,
-  clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  callbackURL: "http://127.0.0.1:3000/auth/github/callback"
-}, function (accessToken, refreshToken, profile, cb) {
-  const existingUser = User.findOne({ githubId: profile.id },
-    function (err, user) {
-      return cb(err, user);
-    }
-  );
-
-  if (!existingUser) {
-    User.save({ githubId: profile.id });
-  }
-}));
-
-passport.serializeUser((user, done) => {
-  done(null, user);
-});
-
-passport.deserializeUser((user, done) => {
-  done(null, user);
-});
 
 const authenticateUser = (req, res, next) => {
   if (req.isAuthenticated()) {
@@ -79,7 +45,6 @@ app.get('/auth/github/callback',
 
 app.get('/problem/:problem_id', index);
 app.post('/problem/:problem_id', index);
-app.get('/error', index);
 
 app.use(function(req, res, next) {
   next(createError(404, 'Not Found'));
@@ -93,11 +58,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  console.log('mongoose connected!');
-});
-
 module.exports = app;
-
