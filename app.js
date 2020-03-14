@@ -41,6 +41,8 @@ passport.use(
 );
 
 const app = express();
+require("./config/db");
+
 app.use(session({ secret: keys.session.KEY, cookie: { maxAge: 60000 } }));
 app.use(express.urlencoded());
 app.use(express.json());
@@ -53,24 +55,10 @@ app.use("/", index);
 app.use("/login", login);
 app.use("/problem", problem);
 
-
-
-const mongoose = require("mongoose");
-
-mongoose
-  .connect(process.env.DB_URL, {
-    useNewUrlParser: true
-  })
-  .then(() => {
-    console.log("Connected to database");
-  })
-  .catch(err => {
-    next(err);
-  });
-app.get('/logout',(req,res)=>{
+app.get("/logout", (req, res) => {
   req.logout();
-res.redirect('/');
-})
+  res.redirect("/");
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   const err = new Error("Not Found");
