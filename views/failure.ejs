@@ -2,14 +2,13 @@
 <html>
   <head>
     <title>Failure</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/style.css"/>
   </head>
   <body>
     <button><a href="/logout">LOGOUT</a></button>
     <div class="title">[SYSTEM] 전투에서 실패하였습니다</div>
 
-
-    <% if(failInfo.length){ %>
+    <% if (failInfo.length) { %>
       <% failInfo.forEach((info) => { %>
         <div class="failBox">
           <div>외계인 정보 : <%= info.case %></div>
@@ -21,7 +20,7 @@
         <button class="button"><a href="/"> 다른 외계인 처치하기! </a></button>
     <% } %>
 
-    <% if(errorInfo.length){ %>
+    <% if (errorInfo.length) { %>
       <div class="errorBox">
         <div>당신이 한눈판사이에 외계인이 도망갔습니다 !</div>
         <div>도망간 이유 : <%= errorInfo[0].err %></div>

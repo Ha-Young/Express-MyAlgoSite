@@ -1,6 +1,4 @@
-const mongoose = require('mongoose');
 const Problem = require('../../models//Problem');
-const User = require('../../models/User');
 const { VM, VMScript } = require('vm2');
 
 exports.getProblemId = async function (req, res, next) {
@@ -9,7 +7,7 @@ exports.getProblemId = async function (req, res, next) {
     req.session.problem = targetProblem;
     res.locals.problem = targetProblem;
     next();
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 };
@@ -18,11 +16,11 @@ exports.showProblem = async function (req, res, next) {
   const problem = res.locals.problem;
 
   try {
-    res.render('problem', problem );
+    res.render('problem', { problem });
   } catch (err) {
     next(err);
   }
-}
+};
 
 exports.checkProblem = async function (req, res, next) {
   try{
@@ -33,7 +31,7 @@ exports.checkProblem = async function (req, res, next) {
     const checkedError = [];
     const problemId = req.params.problem_id;
 
-    if(typeof(userCode) !== 'string'){
+    if (typeof(userCode) !== 'string') {
       throw new Error('invalid code value');
     }
 
@@ -51,19 +49,16 @@ exports.checkProblem = async function (req, res, next) {
           });
         }
       }
-    } catch(err) {
+    } catch (err) {
       const errObj = {};
       Error.captureStackTrace(errObj);
       checkedError.push({
         errMessage : err.message,
-        err : err,
-        errstack : err.stack
-      })
+        err : err
+      });
     }
 
-    //궁금해서 주석처리했어요. 지금처럼 삼항연산자가 길어질경우에는 안쓰는게 좋을까요?
-    //checkedFailure.length ? res.render('failure', { failInfo : checkedFailure, errorInfo : checkedError, problemId }) : res.render('success', { problemId });
-    if(checkedFailure.length || checkedError.length){
+    if (checkedFailure.length || checkedError.length) {
       res.render('failure', {
         failInfo : checkedFailure,
         errorInfo : checkedError,
@@ -72,12 +67,7 @@ exports.checkProblem = async function (req, res, next) {
     } else {
       res.render('success', { problemId });
     }
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
-
-  // 수박수박수 알고리즘 정답
-  // function solution(n){
-  //   return '수박'.repeat(n/2) + (n%2 === 1 ? '수' : '');
-  // }
-}
+};

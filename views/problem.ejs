@@ -4,7 +4,7 @@
     <title>problem</title>
     <link rel="stylesheet" href="/codemirror/lib/codemirror.css"/>
     <link rel="stylesheet" href="/codemirror/theme/darcula.css"/>
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" href="/stylesheets/style.css"/>
   </head>
   <body>
     <button><a href="/logout">LOGOUT</a></button>
@@ -13,7 +13,7 @@
         <div>✨Completed User : <%= problem.completedUsers %></div>
         <div>⭐️Level : <%= problem.difficultyLevel %></div>
         <div>❔How to use? </div>
-        <div> <%= problem.description %> </div>
+        <div><%= problem.description %></div>
       </div>
       <div class="formBox">
         <form action="/problems/<%= problem._id %>" method="POST">
