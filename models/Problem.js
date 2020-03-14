@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
 
 const ProblemSchema = new mongoose.Schema({
-  id: { type: Number, unique: true },
-  title: String,
-  completed_users: Number,
-  difficulty_level: Number,
-  description: String,
+  id: { type: Number, required: true, unique: true },
+  title: { type: String, required: true },
+  completed_users: { type: Number, required: true },
+  difficulty_level: { type: Number, required: true },
+  description: { type: String, required: true },
   tests: [
     {
-      code: mongoose.Schema.Types.Mixed,
-      answer: mongoose.Schema.Types.Mixed
+      code:  { type: String, required: true },
+      answer: { type: mongoose.Schema.Types.Mixed, required: true }
     }
   ]
 });

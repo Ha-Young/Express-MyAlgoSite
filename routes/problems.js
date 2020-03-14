@@ -28,12 +28,12 @@ router.post('/:problem_id', async (req, res, next) => {
 
     try {
       tests.forEach(test => {
-        const script = new VMScript(`${userSolution} ${test.arguments}`, 'vm.js');
+        const script = new VMScript(`${userSolution} ${test.code}`, 'vm.js');
         const userAnswer = vm.run(script);
 
         if (JSON.stringify(userAnswer) !== JSON.stringify(test.answer)) {
           failureList.push({
-            case: test.arguments,
+            case: test.code,
             expected: test.answer,
             result: userAnswer || 'undefined'
           });
