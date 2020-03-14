@@ -9,7 +9,7 @@ const ProblemSchema = new mongoose.Schema({
   func: { type: String, required: true },
   tests: [{
     code: String,
-    Solution: String
+    solution: String
   }]
 });
 

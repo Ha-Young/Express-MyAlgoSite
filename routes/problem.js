@@ -20,16 +20,16 @@ router.get('/:problem_id', async (req, res, next) => {
 
 router.post('/:problem_id', async (req, res, next) => {
   try{
-    const submitCode = req.body.submitCode;
+    const { submitCode } = req.body;
     const problemInfo = await Problem.findById(req.params.problem_id).lean();
     const testList = problemInfo.tests;
-    let failureList = [];
+    const failureList = [];
     let isFailure = false;
 
     vm.run(submitCode);
 
     const testRun = (test) => {
-      if(_.cloneDeep(vm.run(test.code)) !== _.cloneDeep(test.solution)) {
+      if(!_.isEqual(vm.run(test.code), test.solution)) {
         if(!isFailure) isFailure = true;
         failureList.push({
           testCode: test.code,
