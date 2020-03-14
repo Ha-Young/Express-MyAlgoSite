@@ -42,13 +42,7 @@ router.post('/:id', checkUser, async (req, res, next) => {
       if (result !== test.solution) failureTests.push([test.code, test.solution, result]);
     });
 
-    if (!failureTests.length) {
-      const { _id } = await User.find({ github_id: req.user.github_id });
-      // console.log(await User.find({ github_id: req.user.github_id }));
-      problem.completed_users.push(_id);
-      console.log(await Problem.findById(id));
-      return res.render('success', { username });
-    }
+    if (!failureTests.length) return res.render('success', { username });
 
     res.render('failure', {
       failureTests,
@@ -57,7 +51,6 @@ router.post('/:id', checkUser, async (req, res, next) => {
       errorMessage: null
     });
   } catch (err) {
-    console.log(err);
     if (
       err instanceof SyntaxError ||
       err instanceof TypeError ||
