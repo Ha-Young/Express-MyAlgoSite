@@ -1,3 +1,12 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars/enemy</title>
+    <link rel="stylesheet" href="/stylesheets/style.css"/>
+  </head>
+  <body>
+    <div class="title">[SYSTEM] 에러가 발생하였습니다!</div>
+    <div class="errorBox"><%= error %></div>
+    <button><a href="/">메인화면으로 돌아가기</a></button>
+  </body>
+</html>

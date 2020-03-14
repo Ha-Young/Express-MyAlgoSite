@@ -9,7 +9,7 @@ class CodewarsError extends Error {
     this.displayMessage = displayMessage;
 
     console.log(
-      `< [STATUS: ${this.status}] Error Message ${pe.render(message)}>
+      `< [STATUS: ${this.status}] ${pe.render(message)}>
       <Error Stack>
       ${pe.render(this)}
       `
@@ -17,15 +17,15 @@ class CodewarsError extends Error {
   }
 }
 
-class DuplicateError extends CodewarsError {
-  constructor (message, field) {
-    super(message, 400, `${field}는 이미 존재하는 값입니다.`);
-  }
-}
-
 class ValidationError extends CodewarsError {
   constructor (message, field) {
     super(message, 400, `${field}는 유효하지않은 값입니다.`);
+  }
+}
+
+class InvalidObjectIdError extends CodewarsError {
+  constructor (message, problemId) {
+    super(message, 400, `${problemId}가 존재하지 않습니다.`);
   }
 }
 
@@ -42,8 +42,8 @@ class GeneralError extends CodewarsError {
 }
 
 module.exports = {
-  DuplicateError,
   ValidationError,
+  InvalidObjectIdError,
   UndefinedError,
   GeneralError
 };

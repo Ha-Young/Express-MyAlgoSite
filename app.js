@@ -9,6 +9,7 @@ const mongoose = require('mongoose');
 const home = require('./routes/home');
 const problems = require('./routes/problems');
 const setPassport = require('./config/passport');
+const error = require('./libs/error');
 
 const app = express();
 
@@ -47,13 +48,10 @@ app.use('/logout', home);
 app.use('/problems', problems);
 
 app.use(function(req, res, next) {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+  next(new error.UndefinedError('invalid URL. Check pls'));
 });
 
 app.use(function(err, req, res, next) {
-  res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   res.status(err.status || 500);

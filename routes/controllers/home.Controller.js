@@ -1,12 +1,13 @@
 const passport = require('passport');
 const Problem = require('../../models/Problem');
+const error = require('../../libs/error');
 
 exports.showIndex = async function (req, res, next) {
   try {
     const problems = await Problem.find();
     res.render('index', { problems });
   } catch (err) {
-    next(err);
+    next(new error.GeneralError(err.message));
   }
 };
 
@@ -14,7 +15,7 @@ exports.showLogin = async function (req, res, next) {
   try {
     res.render('login');
   } catch (err) {
-    next(err);
+    next(new error.GeneralError(err.message));
   }
 };
 

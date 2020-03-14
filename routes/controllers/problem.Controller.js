@@ -1,38 +1,52 @@
+const mongoose = require('mongoose');
 const Problem = require('../../models//Problem');
 const { VM, VMScript } = require('vm2');
+const error = require('../../libs/error');
 
 exports.getProblemId = async function (req, res, next) {
   try{
-    const targetProblem = await Problem.findOne({ _id: req.params.problem_id });
-    req.session.problem = targetProblem;
+    const { ObjectId } = mongoose.Types;
+    const { problem_id: problemId } = req.params;
+
+    if(!ObjectId.isValid(problemId)){
+      throw new error.InvalidObjectIdError(err.message, problemId);
+    }
+
+    const targetProblem = await Problem.findOne({ _id: problemId });
+
     res.locals.problem = targetProblem;
     next();
   } catch (err) {
-    next(err);
+    if (err instanceof error.InvalidObjectIdError) {
+      return next(err);
+    }
+
+    next(new error.GeneralError(err.message));
   }
 };
 
 exports.showProblem = async function (req, res, next) {
-  const problem = res.locals.problem;
+  const { problem } = res.locals;
 
   try {
     res.render('problem', { problem });
   } catch (err) {
-    next(err);
+    next(new error.GeneralError(err.message));
   }
 };
 
 exports.checkProblem = async function (req, res, next) {
   try{
-    const problem = req.session.problem;
+    const { ObjectId } = mongoose.Types;
+    const { problem } = res.locals;
+    const { problem_id: problemId } = req.params;
     const userCode = req.body.code;
     const vm = new VM();
     const checkedFailure = [];
     const checkedError = [];
-    const problemId = req.params.problem_id;
 
-    if (typeof(userCode) !== 'string') {
-      throw new Error('invalid code value');
+    if(!ObjectId.isValid(problemId)){
+      throw new error.InvalidObjectIdError(err.message, problemId);
     }
 
     try {
@@ -67,7 +81,12 @@ exports.checkProblem = async function (req, res, next) {
     } else {
       res.render('success', { problemId });
     }
+
   } catch (err) {
-    next(err);
+    if (err instanceof error.InvalidObjectIdError) {
+      next(err);
+    }
+
+    next(new error.GeneralError(err.message));
   }
 };
