@@ -2,8 +2,16 @@ const express = require('express');
 const router = express.Router();
 const Problem = require('../models/Problem')
 
+const authenticateUser = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.status(301).redirect('/login');
+  }
+};
+
 /* GET home page. */
-router.get('/', (req, res, next) => {
+router.get('/', authenticateUser, (req, res, next) => {
   Problem.find(function (err, problem) {
     const id = problem.map(x => x.id);
     const title = problem.map(x => x.title);

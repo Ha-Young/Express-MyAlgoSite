@@ -4,7 +4,15 @@ const Problem = require('../models/Problem');
 const { VM } = require('vm2');
 const vm = new VM();
 
-router.get('/:problem_id', (req, res, next) => {
+const authenticateUser = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.status(301).redirect('/login');
+  }
+};
+
+router.get('/:problem_id', authenticateUser, (req, res, next) => {
   Problem.findOne({ id: req.params.problem_id }, function(err, problem) {
     res.render('problems',
       { title: problem.title,
@@ -17,7 +25,7 @@ router.get('/:problem_id', (req, res, next) => {
   });
 });
 
-router.post('/:problem_id', async function(req, res, next) {
+router.post('/:problem_id', authenticateUser, async function(req, res, next) {
   res.status(201);
   var code = req.body.solution;
   var fn = new Function(code);
