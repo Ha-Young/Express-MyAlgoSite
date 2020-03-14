@@ -17,8 +17,9 @@ const app = express();
 
 mongoose.connect(process.env.MONGODB_URL, {
   useNewUrlParser: true, 
-  useUnifiedTopology: true ,
+  useUnifiedTopology: false ,
   useCreateIndex: true,
+  useUnifiedTopology: true
 });
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {

@@ -4,6 +4,7 @@ const Problem = require('../models/Problem');
 const User = require('../models/User');
 const error = require('../lib/error');
 const { checkUser } = require('../middlewares/checkUser');
+const { _ } = require('lodash');
 const { VM } = require('vm2');
 const vm = new VM({
   timeout: 5000,
@@ -38,11 +39,18 @@ router.post('/:id', checkUser, async (req, res, next) => {
     tests.forEach(test => {
       const code = `${receivedSolution} ${test.code}`;
       const result = vm.run(code);
-
-      if (result !== test.solution) failureTests.push([test.code, test.solution, result]);
+      const testSolution = JSON.parse(test.solution);
+      
+      if (!_.isEqual(result, testSolution)) failureTests.push([test.code, test.solution, result]);
     });
 
-    if (!failureTests.length) return res.render('success', { username });
+    if (!failureTests.length) {
+      const user = await User.findById(req.user._id);
+
+      await Problem.findByIdAndUpdate(id, { '$addToSet': { 'completed_users': user._id } });
+
+      return res.render('success', { username });
+    }
 
     res.render('failure', {
       failureTests,

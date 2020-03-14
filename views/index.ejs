@@ -10,7 +10,7 @@
       <% problems.forEach(problem => { %> 
         <div class="problem">
           <h2 class="problem-title"><%= problem.title %></h2>
-          <p class="problem-count"><%= problem.solution_count %>명 완료</p>
+          <p class="problem-count"><%= problem.completed_users.length %>명 완료</p>
           <p class="problem-level">level <%= problem.difficulty_level %></p>
           <a class="train" href="/problems/<%= problem._id %>">TRAIN</a>
         </div> 
