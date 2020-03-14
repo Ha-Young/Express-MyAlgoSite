@@ -24,7 +24,7 @@ mongoose.connect(process.env.DB_HOST, {
 passport.use(new GitHubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  callbackURL: "http://localhost:3000/auth/github/callback"
+  callbackURL: process.env.GITHUB_CALLBACK_URL
 },
 async function(accessToken, refreshToken, profile, cb) {
   const user = await User.findById(profile.id);

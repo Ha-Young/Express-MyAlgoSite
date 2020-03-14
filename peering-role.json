@@ -1,0 +1,14 @@
+{
+  "Name": "AtlasPeering/a7f5da9c-695a-4a2f-9447-0355f9298cdf/vanillacoding-codewars/song-codewars",
+  "IsCustom": true,
+  "Description": "Grants MongoDB access to manage peering connections on network /subscriptions/a7f5da9c-695a-4a2f-9447-0355f9298cdf/resourceGroups/vanillacoding-codewars/providers/Microsoft.Network/virtualNetworks/song-codewars",
+  "Actions": [
+      "Microsoft.Network/virtualNetworks/virtualNetworkPeerings/read",
+      "Microsoft.Network/virtualNetworks/virtualNetworkPeerings/write",
+      "Microsoft.Network/virtualNetworks/virtualNetworkPeerings/delete",
+      "Microsoft.Network/virtualNetworks/peer/action"
+  ],
+  "AssignableScopes": [
+      "/subscriptions/a7f5da9c-695a-4a2f-9447-0355f9298cdf/resourceGroups/vanillacoding-codewars/providers/Microsoft.Network/virtualNetworks/song-codewars"
+  ]
+}

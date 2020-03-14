@@ -1,0 +1,8 @@
+{
+  "appService.zipIgnorePattern": [
+    "node_modules{,/**}",
+    ".vscode{,/**}"
+  ],
+  "appService.deploySubpath": "",
+  "appService.defaultWebAppToDeploy": "/subscriptions/a7f5da9c-695a-4a2f-9447-0355f9298cdf/resourceGroups/vanillacoding-codewars/providers/Microsoft.Web/sites/song-codewars"
+}

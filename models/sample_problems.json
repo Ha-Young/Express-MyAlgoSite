@@ -1,6 +1,5 @@
 [
   {
-    "id": 1,
     "title": "피보나치 수열",
     "completed_users": 15,
     "difficulty_level": 1,
@@ -22,7 +21,6 @@
     ]
   },
   {
-    "id": 2,
     "title": "서울에서 김서방 찾기",
     "completed_users": 11,
     "difficulty_level": 2,
@@ -40,7 +38,6 @@
     ]
   },
   {
-    "id": 3,
     "title": "수박수박수박수박수",
     "completed_users": 12,
     "difficulty_level": 2,
@@ -58,7 +55,6 @@
     ]
   },
   {
-    "id": 4,
     "title": "하샤드 수",
     "completed_users": 5,
     "difficulty_level": 3,
