@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const createError = require('http-errors');
 const GitHubStrategy = require('passport-github').Strategy;
 
-const CodewarsError = require('./helpers/error');
+const ValidationError = require('./helpers/error');
 const index = require('./routes/index');
 const User = require('./models/User');
 
@@ -85,12 +85,11 @@ app.use(function(req, res, next) {
 });
 
 app.use(function(err, req, res, next) {
-  CodewarsError(err, res);
-  // res.locals.message = err.message;
-  // res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // res.status(err.status || 500);
-  // res.render('error');
+  res.status(err.status || 500);
+  res.render('error');
 });
 
 module.exports = app;

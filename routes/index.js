@@ -61,12 +61,7 @@ router.post('/problem/:problem_id', async (req, res, next) => {
     })
 
   } catch (error) {
-    next(error);
-    // if (error instanceof SyntaxError) {
-    //   return next(createError(400, error));
-    // } else if (error instanceof ReferenceError){
-    //   return next(createError(400, error))
-    // }
+    return next(new errors.ValidationError(error));
   }
 
   if (passCount === problem.tests.length) {
