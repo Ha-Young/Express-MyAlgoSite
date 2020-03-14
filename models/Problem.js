@@ -12,7 +12,7 @@ const ProblemSchema = new mongoose.Schema({
   description: { type: String, required: true },
   tests: [{ 
     code: { type: String,required: true },
-    solution: { type: String,required: true }
+    solution: { type: mongoose.Schema.Types.Mixed, required: true }
   }]
 });
 
