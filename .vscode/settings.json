@@ -1,8 +1,0 @@
-{
-  "appService.zipIgnorePattern": [
-    "node_modules{,/**}",
-    ".vscode{,/**}"
-  ],
-  "appService.defaultWebAppToDeploy": "/subscriptions/3e9b7678-d30a-40a8-9e39-f256fdc903af/resourceGroups/vannillacoding/providers/Microsoft.Web/sites/codewarsJeong",
-  "appService.deploySubpath": ""
-}
