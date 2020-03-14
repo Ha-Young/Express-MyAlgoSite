@@ -7,6 +7,7 @@ class CodewarsError extends Error {
 
     this.status = status;
     this.displayMessage = displayMessage;
+
     console.log(
       `
       STATUS: ${this.status}
@@ -41,7 +42,18 @@ class GeneralError extends CodewarsError {
   }
 }
 
+class LoginError extends CodewarsError {
+  constructor(message) {
+    super(
+      message,
+      401,
+      "로그인에 실패했습니다."
+    )
+  }
+}
+
 module.exports = {
   ValidationError,
-  GeneralError
+  GeneralError,
+  LoginError
 }

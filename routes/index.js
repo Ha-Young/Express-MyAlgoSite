@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-const createError = require('http-errors');
 const errors = require('../helpers/error');
 const Problem = require('../models/Problem');
 
@@ -10,20 +9,31 @@ const _ = require('lodash');
 
 router.get('/', async (req, res, next) => {
   const problemList = await Problem.find();
-
-  res.render('index', { problemList });
+  try {
+    res.render('index', { problemList });
+  } catch (error) {
+    next(new errors.GeneralError(error));
+  }
 });
 
 router.get('/login', (req, res, next) => {
-  res.render('socialLogin');
+  try {
+    res.render('socialLogin');
+  } catch (error) {
+    next(new errors.GeneralError(error));
+  }
 })
 
 router.get('/problem/:problem_id', async (req, res, next) => {
   const problemId = req.params.problem_id;
 
-  await Problem.find({ id: problemId }, (err, problem) => {
-    res.render('problem', { problem });
-  });
+  try {
+    await Problem.find({ id: problemId }, (err, problem) => {
+      res.render('problem', { problem });
+    });
+  } catch (error) {
+    next(new errors.GeneralError(error));
+  }
 })
 
 router.post('/problem/:problem_id', async (req, res, next) => {
@@ -81,6 +91,4 @@ router.post('/problem/:problem_id', async (req, res, next) => {
   }
 })
 
-
 module.exports = router;
-

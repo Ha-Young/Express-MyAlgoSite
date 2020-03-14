@@ -79,6 +79,7 @@ app.get('/auth/github/callback',
 
 app.get('/problem/:problem_id', index);
 app.post('/problem/:problem_id', index);
+app.get('/error', index);
 
 app.use(function(req, res, next) {
   next(createError(404, 'Not Found'));
@@ -92,10 +93,11 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
-
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log('mongoose connected!');
 });
+
+module.exports = app;
+
