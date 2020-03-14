@@ -7,10 +7,13 @@ const mongoose = require('mongoose');
  */
 const ProblemSchema = new mongoose.Schema({
   title: {type: String, required: true},
-  completed_users: [{ type: String }],
+  completed_users: [{ type: mongoose.Types.ObjectId, ref: 'User' }],
   difficulty_level: { type: Number, required: true },
   description: { type: String, required: true },
-  tests: [{ type: Object, required: true }]
+  tests: [{ 
+    code: { type: String,required: true },
+    solution: { type: String,required: true }
+  }]
 });
 
 module.exports = mongoose.model('Problem', ProblemSchema);

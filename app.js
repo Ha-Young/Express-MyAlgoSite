@@ -46,8 +46,6 @@ app.use('/problems', problems);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  // const err = createError(404, 'Not Found');
-
   next(new error.PageNotFoundError());
 });
 
