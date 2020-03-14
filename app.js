@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 
 const home = require('./routes/home');
 const problems = require('./routes/problems');
-const setPassport = require('./middleware/passport');
+const setPassport = require('./config/passport');
 
 const app = express();
 
