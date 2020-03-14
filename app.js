@@ -3,46 +3,14 @@ const path = require("path");
 const express = require("express");
 const passport = require("passport");
 const session = require("express-session");
-const githubStrategy = require("passport-github");
 const keys = require("./config/keys");
 const index = require("./routes/index");
 const login = require("./routes/login");
 const problem = require("./routes/problem");
-const User = require("./models/User");
-
-passport.serializeUser((user, cb) => {
-  cb(null, user._id);
-});
-passport.deserializeUser(async (id, cb) => {
-  const user = await User.findById(id);
-  cb(null, user);
-});
-passport.use(
-  new githubStrategy(
-    {
-      clientID: keys.github.CLIENT_ID,
-      clientSecret: keys.github.CLIENT_SECRET,
-      callbackURL: "/login/github/callback"
-    },
-    async (aceessTocken, refreshToken, profile, cb) => {
-      const userInfo = { ...profile };
-      const user = await User.findOne({ id: userInfo._json.id });
-      if (user) {
-        cb(null, user);
-      } else {
-        const newUser = await new User({
-          githubId: userInfo._json.login,
-          id: userInfo._json.id
-        }).save();
-        cb(null, newUser);
-      }
-    }
-  )
-);
-
 const app = express();
-require("./config/db");
 
+require("./config/passport");
+require("./config/db");
 app.use(session({ secret: keys.session.KEY, cookie: { maxAge: 60000 } }));
 app.use(express.urlencoded());
 app.use(express.json());
@@ -54,6 +22,7 @@ app.use(passport.session());
 app.use("/", index);
 app.use("/login", login);
 app.use("/problem", problem);
+
 
 app.get("/logout", (req, res) => {
   req.logout();
