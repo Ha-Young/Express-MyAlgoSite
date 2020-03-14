@@ -1,17 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const Problem = require('../models/Problem'); 
+const Problem = require('../models/Problem');
+const { checkUser } = require('../middlewares/checkUser');
 
 /* GET home page. */
-router.get('/', async(req, res, next) => {
-  if (!req.user) return res.redirect('/login');
-
+router.get('/', checkUser, async (req, res, next) => {
   try {
     const problems = await Problem.find();
     const username = req.user.username;
 
     res.render('index', { problems, username });
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 });

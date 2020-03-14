@@ -1,15 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const Problem = require('../models/Problem');
+const { checkUser } = require('../middlewares/checkUser');
 const { VM } = require('vm2');
 const vm = new VM({
   timeout: 5000,
   sandbox: {}
 });
 
-router.get('/:id', async (req, res, next) => {
-  if (!req.user) return res.redirect('/login');
-
+router.get('/:id', checkUser, async (req, res, next) => {
   try {
     const id = req.params.id;
     const username = req.user.username;
@@ -21,9 +20,7 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.post('/:id', async (req, res, next) => {
-  if (!req.user) return res.redirect('/login');
-
+router.post('/:id', checkUser, async (req, res, next) => {
   const {
     body: { solution: receivedSolution },
     params: { id },
