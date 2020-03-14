@@ -5,11 +5,11 @@ const ProblemSchema = new mongoose.Schema({
   title: { type: String, required: true },
   completed_users: { type: Number, required: true, default: 0, min: 0 },
   difficulty_level: { type: Number, required: true, min: 1 },
-  description: String,
+  description: { type: String, required: true },
   func: { type: String, required: true },
   tests: [{
-    code: String,
-    solution: String
+    code: { type: String, required: true },
+    solution: { type: String, required: true }
   }]
 });
 

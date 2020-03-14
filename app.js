@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 const index = require('./routes/index');
 const login = require('./routes/login');
 const problem = require('./routes/problem');
+const errors = require('./lib/errors');
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, './views'));
@@ -38,9 +39,7 @@ app.post('/logout', function(req, res, next) {
 });
 
 app.use(function(req, res, next) {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+  next(new errors.NotFoundError('Not Found'));
 });
 
 app.use(function(err, req, res, next) {

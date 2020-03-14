@@ -14,10 +14,10 @@ router.post('/github',
   passport.authenticate('github'));
 
   router.get('/github/callback',
-  passport.authenticate('github', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/');
-  }
-);
+    passport.authenticate('github', { failureRedirect: '/login' }),
+    function(req, res) {
+      res.redirect('/');
+    }
+  );
 
 module.exports = router;
