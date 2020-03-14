@@ -5,15 +5,14 @@
     <link rel="stylesheet" href="stylesheets/style.css" />
   </head>
   <body>
-    <%- include('header',{login:login}); %>
+    <%- include('header',{loginId:loginId}); %>
     <h1><%=title %></h1>
     <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
     <ul class="problems">
-      <% for(var i=0; i < problems.length; i++) { %>
-
+      <% for(var i = 0; i < problems.length; i++) { %>
       <li>
         <form method="GET" action="/problem/<%=problems[i].id%>" method="GET">
-          <% if(login){%>
+          <% if(loginId){%>
           <div><input type="submit" value="문제 : <%=problems[i].title%>" /></div>
           <%} else {%>
           <div>

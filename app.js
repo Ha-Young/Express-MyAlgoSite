@@ -4,6 +4,7 @@ const express = require("express");
 const passport = require("passport");
 const session = require("express-session");
 const keys = require("./config/keys");
+
 const index = require("./routes/index");
 const login = require("./routes/login");
 const problem = require("./routes/problem");
@@ -22,7 +23,6 @@ app.use(passport.session());
 app.use("/", index);
 app.use("/login", login);
 app.use("/problem", problem);
-
 
 app.get("/logout", (req, res) => {
   req.logout();

@@ -11,7 +11,7 @@ router.get("/", async (req, res, next) => {
     });
   }
   const githubId = req.user ? req.user.githubId : undefined;
-  res.render("index", { title: "코드전쟁", problems: problems, login: githubId });
+  res.render("index", { title: "코드전쟁", problems: problems, loginId: githubId });
 });
 
 module.exports = router;
