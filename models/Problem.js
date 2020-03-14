@@ -13,7 +13,7 @@ const testSchema = new Schema({
   }
 });
 
-const ProblemSchema = new Schema({
+const problemSchema = new Schema({
   title: {
     type: String,
     required: true
@@ -44,4 +44,4 @@ const ProblemSchema = new Schema({
   timestamps: true
 });
 
-export default model('Problem', ProblemSchema);
+export default model('Problem', problemSchema);
