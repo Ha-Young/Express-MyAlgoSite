@@ -6,9 +6,13 @@ const mongoose = require('mongoose');
 
  */
 const userSchema = new mongoose.Schema({
-  githubId: String,
+  githubId: {
+    type: String,
+    required: true
+  },
   isAdmin: {
     type: Boolean,
+    required: true,
     default: false
   }
 });

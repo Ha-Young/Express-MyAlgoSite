@@ -29,7 +29,7 @@ const postAddCase = async (req, res, next) => {
     const id = req.params.problem_id;
     const { question, answer } = req.body;
 
-    if (question === "" || answer === "") {
+    if (!question.trim().length || !answer.trim().length) {
       throw new errors.ValidationError(`입력한 값이 빈 문자열입니다.`, question && answer);
     }
     
@@ -89,10 +89,10 @@ const postProblemsDetail = async (req, res, next) => {
     const submitedCode = req.body.code;
     const problem = await Problem.findById(id).populate('tests');
     const tests = problem.tests;
-    let isPassTests = true;
-    let context;
+    let isPassTests = false;
+    let context, i;
 
-    for (let i = 0; i < tests.length; i++) {
+    for (i = 0; i < tests.length; i++) {
       try {
         const { code, solution } = tests[i];
         const script = new vm.Script(
@@ -110,16 +110,18 @@ const postProblemsDetail = async (req, res, next) => {
         const result = script.runInContext(context);
 
         if (!result) {
-          isPassTests = false;
           break;
         }
       } catch (err) {
-        isPassTests = false;
         context.error = err.message;
         req.session.context = context;
         res.redirect(`/failure`);
         return;
       }
+    }
+
+    if (i === tests.length) {
+      isPassTests = true;
     }
 
     req.session.context = context;
