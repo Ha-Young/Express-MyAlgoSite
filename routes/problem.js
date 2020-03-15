@@ -9,7 +9,9 @@ const Problem = require('../models/Problem');
 const ERROR_NAME = require('../constants/errorName');
 
 router.get('/:problem_id', pagePermissions.privatePage, async (req, res, next) => {
-  const { params: { problem_id: problemId }} = req;
+  const {
+    params: { problem_id: problemId }
+  } = req;
 
   try {
     const problem = await Problem.findOne({ id: problemId });
@@ -37,76 +39,79 @@ router.post('/:problem_id', pagePermissions.privatePage, async (req, res, next) 
     params: { problem_id: problemId },
     body: { 'user-solution': userSolutionString }
   } = req;
+  const failure = {};
+  let isTestNotPassed = false;
 
   try {
     if (!userSolutionString) {
-      const error = new Error('Solution함수를 작성해주세요.');
-      error.name = ERROR_NAME.NOT_EXISTED_SOLUTION;
-      throw error;
+      failure.message = 'Solution 함수를 작성해주세요.';
+      return res.render('failure', { failure, problemId });
     }
 
     const problem = await Problem.findOne({ id: problemId });
     const solutionTestList = problem.tests;
 
-    solutionTestList.forEach(testCase => {
-      const context = Object.create(null);
-      context.vmParameter = testCase.code_params;
-      vm.createContext(context);
-      const userSolutionValue = vm.runInContext(`(${userSolutionString})(vmParameter)`, context, { timeout: 2000 });
+    for (let i = 0; i < solutionTestList.length; i++) {
+      try {
+        const context = Object.create(null);
+        context.vmParameter = solutionTestList[i].code_params;
+        vm.createContext(context);
+        const userSolutionValue = vm.runInContext(`(${userSolutionString})(vmParameter)`, context, { timeout: 2000 });
 
-      if (userSolutionValue !== testCase.solution) {
-        const error = new Error('해당 테스트를 통과하지 못했어요.');
-        error.name = ERROR_NAME.FAILED_TEST;
-        error.testCase = testCase.code_params;
-        throw error;
+        if (userSolutionValue !== solutionTestList[i].solution) {
+          failure.message = '테스트를 통과하지 못했어요.';
+          failure.testCase = solutionTestList[i].code_params;
+          isTestNotPassed = true;
+          break;
+        }
+      } catch (failure) {
+        console.log(failure);
+        switch (failure.name) {
+          case 'EvalError':
+            res.render('failure', { failure, problemId });
+            break;
+
+          case 'InternalError':
+            res.render('failure', { failure, problemId });
+            break;
+
+          case 'RangeError':
+            res.render('failure', { failure, problemId });
+            break;
+
+          case 'ReferenceError':
+            res.render('failure', { failure, problemId });
+            break;
+
+          case 'SyntaxError':
+            res.render('failure', { failure, problemId });
+            break;
+
+          case 'TypeError':
+            res.render('failure', { failure, problemId });
+            break;
+
+          case 'URIError':
+            res.render('failure', { failure, problemId });
+            break;
+
+          default:
+            failure.message = '알 수 없는 오류가 발생했습니다.';
+            res.render('failure', { failure, problemId });
+        }
+        return;
       }
-    });
-
-    problem.completed_users += 1;
-    await problem.save();
-    res.render('success');
-  } catch (error) {
-    switch (error.name) {
-      case 'EvalError':
-        res.render('failure', { error, problemId });
-        break;
-
-      case 'InternalError':
-        res.render('failure', { error, problemId });
-        break;
-
-      case 'RangeError':
-        res.render('failure', { error, problemId });
-        break;
-
-      case 'ReferenceError':
-        res.render('failure', { error, problemId });
-        break;
-
-      case 'SyntaxError':
-        res.render('failure', { error, problemId });
-        break;
-
-      case 'TypeError':
-        res.render('failure', { error, problemId });
-        break;
-
-      case 'URIError':
-        res.render('failure', { error, problemId });
-        break;
-
-      case ERROR_NAME.NOT_EXISTED_SOLUTION:
-        res.render('failure', { error, problemId });
-        break;
-
-      case ERROR_NAME.FAILED_TEST:
-        res.render('failure', { error, problemId });
-        break;
-
-      default:
-        next(error);
-        break;
     }
+
+    if (isTestNotPassed) {
+      res.render('failure', { failure, problemId });
+    } else {
+      await problem.save();
+      problem.completed_users += 1;
+      res.render('success');
+    }
+  } catch (error) {
+    next(error);
   }
 });
 

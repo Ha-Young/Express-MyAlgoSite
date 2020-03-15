@@ -8,9 +8,9 @@
     <div class="container">
       <div class="failure-box">
         <div>
-          <div class="failure-info"><%= error.message ? error.message : null %></div>
-          <% if(error.testCase) { %>
-          <div>테스트케이스가 '<%= error.testCase %>' 일 경우를 확인해보세요.</div>
+          <div class="failure-info"><%= failure.message ? failure.message : null %></div>
+          <% if(failure.testCase) { %>
+          <div>테스트케이스가 '<%= failure.testCase %>' 일 경우를 확인해보세요.</div>
           <%} %>
           <div class="failure-button-box">
             <a class="failure-button" href="<%= problemId %>">문제로 돌아가기</a>
