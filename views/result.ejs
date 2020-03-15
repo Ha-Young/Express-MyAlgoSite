@@ -3,24 +3,28 @@
   <head>
   </head>
   <body>
-    <h1><%= result %></h1>
-    <% if (failureCode) { %>
-      <h3>테스트 결과</h3>
+    <h1><%= message %></h1>
+    <h3>테스트 결과</h3>
 
-      <% failureCode.forEach(failure => { %>
-        <% if (failure.passed === '✔') { %>
-          <div><%= failure.passed %><%= failure.exampleCode %></div>
-          <div>출력 값 '<%= failure.solution %>' 와(과) 기대 값이 같습니다.</div>
+    <% if (testResults) { %>
+      <% testResults.forEach(test => { %>
+        <% if (test.ispassed === '✔') { %>
+          <div><%= test.isPassed %>
+            <%= test.exampleCode %>
+          </div>
+          <div>출력 값 '<%= test.solution %>' 와(과) 기대 값이 같습니다.</div>
         <% } else { %>
-          <div><%= failure.passed %><%= failure.exampleCode %></div>
-          <div>예상: <%= failure.solution %></div>
-          <div>출력: <%= failure.code %></div>
+          <div><%= test.isPassed %>
+            <%= test.exampleCode %>
+          </div>
+          <div>예상: <%= test.solution %></div>
+          <div>출력: <%= test.code %></div>
         <% } %>
       <% }) %>
 
-      <h3>테스트 <%= passCount %>개 통과</h3>
+      <h3>테스트 <%= testResults.length %>개 중 <%= passCount %>개를 통과하셨군요</h3>
     <% } else { %>
-      <h3>테스트 <%= passCount %>개 모두 통과</h3>
+      <h3><%= passCount %>개의 테스트를 모두 통과하셨군요</h3>
     <% } %>
     <a href="/">Home</a>
     <a href="/problem/<%= id %>">Try again</a>
