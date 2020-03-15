@@ -19,18 +19,15 @@ exports.excuteCode = (tests, inputedSolution) => {
 
 exports.updateUserRecords = async (userId, solvedLevel, totalCount, lvOneCount, lvTwoCount, lvThreeCount) => {
   const solvedAllCount = totalCount + 1;
-  const solvedLevelOne =  lvOneCount + 1;
-  const solvedLevelTwo = lvTwoCount + 1;
-  const solvedLevelThree = lvThreeCount + 1;
   const loginedUser = { _id: userId };
   const updateRecords = { solvedAllCount };
   const options = { new: true };
   if (solvedLevel === 1) {
-    updateRecords.solvedLevelOne = solvedLevelOne;
+    updateRecords.solvedLevelOne = lvOneCount + 1;
   } else if (solvedLevel === 2) {
-    updateRecords.solvedLevelTwo = solvedLevelTwo;
+    updateRecords.solvedLevelTwo = lvTwoCount + 1;
   } else if (solvedLevel === 3) {
-    updateRecords.solvedLevelThree = solvedLevelThree;
+    updateRecords.solvedLevelThree = lvThreeCount + 1;
   }
   const user = await User.findOneAndUpdate(loginedUser, updateRecords, options);
   return user;

@@ -32,7 +32,7 @@ passport.use(new GitHubStrategy({
       if (user.length) {
         return done(null, user[0]);
       } else {
-        const userInfo = new User({
+        const user = await User.create({
           name: profile.username,
           githubId: profile.id,
           githubUrl: profile.profileUrl,
@@ -43,7 +43,6 @@ passport.use(new GitHubStrategy({
           solvedLevelThree: 0,
           solved: []
         });
-        const user = await User.create(userInfo);
         done(null, user);
       }
     } catch (err) {

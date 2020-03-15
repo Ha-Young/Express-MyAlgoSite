@@ -6,11 +6,13 @@ const path = require('path');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
-const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
-const CALLBACK_URL = process.env.CALLBACK_URL;
-const MY_SECRET = process.env.MY_SECRET;
-const ATLAS_URI = process.env.ATLAS_URI;
+const { 
+  GITHUB_CLIENT_ID, 
+  GITHUB_CLIENT_SECRET, 
+  CALLBACK_URL, 
+  MY_SECRET, 
+  ATLAS_URI, 
+} = process.env;
 
 exports.GITHUB_CLIENT_ID = GITHUB_CLIENT_ID;
 exports.GITHUB_CLIENT_SECRET = GITHUB_CLIENT_SECRET;
