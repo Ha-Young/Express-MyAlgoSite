@@ -13,14 +13,16 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        const user = await User.findOne({ github_id: profile.id });
+        const { login, email, id } = profile._json;
+        const user = await User.findOne({ github_id: id });
 
         if (user) {
           done(null, profile);
         } else {
           const newUser = new User({
-            username: profile.username,
-            github_id: profile.id,
+            username: login,
+            email,
+            github_id: id
           });
 
           await newUser.save();
@@ -36,9 +38,10 @@ passport.use(
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
-passport.deserializeUser(async (userId, done) => {
+passport.deserializeUser(async (githubId, done) => {
   try {
-    const user = await User.findOne({ github_id: userId });
+    const user = await User.findOne({ github_id: githubId });
+
     done(null, user);
   } catch (err) {
     done(err);
