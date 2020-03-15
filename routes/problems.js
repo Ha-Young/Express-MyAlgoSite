@@ -11,6 +11,7 @@ router.get('/:problem_id', async (req, res, next) => {
   try {
     const problemId = req.params.problem_id;
     const problem = await Problem.find({ id: problemId });
+    console.log(problem);
     res.render('problems', { problem: problem[0] });
   } catch (err) {
     err.status = 500;

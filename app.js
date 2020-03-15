@@ -14,7 +14,12 @@ const logout = require('./routes/logout');
 const index = require('./routes/index');
 const problems = require('./routes/problems');
 
-mongoose.connect(process.env.DB_URL, { useNewUrlParser: true });
+mongoose.connect(process.env.DB_URL, { 
+  useNewUrlParser: true,
+  useFindAndModify: false,
+  useCreateIndex: true,
+  useUnifiedTopology: true
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

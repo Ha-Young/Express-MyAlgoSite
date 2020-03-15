@@ -1,10 +1,9 @@
 const dotenv = require('dotenv');
+dotenv.config();
 const passport = require('passport');
 const GitHubStrategy = require('passport-github').Strategy;
 const init = require('./init');
 const User = require('../models/User');
-
-dotenv.config();
 
 passport.use(
   new GitHubStrategy(
@@ -20,7 +19,7 @@ passport.use(
 
       const updates = {
         name: profile.displayName,
-        someID: profile.id
+        userId: profile.id
       };
 
       const options = {
