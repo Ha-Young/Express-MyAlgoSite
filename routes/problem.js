@@ -4,17 +4,16 @@ const mongoose = require('mongoose');
 const vm = require('vm');
 const router = express.Router();
 
-const middlewares = require('../middleware');
+const pagePermissions = require('../middlewares/pagePermissions');
 const Problem = require('../models/Problem');
-const ERROR_NAME = require('../constants/error');
+const ERROR_NAME = require('../constants/errorName');
 
-router.get('/:problem_id', middlewares.privatePage, async (req, res, next) => {
-  const {
-    params: { problem_id: problemId }
-  } = req;
+router.get('/:problem_id', pagePermissions.privatePage, async (req, res, next) => {
+  const { params: { problem_id: problemId }} = req;
 
   try {
     const problem = await Problem.findOne({ id: problemId });
+
     if (!problem) {
       const error = new Error('페이지를 찾을 수 없습니다.');
       error.status = 404;
@@ -33,7 +32,7 @@ router.get('/:problem_id', middlewares.privatePage, async (req, res, next) => {
   }
 });
 
-router.post('/:problem_id', middlewares.privatePage, async (req, res, next) => {
+router.post('/:problem_id', pagePermissions.privatePage, async (req, res, next) => {
   const {
     params: { problem_id: problemId },
     body: { 'user-solution': userSolutionString }
@@ -41,7 +40,7 @@ router.post('/:problem_id', middlewares.privatePage, async (req, res, next) => {
 
   try {
     if (!userSolutionString) {
-      const error = new Error('정답을 입력해주세요.');
+      const error = new Error('Solution함수를 작성해주세요.');
       error.name = ERROR_NAME.NOT_EXISTED_SOLUTION;
       throw error;
     }

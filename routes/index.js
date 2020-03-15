@@ -2,10 +2,10 @@ const express = require('express');
 const passport = require('passport');
 const router = express.Router();
 
-const middlewares = require('../middleware');
+const pagePermissions = require('../middlewares/pagePermissions');
 const Problem = require('../models/Problem');
 
-router.get('/', middlewares.privatePage, async (req, res, next) => {
+router.get('/', pagePermissions.privatePage, async (req, res, next) => {
   try {
     const problemList = await Problem.find({});
 
@@ -27,11 +27,11 @@ router.get('/', middlewares.privatePage, async (req, res, next) => {
   }
 });
 
-router.get('/login', middlewares.publicPage, (req, res, next) => {
+router.get('/login', pagePermissions.publicPage, (req, res, next) => {
   res.render('login');
 });
 
-router.get('/logout', middlewares.privatePage, (req, res, next) => {
+router.get('/logout', pagePermissions.privatePage, (req, res, next) => {
   req.logout();
   res.redirect('/');
 });
