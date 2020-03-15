@@ -1,5 +1,6 @@
 const createError = require('http-errors');
 const _ = require('lodash');
+const User = require('../../models/User');
 const Problem = require('../../models/Problem');
 const util = require('./util');
 
@@ -8,7 +9,9 @@ exports.getAll = async (req, res, next) => {
     const problems = await Problem.find().sort({ difficultyLevel: 1 });
     if (!problems) return next(createError(404, 'Problem Not Found'));
 
-    res.render('index', { user: [req.user], problems });
+    const userInfo = await User.findById({ _id: req.user._id }).populate('solved');
+    const processedInfo = util.getUserinfo(userInfo);
+    res.render('index', { processedInfo, problems });
   } catch (err) {
     next(err);
   }
@@ -20,7 +23,9 @@ exports.getSelectedProblem = async (req, res, next) => {
     const problem = await Problem.findById({ _id: problemId });
     if (!problem) return next(createError(404, 'Problem Not Found'));
 
-    res.render('problem', { user: [req.user], problem: [problem] });
+    const userInfo = await User.findById({ _id: req.user._id }).populate('solved');
+    const processedInfo = util.getUserinfo(userInfo);
+    res.render('problem', { processedInfo, problem: [problem] });
   } catch (err) {
     next(err);
   }
@@ -42,13 +47,8 @@ exports.solvedSelectedProblem = async (req, res, next) => {
       } else {
         const isSolvedUser = req.user.solved.some((test) => test.toString() === problemId);
         if (!isSolvedUser) {
-          const { _id, solvedAllCount, solvedLevelOne, solvedLevelTwo, solvedLevelThree } = req.user;
-          const problemLevel = problem.difficultyLevel;
-
           await util.updateProblemRecords(problemId, problem.completedUsers);
-          const updatedUser = await util.updateUserRecords(_id, problemLevel, solvedAllCount, solvedLevelOne, solvedLevelTwo, solvedLevelThree);
-          updatedUser.solved.push(problemId);
-          await updatedUser.save();
+          await util.updateUserRecords(req.user._id, problemId);
         }
         res.render('success', { message: 'Success :)', results });
       }

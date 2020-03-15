@@ -21,10 +21,6 @@ const userSchema = new mongoose.Schema({
     unique: true
   },
   imageUrl: String,
-  solvedAllCount: { type: Number },
-  solvedLevelOne: { type: Number },
-  solvedLevelTwo: { type: Number },
-  solvedLevelThree: { type: Number },
   solved: [
     {
       type: mongoose.ObjectId,

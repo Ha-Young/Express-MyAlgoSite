@@ -2,6 +2,29 @@ const vm = require('vm');
 const User = require('../../models/User');
 const Problem = require('../../models/Problem');
 
+exports.getUserinfo = (userInfo) => {
+  const result = {
+    name: userInfo.name,
+    imageUrl: userInfo.imageUrl,
+    githubUrl: userInfo.githubUrl,
+    solvedLevelOne: 0,
+    solvedLevelTwo: 0,
+    solvedLevelThree: 0,
+  };
+
+  userInfo.solved.forEach((problem) => {
+    if (problem.difficultyLevel === 1) {
+      result.solvedLevelOne++;
+    } else if (problem.difficultyLevel === 2) {
+      result.solvedLevelTwo++;
+    } else if (problem.difficultyLevel === 3) {
+      result.solvedLevelThree++;
+    }
+  });
+
+  return result;
+}
+
 exports.excuteCode = (tests, inputedSolution) => {
   const results = [];
   tests.forEach(test => {
@@ -17,20 +40,11 @@ exports.excuteCode = (tests, inputedSolution) => {
   return results;
 }
 
-exports.updateUserRecords = async (userId, solvedLevel, totalCount, lvOneCount, lvTwoCount, lvThreeCount) => {
-  const solvedAllCount = totalCount + 1;
+exports.updateUserRecords = async (userId, problemId) => {
   const loginedUser = { _id: userId };
-  const updateRecords = { solvedAllCount };
-  const options = { new: true };
-  if (solvedLevel === 1) {
-    updateRecords.solvedLevelOne = lvOneCount + 1;
-  } else if (solvedLevel === 2) {
-    updateRecords.solvedLevelTwo = lvTwoCount + 1;
-  } else if (solvedLevel === 3) {
-    updateRecords.solvedLevelThree = lvThreeCount + 1;
-  }
-  const user = await User.findOneAndUpdate(loginedUser, updateRecords, options);
-  return user;
+  const user = await User.findById(loginedUser);
+  user.solved.push(problemId);
+  await user.save();
 }
 
 exports.updateProblemRecords = async (problemId, beforeRecords) => {
