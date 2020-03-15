@@ -24,7 +24,6 @@ router.get('/', isAuthenticated, async (req, res, next) => {
       problems
     });
   } catch (err) {
-    // console.error(err);
     next(err);
   }
 });

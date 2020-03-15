@@ -48,7 +48,7 @@ router.post('/:problem_id', async (req, res, next) => {
         return
       }
     });
-    
+
     if (wrongProblem.length) {
       res.locals.wrongProblem = wrongProblem;
       res.render('failure', {
@@ -60,6 +60,8 @@ router.post('/:problem_id', async (req, res, next) => {
       res.render('success', { user: req.user.username });
     }
   } catch (err) {
+    err.status = 500;
+    err.message = 'Internal Server Error';
     next(err);
   }
 });
