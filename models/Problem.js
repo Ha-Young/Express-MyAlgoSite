@@ -23,8 +23,7 @@ const ProblemSchema = new mongoose.Schema({
     required: true
   },
   params: {
-    type: Array,
-    default: []
+    type: [ String ]
   },
   tests: [{
     type: mongoose.Types.ObjectId,
