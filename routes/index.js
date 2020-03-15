@@ -12,8 +12,6 @@ const isAuthenticated = function (req, res, next) {
 };
 
 router.get('/', isAuthenticated, async (req, res, next) => {
-  const problemsParse = JSON.parse(JSON.stringify(problems));
-
   try {
     const problemsInDataBase = await Problem.find();
 
@@ -23,10 +21,11 @@ router.get('/', isAuthenticated, async (req, res, next) => {
 
     res.render('index', {
       user: req.user.username,
-      problems: problemsParse
+      problems
     });
   } catch (err) {
-    console.error(err);
+    // console.error(err);
+    next(err);
   }
 });
 

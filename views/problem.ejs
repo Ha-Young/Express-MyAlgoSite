@@ -7,7 +7,6 @@
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/codemirror.min.css'>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/mode/javascript/javascript.min.js'></script>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.0/theme/material.min.css'>
-
 </head>
 
 <body>
@@ -31,8 +30,8 @@
       </li>
     </ul>
 
-    <form action='<%= problem.id %>' method='POST'>
-      <textarea id='codeEditor' name='problem_solution'></textarea>
+    <form action=<%= `/problems/${problem.id}` %> method='POST'>
+      <textarea id='codeEditor' name='problem_solution'><%= problem.defaultFn %></textarea>
       <button type='submit'>제출</button>
     </form>
   </div>

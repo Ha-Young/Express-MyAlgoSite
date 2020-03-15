@@ -9,6 +9,7 @@ const keys = require('./config/keys');
 const index = require('./routes/index');
 const auth = require('./routes/auth');
 const problems = require('./routes/problems');
+const error = require('./routes/error');
 require('./config/passport-setup');
 
 mongoose.connect('mongodb://localhost/codewars', { useNewUrlParser: true }, err => {
@@ -37,6 +38,7 @@ app.use(passport.session());
 app.use('/', index);
 app.use('/auth', auth);
 app.use('/problems', problems);
+app.use('/error', error );
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -47,7 +49,7 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
+  // set locals, only providing error in development`
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 

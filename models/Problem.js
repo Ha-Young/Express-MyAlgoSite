@@ -5,15 +5,48 @@ const mongoose = require('mongoose');
   TODO: Fill in the model specification
 
  */
-//FIXME: 전체적으로 타입 추가, tests 타입 수정
 const ProblemSchema = new mongoose.Schema({
-  id: { type: Number },
-  title: { type: String },
-  defaultFn: { type: String },
-  completed_users: { type: Number },
-  difficulty_level: { type: Number },
-  description: { type: String },
-  tests: []
+  id: {
+    type: Number,
+    unique: true,
+    index: true,
+    required: true,
+  },
+  title: {
+    type: String,
+    unique: true,
+    index: true,
+    required: true
+  },
+  defaultFn: {
+    type: String,
+    required: true
+  },
+  completed_users: {
+    type: Number,
+    required: true
+  },
+  difficulty_level: {
+    type: Number,
+    required: true,
+    enum: [1, 2, 3, 4]
+  },
+  description: {
+    type: String,
+    required: true
+  },
+  tests: [
+    {
+      code: {
+        type: String,
+        required: true
+      },
+      solution: {
+        type: mongoose.Schema.Types.Mixed,
+        required: true
+      }
+    }
+  ]
 });
 
 module.exports = mongoose.model('Problem', ProblemSchema);

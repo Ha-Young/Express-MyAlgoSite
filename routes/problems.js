@@ -17,46 +17,50 @@ router.get('/:problem_id', async (req, res) => {
 });
 
 router.post('/:problem_id', async (req, res, next) => {
-  const problemId = req.params.problem_id;
-  const problem = await Problem.findOne({ id: problemId });
-  const wrongProblem = [];
-  const solution = req.body.problem_solution;
-  console.log(solution)
-  const context = { solution };
-  vm.createContext(context);
-
   try {
-    problem.tests.forEach((testCode, index) => {
-      const script = new vm.Script(`${solution} ${testCode.code}`);
-      const clientResult = script.runInContext(context);
-      const result = testCode.solution;
+    const problemId = req.params.problem_id;
+    const problem = await Problem.findOne({ id: problemId });
+    const wrongProblem = [];
+    const solution = req.body.problem_solution;
+    const context = { solution };
+    vm.createContext(context);
 
-      if (result !== clientResult) {
-        wrongProblem.push({
-          testNo: index + 1,
-          clientResult,
-          result,
+    problem.tests.forEach((testCode, index) => {
+      try {
+        const script = new vm.Script(`${solution} ${testCode.code}`);
+        const result = testCode.solution;
+        const clientResult = script.runInContext(context);
+
+        if (result !== clientResult) {
+          wrongProblem.push({
+            testNo: index + 1,
+            result,
+            clientResult,
+          });
+        }
+      } catch (err) {
+        res.render('failure', {
+          user: req.user.username,
+          wrongProblem: null,
+          error: err,
+          problemId: req.params.problem_id
         });
+        return
       }
     });
+    
+    if (wrongProblem.length) {
+      res.locals.wrongProblem = wrongProblem;
+      res.render('failure', {
+        user: req.user.username,
+        wrongProblem,
+        problemId
+      });
+    } else {
+      res.render('success', { user: req.user.username });
+    }
   } catch (err) {
-    res.render('failure', {
-      user: req.user.username,
-      wrongProblem: null,
-      error: err,
-      problemId: req.params.problem_id
-    });
-  }
-
-  if (wrongProblem.length) {
-    res.locals.wrongProblem = wrongProblem;
-    res.render('failure', {
-      user: req.user.username,
-      wrongProblem,
-      problemId
-    });
-  } else {
-    res.render('success', { user: req.user.username });
+    next(err);
   }
 });
 
