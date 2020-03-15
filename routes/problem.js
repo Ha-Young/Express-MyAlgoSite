@@ -65,40 +65,8 @@ router.post('/:problem_id', pagePermissions.privatePage, async (req, res, next) 
           break;
         }
       } catch (failure) {
-        console.log(failure);
-        switch (failure.name) {
-          case 'EvalError':
-            res.render('failure', { failure, problemId });
-            break;
-
-          case 'InternalError':
-            res.render('failure', { failure, problemId });
-            break;
-
-          case 'RangeError':
-            res.render('failure', { failure, problemId });
-            break;
-
-          case 'ReferenceError':
-            res.render('failure', { failure, problemId });
-            break;
-
-          case 'SyntaxError':
-            res.render('failure', { failure, problemId });
-            break;
-
-          case 'TypeError':
-            res.render('failure', { failure, problemId });
-            break;
-
-          case 'URIError':
-            res.render('failure', { failure, problemId });
-            break;
-
-          default:
-            failure.message = '알 수 없는 오류가 발생했습니다.';
-            res.render('failure', { failure, problemId });
-        }
+        failure.message = failure.message ? failure.message : '알 수 없는 오류가 발생했습니다. 다시 시도해주세요.';
+        res.render('failure', { failure, problemId });
         return;
       }
     }
