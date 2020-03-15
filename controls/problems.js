@@ -58,7 +58,7 @@ const postAddCase = async (req, res, next) => {
 
     if (err instanceof mongoose.Error.ValidationError) {
       return next(
-        new errors.ValidationError(err.message, err.errors.owner.path)
+        new errors.ValidationError(err.message)
       );
     }
 
