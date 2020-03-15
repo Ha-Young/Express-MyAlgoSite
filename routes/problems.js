@@ -27,7 +27,7 @@ router.get('/:id', checkUser, async (req, res, next) => {
 
 router.post('/:id', checkUser, async (req, res, next) => {
   const {
-    body: { solution: receivedSolution },
+    body: { solution: userSolution },
     params: { id },
   } = req;
   const failureTests = [];
@@ -37,7 +37,7 @@ router.post('/:id', checkUser, async (req, res, next) => {
 
   try {
     tests.forEach(test => {
-      const code = `${receivedSolution} ${test.code}`;
+      const code = `${userSolution} ${test.code}`;
       const result = vm.run(code);
       
       if (!_.isEqual(result, test.solution)) failureTests.push([test.code, test.solution, result]);

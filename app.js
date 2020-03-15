@@ -8,7 +8,6 @@ const problems = require('./routes/problems');
 const path = require('path');
 const passport = require('passport');
 const bodyParser = require('body-parser');
-const createError = require('http-errors')
 const error = require('./lib/error');
 const mongoose = require('mongoose');
 const db = mongoose.connection;
