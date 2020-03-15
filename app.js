@@ -1,7 +1,8 @@
+const dotenv = require('dotenv');
+dotenv.config();
 const express = require('express');
 const app = express();
 const path = require('path');
-const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
@@ -12,8 +13,6 @@ const login = require('./routes/login');
 const logout = require('./routes/logout');
 const index = require('./routes/index');
 const problems = require('./routes/problems');
-
-dotenv.config();
 
 mongoose.connect(process.env.DB_URL, { useNewUrlParser: true });
 
