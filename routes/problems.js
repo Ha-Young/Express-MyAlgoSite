@@ -1,12 +1,12 @@
 const express = require('express');
 
-const { isAuthenticated } = require('../routes/middlewares/authorization');
-const { findProblemById, setSolutionResult } = require('../routes/middlewares/utils');
+const { isAuthenticated } = require('../middlewares/authorization');
+const { findProblemById, setSolutionResult } = require('../middlewares/utils');
 
 const router = express.Router();
 
 router.get('/:problem_id', isAuthenticated, findProblemById, async (req, res, next) => {
-  const problem = res.locals.problem;
+  const { problem } = res.locals;
 
   res.render('problem', {
     problem,
@@ -15,9 +15,7 @@ router.get('/:problem_id', isAuthenticated, findProblemById, async (req, res, ne
 });
 
 router.post('/:problem_id', isAuthenticated, findProblemById, setSolutionResult, async (req, res, next) => {
-  const problem = res.locals.problem;
-  const result = res.locals.result;
-  const error = res.locals.error;
+  const { problem, result, error } = res.locals;
 
   res.render(result ? 'success' : 'failure', {
     error,

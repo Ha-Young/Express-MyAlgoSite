@@ -27,13 +27,13 @@ passport.use(new GitHubStrategy({
   callbackURL: process.env.GITHUB_CALLBACK_URL
   },
   async function(accessToken, refreshToken, profile, cb) {
-    const user = await User.findById(profile.id);
+    const user = await User.findOne({ githubId: profile.id });
     if (user) {
       cb(null, user);
     } else {
       const newUser = new User({
         ...profile,
-        _id: profile.id,
+        githubId: profile.id,
         avatar_url: profile.photos[0].value
       });
       await newUser.save();

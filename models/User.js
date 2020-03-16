@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 
  */
 const UserSchema = new mongoose.Schema({
-  _id: {
+  githubId: {
     type: String,
     unique: true
   },

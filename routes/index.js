@@ -2,16 +2,15 @@ const express = require('express');
 
 const router = express.Router();
 
-const { findUser, findProblems } = require('../routes/middlewares/utils');
-const { isAuthenticated } = require('../routes/middlewares/authorization');
+const { findUser, findProblems } = require('../middlewares/utils');
+const { isAuthenticated } = require('../middlewares/authorization');
 
 router.get('/', (req, res) => {
     res.redirect('/home');
 });
 
 router.get('/home', findProblems, findUser, async (req, res, next) => {
-  const problems = res.locals.problems;
-  const user = res.locals.user;
+  const { problems, user } = res.locals;
 
   res.render('index', { 
     user,
@@ -33,8 +32,7 @@ router.get('/logout', isAuthenticated, (req, res) => {
 });
 
 router.get('/:level', findProblems, findUser, async (req, res, next) => {
-  const problems = res.locals.problems;
-  const user = res.locals.user;
+  const { problems, user } = res.locals;
   
   res.render('index', {
     user,

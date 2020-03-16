@@ -1,7 +1,7 @@
 const { VM } = require('vm2');
 
-const User = require('../../models/User');
-const Problem = require('../../models/Problem');
+const User = require('../models/User');
+const Problem = require('../models/Problem');
 
 const findUser = async (req, res, next) => {
   if (req.isAuthenticated()) {
@@ -78,21 +78,21 @@ const findProblemById = async (req, res, next) => {
 
 const setSolutionResult = async (req, res, next) => {
   try {
-    const problem = res.locals.problem;
+    const { problem } = res.locals;
     const vm = new VM({
       timeout: 1000,
       sandbox: {}
     });
 
-    let result = true;
+    const results = [];
 
     vm.run(`const solution = ${req.body.code}`);
 
     problem.tests.forEach(test => {
       const answer = vm.run(test.code);
-      result = result && (answer === test.solution);
+      results.push(answer === test.solution);
     });
-    res.locals.result = result;
+    res.locals.result = results.every(result => result);
     next();
   } catch (error) {
     res.locals.result = false;
