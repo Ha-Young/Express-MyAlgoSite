@@ -1,3 +1,13 @@
-<h1>Problem</h1>
-<h3><%= params %><h3>
-<p>여기는 문제 상세 페이지</p>
+<%- include('./partials/header'); %>
+<div>
+  <form action="<%= params %>" method="post">
+    <div class="problem-description">
+      <h2>Problem Title</h2>
+      <p>Descrition</p>
+    </div>
+    <textarea id="edit-area" class="problem-soultion">function solution() {}</textarea>
+    <textarea id="test-cases" class="problem-test-cases"></textarea>
+    <input type="submit" value="submit">
+  </form>
+</div>
+<%- include('./partials/footer'); %>

@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('./db');
 require('./passport');
 
 const express = require('express');
@@ -6,6 +7,7 @@ const session = require('express-session');
 const path = require('path');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const expressLayouts = require('express-ejs-layouts');
 
 const index = require('./routes/index');
 const login = require('./routes/login');
@@ -13,8 +15,9 @@ const problems = require('./routes/problems');
 
 const app = express();
 
-app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+app.set('layout', path.join(__dirname, 'views/layout/layout'));
 
 app.use(session({
   secret: process.env.SESSION_SECRET,
@@ -22,6 +25,7 @@ app.use(session({
   saveUninitialized: true,
 }))
 
+app.use(expressLayouts);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

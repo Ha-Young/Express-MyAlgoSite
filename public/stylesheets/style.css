@@ -6,3 +6,26 @@ body {
 a {
   color: #00B7FF;
 }
+
+.problems {
+  display: flex;
+}
+
+.card {
+  background: aquamarine;
+  width: 200px;
+  height: 140px;
+  margin: 10px;
+}
+
+/* .problem-soultion {
+  border: 1px solid black;
+}
+
+.problem-test-cases {
+  border: 1px solid black;
+} */
+
+.CodeMirror.cm-s-default {
+  border: 1px solid gray;
+}
