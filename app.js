@@ -1,14 +1,27 @@
+const dotenv = require('dotenv');
+dotenv.config();
 const express = require('express');
-
+const bodyParser = require('body-parser');
+const passport = require('passport');
+const setPassport = require('./utils/auth');
 const index = require('./routes/index');
+const auth = require('./routes/auth');
 
 const app = express();
 
+app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
-
 app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: true }));
+
+setPassport();
+// Initialize Passport and restore authentication state, if any, from the
+// session.
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', index);
+app.use('/auth', auth);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

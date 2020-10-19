@@ -9,15 +9,21 @@
 <body>
   <section class="login-container">
     <h1>Login to Codewars!</h1>
-    <form action="">
+    <form action="/auth/login" method="post">
       <label for="">아이디</label>
-      <input type="text" placeholder="ID">
+      <input type="text" name="id" placeholder="ID">
       <br>
       <label for="">비밀번호</label>
-      <input type="text" placeholder="PASSWORD">
+      <input type="text" name="password" placeholder="PASSWORD">
 
       <input type="submit" value="로그인">
     </form>
   </section>
+  <script>
+    const handleSubmit = (e) => {
+      console.log('submitted!');
+      e.preventDefault();
+    }
+  </script>
 </body>
 </html>
