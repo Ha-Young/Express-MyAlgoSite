@@ -1,3 +1,4 @@
+require('./passport');
 const express = require('express');
 const login = require('./routes/login');
 const index = require('./routes/index');
@@ -6,6 +7,7 @@ const app = express();
 
 app.use('/', index);
 app.use('/login', login);
+
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 // catch 404 and forward to error handler
