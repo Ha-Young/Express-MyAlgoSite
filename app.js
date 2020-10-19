@@ -1,8 +1,14 @@
 const express = require('express');
+const path = require('path');
 
 const index = require('./routes/index');
 
 const app = express();
+
+app.set('views', './views');
+app.set('view engine', 'ejs');
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 
@@ -25,3 +31,7 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+app.listen(5000, function () {
+  console.log('started server');
+});
