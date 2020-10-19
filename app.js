@@ -1,6 +1,8 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const index = require('./routes/index');
+const auth = require('./routes/auth');
 
 const app = express();
 
@@ -8,7 +10,10 @@ app.set('view engine', 'ejs');
 
 app.use(express.static('public'));
 
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use('/', index);
+app.use('/auth', auth);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

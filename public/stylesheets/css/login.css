@@ -45,3 +45,7 @@ body {
 .login-container form input {
   margin-bottom: 8px;
 }
+
+.login-container form input[type='text'] {
+  border: 2px solid black;
+}
