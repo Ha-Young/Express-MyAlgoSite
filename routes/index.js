@@ -1,9 +1,10 @@
+/* eslint-disable no-unused-vars */
 const express = require('express');
 const router = express.Router();
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  res.render('index', { title: '바닐라코딩' });
+  res.render('index', { title: 'home' });
 });
 
 module.exports = router;

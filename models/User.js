@@ -6,7 +6,10 @@ const mongoose = require('mongoose');
 
  */
 const userSchema = new mongoose.Schema({
-
+  // id
+  // nickname
+  // name
+  //
 });
 
 module.exports = mongoose.model('User', userSchema);
