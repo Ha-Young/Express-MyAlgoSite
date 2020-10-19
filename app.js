@@ -1,3 +1,6 @@
+require('dotenv').config();
+require('./db');
+
 const express = require('express');
 
 const index = require('./routes/index');
@@ -5,6 +8,8 @@ const index = require('./routes/index');
 const app = express();
 
 app.use('/', index);
+app.set('view engine', 'ejs');
+app.set('views', './views');
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
