@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Error</title>
+    <title>Problem</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
     <%- include('partials/header') %>
 
-    <h1>Error</h1>
-    <h2><%= message %></h2>
-    <h3><%= error.status %></h3>
-    <pre><%= error.stack %></pre>
+    <h1>Problem</h1>
+    <h2><%= problem_id %></h2>
 
     <%- include('partials/footer') %>
   </body>

@@ -7,7 +7,8 @@ const morgan = require('morgan');
 
 require('./db');
 
-const index = require('./routes/index');
+const globalRouter = require('./routes/global');
+const problemsRouter = require('./routes/problems');
 
 const app = express();
 
@@ -20,7 +21,8 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 
-app.use('/', index);
+app.use('/problems', problemsRouter);
+app.use('/', globalRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

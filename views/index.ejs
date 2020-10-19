@@ -1,18 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Codewars</title>
+    <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1>Codewars</h1>
-    <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
+    <%- include('partials/header') %>
 
-    <ul class="tabs">
-      <li>Level 1</li>
-      <li>Level 2</li>
-      <li>Level 3</li>
-    </ul>
+    <h1>CODEWARS</h1>
+    <p>Welcome to <%= title %></p>
 
     <ul class="problems">
       <li>
@@ -36,5 +32,7 @@
         <div>난이도: Level 3</div>
       </li>
     </ul>
+
+    <%- include('partials/footer') %>
   </body>
 </html>
