@@ -1,9 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-/* GET home page. */
-router.get('/', (req, res, next) => {
-  res.render('index', { title: '바닐라코딩' });
-});
+const home = require('./home');
+const login = require('./login');
+const auth = require('./auth');
+
+router.use('/', home);
+router.use('/login', login);
+router.use('/auth', auth);
 
 module.exports = router;
