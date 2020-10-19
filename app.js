@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const path = require('path');
 
@@ -31,7 +33,3 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-
-app.listen(5000, function () {
-  console.log('started server');
-});
