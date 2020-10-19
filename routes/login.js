@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-/* GET home page. */
-// VerifyLogin middleware 추가 예정
+// VerifyLogin middleware 추가 없음 - login, logout 모두 접속 가능
 router.get('/', (req, res, next) => {
-  res.render('index', { title: '바닐라코딩' });
+  res.send('login page');
 });
 
 module.exports = router;
