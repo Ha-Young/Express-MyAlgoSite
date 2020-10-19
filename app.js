@@ -8,6 +8,10 @@ const app = express();
 app.use('/', index);
 app.use('/login', login);
 
+app.use(express.static('public'));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
+
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 // catch 404 and forward to error handler
