@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const expressLayouts = require('express-ejs-layouts');
 
 require('./db');
 
@@ -11,6 +12,8 @@ const globalRouter = require('./routes/global');
 const problemsRouter = require('./routes/problems');
 
 const app = express();
+
+app.use(expressLayouts);
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
