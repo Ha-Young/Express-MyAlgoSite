@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
+const passportLocalMongoose = require('passport-local-mongoose');
+// const bcrypt = require('bcrypt');
+// const saltRounds = 10;
 
 const UserSchema = new mongoose.Schema({
   username: {
@@ -20,16 +21,18 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
-UserSchema.pre('save', async function (next) {
-  const user = this;
+UserSchema.plugin(passportLocalMongoose, { usernameField: 'email' });
 
-  try {
-    const encryptedPassword = await bcrypt.hash(user.password, saltRounds);
-    user.password = encryptedPassword;
-    next();
-  } catch (err) {
-    next(err);
-  }
-});
+// UserSchema.pre('save', async function (next) {
+//   const user = this;
+
+//   try {
+//     const encryptedPassword = await bcrypt.hash(user.password, saltRounds);
+//     user.password = encryptedPassword;
+//     next();
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
 module.exports = mongoose.model('User', UserSchema);

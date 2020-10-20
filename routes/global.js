@@ -1,16 +1,19 @@
 const express = require('express');
 const router = express.Router();
 
-const globalController = require('../controllers/global');
+const userController = require('../controllers/user');
+const requiresLogin = require('../middlewares/requiresLogin');
 
-router.get('/', globalController.getHome);
+router.get('/', (req, res, next) => {
+  res.render('index', { title: 'MAIN' });
+});
 
-router.get('/join', globalController.getJoin);
-router.post('/join', globalController.postJoin);
+router.get('/join', userController.getJoin);
+router.post('/join', userController.postJoin, userController.postLogin);
 
-router.get('/login', globalController.getLogin);
-router.post('/login', globalController.postLogin);
+router.get('/login', userController.getLogin);
+router.post('/login', userController.postLogin);
 
-router.get('/logout', globalController.getLogout);
+router.get('/logout', requiresLogin, userController.getLogout);
 
 module.exports = router;
