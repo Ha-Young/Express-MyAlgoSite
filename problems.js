@@ -6,7 +6,7 @@ const Problem = require('./models/Problem');
 
 const problems = [
   {
-    "id": 1,
+    "problemNumber": 1,
     "title": "피보나치 수열",
     "completed_users": 15,
     "difficulty_level": 1,
@@ -27,7 +27,7 @@ const problems = [
     ]
   },
   {
-    "id": 2,
+    "problemNumber": 2,
     "title": "서울에서 김서방 찾기",
     "completed_users": 11,
     "difficulty_level": 2,
@@ -44,7 +44,7 @@ const problems = [
     ]
   },
   {
-    "id": 3,
+    "problemNumber": 3,
     "title": "수박수박수박수박수",
     "completed_users": 12,
     "difficulty_level": 2,
@@ -61,7 +61,7 @@ const problems = [
     ]
   },
   {
-    "id": 4,
+    "problemNumber": 4,
     "title": "하샤드 수",
     "completed_users": 10,
     "solution_count": 5,

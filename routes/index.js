@@ -10,16 +10,7 @@ router.get('/', async (req, res, next) => {
     return;
   }
 
-
-  console.log(req.user);
-  // if (!user) {
-  //   res.redirect('/login');
-
-  //   return;
-  // }
-
   const problems = await problemsController.getAll();
-  // console.log(problems);
 
   res.render('index', { problems });
 });

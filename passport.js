@@ -8,7 +8,7 @@ passport.use(new GitHubStrategy({
   callbackURL: process.env.CALLBACK_URL,
 },
   function(accessToken, refreshToken, profile, done) {
-    console.log(profile);
+    // console.log(profile);
     User.findOne({ githubId: profile.id }, function(err, user) {
       return done(err, profile);
     });

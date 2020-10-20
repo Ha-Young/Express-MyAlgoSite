@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const ProblemSchema = new mongoose.Schema({
-  id: {
+  problemNumber: {
     type: Number,
     unique: true,
     required: true,

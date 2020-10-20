@@ -7,21 +7,15 @@
   <body>
     <h1>Codewars</h1>
     <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
-    <%= problems %>
-
     <ul class="problems">
-      <li>
-        <a href='/problems/1'>1</div>
-      </li>
-      <li>
-        <a href='/problems/2'>2</div>
-      </li>
-      <li>
-        <a href='/problems/3'>3</div>
-      </li>
-      <li>
-        <a href='/problems/4'>4</div>
-      </li>
+      <% problems.forEach(problem => { %>
+        <li>
+          <a href='/problems/<%= problem.problemNumber %>'><%= problem.title %></a></br>
+          <%= problem.description %></br>
+          난이도: <%= problem.difficulty_level %></br>
+          맞힌 사람 수: <%= problem.completed_users %>
+        </li>
+      <% }) %>
     </ul>
   </body>
 </html>
