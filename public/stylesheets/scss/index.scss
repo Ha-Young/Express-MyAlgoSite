@@ -1,0 +1,38 @@
+@import 'base';
+
+body {
+  background-color: pink;
+}
+
+.container {
+  width: 40%;
+  margin: 0 auto;
+
+  .tabs {
+    display: flex;
+    justify-content: space-between;
+
+    li {
+      background-color: #fff;
+      padding: 5px;
+      border-radius: 3px;
+    }
+  }
+
+  .problem {
+    background-color: #fff;
+    margin: 1em auto;
+    padding: 1em;
+    border-radius: 10px;
+
+    h3 {
+      margin-top: 0;
+    }
+
+    &:hover {
+      color: grey;
+      transition: 0.2s color;
+      cursor: pointer
+    }
+  }
+}

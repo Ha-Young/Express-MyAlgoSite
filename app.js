@@ -1,13 +1,22 @@
 const dotenv = require('dotenv');
 dotenv.config();
 const express = require('express');
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const setPassport = require('./utils/auth');
 const index = require('./routes/index');
 const auth = require('./routes/auth');
+const problems = require('./routes/problems');
 
 const app = express();
+
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}, () => {
+  console.log('mongod connected!')
+});
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
@@ -22,6 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', index);
 app.use('/auth', auth);
+app.use('/problems', problems);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

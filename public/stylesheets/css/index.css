@@ -1,0 +1,66 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+h1 {
+  font-size: 3em;
+  margin-bottom: 0;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+body {
+  background-color: pink;
+}
+
+.container {
+  width: 40%;
+  margin: 0 auto;
+}
+
+.container .tabs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.container .tabs li {
+  background-color: #fff;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.container .problem {
+  background-color: #fff;
+  margin: 1em auto;
+  padding: 1em;
+  border-radius: 10px;
+}
+
+.container .problem h3 {
+  margin-top: 0;
+}
+
+.container .problem:hover {
+  color: grey;
+  -webkit-transition: 0.2s color;
+  transition: 0.2s color;
+  cursor: pointer;
+}

@@ -1,7 +1,8 @@
 html, body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 h1 {
@@ -20,4 +21,8 @@ li {
 a {
   color: black;
   text-decoration: none;
+}
+
+body {
+  background-color: skyblue;
 }
