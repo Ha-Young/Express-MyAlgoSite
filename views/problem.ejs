@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <%- include('partials/head') %>
-
 <body>
   <div class="main-container">
     <%- include('./partials/header') %>
@@ -10,17 +9,28 @@
       <h3><%= problem.description %></h3>
       <p>난이도 : <%= problem.dificulty_level %></p>
       <p>정답자 수 : <%= problem.completed_users %></p>
-
       <div>
         <form>
           <div>solution:</div>
-          <textarea></textarea>
+          <textarea id="code-editor"></textarea>
           <div>TEST</div>
-          <button type="submit" class="submit">SUBMIT</button>
+          <button type="submit" class="submit-button">SUBMIT</button>
         </form>
       </div>
     </div>
   </div>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/theme/seti.min.css">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/mode/javascript/javascript.min.js"></script>
+  <script>
+    const textarea = document.getElementById('code-editor');
+    const editor = CodeMirror.fromTextArea(textarea, {
+      lineNumbers: true,
+      theme: 'seti',
+      mode: 'javascript',
+    });
+  </script>
 </body>
 
 </html>
