@@ -1,1 +1,20 @@
-<h1>JOIN</h1>
+<form class="join-form" action="/join" method="POST">
+    <div class="form-control">
+      <label for="username">Username</label>
+      <input type="text" name="username" id="username" required>
+    </div>
+    <div class="form-control">
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" required>
+    </div>
+    <div class="form-control">
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" required>
+    </div>
+    <div class="form-control">
+      <label for="confirmPassword">Confirm PW</label>
+      <input type="password" name="confirmPassword" id="confirmPassword" required>
+    </div>
+    <button class="submit-button" type="submit">Join</button>
+</form>
+<%- include('partials/auth-error') %>
