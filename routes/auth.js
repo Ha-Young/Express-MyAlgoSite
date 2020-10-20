@@ -8,7 +8,7 @@ router.get('/login', (req, res, next) => {
 
 router.get(
   '/login/github',
-  passport.authenticate('github')
+  passport.authenticate('github', { failureRedirect: '/auth/login' })
 );
 
 module.exports = router;
