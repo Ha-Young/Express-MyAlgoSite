@@ -15,10 +15,8 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 setPassport();
-// Initialize Passport and restore authentication state, if any, from the
-// session.
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.initialize()); // initialize
+app.use(passport.session()); // 만약 있다면 세션으로부터 auth restore
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
