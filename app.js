@@ -6,17 +6,18 @@ const login = require('./routes/login');
 const index = require('./routes/index');
 const problems = require('./routes/problems');
 const bodyParser = require('body-parser');
+const path = require('path');
 const app = express();
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('./models/User');
 const Problem = require('./models/Problem');
-const CodeMirror = require('./node_modules/codemirror/')
-require("codemirror/mode/javascript/javascript");
-require("codemirror/addon/edit/closebrackets");
-var codeMirror = require("codemirror");
-var editor = codeMirror.fromTextArea(document.getElementById("codeMirror"), {
-  mode: "javascript"
-});
+// const CodeMirror = require('./node_modules/codemirror/')
+// require("codemirror/mode/javascript/javascript");
+// require("codemirror/addon/edit/closebrackets");
+// var codeMirror = require("codemirror");
+// var editor = codeMirror.fromTextArea(document.getElementById("codeMirror"), {
+//   mode: "javascript"
+// });
 
 require('dotenv').config();
 
@@ -69,12 +70,13 @@ passport.deserializeUser(async (user, done) => {
   }
 });
 
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
+
 
 app.use(session({
   secret: 'keyboard cat',
@@ -121,7 +123,7 @@ async function save() {
   }
 
 }
-const cm = new CodeMirror.fromTextArea(document.findElementById('editor'));
+// const cm = new CodeMirror.fromTextArea(document.findElementById('editor'));
 
 // const Problem = require('../../models/Problem');
 
