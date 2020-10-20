@@ -1,13 +1,27 @@
 const express = require('express');
 const router = express.Router();
+const problemsController = require('./controllers/problems.controller');
 
 /* GET home page. */
-router.get('/', (req, res, next) => {
-  res.render('index', { title: '바닐라코딩' });
-});
+router.get('/', async (req, res, next) => {
+  if (!req.user) {
+    res.redirect('/login');
 
-router.post('/sign-up', (req, res, next) => {
-  req.body.name;
+    return;
+  }
+
+
+  console.log(req.user);
+  // if (!user) {
+  //   res.redirect('/login');
+
+  //   return;
+  // }
+
+  const problems = await problemsController.getAll();
+  // console.log(problems);
+
+  res.render('index', { problems });
 });
 
 module.exports = router;

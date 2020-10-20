@@ -10,18 +10,14 @@ const User = require('../../models/User');
 // };
 
 exports.create = async function(req, res, next) {
-  if (
-    !req.body.email
-    || req.body.username
-    || req.body.password
-  ) {
-    return;
+  if (!req.body.email || !req.body.password) {
     // next(someCustomError);
+
+    return;
   }
 
   const userDate = {
     email: req.body.email,
-    username: req.body.username,
     password: req.body.password,
   };
 
