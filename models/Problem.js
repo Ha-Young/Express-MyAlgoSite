@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
 const ProblemSchema = new mongoose.Schema({
-  id: mongoose.Type.ObjectId,
   title: {
     type: String,
     required: true,
   },
   completed_users: {
     type: Number,
+    required: true,
   },
   difficulty_level: {
     type: Number,
@@ -24,7 +24,7 @@ const ProblemSchema = new mongoose.Schema({
         required: true,
       },
       solution: {
-        type: Number,
+        type: mongoose.Schema.Types.Mixed,
         required: true,
       },
     },

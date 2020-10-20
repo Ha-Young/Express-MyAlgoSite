@@ -1,2 +1,23 @@
-<h1><%= title %></h1>
-<a href="/login/github">Sign In with GitHub</a>
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head') %>
+<body>
+  <div class="login-container">
+    <span id="logo-title"><%= title %></span>
+    <div class="login-button-container">
+      <a href="/login/github">
+        <button id="github-login" class="login-button">
+          <i class="fab fa-github"></i>
+          <span>Sign In with GitHub</span>
+        </button>
+      </a>
+      <a href="/login/google">
+        <button id="google-login" class="login-button">
+          <i class="fab fa-google"></i>
+          <span>Sign In with Google</span>
+        </button>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

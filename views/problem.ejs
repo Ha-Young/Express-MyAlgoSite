@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head') %>
+
+<body>
+  <div class="main-container">
+    <%- include('./partials/header') %>
+    <div class="train-container">
+      <h2><%= problem.title %></h2>
+      <h3><%= problem.description %></h3>
+      <p>난이도 : <%= problem.dificulty_level %></p>
+      <p>정답자 수 : <%= problem.completed_users %></p>
+
+      <div>
+        <form>
+          <div>solution:</div>
+          <textarea></textarea>
+          <div>TEST</div>
+          <button type="submit" class="submit">SUBMIT</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,8 +1,196 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+/* public */
+
+html, body{
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 a {
-  color: #00B7FF;
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  outline: none;
+}
+
+i {
+  font-size: 20px;
+}
+
+
+/* login */
+
+.login-container {
+  width: 100%;
+  height: 100%;
+  background-color: #181818;
+  background-image:
+    radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 10px),
+    radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 10px),
+    radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 3px);
+  background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+  background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+#logo-title {
+  font-size: 100px;
+  margin-bottom: 50px;
+  font-family: 'Press Start 2P', cursive;
+  color: white;
+}
+
+.login-button-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-button {
+  width: 220px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#github-login {
+  margin-bottom: 20px;
+  background-color: #2A2A2A;
+}
+
+#google-login {
+  background-color: #D84E32;
+}
+
+/* header */
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 60px;
+  height: 80px;
+  background-color: #222323;
+  color: white;
+}
+
+.header-column {
+  display: flex;
+  align-items: center;
+}
+
+.fa-freebsd {
+  font-size: 30px;
+  margin-right: 10px;
+}
+
+.title {
+  font-size: 20px;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.user-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  margin-right: 10px;
+}
+
+/* main */
+
+.main-container {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: #181818;
+  background-image:
+    radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 10px),
+    radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 10px),
+    radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 3px);
+  background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+  background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+}
+
+.problems-container {
+  margin: 80px auto;
+  display:grid;
+  grid-template-columns: 400px 400px;
+  grid-template-rows: 250px 250px;
+  grid-row: auto;
+  grid-column-gap: 40px;
+  grid-row-gap: 40px;
+  justify-content: center;
+}
+
+/* each problem */
+.problem-wrap {
+  padding: 30px;
+  border-radius: 5px;
+  font-family: sans-serif;
+  color: white;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.39);
+  border: 1px solid rgb(107, 107, 107);
+}
+
+.problem-title-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.problem-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.problem-sum {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sub-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+.label {
+  margin-bottom: 10px;
+}
+
+.train-button-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.train-button {
+  height: 35px;
+  width: 60px;
+  border: none;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.train-button:hover {
+  color: white;
+  border: 1px solid white;
+  background: none;
+  transition-duration: 0.4s;
 }

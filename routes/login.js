@@ -6,7 +6,7 @@ const failedLogin = require('./controllers/auth.controller').failedLogin;
 
 // eslint-disable-next-line no-unused-vars
 router.get('/', (req, res, next)  => {
-  res.render('login', { title: 'Logininin' });
+  res.render('login', { title: 'Codewars' });
 });
 
 router.get('/github', successLogin);
