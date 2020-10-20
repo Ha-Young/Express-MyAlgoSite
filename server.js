@@ -15,30 +15,6 @@ mongoose
     console.log('mongoose is on');
   });
 
-// const problemSchema = new mongoose.Schema({
-//   name: {
-//     type: String,
-//     required: [true, 'must have a name'],
-//   },
-//   rating: Number,
-//   price: Number,
-// });
-
-// const Problem = mongoose.model('Problem', problemSchema);
-
-// const testProblem = new Problem({
-//   name: 'hi',
-//   rating: 5,
-//   price: 3,
-// });
-
-// testProblem.save().then((doc) => {
-//   console.log('save success');
-//   console.log(doc);
-// });
-
-// console.log(testProblem);
-
 const server = app.listen(process.env.PORT, () => {
   console.log('main server is on');
 });

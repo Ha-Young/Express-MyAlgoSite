@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon server.js",
+    "model" : "nodemon models/Problem.js",
     "delete": "node utils/importSampleData.js --delete",
     "import": "node utils/importSampleData.js --import",
     "dev": "NODE_ENV=development nodemon ./bin/www",
