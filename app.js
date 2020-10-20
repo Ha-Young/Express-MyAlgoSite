@@ -10,7 +10,6 @@ const passport = require('passport');
 const expressLayouts = require('express-ejs-layouts');
 
 const index = require('./routes/index');
-const login = require('./routes/login');
 const problems = require('./routes/problems');
 
 const app = express();
@@ -27,12 +26,12 @@ app.use(session({
 
 app.use(expressLayouts);
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/scripts', express.static(path.join(__dirname + '/node_modules')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/login', login);
 app.use('/', index);
 app.use('/problems', problems);
 

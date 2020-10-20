@@ -18,14 +18,18 @@ a {
   margin: 10px;
 }
 
-/* .problem-soultion {
-  border: 1px solid black;
+.CodeMirror {
+  margin-bottom: 20px;
 }
 
-.problem-test-cases {
-  border: 1px solid black;
-} */
+.success {
+  background: rgb(118, 155, 255);
+}
 
-.CodeMirror.cm-s-default {
-  border: 1px solid gray;
+.failure {
+  background: rgb(255, 215, 115);
+}
+
+.error {
+  background: salmon;
 }

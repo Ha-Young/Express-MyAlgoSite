@@ -4,7 +4,8 @@ mongoose.connect(process.env.DB_LOCAL_ADDRESS, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
-  useCreateIndex: true
+  useCreateIndex: true,
+  dbName: 'codewars'
 });
 
 const db = mongoose.connection;
