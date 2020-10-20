@@ -1,28 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <%- include('partials/head') %>
+
 <body>
   <div class="main-container">
     <%- include('./partials/header') %>
-    <div class="train-container">
-      <h2><%= problem.title %></h2>
-      <h3><%= problem.description %></h3>
-      <p>난이도 : <%= problem.dificulty_level %></p>
-      <p>정답자 수 : <%= problem.completed_users %></p>
-      <div>
-        <form>
-          <div>solution:</div>
-          <textarea id="code-editor"></textarea>
-          <div>TEST</div>
+    <div class="train-wrap">
+      <div class="train-container">
+        <div class="train-contents">
+          <h2><%= problem.title %></h2>
+          <span class="train-desc"><%= problem.description %></span>
+          <p>난이도 : <%= problem.difficulty_level %></p>
+          <p>정답자 수 : <%= problem.completed_users %></p>
+        </div>
+        <textarea id="code-editor"></textarea>
+        <div class="buttons-container">
+          <a href="/problems">
+            <i class="fas fa-bars"></i>
+          </a>
           <button type="submit" class="submit-button">SUBMIT</button>
-        </form>
+          <% const nextId = problem.id + 1 %>
+          <% if (nextId < 5) { %>
+            <a href="/problems/<%= nextId %>">
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          <% } %>
+        </div>
       </div>
     </div>
   </div>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/theme/seti.min.css">
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/mode/javascript/javascript.min.js"></script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.js"></script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/mode/javascript/javascript.min.js"></script>
   <script>
     const textarea = document.getElementById('code-editor');
     const editor = CodeMirror.fromTextArea(textarea, {

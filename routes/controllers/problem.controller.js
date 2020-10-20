@@ -17,6 +17,8 @@ exports.getAll = async (req, res, next) => {
   try {
     const problems = await Problem.find().lean();
 
+    console.log(problems[0].id, "getAll id");
+
     res.render('problems', {
       problems: problems,
       username: username,
@@ -28,18 +30,17 @@ exports.getAll = async (req, res, next) => {
 };
 
 exports.getOne = async (req, res, next) => {
+  //FIXME: header 공통으로 설정해두면 avatar_url, username problem에 따로 전달 해 줄 필요 없음.
   const { avatar_url } = req.user._json;
   const username = req.user.username;
   const id = req.params.problem_id;
 
-  if (!id || typeof id === "number") {
+  if (!id || typeof id !== "string") {
     return res.status(204).json({ error: "no content" });
   }
 
   try {
-    const problem = await Problem.findById(id);
-
-    console.log(problem);
+    const problem = await Problem.findOne({ id });
 
     res.render('problem', {
       problem: problem,

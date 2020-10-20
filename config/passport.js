@@ -9,7 +9,6 @@ module.exports = passport => {
         callbackURL: process.env.GITHUB_CB_URL,
       },
       (accessToken, refreshToken, profile, cb) => {
-        console.log(accessToken, refreshToken, profile, cb);
         return cb(null, profile);
       }
     )
