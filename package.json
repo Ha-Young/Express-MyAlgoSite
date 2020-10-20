@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "body-parser": "^1.18.3",
+    "codemirror": "^5.58.1",
     "cookie-parser": "^1.4.5",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
@@ -18,5 +19,8 @@
     "nodemon": "^1.19.1",
     "passport": "^0.4.1",
     "passport-github": "^1.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.11.0"
   }
 }

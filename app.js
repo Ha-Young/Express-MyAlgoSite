@@ -3,7 +3,6 @@ if (process.env.NODE_ENV === 'development') require('dotenv').config();
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const session = require('express-session');
 
 const dbConnection = require('./mongodb');
 const passport = require('./passport/github');
@@ -20,12 +19,6 @@ dbConnection.once('open', (err) => {
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
-
-app.use(session({
-  secret: 'work hard',
-  resave: true,
-  saveUninitialized: false,
-}));
 
 app.use(express.static('public'));
 app.use(passport.initialize());

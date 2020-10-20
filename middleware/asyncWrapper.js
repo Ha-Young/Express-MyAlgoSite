@@ -9,9 +9,9 @@ function asyncWrapper(asyncFn) {
     try {
       return await asyncFn(req, res, next);
     } catch (error) {
-      return next(error);
+      return next(AsyncError);
     }
-  })
+  });
 }
 
 module.exports = asyncWrapper;

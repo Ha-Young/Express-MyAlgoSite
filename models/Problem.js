@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const { Mixed } = mongoose.SchemaTypes
+const { Mixed } = mongoose.SchemaTypes;
 const TestSchema = new mongoose.Schema({
   code: {
     type: String,
@@ -38,4 +38,4 @@ const ProblemSchema = new mongoose.Schema({
   tests: [ TestSchema ],
 }, { timestamps: true });
 
-module.exports = mongoose.model('Problem', ProblemSchema);
+module.exports = mongoose.model("Problem", ProblemSchema);
