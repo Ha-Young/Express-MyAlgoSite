@@ -7,6 +7,8 @@ const ProblemSchema = new mongoose.Schema({
     required: true
   },
   difficulty_level: Number,
+  completed_users: Number,
+  solution_count: Number,
   description: String,
   tests: {
     type: [{

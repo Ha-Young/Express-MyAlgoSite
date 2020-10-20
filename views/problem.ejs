@@ -9,7 +9,26 @@
 <body>
   <h1>Problem</h1>
   <h2>
-    <%= problem.title %>
+    Level <%= problem.difficulty_level %> - <%= problem.title %>
   </h2>
+  <div class="description">
+    <span>
+      제출완료자 - <%= problem.completed_users ? problem.completed_users : '0' %>명
+    </span>
+    <br><br>
+    <%= problem.description %>
+  </div>
+
+  <form action="/problems/<%= problem.id %>" method="post">
+    <div class="code-mirror">
+      <textarea id="myTextarea" name="codeMirror" cols="30" rows="30"></textarea>
+    </div>
+
+    <input type="submit" value="정답 제출">
+  </form>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.css" />
+  <script src="/codeMirror.js"></script>
 </body>
 </html>

@@ -7,6 +7,10 @@ const problemsController = {
     const problem = await Problem.findById(ObjectId(id));
 
     res.render('problem', { problem });
+  },
+
+  postSolution: (req, res) => {
+    console.log('solution posted');
   }
 };
 

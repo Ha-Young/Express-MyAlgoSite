@@ -26,3 +26,23 @@ a {
 body {
   background-color: skyblue;
 }
+
+h2 {
+  background-color: #fff;
+  padding: 10px;
+}
+
+.description {
+  background-color: #fff;
+  margin: 1em;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+input[type="submit"] {
+  position: relative;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  margin-top: 10px;
+}
