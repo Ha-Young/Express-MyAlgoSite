@@ -1,9 +1,10 @@
-const express = require('express');
+/* eslint-disable no-unused-vars */
+const express = require("express");
 
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
-  res.render('login');
+router.get("/", (req, res, next) => {
+  res.render("login");
 });
 
 module.exports = router;

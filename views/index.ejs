@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <%- include('head') %>
+  <%- include("head") %>
   <body>
     <div class="container">
       <ul class="nav nav-pills justify-content-center">
@@ -20,7 +20,7 @@
     </div>
     <div class="container">
       <% data.forEach(function(problem){ %>
-        <%- include('components/problem-card.ejs', { problem }) %>
+        <%- include("components/problem-card.ejs", { problem }) %>
       <% }) %>
     </div>
   </body>

@@ -1,5 +1,6 @@
-const loginButton = document.querySelector('.login');
+/* eslint-disable no-unused-vars */
+const loginButton = document.querySelector(".login");
 
-loginButton.addEventListener('click', (e) => {
-  window.location = '/auth/github'
+loginButton.addEventListener("click", (e) => {
+  window.location = "/auth/github";
 });

@@ -1,6 +1,6 @@
-const passport = require('passport');
-const jwt = require('jsonwebtoken');
-const GitHubStrategy = require('passport-github').Strategy;
+const passport = require("passport");
+const jwt = require("jsonwebtoken");
+const GitHubStrategy = require("passport-github").Strategy;
 
 const SECRET_KEY = process.env.JWT_KEY;
 
@@ -13,7 +13,7 @@ passport.deserializeUser(function (user, done) {
   done(null, user);
 });
 
-const User = require('../models/User');
+const User = require("../models/User");
 
 const githubAuth = new GitHubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
@@ -34,6 +34,6 @@ const githubAuth = new GitHubStrategy({
   }
 );
 
-passport.use('github', githubAuth);
+passport.use("github", githubAuth);
 
 module.exports = passport;
