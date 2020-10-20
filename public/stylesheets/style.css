@@ -6,3 +6,31 @@ body {
 a {
   color: #00B7FF;
 }
+
+.container {
+  display: flex;
+  width: 90%;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.container .card {
+  margin: 20px;
+}
+
+.form-signin {
+  margin: auto;
+  margin-top: 100px;
+  width: 50%;
+}
+
+.article-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.CodeMirror {
+  padding: 10px;
+  margin-bottom: 10px;
+}

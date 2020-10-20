@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+const { Mixed } = mongoose.SchemaTypes
 const TestSchema = new mongoose.Schema({
   code: {
     type: String,
@@ -7,6 +8,7 @@ const TestSchema = new mongoose.Schema({
     trim: true,
   },
   solution: {
+    type: Mixed,
     required: true,
   }
 });

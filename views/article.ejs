@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('head') %>
+  <body>
+    <div class='container'>
+      <div class="jumbotron">
+        <h1 class="display-4"><%= data.title %></h1>
+        <p class="lead"><%= data.description %></p>
+        <hr class="my-4">
+        <p><b>Level:</b> <%= data.difficulty_level%> | <b>Solved Users:</b> <%= data.completed_users%></p>
+        <div id="code"></div>
+        <div class="article-buttons">
+          <a class="btn btn-link btn-lg" href="/problems" role="button">Back</a>
+          <a class="btn btn-primary btn-lg" href="#" role="button">Submit</a>
+        </div>
+      </div>
+    </div>
+    <script src="/codemirror/lib/codemirror.js"></script>
+    <link rel="stylesheet" href="/codemirror/lib/codemirror.css">
+    <link rel="stylesheet" href="/codemirror/theme/ayu-dark.css">
+    <script src="/codemirror/mode/javascript/javascript.js"></script>
+    <script src="/javascripts/code.js"></script>
+  </body>
+</html>

@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>vaco codewars login</title>
-</head>
-<body>
-  <button class="login button">Github Login</button>
-  <script src="/javascripts/login.js"></script>
-</body>
+  <%- include('head') %>
+  <body>
+    <form class="form-signin" action="/auth/github">
+      <div class="text-center mb-4">
+        <img class="mb-4" src="/images/github-icon.png" alt="" width="150" height="150">
+        <h1 class="h3 mb-3 font-weight-normal">Please Sign In For Git Hub</h1>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <p class="mt-5 mb-3 text-muted text-center">© 2020-2020</p>
+    </form>
+  </body>
 </html>
