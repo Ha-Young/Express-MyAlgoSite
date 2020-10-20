@@ -7,6 +7,11 @@
       <label for="password">Password</label>
       <input type="password" name="password" id="password">
     </div>
-    <button class="submit-button" type="submit">Login</button>
-    <%- include('partials/github') %>
+    <div class="form-control">
+      <%- include('partials/github') %>
+      <button class="submit-button" type="submit">Login</button>
+    </div>
 </form>
+
+<%- contentFor('styles') %>
+<link rel='stylesheet' href='/stylesheets/form.css' />

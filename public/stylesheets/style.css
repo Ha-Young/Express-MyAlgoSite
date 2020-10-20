@@ -1,8 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&family=Noto+Sans+KR&family=Ubuntu:wght@400;700&display=swap');
+
 body {
-  padding: 50px 0;
-  font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
+  padding: 0 10px;
+  font-family: 'Ubuntu', 'Noto Sans KR', sans-serif;
 }
 
 a {
-  color: #00b7ff;
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #1c84ad;
+}
+
+code {
+  font-family: 'Fira Code', monospace;
+}
+
+header {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 2.6rem;
+  font-weight: bold;
+  border-bottom: 1px solid gray;
+}
+
+header img {
+  margin: 10px;
+}
+
+header .logo {
+  display: flex;
+  align-items: center;
+}
+
+header .menu ul {
+  display: flex;
+  list-style: none;
+  font-size: 1.6rem;
+}
+
+header .menu ul li {
+  margin: 0 10px;
 }

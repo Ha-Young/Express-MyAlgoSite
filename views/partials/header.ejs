@@ -1,4 +1,19 @@
 <header>
-  <p>⚔Codewars⚔</p>
-  <h1><%= title %></h1>
+  <div class="logo">
+    <img src="/icons/swords.svg" alt="swords" height="40" width="40">
+    Codewars
+  </div>
+  <div class="menu">
+    <ul>
+      <% if (!user) { %>
+        <li><a href="/">Home</a></li>
+        <li><a href="/join">Join</a></li>
+        <li><a href="/login">Login</a></li>
+      <% } else { %>
+        <li><a href="/">Home</a></li>
+        <li><a href="/logout">Logout</a></li>
+      <% } %>
+    </ul>
+  </div>
 </header>
+<h1><%= title %></h1>

@@ -15,6 +15,10 @@
       <label for="confirmPassword">Confirm PW</label>
       <input type="password" name="confirmPassword" id="confirmPassword" required>
     </div>
-    <button class="submit-button" type="submit">Join</button>
+    <div class="form-control">
+      <button class="submit-button" type="submit">Join</button>
+    </div>
 </form>
-<%- include('partials/auth-error') %>
+
+<%- contentFor('styles') %>
+<link rel='stylesheet' href='/stylesheets/form.css' />

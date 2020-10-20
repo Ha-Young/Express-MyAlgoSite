@@ -1,0 +1,38 @@
+form {
+  width: 420px;
+  font-size: 1.2rem;
+}
+
+.form-control {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin: 1rem 0;
+}
+
+.form-control label {
+  width: 150px;
+  margin-right: 1rem;
+}
+
+.form-control input {
+  outline: none;
+  width: 90%;
+  margin-bottom: 0.5rem;
+  border: 0;
+  border-bottom: 1px solid #a1a1a1;
+  font: inherit;
+}
+
+.form-control button {
+  min-width: 100px;
+  margin: 0.2rem;
+  padding: 0.2rem 0.5rem;
+  outline: none;
+  font-size: 1.2rem;
+  font-family: inherit;
+}
+
+.form-control button:hover {
+  cursor: pointer;
+}
