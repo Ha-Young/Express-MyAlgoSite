@@ -3,7 +3,12 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  res.render('index', { title: '바닐라코딩' });
+  if (req.session.passport) {
+    return res.render('index', { title: 'codewars' });
+  }
+
+  res.redirect('/login');
+  // console.log('session', req.session.passport);
 });
 
 module.exports = router;
