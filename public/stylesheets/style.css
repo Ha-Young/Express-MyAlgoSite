@@ -1,8 +1,47 @@
+* {
+  box-sizing: border-box;
+}
 body {
+  text-align: center;
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00B7FF;
+  text-decoration: none;
+}
+
+a :hover {
+  background-color: #1197cc;
+  transition: all 0.5s ease-in;
+}
+
+.problems-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.problem {
+  width: 500px;
+  height: 300px;
+  background-color: #abd5e6;
+  color: rgb(34, 34, 34);
+  margin-bottom: 16px;
+  padding: 16px;
+  border-radius: 8px;
+  align-items: center;
+  cursor: pointer;
+  font-size: large;
+}
+
+.problem-detail {
+  margin-bottom: 8px;
+}
+
+.problem-code-box {
+  width: 200px;
+  height: 200px;
 }

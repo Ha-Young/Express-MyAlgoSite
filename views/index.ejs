@@ -4,43 +4,30 @@
 <head>
   <title>Codewars</title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel="stylesheet" href='codemirror/lib/codemirror.css' />
 </head>
 
 <body>
   <% if (!user) { %>
-  <a href="/login">로그인을 하세요</a>
+  <a href='/login' id=>로그인을 하세요</a>
   <% } %>
   <% if (user) { %>
   <h1>Codewars</h1>
   <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
-
-  <ul class="tabs">
-    <li>Level 1</li>
-    <li>Level 2</li>
-    <li>Level 3</li>
-  </ul>
-
-  <ul class="problems">
-    <li>
-      <div>피보나치 수열</div>
-      <div>정답자: 15명</div>
-      <div>난이도: Level 1</div>
-    </li>
-    <li>
-      <div>서울에서 김서방 찾기</div>
-      <div>정답자: 11명</div>
-      <div>난이도: Level 2</div>
-    </li>
-    <li>
-      <div>수박수박수박수박수</div>
-      <div>정답자: 12명</div>
-      <div>난이도: Level 2</div>
-    </li>
-    <li>
-      <div>하샤드 수</div>
-      <div>정답자: 5명</div>
-      <div>난이도: Level 3</div>
-    </li>
+  <div class='problems-container'>
+    <% for(var i=0; i<problems.length; i++){ %>
+    <a href='/problem/<%=problems[i]._id%>'>
+      <div class='problem'>
+        <h1><%= problems[i].title %></h1>
+        <div class='problem-level'>
+          <div>난이도<%= problems[i].difficulty_level %></div>
+          <div>solution<%= problems[i].solution_count %>개</div>
+          <div>푼사람<%= problems[i].completed_users %>명</div>
+        </div>
+      </div>
+    </a>
+    <% } %>
+  </div>
   </ul>
   <% } %>
 </body>
