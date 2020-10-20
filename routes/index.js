@@ -44,7 +44,6 @@ module.exports = router;
 
 router.post('/', async (req, res, next) => {
   const { body } = req;
-  console.log(body);
   try {
     await User.create(body);
     res.status(201).send('Created!');
@@ -55,7 +54,6 @@ router.post('/', async (req, res, next) => {
 
 router.post('/pro', async (req, res, next) => {
   const { body } = req;
-  console.log(body);
   try {
     await Problem.create(body);
     res.status(201).send('Created!');

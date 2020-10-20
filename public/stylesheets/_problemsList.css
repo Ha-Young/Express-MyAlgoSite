@@ -1,0 +1,50 @@
+.tabs {
+  display: flex;
+  /* background: blue; */
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.tabs a {
+  font-size: 12px;
+  padding: 16px;
+}
+
+.problems {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 60px;
+}
+
+.problems .card {
+  position: relative;
+  background: rgb(29, 29, 29);
+  width: 280px;
+  height: 120px;
+  margin: 10px;
+  padding: 26px;
+  border-radius: 12px;
+}
+
+.card .card-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.card .card-completed-count {
+  position: absolute;
+  right: 20px;
+  bottom: 38px;
+  font-size: 12px;
+  color: gray;
+}
+
+.card .card-level {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  font-size: 12px;
+  color: gray;
+}

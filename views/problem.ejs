@@ -1,5 +1,5 @@
 <%- include('./partials/header'); %>
-<div>
+<div class="problem">
   <div class="problem-description">
     <h2><%= problem.title %></h2>
     <p><%= problem.description %></p>
@@ -10,4 +10,7 @@
     <input type="submit" value="submit">
   </form>
 </div>
+<script src="/scripts/codeMirror/lib/codeMirror.js"></script>
+<script src="/scripts/codeMirror/mode/javascript/javascript.js"></script>
+<script type="text/javascript" src="/javascripts/index.js"></script>
 <%- include('./partials/footer'); %>

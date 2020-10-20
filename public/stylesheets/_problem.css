@@ -1,0 +1,14 @@
+.CodeMirror {
+  margin-bottom: 20px;
+}
+
+.problem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.problem .problem-description {
+  width: 80%;
+}

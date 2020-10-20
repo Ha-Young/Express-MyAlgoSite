@@ -1,35 +1,9 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+@import './_reset.css';
+@import './_variables.css';
 
-a {
-  color: #00B7FF;
-}
-
-.problems {
-  display: flex;
-}
-
-.card {
-  background: aquamarine;
-  width: 200px;
-  height: 140px;
-  margin: 10px;
-}
-
-.CodeMirror {
-  margin-bottom: 20px;
-}
-
-.success {
-  background: rgb(118, 155, 255);
-}
-
-.failure {
-  background: rgb(255, 215, 115);
-}
-
-.error {
-  background: salmon;
-}
+@import './_global.css';
+@import './_login.css';
+@import './_header.css';
+@import './_problemsList.css';
+@import './_problem.css';
+@import './_footer.css';

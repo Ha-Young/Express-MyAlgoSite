@@ -1,0 +1,26 @@
+body {
+  font-family: 'Fira Code', 'Noto Sans KR', sans-serif;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--main-bg-color);
+  color: white;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.success {
+  background: rgb(118, 155, 255);
+}
+
+.failure {
+  background: rgb(255, 215, 115);
+}
+
+.error {
+  background: salmon;
+}

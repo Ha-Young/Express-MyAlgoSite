@@ -1,7 +1,7 @@
 <header>
-  <div class="header-brand"><a href="/">Codewars</a></div>
+  <div class="header-brand"><a href="/"><img src="/img/logo.png" alt="logo" /><span>Codewars</span></a></div>
   <% if (user) {%>
-    <div class="header-username"><%= user %></div>
+    <div class="header-username">Hello, <%= user %></div>
   <% } %>
-  <div class="header-btn__logout"><a href="/logout">Logout</a></div>
+  <div class="header-btn-logout"><a href="/logout">Logout</a></div>
 </header>
