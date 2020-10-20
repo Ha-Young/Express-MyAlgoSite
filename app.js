@@ -20,6 +20,8 @@ setPassport();
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use('/', index);
 app.use('/auth', auth);
 
