@@ -7,7 +7,6 @@
     "dev": "cross-env NODE_ENV=development nodemon ./bin/www"
   },
   "dependencies": {
-    "bcrypt": "^5.0.0",
     "body-parser": "~1.18.2",
     "connect-mongo": "^3.2.0",
     "cookie-parser": "~1.4.3",
@@ -21,6 +20,7 @@
     "morgan": "~1.9.0",
     "nodemon": "^1.19.1",
     "passport": "^0.4.1",
+    "passport-github2": "^0.1.12",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.0.1",
     "serve-favicon": "~2.4.5"

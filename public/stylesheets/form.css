@@ -31,8 +31,11 @@ form {
   outline: none;
   font-size: 1.2rem;
   font-family: inherit;
+  border: 1px solid #a1a1a1;
 }
 
 .form-control button:hover {
   cursor: pointer;
+  border: 1px solid #1c84ad;
+  color: #1c84ad;
 }

@@ -7,10 +7,10 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 
 const db = require('./config/db');
-const session = require('express-session');
 const passport = require('passport');
-const MongoStore = require('connect-mongo')(session);
 require('./config/passport');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
 const expressLayouts = require('express-ejs-layouts');
 
@@ -27,10 +27,7 @@ app.use(express.static('public'));
 
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev'));
-}
+app.use(morgan('dev'));
 
 app.use(
   session({
@@ -45,10 +42,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use((req, res, next) => {
-  const { user } = req;
-
-  res.locals.user = user || null;
-  console.log('Current User : ', user);
+  res.locals.user = req.user || null;
   next();
 });
 

@@ -1,8 +1,18 @@
 <header>
   <div class="logo">
-    <img src="/icons/swords.svg" alt="swords" height="40" width="40">
+    <img src="/icons/swords.svg" alt="swords">
     Codewars
   </div>
+  <% if (user) { %>
+    <div class="current-user">
+      <% if (user.photoUrl) { %>
+        <img src=<%= user.photoUrl %> alt="user photo">
+      <% } else { %>
+        <img src="/icons/user.svg" alt="user photo">
+      <% } %>
+      <%= user.username %>
+    </div>
+  <% } %>
   <div class="menu">
     <ul>
       <% if (!user) { %>

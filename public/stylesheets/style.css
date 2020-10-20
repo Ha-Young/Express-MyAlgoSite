@@ -11,7 +11,7 @@ a {
 }
 
 a:hover {
-  color: #1c84ad;
+  color: #517296;
 }
 
 code {
@@ -23,6 +23,7 @@ header {
 
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   font-size: 2.6rem;
   font-weight: bold;
@@ -33,9 +34,21 @@ header img {
   margin: 10px;
 }
 
-header .logo {
+header .logo,
+header .current-user {
   display: flex;
   align-items: center;
+  color: #517296;
+}
+
+header .current-user {
+  font-size: 2rem;
+  color: #494949;
+}
+
+header .current-user img {
+  width: 50px;
+  border-radius: 50%;
 }
 
 header .menu ul {
