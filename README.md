@@ -39,13 +39,13 @@ yarn run dev or npm run dev
 
   - [V] `/views/index.ejs` template을 보여주어야 합니다.
   - [V] 기존 템플릿에 있는 문제 정보를 지우고, `/models/sample_problems.json`의 정보를 기반으로 데이터베이스를 이용하여 페이지에 문제 정보를  보여주도록 수정해주세요. 문제 이름, 정답자 수, 문제 레벨의 정보가 보여야 합니다.
-  - [ ] 리스트의 각 문제들을 눌렀을때, `/problems/:problem_id` 페이지로 이동하도록 해주세요.
+  - [V] 리스트의 각 문제들을 눌렀을때, `/problems/:problem_id` 페이지로 이동하도록 해주세요.
 
 ### 3. GET `/problems/:problem_id`
 
-  - [ ] `problem_id`에 해당하는 문제의 상세 정보(문제 이름, 정답자 수, 문제 레벨, 그리고 문제에 대한 설명 등)을 화면에 보여주세요. UI 구성은 자유롭게 해주세요.
-  - [ ] 문제에 대한 솔루션 코드를 입력할 수 있는 폼과 정답을 제출할 수 있는 버튼을 보여주세요.
-  - [ ] 해당 폼을 작성하여 "제출" 버튼을 눌렀을때, `POST /problems/:problem_id`로 솔루션 정보를 보내세요. **AJAX는 사용하지 마세요.**
+  - [V] `problem_id`에 해당하는 문제의 상세 정보(문제 이름, 정답자 수, 문제 레벨, 그리고 문제에 대한 설명 등)을 화면에 보여주세요. UI 구성은 자유롭게 해주세요.
+  - [V] 문제에 대한 솔루션 코드를 입력할 수 있는 폼과 정답을 제출할 수 있는 버튼을 보여주세요.
+  - [V] 해당 폼을 작성하여 "제출" 버튼을 눌렀을때, `POST /problems/:problem_id`로 솔루션 정보를 보내세요. **AJAX는 사용하지 마세요.**
 
 #### Resource
 - [CodeMirror](https://github.com/codemirror/CodeMirror): In-browser code editor
