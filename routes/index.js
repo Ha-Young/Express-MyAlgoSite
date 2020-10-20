@@ -2,9 +2,18 @@
 const express = require('express');
 const router = express.Router();
 
-/* GET home page. */
-router.get('/', (req, res, next) => {
-  res.render('index', { title: 'home' });
+const authenticateUser = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    console.log(req.isAuthenticated(), '로그인 했어?');
+    next();
+  } else {
+    console.log(req.isAuthenticated(), '로그인 했어?');
+    res.status(301).redirect('/login');
+  }
+};
+
+router.get('/', authenticateUser, (req, res, next) => {
+  res.redirect('/problems');
 });
 
 module.exports = router;

@@ -1,14 +1,15 @@
-// const passport = require('passport');
+const passport = require("passport");
 
-// exports.login = (req, res, next) => {
-//   res.render('login');
-// };
+const successLogin = passport.authenticate("github", {
+  scope: ["profile"],
+});
 
-// exports.github = passport.authenticate('github', {
-//   scope: [ 'user: email' ]
-// });
+const failedLogin = passport.authenticate("github", {
+  failureRedirect: "/login",
+  successRedirect: "/",
+});
 
-// exports.githubCallback = passport.authenticate('github', {
-//   successRedirect: '/',
-//   failureRedirect: '/login',
-// });
+module.exports = {
+  successLogin: successLogin,
+  failedLogin: failedLogin,
+};
