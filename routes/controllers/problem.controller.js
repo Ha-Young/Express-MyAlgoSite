@@ -53,6 +53,25 @@ exports.getOne = async (req, res, next) => {
 
 };
 
+exports.getResult = async (req, res, next) => {
+  // 정답 맞으면 redirect -> sucess
+  // 정답 틀리면 redirect -> fail
+  // 오류나면 redirect -> error
+  const { script } = req.body;
+
+  if (!script || typeof script !== "string") {
+    return res.status(204).json({ error: "no content" });
+  }
+
+  console.log(script);
+
+  try {
+    res.render('result', );
+  } catch(err) {
+    next(err);
+  }
+};
+
 // exports.create = async function (req, res, next) {
 //   const newProblem = req.body;
 

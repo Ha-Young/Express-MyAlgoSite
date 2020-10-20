@@ -13,36 +13,25 @@
           <p>난이도 : <%= problem.difficulty_level %></p>
           <p>정답자 수 : <%= problem.completed_users %></p>
         </div>
-        <textarea id="code-editor"></textarea>
+        <form method="post" action="/problems/<%= problem.id %>">
+          <textarea name="script" id="code-editor"></textarea>
+          <button type="submit" class="submit-button">SUBMIT</button>
+        </form>
         <div class="buttons-container">
           <a href="/problems">
             <i class="fas fa-bars"></i>
           </a>
-          <button type="submit" class="submit-button">SUBMIT</button>
           <% const nextId = problem.id + 1 %>
           <% if (nextId < 5) { %>
-            <a href="/problems/<%= nextId %>">
-              <i class="fas fa-arrow-right"></i>
-            </a>
+          <a href="/problems/<%= nextId %>">
+            <i class="fas fa-arrow-right"></i>
+          </a>
           <% } %>
         </div>
       </div>
     </div>
   </div>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/theme/seti.min.css">
-  <script type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.js"></script>
-  <script type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/mode/javascript/javascript.min.js"></script>
-  <script>
-    const textarea = document.getElementById('code-editor');
-    const editor = CodeMirror.fromTextArea(textarea, {
-      lineNumbers: true,
-      theme: 'seti',
-      mode: 'javascript',
-    });
-  </script>
+  <%- include('partials/codemirror') %>
 </body>
 
 </html>

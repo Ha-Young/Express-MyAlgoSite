@@ -1,0 +1,13 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/theme/seti.min.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/mode/javascript/javascript.min.js"></script>
+<script>
+  const textarea = document.getElementById('code-editor');
+  const editor = CodeMirror.fromTextArea(textarea, {
+    lineNumbers: true,
+    matchBrackets: true,
+    theme: 'seti',
+    mode: 'javascript',
+  });
+</script>
