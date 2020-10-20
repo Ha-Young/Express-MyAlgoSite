@@ -1,7 +1,24 @@
 const mongoose = require('mongoose');
 
+const TestSchema = new mongoose.Schema(
+  {
+    code: {
+      type: Number,
+      required: true,
+    },
+    solution: {
+      type: mongoose.Schema.Types.Mixed,
+      required: true,
+    },
+  },
+  { _id: false }
+);
+
 const ProblemSchema = new mongoose.Schema({
-  id: Number,
+  id: {
+    type: Number,
+    required: true,
+  },
   title: {
     type: String,
     required: true,
@@ -14,8 +31,14 @@ const ProblemSchema = new mongoose.Schema({
     type: Number,
     default: 1,
   },
-  description: String,
-  tests: [{ code: String, solution: String }],
+  description: {
+    type: String,
+    required: true,
+  },
+  tests: {
+    type: [TestSchema],
+    required: true,
+  },
 });
 
 module.exports = mongoose.model('Problem', ProblemSchema);

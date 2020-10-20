@@ -1,12 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const userController = require('./controllers/user');
-const requiresLogin = require('./middlewares/requiresLogin');
+const userController = require('../controllers/user');
+const ProblemsController = require('../controllers/problems');
+const requiresLogin = require('../controllers/middlewares/requiresLogin');
 
-router.get('/', (req, res, next) => {
-  res.render('index', { title: 'MAIN' });
-});
+router.get('/', requiresLogin, ProblemsController.getAll);
 
 router.get('/join', userController.getJoin);
 router.post('/join', userController.postJoin, userController.postLogin);

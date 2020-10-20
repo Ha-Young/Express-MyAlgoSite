@@ -1,7 +1,6 @@
 const passport = require('passport');
 
-const User = require('../../models/User');
-const Problem = require('../../models/Problem');
+const User = require('../models/User');
 
 exports.getJoin = (req, res, next) => {
   const { user } = req;

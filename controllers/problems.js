@@ -1,3 +1,14 @@
+const Problem = require('../models/Problem');
+
+exports.getAll = async (req, res, next) => {
+  try {
+    const problems = await Problem.find().sort({ id: 1 }).lean();
+    return res.render('index', { title: 'MAIN', problems });
+  } catch (err) {
+    next(err);
+  }
+};
+
 exports.getProblem = (req, res, next) => {
   const { problem_id } = req.params;
 

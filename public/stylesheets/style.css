@@ -1,8 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code&family=Noto+Sans+KR&family=Ubuntu:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Noto+Sans+KR:wght@400;700&family=Righteous&display=swap');
 
 body {
-  padding: 0 10px;
-  font-family: 'Ubuntu', 'Noto Sans KR', sans-serif;
+  padding: 0 50px;
+  font-family: 'Fira Code', 'Noto Sans KR', sans-serif;
+  background-color: #2e3841;
+  color: #e8ecf0;
 }
 
 a {
@@ -11,11 +13,7 @@ a {
 }
 
 a:hover {
-  color: #517296;
-}
-
-code {
-  font-family: 'Fira Code', monospace;
+  color: #86bef7;
 }
 
 header {
@@ -25,25 +23,28 @@ header {
   justify-content: space-between;
   align-items: center;
 
-  font-size: 2.6rem;
-  font-weight: bold;
-  border-bottom: 1px solid gray;
+  font-size: 3.4rem;
+  border-bottom: 1px solid #e8ecf0;
 }
 
 header img {
   margin: 10px;
 }
 
+header .logo {
+  font-family: 'Righteous', cursive;
+}
+
 header .logo,
 header .current-user {
   display: flex;
   align-items: center;
-  color: #517296;
 }
 
 header .current-user {
-  font-size: 2rem;
-  color: #494949;
+  font-size: 1.6rem;
+  font-weight: normal;
+  color: inherit;
 }
 
 header .current-user img {
@@ -55,6 +56,7 @@ header .menu ul {
   display: flex;
   list-style: none;
   font-size: 1.6rem;
+  font-weight: bold;
 }
 
 header .menu ul li {
