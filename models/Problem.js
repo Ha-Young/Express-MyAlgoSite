@@ -28,6 +28,7 @@ const ProblemSchema = new mongoose.Schema({
   description: {
     type: String,
   },
+  solution_count: Number,
   test: [
     {
       code: String,

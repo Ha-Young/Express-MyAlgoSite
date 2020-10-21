@@ -1,9 +1,35 @@
 const express = require('express');
 const passport = require('passport');
 const session = require('express-session');
+const bodyParser = require('body-parser');
 const GitHubStrategy = require('passport-github').Strategy;
 const login = require('./routes/login');
 const index = require('./routes/index');
+const User = require('./models/User');
+const checkAuth = require('./middlewares/checkAuthentication');
+const cookieParser = require('cookie-parser');
+const cookieSession = require('cookie-session');
+
+const app = express();
+app.use(cookieParser());
+app.use(
+  cookieSession({
+    maxAge: 24 * 60 * 60 * 1000,
+    keys: [`${process.env.SESSION_KEY}`],
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser((user, done) => {
+  done(null, user._id);
+});
+
+passport.deserializeUser(async (id, done) => {
+  const user = User.findById(id);
+  done(null, user);
+});
 
 passport.use(
   new GitHubStrategy(
@@ -12,42 +38,33 @@ passport.use(
       clientSecret: process.env.CLIENT_SECRET_GITHUB,
       callbackURL: process.env.CALLBACK_URL_GITHUB,
     },
-    function (accessToken, refreshToken, profile, cb) {
-      // User.findOrCreate({ githubId: profile.id }, function (err, user) {
-      //   return cb(err, user);
-      // });
-      console.log(accessToken, 'tkn');
-      cb(null, profile);
+    async (accessToken, refreshToken, profile, cb) => {
+      const searched = await User.findOne({ github_id: profile.id });
+      if (searched) {
+        return cb(searched);
+      }
+
+      const created = await User.create({
+        github_id: profile.id,
+        github_token: accessToken,
+      });
+
+      if (created) {
+        return cb(null, created);
+      }
+      //error case handle
     }
   )
 );
 
-const app = express();
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.use(
-  session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true },
-  })
-);
-
-passport.serializeUser((user, done) => {
-  done(null, user);
-});
-passport.deserializeUser((user, done) => {
-  done(null, user);
-});
-
 app.set('view engine', 'ejs');
 
 app.use(express.static(`${__dirname}/public`));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/login', login);
-app.use('/', index);
+app.use('/', checkAuth, index);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

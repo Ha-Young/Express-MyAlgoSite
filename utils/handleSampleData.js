@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const dotev = require('dotenv');
 dotev.config({ path: './config.env' });
 const Problem = require('../models/Problem');
+const User = require('../models/User');
 
 mongoose
   .connect(process.env.DATABASE, {

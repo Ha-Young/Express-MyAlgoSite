@@ -4,15 +4,16 @@
   "private": true,
   "scripts": {
     "start": "nodemon server.js",
-    "model": "nodemon models/Problem.js",
-    "delete": "node utils/importSampleData.js --delete",
-    "import": "node utils/importSampleData.js --import",
+    "deleteUser": "node utils/deleteUserData.js --deleteUser",
+    "delete": "node utils/handleSampleData.js --delete",
+    "import": "node utils/handleSampleData.js --import",
     "dev": "NODE_ENV=development nodemon ./bin/www",
     "prod": "NODE_ENV=production nodemon ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
+    "cookie-session": "^1.4.0",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "ejs": "~2.5.7",
