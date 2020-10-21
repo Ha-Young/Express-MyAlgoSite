@@ -1,0 +1,30 @@
+<h1>Problem Detail</h1>
+<div class="problem">
+  <div># <%= targetProblem[0].title %></div>
+  <div>Level <%= targetProblem[0].difficulty_level %></div>
+  <div>Description <%= targetProblem[0].description %></div>
+  <div><%= targetProblem[0].completed_users %> people passed until now</div>
+</div>
+<script src="/lib/codemirror.5.58.1.js"></script>
+<link rel="stylesheet" href="/lib/codemirror.css">
+<script src="/mode/javascript/javascript.js"></script>
+<form action='/problem/<%= targetProblem[0].id %>' method='POST'>
+  <div>
+    <label for='code'>your code..</label>
+    <textarea id='code' name='code'></textarea>
+  </div>
+  <script type="text/javascript">
+    const myTextArea = document.getElementById('code');
+    console.log(myTextArea.name);
+    const myCodeMirror = CodeMirror.fromTextArea(myTextArea, {
+      lineNumbers: true,
+      mode: 'javascript'
+    });
+    console.log(myCodeMirror);
+    myCodeMirror.getDoc().setValue('function solution() {\n}');
+    const value = myCodeMirror.getValue();
+    // const foo = new Function(value);
+    // console.log(foo())
+  </script>
+  <button type='submit'>Submit</button>
+</form>

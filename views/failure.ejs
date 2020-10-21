@@ -1,0 +1,8 @@
+<h1>Some Test Failed</h1>
+<% for(let key in failedTest){ %>
+    <li>
+        Answer for <%= key %>
+        should be <%= failedTest[key] %>
+    </li>
+<% } %>
+<a href='/problem/<%= problemId %>'>Try Again</a>
