@@ -8,6 +8,11 @@ router.get('/', (req, res, next) => {
 
 router.get('/github', passport.authenticate('github'));
 
+router.get('/github/logout', (req, res) => {
+  req.logOut();
+  res.status(302).redirect('/login');
+});
+
 router.get(
   '/github/callback',
   passport.authenticate('github', {
@@ -18,4 +23,5 @@ router.get(
   }
   // optional error handling is needed
 );
+
 module.exports = router;

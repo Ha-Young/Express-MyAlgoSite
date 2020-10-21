@@ -35,5 +35,20 @@ const ProblemSchema = new mongoose.Schema({
     },
   ],
 });
+const Problem = mongoose.model('Problem', ProblemSchema);
 
-module.exports = mongoose.model('Problem', ProblemSchema);
+// const testProblem = new Problem({
+//   id: 123,
+// });
+// console.log(testProblem);
+// const save = async () => {
+//   try {
+//     const result = await testProblem.save();
+//     console.log(result, 'succ');
+//   } catch (err) {
+//     console.log(err, 'fail');
+//   }
+// };
+// save();
+
+module.exports = Problem;
