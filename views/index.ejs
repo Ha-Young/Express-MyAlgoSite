@@ -13,10 +13,10 @@
     <a href='/problem/<%=problems[i]._id%>'>
       <div class='problem'>
         <h1><%= problems[i].title %></h1>
-        <div class='problem-level'>
-          <div>난이도<%= problems[i].difficulty_level %></div>
-          <div>solution<%= problems[i].solution_count %>개</div>
-          <div>푼사람<%= problems[i].completed_users %>명</div>
+        <div class='problem-details'>
+          <div class='problem-detail'>LEVEL <%= problems[i].difficulty_level %></div>
+          <div class='problem-detail'>solution<%= problems[i].solution_count %>개</div>
+          <div class='problem-detail'>정답자<%= problems[i].completed_users %>명</div>
         </div>
       </div>
     </a>

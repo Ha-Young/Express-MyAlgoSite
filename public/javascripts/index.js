@@ -13,22 +13,20 @@ function helloWorld(e) {
 return e;
 }
 
-var fnName = "helloWorld";
-var params = "ctrlq.org";
+const fnName = "helloWorld";
+const params = "ctrlq.org";
 
 const a = window[fnName](params);
 
 
-
-
 function hackerAll(a, b) {
   var result = a * b;
-  return result
+  return result;
 }
 
-var fn_string = hackerAll.toString();
-
-var back_to_fn = new Function(`return ${fn_string}`)() //This restore the function with name, params and all, even es7 class works
+const fn_string = hackerAll.toString();
+console.log(new Function(`return ${fn_string}`));
+const back_to_fn = new Function(`return ${fn_string}`)() //This restore the function with name, params and all, even es7 class works
 
 let string = 'hackerAll(1, 3)';
 

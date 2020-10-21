@@ -40,13 +40,12 @@ button {
   padding: 16px;
   border-radius: 8px;
   align-items: center;
-  cursor: pointer;
   font-size: large;
 }
 
-a :hover {
+a .problem:hover {
   background-color: #1197cc;
-  transition: all 0.5s ease-in;
+  transition: all 0.5s linear;
 }
 
 .problem-detail {
@@ -69,4 +68,9 @@ a :hover {
 
 .code-box-btn :hover {
   background-color: gray;
+}
+
+.problem-details {
+  display: flex;
+  justify-content: space-around;
 }

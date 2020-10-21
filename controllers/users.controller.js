@@ -11,9 +11,11 @@ exports.saveUser = async (
   const photo = profile.photos[0].value;
   const provider = profile.provider;
 
-  User.save({ googleId: profile.id }, function (err, user) {
-    return done(err, user);
-  });
+  try {
+    await User.save({ googleId: profile.id });
+  } catch (err) {
+    next(err);
+  }
 }
 
 // const id = profile.id;
