@@ -1,0 +1,45 @@
+<%- include('header') -%>
+<% if(error !== "") {%>
+<div class="problem__submit__wrap">
+  <form
+    class="problem__submit__form"
+    action="<%= currentProblem._id %>"
+    method="POST"
+  >
+    <h1 class="problem__sumbit__content"><%= currentProblem.title %></h1>
+    <h3 class="problem__sumbit__content">
+      정답자 수 : <%= currentProblem.completed_users %>
+    </h3>
+    <h3 class="problem__sumbit__content">
+      문제 레벨 : <%= currentProblem.difficulty_level %>
+    </h3>
+    <h3 class="problem__sumbit__content">
+      문제 설명 : <%= currentProblem.description %>
+    </h3>
+    <textarea
+      class="problem__sumbit__content problem__sumbit__textarea"
+      placeholder="Try your best"
+      name="submission"
+    ><%= submissionCode %></textarea>
+    <div class="problem__sumbit__button__wrap">
+      <button
+        class="problem__sumbit__button"
+        type="submit"
+      >
+        정답 제출하기
+      </button>
+    </div>
+    <h4 class="message__code__error"><%= error %></h4>
+  </form>
+</div>
+<%- include('codeMirrorScript') -%>
+<% } else{ %>
+<div class="template__result__wrap">
+  <form class="template__result__form" action=<%= problem_id %> method="get">
+    <h3 class="text__result">🚫실패,,, 이 정도도 못풀면 다른 진로를 생각해보아요~🔍</h3>
+    <%- include('result') -%>
+    <button class="button__result" type="submit">다시 풀러가기</button>
+  </form>
+</div>
+<% } %>
+<%- include('footer') -%>

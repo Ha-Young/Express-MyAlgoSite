@@ -1,0 +1,45 @@
+<%- include('header') -%>
+<div class="problem__submit__wrap">
+  <form
+    class="problem__submit__form"
+    action="<%= currentProblem._id %>"
+    method="POST"
+  >
+    <h1 class="problem__sumbit__content"><%= currentProblem.title %></h1>
+    <h3 class="problem__sumbit__content">
+      정답자 수 : <%= currentProblem.completed_users %>
+    </h3>
+    <h3 class="problem__sumbit__content">
+      문제 레벨 : <%= currentProblem.difficulty_level %>
+    </h3>
+    <h3 class="problem__sumbit__content">
+      문제 설명 : <%= currentProblem.description %>
+    </h3>
+    <textarea
+      class="problem__sumbit__content problem__sumbit__textarea"
+      placeholder="Try your best"
+      name="submission"
+    >
+function solution(n) {
+  const str = "수박";
+  const share = Math.floor(n / 2);
+  const isOdd = n % 2 === 1;
+
+  return isOdd ? str.repeat(share) + str[0] : str.repeat(share);
+}</textarea
+    >
+    <div class="problem__sumbit__button__wrap">
+      <button
+        class="problem__sumbit__button"
+        type="submit"
+      >
+        정답 제출하기
+      </button>
+    </div>
+    <% if(error) {%>
+    <h4><%= error %></h4>
+    <% } %>
+  </form>
+</div>
+<%- include('codeMirrorScript') -%>
+<%- include('footer') -%>

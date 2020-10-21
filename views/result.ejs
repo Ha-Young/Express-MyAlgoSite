@@ -1,0 +1,23 @@
+<div class="problem__test__result">
+  <h3>Test Analysis</h3>
+  <table>
+    <thead>
+        <tr>
+            <th></th>
+            <th>Test Answer</th>
+            <th>Your Answer</th>
+            <th>Result</th>
+        </tr>
+    </thead>
+    <tbody>
+      <% for( let i = 0; i < testResults.length; i++ ) { %>
+        <tr>
+          <td>Test Case <%= i + 1 %></td>
+          <td><%= testResults[i].testAnswer %></td>
+          <td><%= testResults[i].userAnswer %></td>
+          <td><%= testResults[i].resultEmoji %></td>
+      </tr>
+      <% } %>
+    </tbody>
+</table>
+</div>

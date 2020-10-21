@@ -38,7 +38,7 @@ yarn run dev or npm run dev
 ### 2. GET `/`
 
   - [ ] `/views/index.ejs` template을 보여주어야 합니다.
-  - [ ] 기존 템플릿에 있는 문제 정보를 지우고, `/models/sample_problems.json`의 정보를 기반으로 데이터베이스를 이용하여 페이지에 문제 정보를  보여주도록 수정해주세요. 문제 이름, 정답자 수, 문제 레벨의 정보가 보여야 합니다.
+  - [ ] 기존 템플릿에 있는 문제 정보를 지우고, `/models/sample_problems.json`의 정보를 기반으로 데이터베이스를 이용하여 페이지에 문제 정보를 보여주도록 수정해주세요. 문제 이름, 정답자 수, 문제 레벨의 정보가 보여야 합니다.
   - [ ] 리스트의 각 문제들을 눌렀을때, `/problems/:problem_id` 페이지로 이동하도록 해주세요.
 
 ### 3. GET `/problems/:problem_id`
