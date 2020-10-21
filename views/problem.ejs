@@ -10,12 +10,12 @@
         <div class="train-contents">
           <h2><%= problem.title %></h2>
           <span class="train-desc"><%= problem.description %></span>
-          <p>난이도 : <%= problem.difficulty_level %></p>
-          <p>정답자 수 : <%= problem.completed_users %></p>
+          <p class="desc-detail">난이도 : <%= problem.difficulty_level %></p>
+          <p class="desc-detail">정답자 수 : <%= problem.completed_users %></p>
         </div>
-        <form method="post" action="/problems/<%= problem.id %>">
-          <textarea name="script" id="code-editor"></textarea>
+        <form class="form-container" method="post" action="/problems/<%= problem.id %>">
           <button type="submit" class="submit-button">SUBMIT</button>
+          <textarea name="script" id="code-editor"></textarea>
         </form>
         <div class="buttons-container">
           <a href="/problems">

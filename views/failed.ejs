@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head') %>
+
+<body>
+  <div class="message-container">
+    <div class="modal">
+      <span class="message-title">Try again..</span>
+      <div class="results-container">
+        <% for (let i = 0; i < results.length; i++) { %>
+        <div class="result-container">
+          <div class="result-column">
+            <div class="result-desc">
+              <label>입력값 ></label>
+              <%= solutions[i].code%>
+            </div>
+            <div class="result-desc">
+              <label>결괏값 ></label>
+              <%= solutions[i].solution %>
+            </div>
+            <div class="result-desc">
+              <label>실행결과 ></label>
+              <%= results[i] %>
+            </div>
+          </div>
+          <div class="result-status">
+            <% if (results[i]) { %>
+            <i class="far fa-check-circle"></i>
+            <% } else { %>
+            <i class="far fa-times-circle"></i>
+            <% } %>
+          </div>
+        </div>
+        <% } %>
+      </div>
+      <div class="test-result">테스트 결과 : <%= results.length %>개 중 <%= count %>개 성공</div>
+      <div><%= error %></div>
+      <div class="result-button-wrap">
+        <a href="/problems">
+          <i class="modal-button fas fa-bars"></i>
+        </a>
+        <a href="/problems/<%= problem.id %>">
+          <i class="modal-button fas fa-arrow-left"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

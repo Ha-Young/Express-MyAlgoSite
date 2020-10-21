@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head') %>
+
+<body>
+  <div class="message-container">
+    <div class="modal">
+      <span class="message-title">Success!!</span>
+      <span>통과 했습니다. 다음 문제를 풀어보세요 !</span>
+      <div class="result-button-wrap">
+      <a href="/problems">
+        <i class="modal-button fas fa-bars"></i>
+      </a>
+      <% const nextId = problem.id + 1 %>
+      <% if (nextId < 5) { %>
+      <a href="/problems/<%= nextId %>">
+        <i class="modal-button fas fa-arrow-right"></i>
+      </a>
+      <% } %>
+    </div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,10 +1,20 @@
 /* public */
 
-html, body{
+html, body {
   width: 100%;
   height: 100%;
   padding: 0;
   margin: 0;
+}
+
+body {
+  background-color: #181818;
+  background-image:
+    radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 10px),
+    radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 10px),
+    radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 3px);
+  background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+  background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
 }
 
 a {
@@ -21,19 +31,17 @@ i {
   font-size: 20px;
 }
 
+label {
+  opacity: 0.4;
+  margin-right: 10px;
+}
+
 
 /* login */
 
 .login-container {
   width: 100%;
   height: 100%;
-  background-color: #181818;
-  background-image:
-    radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 10px),
-    radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 10px),
-    radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 3px);
-  background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
-  background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -45,6 +53,8 @@ i {
   margin-bottom: 50px;
   font-family: 'Press Start 2P', cursive;
   color: white;
+  transform: rotateX(360deg);
+  transition: all 3s linear;
 }
 
 .login-button-container {
@@ -114,17 +124,10 @@ i {
   height: 100%;
   padding: 0;
   margin: 0;
-  background-color: #181818;
-  background-image:
-    radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 10px),
-    radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 10px),
-    radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 3px);
-  background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
-  background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
 }
 
 .problems-container {
-  margin: 80px auto;
+  margin: 180px auto;
   display:grid;
   grid-template-columns: 400px 400px;
   grid-template-rows: 250px 250px;
@@ -132,6 +135,11 @@ i {
   grid-column-gap: 40px;
   grid-row-gap: 40px;
   justify-content: center;
+}
+
+.border {
+  border-right: 1px solid rgb(173, 173, 173);
+  height: 60px;
 }
 
 /* each problem */
@@ -180,6 +188,17 @@ i {
   margin-top: 15px;
 }
 
+.form-container {
+  position: relative;
+}
+
+.submit-button {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  z-index: 9999;
+}
+
 .train-button, .submit-button {
   height: 35px;
   width: 80px;
@@ -224,4 +243,95 @@ i {
 .train-desc {
   line-height: 1.6;
   color: rgb(235, 235, 235);
+}
+
+.desc-detail {
+  opacity: 0.6;
+}
+
+/* message */
+.message-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  height: 500px;
+  width: 800px;
+  background-color: rgba(0, 0, 0, 0.39);
+  border: 1px solid rgb(107, 107, 107);
+  color: white;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.message-title {
+  font-size: 50px;
+  font-family: 'Press Start 2P', cursive;
+  margin-bottom: 80px;
+}
+
+.results-container {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.result-container {
+  width: 200px;
+  height: 90px;
+  border: 1px solid white;
+  margin: 20px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.result-desc:first-child {
+  margin-top: 8px;
+}
+
+.result-desc {
+  height: 20px;
+  font-size: 16px;
+  margin-bottom: 5px;
+  margin-left: 20px;
+  color: rgb(226, 226, 226);
+}
+
+.result-status {
+  position: absolute;
+  top: -30px;
+  display: flex;
+  justify-content: center;
+}
+
+.fa-check-circle {
+  color: rgb(159, 223, 159);
+}
+
+.fa-times-circle {
+  color: #D84E32;
+}
+
+.test-result {
+  font-size: 16px;
+}
+
+.result-button-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: 0;
+}
+
+.modal-button {
+  margin: 30px;
 }
