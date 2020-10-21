@@ -1,5 +1,9 @@
-<h1>오답</h1>
-<p><%= info.code %></p>
-<p>결과값: <%= info.answer %> / 기대값: <%= info.solution %></p>
+<h1>다시 풀어보세요</h1>
+<% if (info.error) { %>
+  <p><%= info.error %> </p>
+<% } else { %>
+  <p><%= info.failureData.code %></p>
+  <p>결과값: <%= info.failureData.answer %> / 기대값: <%= info.failureData.solution %></p>
+<% } %>
 <a href='/problems/<%= info.problemNumber %>'>문제로 돌아가기</a></br>
 <a href='/'>문제 목록으로 돌아가기</a>

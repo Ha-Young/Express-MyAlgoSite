@@ -37,19 +37,32 @@ exports.submitCode = async function(req, res, next) {
     for (let i = 0; i < tests.length; i++) {
       const code = tests[i].code;
       const solution = tests[i].solution;
-      const answer = new Function('solution', `return ${code};`)(submittedFunction);
-      const failureInfo = {
-        problemNumber: req.params.problemNumber
+      let answer;
+      let info = {
+        error: null,
+        failureData: {},
+        problemNumber: req.params.problemNumber,
       };
+
+      try {
+        answer = new Function('solution', `return ${code};`)(submittedFunction);
+        console.log(answer);
+      } catch (err) {
+        info.error = err;
+
+        res.render('failure', { info });
+
+        return;
+      }
 
       if (answer !== solution) {
         isCorrect = false;
 
-        failureInfo.code = code;
-        failureInfo.answer = answer;
-        failureInfo.solution = solution;
+        info.failureData.code = code;
+        info.failureData.answer = answer;
+        info.failureData.solution = solution;
 
-        res.render('failure', { info: failureInfo });
+        res.render('failure', { info });
 
         return;
       }
@@ -57,6 +70,6 @@ exports.submitCode = async function(req, res, next) {
 
     res.render('success');
   } catch (err) {
-    next(err);
+    res.render('error', { err });
   }
 };
