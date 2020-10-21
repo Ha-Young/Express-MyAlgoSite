@@ -6,41 +6,56 @@ const ensureAuthenticated = (req, res, next) => {
 };
 
 const checkTestResults = (req, res, next) => {
-  // 판단 로직을 더 줄일 방법은 없을까 고민해보기
+  // try {
+  //   const results = [];
+  //   const submittedSolution = req.body.solution;
+  //   const tests = req.problem.tests;
+  //   const problemId = req.params.problem_id;
+  //   const username = req.user.username;
 
-  const results = [];
-  const submittedSolution = req.body.solution;
-  const tests = req.problem.tests;
+  //   try {
+  //     tests.forEach((test) => {
+  //       const newFunc = submittedSolution + 'return ' + test.code;
+  //       const result = new Function(newFunc)();
 
-  tests.forEach((test) => {
-    const newFunc = submittedSolution + 'return ' + test.code;
-    const result = new Function(newFunc)();
+  //       if (result === test.solution) {
+  //         results.push([true, result]);
+  //       } else {
+  //         results.push([false, result]);
+  //       }
+  //     });
+  //   } catch (error) {
+  //     return res.render('failure', {
+  //       problemId,
+  //       failureProblem: error.message,
+  //       expectedAnswer: error.message,
+  //       wrongAnswer: error.message,
+  //       username,
+  //     });
+  //   }
 
-    if (result === test.solution) {
-      results.push([true, result]);
-    } else {
-      results.push([false, result]);
-    }
-  });
+  //   if (results.every(result => result[0] === true)) {
+  //     return res.render(
+  //       'success',
+  //       { username }
+  //     );
+  //   }
 
-  if (results.every((result) => result[0] === true)) {
-    return res.render(
-      'success',
-      { username: req.user.username });
-  }
-
-  const failureIndex = results.findIndex((result) =>
-    result[0] === false
-  );
-
-  return res.render(
-    'failure',
-    {
-      currentProblemNumber: req.params.problem_id,
-      failureProblem: tests[failureIndex],
-      wrongAnswer: results[failureIndex][1]
-    }
-  );
+  //   const failureIndex = results.findIndex(result => result[0] === false);
+  //   return res.render(
+  //     'failure',
+  //     {
+  //       problemId,
+  //       failureProblem: tests[failureIndex].code,
+  //       expectedAnswer: tests[failureIndex].solution,
+  //       wrongAnswer: results[failureIndex][1],
+  //       username,
+  //     }
+  //   );
+    throw new Error('실패!');
+  // } catch (error) {
+  //   next(error);
+  // }
 };
 
 module.exports = {

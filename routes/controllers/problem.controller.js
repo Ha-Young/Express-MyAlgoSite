@@ -12,9 +12,14 @@ exports.getAll = async (req, res, next) => {
 
 exports.getTargetProblem = async (req, res, next) => {
   const { problem_id } = req.params;
-
   try {
     const targetProblem = await Problem.findOne({ id: problem_id });
+    if (!targetProblem) {
+      return next({
+        status: 404,
+        message: 'Not Found',
+      });
+    }
     req.problem = targetProblem;
     next();
   } catch (error) {

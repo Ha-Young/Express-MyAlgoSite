@@ -1,20 +1,266 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,500;0,700;1,400&display=swap');
+
+* {
+  box-sizing: border-box;
+}
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  font: Ubuntu, "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: var(--background-color);
 }
 
 a {
-  color: #00B7FF;
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+  color: var(--color-black);
 }
 
 ul {
   list-style: none;
 }
-.problem-container {
-  border: 1px solid black;
+
+button:focus {
+  border: 0;
+  outline: 0;
 }
 
-li {
+.login-container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 90vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-title {
+  font-size: 45px;
+  font-weight: 700;
+  color: var(--color-black);
+  text-transform: uppercase;
+  transition: color 0.5s linear, border 0.5s linear;
+  letter-spacing: 10px;
+  border-bottom: 1px solid var(--color-black);
+}
+.login-title:hover {
+  color: var(--color-red);
+  border-bottom: 1px solid var(--color-red);
+}
+
+.login-button {
+  height: 40px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 30px;
+  background-color: var(--color-red);
+  font-size: 15px;
+  text-transform: uppercase;
+  transition: background-color 0.5s linear;
+}
+.login-button:hover {
+  background-color: var(--color-black);
+  color: var(--color-red);
+  cursor: pointer;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 50px;
+  width: 100%;;
+  height: 100px;
+  background-color: var(--color-black);
+}
+.header-title {
+  color: var(--color-red);
+  text-transform: uppercase;
+  font-size: 20px;
+  letter-spacing: 5px;
+}
+.header-sub-info {
+  display: flex;
+  width: 30%;
+  justify-content: flex-end;
+}
+.header-username {
+  color: var(--color-light-grey);
+  margin-right: 20px;
+}
+.logout-button {
+  height: 20px;
+  padding: 0 10px;
+  border: none;
+  border-radius: 30px;
+  background-color: var(--color-red);
+  color: var(--color-white);
+  font-size: 12px;
+  text-transform: uppercase;
+  transition: background-color 0.5s linear, color 0.5s linear;
+}
+.logout-button:hover {
+  background-color: var(--color-black);
+  color: var(--color-red);
+  cursor: pointer;
+}
+
+.main {
+  padding: 30px 50px;
+  margin: 0 auto;
+  width: 70vw;
+  color: var(--color-light-grey);
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.problem-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 3.5fr 1.5fr;
+  width: 100%;
+  background-color: var(--color-light-grey);
+  margin: 20px 0;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+.problem-container:hover {
+  background-color: var(--color-red);
+  color: var(--color-white);
+}
+
+.problem-title {
+  align-self: center;
+}
+.problem-sub-info {
+  display: flex;
+  justify-content: flex-end;
+  align-self: center;
+}
+.level {
+  font-weight: 500;
+}
+.completed-user {
+  margin-left: 50px;
+}
+.completed-user span:nth-child(2) {
+  font-weight: 700;
+}
+
+.solution-container {
+  padding: 30px 50px;
+  margin: 0 auto;
+  width: 60vw;
+}
+.solution-title {
+  color: var(--color-light-grey);
+  font-size: 30px;
+}
+.solution-sub-info {
+  display: flex;
+  background-color: var(--color-red);
+}
+.solution-sub-info span {
+  margin: 5px 10px;
+  color: var(--color-white);
+  font-size: 15px;
+}
+.solution-description {
+  background-color: var(--color-light-grey);
+  margin: 0 0 20px 0;
+  padding: 5px 10px;
+  font-size: 15px;
+}
+.solution-container form {
+  display: flex;
+  flex-direction: column;
+}
+.submit-button,
+.next-button,
+.retry-button,
+.home-button {
+  align-self: flex-end;
+  margin-top: 20px;
+  height: 40px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 30px;
+  background-color: var(--color-red);
+  color: var(--color-white);
+  font-size: 15px;
+  text-transform: uppercase;
+  transition: all 0.5s linear;
+}
+
+.submit-button:hover,
+.next-button:hover,
+.retry-button:hover,
+.home-button:hover {
+  background-color: var(--color-black);
+  color: var(--color-red);
+  cursor: pointer;
+}
+
+.success-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  padding: 30px 50px;
+  width: 100vw;
+}
+
+.success-container span {
+  font-size: 30px;
+  color: var(--color-light-grey);
+}
+
+.failure-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  padding: 30px 50px;
+  width: 100vw;
+}
+
+.failure-message {
+  font-size: 30px;
+  color: var(--color-light-grey);
+}
+.test-info h5 {
+  font-size: 15px;
+  font-weight: 500;
+  margin: 0;
+  color: var(--color-light-grey);
+  text-transform: uppercase;
+}
+.test-info h5:nth-child(5) {
+  color: var(--color-red);
+}
+
+.test-info div {
+  font-size: 18px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  background-color: var(--color-light-grey);
+  width: 30vw;
+  height: 5vh;
+  padding: 10px;
+  line-height: 30px;
+  border-radius: 10px;
+}
+
+.buttons {
+  width: 30vw;
+  display: flex;
+  justify-content: space-evenly;
 }

@@ -1,12 +1,23 @@
 <%# views/failure.ejs %>
 <% extend('layout') %>
+<% include ./header %>
 
-틀린 테스트 <%= failureProblem.code %>
-이게 맞지롱 <%= failureProblem.solution %>
-입력한 정답 <%= wrongAnswer %>
-<form action='/problems/<%= currentProblemNumber %>' method='GET'>
-  <button type='submit'>다시 풀기</button>
-</form>
-<form action='/' method='GET'>
-  <button type='submit'>다른 문제 풀기</button>
-</form>
+<div class='failure-container'>
+  <h2 class='failure-message'>Never give up, retry! 👊</h2>
+  <div class='test-info'>
+    <h5>Failed Test</h5>
+    <div><%= failureProblem %></div>
+    <h5>Expected Answer</h5>
+    <div><%= expectedAnswer %></div>
+    <h5>Your Answer</h5>
+    <div><%= wrongAnswer %></div>
+  </div>
+  <div class="buttons">
+    <form action='/problems/<%= problemId %>' method='GET'>
+      <button type='submit' class='retry-button'>Retry</button>
+    </form>
+    <form action='/' method='GET'>
+      <button type='submit' class='home-button'>Home</button>
+    </form>
+  </div>
+</div>

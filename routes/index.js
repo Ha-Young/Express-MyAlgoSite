@@ -4,7 +4,10 @@ const { ensureAuthenticated } = require('./middlewares');
 const { getAll } = require('./controllers/problem.controller');
 
 router.get('/', ensureAuthenticated, getAll, (req, res, next) => {
-  res.render('index', { problems: req.problems });
+  res.render('index', {
+    problems: req.problems,
+    username: req.user.username,
+  });
 });
 
 module.exports = router;

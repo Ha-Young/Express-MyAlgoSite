@@ -1,25 +1,20 @@
 <%# views/problem.ejs %>
 <% extend('layout') %>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Document</title>
-    <link rel='stylesheet' href='/lib/codemirror.css'>
-    <link rel='stylesheet' href='/stylesheets/problem.css'>
-    <link rel='stylesheet' href='/mode/material-ocean.css'>
-  </head>
-  <body>
-    <h1><%= problem.title %></h1>
-    <span>Level <%= problem.difficulty_level %></span>
-    <span>Completed Users <%= problem.completed_users %></span>
-    <p><%= problem.description %></p>
-    <form action='/problems/<%= problem.id %>' method='POST'>
-      <textarea name='solution' id='code'></textarea>
-      <button type='submit'>Submit</button>
-    </form>
-    <!-- differ -->
-    <script src='/lib/codemirror.js'></script>
-    <script src='/mode/javascript.js'></script>
-    <script src='/javascripts/index.js'></script>
-  </body>
-</html>
+<% include ./header %>
+
+<div class='solution-container'>
+  <h2 class='solution-title'><%= problem.title %></h2>
+  <div class='solution-sub-info'>
+    <span>🎖Level <%= problem.difficulty_level %></span>
+    <span>🙆‍♀️Completed Users <%= problem.completed_users %></span>
+  </div>
+  <p class='solution-description'><%= problem.description %></p>
+  <form action='/problems/<%= problem.id %>' method='POST'>
+    <textarea name='solution' id='code'></textarea>
+    <button type='submit' class='submit-button'>Attempt</button>
+  </form>
+</div>
+
+<script src='/codemirror/lib/codemirror.js'></script>
+<script src='/codemirror/mode/javascript.js'></script>
+<script src='/javascripts/code.js'></script>

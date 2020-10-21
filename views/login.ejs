@@ -1,6 +1,9 @@
 <%# views/login.ejs %>
 <% extend('layout') %>
 
-<form action="/login/github" method="GET">
-  <button type="submit">Continue with Github</button>
-</form>
+<div class='login-container'>
+  <h1 class='login-title'>Codewars</h1>
+  <form action='/login/github' method='GET'>
+    <button type="submit" class='login-button'>Continue with Github</button>
+  </form>
+</div>

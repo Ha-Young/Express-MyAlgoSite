@@ -25,6 +25,9 @@ app.engine('ejs', require('express-ejs-extend'));
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
+app.use(express.json());
+app.use(express.urlencoded( { extended : false } ));
+
 passportConfig(passport);
 app.use(session({
   secret: process.env.SESSION_SECRET,
@@ -37,25 +40,27 @@ app.use(passport.session());
 
 app.use('/', index);
 app.use('/login', login);
+app.get('/logout', (req, res, next) => {
+  req.logout();
+  res.redirect('/login');
+});
 app.use('/problems', problems);
 app.use(express.static(path.join(__dirname, 'public')));
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
+app.use((err, req, res, next) => {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', {
+    username: req.user.username,
+  });
 });
 
 module.exports = app;

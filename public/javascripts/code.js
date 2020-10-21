@@ -1,7 +1,7 @@
 const code = CodeMirror.fromTextArea(document.getElementById('code'), {
   mode: 'javascript',
   lineNumbers: true,
-  theme: 'material-ocean',
+  theme: '3024-night',
   smartIndent:true,
   lineWrapping:true,
   tabSize:2,

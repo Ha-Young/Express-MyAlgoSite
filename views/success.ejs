@@ -1,7 +1,10 @@
 <%# views/success.ejs %>
 <% extend('layout') %>
+<% include ./header %>
 
-<%= username %> 님, 축하합니다!
-<form action='/' method='GET'>
-  <button type='submit'>다른 문제 풀기</button>
-</form>
+<div class='success-container'>
+  <span><%= username %> 님, 정답입니다!</span>
+  <form action='/' method='GET'>
+    <button type='submit' class='next-button'>다른 문제 풀기</button>
+  </form>
+</div>
