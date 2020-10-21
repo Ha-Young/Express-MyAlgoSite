@@ -12,7 +12,7 @@ router.get(
   passport.authenticate("github", { failureRedirect: "/login" }),
   (req, res, next) => {
     res.cookie("loginToken", req.user);
-    res.redirect("/problems");
+    res.redirect("/");
   }
 );
 

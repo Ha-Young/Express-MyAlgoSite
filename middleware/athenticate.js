@@ -3,16 +3,14 @@ const jwt = require("jsonwebtoken");
 
 const SECRET_KEY = process.env.JWT_KEY;
 
-function athenticate() {
-  return (req, res, next) => {
-    const token = req.cookies && req.cookies.loginToken;
+function athenticate(req, res, next) {
+  const token = req.cookies && req.cookies.loginToken;
 
-    jwt.verify(token, SECRET_KEY, (err, decoded) => {
-      if (err) return res.redirect("/login");
+  jwt.verify(token, SECRET_KEY, (err, decoded) => {
+    if (err) return res.redirect("/login");
 
-      next();
-    });
-  };
+    next();
+  });
 }
 
 module.exports = athenticate;

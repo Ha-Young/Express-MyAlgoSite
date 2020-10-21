@@ -7,9 +7,23 @@
         <h1 class="display-4"><%= data.title %></h1>
         <p class="lead"><%= data.description %></p>
         <hr class="my-4">
-        <p><b>Level:</b> <%= data.difficulty_level%> | <b>Solved Users:</b> <%= data.completed_users%></p>
+        <p><b>Level:</b> <%= data.difficulty_level %> | <b>Solved Users:</b> <%= data.completed_users %></p>
+        <hr class="my-4">
+        <h3>Examples</h3>
+        <% data.examples.forEach(function(example){ %>
+          <%- include("components/problem-example.ejs", { example }) %>
+        <% }) %>
         <form action="/problems/<%= data._id %>/verify" method="post">
-          <textarea id="code" name="code"></textarea>
+          <% if(userCode) { %>
+            <textarea id="code" name="code"><%= userCode%></textarea>
+          <% } else { %>
+            <textarea id="code" name="code">
+function solution(x){
+  let result;
+  return result;
+}
+            </textarea>
+          <% } %>
           <div class="article-buttons">
             <a class="btn btn-link btn-lg" href="/problems" role="button">Back</a>
             <button class="btn btn-primary btn-lg" type="submit">Submit</button>

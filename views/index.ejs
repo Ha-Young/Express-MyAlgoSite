@@ -1,27 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <%- include("head") %>
-  <body>
-    <div class="container">
-      <ul class="nav nav-pills justify-content-center">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Level 1</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Level 2</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Level 3</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="#">Log out</a>
-        </li>
-      </ul>
-    </div>
-    <div class="container">
-      <% data.forEach(function(problem){ %>
-        <%- include("components/problem-card.ejs", { problem }) %>
-      <% }) %>
+  <body class="text-center" cz-shortcut-listen="true">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+      <header class="masthead mb-auto">
+        <div class="inner">
+          <h3 class="masthead-brand">Code Wars</h3>
+        </div>
+      </header>
+      <main role="main" class="inner cover">
+        <h1 class="cover-heading">Hi! <%= userName%></h1>
+        <hr>
+        <p class="lead">Codewars는 알고리즘 문제를 푸는 사이트 입니다... 심심하다면.. 한번 도전해 보세요...?</p>
+        <p class="lead">
+          <a href="/problems" class="btn btn-lg btn-secondary">도전.. 해보겠습니다..?</a>
+        </p>
+      </main>
     </div>
   </body>
 </html>

@@ -25,11 +25,11 @@ const githubAuth = new GitHubStrategy({
     const currentUser = await User.findOne({ id });
 
     if (currentUser) {
-      cb(null, jwt.sign(profile, SECRET_KEY));
+      cb(null, jwt.sign({ user: currentUser }, SECRET_KEY));
     } else {
       const newUser = await User.create({ id, username });
 
-      cb(null, { token: jwt.sign(newUser, SECRET_KEY) });
+      cb(null, { token: jwt.sign({ user: newUser }, SECRET_KEY) });
     }
   }
 );

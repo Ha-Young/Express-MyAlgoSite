@@ -18,7 +18,8 @@
     "mongoose": "^5.10.9",
     "nodemon": "^1.19.1",
     "passport": "^0.4.1",
-    "passport-github": "^1.1.0"
+    "passport-github": "^1.1.0",
+    "string-function-exec": "^0.5.15"
   },
   "devDependencies": {
     "eslint": "^7.11.0"
