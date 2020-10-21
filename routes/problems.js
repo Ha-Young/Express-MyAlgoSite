@@ -1,8 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const problemsController = require('./controllers/problems.controller');
+const {
+  getAll,
+  getOne,
+  submitCode,
+} = require('./controllers/problems.controller');
 
-router.get('/', problemsController.getAll);
-router.get('/:problemNumber', problemsController.getOne);
+router.get('/', getAll);
+router.get('/:problemNumber', getOne);
+router.post('/:problemNumber', submitCode);
 
 module.exports = router;

@@ -1,4 +1,27 @@
-<h1>문제</h1>
-<div><%= title %></div>
-<div><%= description %></div>
-<div><%= tests %></div>
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.min.css" integrity="sha512-xIf9AdJauwKIVtrVRZ0i4nHP61Ogx9fSRAkCLecmE2dL/U8ioWpDvFCAy4dcfecN72HHB9+7FfQj3aiO68aaaw==" crossorigin="anonymous" />
+  <title>Problem</title>
+</head>
+<body>
+  <h1>문제<%= problemNumber %></h1>
+  <h3><%= title %></h3>
+  <p><%= description %></p>
+  <form method='POST' action=<%= `/problems/${problemNumber}` %>>
+    <textarea id='editor' name='code'></textarea>
+    <input type='submit' value='제출'/>
+  </form>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.min.js" integrity="sha512-WWC1A/JchDFZ2ZGaNyMC7CmPFXGLI/6Ih7WN6YG0DX1NGMkW5lqCVFxCmEx3e56Z7iqdQGpO0f+m2t9CJhdb2Q==" crossorigin="anonymous"></script>
+<script>
+  CodeMirror.fromTextArea(document.querySelector('#editor'), {
+    lineNumbers: true,
+    tabSize: 2,
+    mode: 'javascript',
+    matchBrackets: true,
+  }).setValue('function solution() { }');
+</script>
+</html>
