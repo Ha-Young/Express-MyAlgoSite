@@ -1,0 +1,17 @@
+@import 'base';
+
+body {
+  background-color: coral;
+}
+
+.container {
+  background-color: #fff;
+  margin: 1em;
+  padding: 10px;
+
+  button {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

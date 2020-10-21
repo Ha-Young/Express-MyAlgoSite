@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/stylesheets/css/failure.css">
+  <title>Document</title>
+</head>
+<body>
+  <h1>실패!</h1>
+  <div class="container">
+    <% if (error) { %>
+      실행 에러!
+    <% } else { %>
+      테스트 케이스 실패!
+    <% } %>
+
+    <% if (error) { %>
+      실행에러 - <%= error %>
+    <% } else { %>
+      <ul>
+        <% for( let i = 0; i < testResults.length; i++ ) { %>
+          <li>
+            <%= testResults[i].passed ? `${i+1}번 Test passed` : `${i+1}번 Test failed` %>
+          </li>
+        <% } %>
+      </ul>
+    <% } %>
+  </div>
+</body>
+</html>
