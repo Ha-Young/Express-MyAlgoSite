@@ -34,6 +34,20 @@ body {
   padding: 10px;
 }
 
+.container li {
+  border: 1px solid black;
+  margin: 10px;
+  padding: 1em;
+}
+
+.container li.success {
+  color: yellowgreen;
+}
+
+.container li.failed {
+  color: red;
+}
+
 .container button {
   position: relative;
   left: 50%;

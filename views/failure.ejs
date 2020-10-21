@@ -10,21 +10,35 @@
   <h1>실패!</h1>
   <div class="container">
     <% if (error) { %>
-      실행 에러!
+      <h2>
+        실행 에러!
+      </h2>
     <% } else { %>
-      테스트 케이스 실패!
+      <h2>
+        테스트 케이스 실패!
+      </h2>
     <% } %>
 
+    <br>
+
     <% if (error) { %>
-      실행에러 - <%= error %>
+      <%= error %>
     <% } else { %>
-      <ul>
-        <% for( let i = 0; i < testResults.length; i++ ) { %>
-          <li>
+      <% for( let i = 0; i < testResults.length; i++ ) { %>
+        <ul>
+          <li class="<%= testResults[i].passed ? 'success' : 'failed' %>">
             <%= testResults[i].passed ? `${i+1}번 Test passed` : `${i+1}번 Test failed` %>
           </li>
-        <% } %>
-      </ul>
+          <li>
+            actual -
+            <%= testResults[i].actual %>
+          </li>
+          <li>
+            expected -
+            <%= testResults[i].expected %>
+          </li>
+        </ul>
+      <% } %>
     <% } %>
   </div>
 </body>
