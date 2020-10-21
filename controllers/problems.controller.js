@@ -26,7 +26,9 @@ const problemsController = {
         const expected = test.solution;
 
         try {
-          actual = new Function('solution', `return ${test.code}`)(solution).toString();
+          const executionResult = new Function('solution', `return ${test.code}`)(solution);
+
+          actual = executionResult ? executionResult.toString() : undefined;
         } catch (error) {
           console.log('실행에러 발생! => ', error);
           allPass = false;
