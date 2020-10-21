@@ -2,6 +2,7 @@
 @import './_variables.css';
 
 @import './_global.css';
+@import './_message.css';
 @import './_login.css';
 @import './_header.css';
 @import './_problemsList.css';

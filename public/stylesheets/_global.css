@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Noto+Sans+KR:wght@300;400;500&display=swap');
+
 body {
   font-family: 'Fira Code', 'Noto Sans KR', sans-serif;
   width: 100%;
@@ -11,16 +13,4 @@ body {
 a {
   text-decoration: none;
   color: white;
-}
-
-.success {
-  background: rgb(118, 155, 255);
-}
-
-.failure {
-  background: rgb(255, 215, 115);
-}
-
-.error {
-  background: salmon;
 }
