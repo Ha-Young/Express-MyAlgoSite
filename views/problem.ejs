@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+
+    <script src="/codemirror/lib/codemirror.js"></script>
+    <link rel="stylesheet" href="/codemirror/lib/codemirror.css" />
+    <script src="/codemirror/mode/javascript/javascript.js"></script>
+    <script src="/codemirror/addon/edit/closetag.js"></script>
+    <link rel="stylesheet" href="/codemirror/theme/dracula.css" />
+  </head>
+  <body>
+    <h1>Codewars</h1>
+    <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
+
+    <h1><%=title%></h1>
+    <ul>
+      <li>난이도 <%=level%></li>
+      <li>통과한 사람 <%=completeUsers%></li>
+    </ul>
+    <div class="problem-grid-container">
+      <div><%=description%></div>
+      <form action="/problem/<%=id%>" method="POST">
+        <textarea id="editor" name="code"></textarea>
+        <button type="submit">submit</button>
+      </form>
+      <script>
+        const editor = CodeMirror.fromTextArea(
+          document.getElementById('editor'),
+          {
+            mode: 'javascript',
+            theme: 'dracula',
+            autoCloseTags: true,
+            lineNumbers: true,
+          }
+        );
+      </script>
+    </div>
+  </body>
+</html>
