@@ -8,6 +8,7 @@ const setPassport = require('./utils/auth');
 const index = require('./routes/index');
 const auth = require('./routes/auth');
 const problems = require('./routes/problems');
+const { isAuthenticated } = require('./middlewares/isAuthenticated');
 
 const app = express();
 
@@ -28,9 +29,9 @@ setPassport();
 app.use(passport.initialize()); // initialize
 app.use(passport.session()); // 만약 있다면 세션으로부터 auth restore
 
-app.use('/', index);
 app.use('/auth', auth);
-app.use('/problems', problems);
+app.use('/problems', isAuthenticated, problems);
+app.use('/', isAuthenticated, index);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
