@@ -6,18 +6,28 @@ exports.getProblem = async (req, res, next) => {
   try {
     const problemId = req.params.problem_id;
     const problem = await Problem.findOne({ _id: problemId });
-
-    console.log(problem)
+    
     res.render('problem', { problem: problem });
   } catch (err) {
     next(err);
   }
 }
 
-// exports.create = async (req, res, next) => {
-//   try {
+exports.submitAnswer = async (req, res, next) => {
+  try {
+    const problemId = req.params.problem_id;
+    const code = req.body.code;
+    const { tests } = await Problem.findOne({ _id: problemId });
 
-//   } catch (err) {
+    let isCorrect = false;
+    const backTofunc = new Function(`return ${code}`);
 
-//   }
-// }
+    if (isCorrect) {
+      res.render('success');
+    } else {
+      res.render('failure');
+    }
+  } catch (err) {
+    next(err);
+  }
+};

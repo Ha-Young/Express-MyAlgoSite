@@ -14,7 +14,10 @@ const ProblemSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
-  completed_users: Number,
+  completed_users: {
+    type: Number,
+    default: 0,
+  },
   solution_count: Number,
   difficulty_level: {
     type: Number,

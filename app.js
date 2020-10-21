@@ -80,7 +80,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(session({
-  secret: 'keyboard cat',
+  secret: process.env.SESSION_SECRET,
   resave: true,
   saveUninitialized: true
 }));
@@ -117,18 +117,10 @@ async function save() {
   try {
     for (let i = 0; i < problems.length; i++) {
       await Problem(problems[i]).save();
-      console.log('save');
     }
   } catch (err) {
     console.log(err);
   }
-
 }
-// const cm = new CodeMirror.fromTextArea(document.findElementById('editor'));
 
-// const Problem = require('../../models/Problem');
-
-// const save = () => {
-//     ProblemSchema
-//   };
 module.exports = app;

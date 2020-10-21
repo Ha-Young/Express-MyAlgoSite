@@ -1,10 +1,14 @@
 * {
   box-sizing: border-box;
 }
+
 body {
-  text-align: center;
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+section {
+  width: 100%
 }
 
 a {
@@ -40,7 +44,7 @@ button {
   font-size: large;
 }
 
-.a :hover {
+a :hover {
   background-color: #1197cc;
   transition: all 0.5s ease-in;
 }
@@ -49,11 +53,11 @@ button {
   margin-bottom: 8px;
 }
 
-
 .code-box-area {
   width: 500px;
   height: 200px;
   margin: auto;
+  text-align: left;
 }
 
 .code-box-btn {
@@ -61,4 +65,8 @@ button {
   margin-top: 16px;
   border-radius: 8px;
   background-color: lightgray;
+}
+
+.code-box-btn :hover {
+  background-color: gray;
 }

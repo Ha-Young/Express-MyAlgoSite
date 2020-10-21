@@ -4,6 +4,6 @@ const problemsController = require('../controllers/problems.controller');
 
 router.get('/:problem_id', problemsController.getProblem);
 
-router.post('/:problem_id');
+router.post('/:problem_id', problemsController.submitAnswer);
 
 module.exports = router;

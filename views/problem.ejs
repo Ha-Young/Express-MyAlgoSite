@@ -18,8 +18,12 @@
   <% } %>
   <div class='code-box'>
     <form action='/problem/<%=problem._id%>' method='POST'>
-      <textarea id='codemirror' name='code' class='code-box-area'>function problem () {} </textarea>
+      <textarea id='codemirror' name='code' class='code-box-area'>function solution () { return } </textarea>
       <button class='code-box-btn' type='submit'>제출</button>
     </form>
   </div>
 </div>
+
+<script src="/lib/codemirror.js"></script>
+<script src="/mode/javascript/javascript.js"></script>
+<script src='/javascripts/index.js''></script>
