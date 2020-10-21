@@ -61,14 +61,12 @@ app.use(session({
   saveUninitialized: false
 }));
 
-
-const port = process.env.PORT;
 const db = mongoose.connection;
 
 mongoose.connect(
-  `mongodb://localhost:${port}/`,
+  `mongodb://localhost:27017/codewars`,
   {
-    dbName: 'users',
+    dbName: 'codewars',
     useNewUrlParser: true,
     useCreateIndex:true,
     useUnifiedTopology: true,

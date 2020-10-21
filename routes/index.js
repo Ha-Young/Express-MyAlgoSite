@@ -1,14 +1,24 @@
 const express = require('express');
 const router = express.Router();
+const Problem = require('../models/Problem');
 
 /* GET home page. */
-router.get('/', (req, res, next) => {
-  if (req.session.passport) {
-    return res.render('index', { title: 'codewars' });
-  }
+router.get('/', async function (req, res, next) {
+  try {
+    const problemList = await Problem.find();
 
-  res.redirect('/login');
-  // console.log('session', req.session.passport);
+    if (req.session.passport) {
+      return res.render('index', {
+        problemList: problemList
+      });
+    }
+
+    return res.redirect('/login');
+  } catch (err) {
+    return res.status(400).json({
+      error: 'error'
+    });
+  }
 });
 
 module.exports = router;

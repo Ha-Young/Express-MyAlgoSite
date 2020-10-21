@@ -1,0 +1,43 @@
+body {
+  display: flex;
+  height: 90vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.problems-box {
+  display: flex;
+  width: 800px;
+  height: 400px;
+}
+
+a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 200px;
+  height: 400px;
+  text-decoration: none;
+  background-color: rgb(11, 11, 48);
+  border-radius: 10px;
+}
+
+a:link,
+a:visited,
+a:active {
+  color: grey;
+  text-decoration: none;
+}
+
+a:hover {
+  color: grey;
+  background-color: rgb(113, 11, 38);
+}
+
+.problem-detail {
+  padding: 30px;
+  font-size: 15px;
+}

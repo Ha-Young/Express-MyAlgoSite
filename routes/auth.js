@@ -9,9 +9,6 @@ router.get('/github',
 router.get('/github/callback',
   passport.authenticate('github', { failureRedirect: '/login'}),
   function (req, res) {
-    console.log('callback_Success')
-    console.log('session', req.session);
-    // console.log('Success req', req.session.passport.user);
     res.redirect('/');
   }
 );

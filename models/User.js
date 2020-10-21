@@ -12,12 +12,6 @@ const userSchema = new mongoose.Schema({
     required: true,
     trim: true
   }
-  // username: {
-  //   type: String,
-  //   unique: true,
-  //   required: true,
-  //   trim: true
-  // }
 });
 
 module.exports = mongoose.model('User', userSchema);
