@@ -1,13 +1,24 @@
 const express = require('express');
 const router = express.Router();
+const { ensureAuthenticated, checkTestResults } = require('./middlewares');
+const problemController = require('./controllers/problem.controller');
+const bodyParser = require('body-parser');
 
-// VerifyLogin middleware 추가 예정
-router.get('/problems/:problem_id', (res, req, next) => {
-  res.send('problems showing page');
-});
+router.use(bodyParser.json());
+router.use(express.urlencoded({ extended: false }));
 
-router.post('/problems/:problem_id', (res, req, next) => {
-  res.send('each problem page');
-});
+router.get('/:problem_id',
+  ensureAuthenticated,
+  problemController.getTargetProblem,
+  (req, res, next) => {
+    res.render('problem', { problem: req.problem });
+  }
+);
+
+router.post('/:problem_id',
+  ensureAuthenticated,
+  problemController.getTargetProblem,
+  checkTestResults
+);
 
 module.exports = router;

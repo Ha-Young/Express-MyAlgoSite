@@ -1,0 +1,12 @@
+<%# views/failure.ejs %>
+<% extend('layout') %>
+
+틀린 테스트 <%= failureProblem.code %>
+이게 맞지롱 <%= failureProblem.solution %>
+입력한 정답 <%= wrongAnswer %>
+<form action='/problems/<%= currentProblemNumber %>' method='GET'>
+  <button type='submit'>다시 풀기</button>
+</form>
+<form action='/' method='GET'>
+  <button type='submit'>다른 문제 풀기</button>
+</form>

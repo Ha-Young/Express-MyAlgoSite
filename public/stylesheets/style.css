@@ -6,3 +6,15 @@ body {
 a {
   color: #00B7FF;
 }
+
+ul {
+  list-style: none;
+}
+.problem-container {
+  border: 1px solid black;
+}
+
+li {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}

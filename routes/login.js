@@ -1,9 +1,19 @@
 const express = require('express');
+const passport = require('passport');
 const router = express.Router();
 
-// VerifyLogin middleware 추가 없음 - login, logout 모두 접속 가능
 router.get('/', (req, res, next) => {
-  res.send('login page');
+  if (req.isAuthenticated()) {
+    return res.redirect('/');
+  }
+  res.render('login');
 });
+
+router.get('/github', passport.authenticate('github'));
+
+router.get('/github/callback', passport.authenticate('github', {
+    failureRedirect: '/login',
+    successRedirect: '/',
+}));
 
 module.exports = router;
