@@ -1,36 +1,24 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <title>Codewars</title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-  <link rel="stylesheet" href='codemirror/lib/codemirror.css' />
-</head>
-
-<body>
-  <% if (!user) { %>
-  <a href='/login' id=>로그인을 하세요</a>
-  <% } %>
-  <% if (user) { %>
-  <h1>Codewars</h1>
-  <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
-  <div class='problems-container'>
-    <% for(var i=0; i<problems.length; i++){ %>
-    <a href='/problem/<%=problems[i]._id%>'>
-      <div class='problem'>
-        <h1><%= problems[i].title %></h1>
-        <div class='problem-level'>
-          <div>난이도<%= problems[i].difficulty_level %></div>
-          <div>solution<%= problems[i].solution_count %>개</div>
-          <div>푼사람<%= problems[i].completed_users %>명</div>
-        </div>
+<%# views/index.ejs %>
+<% extend('layout') %>
+<% if (!user) { %>
+<a href='/login' id=>로그인을 하세요</a>
+<% } %>
+<% if (user) { %>
+<h1>Codewars</h1>
+<h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
+<div class='problems-container'>
+  <% for(var i=0; i<problems.length; i++){ %>
+  <a href='/problem/<%=problems[i]._id%>'>
+    <div class='problem'>
+      <h1><%= problems[i].title %></h1>
+      <div class='problem-level'>
+        <div>난이도<%= problems[i].difficulty_level %></div>
+        <div>solution<%= problems[i].solution_count %>개</div>
+        <div>푼사람<%= problems[i].completed_users %>명</div>
       </div>
-    </a>
-    <% } %>
-  </div>
-  </ul>
+    </div>
+  </a>
   <% } %>
-  <script src='javascripts/index.js''></script>
-</body>
-
-</html>
+</div>
+</ul>
+<% } %>

@@ -70,13 +70,14 @@ passport.deserializeUser(async (user, done) => {
   }
 });
 
+
 app.use(express.static(path.join(__dirname, 'public')));
+app.engine('ejs', require('express-ejs-extend'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
-
+app.set('views', path.join(__dirname, 'views'));
 
 app.use(session({
   secret: 'keyboard cat',

@@ -11,9 +11,11 @@ a {
   text-decoration: none;
 }
 
-a :hover {
-  background-color: #1197cc;
-  transition: all 0.5s ease-in;
+button {
+  background: transparent;
+  cursor: pointer;
+  border: none;
+  outline: none;
 }
 
 .problems-container {
@@ -25,6 +27,7 @@ a :hover {
 }
 
 .problem {
+  margin: auto;
   width: 500px;
   height: 300px;
   background-color: #abd5e6;
@@ -37,11 +40,25 @@ a :hover {
   font-size: large;
 }
 
+.a :hover {
+  background-color: #1197cc;
+  transition: all 0.5s ease-in;
+}
+
 .problem-detail {
   margin-bottom: 8px;
 }
 
-.problem-code-box {
-  width: 200px;
+
+.code-box-area {
+  width: 500px;
   height: 200px;
+  margin: auto;
+}
+
+.code-box-btn {
+  padding: 8px 16px;
+  margin-top: 16px;
+  border-radius: 8px;
+  background-color: lightgray;
 }

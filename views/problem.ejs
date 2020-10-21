@@ -1,5 +1,7 @@
+<%# views/problem.ejs %>
+<% extend('layout') %>
 <h1>Codewars</h1>
-<h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
+
 <div class='problem-container'>
   <% if(problem) { %>
   <div class='problem'>
@@ -14,9 +16,10 @@
     </div>
   </div>
   <% } %>
-  <form action='/problem/<%=problem._id%>' method='POST'>
-    <textarea id='editor' class='problem-code-box' >function problem () {} </textarea>
-    <button type='submit'>제출</button>
-  </form>
+  <div class='code-box'>
+    <form action='/problem/<%=problem._id%>' method='POST'>
+      <textarea id='codemirror' name='code' class='code-box-area'>function problem () {} </textarea>
+      <button class='code-box-btn' type='submit'>제출</button>
+    </form>
+  </div>
 </div>
-</ul>
