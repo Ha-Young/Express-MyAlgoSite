@@ -34,3 +34,7 @@ a {
   padding: 10px;
   margin-bottom: 10px;
 }
+
+.jumbotron {
+  width: 100%;
+}

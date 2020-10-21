@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("head") %>
+  <body>
+    <div class="alert alert-primary" role="alert">
+      재밌는 문제를 만들어 주세요!
+    </div>
+    <form action="/problem-form/create/?problemId=<%= form._id %>" method="post">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input value="<%= form.title %>" name="title" type="text" class="form-control" id="title" placeholder="제목을 입력해주세요.">
+      </div>
+      <div class="form-group">
+        <label for="difficulty_level">Difficult level</label>
+        <select value="<%= form.difficulty_level %>" name="difficulty_level" class="form-control" id="difficulty_level">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea name="description" class="form-control" id="description" rows="5"><%= form.description %></textarea>
+      </div>
+      <br>
+      <h3>Examples: this will show when user don`t pass the problem</h3>
+      <br>
+      <div class="example-container">
+        <div class="form-row">
+          <div class="col">
+            <input value="<%= form.example_code1 %>" name="example_code1" type="text" class="form-control" placeholder="example : solution(2)">
+          </div>
+          <div class="col">
+            <input value="<%= form.example_answer1 %>" name="example_answer1" type="text" class="form-control" placeholder="answer : 123">
+          </div>
+          <div class="col">
+            <select name="example_answer1_type" class="custom-select">
+              <option value="string">String</option>
+              <option value="number">Number</option>
+              <option value="boolean">Boolean</option>
+              <option value="object">Object</option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <div class="form-row">
+          <div class="col">
+            <input value="<%= form.example_code2 %>" name="example_code2" type="text" class="form-control" placeholder="example : solution(2)">
+          </div>
+          <div class="col">
+            <input value="<%= form.example_answer2 %>" name="example_answer2" type="text" class="form-control" placeholder="answer : 123">
+          </div>
+          <div class="col">
+            <select name="example_answer2_type" class="custom-select">
+              <option value="string">String</option>
+              <option value="number">Number</option>
+              <option value="boolean">Boolean</option>
+              <option value="object">Object</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <br>
+      <h3>Tests: test code. please write type</h3>
+      <br>
+      <div class="test-container">
+        <div class="form-row">
+          <div class="col">
+            <input value="<%= form.test_arguments1 %>" name="test_arguments1" type="text" class="form-control" placeholder="arguments: Array, [2]">
+          </div>
+          <div class="col">
+            <input value="<%= form.test_result1 %>" name="test_result1" type="text" class="form-control" placeholder="result, 123">
+          </div>
+          <div class="col">
+            <select name="test_result1_type" class="custom-select">
+              <option value="string">String</option>
+              <option value="number">Number</option>
+              <option value="boolean">Boolean</option>
+              <option value="object">Object</option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <div class="form-row">
+          <div class="col">
+            <input value="<%= form.test_arguments2 %>" name="test_arguments2" type="text" class="form-control" placeholder='arguments: Array, [2, "text"]'>
+          </div>
+          <div class="col">
+            <input value="<%= form.test_result2 %>" name="test_result2" type="text" class="form-control" placeholder='result, "something"'>
+          </div>
+          <div class="col">
+            <select name="test_result2_type" class="custom-select">
+              <option value="string">String</option>
+              <option value="number">Number</option>
+              <option value="boolean">Boolean</option>
+              <option value="object">Object</option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <div class="button-container">
+          <a href="/problems" class="btn btn-lg btn-primary">Back</a>
+          <button type="submit" class="btn btn-lg btn-danger">Submit</button>
+        </div>
+      </div>
+    </form>
+  </body>
+</html>
