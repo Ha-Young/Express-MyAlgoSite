@@ -278,9 +278,15 @@ label {
   margin-bottom: 80px;
 }
 
+.flex {
+  display: flex;
+}
+
 .results-container {
   display: flex;
-  margin-bottom: 30px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .result-container {
@@ -312,11 +318,11 @@ label {
   justify-content: center;
 }
 
-.fa-check-circle {
-  color: rgb(159, 223, 159);
+.green {
+  color: rgb(132, 226, 132);
 }
 
-.fa-times-circle {
+.red {
   color: #D84E32;
 }
 

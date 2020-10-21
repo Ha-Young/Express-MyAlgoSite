@@ -55,29 +55,33 @@ exports.getResult = async (req, res, next) => {
   const id = req.params.problem_id;
   const script = req.body.script;
 
-  try {
-    const problem = await Problem.findOne({ id });
-    const solutions = problem.tests;
+  const problem = await Problem.findOne({ id });
+  const solutions = problem.tests;
 
-    const testResults = solutions.map(test => {
+  try {
+    let testResults;
+    try {
+    testResults = solutions.map(test => {
       const excutionSyntax = test.code;
       const answer = test.solution;
       const code = `
-        ((req, res, next) => {
-          try {
             ${script}
             ${excutionSyntax};
-          } catch (err) {
-            console.log(err);
-            throw new Error(err);
-          }
-        })();
       `;
-      const userAttempt = new vm.Script(code);
+      const userAttempt = new vm.Script(code, { timeout: 8000 });
       const context = vm.createContext({});
 
+
       return userAttempt.runInContext(context) === answer;
-    });
+    }); 
+    } catch (err) {
+      return res.render('failure', {
+        results: err.message,
+        solutions: err.message,
+        count: err.message,
+        problem: problem,
+      });
+    }
 
     const allPass = testResults.every(checkAllPass);
     const correctCount = getCount(testResults);
@@ -86,12 +90,13 @@ exports.getResult = async (req, res, next) => {
       ? res.render('success', {
           problem: problem,
         })
-      : res.render('failed', {
+      : res.render('failure', {
           results: testResults,
           solutions: solutions,
           count: correctCount,
           problem: problem,
         });
+
   } catch (err) {
     next(err);
   }
