@@ -1,2 +1,15 @@
-<h1>Problem</h1>
-<h2><%= problem_id %></h2>
+<%- include('partials/problem-detail') %>
+
+<div class="playground">
+  <div class="solution">
+    <div class="title">Solution</div>
+    <form class="solution-form" action="/problems/<%= problem.id %>" method="POST">
+      <textarea id="codearea" name="usercode"><%= 'function solution () {\n  \n}\n' %></textarea>
+        <div class="buttons">
+          <button type="submit">Submit</button>
+        </div>
+    </form>
+  </div>
+</div>
+
+<%- include('partials/codemirror') %>

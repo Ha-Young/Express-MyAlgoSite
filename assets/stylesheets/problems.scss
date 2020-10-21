@@ -7,14 +7,14 @@
 
   li {
     width: 100%;
-    margin: 20px 0;
+    margin: 10px 0;
 
-    padding: 20px;
+    padding: 20px 30px;
     border: 1px solid #e8ecf0;
-    border-radius: 5px;
 
     &:hover {
-      border: 1px solid #86bef7;
+      background-color: rgba(#fff, 0.6);
+      color: #000;
     }
 
     .title {

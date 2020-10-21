@@ -1,5 +1,6 @@
 form {
-  font-size: 2rem;
+  font-size: 1.6rem;
+  width: 80%;
 
   .form-control {
     display: flex;
@@ -21,13 +22,20 @@ form {
       font: inherit;
       color: inherit;
     }
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    margin-left: 170px;
+    font-size: 1.4rem;
 
     button {
       background: none;
       color: inherit;
-      min-width: 100px;
+      min-width: 120px;
       margin: 0.5rem;
-      padding: 0.2rem 0.5rem;
+      padding: 0.5rem 1rem;
       outline: none;
       font-size: inherit;
       font-family: inherit;
@@ -36,10 +44,11 @@ form {
 
       &:hover {
         cursor: pointer;
-        color: #86bef7;
+        background-color: rgba(#fff, 0.6);
+        color: #000;
 
         a {
-          color: #86bef7;
+          color: #000;
         }
       }
     }

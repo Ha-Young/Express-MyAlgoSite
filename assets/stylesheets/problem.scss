@@ -1,0 +1,59 @@
+.problem-detail {
+  padding: 0 10px;
+
+  span {
+    font-size: 0.7rem;
+  }
+}
+
+.playground {
+  display: flex;
+  margin: 20px 0;
+
+  .solution {
+    width: 100%;
+  }
+
+  .solution,
+  .output {
+    margin: 10px;
+
+    .title {
+      height: 35px;
+      background-color: #404049;
+      padding: 10px 20px;
+      font-size: 1.6rem;
+    }
+
+    &.success {
+      .title {
+        background-color: #01922d;
+      }
+    }
+
+    &.failure {
+      .title {
+        background-color: #970000;
+      }
+    }
+  }
+
+  .output {
+    width: 100%;
+    height: 475px;
+    border: 1px solid #404049;
+
+    .statistics,
+    .results {
+      padding: 10px;
+    }
+
+    &.success {
+      border-color: #01922d;
+    }
+
+    &.failure {
+      border-color: #970000;
+    }
+  }
+}

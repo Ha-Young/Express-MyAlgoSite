@@ -1,2 +1,25 @@
-<h1>Success</h1>
-<h2><%= problem_id %></h2>
+<%- include('partials/problem-detail') %>
+
+<div class="playground success">
+  <div class="solution">
+    <div class="title">Solution</div>
+    <textarea id="codearea" name="usercode"><%= usercode %></textarea>
+  </div>
+  <div class="output success">
+    <div class="title">Output</div>
+    <div class="statistics">Time: 936ms Passed: 0 Failed: 2</div>
+    <div class="results">Test Results:
+      Multiply
+      fixed tests
+      expected undefined to equal 1
+      Completed in 2ms
+      random tests
+      Completed in 2ms</div>
+  </div>
+</div>
+
+<form class="buttons" action="/" method="get">
+  <button type="submit">목록으로 돌아가기</button>
+</form>
+
+<%- include('partials/codemirror') %>
