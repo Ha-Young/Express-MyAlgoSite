@@ -1,5 +1,4 @@
 const express = require('express');
-const passport = require('passport');
 const verifyUser = require('./middlewares/authorization').verifyUser;
 
 const User = require('../models/User');
@@ -19,26 +18,7 @@ router.get('/', verifyUser, async (req, res, next) => {
   }
 });
 
-router.get('/login', (req, res, next) => {
-  res.render('login');
-});
-
-router.post('/login', passport.authenticate('github'));
-
-router.get('/logout', (req, res, next) => {
-  req.logout();
-  res.redirect('/login');
-});
-
-router.get('/auth/github/callback',
-  passport.authenticate('github', {
-    successRedirect: '/',
-    failureRedirect: '/login'
-  })
-);
-
 module.exports = router;
-
 
 // API TEST =================================
 
