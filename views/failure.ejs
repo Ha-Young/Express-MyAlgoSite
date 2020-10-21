@@ -1,7 +1,11 @@
 <div class="message">
   <div class="message-container failure">
     <h1>Failed...Try again!</h1>
+    <% if (failedCase.message) { %>
+    <p class="failed-message"><%= failedCase.message %></p>
+    <% } else { %>
     <p>Failed passing <span>'<%= failedCase.code %>'</span>..Your case is <span>'<%= failedCase.result %>'</span><br /><span>Expected '<%= failedCase.expected %>'</span></p>
+    <% } %>
     <a href="/">Back</a>
   </div>
 </div>

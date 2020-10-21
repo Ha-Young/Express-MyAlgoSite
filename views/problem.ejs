@@ -5,7 +5,8 @@
     <p><%= problem.description %></p>
   </div>
   <form action="<%= params %>" method="POST">
-    <textarea id="edit-area" name="user_solution" class="problem-soultion">function solution() {}</textarea>
+    <!-- <textarea id="edit-area" name="user_solution" class="problem-soultion">function solution() {}</textarea> -->
+    <textarea id="edit-area" name="user_solution" class="problem-soultion">function solution() { while (true) {} }</textarea>
     <textarea id="test-cases" name="test" class="problem-test-cases"><%= list %></textarea>
     <input type="submit" value="submit">
   </form>
