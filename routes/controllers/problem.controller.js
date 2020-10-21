@@ -61,19 +61,18 @@ exports.getResult = async (req, res, next) => {
   try {
     let testResults;
     try {
-    testResults = solutions.map(test => {
-      const excutionSyntax = test.code;
-      const answer = test.solution;
-      const code = `
+      testResults = solutions.map(test => {
+        const excutionSyntax = test.code;
+        const answer = test.solution;
+        const code = `
             ${script}
             ${excutionSyntax};
       `;
-      const userAttempt = new vm.Script(code, { timeout: 8000 });
-      const context = vm.createContext({});
+        const userAttempt = new vm.Script(code, { timeout: 8000 });
+        const context = vm.createContext({});
 
-
-      return userAttempt.runInContext(context) === answer;
-    }); 
+        return userAttempt.runInContext(context) === answer;
+      });
     } catch (err) {
       return res.render('failure', {
         results: err.message,
@@ -96,7 +95,6 @@ exports.getResult = async (req, res, next) => {
           count: correctCount,
           problem: problem,
         });
-
   } catch (err) {
     next(err);
   }
