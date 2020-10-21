@@ -62,9 +62,13 @@
   color: red;
 }
 
+h2 {
+  margin-bottom: 10px;
+}
+
 pre {
   font-size: 12px;
   line-height: 16px;
   overflow: auto;
-  height: 64%;
+  height: 49%;
 }

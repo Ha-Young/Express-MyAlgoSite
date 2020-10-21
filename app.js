@@ -14,6 +14,9 @@ const auth = require('./routes/auth');
 const problems = require('./routes/problems');
 const api = require('./routes/api');
 
+const errorHandler = require('./routes/error/errorHandler');
+const RequestError = require('./routes/error/RequestError');
+
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -36,24 +39,12 @@ app.use(passport.session());
 app.use('/', index);
 app.use('/auth', auth);
 app.use('/problems', problems);
-
 /* TEST ROUTER: WILL BE DELETED SOON */
 app.use('/api', api);
 
-app.use(function (req, res, next) {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.use(function(req, res, next) {
+  next(RequestError.notFound());
 });
-
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
+app.use(errorHandler);
 
 module.exports = app;

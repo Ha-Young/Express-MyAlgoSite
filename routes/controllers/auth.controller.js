@@ -1,7 +1,6 @@
 const passport = require('passport');
 
 exports.getLogin = function getLogin(req, res, next) {
-  console.log('LOGIN GATE');
   res.render('login');
 };
 
