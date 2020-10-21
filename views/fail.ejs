@@ -2,15 +2,36 @@
 <html lang="en">
   <%- include("head") %>
   <body>
-    Fail!
-    <p>
-      your answer: <%= answer %>
-    </p>
-    <p>
-      expected: <%= expected %>
-    </p>
-    <p>
-      your code: <%= code %>
-    </p>
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+      <header class="masthead mb-auto">
+        <div class="inner">
+          <h3 class="masthead-brand">Code Wars</h3>
+        </div>
+      </header>
+      <main role="main" class="inner cover">
+        <h1 class="cover-heading">틀리셨네욬</h1>
+        <hr>
+        <p>
+          <b>your answer:</b> <%= answer %>
+        </p>
+        <p>
+          <b>expected:</b> <%= expected %>
+        </p>
+        <p>
+          <b>your code:</b>
+        </p>
+        <textarea id="code" name="code"><%= code %></textarea>
+        <hr>
+        <div class="button-container">
+          <a href="/problems/<%= problemId %>" class="btn btn-lg btn-primary">다시 풀게요...</a>
+          <a href="/problems/<%= problemId %>/?errMessage=포기는 배추 셀때나 하는 표현입니다." class="btn btn-lg btn-danger">포기 할래요...</a>
+        </div>
+      </main>
+    </div>
+    <script src="/codemirror/lib/codemirror.js"></script>
+    <link rel="stylesheet" href="/codemirror/lib/codemirror.css">
+    <link rel="stylesheet" href="/codemirror/theme/ayu-dark.css">
+    <script src="/codemirror/mode/javascript/javascript.js"></script>
+    <script src="/javascripts/code.js"></script>
   </body>
 </html>

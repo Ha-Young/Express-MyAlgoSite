@@ -48,6 +48,7 @@ router.get("/:problem_id", asyncWrapper(async (req, res, next) => {
     res.render("article", {
       data: currentProblem,
       userCode,
+      errMessage: req.query.errMessage,
     });
   });
 }));

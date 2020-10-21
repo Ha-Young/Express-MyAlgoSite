@@ -18,7 +18,7 @@ function saveCode(req, res, next) {
     const hasProblemCode = await User.findOne({ "solved.problemId": problemId });
 
     if (hasProblemCode) {
-      await User.updateOne({ _id: userId }, { "solved.$.code": req.body.code });
+      await User.updateOne({ "solved.problemId": problemId }, { "solved.$.code": req.body.code });
     } else {
       await User.findOneAndUpdate({ _id: userId }, { $push: { solved: { problemId, code }}});
     }
