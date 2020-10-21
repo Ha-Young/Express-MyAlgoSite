@@ -28,8 +28,6 @@ setPassport();
 app.use(passport.initialize()); // initialize
 app.use(passport.session()); // 만약 있다면 세션으로부터 auth restore
 
-app.use(bodyParser.urlencoded({ extended: true }));
-
 app.use('/', index);
 app.use('/auth', auth);
 app.use('/problems', problems);

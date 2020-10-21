@@ -1,4 +1,3 @@
-const fetch = require('node-fetch');
 const Problem = require('../models/Problem');
 
 const indexController = {
