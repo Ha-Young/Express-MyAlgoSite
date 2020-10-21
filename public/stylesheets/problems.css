@@ -1,0 +1,1 @@
+.problems ul{width:620px;display:flex;flex-direction:column;justify-content:center;list-style:none}.problems ul li{width:100%;margin:20px 0;padding:20px;border:1px solid #e8ecf0;border-radius:5px}.problems ul li:hover{border:1px solid #86bef7}.problems ul li .title{font-size:1.6rem}.problems ul li .info{opacity:0.7}

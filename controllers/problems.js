@@ -9,10 +9,21 @@ exports.getAll = async (req, res, next) => {
   }
 };
 
-exports.getProblem = (req, res, next) => {
+exports.getProblem = async (req, res, next) => {
   const { problem_id } = req.params;
 
-  res.render('problem', { problem_id });
+  try {
+    const problem = await Problem.findOne({ id: problem_id });
+
+    if (!problem) {
+      const err = new Error('Not Found');
+      err.status = 404;
+      return next(err);
+    }
+    return res.render('problem', { title: 'Problem', problem });
+  } catch (err) {
+    next(err);
+  }
 };
 
 exports.postProblem = (req, res, next) => {

@@ -1,0 +1,50 @@
+header {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 3rem;
+  border-bottom: 1px solid #e8ecf0;
+
+  img {
+    margin: 10px;
+  }
+
+  .logo,
+  .current-user {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo {
+    font-family: 'Righteous', cursive;
+
+    .title {
+      margin-bottom: 10px;
+    }
+  }
+
+  .current-user {
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: inherit;
+
+    img {
+      width: 40px;
+      border-radius: 50%;
+    }
+  }
+
+  .menu ul {
+    display: flex;
+    list-style: none;
+    font-size: 1.6rem;
+    font-weight: bold;
+
+    li {
+      margin: 0 10px;
+    }
+  }
+}

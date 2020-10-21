@@ -1,0 +1,47 @@
+form {
+  font-size: 2rem;
+
+  .form-control {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+
+    label {
+      width: 220px;
+      margin-right: 2rem;
+      text-align: right;
+    }
+
+    input {
+      background: none;
+      outline: none;
+      margin-bottom: 0.5rem;
+      border: 0;
+      border-bottom: 1px solid #a1a1a1;
+      font: inherit;
+      color: inherit;
+    }
+
+    button {
+      background: none;
+      color: inherit;
+      min-width: 100px;
+      margin: 0.5rem;
+      padding: 0.2rem 0.5rem;
+      outline: none;
+      font-size: inherit;
+      font-family: inherit;
+      border: 1px solid #a1a1a1;
+      opacity: 0.8;
+
+      &:hover {
+        cursor: pointer;
+        color: #86bef7;
+
+        a {
+          color: #86bef7;
+        }
+      }
+    }
+  }
+}
