@@ -2,14 +2,16 @@
 const jwt = require("jsonwebtoken");
 
 const User = require("../models/User");
+const asyncWrapper = require("./asyncWrapper");
+const { JwtError, MongoError } = require("../service/error");
 
 const SECRET_KEY = process.env.JWT_KEY;
 
 function saveCode(req, res, next) {
   const token = req.cookies && req.cookies.loginToken;
 
-  jwt.verify(token, SECRET_KEY, async (err, decoded) => {
-    if (err) return res.redirect("/login");
+  jwt.verify(token, SECRET_KEY, asyncWrapper(async (err, decoded) => {
+    if (err) next(new JwtError());
 
     const code = req.body.code;
     const userId = decoded.user._id;
@@ -24,7 +26,7 @@ function saveCode(req, res, next) {
     }
 
     next();
-  });
+  }));
 }
 
 module.exports = saveCode;

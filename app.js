@@ -7,13 +7,13 @@ const bodyParser = require("body-parser");
 
 const dbConnection = require("./mongodb");
 const passport = require("./passport/github");
-
 const router = require("./routes/index");
+const { MongoError } = require("./service/error");
 
 const app = express();
 
 dbConnection.once("open", (err) => {
-  if (err) throw Error(err);
+  if (err) throw MongoError("mongodb can not connect");
 
   console.log("mongodb is connected...");
 });
@@ -27,8 +27,8 @@ app.use(passport.session());
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
 app.use(router);
+
 app.use(function(req, res, next) {
   const err = new Error("Not Found");
   err.status = 404;
