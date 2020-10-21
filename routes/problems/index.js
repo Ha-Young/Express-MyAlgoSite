@@ -13,9 +13,8 @@ const SECRET_KEY = process.env.JWT_KEY;
 
 const router = express.Router();
 
-const athenticate = require("../../middleware/athenticate");
 
-router.get("/", athenticate, asyncWrapper(async (req, res, next) => {
+router.get("/", asyncWrapper(async (req, res, next) => {
   const problems = await Problem.find({});
 
   res.render("problems", {

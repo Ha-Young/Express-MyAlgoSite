@@ -8,9 +8,7 @@ const SECRET_KET = process.env.JWT_KEY;
 
 const router = express.Router();
 
-const athenticate = require("../middleware/athenticate");
-
-router.get("/", athenticate, (req, res, next) => {
+router.get("/", (req, res, next) => {
   jwt.verify(req.cookies.loginToken, SECRET_KET, (err, decoded) => {
     if (err) next(new JwtError(err.message));
 
