@@ -54,12 +54,30 @@ router.post("/:problem_id/verify", saveCode, verifyProblem, (req, res, next) => 
   res.render("success");
 });
 
-router.get("/:problem_id/update", async (req, res, next) => {
+router.get("/:problem_id/update", asyncWrapper(async (req, res, next) => {
   const problem = await Problem.findOne({ _id: req.params.problem_id });
 
   res.render("problem-form", {
     form: problem,
   });
+}));
+
+router.get("/:problem_id/delete", (req, res, next) => {
+  res.render("delete-form", {
+    problemId: req.params.problem_id,
+  });
 });
+
+router.post("/:problem_id/delete", asyncWrapper(async (req, res, next) => {
+  const shouldDelete = req.body.type === "true";
+  const problemId = req.params.problem_id;
+
+  if (shouldDelete) {
+    await Problem.findByIdAndDelete(problemId);
+    await User.updateMany({ "solved.problemId": problemId }, { $pull: { "solved.$": 1 }});
+  }
+
+  res.redirect("/problems");
+}));
 
 module.exports = router;

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("head") %>
+  <body class="text-center" cz-shortcut-listen="true">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+      <header class="masthead mb-auto">
+        <div class="inner">
+          <h3 class="masthead-brand">Code Wars</h3>
+        </div>
+      </header>
+      <main role="main" class="inner cover">
+        <h1 class="cover-heading">정말로 문제를 지울까요?</h1>
+        <hr>
+        <p class="lead">
+          <form action="/problems/<%= problemId %>/delete" method="post">
+            <button type="submit" name="type" value=false class="btn btn-lg btn-secondary">안지울래요</button>
+            <button type="submit" name="type" value=true class="btn btn-lg btn-danger">지울래요</button>
+          </form>
+        </p>
+      </main>
+    </div>
+  </body>
+</html>
