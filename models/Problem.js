@@ -28,9 +28,10 @@ const ProblemSchema = new mongoose.Schema({
     type: String,
   },
   solution_count: Number,
-  test: [
+  tests: [
     {
       code: String,
+      solution: String,
     },
   ],
 });
