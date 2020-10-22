@@ -2,9 +2,7 @@ const Problem = require('../../models/Problem');
 
 exports.getAll = async function(req, res, next) {
   try {
-    const result = await Problem.find();
-
-    return result;
+    return await Problem.find().lean();
   } catch (err) {
     next(err);
   }
@@ -13,6 +11,7 @@ exports.getAll = async function(req, res, next) {
 exports.getOne = async function(req, res, next) {
   try {
     const result = await Problem.find(req.params);
+
     res.render(
       'problem',
       {

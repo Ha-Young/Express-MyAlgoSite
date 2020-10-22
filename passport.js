@@ -8,20 +8,19 @@ passport.use(new GitHubStrategy({
   callbackURL: process.env.CALLBACK_URL,
 },
   function(accessToken, refreshToken, profile, done) {
-    // console.log(profile);
-    User.findOne({ githubId: profile.id }, function(err, user) {
+    console.log(profile);
+    User.findOrCreate({ githubId: profile.id }, (err, user) => {
       return done(err, profile);
     });
   }
 ));
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser((user, done) => {
   done(null, user);
 });
 
-passport.deserializeUser(function(obj, done) {
+passport.deserializeUser((obj, done) => {
   done(null, obj);
 });
-
 
 module.exports = passport;

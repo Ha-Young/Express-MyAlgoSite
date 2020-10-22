@@ -7,7 +7,6 @@ const {
   submitCode,
 } = require('./controllers/problems.controller');
 
-router.get('/', validateUser, getAll);
 router.get('/:problemNumber', validateUser, getOne);
 router.post('/:problemNumber', validateUser, submitCode);
 
