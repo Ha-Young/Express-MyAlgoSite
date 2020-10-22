@@ -7,7 +7,7 @@ exports.getAllProblems = async (req, res, next) => {
 
 exports.logIn = (req, res, next) => {
   res.render('login');
-}
+};
 
 exports.logOut = async (req, res, next) => {
   if (req.session) {
@@ -20,4 +20,4 @@ exports.logOut = async (req, res, next) => {
 
   req.logout();
   res.redirect('/login');
-}
+};

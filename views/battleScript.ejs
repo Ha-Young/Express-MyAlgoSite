@@ -1,0 +1,10 @@
+<audio autoplay id="myautoload">
+  <source src="/music/battle.mp3" type="audio/mpeg" />
+  Your browser does not support the audio element.
+</audio>
+<script type="text/javascript">
+  var backgroundMusic = document.getElementById('myautoload');
+  setTimeout(function () {
+    backgroundMusic.play();
+  }, 100);
+</script>

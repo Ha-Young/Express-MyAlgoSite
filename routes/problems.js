@@ -4,6 +4,6 @@ const authenticateUser = require('../middlewares/authenticateUser')
 const problemsController = require('../controllers/problems.controller');
 
 router.get('/:problem_id', authenticateUser, problemsController.getProblem);
-router.post('/:problem_id', authenticateUser, problemsController.checkProblem);
+router.post('/:problem_id', authenticateUser, problemsController.checkAnswer);
 
 module.exports = router;
