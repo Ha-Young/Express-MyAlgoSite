@@ -1,15 +1,9 @@
-const passport = require('passport');
+const express = require('express');
+const router = express.Router();
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('./routes/models/User');
 require('dotenv').config();
-
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
-
-passport.deserializeUser((id, done) => {
-  done(null, id);
-});
+const passport  = require('passport');
 
 passport.use(
   new GoogleStrategy({
@@ -22,23 +16,28 @@ passport.use(
     profile,
     done
   ) => {
-    const id = profile.id;
+    const userId = profile.id;
     const email = profile.emails[0].value;
     const photo = profile.photos[0].value;
     const provider = profile.provider;
     const newUser = {
-      profile: {
-        id,
-        email,
-        photo,
-        provider
-      }
+      userId,
+      email,
+      photo,
+      provider
     };
 
-    User.findOne({ id: profile.id }, (err, user) => {
-      if (user) return done(null, user);
-
-      User(newUser).save();
-      done(err, user);
-    });
+    try {
+      const user = await User.findOne({ email: email }).exec();
+      if (user) {
+        return done(null, user);
+      } else {
+        await User(newUser).save();
+        return done(null, user);
+      }
+    } catch (err) {
+      return done(err);
+    }
   }));
+
+module.exports = router;
