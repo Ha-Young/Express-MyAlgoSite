@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-
+const { verifyAuth } = require('./middlewares/authorization')
 router.get('/', (req, res, next) => {
   res.render('login');
 });
@@ -10,14 +10,8 @@ router.get('/auth/google',
   passport.authenticate('google', { scope: 'https://www.googleapis.com/auth/userinfo.email' })
 );
 
-const ensureAuth = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    next();
-  }
-};
-
 router.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/login' }), ensureAuth,
+  passport.authenticate('google', { failureRedirect: '/login' }), verifyAuth,
   (req, res, next) => {
     res.redirect('/');
   }
