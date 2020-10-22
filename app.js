@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
+// const MongoStore = require('connect-mongo')(session);
 const setPassport = require('./utils/auth');
 const index = require('./routes/index');
 const auth = require('./routes/auth');
@@ -31,11 +31,11 @@ app.use(session({
   secret: 'secrettexthere',
   saveUninitialized: true,
   resave: true,
-  // using store session on MongoDB using express-session + connect
-  store: new MongoStore({
-    url: process.env.MONGO_URI,
-    collection: 'sessions'
-  })
+  // // using store session on MongoDB using express-session + connect
+  // store: new MongoStore({
+  //   url: process.env.MONGO_URI,
+  //   collection: 'sessions'
+  // })
 }));
 
 setPassport();
