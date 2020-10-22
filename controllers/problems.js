@@ -1,6 +1,6 @@
-const vm = require('vm');
-
 const Problem = require('../models/Problem');
+const ErrorHandler = require('../util/ErrorHandler');
+const getResultLog = require('../util/getResultLog');
 
 exports.getAll = async (req, res, next) => {
   try {
@@ -18,9 +18,7 @@ exports.getProblem = async (req, res, next) => {
     const problem = await Problem.findOne({ id: problem_id });
 
     if (!problem) {
-      const err = new Error('Not Found');
-      err.status = 404;
-      return next(err);
+      return next(new ErrorHandler(404, 'Not Found'));
     }
 
     return res.render('problem', { title: '🎯Problem🎯', problem });
@@ -38,7 +36,7 @@ exports.postProblem = async (req, res, next) => {
 
   try {
     const problem = await Problem.findOne({ id: problem_id });
-    const results = checkUserSolution(usercode, problem.tests);
+    const results = getResultLog(usercode, problem.tests);
     const isAllCorrect = results.every(result => result.isCorrect);
 
     if (isAllCorrect) {
@@ -52,39 +50,3 @@ exports.postProblem = async (req, res, next) => {
     next(err);
   }
 };
-
-class SolutionResult {
-  constructor(userResult, correctResult, error) {
-    this.userResult = (result => {
-      if (result === undefined) return 'undefined';
-      if (result === null) return 'null';
-      return result;
-    })(userResult);
-    this.correctResult = correctResult;
-    this.error = error;
-    this.isCorrect = this.compare();
-  }
-
-  compare() {
-    return this.userResult === this.correctResult;
-  }
-}
-
-function checkUserSolution(code, tests = []) {
-  const logs = [];
-
-  for (const test of tests) {
-    const { code: executionCommand, solution: correctResult } = test;
-
-    try {
-      const script = new vm.Script(code + executionCommand);
-      const userResult = script.runInNewContext({}, { timeout: 1000 });
-      logs.push(new SolutionResult(userResult, correctResult));
-    } catch (error) {
-      const { name, message } = error;
-      logs.push(new SolutionResult(null, correctResult, `${name}: ${message}`));
-    }
-  }
-
-  return logs;
-}

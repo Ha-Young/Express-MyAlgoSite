@@ -1,5 +1,6 @@
 const passport = require('passport');
 
+const ErrorHandler = require('../util/ErrorHandler');
 const User = require('../models/User');
 
 exports.getJoin = (req, res, next) => {
@@ -14,9 +15,7 @@ exports.postJoin = async (req, res, next) => {
   } = req;
 
   if (password !== confirmPassword) {
-    const err = new Error('Passwords do not match.');
-    err.status = 400;
-    return next(err);
+    return next(new ErrorHandler(400, 'Passwords do not match'));
   }
 
   try {

@@ -13,6 +13,7 @@ const session = require('express-session');
 const expressLayouts = require('express-ejs-layouts');
 const sassMiddleware = require('node-sass-middleware');
 
+const ErrorHandler = require('./util/ErrorHandler');
 const globalRouter = require('./routes/global');
 const problemsRouter = require('./routes/problems');
 
@@ -44,9 +45,7 @@ app.use('/', globalRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+  next(new ErrorHandler(404, 'Not Found'));
 });
 
 // error handler
