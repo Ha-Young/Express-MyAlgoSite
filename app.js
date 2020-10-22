@@ -10,6 +10,7 @@ const session = require('express-session');
 
 const index = require('./routes/index');
 const login = require('./routes/login');
+const logout = require('./routes/logout');
 const problems = require('./routes/problems');
 
 const app = express();
@@ -30,6 +31,7 @@ app.use(passport.session());
 
 app.use('/', index);
 app.use('/login', login);
+app.use('/logout', logout);
 app.use('/problems', problems);
 
 // catch 404 and forward to error handler
