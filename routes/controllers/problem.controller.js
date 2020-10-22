@@ -7,15 +7,6 @@ exports.getAll = async (req, res, next) => {
   const { avatar_url } = req.user._json;
   const username = req.user.username;
 
-  if (
-    !avatar_url ||
-    !username ||
-    typeof avatar_url !== 'string' ||
-    typeof username !== 'string'
-  ) {
-    return res.status(204).json({ error: 'no content' });
-  }
-
   try {
     const problems = await Problem.find().lean();
 
@@ -34,10 +25,6 @@ exports.getOne = async (req, res, next) => {
   const username = req.user.username;
   const id = req.params.problem_id;
 
-  if (!id || typeof id !== 'string') {
-    return res.status(204).json({ error: 'no content' });
-  }
-
   try {
     const problem = await Problem.findOne({ id });
 
@@ -55,11 +42,11 @@ exports.getResult = async (req, res, next) => {
   const id = req.params.problem_id;
   const script = req.body.script;
 
-  const problem = await Problem.findOne({ id });
-  const solutions = problem.tests;
-
   try {
     let testResults;
+    const problem = await Problem.findOne({ id });
+    const solutions = problem.tests;
+
     try {
       testResults = solutions.map(test => {
         const excutionSyntax = test.code;

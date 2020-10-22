@@ -5,7 +5,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport = require('passport');
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const passportModule = require('./config/passport');
 
@@ -17,10 +17,10 @@ mongoose.connect(SECRET_URL, {
   useFindAndModify: false,
 });
 
-const index = require('./routes/index');
-const login = require('./routes/login');
-const problems = require('./routes/problems');
-const logout = require('./routes/logout');
+const indexRoutes = require('./routes/index');
+const loginRoutes = require('./routes/login');
+const logoutRoutes = require('./routes/logout');
+const problemsRoutes = require('./routes/problems');
 
 const app = express();
 
@@ -51,19 +51,19 @@ app.use(express.static('routes'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/', index);
-app.use('/login', login);
-app.use('/problems', problems);
-app.get('/logout', logout);
+app.use('/', indexRoutes);
+app.use('/login', loginRoutes);
+app.use('/problems', problemsRoutes);
+app.get('/logout', logoutRoutes);
 
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
-app.use(function (err, req, res, next) {
-  res.locals.message = err.message;
+app.use(function(err, req, res, next) {
+  res.locals.message = err.displayMessage;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   res.status(err.status || 500);

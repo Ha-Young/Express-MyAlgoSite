@@ -1,38 +1,22 @@
 /* eslint-disable no-undef */
-const request = require("supertest");
-const { expect } = require("chai");
-const app = require("../app");
-// const randomstring = require("randomstring");
-// const jwt = require("jsonwebtoken");
-// const USERS = require("../routes/users").USERS;
-// const YOUR_SECRET_KEY = require("../routes/users").YOUR_SECRET_KEY;
+const request = require('supertest');
+const { expect } = require('chai');
+const app = require('../app');
 
-/*
-
-1. Serving a HTML page
-
-*/
-describe("GET /", () => {
-  it("should respond with template", (done) => {
+describe('GET /', () => {
+  it('should respond with template', done => {
     request(app)
-      .get("/")
-      .expect("Content-Type", /html/)
+      .get('/')
+      .expect('Content-Type', /html/)
       .expect(200)
       .end((err, res) => {
         if (err) return done(err);
-        expect(res.text).to.include("Codewars");
+        expect(res.text).to.include('Codewars');
         done();
       });
   });
 });
 
-// /*
-
-// 2. Serving static files
-
-// - https://expressjs.com/en/starter/static-files.html
-
-// */
 // describe("GET static assets", () => {
 //   it("should be able to get static css file", (done) => {
 //     request(app)
