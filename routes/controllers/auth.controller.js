@@ -2,7 +2,11 @@ const passport = require('passport');
 const { VIEWS, ROUTES } = require('../../constants');
 
 exports.getLogin = function getLogin(req, res, next) {
-  res.render(VIEWS.LOGIN);
+  try {
+    res.render(VIEWS.LOGIN);
+  } catch (error) {
+    next(error);
+  }
 };
 
 exports.getLogout = function getLogout(req, res, next) {
