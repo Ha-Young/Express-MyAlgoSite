@@ -2,6 +2,7 @@ require('./db');
 const passport = require('passport');
 const express = require('express');
 const session = require('express-session')
+const createError = require('http-errors');
 const login = require('./routes/login');
 const index = require('./routes/index');
 const problems = require('./routes/problems');
@@ -82,11 +83,10 @@ app.use(passport.session());
 app.use('/', index);
 app.use('/login', login);
 app.use('/problem', problems);
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+  next(createError(404, 'Not Found'));
 });
 
 // error handler
@@ -97,7 +97,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error',  {message: err.message});
+  res.render('error');
 });
 
 module.exports = app;

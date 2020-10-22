@@ -1,7 +1,9 @@
 const verifyAuth = (req, res, next) => {
-    if (req.isAuthenticated()) {
-      next();
-    }
-  };
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.redirect("/login");
+  }
+};
 
 exports.verifyAuth = verifyAuth;
