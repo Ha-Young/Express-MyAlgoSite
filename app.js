@@ -9,8 +9,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const User = require('./models/User');
-const Problem = require('./models/Problem');
+const User = require('./routes/models/User');
 require('dotenv').config();
 
 passport.use(
@@ -100,19 +99,5 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error',  {message: err.message});
 });
-
-async function save() {
-  const fs = require('fs')
-  let rawdata = fs.readFileSync('./models/sample_problems.json');
-  let problems = JSON.parse(rawdata);
-
-  try {
-    for (let i = 0; i < problems.length; i++) {
-      await Problem(problems[i]).save();
-    }
-  } catch (err) {
-    console.log(err);
-  }
-}
 
 module.exports = app;

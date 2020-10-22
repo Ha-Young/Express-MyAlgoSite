@@ -1,7 +1,7 @@
-const Problem = require('../routes/models/Problem');
+const Problem = require('../models/Problem');
 const { VM } = require('vm2');
 const vm = new VM({
-  timeout: 1000,
+  timeout: 2000,
 });
 
 exports.getProblem = async (req, res, next) => {
@@ -65,30 +65,3 @@ exports.submitAnswer = async (req, res, next) => {
     next(err);
   }
 };
-
-/*수박수
-const solution = n => {
-	const repeatCount = Math.floor(n / 2);
-  const answer = '수박'.repeat(repeatCount);
-  if (n % 2) return answer + '수';
-  return answer;
-};*/
-
-
-/*
-function solution(n) {
-    var fibonacci = [0,1];
-
-    for(var i = 2; i <= n; i++){
-        fibonacci.push((fibonacci[0] + fibonacci[1]) % 1234567);
-        fibonacci.shift();
-    }
-
-    var answer = fibonacci[1];
-    return answer;
-} */
-
-
-/*function solution(x){
-  return !(x % (x + "").split("").reduce((a, b) => +b + +a ));
-} */

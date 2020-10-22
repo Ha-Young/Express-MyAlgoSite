@@ -1,4 +1,4 @@
-const Problem = require('../routes/models/Problem');
+const Problem = require('../models/Problem');
 
 exports.getAll = async (req, res, next) => {
   try {
