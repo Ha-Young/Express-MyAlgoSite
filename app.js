@@ -1,25 +1,21 @@
 const express = require('express');
 const index = require('./routes/index');
-//const bodyParser = require('body-parser');
 const path = require("path");
-//const passport = require('passport');
-//const initializePassport = require('./passport-config');
-//npm run dev;
-const flash = require('express-flash');
 const session = require('express-session');
 const passport = require('passport');
 const mongoose = require('mongoose');
-
+const flash = require('express-flash');
 require('dotenv').config();
 
-const MONGOURI = process.env.MONGOURI;
+const MONGO_URI = process.env.MONGOURI;
 const SESSION_SECRET = process.env.SESSION_SECRET;
 
 try {
-  mongoose.connect(MONGOURI, { useNewUrlParser: true, useUnifiedTopology: true });
+  mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
   console.log('mongoDB connected...');
 } catch (err) {
-  throw new Error(err, ': mongoose connection error');
+  next(err);
+  //throw new Error(err, ': mongoose connection error');
 }
 
 const app = express();

@@ -2,41 +2,49 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const passport = require('passport');
-const initializePassport = require('../passport-config');
+//const initializePassport = require('../passport-config');
 const Users = require('../models/User');
 const Problems = require('../models/Problem');
 const UserSolution = require('../models/UserSolution');
+const localStrategy = require('passport-local').Strategy;
 
-let users = [];
-console.log("USERS", Users);
+passport.use(new localStrategy({ usernameField: 'email', passwordField: "password" },
+  async function (email, password, done) {// email, password는 Field에서 받은 값. authenticate확인 후 done호출
+    const user = await Users.find({ email: email }).exec();
+    if (user.length === 0) {
+      return done(null, false, { message: 'No user with this email address' });
+    }
 
-async function getUserData() {
-  try {
-    users = await Users.find({});
-    console.log("HI", users);
-  } catch {
-    throw new Error('Error occured while loading Users data from DB');
+    try {
+      const validPassword = await bcrypt.compare(password, user[0].password);
+      if (validPassword) {
+        return done(null, user[0]);// 성공 -> serializeUser
+      } else {
+        return done(null, false, { message: 'password incorrect' });
+      }
+    } catch (err) {
+      return done(err);
+    }
   }
-}
-getUserData();
+));
 
-initializePassport(
-  passport,
-  email => users.find(user => user.email === email),
-  id => users.find(user => user.id === id)
-)
+passport.serializeUser((user, done) => {// Strategy 성공 시 호출됨
+  console.log("serialize", user);   // 여기의 user가 deserializeUser의 첫 번째 매개변수로 이동
+  done(null, user.id);
+});
+passport.deserializeUser(async (id, done) => {// 매개변수 id는 serializeUser의 done의 인자 user.id를 받은 것
+  const a = await Users.find({ id: id}).exec();
+  return done(null, a[0]);// 여기의 getUserById(id)가 req.user가 됨
+});
 
 /* GET home page. */
 router.get('/', checkAuthenticated, async (req, res, next) => {
-  //from deserialize...req.user
-  console.log("from deserialize", req.user);
-
+  console.log("from deserialize", req.user);//from deserialize...req.user
   try {
     const problems = await Problems.find({});
     res.render('index', { items: problems });
-  } catch {
-    //res.render.status()
-    console.log("problems loading error");
+  } catch(err) {
+    next(err);
   }
 });
 
@@ -55,9 +63,8 @@ router.get('/problem/:problem_id', checkAuthenticated, async (req, res, next) =>
         res.render('problem', { targetProblem, codeWritten: '' });
       }
     }
-  } catch {
-    //res.render.status()
-    console.log("get problem Id page error");
+  } catch(err) {
+    next(err);
   }
 });
 
@@ -95,29 +102,25 @@ router.post('/problem/:problem_id', checkAuthenticated, async (req, res, next) =
       });
       await newUser.save();
       console.log(await UserSolution.find({}));
-    } catch (e) {
-      throw new Error("문제 제출 후 DB 저장 에러");
+    } catch (err) {
+      next(err);
     }
 
     res.render('success');
 
   } catch (e) {
-    console.log(e);
-    console.log(e.message)
-    console.log("stacK", e.stack)
-    res.render('error', { message: "There is error in your code", error: { status: 404, stack: e } })
+    res.render('error', { message: "There is error in your code", error: { stack: e } })
   }
 });
 
 router.get('/login', (req, res, next) => {
-  console.log("LOGIN", req.app.get('env'));//development
   res.render('login');
 });
 
-router.post('/login', passport.authenticate('local', {//use passport authentication middleware
+router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/login',
-  failureFlash: true //passport-config에서 넣었던 message
+  failureFlash: true
 }));
 
 router.get('/register', (req, res, next) => {
@@ -136,15 +139,13 @@ router.post('/register', async (req, res, next) => {
       password: hashedPassword
     });
     await newUser.save();
-    console.log(await Users.find({}));
     res.redirect(302, '/login');
-  } catch {
-    res.redirect('/register');
+  } catch(err) {
+    next(err);
   }
 });
 
-function checkAuthenticated(req, res, next) {//middleware
-  console.log('로그인했니', req.isAuthenticated());
+function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
