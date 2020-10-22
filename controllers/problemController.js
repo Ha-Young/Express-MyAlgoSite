@@ -47,7 +47,7 @@ exports.receiveUserSolution = catchAsync(async (req, res, next) => {
     console.log(test.solution, 'so')
     let answerSheet = Number(test.solution) || test.solution;
     console.log(answerSheet, 'as')
-    
+
     if (answerSheet === 'false') answerSheet = false;
     else if (answerSheet === 'true') answerSheet = true;
 
@@ -73,5 +73,3 @@ exports.receiveUserSolution = catchAsync(async (req, res, next) => {
   ? res.render('success', { result })
   : res.render('failure', { result });
 });
-
-{/* <button><a href="/problem/<%=result[0].problemNumber%>">다시풀기</a></button> */}

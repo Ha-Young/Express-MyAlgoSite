@@ -8,7 +8,7 @@
     "delete": "node utils/handleSampleData.js --delete",
     "import": "node utils/handleSampleData.js --import",
     "dev": "NODE_ENV=development nodemon ./bin/www",
-    "prod": "NODE_ENV=production nodemon ./bin/www",
+    "prod": "NODE_ENV=production nodemon server.js",
     "debug": "ndb server.js"
   },
   "dependencies": {
