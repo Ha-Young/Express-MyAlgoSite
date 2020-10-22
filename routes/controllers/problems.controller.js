@@ -1,4 +1,6 @@
 const Problem = require('../../models/Problem');
+const timeout = require('../../utils/timeout');
+const vm = require('vm');
 
 exports.getAll = async function(req, res, next) {
   try {
@@ -30,8 +32,6 @@ exports.submitHandler = async function(req, res, next) {
   let problemData;
 
   try {
-    const submittedFunction = new Function(`return ${req.body.code};`)();
-
     problemData = await Problem.findOne(req.params);
     const tests = problemData.tests;
 
@@ -48,7 +48,8 @@ exports.submitHandler = async function(req, res, next) {
       };
 
       try {
-        answer = new Function('solution', `return ${code};`)(submittedFunction);
+        const script = new vm.Script(req.body.code + code);
+        answer = script.runInContext(vm.createContext(), { timeout: 2000 });
       } catch (err) {
         info.error = err;
 
