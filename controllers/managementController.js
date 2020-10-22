@@ -1,6 +1,7 @@
 const Problem = require('../models/Problem');
+const catchAsync = require('../utils/catchAsync');
 
-exports.getStats = async (req, res, next) => {
+exports.getStats = catchAsync(async (req, res, next) => {
   const stats = await Problem.aggregate([
     {
       $group: {
@@ -19,4 +20,4 @@ exports.getStats = async (req, res, next) => {
       stats,
     },
   });
-};
+});
