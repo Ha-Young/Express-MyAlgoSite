@@ -4,6 +4,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 const setPassport = require('./utils/auth');
 const index = require('./routes/index');
 const auth = require('./routes/auth');
@@ -23,6 +25,18 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.static('utils'));
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// required for passport session
+app.use(session({
+  secret: 'secrettexthere',
+  saveUninitialized: true,
+  resave: true,
+  // using store session on MongoDB using express-session + connect
+  store: new MongoStore({
+    url: process.env.MONGO_URI,
+    collection: 'sessions'
+  })
+}));
 
 setPassport();
 app.use(passport.initialize()); // initialize

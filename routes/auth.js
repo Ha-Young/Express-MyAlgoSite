@@ -8,7 +8,16 @@ router.get('/login', (req, res, next) => {
 
 router.get(
   '/login/github',
-  passport.authenticate('github', { failureRedirect: '/auth/login' })
+  passport.authenticate('github')
+);
+
+router.get(
+  '/login/github/callback',
+  passport.authenticate('github', { failureRedirect: '/auth/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  }
 );
 
 module.exports = router;
