@@ -6,8 +6,6 @@ exports.getProblem = async (req, res, next) => {
   try {
     const problemId = req.params.problem_id;
     const problem = await Problem.findOne({ _id: problemId });
-
-    console.log(problem)
     res.render('problem', { problem: problem });
   } catch (err) {
     next(err);
@@ -19,21 +17,28 @@ exports.submitAnswer = async (req, res, next) => {
     const problemId = req.params.problem_id;
     const code = req.body.code;
     const { tests } = await Problem.findOne({ _id: problemId });
-    let isCorrect = false;
-  
     const backTofunc = new Function(`return ${code}`);
-    const str = `
-      const solution = ${backTofunc()};
-      return ${tests[0].code} === ${tests[0].solution}
-    `
-    const testCode = new Function(str);
-    console.log(testCode());
+ 
+    const result = tests
+      .map(test => {
+        let getResultTemplate;
+        if (typeof test.solution === 'string') {
+          getResultTemplate = `
+          const solution = ${backTofunc()};
+          return ${test.code} === '${test.solution}';
+        `
+        } else {
+          getResultTemplate = `
+          const solution = ${backTofunc()};
+          return ${test.code} === ${test.solution};
+        `
+        }
+        const getResult = new Function(getResultTemplate);
+        return getResult();
+      })
+      .every(result => result);
 
-    // if (backTofunc().name === 'solution') {
-    //   foo();
-    // }
-
-    if (isCorrect) {
+    if (result) {
       res.render('success');
     } else {
       res.render('failure');
@@ -42,3 +47,30 @@ exports.submitAnswer = async (req, res, next) => {
     next(err);
   }
 };
+
+/*수박수
+const solution = n => {
+	const repeatCount = Math.floor(n / 2);
+  const answer = '수박'.repeat(repeatCount);
+  if (n % 2) return answer + '수';
+  return answer;
+};*/
+
+
+/*
+function solution(n) {
+    var fibonacci = [0,1];
+
+    for(var i = 2; i <= n; i++){
+        fibonacci.push((fibonacci[0] + fibonacci[1]) % 1234567);
+        fibonacci.shift();
+    }
+
+    var answer = fibonacci[1];
+    return answer;
+} */
+
+
+/*function solution(x){
+  return !(x % (x + "").split("").reduce((a, b) => +b + +a ));
+} */
