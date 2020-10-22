@@ -5,10 +5,10 @@
   /* Set height, width, borders, and global font properties here */
   font-family: 'Fira Code', monospace;
   font-size: 1rem;
-  height: 420px;
+  height: 350px;
+  margin-bottom: 20px;
   color: black;
   direction: ltr;
-  opacity: 0.95;
   border: 1px solid rgba(102, 102, 102, 0.6);
 }
 

@@ -1,28 +1,48 @@
-.problems ul {
-  width: 620px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  list-style: none;
+.problems {
+  max-width: 700px;
+  margin: 0 auto;
 
-  li {
-    width: 100%;
-    margin: 10px 0;
+  ul {
+    display: flex;
+    margin-right: 2rem;
+    flex-direction: column;
+    justify-content: center;
+    list-style: none;
 
-    padding: 20px 30px;
-    border: 1px solid #e8ecf0;
+    li {
+      display: flex;
+      align-items: center;
+      height: 70px;
+      margin: 0.5rem 0;
+      border: 1px solid #bcbfc2;
 
-    &:hover {
-      background-color: rgba(#fff, 0.6);
-      color: #000;
-    }
+      &:hover {
+        background-color: rgba(#fff, 0.6);
+        color: #000;
+      }
 
-    .title {
-      font-size: 1.6rem;
-    }
+      .level {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 15%;
+        height: 100%;
+        margin-right: 0.5rem;
+        border-right: 1px solid #bcbfc2;
+        background-color: rgba(#636465, 0.4);
+      }
 
-    .info {
-      opacity: 0.7;
+      .title {
+        width: 70%;
+        padding: 0.5rem;
+        font-size: 1.6rem;
+      }
+
+      .info {
+        width: 15%;
+        opacity: 0.7;
+        font-size: 0.7rem;
+      }
     }
   }
 }

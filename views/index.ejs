@@ -3,12 +3,16 @@
     <% for (const problem of problems) { %>
       <a href="/problems/<%= problem.id %>">
         <li>
-          <div class="title">
+          <div class="level">
             <span>Lv.<%= problem.difficulty_level %></span>
+          </div>
+          <div class="title">
             <span><%= problem.title %></span>
           </div>
           <div class="info">
-            <span>Completed Users : <%= problem.completed_users %></span>
+            <% if (problem.completed_users) { %>
+              <span><b><%= problem.completed_users %></b>명 통과</span>
+            <% } %>
           </div>
         </li>
       </a>

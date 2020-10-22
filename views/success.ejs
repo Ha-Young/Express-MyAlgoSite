@@ -7,19 +7,16 @@
   </div>
   <div class="output success">
     <div class="title">Output</div>
-    <div class="statistics">Time: 936ms Passed: 0 Failed: 2</div>
-    <div class="results">Test Results:
-      Multiply
-      fixed tests
-      expected undefined to equal 1
-      Completed in 2ms
-      random tests
-      Completed in 2ms</div>
+    <div class="statistics">
+      <div class="passed">Passed: <%= results.length %></div>
+      <div class="failed">Failed: 0</div>
+    </div>
+    <div class="results">You have passed all of the tests! :)</div>
   </div>
 </div>
 
 <form class="buttons" action="/" method="get">
-  <button type="submit">목록으로 돌아가기</button>
+  <button type="submit" class="code-button">목록으로 돌아가기</button>
 </form>
 
 <%- include('partials/codemirror') %>

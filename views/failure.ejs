@@ -7,19 +7,29 @@
   </div>
   <div class="output failure">
     <div class="title">Output</div>
-    <div class="statistics">Time: 936ms Passed: 0 Failed: 2</div>
-    <div class="results">Test Results:
-      Multiply
-      fixed tests
-      expected undefined to equal 1
-      Completed in 2ms
-      random tests
-      Completed in 2ms</div>
+    <div class="statistics">
+      <div class="passed">Passed: <%= results.filter(result => result.isCorrect).length %></div>
+      <div class="failed">Failed: <%= results.filter(result => !result.isCorrect).length %></div>
+    </div>
+    <ul class="failcases">
+      <% for (const result of results) { %>
+        <% if (!result.isCorrect) { %>
+          <li class="failcase">
+            <p>Expected: <b class="correct"><%= result.correctResult %></b></p>
+            <% if (!result.error) { %>
+              <p>instead got: <b class="wrong"><%= result.userResult %></b></p>
+            <% } else { %>
+              <p><b class="wrong"><%= result.error %></b></p>
+            <% } %>
+          </li>
+        <% } %>
+      <% } %>
+    </ul>
   </div>
 </div>
 
 <form class="buttons" action="/problems/<%= problem.id %>" method="get">
-  <button type="submit">다시 풀기</button>
+  <button type="submit" class="code-button">다시 풀기</button>
 </form>
 
 <%- include('partials/codemirror') %>

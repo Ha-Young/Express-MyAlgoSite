@@ -23,7 +23,7 @@ exports.getProblem = async (req, res, next) => {
       return next(err);
     }
 
-    return res.render('problem', { title: 'Problem', problem });
+    return res.render('problem', { title: '🎯Problem🎯', problem });
   } catch (err) {
     next(err);
   }
@@ -36,13 +36,12 @@ exports.postProblem = async (req, res, next) => {
   try {
     const problem = await Problem.findOne({ id: problem_id });
     const results = checkUserSolution(usercode, problem.tests);
-    console.log('📌 : exports.postProblem -> results', results);
-    const isSuccess = results.every(result => result.isCorrect);
+    const isAllCorrect = results.every(result => result.isCorrect);
 
-    if (isSuccess) {
-      res.render('success', { title: '✨Success✨', problem, usercode });
+    if (isAllCorrect) {
+      res.render('success', { title: '✨Success✨', problem, results, usercode });
     } else {
-      res.render('failure', { title: '🤦‍♀️Failure🤦‍♂️', problem, usercode });
+      res.render('failure', { title: '🤦‍♀️Failure🤦‍♂️', problem, results, usercode });
     }
   } catch (err) {
     next(err);
@@ -51,7 +50,12 @@ exports.postProblem = async (req, res, next) => {
 
 class SolutionResult {
   constructor(userResult, correctResult, error) {
-    this.userResult = userResult;
+    this.userResult = (result => {
+      if (result === undefined) return 'undefined';
+      if (result === null) return 'null';
+      if (result === 0) return '0';
+      return result;
+    })(userResult);
     this.correctResult = correctResult;
     this.error = error;
     this.isCorrect = this.compare();
@@ -67,9 +71,9 @@ function checkUserSolution(code, tests = []) {
 
   for (const test of tests) {
     const { code: executionCommand, solution: correctResult } = test;
-    const script = new vm.Script(code + executionCommand);
 
     try {
+      const script = new vm.Script(code + executionCommand);
       const userResult = script.runInNewContext({}, { timeout: 1000 });
       logs.push(new SolutionResult(userResult, correctResult));
     } catch (error) {

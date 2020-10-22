@@ -1,23 +1,34 @@
-.problem-detail {
-  padding: 0 10px;
+main {
+  width: 90%;
+  max-width: 960px;
+  margin: 0 auto;
+}
 
-  span {
-    font-size: 0.7rem;
+.problem-detail {
+  padding: 20px;
+  border: 1px solid #404049;
+  background-color: rgba(#0c1021, 0.8);
+
+  h1 {
+    display: inline;
+    margin-right: 10px;
+  }
+
+  p {
+    margin: 20px 10px 10px 0;
   }
 }
 
 .playground {
   display: flex;
-  margin: 20px 0;
 
   .solution {
     width: 100%;
+    overflow-x: auto;
   }
 
   .solution,
   .output {
-    margin: 10px;
-
     .title {
       height: 35px;
       background-color: #404049;
@@ -33,27 +44,73 @@
 
     &.failure {
       .title {
-        background-color: #970000;
+        background-color: #b10000;
       }
     }
   }
 
   .output {
     width: 100%;
-    height: 475px;
+    height: 405px;
+    overflow-y: auto;
+    margin-bottom: 5px;
     border: 1px solid #404049;
+    background-color: rgba(#3b3333, 0.5);
 
     .statistics,
     .results {
       padding: 10px;
     }
 
+    .statistics {
+      display: flex;
+      justify-content: space-around;
+      font-size: 1.4rem;
+      margin-top: 10px;
+
+      .passed {
+        color: #00d640;
+      }
+
+      .failed {
+        color: #ff0000;
+      }
+    }
+
     &.success {
       border-color: #01922d;
+
+      .results {
+        margin: 30px;
+        border: 2px dotted #01922d;
+      }
     }
 
     &.failure {
-      border-color: #970000;
+      border-color: #b10000;
+
+      .failcases {
+        padding: 10px;
+        margin: 5px 10px 5px 30px;
+        list-style: square;
+        color: #cdd0d4;
+
+        .failcase {
+          margin-bottom: 1.2rem;
+
+          p {
+            margin: 0;
+
+            .correct {
+              color: #01922d;
+            }
+
+            .wrong {
+              color: #b10000;
+            }
+          }
+        }
+      }
     }
   }
 }

@@ -2,11 +2,10 @@
   display: flex;
   justify-content: flex-end;
 
-  button {
+  .code-button {
     background: none;
     color: inherit;
     min-width: 100px;
-    margin: 1rem;
     padding: 1rem 2rem;
     outline: none;
     font-size: inherit;

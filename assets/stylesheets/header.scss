@@ -8,6 +8,15 @@ header {
   font-size: 3rem;
   border-bottom: 1px solid #e8ecf0;
 
+  a {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      color: #86bef7;
+    }
+  }
+
   img {
     margin: 10px;
   }
