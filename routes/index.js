@@ -71,18 +71,6 @@ router.post('/problem/:problem_id', checkAuthenticated, async (req, res, next) =
   const solution = anonymousFunc();//실행할 함수
 
   try {
-    const newUser = new UserSolution({
-      problemId: req.params.problem_id,
-      username: req.user.username,
-      codeWritten: req.body.code
-    });
-    await newUser.save();
-    console.log(await UserSolution.find({}));
-  } catch (e) {
-    throw new Error("문제 제출 후 DB 저장 에러");
-  }
-
-  try {
     const failedTest = {};
 
     for (let i = 0; i < targetProblem[0].tests.length; i++) {
@@ -97,6 +85,18 @@ router.post('/problem/:problem_id', checkAuthenticated, async (req, res, next) =
           return;
         }
       }
+    }
+
+    try {
+      const newUser = new UserSolution({
+        problemId: req.params.problem_id,
+        username: req.user.username,
+        codeWritten: req.body.code
+      });
+      await newUser.save();
+      console.log(await UserSolution.find({}));
+    } catch (e) {
+      throw new Error("문제 제출 후 DB 저장 에러");
     }
 
     res.render('success');
