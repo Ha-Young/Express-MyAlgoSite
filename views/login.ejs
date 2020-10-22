@@ -8,9 +8,14 @@
 </head>
 <body>
   <section class="login-container">
-    <h1>Login to Codewars!</h1>
+    <h1>Welcome to Codewars!</h1>
     <br>
-    <a href="/auth/login/github">깃허브로 로그인하기</a>
+
+    <% if (isAuthenticated) { %>
+      <a href="/">들어가기</a>
+    <% } else { %>
+      <a href="/auth/login/github">깃허브로 로그인하기</a>
+    <% } %>
   </section>
 </body>
 </html>
