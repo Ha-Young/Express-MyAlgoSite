@@ -16,6 +16,7 @@ const api = require('./routes/api');
 
 const errorHandler = require('./routes/error/errorHandler');
 const RequestError = require('./routes/error/RequestError');
+const ROUTERS = require('./constants').ROUTERS;
 
 const app = express();
 
@@ -36,9 +37,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', index);
-app.use('/auth', auth);
-app.use('/problems', problems);
+app.use(ROUTERS.HOME, index);
+app.use(ROUTERS.AUTH, auth);
+app.use(ROUTERS.PROBLEMS, problems);
 /* TEST ROUTER: WILL BE DELETED SOON */
 app.use('/api', api);
 

@@ -3,25 +3,28 @@ const vm = require('vm');
 const Problem = require('../../models/Problem');
 const User = require('../../models/User');
 
+const RequestError = require('../error/RequestError');
+const { VIEWS, TEST } = require('../../constants');
+
 exports.getAllProblems = async function getAllProblems(req, res, next) {
   const { query: { filter }, user } = req;
   const options = {};
   if (filter) options.difficulty_level = filter;
   try {
     const list = await Problem.find(options).lean().exec();
-    res.render('index', { title: 'Codewars', user: user.display_name, list });
+    res.render(VIEWS.HOME, { title: 'Codewars', user: user.display_name, list });
   } catch (error) {
     next(error);
   }
 };
 
 exports.getProblem = async function getProblem(req, res, next) {
-  const { params: { problem_id } } = req;
+  const { params: { problem_id }, user } = req;
   try {
     const targetProblem = await Problem.findById(problem_id);
     const testCaseList = targetProblem.tests.map(value => `assertEquals(${value.code}, ${value.solution});` + '\n');
 
-    res.render('problem', { params: problem_id, user: 'TOGGO', list: testCaseList.join(''), problem: targetProblem });
+    res.render(VIEWS.PROBLEM, { params: problem_id, user: user.display_name, list: testCaseList.join(''), problem: targetProblem });
   } catch (error) {
     next(error);
   }
@@ -34,7 +37,7 @@ exports.postSolution = async function postSolution(req, res, next) {
     const { testResult, failedCase } = await checkSolution(targetProblem.tests, user_solution);
 
     switch (testResult) {
-      case 'succeed':
+      case TEST.SUCCEED:
         const isUser = targetProblem.compledted_user_ids.includes(user._id);
         if (!isUser) {
           const count = targetProblem.completed_users += 1;
@@ -46,19 +49,17 @@ exports.postSolution = async function postSolution(req, res, next) {
             $push: { solutions: [{ problem_id, solution: user_solution }] }
           });
         }
-        res.status(200).render('success');
+        res.status(200).render(VIEWS.SUCCESS);
         return;
-      case 'failed':
+      case TEST.FAILED:
         failedCase.result = 'undefined';
-        res.status(200).render('failure', { failedCase });
+        res.status(200).render(VIEWS.FAILURE, { failedCase });
         return;
-      case 'execution-error':
-        res.status(200).render('failure', { failedCase });
+      case TEST.EXECUTION_ERROR:
+        res.status(200).render(VIEWS.FAILURE, { failedCase });
         return;
       default:
-        const error = new Error('Bad request');
-        error.status = 400;
-        throw error;
+        throw RequestError.badRequest();
     }
   } catch (error) {
     next(error);
@@ -84,13 +85,13 @@ function checkSolution(list, solution) {
       });
 
       if (isPassed) {
-        resolve({ testResult: 'succeed' });
+        resolve({ testResult: TEST.SUCCEED });
       } else {
-        resolve({ testResult: 'failed', failedCase });
+        resolve({ testResult: TEST.FAILED, failedCase });
       }
     } catch (error) {
       failedCase.message = error.message;
-      resolve({ testResult: 'execution-error', failedCase });
+      resolve({ testResult: TEST.EXECUTION_ERROR, failedCase });
     }
   })
 }

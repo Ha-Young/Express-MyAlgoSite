@@ -27,4 +27,9 @@ router.post('/pro', async (req, res, next) => {
   }
 });
 
+router.post('/test', async (req, res, next) => {
+  const { body } = req;
+  res.status(200).send({ result: 'ok', content: body });
+});
+
 module.exports = router;

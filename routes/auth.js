@@ -1,11 +1,12 @@
 const express = require('express');
 const authController = require('./controllers/auth.controller');
+const ROUTES = require('../constants').ROUTES;
 
 const router = express.Router();
 
-router.get('/login', authController.getLogin);
-router.post('/login', authController.postLogin);
-router.get('/logout', authController.getLogout);
-router.get('/github/callback', authController.getGithubCallback);
+router.get(ROUTES.LOGIN, authController.getLogin);
+router.post(ROUTES.LOGIN, authController.postLogin);
+router.get(ROUTES.LOGOUT, authController.getLogout);
+router.get(ROUTES.GITHUB_CALLBACK, authController.getGithubCallback);
 
 module.exports = router;
