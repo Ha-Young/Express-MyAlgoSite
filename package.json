@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "start": "NODE_ENV=production node ./bin/www",
-    "dev": "NODE_ENV=development nodemon ./bin/www"
+    "dev": "NODE_ENV=development nodemon ./bin/www",
+    "test": "mocha ./routes/**/*.spec.js"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
-    "codemirror": "^5.58.1",
     "connect-mongodb-session": "^2.4.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
@@ -23,5 +23,9 @@
     "passport": "^0.4.1",
     "passport-github": "^1.1.0",
     "serve-favicon": "~2.4.5"
+  },
+  "devDependencies": {
+    "mocha": "^8.2.0",
+    "sinon": "^9.2.0"
   }
 }

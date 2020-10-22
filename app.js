@@ -58,4 +58,8 @@ app.use(function(req, res, next) {
 });
 app.use(errorHandler);
 
+app.listen(function () {
+  console.log(`[SERVER] start - env: ${process.env.NODE_ENV}`);
+});
+
 module.exports = app;

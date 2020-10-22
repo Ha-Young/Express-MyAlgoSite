@@ -3,7 +3,7 @@ const { VIEWS, ROUTES } = require('../../constants');
 
 exports.getLogin = function getLogin(req, res, next) {
   try {
-    res.render(VIEWS.LOGIN);
+    res.status(200).render(VIEWS.LOGIN);
   } catch (error) {
     next(error);
   }

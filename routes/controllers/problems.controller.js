@@ -12,7 +12,7 @@ exports.getAllProblems = async function getAllProblems(req, res, next) {
   if (filter) options.difficulty_level = filter;
   try {
     const list = await Problem.find(options).lean().exec();
-    res.render(VIEWS.HOME, { title: 'Codewars', user: user.display_name, list });
+    res.status(200).render(VIEWS.HOME, { title: 'Codewars', user: user.display_name, list });
   } catch (error) {
     next(error);
   }
@@ -24,7 +24,7 @@ exports.getProblem = async function getProblem(req, res, next) {
     const targetProblem = await Problem.findById(problem_id);
     const testCaseList = targetProblem.tests.map(value => `assertEquals(${value.code}, ${value.solution});` + '\n');
 
-    res.render(VIEWS.PROBLEM, { params: problem_id, user: user.display_name, list: testCaseList.join(''), problem: targetProblem });
+    res.status(200).render(VIEWS.PROBLEM, { params: problem_id, user: user.display_name, list: testCaseList.join(''), problem: targetProblem });
   } catch (error) {
     next(error);
   }
