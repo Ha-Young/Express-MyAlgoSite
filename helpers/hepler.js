@@ -1,8 +1,4 @@
-const { count } = require("../models/Problem");
-
-const checkAllPass = (el) => {
-  return el;
-};
+const checkAllPass = (el) => el;
 
 const getCount = results => {
   let count = 0;

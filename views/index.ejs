@@ -1,10 +1,34 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title><%= title %></title>
-  <link rel='stylesheet' href='/public/stylesheets/style.css' />
-</head>
+<html lang="en">
+<%- include('partials/head') %>
+
 <body>
- <h1>여기는 인덱스 입니다.....수정...바람</h1>
+  <div class="main-container">
+    <%- include('./partials/header') %>
+    <div class="problems-container">
+      <% for(let problem of problems){ %>
+        <div class="problem-wrap">
+          <div class="problem-title-wrap">
+            <span class="problem-title"><%= problem.title %></span>
+          </div>
+          <div class="problem-sum">
+            <div class="sub-column">
+              <span class="label">난이도</span>
+              <span class="problem-difficulty"><%= problem.difficulty_level %></span>
+            </div>
+            <div class="border"></div>
+            <div class="sub-column">
+              <span class="label">정답자 수</span>
+              <span class="problem-users"><%= problem.completed_users %></span>
+            </div>
+          </div>
+          <a href="/problems/<%= problem.id %>" class="train-button-wrap">
+            <button class="train-button">TRAIN</button>
+          </a>
+        </div>
+      <% } %>
+    </div>
+  </div>
 </body>
+
 </html>

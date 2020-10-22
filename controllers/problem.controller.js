@@ -1,19 +1,19 @@
 /* eslint-disable no-unused-vars */
-const Problem = require('../../models/Problem');
+const Problem = require('../models/Problem');
 const vm = require('vm');
-const { checkAllPass, getCount } = require('../../utils/utils');
+const { checkAllPass, getCount } = require('../helpers/hepler');
 
 exports.getAll = async (req, res, next) => {
-  const { avatar_url } = req.user._json;
+  const avatar = req.user.avatar;
   const username = req.user.username;
 
   try {
     const problems = await Problem.find().lean();
 
-    res.render('problems', {
+    res.render('index', {
       problems: problems,
       username: username,
-      avatar: avatar_url,
+      avatar: avatar,
     });
   } catch (err) {
     next(err);
@@ -21,7 +21,7 @@ exports.getAll = async (req, res, next) => {
 };
 
 exports.getOne = async (req, res, next) => {
-  const { avatar_url } = req.user._json;
+  const avatar = req.user.avatar;
   const username = req.user.username;
   const id = req.params.problem_id;
 
@@ -31,7 +31,7 @@ exports.getOne = async (req, res, next) => {
     res.render('problem', {
       problem: problem,
       username: username,
-      avatar: avatar_url,
+      avatar: avatar,
     });
   } catch (err) {
     next(err);
@@ -43,9 +43,10 @@ exports.getResult = async (req, res, next) => {
   const script = req.body.script;
 
   try {
-    let testResults;
     const problem = await Problem.findOne({ id });
-    const solutions = problem.tests;
+    const { tests: solutions, completed_users: userCount, _id } = problem;
+    const newUserCount = userCount + 1;
+    let testResults;
 
     try {
       testResults = solutions.map(test => {
@@ -72,16 +73,24 @@ exports.getResult = async (req, res, next) => {
     const allPass = testResults.every(checkAllPass);
     const correctCount = getCount(testResults);
 
-    allPass
-      ? res.render('success', {
-          problem: problem,
-        })
-      : res.render('failure', {
-          results: testResults,
-          solutions: solutions,
-          count: correctCount,
-          problem: problem,
-        });
+    if (allPass) {
+      await Problem.findByIdAndUpdate(
+        _id,
+        { completed_users: newUserCount },
+        { new: true },
+      );
+
+      res.render('success', {
+        problem: problem,
+      });
+    } else {
+      res.render('failure', {
+        results: testResults,
+        solutions: solutions,
+        count: correctCount,
+        problem: problem,
+      });
+    }
   } catch (err) {
     next(err);
   }

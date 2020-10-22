@@ -5,17 +5,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport = require('passport');
-const mongoose = require('mongoose');
 
 const passportModule = require('./config/passport');
-
-const SECRET_URL = process.env.MONGO_URL;
-
-mongoose.connect(SECRET_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-});
+const db = require('./config/mongoose');
 
 const indexRoutes = require('./routes/index');
 const loginRoutes = require('./routes/login');
@@ -24,9 +16,8 @@ const problemsRoutes = require('./routes/problems');
 
 const app = express();
 
-// secret : 쿠키 임의 변조하는 것 방지. 세션을 암호화 시켜 저장.
-// resave : 세션을 언제나 저장할 것인지 정하는 값. false 권장.. 왜....?
-// saveUnitialized : 세션에 저장되기 전에 초기화되지 않은 값으로 미리 만들어서 저장.
+db();
+
 app.use(
   session({
     secret: process.env.SECRET_CODE,
