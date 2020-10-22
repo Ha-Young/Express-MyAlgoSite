@@ -4,7 +4,12 @@ body {
   background-color: pink;
 }
 
-.container {
+h2 {
+  background-color: #fff;
+  padding: 10px;
+}
+
+.problems-wrapper {
   width: 40%;
   margin: 0 auto;
 
@@ -20,7 +25,7 @@ body {
   }
 
   .problem {
-    background-color: #fff;
+    background-color: white;
     margin: 1em auto;
     padding: 1em;
     border-radius: 10px;

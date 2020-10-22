@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
 html, body {
   margin: 0;
   padding: 0;
@@ -6,9 +7,14 @@ html, body {
 }
 
 h1 {
+  font-family: 'Russo One', sans-serif;
   font-size: 3em;
   margin-left: 13px;
   margin-bottom: 0;
+}
+
+h2 {
+  margin-left: 20px;
 }
 
 ul {
@@ -28,12 +34,17 @@ body {
   background-color: pink;
 }
 
-.container {
+h2 {
+  background-color: #fff;
+  padding: 10px;
+}
+
+.problems-wrapper {
   width: 40%;
   margin: 0 auto;
 }
 
-.container .tabs {
+.problems-wrapper .tabs {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -42,24 +53,24 @@ body {
           justify-content: space-between;
 }
 
-.container .tabs li {
+.problems-wrapper .tabs li {
   background-color: #fff;
   padding: 5px;
   border-radius: 3px;
 }
 
-.container .problem {
-  background-color: #fff;
+.problems-wrapper .problem {
+  background-color: white;
   margin: 1em auto;
   padding: 1em;
   border-radius: 10px;
 }
 
-.container .problem h3 {
+.problems-wrapper .problem h3 {
   margin-top: 0;
 }
 
-.container .problem:hover {
+.problems-wrapper .problem:hover {
   color: grey;
   -webkit-transition: 0.2s color;
   transition: 0.2s color;

@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
 html, body {
   margin: 0;
   padding: 0;
@@ -6,9 +7,14 @@ html, body {
 }
 
 h1 {
+  font-family: 'Russo One', sans-serif;
   font-size: 3em;
   margin-left: 13px;
   margin-bottom: 0;
+}
+
+h2 {
+  margin-left: 20px;
 }
 
 ul {
@@ -55,16 +61,12 @@ body {
 
 .login-container h1 {
   margin-top: 0;
+  margin-left: 20px;
 }
 
-.login-container form {
-  text-align: center;
-}
-
-.login-container form input {
-  margin-bottom: 8px;
-}
-
-.login-container form input[type='text'] {
-  border: 2px solid black;
+.login-container a {
+  background-color: black;
+  color: white;
+  padding: 10px;
+  border-radius: 3px;
 }
