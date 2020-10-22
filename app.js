@@ -26,7 +26,7 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 
 app.use(express.json());
-app.use(express.urlencoded( { extended : false } ));
+app.use(express.urlencoded({ extended : false }));
 
 passportConfig(passport);
 app.use(session({
@@ -38,6 +38,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/login', login);
 app.get('/logout', (req, res, next) => {
@@ -45,7 +46,6 @@ app.get('/logout', (req, res, next) => {
   res.redirect('/login');
 });
 app.use('/problems', problems);
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
   const err = new Error('Not Found');

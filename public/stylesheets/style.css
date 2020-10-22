@@ -264,3 +264,9 @@ ul {
   display: flex;
   justify-content: space-evenly;
 }
+
+.error-container {
+  padding: 30px 50px;
+  width: 100vw;
+  color: var(--color-light-grey);
+}

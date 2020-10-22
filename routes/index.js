@@ -1,12 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const { ensureAuthenticated } = require('./middlewares');
-const { getAll } = require('./controllers/problem.controller');
+const ensureAuthenticated = require('./middlewares/authentication');
+const { getAllProblems } = require('./middlewares/problems');
 
-router.get('/', ensureAuthenticated, getAll, (req, res, next) => {
-  res.render('index', {
-    problems: req.problems,
-    username: req.user.username,
+router.get('/',
+  ensureAuthenticated,
+  getAllProblems,
+  (req, res, next) => {
+    res.render('index', {
+      problems: req.problems,
+      username: req.user.username,
   });
 });
 

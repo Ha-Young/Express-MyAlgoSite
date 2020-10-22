@@ -13,7 +13,7 @@
             <div class='level'>🎖Level <%= problem.difficulty_level %></div>
             <div class='completed-user'>
               <span>🙆‍♀️Completed Users</span>
-              <span><%= problem.completed_users %></span>
+              <span><%= problem.completed_users.length %></span>
             </div>
           </div>
         </li>
@@ -21,4 +21,3 @@
     <% }) %>
   </ul>
 </main>
-

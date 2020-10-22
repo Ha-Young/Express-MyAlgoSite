@@ -2,6 +2,11 @@
 <% extend('layout') %>
 <% include ./header %>
 
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<div class='error-container'>
+  <h1 class='error-message'><%= message %></h1>
+  <h2 class='error-status'><%= error.status %></h2>
+  <pre class='error-stack'><%= error.stack %></pre>
+  <form action='/' method='GET'>
+    <button type='submit' class='home-button'>Home</button>
+  </form>
+</div>

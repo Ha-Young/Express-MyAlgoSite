@@ -6,7 +6,7 @@
   <h2 class='solution-title'><%= problem.title %></h2>
   <div class='solution-sub-info'>
     <span>🎖Level <%= problem.difficulty_level %></span>
-    <span>🙆‍♀️Completed Users <%= problem.completed_users %></span>
+    <span>🙆‍♀️Completed Users <%= problem.completed_users.length %></span>
   </div>
   <p class='solution-description'><%= problem.description %></p>
   <form action='/problems/<%= problem.id %>' method='POST'>
