@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "cross-env NODE_ENV=development nodemon ./bin/www"
+    "dev": "cross-env NODE_ENV=development nodemon ./bin/www",
+    "test": "cross-env NODE_ENV=test mocha spec"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
@@ -27,6 +28,9 @@
     "serve-favicon": "~2.4.5"
   },
   "devDependencies": {
-    "cross-env": "^7.0.2"
+    "chai": "^4.2.0",
+    "cross-env": "^7.0.2",
+    "mocha": "^8.2.0",
+    "supertest": "^5.0.0"
   }
 }
