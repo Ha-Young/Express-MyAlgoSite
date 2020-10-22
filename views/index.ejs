@@ -7,7 +7,15 @@
   <body>
     <h1>Codewars</h1>
     <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
-
+    <form action="/problem/byLevel" method="POST">
+      <label for="level">원하는 난이도 선택:</label>
+      <select name="level">
+        <option>level 1</option>
+        <option>level 2</option>
+        <option>level 3</option>
+      </select>
+      <button type="submit">GO!</button>
+    </form>
     <div class="grid-container">
       <% data.forEach(function (data) { %>
       <div class="problem-container">

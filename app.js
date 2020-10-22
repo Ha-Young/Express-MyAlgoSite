@@ -3,10 +3,10 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 const GitHubStrategy = require('passport-github').Strategy;
 const login = require('./routes/login');
-const index = require('./routes/index');
+// const index = require('./routes/index');
 const problem = require('./routes/problem');
 const User = require('./models/User');
-const checkAuth = require('./middlewares/checkAuthentication');
+const checkAuth = require('./middlewares/checkAuth');
 const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
 const importSampleProblems = require('./utils/handleSampleProblems');
@@ -64,11 +64,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/login', login);
-app.use('/problem', problem);
-app.use('/', index);
-
 // app.use('/', checkAuth, index);
-// app.use('/problem', checkAuth, problem);
+app.use('/', checkAuth, problem);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

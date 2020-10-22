@@ -1,7 +1,10 @@
-const express = require('express');
-const router = express.Router();
 const vm = require('vm');
 const Problem = require('../models/Problem');
+
+exports.renderMainPage = async (req, res, next) => {
+  const problems = await Problem.find();
+  res.render('index', { data: problems });
+};
 
 exports.getProblem = async (req, res, next) => {
   const id = req.params.problem_id;
@@ -39,4 +42,10 @@ exports.receiveUserSolution = async (req, res, next) => {
     }
   });
   return isAnswer ? res.render('success') : res.render('failure');
+};
+
+exports.filterByLevel = (req, res, next) => {
+  console.log(req.body.level);
+  console.log(req.query);
+  res.send('lelve');
 };
