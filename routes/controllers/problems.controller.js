@@ -15,7 +15,7 @@ exports.getOne = async function(req, res, next) {
     res.render(
       'problem',
       {
-        problemNumber: result.problemNumber,
+        problem_number: result.problem_number,
         title: result.title,
         description: result.description,
         tests: result.tests,
@@ -26,26 +26,25 @@ exports.getOne = async function(req, res, next) {
   }
 };
 
-exports.submitCode = async function(req, res, next) {
-  console.log(req.user);
-  console.log(req.body);
+exports.submitHandler = async function(req, res, next) {
   let problemData;
 
   try {
     const submittedFunction = new Function(`return ${req.body.code};`)();
 
     problemData = await Problem.findOne(req.params);
-    console.log(problemData);
     const tests = problemData.tests;
 
     for (let i = 0; i < tests.length; i++) {
       const code = tests[i].code;
       const solution = tests[i].solution;
+
       let answer;
+
       let info = {
         error: null,
         failureData: {},
-        problemNumber: req.params.problemNumber,
+        problem_number: req.params.problem_number,
       };
 
       try {
@@ -71,13 +70,19 @@ exports.submitCode = async function(req, res, next) {
       }
     }
 
-    problemData.completed_users++;
+    if (
+      !problemData.completed_users
+        .includes(req.user._id)
+    ) {
+      problemData.completed_users.push(req.user._id);
+      problemData.completed_user_number++;
 
-    await Problem.findOneAndUpdate(
-      req.params,
-      problemData,
-      { new: true }
-    );
+      await Problem.findOneAndUpdate(
+        req.params,
+        problemData,
+        { new: true }
+      );
+    }
 
     res.render('success');
   } catch (err) {

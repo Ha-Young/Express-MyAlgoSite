@@ -4,10 +4,10 @@ const { validateUser } = require('./middlewares/userValidation');
 const {
   getAll,
   getOne,
-  submitCode,
+  submitHandler,
 } = require('./controllers/problems.controller');
 
-router.get('/:problemNumber', validateUser, getOne);
-router.post('/:problemNumber', validateUser, submitCode);
+router.get('/:problem_number', validateUser, getOne);
+router.post('/:problem_number', validateUser, submitHandler);
 
 module.exports = router;

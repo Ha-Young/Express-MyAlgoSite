@@ -11,10 +11,10 @@
     <ul class="problems">
       <% problems.forEach(problem => { %>
         <li>
-          <a href='/problems/<%= problem.problemNumber %>'><%= problem.title %></a></br>
+          <a href='/problems/<%= problem.problem_number %>'><%= problem.title %></a></br>
           <%= problem.description %></br>
           난이도: <%= problem.difficulty_level %></br>
-          맞힌 사람 수: <%= problem.completed_users %>
+          맞힌 사람 수: <%= problem.completed_users.length %>
         </li>
       <% }) %>
     </ul>
