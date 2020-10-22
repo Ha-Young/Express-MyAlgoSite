@@ -8,7 +8,6 @@ const problems = JSON.parse(
 );
 
 const importProblems = async () => {
-  console.log('import');
   try {
     await Problem.create(problems);
     console.log('data successfully loaded');
@@ -18,7 +17,6 @@ const importProblems = async () => {
 };
 
 const deleteProblems = async () => {
-  console.log('delete');
   try {
     await Problem.deleteMany();
     console.log('data successfully delete');

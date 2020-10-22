@@ -1,16 +1,17 @@
 const express = require('express');
 const passport = require('passport');
 const bodyParser = require('body-parser');
-const GitHubStrategy = require('passport-github').Strategy;
+
 const index = require('./routes/index');
 const login = require('./routes/login');
 const problem = require('./routes/problem');
-const User = require('./models/User');
+
 const checkAuth = require('./middlewares/checkAuth');
 const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
 const apiSampleProblems = require('./utils/apiSampleProblems');
-const passportHandler = require('./config/passport-setup');
+
+require('./config/passport-setup');
 
 apiSampleProblems();
 
@@ -27,40 +28,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 // app.use(passportHandler);
-
-passport.serializeUser((user, done) => {
-  console.log(1);
-  done(null, user._id);
-});
-
-passport.deserializeUser(async (id, done) => {
-  console.log(2);
-  const user = await User.findById(id);
-  done(null, user);
-});
-
-passport.use(
-  new GitHubStrategy(
-    {
-      clientID: `${process.env.CLIENT_ID_GITHUB}`,
-      clientSecret: process.env.CLIENT_SECRET_GITHUB,
-      callbackURL: process.env.CALLBACK_URL_GITHUB,
-    },
-    async (accessToken, refreshToken, profile, cb) => {
-      console.log(3);
-      const searched = await User.findOne({ github_id: profile.id });
-      if (searched) return cb(null, searched);
-
-      const created = await User.create({
-        github_id: profile.id,
-        github_token: accessToken,
-      });
-
-      if (created) return cb(null, created);
-      //error case handle
-    }
-  )
-);
 
 app.set('view engine', 'ejs');
 
