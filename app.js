@@ -86,7 +86,7 @@ app.use('/problem', problems);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  next(createError(404, 'Not Found'));
+  next(createError(404, `Can't find ${req.originalUrl} on this server!`));
 });
 
 // error handler

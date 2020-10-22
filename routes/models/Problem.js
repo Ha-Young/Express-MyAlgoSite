@@ -18,7 +18,10 @@ const ProblemSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  solution_count: Number,
+  solution_count: {
+    type: Number,
+    default: 0,
+  },
   difficulty_level: {
     type: Number,
     require: true,
@@ -34,6 +37,5 @@ const ProblemSchema = new mongoose.Schema({
     }
   ]
 });
-
 
 module.exports = mongoose.model('Problem', ProblemSchema);

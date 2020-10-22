@@ -2,8 +2,13 @@
 <% extend('layout') %>
 
 <section class='failure'>
-    <div class='failure-container'>
-        <p>다시 도전하세요~</p>
+    <% if (error) { %>
+    <h1><%= error.message %></h1>
+    <h2><%= error.status %></h2>
+    <a href='/problem/<%=problemId%>'>다시 풀기</a>
+    <% } else { %>
+    <div class='failure-container'>ㄴ
+        <p>다시 도전하세요</p>
         <div class='failure-description'>
             input <p><%= input %></p>
         </div>
@@ -17,4 +22,5 @@
     <div class='backTo-main-btn'>
         <a href='/'>other test</a>
     </div>
+    <% } %>
 </section>
