@@ -8,10 +8,10 @@ passport.use(new GitHubStrategy({
   callbackURL: process.env.CALLBACK_URL,
 },
   function(accessToken, refreshToken, profile, done) {
-    console.log(profile);
-    User.findOrCreate({ githubId: profile.id }, (err, user) => {
-      return done(err, profile);
-    });
+    User.findOrCreate(
+      { githubId: profile.id },
+      (err, user) => done(err, user)
+    );
   }
 ));
 

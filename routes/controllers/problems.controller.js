@@ -10,15 +10,15 @@ exports.getAll = async function(req, res, next) {
 
 exports.getOne = async function(req, res, next) {
   try {
-    const result = await Problem.find(req.params);
+    const result = await Problem.findOne(req.params);
 
     res.render(
       'problem',
       {
-        problemNumber: result[0].problemNumber,
-        title: result[0].title,
-        description: result[0].description,
-        tests: result[0].tests,
+        problemNumber: result.problemNumber,
+        title: result.title,
+        description: result.description,
+        tests: result.tests,
       }
     );
   } catch (err) {
@@ -27,11 +27,16 @@ exports.getOne = async function(req, res, next) {
 };
 
 exports.submitCode = async function(req, res, next) {
+  console.log(req.user);
+  console.log(req.body);
+  let problemData;
+
   try {
     const submittedFunction = new Function(`return ${req.body.code};`)();
 
-    const problemData = await Problem.find(req.params);
-    const tests = problemData[0].tests;
+    problemData = await Problem.findOne(req.params);
+    console.log(problemData);
+    const tests = problemData.tests;
 
     for (let i = 0; i < tests.length; i++) {
       const code = tests[i].code;
@@ -65,6 +70,14 @@ exports.submitCode = async function(req, res, next) {
         return;
       }
     }
+
+    problemData.completed_users++;
+
+    await Problem.findOneAndUpdate(
+      req.params,
+      problemData,
+      { new: true }
+    );
 
     res.render('success');
   } catch (err) {
