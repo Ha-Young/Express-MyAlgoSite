@@ -1,33 +1,31 @@
-const StringFunction = require("string-function-exec");
 const Problem = require("../models/Problem");
 const { MongoError } = require("../service/error");
 
+const vm = require("vm");
+
 async function verifyProblem(req, res, next) {
   const problemId = req.params.problem_id;
-  let problem;
 
+  let tests;
   try {
-    problem = await Problem.findById(problemId);
+    const problem = await Problem.findById(problemId);
+    tests = problem.tests;
   } catch (err) {
-    next(new MongoError(err.message));
+    next(new MongoError());
   }
 
   try {
-    const givenFunction = new StringFunction(req.body.code);
-    const tests = problem.tests;
-
     for (let i = 0; i < tests.length; i++) {
-      const args = tests[i].args;
-      const answer = givenFunction.execute(...args);
-      const expected = tests[i].solution;
+      const code = tests[i].code;
+      const answer = tests[i].answer;
+      const context = { result: null };
+      const script = new vm.Script(`${req.body.code}result = ${code};`);
 
-      if (answer !== expected) {
-        return res.render("fail", {
-          code: req.body.code,
-          expected,
-          answer,
-          problemId,
-        });
+      vm.createContext(context);
+      script.runInContext(context);
+
+      if (answer !== context.result) {
+        return res.redirect(`/problems/${problemId}/?errMessage="${code}" is expected ${answer}. your answer is ${context.result}`);
       }
     }
 

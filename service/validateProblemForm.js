@@ -1,61 +1,62 @@
 const { ValidationError } = require("./error");
 
-function changeType(value, type) {
-  switch(type) {
+function changeType({ code, answer, answer_type }, next) {
+  const result = {
+    code,
+    answer,
+    answer_type,
+  };
+
+  switch (answer_type) {
     case "string": {
-      return String(value);
+      result.answer = String(answer);
+
+      return result;
     }
     case "number": {
-      return Number(value);
+      result.answer = Number(answer);
+
+      return result;
     }
     case "boolean": {
-      return value === "true" || value === "True";
+      if (!(answer !== "true" || answer !== "True" || answer !== "false" || answer !== "False")) {
+        next(new ValidationError(`${answer} is not boolean. ex) true, false`));
+      }
+      result.answer = answer === "true" || answer === "True";
+
+      return result;
     }
     case "object": {
-      return JSON.parse(value);
+      result.answer = JSON.parse(answer);
+
+      return result;
     }
   }
 }
 
+function checkExample({ code, answer }, next) {
+  if (!code.length) next(new ValidationError("can not found code"));
+  if (!answer.length) next(new ValidationError("can not found answer"));
+  if (!code.includes("solution")) next(new ValidationError("functionName must be solution, ex) solution(2)"));
+}
+
 async function validateProblemForm(req, res, next) {
-  try {
-    const form = req.body;
-    const title = form.title;
-    const description = form.description;
-    const difficulty_level = Number(form.difficulty_level);
-    const examples = [
-      {
-        code: form.example_code1,
-        answer: changeType(form.example_answer1, form.example_answer1_type),
-      },
-      {
-        code: form.example_code2,
-        answer: changeType(form.example_answer2, form.example_answer2_type),
-      }
-    ];
-    const tests = [
-      {
-        args: JSON.parse(form.test_arguments1),
-        solution: changeType(form.test_result1, form.test_result1_type),
-      },
-      {
-        args: JSON.parse(form.test_arguments2),
-        solution: changeType(form.test_result2, form.test_result2_type),
-      }
-    ];
+  const { title, description, difficulty_level, examples, tests } = req.body;
 
-    req.body = {
-      title,
-      description,
-      difficulty_level,
-      examples,
-      tests
-    };
+  if (!title.length) next(new ValidationError("can not found title"));
+  if (!description.length) next(new ValidationError("can not found description"));
 
-    next();
-  } catch (err) {
-    next(new ValidationError());
-  }
+  examples.forEach(example => checkExample(example, next));
+  tests.forEach(test => checkExample(test, next));
+
+  const changedExamples = examples.map(example => changeType(example, next));
+  const changedTests = tests.map(test => changeType(test, next));
+
+  req.body.difficulty_level = Number(difficulty_level);
+  req.body.examples = changedExamples;
+  req.body.tests = changedTests;
+
+  next();
 }
 
 module.exports = validateProblemForm;

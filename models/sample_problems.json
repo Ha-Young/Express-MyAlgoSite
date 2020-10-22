@@ -7,30 +7,35 @@
     "examples": [
       {
         "code": "solution(3)",
-        "answer": 2
+        "answer": 2,
+        "answer_type": "number"
       },
       {
         "code": "solution(10)",
-        "answer": 55
+        "answer": 55,
+        "answer_type": "number"
       }
     ],
-    "example_answer": 2,
     "tests": [
       {
-        "args": [3],
-        "solution": 2
+        "code": "solution(3)",
+        "answer": 2,
+        "answer_type": "number"
       },
       {
-        "args": [2],
-        "solution": 1
+        "code": "solution(10)",
+        "answer": 55,
+        "answer_type": "number"
       },
       {
-        "args": [1],
-        "solution": 1
+        "code": "solution(4)",
+        "answer": 3,
+        "answer_type": "number"
       },
       {
-        "args": [10],
-        "solution": 55
+        "code": "solution(5)",
+        "answer": 5,
+        "answer_type": "number"
       }
     ]
   },
@@ -42,28 +47,30 @@
     "examples": [
       {
         "code": "solution(['Jane', 'Kim'])",
-        "answer": "김서방은 1에 있다"
+        "answer": "김서방은 1에 있다",
+        "answer_type": "string"
       },
       {
         "code": "solution(['Jane', 'Huh', 'Kim'])",
-        "answer": "김서방은 2에 있다"
+        "answer": "김서방은 2에 있다",
+        "answer_type": "string"
       }
     ],
     "tests": [
       {
-        "args": [[
-          "Jane",
-          "Kim"
-        ]],
-        "solution": "김서방은 1에 있다"
+        "code": "solution(['Jane', 'Kim'])",
+        "answer": "김서방은 1에 있다",
+        "answer_type": "string"
       },
       {
-        "args": [[
-          "Jane",
-          "Huh",
-          "Kim"
-        ]],
-        "solution": "김서방은 2에 있다"
+        "code": "solution(['Kim', 'Huh', 'sad'])",
+        "answer": "김서방은 0에 있다",
+        "answer_type": "string"
+      },
+      {
+        "code": "solution(['Jane', 'Huh', 'Kim'])",
+        "answer": "김서방은 2에 있다",
+        "answer_type": "string"
       }
     ]
   },
@@ -75,21 +82,25 @@
     "examples": [
       {
         "code": "solution(3)",
-        "answer": "수박수"
+        "answer": "수박수",
+        "answer_type": "string"
       },
       {
         "code": "solution(4)",
-        "answer": "수박수박"
+        "answer": "수박수박",
+        "answer_type": "string"
       }
     ],
     "tests": [
       {
-        "args": [3],
-        "solution": "수박수"
+        "code": "solution(3)",
+        "answer": "수박수",
+        "answer_type": "string"
       },
       {
-        "args": [4],
-        "solution": "수박수박"
+        "code": "solution(4)",
+        "answer": "수박수박",
+        "answer_type": "string"
       }
     ]
   },
@@ -101,21 +112,25 @@
     "examples": [
       {
         "code": "solution(10)",
-        "answer": true
+        "answer": true,
+        "answer_type": "boolean"
       },
       {
         "code": "solution(1)",
-        "answer": false
+        "answer": false,
+        "answer_type": "boolean"
       }
     ],
     "tests": [
       {
-        "args": [10],
-        "solution": true
+        "code": "solution(10)",
+        "answer": true,
+        "answer_type": "boolean"
       },
       {
-        "args": [11],
-        "solution": false
+        "code": "solution(1)",
+        "answer": false,
+        "answer_type": "boolean"
       }
     ]
   }

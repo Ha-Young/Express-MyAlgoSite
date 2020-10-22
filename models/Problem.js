@@ -1,13 +1,6 @@
 const mongoose = require("mongoose");
 
 const { Mixed } = mongoose.SchemaTypes;
-const TestSchema = new mongoose.Schema({
-  args: [ Mixed ],
-  solution: {
-    type: Mixed,
-    required: true,
-  }
-});
 
 const ExampleSchema = new mongoose.Schema({
   code: {
@@ -15,6 +8,10 @@ const ExampleSchema = new mongoose.Schema({
     required: true,
   },
   answer: {
+    type: Mixed,
+    required: true,
+  },
+  answer_type: {
     type: Mixed,
     required: true,
   }
@@ -42,7 +39,7 @@ const ProblemSchema = new mongoose.Schema({
     unique: true,
     trim: true,
   },
-  tests: [ TestSchema ],
+  tests: [ ExampleSchema ],
   examples: [ ExampleSchema ],
 }, { timestamps: true });
 

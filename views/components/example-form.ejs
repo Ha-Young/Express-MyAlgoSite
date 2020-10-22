@@ -1,0 +1,24 @@
+<div class="form-row">
+  <div class="col">
+    <input value="<%= example.code %>" name="examples[<%= index %>][code]" type="text" class="form-control"
+      placeholder="solution(2)">
+  </div>
+  <div class="col">
+    <input value="<%= example.answer %>" name="examples[<%= index %>][answer]" type="text" class="form-control"
+      placeholder="3">
+  </div>
+  <div class="col">
+    <select name="examples[<%= index %>][answer_type]" class="custom-select">
+      <%
+      const options = [ "string", "number", "boolean", "object"];
+
+      for ( var i = 0; i < options.length; i++ )
+      {
+          var selected = (options[i] === example.answer_type) ? "selected" : "";
+          %><option value="<%= options[i] %>" <%= selected %>><%= options[i].toUpperCase() %></option><%
+      }
+      %>
+    </select>
+  </div>
+</div>
+<br>

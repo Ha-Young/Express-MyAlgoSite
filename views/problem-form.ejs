@@ -26,78 +26,17 @@
       <h3>Examples: this will show when user don`t pass the problem</h3>
       <br>
       <div class="example-container">
-        <div class="form-row">
-          <div class="col">
-            <input value="<%= form.example_code1 %>" name="example_code1" type="text" class="form-control" placeholder="example : solution(2)">
-          </div>
-          <div class="col">
-            <input value="<%= form.example_answer1 %>" name="example_answer1" type="text" class="form-control" placeholder="answer : 123">
-          </div>
-          <div class="col">
-            <select name="example_answer1_type" class="custom-select">
-              <option value="string">String</option>
-              <option value="number">Number</option>
-              <option value="boolean">Boolean</option>
-              <option value="object">Object</option>
-            </select>
-          </div>
-        </div>
-        <br>
-        <div class="form-row">
-          <div class="col">
-            <input value="<%= form.example_code2 %>" name="example_code2" type="text" class="form-control" placeholder="example : solution(2)">
-          </div>
-          <div class="col">
-            <input value="<%= form.example_answer2 %>" name="example_answer2" type="text" class="form-control" placeholder="answer : 123">
-          </div>
-          <div class="col">
-            <select name="example_answer2_type" class="custom-select">
-              <option value="string">String</option>
-              <option value="number">Number</option>
-              <option value="boolean">Boolean</option>
-              <option value="object">Object</option>
-            </select>
-          </div>
-        </div>
+        <% form.examples.forEach(function(example, index){ %>
+          <%- include("components/example-form.ejs", { example, index }) %>
+        <% }) %>
       </div>
       <br>
       <h3>Tests: test code. please write type</h3>
       <br>
       <div class="test-container">
-        <div class="form-row">
-          <div class="col">
-            <input value="<%= form.test_arguments1 %>" name="test_arguments1" type="text" class="form-control" placeholder="arguments: Array, [2]">
-          </div>
-          <div class="col">
-            <input value="<%= form.test_result1 %>" name="test_result1" type="text" class="form-control" placeholder="result, 123">
-          </div>
-          <div class="col">
-            <select name="test_result1_type" class="custom-select">
-              <option value="string">String</option>
-              <option value="number">Number</option>
-              <option value="boolean">Boolean</option>
-              <option value="object">Object</option>
-            </select>
-          </div>
-        </div>
-        <br>
-        <div class="form-row">
-          <div class="col">
-            <input value="<%= form.test_arguments2 %>" name="test_arguments2" type="text" class="form-control" placeholder='arguments: Array, [2, "text"]'>
-          </div>
-          <div class="col">
-            <input value="<%= form.test_result2 %>" name="test_result2" type="text" class="form-control" placeholder='result, "something"'>
-          </div>
-          <div class="col">
-            <select name="test_result2_type" class="custom-select">
-              <option value="string">String</option>
-              <option value="number">Number</option>
-              <option value="boolean">Boolean</option>
-              <option value="object">Object</option>
-            </select>
-          </div>
-        </div>
-        <br>
+        <% form.tests.forEach(function(test, index){ %>
+          <%- include("components/test-form.ejs", { test, index }) %>
+        <% }) %>
         <div class="button-container">
           <a href="/problems" class="btn btn-lg btn-primary">Back</a>
           <button type="submit" class="btn btn-lg btn-danger">Submit</button>

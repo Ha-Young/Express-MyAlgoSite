@@ -32,7 +32,7 @@ const githubAuth = new GitHubStrategy({
       } else {
         const newUser = await User.create({ id, username });
 
-        cb(null, { token: jwt.sign({ user: newUser }, SECRET_KEY) });
+        cb(null, jwt.sign({ user: newUser }, SECRET_KEY));
       }
     } catch (err) {
       throw new MongoError();

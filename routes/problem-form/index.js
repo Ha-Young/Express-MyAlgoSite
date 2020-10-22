@@ -4,6 +4,7 @@ const express = require("express");
 const Problem = require("../../models/Problem");
 const { MongoError } = require("../../service/error");
 const validateProblemForm = require("../../service/validateProblemForm");
+const serializeForm = require("../../middleware/serializeForm");
 
 const router = express.Router();
 
@@ -11,18 +12,35 @@ const formBase = {
   title: "",
   difficulty_level: "",
   description: "",
-  example_code1: "",
-  example_answer1: "",
-  example_answer1_type: "",
-  example_code2: "",
-  example_answer2: "",
-  example_answer2_type: "",
-  test_arguments1: "",
-  test_result1: "",
-  test_result1_type: "",
-  test_arguments2: "",
-  test_result2: "",
-  test_result2_type: "",
+  examples: [
+    {
+      code: "",
+      answer: "",
+      answer_type: "string",
+    },
+    {
+      code: "",
+      answer: "",
+      answer_type: "string",
+    },
+  ],
+  tests: [
+    {
+      code: "",
+      answer: "",
+      answer_type: "string",
+    },
+    {
+      code: "",
+      answer: "",
+      answer_type: "string",
+    },
+    {
+      code: "",
+      answer: "",
+      answer_type: "string",
+    },
+  ],
 };
 
 router.get("/", (req, res, next) => {
@@ -39,7 +57,7 @@ async function saveForm(req, res, next) {
   next();
 }
 
-router.post("/create", saveForm, validateProblemForm, (req, res, next) => {
+router.post("/create", serializeForm, saveForm, validateProblemForm, (req, res, next) => {
   const problemId = req.query.problemId;
 
   if (problemId) {
