@@ -1,8 +1,10 @@
 const vm = require('vm');
 const Problem = require('../models/Problem');
+const APIFeatures = require('../utils/apiFeatures');
 
-exports.renderMainPage = async (req, res, next) => {
-  const problems = await Problem.find();
+exports.getAllProblems = async (req, res, next) => {
+  const featured = new APIFeatures(Problem.find(), req.query).filter().sort();
+  const problems = await featured.query;
   res.render('index', { data: problems });
 };
 
@@ -42,10 +44,4 @@ exports.receiveUserSolution = async (req, res, next) => {
     }
   });
   return isAnswer ? res.render('success') : res.render('failure');
-};
-
-exports.filterByLevel = (req, res, next) => {
-  console.log(req.body.level);
-  console.log(req.query);
-  res.send('lelve');
 };

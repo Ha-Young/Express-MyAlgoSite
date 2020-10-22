@@ -2,16 +2,17 @@ const express = require('express');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const GitHubStrategy = require('passport-github').Strategy;
+const index = require('./routes/index');
 const login = require('./routes/login');
-// const index = require('./routes/index');
 const problem = require('./routes/problem');
 const User = require('./models/User');
 const checkAuth = require('./middlewares/checkAuth');
 const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
-const importSampleProblems = require('./utils/handleSampleProblems');
+const apiSampleProblems = require('./utils/apiSampleProblems');
+const passportHandler = require('./config/passport-setup');
 
-importSampleProblems();
+apiSampleProblems();
 
 const app = express();
 
@@ -25,12 +26,15 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+// app.use(passportHandler);
 
 passport.serializeUser((user, done) => {
+  console.log(1);
   done(null, user._id);
 });
 
 passport.deserializeUser(async (id, done) => {
+  console.log(2);
   const user = await User.findById(id);
   done(null, user);
 });
@@ -43,6 +47,7 @@ passport.use(
       callbackURL: process.env.CALLBACK_URL_GITHUB,
     },
     async (accessToken, refreshToken, profile, cb) => {
+      console.log(3);
       const searched = await User.findOne({ github_id: profile.id });
       if (searched) return cb(null, searched);
 
@@ -64,8 +69,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/login', login);
-// app.use('/', checkAuth, index);
-app.use('/', checkAuth, problem);
+app.use('/problem', checkAuth, problem);
+app.use('/', checkAuth, index);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

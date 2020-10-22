@@ -70,5 +70,23 @@
         "solution": false
       }
     ]
+  },
+  {
+    "id": 4,
+    "title": "홀짝",
+    "solution_count": 5,
+    "difficulty_level": 4,
+    "secretProblem": true,
+    "description": "짝수면 true, 홀수면 false를 반환하는 함수를 작성하세요",
+    "tests": [
+      {
+        "code": "solution(2)",
+        "solution": true
+      },
+      {
+        "code": "solution(1)",
+        "solution": false
+      }
+    ]
   }
 ]

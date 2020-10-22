@@ -7,12 +7,23 @@
   <body>
     <h1>Codewars</h1>
     <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
-    <form action="/problem/byLevel" method="POST">
+    <form action="/" method="GET">
+      <button>필터 초기화</button>
+    </form>
+    <form action="/" method="GET">
       <label for="level">원하는 난이도 선택:</label>
-      <select name="level">
-        <option>level 1</option>
-        <option>level 2</option>
-        <option>level 3</option>
+      <select name="difficulty_level">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+      </select>
+      <button type="submit">GO!</button>
+    </form>
+    <form action="/" method="GET">
+      <label for="level">난이도별 정렬 선택:</label>
+      <select name="sort">
+        <option>쉬움</option>
+        <option>어려움</option>
       </select>
       <button type="submit">GO!</button>
     </form>
@@ -27,5 +38,6 @@
       </div>
       <% }) %>
     </div>
+    <button><a href="/management">Manager Mode</a></button>
   </body>
 </html>
