@@ -2,11 +2,12 @@ require('dotenv').config();
 require('./db');
 require('./passport');
 
-const express = require('express');
-const session = require('express-session');
 const path = require('path');
+const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
 const expressLayouts = require('express-ejs-layouts');
 
 const index = require('./routes/index');
@@ -19,6 +20,14 @@ const RequestError = require('./routes/error/RequestError');
 const ROUTERS = require('./constants').ROUTERS;
 
 const app = express();
+const store = new MongoDBStore({
+  uri:
+    process.env.NODE_ENV === 'production' ?
+    process.env.DB_PRODUCTION_ADDRESS :
+    process.env.DB_LOCAL_ADDRESS,
+  databaseName: 'codewars',
+  collection: 'session'
+})
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -28,6 +37,7 @@ app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
+  store,
 }));
 
 app.use(expressLayouts);

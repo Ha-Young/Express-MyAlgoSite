@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.DB_LOCAL_ADDRESS, {
+mongoose.connect(
+  process.env.NODE_ENV === 'production' ?
+  process.env.DB_PRODUCTION_ADDRESS :
+  process.env.DB_LOCAL_ADDRESS,
+  {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
