@@ -7,5 +7,22 @@
   <body>
     <h1>Codewars</h1>
     <h2>success!</h2>
+    <% for (let i = 0; i < result.length; i ++) { %>
+      <ul>
+        <li>통과한 케이스 번호: <%=result[i].testCase%></li>
+        <li>통과한 케이스 실행문: <%=result[i].excutedCode%></li>
+        <% if (result[i].returned === undefined) {%>
+          <li>통과한 케이스 반환값: undefined</li>
+        <%} else if (result[i].returned === null) {%>
+          <li>통과한 케이스 반환값: null</li>
+        <%} else {%>
+          <li>통과한 케이스 반환값: <%=result[i].returned%></li>
+        <%}%>
+      </ul>
+      <% } %>
+
+    <button><a href="/problem/<%=result[0].problemNumber%>">다시풀기</a></button>
+    <button><a href="/">다른 문제 풀기</a></button>
   </body>
 </html>
+

@@ -26,6 +26,7 @@ exports.getProblem = catchAsync(async (req, res, next) => {
 exports.receiveUserSolution = catchAsync(async (req, res, next) => {
 
   const problemNumber = req.params.problem_id;
+  console.log('pn', problemNumber )
   const problem = await Problem.find({ id: problemNumber });
   const solution = await new Function(`return ${req.body.code}`)();
 
@@ -39,22 +40,26 @@ exports.receiveUserSolution = catchAsync(async (req, res, next) => {
   };
   const result = [];
 
-  console.log(problem[0].tests)
+  // console.log(problem[0].tests)
   problem[0].tests.forEach(async (test, i) => {
     const code = `var result = ${test.code};`;
     vm.runInContext(code, context);
-    const asnwerSheet = Number(test.solution) || test.solution;
+    console.log(test.solution, 'so')
+    let answerSheet = Number(test.solution) || test.solution;
+    console.log(answerSheet, 'as')
+    
+    if (answerSheet === 'false') answerSheet = false;
+    else if (answerSheet === 'true') answerSheet = true;
 
-    if (asnwerSheet === 'false' || asnwerSheet === 'true') {
-      asnwerSheet = Boolean(asnwerSheet);
-    }
-
+    console.log(answerSheet, 'as3')
     const caseInfo = {...caseInfoDefault}
     caseInfo.testCase = i + 1;
     caseInfo.excutedCode = test.code;
     caseInfo.returned = context.result;
 
-    if (context.result !== asnwerSheet) {
+    // console.log(context.result, 'rel')
+    // console.log(answerSheet, 'sh')
+    if (context.result !== answerSheet) {
       isCorrect = false;
       caseInfo.isCorrect = false;
       result.push(caseInfo);
@@ -63,9 +68,10 @@ exports.receiveUserSolution = catchAsync(async (req, res, next) => {
     result.push(caseInfo);
   });
 
-  console.log(result, 'rslt')
+  // console.log(result, 'rslt')
   return isCorrect
-  ? res.render('success')
+  ? res.render('success', { result })
   : res.render('failure', { result });
 });
 
+{/* <button><a href="/problem/<%=result[0].problemNumber%>">다시풀기</a></button> */}
