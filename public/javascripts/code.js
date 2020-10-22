@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 const codeBox = document.getElementById("code");
 
 CodeMirror.fromTextArea(codeBox, {

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 function destruct(key) {
   let type = "";
   let index = "";

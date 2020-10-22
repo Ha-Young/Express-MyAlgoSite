@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 const jwt = require("jsonwebtoken");
 
 const SECRET_KEY = process.env.JWT_KEY;

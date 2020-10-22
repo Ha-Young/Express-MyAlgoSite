@@ -1,9 +1,8 @@
-/* eslint-disable no-unused-vars */
 const jwt = require("jsonwebtoken");
 
 const User = require("../models/User");
 const asyncWrapper = require("./asyncWrapper");
-const { JwtError, MongoError } = require("../service/error");
+const { JwtError } = require("../service/error");
 
 const SECRET_KEY = process.env.JWT_KEY;
 
