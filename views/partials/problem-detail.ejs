@@ -1,7 +1,7 @@
 <div class="problem-detail">
   <div class="problem-detail__title">
     <h1>Lv.<%= problem.difficulty_level %> <%= problem.title %></h1>
-    <span>정답자 수 : <%= problem.completed_users %></span>
+    <span>정답자 수 : <%= problem.completed_users.length %></span>
   </div>
   <p><%= problem.description %></p>
 </div>

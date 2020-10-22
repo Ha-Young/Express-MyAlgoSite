@@ -30,8 +30,11 @@ exports.getProblem = async (req, res, next) => {
 };
 
 exports.postProblem = async (req, res, next) => {
-  const { problem_id } = req.params;
-  const { usercode } = req.body;
+  const {
+    params: { problem_id },
+    body: { usercode },
+    user,
+  } = req;
 
   try {
     const problem = await Problem.findOne({ id: problem_id });
@@ -39,6 +42,8 @@ exports.postProblem = async (req, res, next) => {
     const isAllCorrect = results.every(result => result.isCorrect);
 
     if (isAllCorrect) {
+      problem.completed_users.addToSet(user._id);
+      await problem.save();
       res.render('success', { title: '✨Success✨', problem, results, usercode });
     } else {
       res.render('failure', { title: '🤦‍♀️Failure🤦‍♂️', problem, results, usercode });
@@ -53,7 +58,6 @@ class SolutionResult {
     this.userResult = (result => {
       if (result === undefined) return 'undefined';
       if (result === null) return 'null';
-      if (result === 0) return '0';
       return result;
     })(userResult);
     this.correctResult = correctResult;

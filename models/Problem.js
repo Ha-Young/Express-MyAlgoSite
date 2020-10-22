@@ -24,8 +24,8 @@ const ProblemSchema = new mongoose.Schema({
     required: true,
   },
   completed_users: {
-    type: Number,
-    default: 0,
+    type: [mongoose.Schema.Types.ObjectId],
+    default: [],
   },
   difficulty_level: {
     type: Number,
