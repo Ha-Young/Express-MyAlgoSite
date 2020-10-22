@@ -5,10 +5,10 @@ const passport = require('passport');
 const initializePassport = require('../passport-config');
 const Users = require('../models/User');
 const Problems = require('../models/Problem');
-//const questions = require('../models/sample_problems.json');
-//DeprecationWarning: collection.ensureIndex is deprecated. Use createIndexes instead.
+const UserSolution = require('../models/UserSolution');
 
 let users = [];
+console.log("USERS", Users);
 
 async function getUserData() {
   try {
@@ -43,12 +43,17 @@ router.get('/', checkAuthenticated, async (req, res, next) => {
 router.get('/problem/:problem_id', checkAuthenticated, async (req, res, next) => {
   try {
     const targetProblem = await Problems.find({ id: req.params.problem_id }).exec();
+    const userHistory = await UserSolution.find({ problemId: req.params.problem_id, username: req.user.username }).exec();
 
     if (targetProblem.length === 0) {
       res.redirect('/');
     } else {
-      console.log("##", targetProblem);
-      res.render('problem', { targetProblem });
+      if (userHistory.length > 0) {
+        const codeWritten = userHistory[0].codeWritten;
+        res.render('problem', { targetProblem, codeWritten });
+      } else {
+        res.render('problem', { targetProblem, codeWritten: '' });
+      }
     }
   } catch {
     //res.render.status()
@@ -60,11 +65,22 @@ router.post('/problem/:problem_id', checkAuthenticated, async (req, res, next) =
   console.log(req.params.problem_id);
   const targetProblem = await Problems.find({ id: req.params.problem_id }).exec();
   console.log(targetProblem[0].tests);
-  //console.log(targetProblem[0].tests);
   console.log("form으로 들어온 String 코드", req.body.code);
   const stringFunc = req.body.code;
   const anonymousFunc = new Function('return ' + stringFunc);
   const solution = anonymousFunc();//실행할 함수
+
+  try {
+    const newUser = new UserSolution({
+      problemId: req.params.problem_id,
+      username: req.user.username,
+      codeWritten: req.body.code
+    });
+    await newUser.save();
+    console.log(await UserSolution.find({}));
+  } catch (e) {
+    throw new Error("문제 제출 후 DB 저장 에러");
+  }
 
   try {
     const failedTest = {};
@@ -85,13 +101,16 @@ router.post('/problem/:problem_id', checkAuthenticated, async (req, res, next) =
 
     res.render('success');
 
-  } catch(e) {
-    res.render('error', {message: "There is error in your code", error: { status: 404, stack: e}})
+  } catch (e) {
+    console.log(e);
+    console.log(e.message)
+    console.log("stacK", e.stack)
+    res.render('error', { message: "There is error in your code", error: { status: 404, stack: e } })
   }
 });
 
-
 router.get('/login', (req, res, next) => {
+  console.log("LOGIN", req.app.get('env'));//development
   res.render('login');
 });
 
@@ -122,7 +141,6 @@ router.post('/register', async (req, res, next) => {
   } catch {
     res.redirect('/register');
   }
-  console.log(users);
 });
 
 function checkAuthenticated(req, res, next) {//middleware

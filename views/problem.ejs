@@ -11,18 +11,21 @@
 <form action='/problem/<%= targetProblem[0].id %>' method='POST'>
   <div>
     <label for='code'>your code..</label>
-    <textarea id='code' name='code'></textarea>
+    <textarea id='code' name='code'><%= codeWritten %></textarea>
   </div>
   <script type="text/javascript">
     const myTextArea = document.getElementById('code');
-    console.log(myTextArea.name);
+    console.log(myTextArea.prev);
     const myCodeMirror = CodeMirror.fromTextArea(myTextArea, {
       lineNumbers: true,
       mode: 'javascript'
     });
-    console.log(myCodeMirror);
-    myCodeMirror.getDoc().setValue('function solution() {\n}');
     const value = myCodeMirror.getValue();
+    console.log(value);
+    if (value) {
+      myCodeMirror.getDoc().setValue(value);
+    }
+    else myCodeMirror.getDoc().setValue('function solution() {\n}');
     // const foo = new Function(value);
     // console.log(foo())
   </script>

@@ -9,8 +9,6 @@ const flash = require('express-flash');
 const session = require('express-session');
 const passport = require('passport');
 const mongoose = require('mongoose');
-const Problem = require('./models/Problem');
-const problems = require('./models/sample_problems.json');
 
 require('dotenv').config();
 
@@ -24,27 +22,9 @@ try {
   throw new Error(err, ': mongoose connection error');
 }
 
-// saveProblemData();
-// async function saveProblemData() {
-//   try {
-//     for (let i = 0; i < problems.length; i++) {
-//       const problem = new Problem({
-//         id: problems[i].id,
-//         title: problems[i].title,
-//         completed_users: problems[i].completed_users,
-//         difficulty_level: problems[i].difficulty_level,
-//         description: problems[i].description,
-//         test: problems[i].tests
-//       });
-//       await problem.save();
-//     }
-//   }
-//   catch(e) {
-//     console.log(e);
-//   }
-// }
-
 const app = express();
+console.log("EXPRESS",app.get('env'));
+console.log("process.env.NODE_ENV", process.env.NODE_ENV);
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
@@ -81,11 +61,15 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
+  console.log("req", req.app.get('env'))//npm start를 하면 production / npm dev run이면 development
+  console.log(err);
+  console.log(err.message)//NOT FOUND
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
   res.status(err.status || 500);
+  res.locals.error.status = err.status;
   res.render('error');
 });
 
