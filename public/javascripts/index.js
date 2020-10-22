@@ -25,7 +25,6 @@ function hackerAll(a, b) {
 }
 
 const fn_string = hackerAll.toString();
-console.log(new Function(`return ${fn_string}`));
 const back_to_fn = new Function(`return ${fn_string}`)() //This restore the function with name, params and all, even es7 class works
 
 let string = 'hackerAll(1, 3)';

@@ -11,14 +11,6 @@ const app = express();
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('./models/User');
 const Problem = require('./models/Problem');
-// const CodeMirror = require('./node_modules/codemirror/')
-// require("codemirror/mode/javascript/javascript");
-// require("codemirror/addon/edit/closebrackets");
-// var codeMirror = require("codemirror");
-// var editor = codeMirror.fromTextArea(document.getElementById("codeMirror"), {
-//   mode: "javascript"
-// });
-
 require('dotenv').config();
 
 passport.use(
@@ -106,7 +98,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error',  {message: err.message});
 });
 
 async function save() {

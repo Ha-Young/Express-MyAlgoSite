@@ -1,4 +1,20 @@
 <%# views/failure.ejs %>
 <% extend('layout') %>
 
-<h1>통과하지 못했습니다</h1>
+<section class='failure'>
+    <div class='failure-container'>
+        <p>다시 도전하세요~</p>
+        <div class='failure-description'>
+            input <p><%= input %></p>
+        </div>
+        <div class='failure-description'>
+            output <p><%= output %></p>
+        </div>
+        <div class='failure-description'>
+            expect <p><%= expect %></p>
+        </div>
+    </div>
+    <div class='backTo-main-btn'>
+        <a href='/'>other test</a>
+    </div>
+</section>

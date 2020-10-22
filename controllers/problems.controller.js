@@ -1,6 +1,8 @@
-const express = require('express');
-const router = express.Router();
 const Problem = require('../models/Problem');
+const { VM } = require('vm2');
+const vm = new VM({
+  timeout: 1000,
+});
 
 exports.getProblem = async (req, res, next) => {
   try {
@@ -10,38 +12,54 @@ exports.getProblem = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-}
+};
 
 exports.submitAnswer = async (req, res, next) => {
   try {
     const problemId = req.params.problem_id;
     const code = req.body.code;
     const { tests } = await Problem.findOne({ _id: problemId });
-    const backTofunc = new Function(`return ${code}`);
- 
+
+    let input;
+    let output;
+    let expect;
+
     const result = tests
       .map(test => {
         let getResultTemplate;
+        let outputTemplate = `
+          ${vm.run(code)};
+          ${test.code};
+        `;
         if (typeof test.solution === 'string') {
           getResultTemplate = `
-          const solution = ${backTofunc()};
-          return ${test.code} === '${test.solution}';
-        `
+            ${vm.run(code)};
+            ${test.code} === '${test.solution}';
+          `;
         } else {
           getResultTemplate = `
-          const solution = ${backTofunc()};
-          return ${test.code} === ${test.solution};
-        `
+            ${vm.run(code)};
+            ${test.code} === ${test.solution};
+          `;
         }
-        const getResult = new Function(getResultTemplate);
-        return getResult();
+
+        if (!vm.run(getResultTemplate) && !input && !expect) {
+          input = test.code;
+          output = vm.run(outputTemplate);
+          expect = test.solution;
+        }
+        return vm.run(getResultTemplate);
       })
       .every(result => result);
 
     if (result) {
       res.render('success');
     } else {
-      res.render('failure');
+      res.render('failure', {
+        input: input,
+        output: output,
+        expect: expect,
+      });
     }
   } catch (err) {
     next(err);
