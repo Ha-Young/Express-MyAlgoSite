@@ -87,17 +87,3 @@ async function saveProblems() {
     await new Problem(problems[i]).save();
   }
 }
-
-// MongoClient.connect(url, (err, db) => {
-//   if (err) throw err;
-
-//   const dbo = db.db('codewars');
-
-//   dbo.collection('problems').insertMany(problems, (err, res) => {
-//     if (err) throw err;
-
-//     console.log('Number inserted:' + res.insertedCount);
-
-//     db.close();
-//   });
-// });

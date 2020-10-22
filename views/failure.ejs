@@ -2,8 +2,12 @@
 <% if (info.error) { %>
   <p><%= info.error %> </p>
 <% } else { %>
-  <p><%= info.failureData.code %></p>
-  <p>결과값: <%= info.failureData.answer %> / 기대값: <%= info.failureData.solution %></p>
+  <p><%= info.failureData.code %>의 반환값이 틀렸습니다.</p>
+  <p>결과값: <% if (!info.failureData.answer) { %>
+    undefined
+    <% } else { %>
+    <%= info.failureData.answer %>
+  <% } %> / 기대값: <%= info.failureData.solution %></p>
 <% } %>
 <a href='/problems/<%= info.problemNumber %>'>문제로 돌아가기</a></br>
 <a href='/'>문제 목록으로 돌아가기</a>

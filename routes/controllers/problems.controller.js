@@ -46,7 +46,6 @@ exports.submitCode = async function(req, res, next) {
 
       try {
         answer = new Function('solution', `return ${code};`)(submittedFunction);
-        console.log(answer);
       } catch (err) {
         info.error = err;
 
