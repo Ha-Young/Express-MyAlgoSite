@@ -4,7 +4,12 @@
     <span class="title">Codewars</span>
   </div>
   <div class="header-column">
-    <img class="user-avatar" src="<%= avatar %>" alt="avatar" />
-    <%= username %>
+    <div class="user-info">
+      <img class="user-avatar" src="<%= avatar %>" alt="avatar" />
+      <span><%= username %></span>
+    </div>
+    <a href="/logout">
+      <span class="logout-button">log out</span>
+    </a>
   </div>
 </div>

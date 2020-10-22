@@ -98,6 +98,13 @@ label {
 .header-column {
   display: flex;
   align-items: center;
+
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
 }
 
 .fa-freebsd {
@@ -115,6 +122,10 @@ label {
   height: 30px;
   border-radius: 50px;
   margin-right: 10px;
+}
+
+.logout-button {
+  height: 30px;
 }
 
 /* main */

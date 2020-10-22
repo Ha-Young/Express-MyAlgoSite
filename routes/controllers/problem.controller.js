@@ -65,9 +65,9 @@ exports.getResult = async (req, res, next) => {
         const excutionSyntax = test.code;
         const answer = test.solution;
         const code = `
-            ${script}
-            ${excutionSyntax};
-      `;
+          ${script}
+          ${excutionSyntax};
+        `;
         const userAttempt = new vm.Script(code, { timeout: 8000 });
         const context = vm.createContext({});
 

@@ -20,6 +20,7 @@ mongoose.connect(SECRET_URL, {
 const index = require('./routes/index');
 const login = require('./routes/login');
 const problems = require('./routes/problems');
+const logout = require('./routes/logout');
 
 const app = express();
 
@@ -53,6 +54,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', index);
 app.use('/login', login);
 app.use('/problems', problems);
+app.get('/logout', logout);
 
 app.use(function (req, res, next) {
   const err = new Error('Not Found');
