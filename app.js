@@ -1,10 +1,10 @@
 require('dotenv').config();
-require('./db');
+require('./db'); 
 require('./googleStrategy');
 const passport = require('passport');
 const express = require('express');
 const app = express();
-const session = require('express-session')
+const session = require('express-session');
 const createError = require('http-errors');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -29,13 +29,12 @@ passport.deserializeUser(async (id, done) => {
 });
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.engine('ejs', require('express-ejs-extend'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.engine('ejs', require('express-ejs-extend'));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
-
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: true,
@@ -56,7 +55,6 @@ app.use((req, res, next) => {
 
 // error handler
 app.use((err, req, res, next) => {
-  console.log(err)
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

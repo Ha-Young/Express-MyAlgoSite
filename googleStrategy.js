@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('./routes/models/User');
-require('dotenv').config();
 const passport  = require('passport');
 
 passport.use(
@@ -16,7 +15,6 @@ passport.use(
     profile,
     done
   ) => {
-    console.log(1)
     const userId = profile.id;
     const email = profile.emails[0].value;
     const photo = profile.photos[0].value;
