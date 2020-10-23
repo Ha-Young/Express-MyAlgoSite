@@ -72,7 +72,7 @@ exports.submitAnswer = async (
     } catch (err) {
       return res.render('failure', {
         error: err,
-        problemId: problem_id
+        problemId: problem_id,
       });
     }
 
