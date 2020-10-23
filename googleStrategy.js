@@ -23,7 +23,7 @@ passport.use(
       userId,
       email,
       photo,
-      provider
+      provider,
     };
 
     try {

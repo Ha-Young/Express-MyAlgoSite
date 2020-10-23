@@ -7,13 +7,13 @@ const { isLoggedIn } = require('./middlewares/authorization');
 router.get('/', loginController.renderLoginTemplate);
 
 router.get('/auth/google',
-  passport.authenticate('google', { scope: 'https://www.googleapis.com/auth/userinfo.email' })
+  passport.authenticate('google', { scope: 'https://www.googleapis.com/auth/userinfo.email' }),
 );
 
 router.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   isLoggedIn,
-  loginController.redirectToMain
+  loginController.redirectToMain,
 );
 
 router.get('/logout', isLoggedIn, loginController.logout);

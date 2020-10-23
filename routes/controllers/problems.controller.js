@@ -90,7 +90,7 @@ exports.submitAnswer = async (
     const isValidObjectId = mongoose.isValidObjectId(problem_id);
 
     if (!isValidObjectId) {
-      next(createError(500, constants.ERROR_MESSAGE_INVALID_ID))
+      next(createError(500, constants.ERROR_MESSAGE_INVALID_ID));
     }
     next(err);
   }
