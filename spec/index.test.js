@@ -38,16 +38,3 @@ describe('GET /non-valid-url', () => {
       .end(done);
   });
 });
-
-// describe('GET /:problem_id', () => {
-//   it('should respond with problem template', done => {
-//     const problemId = Problem[0].id;
-//     request(app)
-//       .get(`/problems/${problemId}}`)
-//       .end((err, res) => {
-//         if (err) return done(err);
-//         expect(res.text).to.include('피보나치 수열');
-//         done();
-//       });
-//   });
-// });
