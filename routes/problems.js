@@ -5,5 +5,6 @@ const { isAuthenticated } = require('../middlewares/isAuthenticated');
 
 router.get('/:problem_id', isAuthenticated, problemsController.getProblem);
 router.post('/:problem_id', isAuthenticated, problemsController.postSolution);
+router.get('/', isAuthenticated, problemsController.getfilteredProblems);
 
 module.exports = router;
