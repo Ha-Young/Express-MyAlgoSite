@@ -1,7 +1,11 @@
 {
   "name": "codewars",
   "version": "1.0.0",
-  "private": true,
+  "description": "The Code War has begun",
+  "engines": {
+    "node": "12.x",
+    "npm": "6.x"
+  },
   "scripts": {
     "start": "node ./bin/www",
     "dev": "cross-env NODE_ENV=development nodemon ./bin/www",
@@ -9,6 +13,7 @@
   },
   "dependencies": {
     "body-parser": "~1.18.2",
+    "compression": "^1.7.4",
     "connect-mongo": "^3.2.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
@@ -17,6 +22,7 @@
     "express": "^4.17.1",
     "express-ejs-layouts": "^2.5.0",
     "express-session": "^1.17.1",
+    "helmet": "^4.1.1",
     "mongoose": "^5.10.9",
     "morgan": "~1.9.0",
     "node-sass-middleware": "^0.11.0",
