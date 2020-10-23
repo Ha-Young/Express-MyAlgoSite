@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 const { expect } = require('chai');
 const request = require('supertest');
 const randomstring = require("randomstring");
