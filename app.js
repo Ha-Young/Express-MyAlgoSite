@@ -1,4 +1,4 @@
-require('dotenv').config();
+if (process.env.NODE_ENV === 'development') require('dotenv').config();
 
 const express = require('express');
 const index = require('./routes/index');
@@ -16,7 +16,7 @@ const User = require('./models/User');
 passport.use(new GitHubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLENT_SECRET,
-  callbackURL: 'http://localhost:3000/auth/github/callback'
+  callbackURL: `${process.env.URI}/auth/github/callback`
 },
   function(accessToken, refreshToken, profile, cb) {
     User.findOne({ githubId: profile.id }, (err, user) => {
@@ -58,7 +58,7 @@ app.use(session({
 const db = mongoose.connection;
 
 mongoose.connect(
-  `mongodb://localhost:27017/codewars`,
+  `mongodb+srv://theyyyzzz3:1234@cluster0.r2mjk.mongodb.net/codewars?retryWrites=true&w=majority`,
   {
     dbName: 'codewars',
     useNewUrlParser: true,
