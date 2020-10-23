@@ -30,7 +30,7 @@
     <div class="grid-container">
       <% data.forEach(function (data) { %>
       <div class="problem-container">
-        <h3><a href="/problem/<%=data.id%>"><%=data.title%></a></h3>
+        <h3><a href="/problem/<%=data._id%>"><%=data.title%></a></h3>
         <div class="problem-detail">
           <div>난이도: <%=data.difficulty_level%></div>
           <div>성공한 사람: <%=data.completed_users || 0%></div>
@@ -38,6 +38,7 @@
       </div>
       <% }) %>
     </div>
+    <button><a href="login/github/logout"> Log Out</a></button>
     <button><a href="/management">Manager Mode</a></button>
   </body>
 </html>

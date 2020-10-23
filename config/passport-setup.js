@@ -3,7 +3,6 @@ const GitHubStrategy = require('passport-github').Strategy;
 const User = require('../models/User');
 
 passport.serializeUser((user, done) => {
-  console.log(1);
   done(null, user._id);
 });
 
@@ -29,7 +28,6 @@ passport.use(
       });
 
       if (created) return cb(null, created);
-      //error case handle
     }
   )
 );

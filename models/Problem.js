@@ -62,16 +62,4 @@ ProblemSchema.pre(/^find/, function (next) {
   next();
 });
 
-const Problem = mongoose.model('Problem', ProblemSchema);
-
-// const testP = new Problem({
-//   title: "hi",
-//   difficulty_level: "1"
-// })
-// console.log(testP, 'test')
-
-// testP.save().then(doc => {
-//   console.log(doc, 'doc')
-// })
-
-module.exports = Problem;
+module.exports = mongoose.model('Problem', ProblemSchema);

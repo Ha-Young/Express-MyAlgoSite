@@ -7,13 +7,10 @@ const index = require('./routes/index');
 const login = require('./routes/login');
 const problem = require('./routes/problem');
 const checkAuth = require('./middlewares/checkAuth');
-// const apiSampleProblems = require('./utils/apiSampleProblems');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
 require('./config/passport-setup');
-
-// apiSampleProblems();
 
 const app = express();
 
@@ -35,10 +32,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/login', login);
-app.use('/problem', problem);
-app.use('/', index);
-// app.use('/problem', checkAuth, problem);
-// app.use('/', checkAuth, index);
+app.use('/problem', checkAuth, problem);
+app.use('/', checkAuth, index);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
