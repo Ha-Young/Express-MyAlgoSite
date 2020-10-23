@@ -3,11 +3,12 @@
 * {
   box-sizing: border-box;
 }
+
 body {
   margin: 0;
   padding: 0;
-  font: Ubuntu, "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: var(--background-color);
+  font: Ubuntu, "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
@@ -15,8 +16,8 @@ a {
 }
 
 a:visited {
-  text-decoration: none;
   color: var(--color-black);
+  text-decoration: none;
 }
 
 ul {
@@ -38,17 +39,18 @@ button:focus {
 }
 
 .login-title {
+  border-bottom: 1px solid var(--color-black);
+  color: var(--color-black);
   font-size: 45px;
   font-weight: 700;
-  color: var(--color-black);
   text-transform: uppercase;
-  transition: color 0.5s linear, border 0.5s linear;
   letter-spacing: 10px;
-  border-bottom: 1px solid var(--color-black);
+  transition: color 0.5s linear, border 0.5s linear;
 }
+
 .login-title:hover {
-  color: var(--color-red);
   border-bottom: 1px solid var(--color-red);
+  color: var(--color-red);
 }
 
 .login-button {
@@ -61,6 +63,7 @@ button:focus {
   text-transform: uppercase;
   transition: background-color 0.5s linear;
 }
+
 .login-button:hover {
   background-color: var(--color-black);
   color: var(--color-red);
@@ -71,26 +74,30 @@ button:focus {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 50px;
   width: 100%;;
   height: 100px;
+  padding: 0 50px;
   background-color: var(--color-black);
 }
+
 .header-title {
   color: var(--color-red);
   text-transform: uppercase;
   font-size: 20px;
   letter-spacing: 5px;
 }
+
 .header-sub-info {
   display: flex;
-  width: 30%;
   justify-content: flex-end;
+  width: 30%;
 }
+
 .header-username {
-  color: var(--color-light-grey);
   margin-right: 20px;
+  color: var(--color-light-grey);
 }
+
 .logout-button {
   height: 20px;
   padding: 0 10px;
@@ -102,6 +109,7 @@ button:focus {
   text-transform: uppercase;
   transition: background-color 0.5s linear, color 0.5s linear;
 }
+
 .logout-button:hover {
   background-color: var(--color-black);
   color: var(--color-red);
@@ -109,27 +117,29 @@ button:focus {
 }
 
 .main {
-  padding: 30px 50px;
-  margin: 0 auto;
   width: 70vw;
+  margin: 0 auto;
+  padding: 30px 50px;
   color: var(--color-light-grey);
 }
 
 ul {
+  width: 100%;
   margin: 0;
   padding: 0;
-  width: 100%;
 }
 
 .problem-container {
   display: grid;
   grid-template-columns: 3.5fr 1.5fr;
   width: 100%;
-  background-color: var(--color-light-grey);
   margin: 20px 0;
   padding: 10px 20px;
   border-radius: 10px;
+  background-color: var(--color-light-grey);
+  color: var(--color-black);
 }
+
 .problem-container:hover {
   background-color: var(--color-red);
   color: var(--color-white);
@@ -138,56 +148,66 @@ ul {
 .problem-title {
   align-self: center;
 }
+
 .problem-sub-info {
   display: flex;
   justify-content: flex-end;
   align-self: center;
 }
+
 .level {
   font-weight: 500;
 }
+
 .completed-user {
   margin-left: 50px;
 }
+
 .completed-user span:nth-child(2) {
   font-weight: 700;
 }
 
 .solution-container {
-  padding: 30px 50px;
-  margin: 0 auto;
   width: 60vw;
+  margin: 0 auto;
+  padding: 30px 50px;
 }
+
 .solution-title {
   color: var(--color-light-grey);
   font-size: 30px;
 }
+
 .solution-sub-info {
   display: flex;
   background-color: var(--color-red);
 }
+
 .solution-sub-info span {
   margin: 5px 10px;
   color: var(--color-white);
   font-size: 15px;
 }
+
 .solution-description {
-  background-color: var(--color-light-grey);
   margin: 0 0 20px 0;
   padding: 5px 10px;
+  background-color: var(--color-light-grey);
   font-size: 15px;
 }
+
 .solution-container form {
   display: flex;
   flex-direction: column;
 }
+
 .submit-button,
 .next-button,
 .retry-button,
 .home-button {
   align-self: flex-end;
-  margin-top: 20px;
   height: 40px;
+  margin-top: 20px;
   padding: 0 20px;
   border: none;
   border-radius: 30px;
@@ -212,9 +232,9 @@ ul {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100vw;
   margin-top: 50px;
   padding: 30px 50px;
-  width: 100vw;
 }
 
 .success-container span {
@@ -227,46 +247,48 @@ ul {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100vw;
   margin-top: 50px;
   padding: 30px 50px;
-  width: 100vw;
 }
 
 .failure-message {
   font-size: 30px;
   color: var(--color-light-grey);
 }
+
 .test-info h5 {
-  font-size: 15px;
-  font-weight: 500;
   margin: 0;
   color: var(--color-light-grey);
+  font-size: 15px;
+  font-weight: 500;
   text-transform: uppercase;
 }
+
 .test-info h5:nth-child(5) {
   color: var(--color-red);
 }
 
 .test-info div {
-  font-size: 18px;
-  margin-top: 10px;
-  margin-bottom: 30px;
-  background-color: var(--color-light-grey);
   width: 30vw;
   height: 5vh;
+  margin-top: 10px;
+  margin-bottom: 30px;
   padding: 10px;
-  line-height: 30px;
   border-radius: 10px;
+  font-size: 18px;
+  background-color: var(--color-light-grey);
+  line-height: 30px;
 }
 
 .buttons {
-  width: 30vw;
   display: flex;
   justify-content: space-evenly;
+  width: 30vw;
 }
 
 .error-container {
-  padding: 30px 50px;
   width: 100vw;
+  padding: 30px 50px;
   color: var(--color-light-grey);
 }

@@ -5,6 +5,6 @@ const code = CodeMirror.fromTextArea(document.getElementById('code'), {
   smartIndent:true,
   lineWrapping:true,
   tabSize:2,
-}).setValue(`function solution (something) {
+}).setValue(`function solution (n) {
   // your code here...
 }`);

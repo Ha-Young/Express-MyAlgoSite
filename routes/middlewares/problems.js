@@ -13,7 +13,7 @@ exports.getAllProblems = async (req, res, next) => {
 exports.getTargetProblem = async (req, res, next) => {
   const { problem_id } = req.params;
   try {
-    const targetProblem = await Problem.findOne({ id: problem_id });
+    const targetProblem = await Problem.findById(problem_id);
     if (!targetProblem) {
       const error = new Error('Not Found');
       error.status = 404;

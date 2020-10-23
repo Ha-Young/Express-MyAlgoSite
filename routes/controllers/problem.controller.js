@@ -5,11 +5,7 @@ exports.checkTestCases = async (req, res, next) => {
   try {
     const testResults = [];
     const { _id: userObjectId, username } = req.user;
-    const {
-      id: problemId,
-      _id: problemObjectId,
-      tests: testCases,
-    } = req.problem;
+    const { _id: problemId, tests: testCases } = req.problem;
     const targetSolution = req.body.solution;
 
     try {
@@ -38,7 +34,7 @@ exports.checkTestCases = async (req, res, next) => {
 
     const isAllTestsPassed = testResults.every(result => result[0] === true);
     if (isAllTestsPassed) {
-      await Problem.findByIdAndUpdate(problemObjectId, {
+      await Problem.findByIdAndUpdate(problemId, {
         $addToSet: { completed_users: userObjectId }
       });
       return res.status(201).render('success', { username });

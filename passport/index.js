@@ -31,7 +31,6 @@ module.exports = (passport) => {
       });
       done(null, newUser);
     } catch (error) {
-      // 에러 세분화
       next(error);
     }
   }));

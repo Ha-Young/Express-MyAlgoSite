@@ -1,16 +1,13 @@
 const mongoose = require('mongoose');
 
 const ProblemSchema = new mongoose.Schema({
-  id: {
-    type: String,
-    required: true,
-  },
+  id: mongoose.Schema.Types.ObjectId,
   title: {
     type: String,
     required: true,
   },
   completed_users: {
-    type: [ mongoose.Schema.Types.objectId ],
+    type: [ mongoose.Schema.Types.ObjectId ],
     default: [],
     required: true,
   },

@@ -9,7 +9,7 @@
     <span>🙆‍♀️Completed Users <%= problem.completed_users.length %></span>
   </div>
   <p class='solution-description'><%= problem.description %></p>
-  <form action='/problems/<%= problem.id %>' method='POST'>
+  <form action='/problems/<%= problem._id %>' method='POST'>
     <textarea name='solution' id='code'></textarea>
     <button type='submit' class='submit-button'>Attempt</button>
   </form>
