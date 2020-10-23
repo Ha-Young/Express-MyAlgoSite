@@ -6,6 +6,9 @@ const problemsController = {
     const id = req.params.problem_id;
     const problem = await Problem.findById(ObjectId(id));
 
+    res.locals.isAuthenticated = true,
+    res.locals.username = req.user[0].username;
+
     res.render('problem', { problem });
   },
 
@@ -63,7 +66,6 @@ const problemsController = {
       console.error('error occurred => ', err);
       console.log(err.code);
 
-      // 서버 에러 핸들링
       return res.render('error', {
         message: err.message,
         error: err

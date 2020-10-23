@@ -7,6 +7,8 @@
   <title>Problem</title>
 </head>
 <body>
+  <%- include('./partials/nav') %>
+
   <h1>Problem</h1>
   <h2>
     Level <%= problem.difficulty_level %> - <%= problem.title %>
@@ -28,9 +30,9 @@
   </form>
 
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/mode/javascript/javascript.min.js" integrity="sha512-e3U/84Fo+2ZAnRhLkjStm2hYnkmZ/NRmeesZ/GHjDhcLh35eYTQxsfSeDppx6Se5aX0N6mrygH7tr4wugWsPeQ==" crossorigin="anonymous"></script>
+  <script src="/codeMirror/lib/codemirror.js"></script>
+  <link rel="stylesheet" href="/codeMirror/lib/codemirror.css">
+  <script src="/codeMirror/mode/javascript/javascript.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/theme/hopscotch.min.css" integrity="sha512-sVeSVnAJXmUh3VZLbkOfp+td37wPdXnCjPDhuuxwYz3USskJRWIno4dlLxqo6DgPIzWwdlxl24KiHge0TvH5oA==" crossorigin="anonymous" />
   <script src="/codeMirror.js"></script>
 </body>
