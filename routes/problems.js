@@ -5,9 +5,8 @@ const Problem = require('../models/Problem');
 
 router.get('/:problem_id', async function (req, res, next) {
   try {
-    const problemList = await Problem.find();
     const problemId = req.params.problem_id;
-    const problem = problemList.find(item => item.id === problemId);
+    const problem = await Problem.findOne({ id: problemId });
 
     return res.render('problem', {
       problem: problem
@@ -27,7 +26,7 @@ router.post('/:problem_id', async function (req, res, next) {
 
   for (let i = 0; i < problem.tests.length; i++) {
     let { code, solution } = problem.tests[i];
-    let context = { inputAnswer: null }
+    let context = { inputAnswer: null };
     let inputFunction = new vm.Script(inputStringCode + `inputAnswer = ${code}`);
 
     vm.createContext(context);

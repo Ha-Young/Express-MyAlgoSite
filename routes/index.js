@@ -15,9 +15,7 @@ router.get('/', async function (req, res, next) {
 
     return res.redirect('/login');
   } catch (err) {
-    return res.status(400).json({
-      error: 'error'
-    });
+    next(err);
   }
 });
 
