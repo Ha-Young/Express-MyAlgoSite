@@ -15,7 +15,7 @@ module.exports = (passport) => {
   passport.use(new GitHubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: process.env.PASSPORT_CALLBACK_URL
+    callbackURL: process.env.GITHUB_CALLBACK_URL
   }, async (accessToken, refreshToken, profile, done) => {
     const { id, username } = profile;
 
