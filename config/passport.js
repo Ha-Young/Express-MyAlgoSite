@@ -13,6 +13,7 @@ module.exports = () => {
       async function (accessToken, refreshToken, profile, cb) {
         const { id, username, provider } = profile;
         const userInfo = { id, username, provider };
+
         const isSameIdIn = await User.findOne({ id });
 
         if (!isSameIdIn) await User.create(userInfo);

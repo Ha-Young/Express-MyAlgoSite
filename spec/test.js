@@ -42,4 +42,3 @@ describe('GET /non-valid-url', () => {
       });
   });
 });
-
