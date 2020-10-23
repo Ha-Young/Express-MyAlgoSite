@@ -33,12 +33,14 @@ module.exports = () => {
           });
 
           await user.save();
-        } else {
-          console.log('DB에서 유저 찾았다!')
-        }
 
-        console.log('패스포트 인증 완료..!');
-        return cb(null, user);
+          return cb(null, user);
+        } else {
+          console.log('DB에서 유저 찾았다!');
+          console.log('패스포트 인증 완료..!');
+
+          return cb(null, user);
+        }
       } catch (err) {
         console.log('패스포트 인증 중 에러..');
         console.error(err);

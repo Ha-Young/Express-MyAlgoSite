@@ -1,0 +1,20 @@
+<head>
+  <link rel="stylesheet" href="/stylesheets/css/nav.css">
+</head>
+
+<nav>
+  <span class="logo">
+    코드워즈
+  </span>
+
+  <ul>
+    <% if (isAuthenticated) { %>
+      <li>
+        <%= username %>님, 환영합니다!
+      </li>
+    <% } %>
+    <a href="/auth/logout">
+      <li>로그아웃</li>
+    </a>
+  </ul>
+</nav>
