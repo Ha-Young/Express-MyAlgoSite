@@ -48,13 +48,14 @@ h2 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .problems-wrapper .tabs li {
   background-color: #fff;
+  margin-right: 10px;
   padding: 5px;
   border-radius: 3px;
 }
