@@ -10,7 +10,9 @@ body {
   flex-direction: column;
   width: 900px;
   height: 900px;
-  border: 1px solid black;
+  border-radius: 10px;
+  background-color: rgb(11, 11, 48);
+  color: rgb(164, 161, 161);
 }
 
 .title {
@@ -45,14 +47,16 @@ input {
   align-self: center;
   border: none;
   background-color: rgb(11, 11, 48);
-  color: grey;
+  color: rgb(164, 161, 161);
   outline: none;
   font-size: 20px;
   letter-spacing: 10px;
   border-radius: 30px;
+  border: 1px solid rgb(113, 11, 38);
 }
 
 input:hover {
-  color: grey;
+  color: rgb(164, 161, 161);
   background-color: rgb(113, 11, 38);
+  transition: all 0.3s;
 }

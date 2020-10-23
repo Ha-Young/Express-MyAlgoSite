@@ -1,0 +1,62 @@
+body {
+  display: flex;
+  height: 90vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.failure-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 800px;
+  height: 400px;
+  background-color: rgb(11, 11, 48);
+  border-radius: 10px;
+  color: rgb(164, 161, 161);
+  font-size: 17px;
+}
+
+.failure-message {
+  font-size: 25px;
+}
+
+.failure-case {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  height: 150px;
+  border: 1px solid rgb(113, 11, 38);
+  background-color: rgba(113, 11, 38, 0.2);
+  margin-top: 30px;
+  border-radius: 10px;
+}
+
+a {
+  display: flex;
+  width: 250px;
+  height: 60px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  background-color: rgb(11, 11, 48);
+  text-decoration: none;
+  border-radius: 10px;
+  color: rgb(164, 161, 161);
+  border: 1px solid rgb(113, 11, 38);
+  transition: all 0.3s;
+}
+
+a:link,
+a:visited,
+a:active {
+  color: rgb(164, 161, 161);
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(164, 161, 161);
+  background-color: rgb(113, 11, 38);
+}

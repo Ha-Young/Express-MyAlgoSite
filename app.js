@@ -19,7 +19,6 @@ passport.use(new GitHubStrategy({
   callbackURL: 'http://localhost:3000/auth/github/callback'
 },
   function(accessToken, refreshToken, profile, cb) {
-    // console.log('profile', profile);
     User.findOne( { githubId: profile.id }, (err, user) => {
       if (err) { return next(err); }
 

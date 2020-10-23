@@ -3,33 +3,34 @@ body {
   height: 90vh;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-.title {
-  color: rgb(11, 11, 48);
-}
-
-.problems-box {
+.celebration-box {
   display: flex;
-  width: 920px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 800px;
   height: 400px;
-  background-color: rgb(113, 11, 38);
+  background-color: rgb(11, 11, 48);
   border-radius: 10px;
+  color: rgb(164, 161, 161);
+  font-size: 20px;
 }
 
 a {
   display: flex;
+  width: 200px;
+  height: 60px;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  width: 230px;
-  height: 400px;
-  text-decoration: none;
+  margin-top: 80px;
   background-color: rgb(11, 11, 48);
+  text-decoration: none;
   border-radius: 10px;
-  margin-right: 1px;
+  color: rgb(164, 161, 161);
+  border: 1px solid rgb(113, 11, 38);
+  transition: all 0.3s;
 }
 
 a:link,
@@ -42,14 +43,4 @@ a:active {
 a:hover {
   color: rgb(164, 161, 161);
   background-color: rgb(113, 11, 38);
-  transition: all 0.3s;
-}
-
-.problem-detail {
-  padding: 30px;
-  font-size: 15px;
-}
-
-.problem-detail:nth-child(1) {
-  font-size: 18px;
 }
