@@ -4,7 +4,7 @@ const getResultLog = require('../util/getResultLog');
 
 exports.getAll = async (req, res, next) => {
   try {
-    const problems = await Problem.find().sort({ id: 1 }).lean();
+    const problems = await Problem.find().lean();
     return res.render('index', { title: 'MAIN', problems });
   } catch (err) {
     next(err);
@@ -15,7 +15,7 @@ exports.getProblem = async (req, res, next) => {
   const { problem_id } = req.params;
 
   try {
-    const problem = await Problem.findOne({ id: problem_id });
+    const problem = await Problem.findById(problem_id);
 
     if (!problem) {
       return next(new ErrorHandler(404, 'Not Found'));
@@ -35,7 +35,7 @@ exports.postProblem = async (req, res, next) => {
   } = req;
 
   try {
-    const problem = await Problem.findOne({ id: problem_id });
+    const problem = await Problem.findById(problem_id);
     const results = getResultLog(usercode, problem.tests);
     const isAllCorrect = results.every(result => result.isCorrect);
 
