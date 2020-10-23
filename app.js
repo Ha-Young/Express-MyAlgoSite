@@ -52,8 +52,6 @@ app.use(passport.session());
 app.use(ROUTERS.HOME, index);
 app.use(ROUTERS.AUTH, auth);
 app.use(ROUTERS.PROBLEMS, problems);
-/* TEST ROUTER: WILL BE DELETED SOON */
-app.use('/api', api);
 
 app.use(function (req, res, next) {
   next(RequestError.notFound());
