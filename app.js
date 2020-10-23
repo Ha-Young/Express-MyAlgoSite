@@ -5,6 +5,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport = require('passport');
+const compression = require('compression');
 
 const passportModule = require('./config/passport');
 const db = require('./config/mongoose');
@@ -15,6 +16,8 @@ const logoutRoutes = require('./routes/logout');
 const problemsRoutes = require('./routes/problems');
 
 const app = express();
+
+app.use(compression());
 
 db();
 
