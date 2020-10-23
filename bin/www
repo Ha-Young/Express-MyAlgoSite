@@ -7,14 +7,16 @@
 const app = require('../app');
 const debug = require('debug')('cms:server');
 const http = require('http');
-const dotenv = require('dotenv');
-dotenv.config();
+
+if (process.env.NODE_ENV === 'development') {
+  const dotenv = require('dotenv');
+  dotenv.config();
+}
 
 /**
  * Get port from environment and store in Express.
  */
 
-console.log(process.env.PORT)
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
