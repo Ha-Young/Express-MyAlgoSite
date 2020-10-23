@@ -1,6 +1,8 @@
 <%# views/error.ejs %>
 <% extend('layout') %>
 
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<section class='error'>
+  <h1><%= message %></h1>
+  <h2><%= error.status %></h2>
+  <p><%= error.stack %></p>
+</section>

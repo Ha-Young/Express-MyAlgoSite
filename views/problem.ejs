@@ -1,28 +1,29 @@
 <%# views/problem.ejs %>
 <% extend('layout') %>
-<h1>Codewars</h1>
-
-<div class='problem-container'>
-  <% if(problem) { %>
-  <div class='problem'>
-    <h1><%= problem.title %></h1>
-    <div class='problem-description'>
-      <p><%= problem.description %></p>
+<section>
+  <h1>Codewars</h1>
+  <div class='problem-container'>
+    <% if(problem) { %>
+    <div class='problem'>
+      <h1><%= problem.title %></h1>
+      <div class='problem-description'>
+        <p><%= problem.description %></p>
+      </div>
+      <div class='problem-details'>
+        <div class='problem-detail'>LEVEL <%= problem.difficulty_level %></div>
+        <div class='problem-detail'>solution<%= problem.solution_count %>개</div>
+        <div class='problem-detail'>정답자<%= problem.completed_users %>명</div>
+      </div>
     </div>
-    <div class='problem-details'>
-      <div class='problem-detail'>LEVEL <%= problem.difficulty_level %></div>
-      <div class='problem-detail'>solution<%= problem.solution_count %>개</div>
-      <div class='problem-detail'>정답자<%= problem.completed_users %>명</div>
+    <% } %>
+    <div class='code-box'>
+      <form action='/problem/<%=problem._id%>' method='POST'>
+        <textarea id='codemirror' name='code' class='code-box-area'>function solution () { return } </textarea>
+        <button class='code-box-btn' type='submit'>제출</button>
+      </form>
     </div>
   </div>
-  <% } %>
-  <div class='code-box'>
-    <form action='/problem/<%=problem._id%>' method='POST'>
-      <textarea id='codemirror' name='code' class='code-box-area'>function solution () { return } </textarea>
-      <button class='code-box-btn' type='submit'>제출</button>
-    </form>
-  </div>
-</div>
+</section>
 
 <script src="/lib/codemirror.js"></script>
 <script src="/mode/javascript/javascript.js"></script>

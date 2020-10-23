@@ -1,6 +1,10 @@
 const createError = require('http-errors');
 
-const isLoggedIn = (req, res, next) => {
+const isLoggedIn = (
+  req,
+  res,
+  next
+) => {
   if (req.isAuthenticated()) {
     next();
   } else {

@@ -66,10 +66,6 @@ a .problem:hover {
   background-color: lightgray;
 }
 
-.code-box-btn :hover {
-  background-color: gray;
-}
-
 .problem-details {
   display: flex;
   justify-content: space-around;

@@ -5,23 +5,33 @@ const Problem = require('../models/Problem');
 const constants = require('../../constants');
 const vm = new VM({
   timeout: 2000,
-
 });
-exports.getProblem = async (req, res, next) => {
+
+exports.getProblem = async (
+  req,
+  res,
+  next,
+) => {
   try {
     const { params: { problem_id } } = req;
     const problem = await Problem.findOne({ _id: problem_id });
 
     res.render('problem', { problem: problem });
   } catch (err) {
-    if (!mongoose.isValidObjectId(problem_id)) {
-      next(createError(500, constants.ERROR_MESSAGE_INVALID_ID))
+    const isValidObjectId = mongoose.isValidObjectId(problem_id);
+    
+    if (!isValidObjectId) {
+      next(createError(500, constants.ERROR_MESSAGE_INVALID_ID));
     }
     next(err);
   }
 };
 
-exports.submitAnswer = async (req, res, next) => {
+exports.submitAnswer = async (
+  req,
+  res,
+  next,
+) => {
   try {
     const { params: { problem_id } } = req;
     const code = req.body.code;
@@ -65,6 +75,7 @@ exports.submitAnswer = async (req, res, next) => {
         problemId: problem_id
       });
     }
+
     if (result) {
       res.render('success');
     } else {
@@ -76,8 +87,9 @@ exports.submitAnswer = async (req, res, next) => {
       });
     }
   } catch (err) {
-    console.log('asdf')
-    if (!mongoose.isValidObjectId(problem_id)) {
+    const isValidObjectId = mongoose.isValidObjectId(problem_id);
+
+    if (!isValidObjectId) {
       next(createError(500, constants.ERROR_MESSAGE_INVALID_ID))
     }
     next(err);

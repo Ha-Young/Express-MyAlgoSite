@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
  */
 const option = {
   createdAt: 'created_at',
-  updatedAt: 'updated_at'
+  updatedAt: 'updated_at',
 };
 
 const userSchema = new mongoose.Schema({

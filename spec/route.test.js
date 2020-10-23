@@ -1,7 +1,6 @@
 const request = require('supertest');
 const app = require('../app');
 const { expect } = require('chai')
-const { isLoggedIn } = require('../routes/middlewares/authorization');
 
 describe('GET /', () => {
   it('should respond with template', done => {

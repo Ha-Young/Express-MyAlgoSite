@@ -9,6 +9,7 @@ const ProblemSchema = new mongoose.Schema({
   id: {
     type: Number,
     require: true,
+    unique: true,
   },
   title: {
     type: String,
@@ -35,7 +36,7 @@ const ProblemSchema = new mongoose.Schema({
       code: String,
       solution: {}
     }
-  ]
+  ],
 });
 
 module.exports = mongoose.model('Problem', ProblemSchema);

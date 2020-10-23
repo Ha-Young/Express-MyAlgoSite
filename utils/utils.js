@@ -1,6 +1,6 @@
 const Problem = require('../routes/models/Problem');
 
-async function save() {
+const save = async () => {
   const fs = require('fs')
   let rawdata = fs.readFileSync('./models/sample_problems.json');
   let problems = JSON.parse(rawdata);
@@ -12,4 +12,4 @@ async function save() {
   } catch (err) {
     console.error(err);
   }
-}
+};
