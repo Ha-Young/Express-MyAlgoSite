@@ -1,0 +1,111 @@
+body,
+html {
+  margin: 0;
+}
+
+.background {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(47, 50, 51);
+}
+
+.problem-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 20vh;
+  background-color: rgb(48, 50, 51);
+  border-bottom: solid 1px grey;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
+  font-size: 30px;
+  color: rgb(187, 67, 44);
+}
+
+.wrap-sub-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
+}
+
+.completed-users,
+.difficulty-level {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: whitesmoke;
+  padding: 20px 20px 0 20px;
+}
+
+.problem-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 80vw;
+  height: 80vh;
+  background-color: rgb(47, 50, 51);
+}
+
+.content-left-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 40%;
+  height: 80%;
+  margin: 5px;
+}
+
+.content-right-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+  height: 80%;
+  margin: 5px;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  background-color: rgb(43, 43, 43);
+  color: whitesmoke;
+  width: 95%;
+  height: 440px;
+}
+
+.submit-button {
+  background-color: grey;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  width: 80px;
+  height: 30px;
+  font-size: 17px;
+  font-weight: 700;
+  margin-top: 50px;
+  margin-left: 600px;
+}
+
+.submit-button:hover {
+  background-color: black;
+  color: white;
+  border: none;
+}

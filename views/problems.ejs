@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <link rel='stylesheet' href='/stylesheets/problems.css' />
+    <link rel='stylesheet' href="/codemirror/lib/codemirror.css">
+    <link rel='stylesheet' href='/codemirror/theme/darcula.css'>
+    <script src="/codemirror/lib/codemirror.js"></script>
+    <script src="/codemirror/mode/javascript/javascript.js"></script>
+  </head>
+  <body>
+    <div class="background">
+      <header class="problem-info">
+        <div class="title"> <%= title %> </div>
+        <div class="wrap-sub-info">
+          <div class="difficulty-level"> Level <%= difficulty_level %> </div>
+          <div class="completed-users"> correct <%= completed_users %> </div>
+        </div>
+      </header>
+      <div class="problem-content">
+        <div class="content-left-side">
+          <div class="description"> <%= description %> </div>
+        </div>
+        <div class="content-right-side">
+          <form method="POST" action="/problems/<%= id %>">
+            <textarea id="editor" name="editor">
+function solution (input) {
+  /* your solution code here */
+}</textarea>
+<input class="submit-button" type="submit" value="Submit">
+</form>
+          <script>
+            const $editor = document.getElementById('editor');
+            const editor = CodeMirror.fromTextArea($editor, {
+              lineNumbers: true,
+              lineWrapping: false,
+              mode: "javascript",
+              theme: "darcula",
+              val: $editor.value
+            });
+
+            editor.setSize(700, 500);
+          </script>
+        </div>
+    </div>
+  </body>
+</html>

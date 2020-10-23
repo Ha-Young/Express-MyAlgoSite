@@ -1,3 +1,13 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars | Error</title>
+    <link rel='stylesheet' href='/stylesheets/error.css' />
+  </head>
+  <body>
+    <div class="error">
+      <h1> <%= errorDescription %> </h1>
+      <h3> <%= errorStatus %> <%= errorMessage %> </h3>
+    </div>
+  </body>
+</html>

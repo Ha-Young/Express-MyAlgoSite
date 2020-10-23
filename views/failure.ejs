@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <link rel='stylesheet' href='/stylesheets/failure.css' />
+  </head>
+  <body>
+    <div class="background">
+      <header class="header">
+        <h1> <%= message %></h1>
+      </header>
+      <% if (message === "오류") { %>
+        <%= errMessage %>
+        <% } %>
+      <div class="wrap-tests-info">
+        <% testsInfo.forEach((cur, index) => {  %>
+        <div class="tests">
+          <div class="test-number">
+            Test <%= index + 1 %>
+          </div>
+          <div class="test-result">
+            <%= cur %>
+          </div>
+        </div>
+        <% }) %>
+
+      </div>
+      <a href="/">
+        <button class="problem-list-button">Problems List</button>
+      </a>
+    </div>
+  </body>
+</html>
