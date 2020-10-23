@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const session = require('express-session');
 // const MongoStore = require('connect-mongo')(session);
+const compression = require('compression');
+const helmet = require('helmet');
 const setPassport = require('./utils/auth');
 const index = require('./routes/index');
 const auth = require('./routes/auth');
@@ -19,6 +21,9 @@ mongoose.connect(process.env.MONGO_URI, {
 }, () => {
   console.log('mongodb is connected!');
 });
+
+app.use(helmet());
+app.use(compression());
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
