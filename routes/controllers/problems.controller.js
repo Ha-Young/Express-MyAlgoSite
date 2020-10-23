@@ -1,5 +1,4 @@
 const Problem = require('../../models/Problem');
-const timeout = require('../../utils/timeout');
 const vm = require('vm');
 
 exports.getAll = async function(req, res, next) {
