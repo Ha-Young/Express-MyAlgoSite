@@ -18,7 +18,6 @@ const ProblemSchema = new mongoose.Schema(
     },
     completed_users: {
       type: Number,
-      required: [true, 'A problem must have a title field'],
       min: [0, 'The number of completed users can not be lower than 0'],
     },
     difficulty_level: {
@@ -53,7 +52,6 @@ const ProblemSchema = new mongoose.Schema(
 );
 
 ProblemSchema.virtual('level').get(function () {
-  console.log('virture');
   if (this.difficulty_level === 1) return 'Easy';
   else if (this.difficulty_level === 2) return 'Normal';
   else if (this.difficulty_level === 3) return 'Hard';
@@ -65,5 +63,15 @@ ProblemSchema.pre(/^find/, function (next) {
 });
 
 const Problem = mongoose.model('Problem', ProblemSchema);
+
+// const testP = new Problem({
+//   title: "hi",
+//   difficulty_level: "1"
+// })
+// console.log(testP, 'test')
+
+// testP.save().then(doc => {
+//   console.log(doc, 'doc')
+// })
 
 module.exports = Problem;

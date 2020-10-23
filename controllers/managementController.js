@@ -15,13 +15,12 @@ exports.getStats = catchAsync(async (req, res, next) => {
       },
     },
   ]);
-  
   res.render('management', {stats: stats[0]})
 });
 
 exports.intializeProblems = catchAsync(async (req, res, next) => {
-  await apiSampleProblems.deleteProblems(); 
-  await apiSampleProblems.importProblems(); //code 11000 / kind required
+  await apiSampleProblems.deleteProblems();
+  await apiSampleProblems.importProblems();
 
   res.render('init');
 
