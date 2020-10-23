@@ -1,4 +1,4 @@
-const { ValidationError } = require("./error");
+const { ValidationError } = require("../service/error");
 
 function changeType({ code, answer, answer_type }, next) {
   const result = {

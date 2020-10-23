@@ -5,15 +5,15 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "NODE_ENV=development nodemon ./bin/www",
-    "test": "jest test"
+    "test": "NODE_ENV=development mocha spec"
   },
   "dependencies": {
-    "@types/jest": "^26.0.15",
     "body-parser": "^1.18.3",
     "codemirror": "^5.58.1",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
     "ejs": "~2.5.7",
+    "expect-cookies": "^0.1.2",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.9",
@@ -21,8 +21,10 @@
     "passport-github": "^1.1.0"
   },
   "devDependencies": {
+    "mocha": "^8.2.0",
+    "sinon": "^9.2.0",
+    "chai": "^4.2.0",
     "supertest": "^5.0.0",
-    "jest": "^26.6.0",
     "nodemon": "^1.19.1",
     "eslint": "^7.11.0"
   }

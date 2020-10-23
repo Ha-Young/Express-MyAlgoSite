@@ -2,7 +2,7 @@ const express = require("express");
 
 const Problem = require("../../models/Problem");
 const { MongoError } = require("../../service/error");
-const validateProblemForm = require("../../service/validateProblemForm");
+const validateProblemForm = require("../../middleware/validateProblemForm");
 const serializeForm = require("../../middleware/serializeForm");
 
 const router = express.Router();
