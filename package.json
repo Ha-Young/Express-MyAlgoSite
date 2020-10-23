@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "NODE_ENV=development nodemon ./bin/www"
+    "dev": "NODE_ENV=development nodemon ./bin/www",
+    "test": "mocha spec"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
-    "chai": "^4.2.0",
     "codemirror": "^5.58.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
@@ -16,18 +16,18 @@
     "ejs": "~2.5.7",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
-    "express-validator": "^6.6.1",
-    "mocha": "^8.2.0",
     "mongoose": "^5.10.9",
     "morgan": "~1.9.0",
     "nodemon": "^1.19.1",
     "passport": "^0.4.1",
     "passport-github": "^1.1.0",
-    "passport-github2": "^0.1.12",
-    "serve-favicon": "~2.4.5",
-    "vm": "^0.1.0"
+    "randomstring": "^1.1.5",
+    "serve-favicon": "~2.4.5"
   },
   "devDependencies": {
-    "eslint": "^7.11.0"
+    "chai": "^4.2.0",
+    "eslint": "^7.11.0",
+    "mocha": "^8.2.0",
+    "supertest": "^5.0.0"
   }
 }
