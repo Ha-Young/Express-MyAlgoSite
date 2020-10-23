@@ -22,23 +22,25 @@ const ROUTERS = require('./constants').ROUTERS;
 const app = express();
 const store = new MongoDBStore({
   uri:
-    process.env.NODE_ENV === 'production' ?
-    process.env.DB_PRODUCTION_ADDRESS :
-    process.env.DB_LOCAL_ADDRESS,
+    process.env.NODE_ENV === 'production'
+      ? process.env.DB_PRODUCTION_ADDRESS
+      : process.env.DB_LOCAL_ADDRESS,
   databaseName: 'codewars',
   collection: 'session'
-})
+});
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.set('layout', path.join(__dirname, 'views/layout/layout'));
 
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true,
-  store,
-}));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    store
+  })
+);
 
 app.use(expressLayouts);
 app.use(express.static(path.join(__dirname, 'public')));
@@ -53,7 +55,7 @@ app.use(ROUTERS.PROBLEMS, problems);
 /* TEST ROUTER: WILL BE DELETED SOON */
 app.use('/api', api);
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(RequestError.notFound());
 });
 app.use(errorHandler);
