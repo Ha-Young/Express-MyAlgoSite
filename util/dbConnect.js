@@ -4,7 +4,7 @@ const dbConnect = () => {
   if (process.env.NODE_ENV !== 'production') {
     mongoose.set('debug', true);
   }
-  mongoose.connect(`mongodb://localhost:${process.env.MONGOPORT}/codewar`, {
+  mongoose.connect(`mongodb+srv://jpdud:wkdwns007557523m!@@cluster0.rwebj.mongodb.net/codewar?retryWrites=true&w=majority`, {
     useCreateIndex: true,
     useFindAndModify: false,
     useNewUrlParser: true,

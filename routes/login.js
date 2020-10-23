@@ -2,6 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const GitHubStrategy = require('passport-github').Strategy;
 const User = require('../models/User');
+const Problem = require('../models/Problem');
 
 const router = express.Router();
 
@@ -15,6 +16,7 @@ passport.use(new GitHubStrategy(
     let user;
 
     try {
+      await Problem.create()
       user = await User.findOne({ githubID: profile.id });
 
       if (!user) {
@@ -43,8 +45,8 @@ passport.deserializeUser(async (user, cb) => {
   try {
     const result = await User.findOne({ githubID: user.githubID });
     if (result) return cb(null, result);
-    return; //결과가 없을 때도 어떻게 처리하는지
-  } catch (error) { //internal error는 어디서 어떻게 처리되는지
+    return;
+  } catch (error) {
   }
 });
 
