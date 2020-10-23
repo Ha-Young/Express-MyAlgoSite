@@ -15,6 +15,7 @@ exports.getLogin = function getLogin(req, res, next) {
 
 exports.getLogout = function getLogout(req, res, next) {
   req.logout();
+  req.session.destroy();
   res.redirect(ROUTES.REDIRECT_LOGIN);
 };
 

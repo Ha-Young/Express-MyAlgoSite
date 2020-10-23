@@ -13,7 +13,6 @@ const expressLayouts = require('express-ejs-layouts');
 const index = require('./routes/index');
 const auth = require('./routes/auth');
 const problems = require('./routes/problems');
-const api = require('./routes/api');
 
 const errorHandler = require('./routes/error/errorHandler');
 const RequestError = require('./routes/error/RequestError');
