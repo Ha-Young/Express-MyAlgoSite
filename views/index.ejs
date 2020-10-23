@@ -2,9 +2,10 @@
 <% extend('layout') %>
 
 <% if (!user) { %>
-<a href='/login' id=>로그인을 하세요</a>
+<a href='/login'>로그인을 하세요</a>
 <% } else { %>
 <h1>Codewars</h1>
+<a href='/login/logout'>logout</a>
 <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
 <section class='problems'>
   <div class='problems-container'>

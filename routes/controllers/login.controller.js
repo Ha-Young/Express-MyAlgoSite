@@ -1,5 +1,5 @@
 exports.renderLoginTemplate = (req, res, next) => {
-  res.render('login');
+  res.render('login', {error : null });
 };
 
 exports.redirectToMain = (req, res, next) => {

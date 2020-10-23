@@ -5,8 +5,8 @@ const Problem = require('../models/Problem');
 const constants = require('../../constants');
 const vm = new VM({
   timeout: 2000,
-});
 
+});
 exports.getProblem = async (req, res, next) => {
   try {
     const { params: { problem_id } } = req;
@@ -36,19 +36,19 @@ exports.submitAnswer = async (req, res, next) => {
         .map(test => {
           let getResultTemplate;
           let outputTemplate = `
-        ${vm.run(code)};
-        ${test.code};
-      `;
+            ${vm.run(code)};
+            ${test.code};
+          `;
           if (typeof test.solution === 'string') {
             getResultTemplate = `
-          ${vm.run(code)};
-          ${test.code} === '${test.solution}';
-        `;
+              ${vm.run(code)};
+              ${test.code} === '${test.solution}';
+            `;
           } else {
             getResultTemplate = `
-          ${vm.run(code)};
-          ${test.code} === ${test.solution};
-        `;
+              ${vm.run(code)};
+              ${test.code} === ${test.solution};
+            `;
           }
 
           if (!vm.run(getResultTemplate) && !input && !expect) {
@@ -69,12 +69,14 @@ exports.submitAnswer = async (req, res, next) => {
       res.render('success');
     } else {
       res.render('failure', {
+        error: null,
         input: input,
         output: output,
         expect: expect,
       });
     }
   } catch (err) {
+    console.log('asdf')
     if (!mongoose.isValidObjectId(problem_id)) {
       next(createError(500, constants.ERROR_MESSAGE_INVALID_ID))
     }

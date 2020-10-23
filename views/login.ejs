@@ -2,7 +2,10 @@
 <% extend('layout') %>
 
 <div>
-    <h1>login</h1>
+  <h1>login</h1>
+  <% if (error) { %>
+    <h1>로그인을 하세요</h1>
+    <h2><%= error.status %></h2>
+    <% } %>
 </div>
-
 <a href="login/auth/google">Sign In with Google</a>

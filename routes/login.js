@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const loginController = require('./controllers/login.controller');
-const { verifyAuth } = require('./middlewares/authorization');
+const { isLoggedIn } = require('./middlewares/authorization');
 
 router.get('/', loginController.renderLoginTemplate);
 
@@ -12,10 +12,10 @@ router.get('/auth/google',
 
 router.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
-  verifyAuth,
+  isLoggedIn,
   loginController.redirectToMain
 );
 
-router.get('/logout', loginController.logout);
+router.get('/logout', isLoggedIn, loginController.logout);
 
 module.exports = router;

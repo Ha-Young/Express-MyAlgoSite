@@ -1,9 +1,11 @@
-const verifyAuth = (req, res, next) => {
+const createError = require('http-errors');
+
+const isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
     next();
   } else {
-    res.redirect("/login");
+    next(createError(403, '로그인이 필요합니다'));
   }
 };
 
-exports.verifyAuth = verifyAuth;
+exports.isLoggedIn = isLoggedIn;
