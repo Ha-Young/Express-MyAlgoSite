@@ -7,7 +7,7 @@ module.exports = () => {
     }
 
     mongoose.connect(
-      "mongodb://localhost:27017/codewars",
+      process.env.MONGODB_URI || "mongodb://localhost:27017/codewars",
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
