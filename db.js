@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 mongoose.connect(
-  'mongodb://localhost/codewars',
+  process.env.DB,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,

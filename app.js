@@ -1,6 +1,6 @@
+require('dotenv').config();
 require('./db');
 require('./googleStrategy');
-require('dotenv').config();
 const passport = require('passport');
 const express = require('express');
 const app = express();
@@ -65,4 +65,20 @@ app.use((err, req, res, next) => {
   res.render('error');
 });
 
+
+// const Problem = require('./routes/models/Problem');
+
+// const save = async () => {
+//   const fs = require('fs')
+//   let rawdata = fs.readFileSync('./routes/models/sample_problems.json');
+//   let problems = JSON.parse(rawdata);
+
+//   try {
+//     for (let i = 0; i < problems.length; i++) {
+//       await Problem(problems[i]).save();
+//     }
+//   } catch (err) {
+//     console.error(err);
+//   }
+// };
 module.exports = app;
