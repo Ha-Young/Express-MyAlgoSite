@@ -3,6 +3,18 @@ const router = express.Router();
 const vm = require('vm');
 const Problem = require('../models/Problem');
 
+router.get('/', async function (req, res, next) {
+  try {
+    const problemList = await Problem.find();
+
+    return res.render('index', {
+      problemList: problemList
+    });
+  } catch (err) {
+    next(err);
+  }
+})
+
 router.get('/:problem_id', async function (req, res, next) {
   try {
     const problemId = req.params.problem_id;
