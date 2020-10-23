@@ -7,25 +7,23 @@ const problems = JSON.parse(
   fs.readFileSync(`${__dirname}/../models/sample_problems.json`, 'utf-8')
 );
 
-const importProblems = async () => {
-  try {
+exports.importProblems = async () => {
+  
     await Problem.create(problems);
     console.log('data successfully loaded');
-  } catch (err) {
-    console.log(err);
-  }
+  
 };
 
-const deleteProblems = async () => {
+exports.deleteProblems = async () => {
   try {
     await Problem.deleteMany();
     console.log('data successfully delete');
   } catch (err) {
-    console.log(err);
+    console.log(err.code)
   }
 };
 
-module.exports = async () => {
-  await deleteProblems();
-  await importProblems();
-};
+// module.exports = async () => {
+//   await deleteProblems();
+//   await importProblems();
+// };

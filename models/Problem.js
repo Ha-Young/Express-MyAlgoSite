@@ -18,6 +18,7 @@ const ProblemSchema = new mongoose.Schema(
     },
     completed_users: {
       type: Number,
+      required: [true, 'A problem must have a title field'],
       min: [0, 'The number of completed users can not be lower than 0'],
     },
     difficulty_level: {

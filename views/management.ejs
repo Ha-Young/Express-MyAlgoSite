@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <h1>Codewars</h1>
+    <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
+    <div class='management'>
+      <h2>보유 문제 현황</h2>
+      <ul>
+        <li>전체 문제 수: <%=stats.numProblems%></li>
+        <li>평균 난이도: <%=stats.avgDifficulty%></li>
+        <li>평균 성공 인원: <%=stats.avgCompletedUsers%></li>
+        <li>가장 쉬운 레벨 <%=stats.easiestLevel%></li>
+        <li>가장 어려운 레벨 <%=stats.hardiestLevel%></li>
+      </ul>
+      <button><a href="/">돌아가기</a></button>
+      <button><a href="/management/init">초기화</a></button>
+    </div>
+  </body>
+</html>

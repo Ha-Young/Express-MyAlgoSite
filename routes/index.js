@@ -5,5 +5,5 @@ const managementController = require('../controllers/managementController');
 
 router.get('/', problemController.getAllProblems);
 router.get('/management', managementController.getStats);
-
+router.get('/management/init', managementController.intializeProblems);
 module.exports = router;

@@ -1,26 +1,30 @@
 body {
-  padding: 50px;
-  font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
+	padding: 50px;
+	font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00b7ff;
+	color: #00b7ff;
 }
 
 .grid-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 20px;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-gap: 20px;
 }
 
 .problem-container {
-  background-color: blanchedalmond;
-  text-align: center;
-  width: 100%;
+	background-color: blanchedalmond;
+	text-align: center;
+	width: 100%;
 }
 
 .problem-grid-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 20px;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-gap: 20px;
+}
+
+.management {
+	background-color: blanchedalmond;
 }

@@ -1,4 +1,5 @@
 const Problem = require('../models/Problem');
+const apiSampleProblems = require('../utils/apiSampleProblems');
 const catchAsync = require('../utils/catchAsync');
 
 exports.getStats = catchAsync(async (req, res, next) => {
@@ -14,10 +15,14 @@ exports.getStats = catchAsync(async (req, res, next) => {
       },
     },
   ]);
-  res.status(200).json({
-    status: 'success',
-    data: {
-      stats,
-    },
-  });
+  
+  res.render('management', {stats: stats[0]})
+});
+
+exports.intializeProblems = catchAsync(async (req, res, next) => {
+  await apiSampleProblems.deleteProblems(); 
+  await apiSampleProblems.importProblems(); //code 11000 / kind required
+
+  res.render('init');
+
 });

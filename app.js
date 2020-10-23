@@ -7,13 +7,13 @@ const index = require('./routes/index');
 const login = require('./routes/login');
 const problem = require('./routes/problem');
 const checkAuth = require('./middlewares/checkAuth');
-const apiSampleProblems = require('./utils/apiSampleProblems');
+// const apiSampleProblems = require('./utils/apiSampleProblems');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
 require('./config/passport-setup');
 
-apiSampleProblems();
+// apiSampleProblems();
 
 const app = express();
 
