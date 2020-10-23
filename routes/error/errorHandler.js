@@ -1,5 +1,9 @@
+const mongoose = require('mongoose');
+const InternalError = require('../error/InternalError');
+
 function errorHandler(err, req, res, next) {
   if (process.env.NODE_ENV === 'production') {
+    if (err instanceof mongoose.Error) err = new InternalError();
     err.stack = null;
   }
 

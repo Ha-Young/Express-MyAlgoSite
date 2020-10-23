@@ -1,10 +1,13 @@
-const vm = require('vm');
-
-const Problem = require('../../models/Problem');
+const vm = require('vm');const Problem = require('../../models/Problem');
 const User = require('../../models/User');
 
 const RequestError = require('../error/RequestError');
-const { VIEWS, TEST } = require('../../constants');
+const { VIEWS, TEST, ROUTERS } = require('../../constants');
+
+
+exports.redirectHome = function redirectHome(req, res, next) {
+  res.redirect(ROUTERS.HOME);
+};
 
 exports.getAllProblems = async function getAllProblems(req, res, next) {
   const { query: { filter }, user } = req;
@@ -22,6 +25,8 @@ exports.getProblem = async function getProblem(req, res, next) {
   const { params: { problem_id }, user } = req;
   try {
     const targetProblem = await Problem.findById(problem_id);
+    if (!targetProblem) throw RequestError.notFound();
+
     const testCaseList = targetProblem.tests.map(value => `assertEquals(${value.code}, ${value.solution});` + '\n');
 
     res.status(200).render(VIEWS.PROBLEM, { params: problem_id, user: user.display_name, list: testCaseList.join(''), problem: targetProblem });
@@ -34,15 +39,17 @@ exports.postSolution = async function postSolution(req, res, next) {
   const { body: { user_solution }, params: { problem_id }, user } = req;
   try {
     const targetProblem = await Problem.findById(problem_id);
+    if (!targetProblem) throw RequestError.notFound();
+
     const { testResult, failedCase } = await checkSolution(targetProblem.tests, user_solution);
 
     switch (testResult) {
       case TEST.SUCCEED:
-        const isUser = targetProblem.compledted_user_ids.includes(user._id);
+        const isUser = targetProblem.completed_user_ids.includes(user._id);
         if (!isUser) {
           const count = targetProblem.completed_users += 1;
           await Problem.updateOne({ _id: problem_id }, {
-            $push: { compledted_user_ids: [user._id] },
+            $push: { completed_user_ids: [user._id] },
             completed_users: count
           });
           await User.updateOne({ _id: user._id }, {
