@@ -1,11 +1,6 @@
 const mongoose = require('mongoose');
 const Strategy = require('passport-github');
 
-/*
-
-  TODO: Fill in the model specification
-
- */
 const ProblemSchema = new mongoose.Schema({
   id: {
     type: String,

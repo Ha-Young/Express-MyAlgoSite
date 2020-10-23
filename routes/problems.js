@@ -12,28 +12,42 @@ router.get('/:problem_id', async function (req, res, next) {
       problem: problem
     });
   } catch (err) {
-    return res.status(400).json({
-      error: 'error'
-    });
+    next(err);
   }
 });
 
 router.post('/:problem_id', async function (req, res, next) {
+  let problem;
+  let inputStringCode;
+
   try {
-  const problemId = req.params.problem_id;
-  const problem = await Problem.findOne({ id: problemId });
-  const inputStringCode = req.body.code;
+    const problemId = req.params.problem_id;
+    problem = await Problem.findOne({ id: problemId });
+    inputStringCode = req.body.code;
+  } catch (err) {
+    next(err);
+  }
 
   for (let i = 0; i < problem.tests.length; i++) {
-    let { code, solution } = problem.tests[i];
-    let context = { inputAnswer: null };
-    let inputFunction = new vm.Script(inputStringCode + `inputAnswer = ${code}`);
+    const { code, solution } = problem.tests[i];
+    const context = { inputAnswer: null };
 
-    vm.createContext(context);
-    inputFunction.runInContext(context);
+    let answer;
+    let problemAnswer;
 
-    let answer = context.inputAnswer;
-    let problemAnswer = solution;
+    try {
+      const inputFunction = new vm.Script(inputStringCode + `inputAnswer = ${code}`);
+
+      vm.createContext(context);
+      inputFunction.runInContext(context);
+
+      answer = context.inputAnswer;
+      problemAnswer = solution;
+    } catch (err) {
+      return res.render('error', {
+        errorMessage: err.message
+      });
+    }
 
     if (answer !== problemAnswer) {
       return res.render('failure', {
@@ -45,11 +59,6 @@ router.post('/:problem_id', async function (req, res, next) {
   return res.render('success', {
     correctProblem: problem
   });
-  } catch (err) {
-    return res.render('error', {
-      errorMessage: err.message
-    });
-  }
 });
 
 module.exports = router;
