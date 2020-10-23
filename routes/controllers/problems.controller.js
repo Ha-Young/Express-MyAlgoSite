@@ -1,5 +1,6 @@
 const Problem = require('../../models/Problem');
 const vm = require('vm');
+const { PROBLEM, SUCCESS, FAILURE } = require('../../constants/index');
 
 exports.getAll = async function(req, res, next) {
   try {
@@ -16,7 +17,7 @@ exports.getOne = async function(req, res, next) {
     const result = await Problem.findOne(req.params);
 
     res.status(200).render(
-      'problem',
+      PROBLEM,
       {
         problem_number: result.problem_number,
         title: result.title,
@@ -55,7 +56,7 @@ exports.submitHandler = async function(req, res, next) {
       } catch (err) {
         info.error = err;
 
-        res.render('failure', { info });
+        res.status(200).render(FAILURE, { info });
 
         return;
       }
@@ -65,7 +66,7 @@ exports.submitHandler = async function(req, res, next) {
         info.failureData.answer = answer;
         info.failureData.solution = solution;
 
-        res.status(200).render('failure', { info });
+        res.status(200).render(FAILURE, { info });
 
         return;
       }
@@ -89,7 +90,7 @@ exports.submitHandler = async function(req, res, next) {
       }
     }
 
-    res.status(200).render('success');
+    res.status(200).render(SUCCESS);
   } catch (err) {
     next(err);
   }
