@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 
-mongoose.connect(process.env.MONGODB_URI, {
+const uri = `mongodb+srv://${process.env.MONGODB_ID}:${process.env.MONGODB_PASSWORD}@cluster0.w0p1f.gcp.mongodb.net/vaco?retryWrites=true&w=majority`;
+
+mongoose.connect(uri, {
   useCreateIndex: true,
   useFindAndModify: false,
   useNewUrlParser: true,
