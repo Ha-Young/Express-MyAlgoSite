@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+
+    <link rel='stylesheet' href='/codemirror-5.58.1/codemirror.css'>
+    <script src="/codemirror-5.58.1/codemirror.js"></script>
+    <script src="/codemirror-5.58.1/javascript.js"></script>
+    <link rel='stylesheet' href="/codemirror-5.58.1/dracula.css">
+
+  </head>
+  <body>
+    <h1>정답입니다! </h1>
+    <h2 onclick="location.href=`/register`">문제 정보</h2>
+    <ul class="tabs">
+      <li>문제: <%= question.title %> </li>
+      <li>정답자수: <%= question.completed_users %> </li>
+      <li>난이도: <%= question.difficulty_level %> </li>
+      <% if (question.description) { %>
+      <li>설명: <%= question.description %> </li>
+      <% } else { %>
+        설명이 없습니다...
+        <% } %>
+      <li>소요시간: .....</li>
+    </ul> 작성하신 코드:
+      <textarea id='code' name="code" cols="50" rows="10" ><%=holder%></textarea>
+      <button type="button" onclick="location.href=`/problems`">Back to Problems</button>
+  </body>
+  <script>
+    const editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+      lineNumbers: true,
+      mode: "javascript",
+      theme: 'dracula',
+      tabSize:2,
+      indentWithTabs: true,
+      readOnly: 'nocursor',
+    });
+  </script>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>login...</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>login...</h1>
+    <form action="/login" method="post">
+      <div>
+        <% if (inputedEmail) { %>
+          <input id="text" type="text" name="email" value="<%= inputedEmail %>" required="">
+          <% } else { %>
+          <input id="text" type="text" name="email"  placeholder="Email" required="">
+          <% } %>
+      </div>
+      <div>
+        <input type="password" name="password" placeholder="Password" required="">
+      </div>
+      <% if (notificationMessage) { %>
+        <div  style="color:red"><%=notificationMessage%></div>
+        <% } %>
+      <button type="submit">login</button>
+      <button type="button" onclick="location.href='/register'">register</button>
+     </form>
+  </body>
+</html>

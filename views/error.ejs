@@ -1,3 +1,36 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Error</title>
+    <link rel='stylesheet' href='/codemirror-5.58.1/codemirror.css'>
+    <script src="/codemirror-5.58.1/codemirror.js"></script>
+    <script src="/codemirror-5.58.1/javascript.js"></script>
+    <link rel='stylesheet' href="/codemirror-5.58.1/dracula.css">
+  </head>
+  <body>
+    <h1>Error!</h1>
+    <div>
+      <% if (displayToUser) { %>
+        <div>
+          <%=displayToUser%>
+        </div>
+        <% } else { %>
+          <div>
+            <% if (errorName) { %>
+            <h2>[<%=errorName%>]</h2>
+            <% } %>
+          <div>
+            <h3>Status: <%=errorStatus%></h3>
+          </div>
+          <div>
+            <h3>Message: <%=errorMessage%></h3>
+          </div>
+            <h3>Requested URL: <%=reqUrl%></h3>
+          <div>
+            <% if (location) { %>
+              <h3>Occurrence point: <%=location%></h3>
+              <% } %>
+          <% } %>
+    </div>
+  </body>
+</html>

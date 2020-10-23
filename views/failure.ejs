@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/codemirror-5.58.1/codemirror.css'>
+    <script src="/codemirror-5.58.1/codemirror.js"></script>
+    <script src="/codemirror-5.58.1/javascript.js"></script>
+    <link rel='stylesheet' href="/codemirror-5.58.1/dracula.css">
+  </head>
+  <body>
+    <div>
+    </div>
+    <% if (errorName) { %>
+      <div>
+        <h2> [<%=errorName%>]</h2>
+      </div>
+      <div>
+        <h2><%=errorMessage%></h2>
+      </div>
+      <div>
+        <h5><%=errorStack%></h5>
+      </div>
+      <% } else { %>
+          <% if (passedTests === 'X') { %>
+            <h1>통과한 테스트: <%=passedTests%></h1>
+            <% } else { %>
+              <h1>통과한 테스트:</h1>
+              <ol>
+                <% for (let index = 0; index < passedTestsLength; index++) { %>
+                  <li><%=passedTests[index].code%>===
+                    <%=passedTests[index].solution%>
+                  </li>
+                  <% } %>
+                <% } %>
+              </ol>
+          <div>
+              <h1>통과 하지못한 테스트:</h1>
+              <ol>
+                <% for (let index = 0; index < notPassedTestsLength; index++) { %>
+                  <li><%=notPassedTests[index].code%>===
+                    <%=notPassedTests[index].solution%>
+                  </li>
+                <% } %>
+
+              </ol>
+          </div>
+      <% } %>
+    </ul> 작성하신 코드:
+    <textarea id='code' name="code" cols="50" rows="10" ><%=holder%></textarea>
+    <button type="button" onclick="location.href=`/problems`">Back to Problems</button>
+</body>
+<script>
+  const editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    lineNumbers: true,
+    mode: "javascript",
+    theme: 'dracula',
+    tabSize:2,
+    indentWithTabs: true,
+    readOnly: 'nocursor',
+  });
+</script>
+</html>
