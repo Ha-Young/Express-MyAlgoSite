@@ -1,8 +1,12 @@
 const Problem = require('../models/Problem');
 
 exports.getAllProblems = async (req, res, next) => {
-  const initialProblems = await Problem.find({});
-  res.render('index', { initialProblems });
+  try {
+    const initialProblems = await Problem.find({});
+    res.render('index', { initialProblems });
+  } catch (error) {
+    next(error);
+  }
 };
 
 exports.logIn = (req, res, next) => {

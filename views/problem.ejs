@@ -7,7 +7,7 @@
   >
     <h1 class="problem__sumbit__content"><%= currentProblem.title %></h1>
     <h3 class="problem__sumbit__content">
-      정답자 수 : <%= currentProblem.completed_users %>
+      정답자 수 : <%= currentProblem.completed_users.length %>
     </h3>
     <h3 class="problem__sumbit__content">
       문제 레벨 : <%= currentProblem.difficulty_level %>
@@ -19,20 +19,9 @@
       class="problem__sumbit__content problem__sumbit__textarea"
       placeholder="Try your best"
       name="submission"
-    >
-function solution(n) {
-  const str = "수박";
-  const share = Math.floor(n / 2);
-  const isOdd = n % 2 === 1;
-
-  return isOdd ? str.repeat(share) + str[0] : str.repeat(share);
-}</textarea
-    >
+    ></textarea>
     <div class="problem__sumbit__button__wrap">
-      <button
-        class="problem__sumbit__button"
-        type="submit"
-      >
+      <button class="problem__sumbit__button" type="submit">
         정답 제출하기
       </button>
     </div>

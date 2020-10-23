@@ -1,10 +1,10 @@
 <%- include('header') -%>
 <div class="problem__select__wrap">
   <h1 class="problem__select__title">🚀Codewars🚀</h1>
-  <h2 class="problem__select__title">풀고 싶은 문제를 풀어보세요! :)</h2>
+  <h2 class="problem__select__title">풀고 싶은 문제를 고르세요</h2>
 
   <ul class="problems">
-    <% for(let i = 0; i < initialProblems.length; i++) { %> 
+    <% for(let i = 0; i < initialProblems.length; i++) { %>
     <% const currentProblem = initialProblems[i] %>
     <a href="problems/<%= currentProblem._id %>">
       <li class="problem">
@@ -12,7 +12,7 @@
           <%= i + 1 %>. <%= currentProblem.title %>
         </h3>
         <h3 class="problem__content">
-          정답자 수 : <%= currentProblem.completed_users %>
+          정답자 수 : <%= currentProblem.completed_users.length %>
         </h3>
         <h3 class="problem__content">
           문제 레벨 : <%= currentProblem.difficulty_level %>

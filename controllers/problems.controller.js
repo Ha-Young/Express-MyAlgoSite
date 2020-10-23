@@ -1,5 +1,6 @@
-const Problem = require('../models/Problem');
 const vm = require('vm');
+const Problem = require('../models/Problem');
+const User = require('../models/User');
 
 exports.getProblem = async (req, res, next) => {
   const { problem_id } = req.params;
@@ -11,6 +12,7 @@ exports.getProblem = async (req, res, next) => {
 exports.checkAnswer = async (req, res, next) => {
   const { problem_id } = req.params;
   const { submission: submissionCode } = req.body;
+  const { username } = req.user;
   const testResults = [];
   const context = {};
   let testCases;
@@ -44,7 +46,9 @@ exports.checkAnswer = async (req, res, next) => {
 
     try {
       const functionExcutingScript = new vm.Script(funcToBeExecuted);
-      userAnswer = functionExcutingScript.runInContext(context);
+      userAnswer = functionExcutingScript.runInContext(context, {
+        timeout: 1000 * 10,
+      });
     } catch (error) {
       const currentProblem = await Problem.findById(problem_id);
       res.render('failure', { currentProblem, error, submissionCode });
@@ -62,6 +66,20 @@ exports.checkAnswer = async (req, res, next) => {
   }
 
   if (isTestPassed) {
+    try {
+      const { _id: userId } = await User.findOne({ username });
+
+      await Problem.findByIdAndUpdate(problem_id, {
+        $addToSet: { completed_users: userId },
+      });
+
+      await User.findByIdAndUpdate(userId, {
+        $addToSet: { solved_problem: problem_id },
+      });
+    } catch (error) {
+      next(error);
+    }
+
     return res.render('success', { testResults });
   }
 
