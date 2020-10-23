@@ -1,21 +1,27 @@
+:root {
+  --darkblue-color: rgb(11, 11, 48);
+  --darkred-color: rgb(113, 11, 38);
+  --default-fontcolor: rgb(164, 161, 161);
+}
+
 body {
   display: flex;
   height: 90vh;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-color: var(--darkblue-color);
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 .title {
-  color: rgb(11, 11, 48);
+  color: var(--default-fontcolor);
 }
 
 .problems-box {
   display: flex;
   width: 920px;
   height: 400px;
-  background-color: rgb(113, 11, 38);
   border-radius: 10px;
 }
 
@@ -27,21 +33,22 @@ a {
   width: 230px;
   height: 400px;
   text-decoration: none;
-  background-color: rgb(11, 11, 48);
+  background-color: var(--darkblue-color);
   border-radius: 10px;
-  margin-right: 1px;
+  margin-right: 2px;
+  border: 1px solid var(--darkred-color);
 }
 
 a:link,
 a:visited,
 a:active {
-  color: rgb(164, 161, 161);
+  color: var(--default-fontcolor);
   text-decoration: none;
 }
 
 a:hover {
-  color: rgb(164, 161, 161);
-  background-color: rgb(113, 11, 38);
+  color: var(--default-fontcolor);
+  background-color: var(--darkred-color);
   transition: all 0.3s;
 }
 

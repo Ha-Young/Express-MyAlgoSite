@@ -1,8 +1,16 @@
+:root {
+  --darkblue-color: rgb(11, 11, 48);
+  --darkred-color: rgb(113, 11, 38);
+  --default-fontcolor: rgb(164, 161, 161);
+  --default-border: rgb(197, 194, 194);
+}
+
 body {
   display: flex;
   height: 90vh;
   justify-content: center;
   align-items: center;
+  background-color: var(--darkblue-color);
 }
 
 .failure-box {
@@ -12,9 +20,10 @@ body {
   align-items: center;
   width: 800px;
   height: 400px;
-  background-color: rgb(11, 11, 48);
+  background-color: var(--darkblue-color);
   border-radius: 10px;
-  color: rgb(164, 161, 161);
+  border: 1px solid var(--default-border);
+  color: var(--default-fontcolor);
   font-size: 17px;
 }
 
@@ -28,7 +37,7 @@ body {
   align-items: center;
   width: 500px;
   height: 150px;
-  border: 1px solid rgb(113, 11, 38);
+  border: 1px solid var(--darkred-color);
   background-color: rgba(113, 11, 38, 0.2);
   margin-top: 30px;
   border-radius: 10px;
@@ -41,22 +50,22 @@ a {
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-  background-color: rgb(11, 11, 48);
+  background-color: var(--darkblue-color);
   text-decoration: none;
   border-radius: 10px;
-  color: rgb(164, 161, 161);
-  border: 1px solid rgb(113, 11, 38);
+  color: var(--default-fontcolor);
+  border: 1px solid var(--darkred-color);
   transition: all 0.3s;
 }
 
 a:link,
 a:visited,
 a:active {
-  color: rgb(164, 161, 161);
+  color: var(--default-fontcolor);
   text-decoration: none;
 }
 
 a:hover {
-  color: rgb(164, 161, 161);
-  background-color: rgb(113, 11, 38);
+  color: var(--default-fontcolor);
+  background-color: var(--darkred-color);
 }

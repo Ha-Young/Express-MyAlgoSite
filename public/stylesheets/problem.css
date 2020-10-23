@@ -1,8 +1,16 @@
+:root {
+  --darkblue-color: rgb(11, 11, 48);
+  --darkred-color: rgb(113, 11, 38);
+  --default-fontcolor: rgb(164, 161, 161);
+  --default-border: rgb(197, 194, 194);
+}
+
 body {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background-color: var(--darkblue-color);
 }
 
 .problem-box {
@@ -11,8 +19,9 @@ body {
   width: 900px;
   height: 900px;
   border-radius: 10px;
-  background-color: rgb(11, 11, 48);
-  color: rgb(164, 161, 161);
+  background-color: var(--darkblue-color);
+  border: 1px solid var(--default-border);
+  color: var(--default-fontcolor);
 }
 
 .title {
@@ -46,17 +55,17 @@ input {
   justify-content: center;
   align-self: center;
   border: none;
-  background-color: rgb(11, 11, 48);
-  color: rgb(164, 161, 161);
+  background-color: var(--darkblue-color);
+  color: var(--default-fontcolor);
   outline: none;
   font-size: 20px;
   letter-spacing: 10px;
   border-radius: 30px;
-  border: 1px solid rgb(113, 11, 38);
+  border: 1px solid var(--darkred-color);
 }
 
 input:hover {
-  color: rgb(164, 161, 161);
-  background-color: rgb(113, 11, 38);
+  color: var(--default-fontcolor);
+  background-color: var(--darkred-color);
   transition: all 0.3s;
 }
