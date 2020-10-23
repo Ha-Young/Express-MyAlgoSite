@@ -1,5 +1,6 @@
 const passport = require('passport');
 const ObjectId = require('mongoose').Types.ObjectId;
+const appRoot = require('app-root-path');
 const User = require('../models/User');
 
 module.exports = () => {
@@ -9,7 +10,7 @@ module.exports = () => {
     new GithubStrategy({
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: "http://localhost:3000/auth/login/github/callback"
+      callbackURL: 'https://codewars-justin.herokuapp.com/auth/login/github/callback',
     }, async function (accessToken, refreshToken, profile, cb) {
       try {
         // find or create user
