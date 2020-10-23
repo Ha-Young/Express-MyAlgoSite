@@ -1,4 +1,5 @@
 const Problem = require('../../models/Problem');
+const mongoose = require('mongoose');
 
 exports.getAllProblems = async (req, res, next) => {
   try {
@@ -11,14 +12,15 @@ exports.getAllProblems = async (req, res, next) => {
 };
 
 exports.getTargetProblem = async (req, res, next) => {
-  const { problem_id } = req.params;
   try {
-    const targetProblem = await Problem.findById(problem_id);
-    if (!targetProblem) {
+    const { problem_id } = req.params;
+    if (!mongoose.isValidObjectId(problem_id)) {
       const error = new Error('Not Found');
       error.status = 404;
       return next(error);
     }
+
+    const targetProblem = await Problem.findById(problem_id);
     req.problem = targetProblem;
     next();
   } catch (error) {
