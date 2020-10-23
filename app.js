@@ -1,8 +1,10 @@
-if (process.env.NODE_ENV === "development") require("dotenv").config();
-
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
+
+if (process.env.NODE_ENV === "development") {
+  require("dotenv").config();
+}
 
 const dbConnection = require("./mongodb");
 const passport = require("./passport/github");
@@ -10,6 +12,18 @@ const router = require("./routes/index");
 const { MongoError } = require("./service/error");
 
 const app = express();
+
+if (process.env.NODE_ENV === "development") {
+  const morgan = require("morgan");
+
+  app.use(morgan());
+} else if (process.env.NODE_ENV === "production") {
+  const compression = require("compression");
+  const helmet = require("helmet");
+
+  app.use(compression());
+  app.use(helmet());
+}
 
 dbConnection.once("open", (err) => {
   if (err) throw MongoError("mongodb can not connect");
