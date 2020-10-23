@@ -15,19 +15,16 @@
   </div>
   <script type="text/javascript">
     const myTextArea = document.getElementById('code');
-    console.log(myTextArea.prev);
     const myCodeMirror = CodeMirror.fromTextArea(myTextArea, {
       lineNumbers: true,
       mode: 'javascript'
     });
     const value = myCodeMirror.getValue();
-    console.log(value);
+    console.log("value", typeof value);
+
     if (value) {
       myCodeMirror.getDoc().setValue(value);
-    }
-    else myCodeMirror.getDoc().setValue('function solution() {\n}');
-    // const foo = new Function(value);
-    // console.log(foo())
+    } else myCodeMirror.getDoc().setValue('function solution() {\n}');
   </script>
   <button type='submit'>Submit</button>
 </form>

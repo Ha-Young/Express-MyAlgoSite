@@ -11,7 +11,7 @@ const testSchema = new mongoose.Schema({
     required: true
   },
   solution: {
-    type: String,
+    type: mongoose.Schema.Types.Mixed,
     required: true
   }
 });
@@ -37,4 +37,4 @@ const ProblemSchema = new mongoose.Schema({
   tests: [testSchema]
 });
 
-module.exports = mongoose.model('Problem', ProblemSchema);
+module.exports = mongoose.model('Problems', ProblemSchema);

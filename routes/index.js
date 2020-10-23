@@ -2,14 +2,14 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const passport = require('passport');
-//const initializePassport = require('../passport-config');
+const vm = require('vm');
 const Users = require('../models/User');
 const Problems = require('../models/Problem');
 const UserSolution = require('../models/UserSolution');
 const localStrategy = require('passport-local').Strategy;
 
 passport.use(new localStrategy({ usernameField: 'email', passwordField: "password" },
-  async function (email, password, done) {// email, password는 Field에서 받은 값. authenticate확인 후 done호출
+  async function (email, password, done) {
     const user = await Users.find({ email: email }).exec();
     if (user.length === 0) {
       return done(null, false, { message: 'No user with this email address' });
@@ -18,7 +18,7 @@ passport.use(new localStrategy({ usernameField: 'email', passwordField: "passwor
     try {
       const validPassword = await bcrypt.compare(password, user[0].password);
       if (validPassword) {
-        return done(null, user[0]);// 성공 -> serializeUser
+        return done(null, user[0]);
       } else {
         return done(null, false, { message: 'password incorrect' });
       }
@@ -28,22 +28,25 @@ passport.use(new localStrategy({ usernameField: 'email', passwordField: "passwor
   }
 ));
 
-passport.serializeUser((user, done) => {// Strategy 성공 시 호출됨
-  console.log("serialize", user);   // 여기의 user가 deserializeUser의 첫 번째 매개변수로 이동
+passport.serializeUser((user, done) => {
+  console.log("serialize", user);
   done(null, user.id);
 });
-passport.deserializeUser(async (id, done) => {// 매개변수 id는 serializeUser의 done의 인자 user.id를 받은 것
-  const a = await Users.find({ id: id}).exec();
-  return done(null, a[0]);// 여기의 getUserById(id)가 req.user가 됨
+
+passport.deserializeUser(async (id, done) => {
+  const a = await Users.find({ id: id }).exec();
+  return done(null, a[0]);
 });
 
 /* GET home page. */
 router.get('/', checkAuthenticated, async (req, res, next) => {
-  console.log("from deserialize", req.user);//from deserialize...req.user
+  //console.log(res.getHeader('content-type'));
+  //console.log("session", req.session);
+  //console.log("from deserialize", req.user);//from deserialize...req.user
   try {
     const problems = await Problems.find({});
     res.render('index', { items: problems });
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 });
@@ -60,60 +63,57 @@ router.get('/problem/:problem_id', checkAuthenticated, async (req, res, next) =>
         const codeWritten = userHistory[0].codeWritten;
         res.render('problem', { targetProblem, codeWritten });
       } else {
-        res.render('problem', { targetProblem, codeWritten: '' });
+        res.render('problem', { targetProblem, codeWritten: undefined });
       }
     }
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 });
 
 router.post('/problem/:problem_id', checkAuthenticated, async (req, res, next) => {
-  console.log(req.params.problem_id);
   const targetProblem = await Problems.find({ id: req.params.problem_id }).exec();
-  console.log(targetProblem[0].tests);
-  console.log("form으로 들어온 String 코드", req.body.code);
-  const stringFunc = req.body.code;
-  const anonymousFunc = new Function('return ' + stringFunc);
-  const solution = anonymousFunc();//실행할 함수
+  const stringFuncSubmittedByUser = req.body.code;
 
   try {
     const failedTest = {};
-
     for (let i = 0; i < targetProblem[0].tests.length; i++) {
-      const executeFunc = new Function('a', 'return function () { const solution = a; \n return ' + targetProblem[0].tests[i].code + '}');
-      const answer = new Function('return ' + targetProblem[0].tests[i].solution);
-      const result = executeFunc(solution);
-
-      if (result() !== answer()) {
+      const code = targetProblem[0].tests[i].code;
+      const solution = targetProblem[0].tests[i].solution;
+      const context = { result: undefined };
+      const executtionScript = stringFuncSubmittedByUser + '\n' + 'result = ' + code;
+      const script = new vm.Script(executtionScript);
+      vm.createContext(context);
+      script.runInContext(context);
+      if (context.result !== solution) {
         failedTest[targetProblem[0].tests[i].code] = targetProblem[0].tests[i].solution;
         if (i === targetProblem[0].tests.length - 1) {
           res.render('failure', { problemId: req.params.problem_id, failedTest });
           return;
         }
       }
+      else if (i === targetProblem[0].tests.length - 1) {
+        try {
+          const newUser = new UserSolution({
+            problemId: req.params.problem_id,
+            username: req.user.username,
+            codeWritten: req.body.code
+          });
+          await newUser.save();
+          res.render('success');
+
+        } catch (err) {
+          next(err);
+        }
+      }
     }
-
-    try {
-      const newUser = new UserSolution({
-        problemId: req.params.problem_id,
-        username: req.user.username,
-        codeWritten: req.body.code
-      });
-      await newUser.save();
-      console.log(await UserSolution.find({}));
-    } catch (err) {
-      next(err);
-    }
-
-    res.render('success');
-
-  } catch (e) {
-    res.render('error', { message: "There is error in your code", error: { stack: e } })
+  } catch (err) {
+    res.render('error', { message: "There is error in your code", error: { stack: err } })
   }
 });
 
 router.get('/login', (req, res, next) => {
+  console.log("session", req.session);
   res.render('login');
 });
 
@@ -124,12 +124,11 @@ router.post('/login', passport.authenticate('local', {
 }));
 
 router.get('/register', (req, res, next) => {
+  console.log("session", req.session);
   res.render('register');
 });
 
 router.post('/register', async (req, res, next) => {
-  console.log(req.body);
-
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const newUser = new Users({
@@ -140,16 +139,18 @@ router.post('/register', async (req, res, next) => {
     });
     await newUser.save();
     res.redirect(302, '/login');
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 });
 
 function checkAuthenticated(req, res, next) {
+  console.log("checkAuthenticated", req.session);
+  console.log(req.isAuthenticated())
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect('/login');
+  res.redirect(302, '/login');
 }
 
 module.exports = router;
