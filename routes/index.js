@@ -5,14 +5,22 @@ const problemsController = require('./controllers/problems.controller');
 /* GET home page. */
 router.get('/', async (req, res, next) => {
   if (!req.user) {
-    res.redirect('/login');
+    try {
+      res.status(302).redirect('/login');
 
-    return;
+      return;
+    } catch (err) {
+      next(err);
+    }
   }
 
-  const problems = await problemsController.getAll();
+  try {
+    const problems = await problemsController.getAll();
 
-  res.render('index', { problems });
+    res.render('index', { problems });
+  } catch (err) {
+    next(err);
+  }
 });
 
 module.exports = router;

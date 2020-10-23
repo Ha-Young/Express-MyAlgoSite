@@ -3,7 +3,9 @@ const vm = require('vm');
 
 exports.getAll = async function(req, res, next) {
   try {
-    return await Problem.find().lean();
+    const problems = await Problem.find().lean();
+
+    return problems.sort((a, b) => Number(a.problem_number) - Number(b.problem_number));
   } catch (err) {
     next(err);
   }
@@ -13,7 +15,7 @@ exports.getOne = async function(req, res, next) {
   try {
     const result = await Problem.findOne(req.params);
 
-    res.render(
+    res.status(200).render(
       'problem',
       {
         problem_number: result.problem_number,
@@ -40,7 +42,7 @@ exports.submitHandler = async function(req, res, next) {
 
       let answer;
 
-      let info = {
+      const info = {
         error: null,
         failureData: {},
         problem_number: req.params.problem_number,
@@ -48,6 +50,7 @@ exports.submitHandler = async function(req, res, next) {
 
       try {
         const script = new vm.Script(req.body.code + code);
+
         answer = script.runInContext(vm.createContext(), { timeout: 2000 });
       } catch (err) {
         info.error = err;
@@ -58,13 +61,11 @@ exports.submitHandler = async function(req, res, next) {
       }
 
       if (answer !== solution) {
-        isCorrect = false;
-
         info.failureData.code = code;
         info.failureData.answer = answer;
         info.failureData.solution = solution;
 
-        res.render('failure', { info });
+        res.status(200).render('failure', { info });
 
         return;
       }
@@ -77,15 +78,19 @@ exports.submitHandler = async function(req, res, next) {
       problemData.completed_users.push(req.user._id);
       problemData.completed_user_number++;
 
-      await Problem.findOneAndUpdate(
-        req.params,
-        problemData,
-        { new: true }
-      );
+      try {
+        await Problem.findOneAndUpdate(
+          req.params,
+          problemData,
+          { new: true }
+        );
+      } catch (err) {
+        next(err);
+      }
     }
 
-    res.render('success');
+    res.status(200).render('success');
   } catch (err) {
-    res.render('error', { err });
+    next(err);
   }
 };

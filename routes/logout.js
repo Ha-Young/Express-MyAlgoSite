@@ -3,8 +3,12 @@ const router = express.Router();
 const passport = require('../passport');
 
 router.get('/', (req, res, next) => {
-  req.logout();
-  res.redirect('/login');
+  try {
+    req.logout();
+    res.redirect('/login');
+  } catch (err) {
+    next(err);
+  }
 });
 
 module.exports = router;

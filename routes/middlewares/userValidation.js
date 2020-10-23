@@ -1,6 +1,6 @@
 function validateUser(req, res, next) {
   if (!req.user) {
-    res.redirect('/login');
+    res.status(302).redirect('/login');
 
     return;
   }
