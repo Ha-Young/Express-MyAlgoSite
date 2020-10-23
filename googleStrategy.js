@@ -16,6 +16,7 @@ passport.use(
     profile,
     done
   ) => {
+    console.log(1)
     const userId = profile.id;
     const email = profile.emails[0].value;
     const photo = profile.photos[0].value;
