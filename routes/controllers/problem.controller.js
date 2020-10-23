@@ -4,10 +4,13 @@ const Problem = require('../../models/Problem');
 exports.checkTestCases = async (req, res, next) => {
   try {
     const testResults = [];
-    const problemId = req.params.problem_id;
-    const username = req.user.username;
+    const { _id: userObjectId, username } = req.user;
+    const {
+      id: problemId,
+      _id: problemObjectId,
+      tests: testCases,
+    } = req.problem;
     const targetSolution = req.body.solution;
-    const testCases = req.problem.tests;
 
     try {
       testCases.forEach(test => {
@@ -24,7 +27,7 @@ exports.checkTestCases = async (req, res, next) => {
         }
       });
     } catch (error) {
-      return res.render('failure', {
+      return res.status(400).render('failure', {
         username,
         failureProblem: error.message,
         expectedAnswer: error.message,
@@ -34,17 +37,15 @@ exports.checkTestCases = async (req, res, next) => {
     }
 
     const isAllTestsPassed = testResults.every(result => result[0] === true);
-
     if (isAllTestsPassed) {
-      const problemObjectId = await Problem.findOne({ id: problemId });
       await Problem.findByIdAndUpdate(problemObjectId, {
-        $addToSet: { completed_users: req.user._id }
+        $addToSet: { completed_users: userObjectId }
       });
-      return res.render('success', { username });
+      return res.status(201).render('success', { username });
     }
 
     const failedTestIndex = testResults.findIndex(result => result[0] === false);
-    return res.render('failure', {
+    return res.status(201).render('failure', {
         username,
         failureProblem: testCases[failedTestIndex].code,
         expectedAnswer: testCases[failedTestIndex].solution,

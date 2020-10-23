@@ -1,8 +1,6 @@
-const ensureAuthenticated = (req, res, next) => {
+exports.ensureAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect('/login');
+  res.redirect(302, '/login');
 };
-
-module.exports = ensureAuthenticated;

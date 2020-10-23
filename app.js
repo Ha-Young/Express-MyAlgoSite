@@ -11,14 +11,6 @@ const login = require('./routes/login');
 const problems = require('./routes/problems');
 const passportConfig = require('./passport');
 
-// const Problem = require('./models/Problem');
-// const mockData = require('./models/sample_problems.json');
-
-// const createDB = async () => {
-//   await Problem.create(mockData);
-// }
-// createDB();
-
 const app = express();
 
 app.engine('ejs', require('express-ejs-extend'));
@@ -43,7 +35,7 @@ app.use('/', index);
 app.use('/login', login);
 app.get('/logout', (req, res, next) => {
   req.logout();
-  res.redirect('/login');
+  res.redirect(302, '/login');
 });
 app.use('/problems', problems);
 

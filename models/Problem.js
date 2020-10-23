@@ -24,7 +24,7 @@ const ProblemSchema = new mongoose.Schema({
   },
   tests: [{
     code: String,
-    solution: mongoose.Schema.Types.Mixed
+    solution: mongoose.Schema.Types.Mixed,
   }],
 });
 
