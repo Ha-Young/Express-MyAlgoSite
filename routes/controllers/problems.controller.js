@@ -19,7 +19,7 @@ exports.getProblem = async (
     res.render('problem', { problem: problem });
   } catch (err) {
     const isValidObjectId = mongoose.isValidObjectId(problem_id);
-    
+
     if (!isValidObjectId) {
       next(createError(500, constants.ERROR_MESSAGE_INVALID_ID));
     }
@@ -81,9 +81,9 @@ exports.submitAnswer = async (
     } else {
       res.render('failure', {
         error: null,
-        input: input,
-        output: output,
-        expect: expect,
+        input,
+        output,
+        expect,
       });
     }
   } catch (err) {

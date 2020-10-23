@@ -1,5 +1,6 @@
 require('./db');
 require('./googleStrategy');
+require('dotenv').config();
 const passport = require('passport');
 const express = require('express');
 const app = express();
@@ -7,7 +8,6 @@ const session = require('express-session')
 const createError = require('http-errors');
 const bodyParser = require('body-parser');
 const path = require('path');
-require('dotenv').config();
 const login = require('./routes/login');
 const index = require('./routes/index');
 const problems = require('./routes/problems');
@@ -17,13 +17,14 @@ passport.serializeUser((user, done) => {
   done(null, user);
 });
 
-passport.deserializeUser(async (user, done) => {
+passport.deserializeUser(async (id, done) => {
   try {
-    await User.findOne({ email: user.email }, (err, user) => {
-      done(null, user);
+    const user = await User.findOne({
+      email: id.email,
     });
+    return done(null, user);
   } catch (err) {
-    done(err)
+    return done(err);
   }
 });
 

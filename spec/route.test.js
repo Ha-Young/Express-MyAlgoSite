@@ -23,7 +23,7 @@ describe('GET static assets', () => {
       .expect(200)
       .end((err, res) => {
         if (err) return done(err);
-        expect(res.text).to.include('Lucida Grande');
+        expect(res.text).to.include('Open Sans');
         done();
       });
   });
@@ -36,6 +36,19 @@ describe('GET static assets', () => {
       .end((err, res) => {
         if (err) return done(err);
         expect(res.text).to.include('javascript');
+        done();
+      });
+  });
+});
+
+describe('GET /non-valid-url', () => {
+  it('should respond with error template', done => {
+    request(app)
+      .get('/non-valid-url')
+      .expect(404)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.text).to.include('ERROR');
         done();
       });
   });
