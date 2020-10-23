@@ -1,6 +1,10 @@
 const passport = require('passport');
 const { VIEWS, ROUTES } = require('../../constants');
 
+exports.redirectLogin = function redirectLogin(req, res, next) {
+  res.redirect(ROUTES.REDIRECT_LOGIN);
+};
+
 exports.getLogin = function getLogin(req, res, next) {
   try {
     res.status(200).render(VIEWS.LOGIN);
