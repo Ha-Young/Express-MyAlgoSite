@@ -1,0 +1,13 @@
+<a href='/problems/<%= problem._id %>'>
+  <div class='problem-item'>
+    <div class='problem-item-header'>
+      <div class='problem-number'>문제 <%= i + 1 %></div>
+    </div>
+    <div class='problem-preview'><%= problem.description %></div>
+    <div class='problem-info'>
+      <div class='problem-level'>레벨 <%= problem.difficulty_level %></div>
+      <div class='problem-completed'><%= problem.completed_users %>명 completed</div>
+    </div>
+    <div class='problem-title'><%= problem.title %></div>
+  </div>
+</a>

@@ -1,0 +1,112 @@
+@import url('./common.css');
+
+.problem-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  background: rgb(247, 247, 247);
+  flex-wrap: wrap;
+  flex: 1;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  overflow-y: scroll;
+  justify-content: center;
+}
+
+.problem-container::-webkit-scrollbar {
+  display: none;
+}
+
+.problem-item {
+  width: 300px;
+  height: 400px;
+  display: flex;
+  border-radius: 4px;
+  flex-direction: column;
+  margin:0;
+  background: white;
+  margin-bottom: 15px;
+  color: black;
+  font-weight: bold;
+  margin: 10px;
+}
+
+.problem-item:hover {
+  background: rgb(0, 0, 0, 0.4);
+  box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+  transform: translatey(-5px);
+  transition: .5s ease-in-out;
+}
+
+.problem-item:hover .problem-preview {
+  color: white;
+}
+
+.problem-item:hover .problem-title {
+  color: black;
+  background: white;
+}
+
+.problem-item:hover .problem-item-header {
+  color: white;
+}
+
+.problem-item:hover .problem-info {
+  color: white;
+}
+
+.problem-item-header {
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+}
+
+.problem-number {
+  height: 30px;
+}
+
+.problem-info {
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+}
+
+.problem-level {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.problem-completed {
+  margin-right: 10px;
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.problem-preview {
+  flex: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  padding: 10px;
+}
+
+.problem-title {
+  height: 50px;
+  background: rgb(243, 243, 243);
+  padding:10px;
+  margin-top:10px;
+}
+
+@keyframes float {
+	0% {
+		box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+		transform: translatey(0px);
+	}
+	100% {
+		box-shadow: 0 25px 15px 0px rgba(0,0,0,0.2);
+		transform: translatey(-10px);
+	}
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <title>CodeWar</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.css'/>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/theme/monokai.min.css'/>
+    <link rel='stylesheet' type='text/css' href='/stylesheets/problems.css'/>
+  </head>
+  <body>
+    <%- include('./header', { userInfo }) %>
+    <div class='problem-container'>
+      <div class='input-window'>
+        <div id='tried-value'><%= triedProblem.code %></div>
+        <div id='editor'></div>
+      </div>
+      <div class='problem-window'>
+        <div class='problem'>
+          <div class='problem-title'>
+            <%= problem.title %>
+          </div>
+          <div class='problem-description'>
+            <%= problem.description %>
+          </div>
+        </div>
+        <div class='test'>
+          <div class='test-title'>실행결과</div>
+          <div class='test-content'>
+            <% if (triedProblem.result) { %>
+              <% triedProblem.result.forEach(function(item){ %>
+                <%- include('./testResult',{ item }) %>
+              <% }) %>
+            <% } %>
+          </div>
+          <form id='test-submit' class='test-start-button' action='/problems/<%= problem._id %>' method='POST'>
+            <input id='string-code' name='code' type='hidden' value=''/>
+            <input type='submit' value='제출'/>
+          </form>
+        </div>
+      </div>
+    </div>
+    <%= problem.success %>
+    <%- include ./footer %>
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.js'></script>
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/mode/javascript/javascript.min.js'></script>
+    <script src='/javascripts/problems.js'></script>
+  </body>
+</html>

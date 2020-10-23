@@ -1,0 +1,138 @@
+@import url('./common.css');
+
+.problem-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  border-bottom: 2px solid white;
+}
+
+.input-window {
+  flex: 1;
+}
+
+.problem-window {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  border-bottom: 2px solid white;
+}
+
+#editor {
+  width: 100%;
+  height: 100%;
+}
+
+.CodeMirror {
+  flex: 1;
+  font-family: "Roboto Mono" !important;
+  font-size: 20px;
+  border-top: 2px solid white;
+  border-right: solid 2px white;
+  height: 100%;
+}
+
+.problem {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  color: white;
+  background:#272822
+}
+
+.problem-title {
+  border-top: solid 2px white;
+  border-bottom: solid 2px white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 2;
+  font-size: 25px;
+}
+
+.problem-description {
+  border-bottom: solid 2px white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 5;
+  padding: 50px;
+  font-size: 20px;
+}
+
+.test {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.test-title {
+  flex: 1;
+  display: flex;
+  padding-left: 10px;
+  align-items: center;
+}
+
+.test-content {
+  padding: 10px;
+  flex: 5;
+  background:#272822
+}
+
+.test-start-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  border: 2px solid white;
+  background: white;
+}
+
+.test-start-button input[type="submit"] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 100px;
+  height: 30px;
+  background: white;
+  cursor: pointer;
+  color: black;
+  font-weight: bold;
+}
+
+.test-start-button input[type="submit"]:hover {
+  background: rgb(202, 202, 202);
+}
+
+#tried-value {
+  display: none;
+}
+
+.result-item {
+  margin: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+.test-code {
+  flex: 1;
+  margin-right: 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.test-success {
+  flex: 1;
+  color: rgb(0, 207, 0);
+  font-weight: bold;
+}
+
+.test-fail {
+  flex: 1;
+  color: red;
+  font-weight: bold;
+}

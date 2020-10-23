@@ -1,0 +1,8 @@
+<div class='result-item'>
+  <div class='test-code'><%= item.test %></div>
+  <% if (item.result === 'TEST_SUCCESS') { %>
+    <div class='test-success'><%= item.message %></div>
+  <% } else { %>
+    <div class='test-fail'><%= item.message %></div>
+  <% } %>
+</div>
