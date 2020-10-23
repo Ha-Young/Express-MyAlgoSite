@@ -8,7 +8,7 @@ module.exports = () => {
       {
         clientID: process.env.GITHUB_CLIENT_ID,
         clientSecret: process.env.GITHUB_CLIENT_SECRET,
-        callbackURL: 'https://afternoon-sea-45834.herokuapp.com/auth/github/callback',
+        callbackURL: 'https://fathomless-ocean-47271.herokuapp.com/auth/github/callback',
       },
       async function (accessToken, refreshToken, profile, cb) {
         const { id, username, provider } = profile;
