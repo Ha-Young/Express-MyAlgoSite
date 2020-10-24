@@ -37,6 +37,9 @@ body {
     cursor: default;
 }
 
+section {
+  width: 100%;
+}
 a {
     text-decoration: none;
 }
@@ -74,7 +77,8 @@ h3 {
     margin: 8px 0;
 }
 
-p {font-size: var(--font-regular);
+p {
+    font-size: var(--weight-semi-bold);
     font-weight: var(--weight-regular);
     color: var(--color-black);
     margin: 4px 0;
@@ -100,14 +104,24 @@ p {font-size: var(--font-regular);
   margin: auto;
 }
 
-.logout-btn
-.user-email
+.user {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-photo img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
 .user-photo {
   position: absolute;
   top: 16px;
   right: 24px;
 }
-
 
 .problems-container {
   width: 100%;
@@ -142,28 +156,49 @@ a .problem:hover {
   transition: all 0.5s linear;
 }
 
+.problem-title {
+  width: 100%;
+  text-align: center;
+}
+
 .problem-details {
+  width: 50%;
+  margin: auto;
   display: flex;
   justify-content: space-around;
 }
 
 .problem-detail {
+  width: 100%;
   padding: 8px;
   padding-top: 16px;
   margin-bottom: 8px;
-  
 }
 
-.code-box-area {
-  width: 500px;
+.problem-description {
+  width: 70%;
+  height: 160px;
+  padding: 16px;
+  margin: auto;
+  margin-bottom: 16px;
+  border-radius: var(--size-border-radius);
+  background-color: var(--color-white);
+}
+
+.code-box {
+  position: relative;
+  width: 70%;
   height: 200px;
   margin: auto;
   text-align: left;
+  border-radius: var(--size-border-radius);
 }
 
 .code-box-btn {
+  position: absolute;
+  right: 8px;
   padding: 8px 16px;
   margin-top: 16px;
   border-radius: var(--size-border-radius);
-  background-color: var(--color-light-grey);
+  background-color: var(--color-blue);
 }
