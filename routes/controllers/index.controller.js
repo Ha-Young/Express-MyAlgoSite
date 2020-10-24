@@ -7,9 +7,10 @@ exports.getAllProblem = async (
 ) => {
   try {
     const problems = await Problem.find();
+    
     res.render('index', {
-      user: req.user,
-      problems: problems
+      user: req.user ,
+      problems: problems,
     });
   } catch (err) {
     next(err);

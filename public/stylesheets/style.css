@@ -63,14 +63,14 @@ h1 {
 h2 {
     font-size: var(--font-medium);
     font-weight: var(--weight-regular);
-    color: var(--color-black);
+    color: var(--color-);
     margin: 8px 0;
 }
 
 h3 {
     font-size: var(--font-regular);
-    font-weight: var(--weight-regular);
-    color: var(--color-black);
+    font-weight: var(--weight-bold);
+    color: var(--color-dark-grey);
     margin: 8px 0;
 }
 
@@ -80,11 +80,8 @@ p {font-size: var(--font-regular);
     margin: 4px 0;
 }
 
-button {
-  background: transparent;
-  cursor: pointer;
-  border: none;
-  outline: none;
+.title {
+  text-align: center;
 }
 
 .login-container {
@@ -103,24 +100,34 @@ button {
   margin: auto;
 }
 
-.logout-btn {
+.logout-btn
+.user-email
+.user-photo {
   position: absolute;
   top: 16px;
   right: 24px;
 }
 
+
 .problems-container {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
   text-align: center;
+}
+
+.title-description {
+  padding: 16px;
+  text-align: center;
+}
+
+.problems {
+  text-align: center;
+  align-items: center;
 }
 
 .problem {
   margin: auto;
-  width: 500px;
-  height: 300px;
+  width: 40rem;
+  height: 8rem;
   background-color: var(--color-white);
   color: var(--color-dark-grey);
   margin-bottom: 16px;
@@ -141,10 +148,10 @@ a .problem:hover {
 }
 
 .problem-detail {
-  padding: 16px;
-  padding-top: 100px;
+  padding: 8px;
+  padding-top: 16px;
   margin-bottom: 8px;
-
+  
 }
 
 .code-box-area {
