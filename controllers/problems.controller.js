@@ -1,3 +1,4 @@
+const vm = require('vm');
 const ObjectId = require('mongoose').Types.ObjectId;
 const Problem = require('../models/Problem');
 const { render } = require('node-sass');
@@ -27,7 +28,6 @@ const problemsController = {
     try {
       const id = req.params.problem_id;
       const problem = await Problem.findById(ObjectId(id));
-      const solution = new Function('x', `return (${req.body.codeMirror})(x)`);
 
       let allPass = true;
       let executionError = null;
@@ -39,8 +39,23 @@ const problemsController = {
         let actual;
         const expected = test.solution;
 
+        const context = {
+          result: null
+        };
+
+        vm.createContext(context);
+
         try {
-          const executionResult = new Function('solution', `return ${test.code}`)(solution);
+          const vmScript = new vm.Script(`
+            result = (function () {
+              const solution = ${req.body.codeMirror};
+              return ${test.code};
+            })();
+          `);
+
+          vmScript.runInContext(context);
+
+          const executionResult = context.result;
 
           actual = executionResult ? executionResult.toString() : undefined;
         } catch (error) {
