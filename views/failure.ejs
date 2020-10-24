@@ -8,19 +8,28 @@
   <a href='/problem/<%=problemId%>'>다시 풀기</a>
   <% } else { %>
   <div class='failure-container'>
-    <p>다시 도전하세요</p>
+    <p>다시 도전하세요 :(</p>
     <div class='failure-description'>
-      input <p><%= input %></p>
+      <div class='failure-reson'>
+        input
+      </div>
+      <h3><%= input %></h3>
     </div>
     <div class='failure-description'>
-      output <p><%= output %></p>
+      <div class='failure-reson'>
+        output
+      </div>
+      <h3><%= output %></h3>
     </div>
     <div class='failure-description'>
-      expect <p><%= expect %></p>
+      <div class='failure-reson'>
+        expect
+      </div>
+      <h3><%= expect %><h3>
     </div>
-  </div>
-  <div class='backTo-main-btn'>
-    <a href='/'>other test</a>
+    <div class='backTo-main-btn'>
+      <a href='/'>다른 문제 풀기</a>
+    </div>
   </div>
   <% } %>
 </section>

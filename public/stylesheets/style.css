@@ -39,7 +39,9 @@ body {
 
 section {
   width: 100%;
+  height: 100%;
 }
+
 a {
     text-decoration: none;
 }
@@ -117,15 +119,9 @@ p {
   border-radius: 50%;
 }
 
-.user-photo {
-  position: absolute;
-  top: 16px;
-  right: 24px;
-}
-
 .problems-container {
   width: 100%;
-  text-align: center;
+  margin: auto;
 }
 
 .title-description {
@@ -135,12 +131,12 @@ p {
 
 .problems {
   text-align: center;
-  align-items: center;
+  align-items: gitcenter;
 }
 
 .problem {
   margin: auto;
-  width: 40rem;
+  width: 100%;
   height: 8rem;
   background-color: var(--color-white);
   color: var(--color-dark-grey);
@@ -148,6 +144,7 @@ p {
   padding: 16px;
   border-radius: var(--size-border-radius);
   align-items: center;
+  text-align: center;
   font-size: large;
 }
 
@@ -182,7 +179,7 @@ a .problem:hover {
   margin: auto;
   margin-bottom: 16px;
   border-radius: var(--size-border-radius);
-  background-color: var(--color-white);
+  background-color: var(--color-blue);
 }
 
 .code-box {
@@ -201,4 +198,29 @@ a .problem:hover {
   margin-top: 16px;
   border-radius: var(--size-border-radius);
   background-color: var(--color-blue);
+}
+
+.failure-container {
+  width: 50%;
+  height: 540px;
+  padding: 16px;
+  margin: auto;
+  margin-top: 160px;
+  text-align: center;
+  align-items: center;
+  background-color: var(--color-blue); 
+  border-radius: var(--size-border-radius);
+}
+
+.failure-description {
+  width: 100%;
+  margin: auto;
+  padding: 8px;
+}
+
+.failure-reson {
+  background-color:  var(--color-light-white);
+  border-radius: var(--size-border-radius);
+  margin-bottom: 8px;
+  font-size: var(--font-regular);
 }

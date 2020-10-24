@@ -1,31 +1,31 @@
 <%# views/problem.ejs %>
 <% extend('layout') %>
 
-  <section class='problem-container'>
-    <div>
-      <h1 class='title'>leeCode</h1>
-    </div>
-    <% if(problem) { %>
-      <div class='problem-title'>
-        <h2><%= problem.title %></h2>
-      </div>
-      <div class='problem-details'>
-        <div class='problem-detail'>LEVEL <%= problem.difficulty_level %></div>
-        <div class='problem-detail'>solution <%= problem.solution_count %>개</div>
-        <div class='problem-detail'>정답자 <%= problem.completed_users %>명</div>
-      </div>
-      <div class='problem-description'>
-        <p><%= problem.description %></p>
-      </div>
-      <div class='code-box'>
-        <form action='/problem/<%=problem._id%>' method='POST'>
-          <textarea id='codemirror' name='code' class='code-box-area'>function solution () { return } </textarea>
-          <button class='code-box-btn' type='submit'>제출</button>
-        </form>
-      </div>
-    </div>
-    <% } %>
-  </section>
+<section class='problem-container'>
+  <div>
+    <h1 class='title'>leeCode</h1>
+  </div>
+  <% if(problem) { %>
+  <div class='problem-title'>
+    <h2><%= problem.title %></h2>
+  </div>
+  <div class='problem-details'>
+    <div class='problem-detail'>LEVEL <%= problem.difficulty_level %></div>
+    <div class='problem-detail'>solution <%= problem.solution_count %></div>
+    <div class='problem-detail'>정답자 <%= problem.completed_users %></div>
+  </div>
+  <div class='problem-description'>
+    <p><%= problem.description %></p>
+  </div>
+  <div class='code-box'>
+    <form action='/problem/<%=problem._id%>' method='POST'>
+      <textarea id='codemirror' name='code' class='code-box-area'>function solution () { return } </textarea>
+      <button class='code-box-btn' type='submit'>제출</button>
+    </form>
+  </div>
+  </div>
+  <% } %>
+</section>
 
 <script src="/lib/codemirror.js"></script>
 <script src="/mode/javascript/javascript.js"></script>
