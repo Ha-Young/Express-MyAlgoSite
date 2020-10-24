@@ -7,6 +7,8 @@ mongoose.connect(uri, {
   useFindAndModify: false,
   useNewUrlParser: true,
   useUnifiedTopology: true,
+}, (err) => {
+  if (err) throw Error(err);
 });
 
 const connection = mongoose.connection;

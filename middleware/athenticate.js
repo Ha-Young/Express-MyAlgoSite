@@ -8,6 +8,7 @@ function athenticate(req, res, next) {
   jwt.verify(token, SECRET_KEY, (err, decoded) => {
     if (err) return res.redirect("/login");
 
+    req.cookies.loginToken = decoded;
     next();
   });
 }
