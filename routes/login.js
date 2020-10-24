@@ -12,8 +12,8 @@ router.get('/', (req, res, next) => {
 router.get('/github', passport.authenticate('github'));
 
 router.get('/github/callback', passport.authenticate('github', {
-    failureRedirect: '/login',
-    successRedirect: '/',
+  failureRedirect: '/login',
+  successRedirect: '/',
 }));
 
 module.exports = router;

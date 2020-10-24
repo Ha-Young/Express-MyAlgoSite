@@ -4,7 +4,7 @@ const Problem = require('../../models/Problem');
 exports.checkTestCases = async (req, res, next) => {
   try {
     const testResults = [];
-    const { _id: userObjectId, username } = req.user;
+    const { _id: userId, username } = req.user;
     const { _id: problemId, tests: testCases } = req.problem;
     const targetSolution = req.body.solution;
 
@@ -16,11 +16,10 @@ exports.checkTestCases = async (req, res, next) => {
         const code = `${targetSolution} ${test.code}`;
         const executionResult = vm.runInContext(code, context, { timeout: 5000 });
 
-        if (executionResult === test.solution) {
-          testResults.push([true, executionResult]);
-        } else {
-          testResults.push([false, executionResult]);
-        }
+        testResults.push({
+          isPassed: (executionResult === test.solution),
+          answer: executionResult,
+        });
       });
     } catch (error) {
       return res.status(400).render('failure', {
@@ -32,22 +31,20 @@ exports.checkTestCases = async (req, res, next) => {
       });
     }
 
-    const isAllTestsPassed = testResults.every(result => result[0] === true);
-    if (isAllTestsPassed) {
+    const failedTestIndex = testResults.findIndex(result => result.isPassed === false);
+    if (failedTestIndex === -1) {
       await Problem.findByIdAndUpdate(problemId, {
-        $addToSet: { completed_users: userObjectId }
+        $addToSet: { completed_users: userId }
       });
       return res.status(201).render('success', { username });
     }
-
-    const failedTestIndex = testResults.findIndex(result => result[0] === false);
     return res.status(201).render('failure', {
-        username,
-        failureProblem: testCases[failedTestIndex].code,
-        expectedAnswer: testCases[failedTestIndex].solution,
-        wrongAnswer: testResults[failedTestIndex][1],
-        problemId,
-      });
+      username,
+      failureProblem: testCases[failedTestIndex].code,
+      expectedAnswer: testCases[failedTestIndex].solution,
+      wrongAnswer: testResults[failedTestIndex].answer,
+      problemId,
+    });
   } catch (error) {
     next(error);
   }

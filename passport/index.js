@@ -1,7 +1,7 @@
 const GitHubStrategy = require('passport-github').Strategy;
 const User = require('../models/User');
 
-module.exports = (passport) => {
+module.exports = passport => {
   passport.serializeUser((user, done) => {
     done(null, user.id);
   });
@@ -26,8 +26,8 @@ module.exports = (passport) => {
       }
 
       const newUser = await User.create({
-        id: id,
-        username: username,
+        id,
+        username,
       });
       done(null, newUser);
     } catch (error) {
