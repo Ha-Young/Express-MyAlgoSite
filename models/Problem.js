@@ -7,7 +7,7 @@ const ProblemSchema = new mongoose.Schema({
     required: true,
   },
   completed_users: {
-    type: [ mongoose.Schema.Types.ObjectId ],
+    type: [ mongoose.Schema.Types.objectId ],
     default: [],
     required: true,
   },
