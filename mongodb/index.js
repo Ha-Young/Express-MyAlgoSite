@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+const { MongoError } = require("../service/error");
+
 const uri = `mongodb+srv://${process.env.MONGODB_ID}:${process.env.MONGODB_PASSWORD}@cluster0.w0p1f.gcp.mongodb.net/vaco?retryWrites=true&w=majority`;
 
 mongoose.connect(uri, {
@@ -8,9 +10,17 @@ mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }, (err) => {
-  if (err) throw Error(err);
+  if (err) throw new MongoError(err);
 });
 
-const connection = mongoose.connection;
+mongoose.connection.on("error", (err) => {
+  if (err) throw new MongoError(err);
+});
 
-module.exports = connection;
+mongoose.connection.once("open", (err) => {
+  if (err) throw new MongoError(err);
+
+  console.log("mongodb is connected...");
+});
+
+module.exports = mongoose;

@@ -11,7 +11,6 @@ passport.serializeUser(function (user, done) {
 });
 
 passport.deserializeUser(function (user, done) {
-  console.log(1);
   done(null, user);
 });
 
@@ -41,5 +40,10 @@ const githubAuth = new GitHubStrategy({
 );
 
 passport.use("github", githubAuth);
+
+passport.set = (app) => {
+  app.use(passport.initialize());
+  app.use(passport.session());
+};
 
 module.exports = passport;
