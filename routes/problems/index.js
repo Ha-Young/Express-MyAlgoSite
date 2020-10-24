@@ -8,7 +8,6 @@ const asyncWrapper = require("../../middleware/asyncWrapper");
 
 const router = express.Router();
 
-
 router.get("/", asyncWrapper(async (req, res, next) => {
   const problems = await Problem.find({});
 
@@ -29,7 +28,6 @@ router.get("/:problem_id", asyncWrapper(async (req, res, next) => {
   const loginToken = req.cookies.loginToken;
 
   const userId = loginToken.user._id;
-  console.log(userId);
   const user = await User.findOne(userId);
   const problem = user.solved.find(problem => (
     problem.problemId.toString() === problemId
