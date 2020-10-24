@@ -21,7 +21,7 @@ afterEach(() => {
 });
 
 describe("/logout", () => {
-  it("should redirect to login page if there is token", (done) => {
+  it("should redirect to login page if there is not token", (done) => {
     requested
       .expect(302)
       .expect("location", "/login")
@@ -32,7 +32,7 @@ describe("/logout", () => {
       });
   });
 
-  it("should redirect to login page if there is not token", (done) => {
+  it("should redirect to login page if there is token", (done) => {
     requested
       .set("Cookie", [`loginToken=${token}`])
       .expect(302)

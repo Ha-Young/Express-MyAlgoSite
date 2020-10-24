@@ -86,7 +86,7 @@ describe("problem test", function() {
     it("should render problem page by id", (done) => {
       const problemId = storedProblems[0]._id;
       const problemTitle = storedProblems[0].title;
-      const monkFindOne = sinon.stub(User, "findOne").returns({ solved: [] });
+      sinon.stub(User, "findOne").returns({ solved: [] });
 
       request(app)
         .get(`/problems/${problemId}`)
