@@ -31,8 +31,8 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser(async (id, done) => {
-  const a = await Users.find({ id }).exec();
-  return done(null, a[0]);
+  const targetUser = await Users.find({ id }).exec();
+  return done(null, targetUser[0]);
 });
 
 /* GET home page. */
