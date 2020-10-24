@@ -13,7 +13,7 @@ describe("GET /auth", () => {
     requested = null;
   });
 
-  it("redirect to github auth page", done => {
+  it("redirect to github auth page", (done) => {
     requested
       .expect("location", /https:\/\/github.com\/login\/oauth\/authorize/)
       .end((err, res) => {

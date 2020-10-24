@@ -6,7 +6,7 @@ const app = require("../app");
 const SECRET_KEY = process.env.JWT_KEY;
 
 describe("GET /", () => {
-  it("if there is no token should redirect to login page", done => {
+  it("if there is no token should redirect to login page", (done) => {
     request(app)
       .get("/")
       .expect(302)
@@ -19,7 +19,7 @@ describe("GET /", () => {
       });
   });
 
-  it("if there is token should render home page", done => {
+  it("if there is token should render home page", (done) => {
     const token = jwt.sign({ user: "test" }, SECRET_KEY);
 
     request(app)

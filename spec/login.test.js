@@ -2,7 +2,7 @@ const request = require("supertest");
 const app = require("../app");
 
 describe("GET /login", () => {
-  it("should render login page", done => {
+  it("should render login page", (done) => {
     request(app)
       .get("/login")
       .expect(200)

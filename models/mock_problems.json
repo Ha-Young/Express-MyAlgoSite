@@ -1,0 +1,137 @@
+[
+  {
+    "title": "sample title 1",
+    "completed_users": 15,
+    "difficulty_level": 1,
+    "description": "sample description 1",
+    "examples": [
+      {
+        "code": "solution(3)",
+        "answer": 2,
+        "answer_type": "number"
+      },
+      {
+        "code": "solution(10)",
+        "answer": 55,
+        "answer_type": "number"
+      }
+    ],
+    "tests": [
+      {
+        "code": "solution(3)",
+        "answer": 2,
+        "answer_type": "number"
+      },
+      {
+        "code": "solution(10)",
+        "answer": 55,
+        "answer_type": "number"
+      },
+      {
+        "code": "solution(4)",
+        "answer": 3,
+        "answer_type": "number"
+      },
+      {
+        "code": "solution(5)",
+        "answer": 5,
+        "answer_type": "number"
+      }
+    ]
+  },
+  {
+    "title": "sample title 2",
+    "completed_users": 11,
+    "difficulty_level": 2,
+    "description": "sample description 2",
+    "examples": [
+      {
+        "code": "solution(['Jane', 'Kim'])",
+        "answer": "김서방은 1에 있다",
+        "answer_type": "string"
+      },
+      {
+        "code": "solution(['Jane', 'Huh', 'Kim'])",
+        "answer": "김서방은 2에 있다",
+        "answer_type": "string"
+      }
+    ],
+    "tests": [
+      {
+        "code": "solution(['Jane', 'Kim'])",
+        "answer": "김서방은 1에 있다",
+        "answer_type": "string"
+      },
+      {
+        "code": "solution(['Kim', 'Huh', 'sad'])",
+        "answer": "김서방은 0에 있다",
+        "answer_type": "string"
+      },
+      {
+        "code": "solution(['Jane', 'Huh', 'Kim'])",
+        "answer": "김서방은 2에 있다",
+        "answer_type": "string"
+      }
+    ]
+  },
+  {
+    "title": "sample title 3",
+    "completed_users": 12,
+    "difficulty_level": 2,
+    "description": "sample description 3",
+    "examples": [
+      {
+        "code": "solution(3)",
+        "answer": "수박수",
+        "answer_type": "string"
+      },
+      {
+        "code": "solution(4)",
+        "answer": "수박수박",
+        "answer_type": "string"
+      }
+    ],
+    "tests": [
+      {
+        "code": "solution(3)",
+        "answer": "수박수",
+        "answer_type": "string"
+      },
+      {
+        "code": "solution(4)",
+        "answer": "수박수박",
+        "answer_type": "string"
+      }
+    ]
+  },
+  {
+    "title": "sample title 4",
+    "solution_count": 5,
+    "difficulty_level": 3,
+    "description": "sample description 4",
+    "examples": [
+      {
+        "code": "solution(10)",
+        "answer": true,
+        "answer_type": "boolean"
+      },
+      {
+        "code": "solution(1)",
+        "answer": false,
+        "answer_type": "boolean"
+      }
+    ],
+    "tests": [
+      {
+        "code": "solution(10)",
+        "answer": true,
+        "answer_type": "boolean"
+      },
+      {
+        "code": "solution(1)",
+        "answer": false,
+        "answer_type": "boolean"
+      }
+    ]
+  }
+]

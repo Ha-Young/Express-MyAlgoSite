@@ -25,11 +25,12 @@ router.post("/", asyncWrapper(async (req, res, next) => {
 
 router.get("/:problem_id", asyncWrapper(async (req, res, next) => {
   const problemId = req.params.problem_id;
-  const currentProblem = await Problem.findById({ _id: problemId });
+  const currentProblem = await Problem.findById(problemId);
   const loginToken = req.cookies.loginToken;
 
   const userId = loginToken.user._id;
-  const user = await User.findOne({ _id: userId });
+  console.log(userId);
+  const user = await User.findOne(userId);
   const problem = user.solved.find(problem => (
     problem.problemId.toString() === problemId
   ));
