@@ -1,7 +1,7 @@
 const db = require('mongoose');
 
 db.set('useFindAndModify', false);
-db.connect('mongodb://localhost/codewars', {
+db.connect(process.env.DB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

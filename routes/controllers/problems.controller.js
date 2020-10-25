@@ -1,6 +1,9 @@
 const Problem = require('../../models/Problem');
 const vm = require('vm');
+const dbError = require('../../errors/dbError');
 const { PROBLEM, SUCCESS, FAILURE } = require('../../constants/index');
+
+const dbErr = new dbError('error occured while getting problem data', 500);
 
 exports.getAll = async function(req, res, next) {
   try {
@@ -15,6 +18,12 @@ exports.getAll = async function(req, res, next) {
 exports.getOne = async function(req, res, next) {
   try {
     const result = await Problem.findOne(req.params);
+
+    if (!result) {
+      next(dbErr);
+
+      return;
+    }
 
     res.status(200).render(
       PROBLEM,
@@ -35,6 +44,13 @@ exports.submitHandler = async function(req, res, next) {
 
   try {
     problemData = await Problem.findOne(req.params);
+
+    if (!problemData) {
+      next(dbErr);
+
+      return;
+    }
+
     const { tests } = problemData;
 
     for (let i = 0; i < tests.length; i++) {
