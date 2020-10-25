@@ -1,17 +1,18 @@
 const Problem = require('../../models/Problem');
 const vm = require('vm');
 const dbError = require('../../errors/dbError');
+const tryCatchWrapper = require('../../utils/tryCatchWrapper');
 const { PROBLEM, FAILURE } = require('../../constants/index');
 
 const dbErr = new dbError('error occured while getting problem data', 500);
 
-exports.getAll = asyncWrapper(async function(req, res, next) {
+exports.getAll = tryCatchWrapper(async function(req, res, next) {
   const problems = await Problem.find().lean();
 
   return problems.sort((a, b) => Number(a.number) - Number(b.number));
 });
 
-exports.getOne = asyncWrapper(async function(req, res, next) {
+exports.getOne = tryCatchWrapper(async function(req, res, next) {
   const result = await Problem.findOne(req.params);
 
   if (!result) {
@@ -31,7 +32,7 @@ exports.getOne = asyncWrapper(async function(req, res, next) {
   );
 });
 
-exports.submitHandler = asyncWrapper(async function(req, res, next) {
+exports.submitHandler = tryCatchWrapper(async function(req, res, next) {
   const problemData = await Problem.findOne(req.params);
 
   if (!problemData) {
@@ -82,13 +83,3 @@ exports.submitHandler = asyncWrapper(async function(req, res, next) {
 
   next();
 });
-
-function asyncWrapper(fn) {
-  return async function(req, res, next) {
-    try {
-      return await fn(req, res, next);
-    } catch {
-      next;
-    }
-  };
-}

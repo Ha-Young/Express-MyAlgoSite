@@ -2,7 +2,6 @@ const Problem = require('../../models/Problem');
 const { SUCCESS } = require('../../constants/index');
 
 async function updateDb(req, res, next) {
-  console.log(req.params);
   const problemData = await Problem.findOne(req.params);
 
   if (
