@@ -14,19 +14,22 @@ passport.use(new GitHubStrategy({
 },
   async function (accessToken, refreshToken, profile, cb) {
     const findOrCreateUserInfo = async (profile) => {
-      const isExist = await Users.exists({ githubId: profile.id });
+      try {
+        const isExist = await User.exists({ githubId: profile.id });
 
-      if (!isExist) {
-        const newUser = new User({ githubId: profile.id, userName: profile.username });
-
-        await newUser.save((err, doc) => {
-          if (err) return;
-        });
+        if (!isExist) {
+          const newUser = new User({ githubId: profile.id, userName: profile.username });
+          await newUser.save((err, doc) => {
+            if (err) return;
+          });
+        }
+      } catch (err) {
+        if (err) return;
       }
     };
 
     await findOrCreateUserInfo(profile);
-    return cb(null,);
+    return cb(null, profile);
   }));
 
 passport.serializeUser(function (user, done) {
