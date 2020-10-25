@@ -1,4 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
+@font-face {
+  font-family: 'HeirofLightBold';
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/HeirofLightBold.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 html, body {
   margin: 0;
   padding: 0;
@@ -10,11 +17,14 @@ h1 {
   font-family: 'Russo One', sans-serif;
   font-size: 3em;
   margin-left: 13px;
+  margin-right: 13px;
   margin-bottom: 0;
 }
 
 h2 {
+  font-family: 'HeirofLightBold';
   margin-left: 20px;
+  line-height: 40px;
 }
 
 ul {

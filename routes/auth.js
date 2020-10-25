@@ -1,6 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const authController = require('../controllers/auth.controller');
+const setLocals = require('../middlewares/setLocals');
 const router = express.Router();
 
 router.get('/login', authController.renderLogin);
