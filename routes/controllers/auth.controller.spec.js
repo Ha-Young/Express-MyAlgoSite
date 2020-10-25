@@ -37,13 +37,17 @@ describe('auth controller', () => {
 
   describe('Execute logout', () => {
     beforeEach(() => {
-      req = { logout: sinon.spy() };
+      req = {
+        logout: sinon.spy(),
+        session: { destroy: sinon.spy() }
+      };
       res = { redirect: sinon.spy() };
     });
 
     it('should logout and redirect', () => {
       Controller.getLogout(req, res, next);
       sinon.assert.calledOnce(req.logout);
+      sinon.assert.calledOnce(req.session.destroy);
       sinon.assert.calledOnce(res.redirect);
     });
   });
