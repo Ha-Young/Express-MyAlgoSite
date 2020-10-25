@@ -1,116 +1,94 @@
 const Problem = require('../../models/Problem');
 const vm = require('vm');
 const dbError = require('../../errors/dbError');
-const { PROBLEM, SUCCESS, FAILURE } = require('../../constants/index');
+const { PROBLEM, FAILURE } = require('../../constants/index');
 
 const dbErr = new dbError('error occured while getting problem data', 500);
 
-exports.getAll = async function(req, res, next) {
-  try {
-    const problems = await Problem.find().lean();
+exports.getAll = asyncWrapper(async function(req, res, next) {
+  const problems = await Problem.find().lean();
 
-    return problems.sort((a, b) => Number(a.number) - Number(b.number));
-  } catch (err) {
-    next(err);
+  return problems.sort((a, b) => Number(a.number) - Number(b.number));
+});
+
+exports.getOne = asyncWrapper(async function(req, res, next) {
+  const result = await Problem.findOne(req.params);
+
+  if (!result) {
+    next(dbErr);
+
+    return;
   }
-};
 
-exports.getOne = async function(req, res, next) {
-  try {
-    const result = await Problem.findOne(req.params);
+  res.status(200).render(
+    PROBLEM,
+    {
+      number: result.number,
+      title: result.title,
+      description: result.description,
+      tests: result.tests,
+    }
+  );
+});
 
-    if (!result) {
-      next(dbErr);
+exports.submitHandler = asyncWrapper(async function(req, res, next) {
+  const problemData = await Problem.findOne(req.params);
+
+  if (!problemData) {
+    next(dbErr);
+
+    return;
+  }
+
+  const { tests } = problemData;
+
+  for (let i = 0; i < tests.length; i++) {
+    const { code, solution } = tests[i];
+
+    let answer;
+
+    const info = {
+      error: null,
+      failureData: {
+        code: '',
+        answer: '',
+        solution: '',
+      },
+      number: req.params.number,
+    };
+
+    try {
+      const script = new vm.Script(req.body.code + code);
+
+      answer = script.runInContext(vm.createContext(), { timeout: 2000 });
+    } catch (err) {
+      info.error = err;
+
+      res.status(200).render(FAILURE, { info });
 
       return;
     }
 
-    res.status(200).render(
-      PROBLEM,
-      {
-        number: result.number,
-        title: result.title,
-        description: result.description,
-        tests: result.tests,
-      }
-    );
-  } catch (err) {
-    next(err);
-  }
-};
+    if (answer !== solution) {
+      info.failureData.code = code;
+      info.failureData.answer = answer;
+      info.failureData.solution = solution;
 
-exports.submitHandler = async function(req, res, next) {
-  let problemData;
-
-  try {
-    problemData = await Problem.findOne(req.params);
-
-    if (!problemData) {
-      next(dbErr);
+      res.status(200).render(FAILURE, { info });
 
       return;
     }
-
-    const { tests } = problemData;
-
-    for (let i = 0; i < tests.length; i++) {
-      const { code, solution } = tests[i];
-
-      let answer;
-
-      const info = {
-        error: null,
-        failureData: {
-          code: '',
-          answer: '',
-          solution: '',
-        },
-        number: req.params.number,
-      };
-
-      try {
-        const script = new vm.Script(req.body.code + code);
-
-        answer = script.runInContext(vm.createContext(), { timeout: 2000 });
-      } catch (err) {
-        info.error = err;
-
-        res.status(200).render(FAILURE, { info });
-
-        return;
-      }
-
-      if (answer !== solution) {
-        info.failureData.code = code;
-        info.failureData.answer = answer;
-        info.failureData.solution = solution;
-
-        res.status(200).render(FAILURE, { info });
-
-        return;
-      }
-    }
-
-    if (
-      !problemData.completed_users
-        .includes(req.user._id)
-    ) {
-      problemData.completed_users.push(req.user._id);
-      problemData.completed_user_number++;
-
-      try {
-        await Problem.findOneAndUpdate(
-          req.params,
-          problemData,
-          { new: true }
-        );
-      } catch (err) {
-        next(err);
-      }
-    }
-
-    res.status(200).render(SUCCESS);
-  } catch (err) {
-    next(err);
   }
-};
+
+  next();
+});
+
+function asyncWrapper(fn) {
+  return async function(req, res, next) {
+    try {
+      return await fn(req, res, next);
+    } catch {
+      next;
+    }
+  };
+}
