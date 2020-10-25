@@ -2,7 +2,9 @@
   <div class="message-container failure">
     <h1>Failed...Try again!</h1>
     <% if (failedCase.message) { %>
-      <p class="failed-message"><%= failedCase.message %></p>
+      <p class="failed-message">
+        <%= failedCase.message %>
+      </p>
     <% } else { %>
       <p>
         Failed passing
