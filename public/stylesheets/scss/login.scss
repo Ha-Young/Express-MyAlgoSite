@@ -1,12 +1,12 @@
 @import 'base';
 
 body {
-  background-image: url('/images/code_background.jpg');
+  background-image: url('/images/code_falling.gif');
 }
 
 .login-container {
   width: 50%;
-  height: 50vh;
+  min-height: 40vh;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -19,10 +19,13 @@ body {
   align-items: center;
 
   border-radius: 15px;
+  padding: 0 3em;
 
   h1 {
     margin-top: 0;
-    margin-left: 20px;
+    width: 100%;
+    text-align: center;
+    overflow-wrap: break-word;
   }
 
   a {
