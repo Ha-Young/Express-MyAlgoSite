@@ -2,10 +2,8 @@ const mongoose = require('mongoose');
 const passportLocalMongoose = require("passport-local-mongoose");
 
 const userSchema = new mongoose.Schema({
-  githubId: String,
+  githubId: { type: String, require: true },
   userName: String
 });
-
-userSchema.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model('User', userSchema);
