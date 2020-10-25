@@ -1,13 +1,15 @@
 const passport = require('passport');
 const GitHubStrategy = require('passport-github').Strategy;
+
 const User = require('./models/User');
+const { ROUTERS, ROUTES } = require('./constants');
 
 passport.use(
   new GitHubStrategy(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: `${process.env.URL}/auth/github/callback`
+      callbackURL: `${process.env.URL}${ROUTERS.AUTH}${ROUTES.GITHUB_CALLBACK}`
     },
     gitHubCallback
   )

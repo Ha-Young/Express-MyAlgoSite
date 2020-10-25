@@ -2,7 +2,7 @@ const sinon = require('sinon');
 const Controller = require('./problems.controller');
 const Problem = require('../../models/Problem');
 const User = require('../../models/User');
-const { VIEWS } = require('../../constants');
+const VIEWS = require('../../constants').VIEWS;
 
 describe('problems controller', () => {
   const USER = {
