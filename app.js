@@ -8,7 +8,6 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const compression = require('compression');
-const helmet = require('helmet');
 const passport = require('passport');
 const session = require('express-session');
 
@@ -20,8 +19,6 @@ const globalRouter = require('./routes/global');
 const problemsRouter = require('./routes/problems');
 
 const app = express();
-
-app.use(helmet());
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

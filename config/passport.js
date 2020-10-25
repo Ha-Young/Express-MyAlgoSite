@@ -14,9 +14,9 @@ passport.use(
     },
     async function (accessToken, refreshToken, profile, cb) {
       const {
-        id: githubId,
+        id: github_id,
         username,
-        photos: [{ value: photoUrl }],
+        photos: [{ value: photo_url }],
         emails: [{ value: email }],
       } = profile;
 
@@ -27,16 +27,16 @@ passport.use(
           const newUser = await User.create({
             username,
             email,
-            githubId,
-            photoUrl,
+            github_id,
+            photo_url,
           });
 
           return cb(null, newUser);
         }
 
         user.username = username;
-        user.githubId = githubId;
-        user.photoUrl = photoUrl;
+        user.github_id = github_id;
+        user.photo_url = photo_url;
         await user.save();
 
         return cb(null, user);

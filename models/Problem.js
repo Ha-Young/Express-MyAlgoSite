@@ -21,10 +21,12 @@ const ProblemSchema = new mongoose.Schema({
   },
   completed_users: {
     type: [mongoose.Schema.Types.ObjectId],
+    ref: 'User',
     default: [],
   },
   difficulty_level: {
     type: Number,
+    enum: [1, 2, 3],
     default: 1,
   },
   description: {

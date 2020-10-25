@@ -12,11 +12,11 @@ const UserSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  githubId: {
+  github_id: {
     type: Number,
     default: null,
   },
-  photoUrl: {
+  photo_url: {
     type: String,
     default: null,
   },
