@@ -1,9 +1,7 @@
 module.exports = {
   renderLogin: (req, res, next) => {
-    const isAuthenticated = req.isAuthenticated();
-
     res.render('login', {
-      isAuthenticated,
+      isAuthenticated: req.isAuthenticated(),
     });
   },
 
