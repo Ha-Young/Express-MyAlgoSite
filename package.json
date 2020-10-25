@@ -7,14 +7,12 @@
     "dev": "cross-env NODE_ENV=development nodemon ./bin/www"
   },
   "dependencies": {
-    "app-root-path": "^3.0.0",
     "body-parser": "^1.18.3",
     "codemirror": "^5.58.1",
     "compression": "^1.7.4",
     "connect-mongo": "^3.2.0",
     "cookie-parser": "~1.4.3",
     "cross-env": "^7.0.2",
-    "debug": "^2.6.9",
     "ejs": "~2.5.7",
     "express": "^4.17.1",
     "express-session": "^1.17.1",

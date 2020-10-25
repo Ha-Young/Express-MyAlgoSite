@@ -13,7 +13,6 @@ module.exports = () => {
       callbackURL: 'https://codewars-justin.herokuapp.com/auth/login/github/callback',
     }, async function (accessToken, refreshToken, profile, cb) {
       try {
-        // find or create user
         const user = await User.find({ id: profile.id });
 
         if (user.length === 0) {
