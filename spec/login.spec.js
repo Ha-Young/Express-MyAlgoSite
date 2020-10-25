@@ -26,15 +26,9 @@ it('should redirect login page if user has no session', (done) => {
 });
 
 it('should redirect problems page if user has session', (done) => {
-  beforeEach(() => {
-    app.request.session = {
-      passport: true
-    };
-  });
-
-  afterEach(() => {
-    app.request.session = undefined;
-  });
+  app.request.session = {
+    passport: true
+  };
 
   request(app)
     .get('/')
@@ -43,6 +37,7 @@ it('should redirect problems page if user has session', (done) => {
     .end((err, res) => {
       if (err) return done(err);
 
+      app.request.session = undefined;
       done();
     });
 });

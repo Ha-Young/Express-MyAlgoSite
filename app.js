@@ -12,6 +12,7 @@ const app = express();
 const passport = require('passport');
 const GitHubStrategy = require('passport-github').Strategy;
 const User = require('./models/User');
+const cookieparser = require('cookie-parser');
 
 passport.use(new GitHubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
@@ -47,6 +48,7 @@ app.set('views', __dirname + '/views');
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(cookieparser());
 
 app.use(passport.initialize());
 app.use(session({
@@ -68,6 +70,17 @@ mongoose.connect(
   },
   () => console.log('connected')
 );
+
+app.use('/test', (req, res, next) => {
+  console.log(req.cookies)
+  const userCookie = req.cookies.user;
+  console.log('done');
+  if (userCookie === 'testuser') {
+    res.json({ result: 'ok' });
+  } else {
+    res.json({ result: 'fail' });
+  }
+});
 
 app.use('/', index);
 app.use('/login', login);

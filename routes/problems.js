@@ -16,6 +16,7 @@ router.get('/', async function (req, res, next) {
 })
 
 router.get('/:problem_id', async function (req, res, next) {
+  console.log('req', req);
   try {
     const problemId = req.params.problem_id;
     const problem = await Problem.findOne({ id: problemId });
