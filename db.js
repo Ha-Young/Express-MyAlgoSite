@@ -7,7 +7,7 @@ db.connect('mongodb://localhost/codewars', {
 });
 
 db.connection
-  .on('error', () => console.error('connection error:'))
+  .on('error', err => console.error(`connection error: ${err}`))
   .once('open', () => console.log('database connected'));
 
 module.exports = db;

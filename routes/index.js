@@ -1,19 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const problemsController = require('./controllers/problems.controller');
-const { LOGIN_PAGE_URL, INDEX } = require('../constants/index');
+const { INDEX } = require('../constants/index');
+const { checkIsLoggedIn } = require('./middlewares/checkIsLoggedIn');
 
-router.get('/', async (req, res, next) => {
-  if (!req.user) {
-    try {
-      res.status(302).redirect(LOGIN_PAGE_URL);
-
-      return;
-    } catch (err) {
-      next(err);
-    }
-  }
-
+router.get('/', checkIsLoggedIn, async (req, res, next) => {
   try {
     const problems = await problemsController.getAll();
 

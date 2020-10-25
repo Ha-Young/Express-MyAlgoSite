@@ -7,10 +7,10 @@
   <title>Problem</title>
 </head>
 <body>
-  <h1>문제<%= problem_number %></h1>
+  <h1>문제<%= number %></h1>
   <h3><%= title %></h3>
   <p><%= description %></p>
-  <form method='POST' action=<%= `/problems/${problem_number}` %>>
+  <form method='POST' action=<%= `/problems/${number}` %>>
     <textarea id='editor' name='code'></textarea>
     <input type='submit' value='제출'/>
   </form>

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const findOrCreate = require('mongoose-findorcreate');
 
 const userSchema = new mongoose.Schema({
-  githubId: {
+  github_id: {
     type: String,
     unique: true,
     required: true,

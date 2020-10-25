@@ -6,7 +6,7 @@ exports.getAll = async function(req, res, next) {
   try {
     const problems = await Problem.find().lean();
 
-    return problems.sort((a, b) => Number(a.problem_number) - Number(b.problem_number));
+    return problems.sort((a, b) => Number(a.number) - Number(b.number));
   } catch (err) {
     next(err);
   }
@@ -19,7 +19,7 @@ exports.getOne = async function(req, res, next) {
     res.status(200).render(
       PROBLEM,
       {
-        problem_number: result.problem_number,
+        number: result.number,
         title: result.title,
         description: result.description,
         tests: result.tests,
@@ -35,18 +35,21 @@ exports.submitHandler = async function(req, res, next) {
 
   try {
     problemData = await Problem.findOne(req.params);
-    const tests = problemData.tests;
+    const { tests } = problemData;
 
     for (let i = 0; i < tests.length; i++) {
-      const code = tests[i].code;
-      const solution = tests[i].solution;
+      const { code, solution } = tests[i];
 
       let answer;
 
       const info = {
         error: null,
-        failureData: {},
-        problem_number: req.params.problem_number,
+        failureData: {
+          code: '',
+          answer: '',
+          solution: '',
+        },
+        number: req.params.number,
       };
 
       try {

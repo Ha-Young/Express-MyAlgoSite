@@ -110,4 +110,15 @@ describe('mongoDB database managing', function() {
       setTimeout(checkDatabaseConnection, 1000);
     })();
   });
+
+  it('should display problems', done => {
+    request(app)
+      .get('/')
+      .expect(200)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.text).to.include('Codewars');
+        done();
+      });
+  });
 });

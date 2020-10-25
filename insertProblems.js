@@ -1,4 +1,4 @@
-[
+const problems = [
   {
     "number": 1,
     "title": "피보나치 수열",
@@ -71,4 +71,14 @@
     ],
     "completed_users": []
   }
-]
+];
+
+const Problem = require('./models/Problem');
+
+async function insertProblems() {
+  for (let i = 0; i < problems.length; i++) {
+    await new Problem(problems[i]).save();
+  }
+}
+
+insertProblems();

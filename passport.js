@@ -5,11 +5,11 @@ const User = require('./models/User');
 passport.use(new GitHubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  callbackURL: process.env.CALLBACK_URL,
+  callbackURL: process.env.GITHUB_CALLBACK_URL,
 },
   function(accessToken, refreshToken, profile, done) {
     User.findOrCreate(
-      { githubId: profile.id },
+      { github_id: profile.id },
       (err, user) => done(err, user)
     );
   }

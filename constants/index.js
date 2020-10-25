@@ -6,5 +6,5 @@ module.exports = {
   INDEX: 'index',
   LOGIN: 'login',
   GITHUB: 'github',
-  PROBLEM_NUM_URL: '/:problem_number',
+  PROBLEM_NUM_URL: '/:number',
 };

@@ -1,5 +1,5 @@
-const githubLoginButton = document.querySelector('#logout');
+const githubLogoutButton = document.querySelector('#logout');
 
-githubLoginButton.addEventListener('click', () => {
+githubLogoutButton.addEventListener('click', () => {
   location.assign('/logout');
 });
