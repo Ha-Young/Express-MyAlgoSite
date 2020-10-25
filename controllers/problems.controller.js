@@ -1,15 +1,11 @@
 const vm = require('vm');
 const ObjectId = require('mongoose').Types.ObjectId;
 const Problem = require('../models/Problem');
-const { render } = require('node-sass');
 
 const problemsController = {
   getfilteredProblems: async (req, res) => {
     const level = req.query.level;
     const problems = await Problem.find({ difficulty_level: level });
-
-    res.locals.isAuthenticated = true;
-    res.locals.username = req.user.username;
 
     res.render('index', { problems });
   },
@@ -17,9 +13,6 @@ const problemsController = {
   getProblem: async (req, res) => {
     const id = req.params.problem_id;
     const problem = await Problem.findById(ObjectId(id));
-
-    res.locals.isAuthenticated = true,
-    res.locals.username = req.user[0].username;
 
     res.render('problem', { problem });
   },
