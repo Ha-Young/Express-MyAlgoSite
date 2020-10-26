@@ -1,5 +1,3 @@
-const express = require('express');
-const router = express.Router();
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('./routes/models/User');
 const passport  = require('passport');
@@ -38,5 +36,3 @@ passport.use(
       return done(err);
     }
   }));
-
-module.exports = router;

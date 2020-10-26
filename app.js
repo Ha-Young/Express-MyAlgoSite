@@ -1,5 +1,5 @@
 require('dotenv').config();
-require('./db'); 
+require('./db');
 require('./googleStrategy');
 const passport = require('passport');
 const express = require('express');
@@ -46,7 +46,7 @@ app.use(passport.session());
 
 app.use('/', index);
 app.use('/login', login);
-app.use('/problem', problems);
+app.use('/problems', problems);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

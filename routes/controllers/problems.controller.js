@@ -7,11 +7,7 @@ const vm = new VM({
   timeout: 2000,
 });
 
-exports.getProblem = async (
-  req,
-  res,
-  next,
-) => {
+exports.getProblem = async (req, res, next) => {
   try {
     const { params: { problem_id } } = req;
     const problem = await Problem.findOne({ _id: problem_id });
@@ -21,20 +17,15 @@ exports.getProblem = async (
     const isValidObjectId = mongoose.isValidObjectId(problem_id);
 
     if (!isValidObjectId) {
-      next(createError(500, constants.ERROR_MESSAGE_INVALID_ID));
+      next(createError(400, constants.ERROR_MESSAGE_INVALID_ID));
     }
     next(err);
   }
 };
 
-exports.submitAnswer = async (
-  req,
-  res,
-  next,
-) => {
+exports.submitAnswer = async (req, res, next) => {
   try {
-    const { params: { problem_id } } = req;
-    const code = req.body.code;
+    const { params: { problem_id }, body: { code } } = req;
     const { tests } = await Problem.findOne({ _id: problem_id });
     let result;
     let input;
@@ -90,7 +81,7 @@ exports.submitAnswer = async (
     const isValidObjectId = mongoose.isValidObjectId(problem_id);
 
     if (!isValidObjectId) {
-      next(createError(500, constants.ERROR_MESSAGE_INVALID_ID));
+      next(createError(400, constants.ERROR_MESSAGE_INVALID_ID));
     }
     next(err);
   }
