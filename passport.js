@@ -16,7 +16,7 @@ passport.use(new GitHubStrategy({
 ));
 
 passport.serializeUser((user, done) => {
-  done(null, user);
+  done(null, user.id);
 });
 
 passport.deserializeUser((id, done) => {
@@ -24,6 +24,5 @@ passport.deserializeUser((id, done) => {
     done(err, user);
   });
 });
-
 
 module.exports = passport;
