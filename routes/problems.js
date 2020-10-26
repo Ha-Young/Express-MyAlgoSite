@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const { ensureAuthenticated } = require('./middlewares/authentication');
+const { authenticate } = require('./middlewares/authentication');
 const { getTargetProblem } = require('./middlewares/problems');
 const { checkTestCases } = require('./controllers/problem.controller');
 
 router.get('/:problem_id',
-  ensureAuthenticated,
+  authenticate,
   getTargetProblem,
   (req, res, next) => {
     res.status(200).render('problem', {
@@ -16,7 +16,7 @@ router.get('/:problem_id',
 );
 
 router.post('/:problem_id',
-  ensureAuthenticated,
+  authenticate,
   getTargetProblem,
   checkTestCases,
 );

@@ -6,11 +6,11 @@ const ProblemSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  completed_users: {
-    type: [ mongoose.Schema.Types.objectId ],
-    default: [],
+  completed_users: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
     required: true,
-  },
+  }],
   difficulty_level: {
     type: Number,
     required: true,
