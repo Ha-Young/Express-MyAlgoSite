@@ -1,39 +1,40 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Login</title>
+    <title>Sign Up</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/login.css' />
   </head>
   <body>
-    <form>
+    <form method="POST" action="/users/signup">
       <fieldset>
         <legend>CREATE ACCOUNT</legend>
         <div class="form-box">
           <label for="userId">ID</label>
-          <input name="userId" id="userId" type="text" />
+          <input name="userId" id="userId" type="text" required/>
         </div>
         <div class="form-box">
           <label>PASSWORD</label>
-          <input name="password" id="password" type="password" />
+          <input name="password" id="password" type="password" required />
         </div>
         <div class="form-box">
           <label for="username">NAME</label>
-          <input name="username" id="username" type="text" />
+          <input name="username" id="username" type="text" required />
         </div>
         <div class="form-box">
           <label for="nickname">NICKNAME</label>
-          <input name="nickname" id="nickname" type="text" />
+          <input name="nickname" id="nickname" type="text" required />
         </div>
         <div class="form-box">
           <label>E-MAIL</label>
-          <input name="email" id="email" type="email" />
+          <input name="email" id="email" type="email" required />
         </div>
       </fieldset>
+      <div class="button-list">
+        <button class="button" type="button">BACK</button>
+        <button class="button" type="reset">RESET</button>
+        <input class="button" type="submit" value="SIGN UP" />
+      </div>
     </form>
-    <div class="button-list">
-      <button class="button" type="button">BACK</button>
-      <button class="button" type="button">SIGN UP</button>
-    </div>
   </body>
 </html>

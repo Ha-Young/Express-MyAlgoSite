@@ -17,6 +17,6 @@ router.get("/signup", (req, res, next) => {
   res.render('signup');
 });
 
-router.post("/signup/new", usersController.signUp);
+router.post("/signup", usersController.signUp);
 
 module.exports = router;

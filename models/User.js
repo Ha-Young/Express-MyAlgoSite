@@ -12,10 +12,12 @@ const userSchema = new mongoose.Schema({
   },
   nickname: {
     type: String,
+    unique: true,
     required: true
   },
   userId: {
     type: String,
+    unique: true,
     required: true
   },
   password: {
@@ -24,6 +26,7 @@ const userSchema = new mongoose.Schema({
   },
   email: {
     type: String,
+    unique: true,
     required: true
   }
 });
