@@ -4,6 +4,16 @@ const index = require('./routes/index');
 
 const app = express();
 
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
+
+app.use(require('morgan')('combined'));
+app.use(express.static('public'));
+app.use(require('cookie-parser')());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+
 app.use('/', index);
 
 // catch 404 and forward to error handler
