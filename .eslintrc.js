@@ -4,7 +4,9 @@ module.exports = {
   },
   extends: [
     "eslint:recommended",
-    "plugin:node/recommended"
+    "plugin:node/recommended",
+    "plugin:security/recommended",
+    "plugin:mocha/recommended"
   ],
   parserOptions: {
     ecmaVersion: 12,
@@ -67,5 +69,7 @@ module.exports = {
         asyncArrow: "always",
       }
     ],
+    "mocha/no-skipped-tests": "error",
+    "mocha/no-exclusive-tests": "error",
   },
 };

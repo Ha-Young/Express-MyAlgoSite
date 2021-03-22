@@ -1,22 +1,11 @@
 const express = require('express');
 const morgan = require('morgan');
-const mongoose = require("mongoose");
 const createError = require("http-errors");
 
 const index = require('./routes/index');
-const { logger, stream } = require("./logger");
+const { logger, stream } = require("./loader/logger");
 
 const app = express();
-
-mongoose.Promise = global.Promise;
-mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-  })
-  .then(() => console.log("Successfully connected to mongodb"))
-  .catch(e => console.error(e));
 
 app.use(morgan("combined", { stream }));
 
