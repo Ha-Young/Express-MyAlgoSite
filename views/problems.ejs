@@ -6,22 +6,6 @@
   </head>
   <body>
     <h1>Codewars</h1>
-    <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
 
-    <ul class="tabs">
-      <li>Level 1</li>
-      <li>Level 2</li>
-      <li>Level 3</li>
-    </ul>
-
-    <ul class="problems">
-    <% for(let i = 0; i < problems.length; i++){%>
-      <li>
-
-      <div><%= `정답자: ${problems[i].completed_users}` %></div>
-      <div><%= `난이도: Level ${problems[i].difficulty_level}` %></div>
-    </li>
-    <%}%>
-    </ul>
   </body>
 </html>
