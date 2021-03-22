@@ -1,0 +1,8 @@
+<div>title: <%= problem.title %></div>
+<div>Level: <%= problem.difficulty_level %></div>
+<div>description: <%= problem.description %></div>
+
+<% problem.tests.forEach((test) => { %>
+  <div>example: <%= test.code %></div>
+  <div>result: <%= test.solution %></div>
+<% }) %>
