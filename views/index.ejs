@@ -1,44 +1,51 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Codewars</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <title>코드워!</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css" />
   </head>
   <body>
-    <h1>Codewars</h1>
-    <h2>HELLO <%= name %></h2>
-    <form action="/logout?_method=DELETE" method="POST">
-      <button type="submit">LOG OUT</button>
-    </form>
-    <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
+    <div class="container">
+      <h1>Codewars</h1>
+      <h2>Hello
+        <span class="text-muted">
+          <%= name %>
+        </span>
+      </h2>
+      <form action="/logout?_method=DELETE" method="POST">
+        <button class="btn btn-primary" type="submit">LOG OUT</button>
+      </form>
+      <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
 
-    <ul class="tabs">
-      <li>Level 1</li>
-      <li>Level 2</li>
-      <li>Level 3</li>
-    </ul>
+      <ul class="tabs list-group">
+        <li class="list-group-item">Level 1</li>
+        <li class="list-group-item">Level 2</li>
+        <li class="list-group-item">Level 3</li>
+      </ul>
 
-    <ul class="problems">
-      <li>
-        <div>피보나치 수열</div>
-        <div>정답자: 15명</div>
-        <div>난이도: Level 1</div>
-      </li>
-      <li>
-        <div>서울에서 김서방 찾기</div>
-        <div>정답자: 11명</div>
-        <div>난이도: Level 2</div>
-      </li>
-      <li>
-        <div>수박수박수박수박수</div>
-        <div>정답자: 12명</div>
-        <div>난이도: Level 2</div>
-      </li>
-      <li>
-        <div>하샤드 수</div>
-        <div>정답자: 5명</div>
-        <div>난이도: Level 3</div>
-      </li>
-    </ul>
+      <ul class="problems list-group">
+        <li class="list-group-item">
+          <div>피보나치 수열</div>
+          <div>정답자: 15명</div>
+          <div>난이도: Level 1</div>
+        </li>
+        <li class="list-group-item">
+          <div>서울에서 김서방 찾기</div>
+          <div>정답자: 11명</div>
+          <div>난이도: Level 2</div>
+        </li>
+        <li class="list-group-item">
+          <div>수박수박수박수박수</div>
+          <div>정답자: 12명</div>
+          <div>난이도: Level 2</div>
+        </li>
+        <li class="list-group-item">
+          <div>하샤드 수</div>
+          <div>정답자: 5명</div>
+          <div>난이도: Level 3</div>
+        </li>
+      </ul>
+    </div>
   </body>
 </html>

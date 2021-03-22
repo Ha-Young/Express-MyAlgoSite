@@ -7,12 +7,20 @@ const flash = require("express-flash");
 const session = require("express-session");
 const passport = require("passport");
 const methodOverride = require("method-override");
+const mongoose = require("mongoose");
 
 const index = require("./routes/index");
 const login = require("./routes/login");
 const problems = require("./routes/problems");
 
 const app = express();
+
+// db
+const mongoDB = process.env.MONGO_URL;
+
+mongoose.connect(mongoDB, { useNewUrlParser: true })
+  .then(() => console.log("mongoDB connected!"))
+  .catch(() => console.log("ERROR! can't connect mongoDB!"));
 
 app.set("view engine", "ejs");
 
@@ -25,6 +33,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -36,6 +45,7 @@ app.delete("/logout", (req, res) => {
   req.logOut();
   res.redirect("/login");
 });
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   const err = new Error('Not Found');
@@ -54,6 +64,7 @@ app.use(function(err, req, res, next) {
   res.render("error");
 });
 
+// move to middlewares dir
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
@@ -62,6 +73,7 @@ function checkAuthenticated(req, res, next) {
   res.redirect("/login");
 }
 
+// move to middlewares dir
 function checkNotAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     res.redirect("/login");

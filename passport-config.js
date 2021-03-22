@@ -3,14 +3,14 @@ const bcrypt = require("bcrypt");
 
 function initialize(passport, getUserByEmail, getUserById) {
   const authenticateUser = async (email, password, done) => {
-    const user = getUserByEmail(email);
+    const user = await getUserByEmail(email);
 
     if (user === null) {
       return done(null, false, { message: "unknown email" });
     }
 
     try {
-      const hasUser = await bcrypt.compare(password, user.password);
+      const hasUser = await bcrypt.compare(password, user[0].password);
 
       if (hasUser) {
         return done(null, user);
@@ -27,8 +27,8 @@ function initialize(passport, getUserByEmail, getUserById) {
     usernameField: "email",
   }, authenticateUser));
 
-  passport.serializeUser((user, done) => done(null, user.id));
-  passport.deserializeUser((id, done) => done(null, getUserById(id)));
+  passport.serializeUser((user, done) => done(null, user[0].id));
+  passport.deserializeUser(async (id, done) => done(null, await getUserById(id)));
 }
 
 module.exports = initialize;

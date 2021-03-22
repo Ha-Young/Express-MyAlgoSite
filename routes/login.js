@@ -3,19 +3,15 @@ const passport = require("passport");
 const bcrypt = require("bcrypt");
 
 const initializePassport = require("../passport-config");
+const User = require("../models/User");
 
 const router = express.Router();
 
 initializePassport(
   passport,
-  (email) => USERS.find(user => user.email === email),
-  (id) => USERS.find(user => user.id === id),
+  (email) => User.find({ email }),
+  (id) => User.findById(id),
 );
-
-// temp user db
-
-const USERS = [];
-
 
 /* GET login page. */
 router.get("/", (req, res, next) => {
@@ -35,13 +31,15 @@ router.get("/register", (req, res, next) => {
 router.post("/register", async (req, res, next) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    USERS.push({
+    
+    const newUser = new User({
       id: Date.now().toString(),
       name: req.body.name,
       email: req.body.email,
       password: hashedPassword,
     });
 
+    await newUser.save();
     res.redirect("/login");
   } catch (err) {
     res.redirect("/login/register");
