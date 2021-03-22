@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
+const verifyUser = require('./routes/middlewares/verifyUser');
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const db = process.env.DATABASE.replace(
   '<password>',
@@ -52,7 +53,7 @@ passport.deserializeUser(function (user, done) {
   done(null, user);
 });
 
-app.use('/', index);
+app.use('/', verifyUser, index);
 app.use('/login', login);
 app.use('/auth', auth);
 

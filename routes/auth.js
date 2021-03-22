@@ -15,7 +15,8 @@ router.get(
     'google', {
       successRedirect: '/',
       failureRedirect: 'auth/google'
-    })
+    }
+  )
 );
 
 module.exports = router;
