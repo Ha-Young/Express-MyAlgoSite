@@ -1,6 +1,4 @@
-const mongoose = require("mongoose");
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 
 const User = require("../../models/User");
 
@@ -16,7 +14,7 @@ exports.register = async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, 10);
   const user = new User({
     username,
-    hashedPassword,
+    password: hashedPassword,
   });
 
   await user.save();
