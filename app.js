@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const path = require("path");
 
@@ -6,6 +7,21 @@ const index = require("./routes/index");
 const login = require("./routes/auth/index");
 
 const app = express();
+const db = mongoose.connection;
+
+db.on("error", console.error);
+db.once("open", () => {
+  console.log("Successfully connected to mongdb");
+});
+
+mongoose.connect(
+  "mongodb://127.0.0.1:27017",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  }
+);
 
 app.set("views", path.join(__dirname, "/views"));
 app.set("view engine", "ejs");
