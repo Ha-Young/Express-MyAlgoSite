@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
-const verifyUser = require('./routes/middlewares/verifyUser');
+const session = require('express-session');
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const db = process.env.DATABASE.replace(
   '<password>',
@@ -37,6 +37,13 @@ const auth = require('./routes/auth');
 
 const app = express();
 
+app.use(session({
+  secret: process.env.CLIENT_SECRET,
+  cookie: { maxAge: 60 * 60 * 1000 },
+  resave: true,
+  saveUninitialized: false
+}));
+
 app.set('views', `${__dirname}/views`);
 app.set('view engine', 'ejs');
 
@@ -44,6 +51,7 @@ app.use(express.json());
 app.use(express.urlencoded());
 
 app.use(passport.initialize());
+app.use(passport.session());
 
 passport.serializeUser(function (user, done) {
   done(null, user);
@@ -53,7 +61,7 @@ passport.deserializeUser(function (user, done) {
   done(null, user);
 });
 
-app.use('/', verifyUser, index);
+app.use('/', index);
 app.use('/login', login);
 app.use('/auth', auth);
 
