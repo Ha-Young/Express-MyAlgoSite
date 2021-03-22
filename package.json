@@ -13,11 +13,12 @@
     "ejs": "~2.5.7",
     "express": "^4.17.1",
     "express-ejs-layouts": "^2.5.0",
+    "express-session": "^1.17.1",
     "mongodb": "^3.6.5",
     "mongoose": "^5.12.1",
     "morgan": "~1.9.0",
     "passport": "^0.4.1",
-    "passport-google-oauth": "^2.0.0",
+    "passport-google-oauth20": "^2.0.0",
     "serve-favicon": "~2.4.5"
   },
   "devDependencies": {

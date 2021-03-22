@@ -1,17 +1,23 @@
 const { TITLE } = require("../constants/common");
 
 exports.home = (req, res) => {
-  res.render("home", { title: TITLE.HOME });
+  res.render("home", { pageTitle: TITLE.HOME });
 };
 
 exports.getLogin = (req, res) => {
-  res.render("login", { title: TITLE.LOGIN });
+  res.render("login", { pageTitle: TITLE.LOGIN });
 };
-
 exports.postLogin = (req, res) => {
   const { id, password } = req.body;
 };
 
-exports.join = (req, res) => {
-  res.render("join", { title: TITLE.JOIN });
+exports.logout = (req, res) => {
+  res.redirect("/login");
+}
+
+exports.getJoin = (req, res) => {
+  res.render("join", { pageTitle: TITLE.JOIN });
 };
+exports.postJoin = (req, res) => {
+  res.redirect("/");
+}

@@ -6,8 +6,11 @@ const mongoose = require('mongoose');
 
  */
 const userSchema = new mongoose.Schema({
-  id: mongoose.Schema.Types.ObjectId,
-  password: String,
+  name: String,
+  email: String,
+  avatalUrl: String,
+  googleId: Number,
+  solvedProblem: Object,
 });
 
 module.exports = mongoose.model('User', userSchema);

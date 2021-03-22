@@ -1,14 +1,16 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const expressEjsLayouts = require("express-ejs-layouts");
 const fs = require("fs");
 const helmet = require("helmet");
 const morgan = require("morgan");
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth').OAuthStrategy;
 const path = require("path");
-
-const globalRouter = require("./routes/index");
+const globalRouter = require("./routes/globalRouter");
+const { localMiddleware } = require("./middlewares");
+const passport = require("./passport");
+const session = require('express-session');
+require("dotenv").config();
 
 const app = express();
 
@@ -27,19 +29,32 @@ app.use(morgan("combined", {
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+
 app.use(expressEjsLayouts);
+
+app.use(session({
+  secret: process.env.SECRET_CODE,
+  cookie: { maxAge: 60 * 60 * 1000 },
+  resave: true,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(localMiddleware);
 
 app.use("/", globalRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   const err = new Error("Not Found");
   err.status = 404;
   next(err);
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use((err, req, res, next) => {
   console.error(err);
   // set locals, only providing error in development
   res.locals.message = err.message;
