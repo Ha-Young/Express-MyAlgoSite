@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const expressSession = require("express-session");
 const logger = require("morgan");
+const expressLayouts = require("express-ejs-layouts");
 
 const passport = require("./passport");
 
@@ -12,10 +13,14 @@ const login = require("./routes/login");
 
 const app = express();
 
+app.use(express.static(`${__dirname}/public`));
+app.use(expressLayouts);
+
+app.set("layout", "layout");
+app.set("layout extractScripts", true);
+
 app.set("views", "./views");
 app.set("view engine", "ejs");
-
-app.use(express.static(`${__dirname}/public`));
 
 app.use(logger("dev"));
 app.use(bodyParser.json());
