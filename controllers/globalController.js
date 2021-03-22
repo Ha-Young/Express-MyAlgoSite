@@ -4,8 +4,12 @@ exports.home = (req, res) => {
   res.render("home", { title: TITLE.HOME });
 };
 
-exports.login = (req, res) => {
+exports.getLogin = (req, res) => {
   res.render("login", { title: TITLE.LOGIN });
+};
+
+exports.postLogin = (req, res) => {
+  const { id, password } = req.body;
 };
 
 exports.join = (req, res) => {

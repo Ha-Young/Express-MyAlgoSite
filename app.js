@@ -4,8 +4,9 @@ const expressEjsLayouts = require("express-ejs-layouts");
 const fs = require("fs");
 const helmet = require("helmet");
 const morgan = require("morgan");
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth').OAuthStrategy;
 const path = require("path");
-require("./db");
 
 const globalRouter = require("./routes/index");
 
@@ -20,8 +21,6 @@ app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(helmet());
-app.use(helmet.xssFilter());
-app.use(helmet.contentSecurityPolicy());
 app.use(morgan("dev"));
 app.use(morgan("combined", {
   stream: fs.createWriteStream(path.join(__dirname, "app.log"), { flags: "a" }),
@@ -48,7 +47,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render("error");
+  res.render("error", { title: "ERROR" });
 });
 
 module.exports = app;
