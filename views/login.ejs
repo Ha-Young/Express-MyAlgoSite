@@ -8,23 +8,25 @@
   <body>
     <div class="login-container">
       <h1 class="login-title">Log in</h1>
-      <form action="" class="login-form">
+      <form action="" method="POST" class="login-form">
         <label>Email</label>
         <input
           class="input-user-email"
           type="text"
           name="user-email"
+          autocomplete="username"
         >
         <label>Password</label>
         <input
           class="input-user-password"
           type="password"
           name="user-password"
+          autocomplete="current-password"
         >
         <button
-          class="create-account-button"
+          class="create-account-link-button"
           type="button"
-          onclick="location.href='/create_account'"
+          onclick="location.href = '/create_account';"
         >Create account</button>
         <button class="login-button" type="submit">Log in</button>
       </form>
