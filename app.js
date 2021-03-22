@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
 const index = require("./routes/index");
 const login = require("./routes/login");
@@ -19,6 +20,8 @@ mongoose.connect(
 const db = mongoose.connection;
 db.on("error", (err) => console.error(`DB connection Error : \n${err}`));
 db.once("open", () => console.log("Connected"));
+
+app.use(bodyParser.json());
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
