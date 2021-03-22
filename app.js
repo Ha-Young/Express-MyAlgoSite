@@ -4,6 +4,15 @@ const index = require('./routes/index');
 
 const app = express();
 
+// dbUser / vanillacoding
+
+// mongodb+srv://dbUser:vanillacoding@cluster0.hugiy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+
+
+
+app.set("view engine", "ejs");
+app.use(express.static(__dirname + "/public"));
+
 app.use('/', index);
 
 // catch 404 and forward to error handler
