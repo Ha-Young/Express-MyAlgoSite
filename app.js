@@ -4,6 +4,8 @@ const index = require("./routes/index");
 
 const app = express();
 
+app.set("view engine", "ejs");
+
 app.use("/", index);
 
 // catch 404 and forward to error handler
