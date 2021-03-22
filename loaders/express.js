@@ -1,6 +1,8 @@
 const cors = require("cors");
 const createError = require("http-errors");
 const express = require("express");
+const expressLayouts = require('express-ejs-layouts');
+const methodOverride = require('method-override');
 const path = require("path");
 const { format } = require("date-fns");
 
@@ -8,10 +10,14 @@ const { logger } = require("./logger");
 
 module.exports = function ({ app, routerLoader }) {
   app.set("view engine", "ejs");
+  app.use(expressLayouts);
+
+  app.set("layout", "layout");
 
   app.use(cors());
 
   app.use(express.json());
+  app.use(methodOverride());
   app.use(express.static(path.resolve(__dirname, "../public")));
 
   routerLoader({ app });
