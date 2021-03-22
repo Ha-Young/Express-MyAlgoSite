@@ -14,17 +14,21 @@ const app = express();
 */
 
 mongoose.connect(
-  "mongodb+srv://dbUser:vanillacoding@cluster0.hugiy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-  { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }
+  "mongodb+srv://dbUser:vanillacoding@cluster0.hugiy.mongodb.net/codewars?retryWrites=true&w=majority",
+  { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true }
 );
 const db = mongoose.connection;
 db.on("error", (err) => console.error(`DB connection Error : \n${err}`));
 db.once("open", () => console.log("Connected"));
 
-app.use(bodyParser.json());
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 app.use("/", index);
 app.use("/login", login);
