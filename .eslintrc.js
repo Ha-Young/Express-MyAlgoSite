@@ -6,14 +6,13 @@ module.exports = {
     "eslint:recommended",
     "plugin:node/recommended"
   ],
-  plugins: ["require-sort"],
   parserOptions: {
     ecmaVersion: 12,
   },
   rules: {
     "no-unused-vars": "warn",
     "no-var": "error",
-    "no-console": "error",
+    "no-console": "warn",
     "no-debugger": "error",
     "no-plusplus": "off",
     "no-shadow": "off",
@@ -68,6 +67,5 @@ module.exports = {
         asyncArrow: "always",
       }
     ],
-    "require-sort/require-sort": "error",
   },
 };
