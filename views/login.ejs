@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%=title %></title>
+    <title></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
     <h1>Codewars</h1>
     <h2>LOGIN</h2>
-    <Form>
-      <input type="text" class="id">
+    <div class="social_login">
+      <button class="social_login-button">
+        Log in with github
+      </button>
+    </div>
+    <Form action="/login" method="POST">
+      <input type="email" id="email" name="email" placeholder="email" required>
+      <input type="password" id="password" name="password" placeholder="password" required>
+      <button class="submit">LOGIN</button>
     </Form>
+    <% if (messages.error) { %>
+      <%= messages.error %>
+    <% } %>
+    <a href="/login/register">Register</a>
   </body>
 </html>
