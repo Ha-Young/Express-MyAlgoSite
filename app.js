@@ -1,9 +1,9 @@
+require('dotenv').config();
+
 const express = require('express');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-
-dotenv.config();
-
+const passport = require('passport');
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const db = process.env.DATABASE.replace(
   '<password>',
   process.env.DATABASE_PASSWORD
@@ -17,16 +17,44 @@ mongoose.connect(db, {
   .then(() => console.log('Database connection sucessful👍🏻'))
   .catch(err => console.log(err));
 
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.CLIENT_ID,
+      clientSecret: process.env.CLIENT_SECRET,
+      callbackURL: "/auth/google/callback"
+    },
+    function (token, tokenSecret, profile, done) {
+      return done(null, profile);
+    }
+  )
+);
+
 const index = require('./routes/index');
-const loginRouter = require('./routes/login');
+const login = require('./routes/login');
+const auth = require('./routes/auth');
 
 const app = express();
 
 app.set('views', `${__dirname}/views`);
 app.set('view engine', 'ejs');
 
+app.use(express.json());
+app.use(express.urlencoded());
+
+app.use(passport.initialize());
+
+passport.serializeUser(function (user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function (user, done) {
+  done(null, user);
+});
+
 app.use('/', index);
-app.use('/login', loginRouter);
+app.use('/login', login);
+app.use('/auth', auth);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
