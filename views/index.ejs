@@ -5,10 +5,11 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <% if (user) {%>
-      <h2><%= user.name %></h2>
-    <% } else { %>
+    <% if (!user) { %>
       <h2>Please <a href="/login">Log in</a></h2>
+    <% } else { %>
+      <h2><%= user.name %></h2>
+    <%# 여기에 문제 선택할 수 있는 화면이 나오도록%>
     <% } %>
   </body>
 </html>
