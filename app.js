@@ -1,4 +1,6 @@
 const express = require("express");
+const passport = require("passport");
+const passportConfig = require("./config/passport");
 
 const app = express();
 app.set("view engine", "ejs");
@@ -8,14 +10,16 @@ app.use(
     extended: true,
   })
 );
-
+app.use(passport.initialize());
 app.use(express.static("public"));
 
 const index = require("./routes/index");
-const login = require("./routes/login");
+const signIn = require("./routes/signIn");
+const logIn = require("./routes/logIn");
 const dotenv = require("dotenv");
 
 dotenv.config();
+passportConfig();
 
 const mongoose = require("mongoose");
 mongoose
@@ -27,7 +31,8 @@ mongoose
   .catch((error) => console.error(error)); // 에러분기 처리
 
 app.use("/", index);
-app.use("/login", login);
+app.use("/signIn", signIn);
+app.use("/logIn", logIn);
 
 //404 handler
 app.use(function (req, res, next) {
