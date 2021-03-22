@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "NODE_ENV=development nodemon ./bin/www"
+    "dev": "NODE_ENV=development nodemon ./bin/www",
+    "debug": "ndb ./bin/www"
   },
   "dependencies": {
     "codemirror": "^5.60.0",
@@ -19,10 +20,10 @@
     "passport-github": "^1.1.0",
     "serve-favicon": "~2.4.5"
   },
-  "engines": {
-    "node": ">=14.0.0"
-  },
   "devDependencies": {
     "ndb": "^1.1.5"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }
