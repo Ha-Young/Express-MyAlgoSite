@@ -10,6 +10,7 @@
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.5",
+    "date-fns": "^2.19.0",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "ejs": "~2.5.7",
