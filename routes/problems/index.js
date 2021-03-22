@@ -3,6 +3,6 @@ const problemController = require("../controllers/problems.controller");
 
 const router = express.Router();
 
-router.get("/", problemController.getAll);
+router.get("/:problem_id", problemController.detail);
 
 module.exports = router;

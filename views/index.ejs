@@ -9,7 +9,7 @@
 
     <ul class="problems">
       <% problems.forEach(problem => { %>
-        <li onclick="location.href='/problems/:<%= problem.id %>'">
+        <li onclick="location.href='/problems/<%= problem._id %>'">
           <p><%= problem.title %></p>
           <p>문제 레벨: <%= problem.difficulty_level %></p>
           <p>정답자: <%= problem.completed_users %></p>

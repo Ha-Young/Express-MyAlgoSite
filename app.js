@@ -3,7 +3,9 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const path = require("path");
 
-const index = require("./routes/index");
+const home = require("./routes/index");
+
+const problemRouter = require("./routes/problems/index");
 
 const app = express();
 const db = mongoose.connection;
@@ -64,7 +66,7 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.get("/", authenticateUser, index);
+app.get("/", authenticateUser, home);
 
 app.get("/login", (req, res, next) => {
   res.render("login");
@@ -79,6 +81,8 @@ app.get("/login/google/callback",
     failureRedirect: "/login",
     successRedirect: "/"
 }));
+
+app.use("/problems", authenticateUser, problemRouter);
 
 app.use(function(req, res, next) {
   const err = new Error("Not Found");
