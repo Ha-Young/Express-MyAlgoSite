@@ -1,0 +1,41 @@
+.create-account-container {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.create-account-title {
+  width: 300px;
+  color: #3caa95;
+}
+
+.create-account-form {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 300px;
+}
+
+.input-user-name,
+.input-user-email,
+.input-user-password,
+.input-user-password-confirm {
+  height: 40px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.3rem;
+  background-color: #ebebeb;
+  outline: none;
+}
+
+.create-account-button {
+  margin-top: 20px;
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  background-color: #3caa95;
+  cursor: pointer;
+  outline: none;
+}
