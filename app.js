@@ -1,5 +1,8 @@
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const express = require('express');
+const morgan = require('morgan');
+const passport = require('passport');
 
 const index = require('./routes/index');
 
@@ -8,8 +11,13 @@ const app = express();
 app.set('views', './views');
 app.set('view engine', 'ejs');
 app.use(express.static('./public'));
+
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(morgan('dev'));
+app.use(passport.initialize());
+app.use(passport.initialize());
 
 // router
 app.use('/', index);

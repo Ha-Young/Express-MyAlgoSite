@@ -7,7 +7,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/login', (req, res, next) => {
-  res.render('login', { title: '바닐라코딩' });
+  res.render('login', { title: 'Sign In' });
 });
 
 router.post('/login', (req, res, next) => {
@@ -18,11 +18,16 @@ router.post('/login', (req, res, next) => {
 });
 
 router.get('/join', (req, res, next) => {
-  res.render('login', { title: '바닐라코딩' });
+  res.render('join', { title: 'Sign Up' });
 });
 
 router.post('/join', (req, res, next) => {
-  
+  const {
+    body: { email, password, name }
+  } = req;
+  console.log("email", email);
+  console.log("password", password);
+  console.log("name", name);
 });
 
 module.exports = router;
