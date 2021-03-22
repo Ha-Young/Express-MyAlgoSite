@@ -1,10 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const { verifyUser } = require('./middlewares/verifyUser');
+const Problem = require('../models/Problem');
 
-router.get('/', verifyUser, (req, res, next) => {
+router.get('/', verifyUser, async (req, res, next) => {
   console.log(req.session)
-  res.render('index', { title: '바닐라코딩' });
+  const problems = await Problem.find();
+
+  res.render('index', { problems });
 });
 
 module.exports = router;

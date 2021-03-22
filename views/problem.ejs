@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="lib/codemirror.js"></script>
+  <link rel="stylesheet" href="lib/codemirror.css">
+  <script src="mode/javascript/javascript.js"></script>
+  <div>
+    <%= problem.title %>
+  </div>
+  <div>
+    <%= problem.completed_users %>
+  </div>
+  <div>
+    <%= problem.difficulty_level %>
+  </div>
+  <div>
+    <%= problem.description %>
+  </div>
+  <div id="codeEditor">
+    <% var myCodeMirror = CodeMirror(document.querySelector("#codeEditor"), { %>
+      <%   value: "function myScript(){return 100;}\n", %>
+      <%  mode:  "javascript" %>
+    <% }); %>
+  </div>
+</body>
+</html>

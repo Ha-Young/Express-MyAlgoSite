@@ -14,6 +14,10 @@ mongoose.connect(process.env.MONGODB_URL, {
   useFindAndModify: false
 });
 
+const { storeSampleProblems } = require('./loaders/loadSampleProblems');
+
+// storeSampleProblems();
+
 const publicDirectoryPath = path.join(__dirname, './public');
 const viewsDirectoryPath = path.join(__dirname, './views');
 
