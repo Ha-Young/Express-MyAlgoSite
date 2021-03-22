@@ -7,11 +7,9 @@ router.get("/login", (req, res, next) => {
   res.render('login');
 });
 
-router.get("/login/check", usersController.checkLogin);
+router.post("/login/check", usersController.checkLogin);
 
-router.get("/logout", (req, res, next) => {
-  res.render('login');
-});
+router.get("/logout", usersController.logOut);
 
 router.get("/signup", (req, res, next) => {
   res.render('signup');
