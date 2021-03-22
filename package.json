@@ -15,5 +15,8 @@
     "morgan": "~1.9.0",
     "nodemon": "^1.19.1",
     "serve-favicon": "~2.4.5"
+  },
+  "devDependencies": {
+    "helmet": "^4.4.1"
   }
 }

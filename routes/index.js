@@ -1,9 +1,8 @@
 const express = require('express');
-const router = express.Router();
+const globalRouter = express.Router();
+const { home } = require("../controllers/globalController");
 
 /* GET home page. */
-router.get('/', (req, res, next) => {
-  res.render('index', { title: '바닐라코딩' });
-});
+globalRouter.get('/', home);
 
-module.exports = router;
+module.exports = globalRouter;
