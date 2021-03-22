@@ -1,18 +1,52 @@
 const express = require('express');
+const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
+const passport = require('passport');
+const session = require('express-session');
+const flash = require('express-flash');
+require('dotenv').config();
+
+const users = [];
+const initializePassport = require('./config/passport-config');
+initializePassport(
+  passport,
+  email => users.find(user => user.email === email),
+  id => users.find(user => user.id === id)
+);
 
 const index = require('./routes/index');
 
 const app = express();
 
+const mongoose = require('mongoose');
+mongoose.connect(process.env.MONGODB_URL, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+});
+
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-app.use(require('morgan')('combined'));
+app.use(cookieParser('secret code'));
+app.use(session({
+  resave: false,
+  saveUninitialized: false,
+  secret: process.env.SESSION_SECRET,
+  cookie: {
+    httpOnly: true,
+    secure: false,
+  },
+}));
+app.use(morgan('dev'));
+app.use(flash());
 app.use(express.static('public'));
-app.use(require('cookie-parser')());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', index);
 
