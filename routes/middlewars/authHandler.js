@@ -17,9 +17,9 @@ exports.create = function (req, res) {
       if (err) {
         res.send(err);
       }
-      // jwt.sign('token내용', 'JWT secretkey')
-      const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET);
-      return res.json({ user, token });
+
+      const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET_KEY);
+      return res.status(200).json({ user, token });
     });
   })(req, res);
 };

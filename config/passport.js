@@ -1,27 +1,25 @@
 const passport = require("passport");
-const passportJWT = require("passport-jwt");
-const JWTStrategy = passportJWT.Strategy;
-const ExtractJWT = passportJWT.ExtractJwt;
+const JwtStrategy = require("passport-jwt").Strategy;
+const ExtractJwt = require("passport-jwt").ExtractJwt;
 const LocalStrategy = require("passport-local").Strategy;
 
 const dotenv = require("dotenv");
 dotenv.config();
 
-let UserModel = require("../models/User");
+const UserModel = require("../models/User");
 require("dotenv").config();
 
 module.exports = () => {
-  // Local Strategy
   passport.use(
+    "local",
     new LocalStrategy(
       {
         usernameField: "email",
         passwordField: "password",
+        session: false,
       },
       function (email, password, done) {
-        return UserModel.findOne({
-          where: { email: email, password: password },
-        })
+        return UserModel.findOne({ email: email, password: password })
           .then((user) => {
             if (!user) {
               return done(null, false, {
@@ -37,13 +35,16 @@ module.exports = () => {
 
   //JWT Strategy
   passport.use(
-    new JWTStrategy(
+    "jwt",
+    new JwtStrategy(
       {
-        jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
         secretOrKey: process.env.JWT_SECRET_KEY,
       },
       function (jwtPayload, done) {
-        return UserModel.findOneById(jwtPayload.id)
+        console.log("jwt payload", jwtPayload);
+
+        return UserModel.findById(jwtPayload._id)
           .then((user) => {
             return done(null, user);
           })

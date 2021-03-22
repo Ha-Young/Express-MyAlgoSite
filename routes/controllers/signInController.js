@@ -21,13 +21,13 @@ exports.createUser = async function (req, res, next) {
     return res.status(400).send("Email already exists");
   }
 
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(req.body.password, salt);
+  // const salt = await bcrypt.genSalt(10);
+  // const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
   const user = new User({
     name: req.body.name,
     email: req.body.email,
-    password: hashedPassword,
+    password: req.body.password,
   });
 
   try {

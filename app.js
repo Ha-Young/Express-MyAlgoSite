@@ -10,12 +10,13 @@ app.use(
     extended: true,
   })
 );
-app.use(passport.initialize());
+
 app.use(express.static("public"));
 
 const index = require("./routes/index");
 const signIn = require("./routes/signIn");
 const logIn = require("./routes/logIn");
+const user = require("./routes/user");
 const dotenv = require("dotenv");
 
 dotenv.config();
@@ -33,6 +34,7 @@ mongoose
 app.use("/", index);
 app.use("/signIn", signIn);
 app.use("/logIn", logIn);
+app.use("/user", user);
 
 //404 handler
 app.use(function (req, res, next) {
