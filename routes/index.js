@@ -10,4 +10,8 @@ router.get('/login', (req, res, next) => {
   res.render('pages/login');
 });
 
+router.get('/join', (req, res, next) => {
+  res.render('pages/join');
+});
+
 module.exports = router;
