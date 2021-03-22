@@ -10,9 +10,15 @@ passport.use(new GitHubStrategy(
     callbackURL: "http://localhost:3000/login/github/callback"
   },
   function (accessToken, refreshToken, profile, cb) {
-    Users.findOrCreate({ githubId: profile.id }, function (err, user) {
-      return cb(err, user);
-    });
+    Users.findOrCreate(
+      {
+        githubId: profile.id,
+        profileUrl: profile.profileUrl,
+      },
+      function (err, user) {
+        return cb(err, user);
+      }
+    );
   }
 ));
 
