@@ -6,6 +6,9 @@ const app = express();
 
 app.use('/', index);
 
+app.set('views', `${__dirname}/views`);
+app.set('view engine', 'ejs');
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   const err = new Error('Not Found');
