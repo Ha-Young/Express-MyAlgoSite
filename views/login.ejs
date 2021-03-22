@@ -7,22 +7,22 @@
     <link rel='stylesheet' href='/stylesheets/login.css' />
   </head>
   <body>
-    <form>
+    <form method="POST" action="/users/login/check">
       <fieldset>
         <legend>LOGIN</legend>
         <div class="form-box">
-          <label for="id">ID</label>
-          <input name="id" id="id" type="text" />
+          <label for="userId">ID</label>
+          <input name="userId" id="userId" type="text" required/>
         </div>
         <div class="form-box">
           <label>PASSWORD</label>
-          <input name="password" id="password" type="password" />
+          <input name="userPassword" id="userPassword" type="password" required />
         </div>
       </fieldset>
+      <ul class="button-list">
+        <li><input class="button" type="submit" value="SIGN IN" /></li>
+        <li><a class="button" href="/users/signup">CREATE ACCOUNT</a></li>
+      </ul>
     </form>
-    <ul class="button-list">
-      <li><input class="button" type="submit" value="SIGN IN" /></li>
-      <li><a class="button" href="/users/signup">CREATE ACCOUNT</a></li>
-    </ul>
   </body>
 </html>
