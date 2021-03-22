@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Codewars</title>
+    <title>Problem</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
@@ -17,7 +17,7 @@
     <ul class="problems">
     <% for(let i = 0; i < problems.length; i++){%>
       <li>
-      <div><a href=<%= `problems/${problems[i].id}` %>><%= problems[i].title %></a></div>
+
       <div><%= `정답자: ${problems[i].completed_users}` %></div>
       <div><%= `난이도: Level ${problems[i].difficulty_level}` %></div>
     </li>
