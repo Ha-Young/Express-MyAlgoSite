@@ -34,12 +34,4 @@ const ProblemSchema = new mongoose.Schema({
   ]
 });
 
-
-//이건 나중에 util 함수로 빼주거나 하다못해 selectString이라도 constant로 빼줘야되지않을까?
-//유저가 알면 안되는 굳이 따지자면 보안 관련 정보 제어인듯 하다.
-ProblemSchema.pre(/^find/, function (next) {
-  this.select('-tests -__v -_id');
-  next();
-});
-
 module.exports = mongoose.model('Problem', ProblemSchema);
