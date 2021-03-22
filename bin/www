@@ -3,10 +3,12 @@
 /**
  * Module dependencies.
  */
+require('dotenv').config();
 
 const app = require('../app');
 const debug = require('debug')('cms:server');
 const http = require('http');
+const mongoose = require('mongoose');
 
 /**
  * Get port from environment and store in Express.
@@ -24,6 +26,15 @@ const server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
+
+mongoose.connect(
+  process.env.DATABASE_LOCAL,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  },
+).then(() => console.log("DB connection successful!"));
 
 server.listen(port);
 server.on('error', onError);
