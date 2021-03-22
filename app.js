@@ -1,10 +1,28 @@
-const express = require('express');
+require("dotenv").config();
+const express = require("express");
+const mongoose = require("mongoose");
 
-const index = require('./routes/index');
+const login = require("./routes/login");
+const index = require("./routes/index");
 
 const app = express();
 
-app.use('/', index);
+app.engine(".html", require("ejs").__express);
+app.set("view engine", "ejs");
+
+app.use(express.static("public"));
+
+
+mongoose.connect(process.env.MONGO_DB, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+  dbName: "Articles"
+});
+
+app.use("/login", login);
+app.use("/", index);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
