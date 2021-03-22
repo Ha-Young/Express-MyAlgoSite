@@ -1,6 +1,5 @@
-const index = require('../routes/index');
+const routes = require("../routes");
 
 module.exports = function ({ app }) {
-  app.use('/', index);
-
+  app.use('/', routes());
 };

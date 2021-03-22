@@ -1,17 +1,13 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
 
-/* GET home page. */
-router.get('/', (req, res, next) => {
-  res.render('pages/index');
-});
+const auth = require('./auth');
+const { home } = require('../controllers/home');
 
-router.get('/login', (req, res, next) => {
-  res.render('pages/login');
-});
+module.exports = function () {
+  const app = express.Router();
+  app.get('/', home);
 
-router.get('/join', (req, res, next) => {
-  res.render('pages/join');
-});
+  auth(app);
 
-module.exports = router;
+  return app;
+};
