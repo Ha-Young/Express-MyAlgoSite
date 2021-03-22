@@ -7,6 +7,7 @@
     "dev": "NODE_ENV=development nodemon ./bin/www"
   },
   "dependencies": {
+    "codemirror": "^5.60.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
@@ -15,9 +16,13 @@
     "mongoose": "^5.12.1",
     "morgan": "~1.9.0",
     "nodemon": "^1.19.1",
+    "passport-github": "^1.1.0",
     "serve-favicon": "~2.4.5"
   },
   "engines": {
     "node": ">=14.0.0"
+  },
+  "devDependencies": {
+    "ndb": "^1.1.5"
   }
 }
