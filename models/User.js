@@ -8,6 +8,12 @@ const findOrCreate = require("mongoose-findorcreate");
  */
 const userSchema = new mongoose.Schema({
   githubId: String,
+  userId: String,
+  userPassWord: String,
+  score: {
+    type: Number,
+    default: 0,
+  },
 });
 
 userSchema.plugin(findOrCreate);
