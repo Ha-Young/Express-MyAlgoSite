@@ -1,10 +1,16 @@
 const express = require('express');
 
-const index = require('./routes/index');
+const index = require("./routes/index");
+const login = require("./routes/login");
+const problems = require("./routes/problems");
 
 const app = express();
 
-app.use('/', index);
+app.set("view engine", "ejs");
+
+app.use("/", index);
+app.use("/login", login);
+app.use("/problems", problems);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
