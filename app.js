@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const index = require("./routes/index");
+const login = require("./routes/login");
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
 app.use("/", index);
+app.use("/login", login);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

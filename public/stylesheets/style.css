@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -6,3 +10,59 @@ body {
 a {
   color: #00B7FF;
 }
+
+label {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.login-container {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.login-title {
+  width: 300px;
+  color: #3caa95;
+}
+
+.login-form {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 300px;
+}
+
+.input-user-id,
+.input-user-password {
+  height: 40px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.3rem;
+  background-color: #ebebeb;
+  outline: none;
+}
+
+.login-button,
+.create-account-button {
+  margin-top: 20px;
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+}
+
+.create-account-button {
+  border: 3px solid #3caa95;
+  color: #3caa95;
+  background-color: white;
+}
+
+.login-button {
+  color: white;
+  background-color: #3caa95;
+}
+
