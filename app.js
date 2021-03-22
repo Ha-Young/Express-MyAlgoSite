@@ -3,11 +3,14 @@ const mongoose = require("mongoose");
 
 const index = require("./routes/index");
 const login = require("./routes/login");
+const createAccount = require("./routes/createAccount")
 
 const app = express();
 
-// dbUser / vanillacoding
-// mongodb+srv://dbUser:vanillacoding@cluster0.hugiy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+/*
+  dbUser / vanillacoding
+  mongodb+srv://dbUser:vanillacoding@cluster0.hugiy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+*/
 
 mongoose.connect(
   "mongodb+srv://dbUser:vanillacoding@cluster0.hugiy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
@@ -22,6 +25,7 @@ app.use(express.static(__dirname + "/public"));
 
 app.use("/", index);
 app.use("/login", login);
+app.use("/create_account", createAccount);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
