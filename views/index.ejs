@@ -2,7 +2,6 @@
 <html>
   <head>
     <title>Codewars</title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
     <h1>Codewars</h1>
@@ -10,14 +9,12 @@
 
     <ul class="problems">
       <% problems.forEach(problem => { %>
-        <li>
+        <li onclick="location.href='/problems/:<%= problem.id %>'">
           <p><%= problem.title %></p>
           <p>문제 레벨: <%= problem.difficulty_level %></p>
           <p>정답자: <%= problem.completed_users %></p>
-          <p>설명: <%= problem.description %></p>
         </li>
       <%  }) %>
     </ul>
-    <button onclick="location.href='/login'">로그인</button>
   </body>
 </html>
