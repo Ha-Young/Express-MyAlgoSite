@@ -1,8 +1,9 @@
 const express = require('express');
 const globalRouter = express.Router();
-const { home } = require("../controllers/globalController");
+const { home, login } = require("../controllers/globalController");
 
 /* GET home page. */
-globalRouter.get('/', home);
+globalRouter.get("/", home);
+globalRouter.get("/login", login);
 
 module.exports = globalRouter;

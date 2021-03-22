@@ -1,13 +1,18 @@
-const bodyParser = require("body-parser");
 const express = require("express");
+const bodyParser = require("body-parser");
+const expressEjsLayouts = require("express-ejs-layouts");
 const fs = require("fs");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const path = require("path");
+require("./db");
 
 const globalRouter = require("./routes/index");
 
 const app = express();
+
+app.set('layout', path.join('layouts/main'));
+app.set("layout extractScripts", true);
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -23,6 +28,7 @@ app.use(morgan("combined", {
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressEjsLayouts);
 
 app.use("/", globalRouter);
 
@@ -35,6 +41,7 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
+  console.error(err);
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};

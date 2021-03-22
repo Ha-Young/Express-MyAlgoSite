@@ -12,11 +12,15 @@
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
     "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.0",
+    "mongodb": "^3.6.5",
+    "mongoose": "^5.12.1",
     "morgan": "~1.9.0",
-    "nodemon": "^1.19.1",
     "serve-favicon": "~2.4.5"
   },
   "devDependencies": {
-    "helmet": "^4.4.1"
+    "dotenv": "^8.2.0",
+    "helmet": "^4.4.1",
+    "nodemon": "^2.0.7"
   }
 }
