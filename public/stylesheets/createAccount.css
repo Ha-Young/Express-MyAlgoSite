@@ -28,14 +28,24 @@
   outline: none;
 }
 
+.login-link-button,
 .create-account-button {
   margin-top: 20px;
   height: 30px;
   border: none;
   border-radius: 5px;
-  color: white;
   font-weight: bold;
-  background-color: #3caa95;
   cursor: pointer;
   outline: none;
+}
+
+.login-link-button {
+  border: 3px solid #3caa95;
+  color: #3caa95;
+  background-color: white;
+}
+
+.create-account-button {
+  color: white;
+  background-color: #3caa95;
 }
