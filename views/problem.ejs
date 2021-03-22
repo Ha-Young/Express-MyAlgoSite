@@ -7,9 +7,6 @@
   <title>Document</title>
 </head>
 <body>
-  <script src="lib/codemirror.js"></script>
-  <link rel="stylesheet" href="lib/codemirror.css">
-  <script src="mode/javascript/javascript.js"></script>
   <div>
     <%= problem.title %>
   </div>
@@ -23,10 +20,10 @@
     <%= problem.description %>
   </div>
   <div id="codeEditor">
-    <% var myCodeMirror = CodeMirror(document.querySelector("#codeEditor"), { %>
-      <%   value: "function myScript(){return 100;}\n", %>
-      <%  mode:  "javascript" %>
-    <% }); %>
+    <form action="<%= `/problems/${problem.id}` %>" method="post">
+      <textarea name="solution" cols="30" rows="10"></textarea>
+      <input type="submit">
+    </form>
   </div>
 </body>
 </html>
