@@ -1,38 +1,32 @@
 require("dotenv").config();
 
 const express = require("express");
-const passport = require("passport");
-const GoogleStrategy = require("passport-google-oauth").OAuthStrategy;
 
 const index = require("./routes/index");
 const login = require("./routes/login");
+const passport = require("passport");
+const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 
 const app = express();
 
-app.use('/', index);
+const mongoose = require("mongoose");
+const db = mongoose.connection;
 
-passport.use(new GoogleStrategy({
-    consumerKey: process.env['GOOGLE_CONSUMER_KEY'],
-    consumerSecret: process.env["GOOGLE_CONSUMER_SECRET"],
-    callbackURL: "/return"
-  },
-  function (token, tokenSecret, profile, done) {
-    URLSearchParams.findOrCreate({ googleId: profile.id }, function (err, user) {
-      return done(err, user);
-    });
-  }
-));
-
-app.get("/auth/google",
-  passport.authenticate("google", { scope: ""}));
-
-app.get("/auth/google/callback",
-  passport.authenticate("google", { failureRedirect: "/login"}),
-  function (req, res) {
-    res.redirect("/");
-  });
+mongoose.connect("mongodb+srv://hyeongju:WwHdtPxR6b-PibR@codewars.zwtye.mongodb.net/myFirstDatabase", {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+});
+db.on("error", console.error.bind(console, 'connection error:'));
+db.once("open", function () {
+  console.log("Connected to mongod server");
+});
 
 app.set("view engine", "ejs");
+
+app.use(passport.initialize());
+
+app.use('/', index);
+app.use("/login", login);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
