@@ -1,7 +1,8 @@
 const fs = require("fs");
+const path = require("path");
 const winston = require("winston");
 
-const logDir = __dirname + "../logs";
+const logDir = path.resolve(__dirname, "../logs");
 
 if (!fs.existsSync(logDir)) {
   fs.mkdirSync(logDir);
@@ -31,4 +32,3 @@ const stream = {
 
 exports.logger = logger;
 exports.stream = stream;
-
