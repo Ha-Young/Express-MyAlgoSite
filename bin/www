@@ -10,7 +10,7 @@
 const app = require('../app');
 const debug = require('debug')('cms:server');
 const http = require('http');
-const { port } = require('../config');
+const { port } = require('../src/config');
 
 /**
  * Get port from environment and store in Express.

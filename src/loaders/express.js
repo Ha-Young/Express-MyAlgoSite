@@ -18,7 +18,7 @@ module.exports = function ({ app, routerLoader }) {
 
   app.use(express.json());
   app.use(methodOverride());
-  app.use(express.static(path.resolve(__dirname, "../public")));
+  app.use(express.static(path.resolve(__dirname, "../../public")));
 
   routerLoader({ app });
 
@@ -37,6 +37,6 @@ module.exports = function ({ app, routerLoader }) {
 
     // render the error page
     res.status(err.status || 500);
-    res.render('error');
+    res.render('pages/error');
   });
 };
