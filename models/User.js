@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const passportLocalMongoose = require('passport-local-mongoose');
 
-const problemsSchema = new mongoose.Schema({
+const Problem = new mongoose.Schema({
   _id: {
     type: mongoose.ObjectId,
     index: true,
@@ -10,7 +11,7 @@ const problemsSchema = new mongoose.Schema({
   code: String,
 });
 
-const userSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
   _id: {
     type: mongoose.ObjectId,
     index: true,
@@ -35,7 +36,9 @@ const userSchema = new mongoose.Schema({
   },
   exprience: Number,
   kyu: Number,
-  problems: [problemsSchema],
+  problems: [Problem],
 });
 
-module.exports = mongoose.model('User', userSchema);
+UserSchema.plugin(passportLocalMongoose, {usernameField: "email"})
+
+module.exports = mongoose.model('User', UserSchema);

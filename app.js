@@ -1,4 +1,4 @@
-const dotenv = require('dot-env');
+const dotenv = require('dotenv');
 dotenv.config();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -6,6 +6,7 @@ const express = require('express');
 const morgan = require('morgan');
 const passport = require('passport');
 require('./dbInit');
+require('./passport');
 
 const index = require('./routes/index');
 
