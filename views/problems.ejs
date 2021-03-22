@@ -2,10 +2,26 @@
 <html>
   <head>
     <title>Problem</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
-    <h1>Codewars</h1>
-
+    <h1><%= problem.title  %></h1>
+    <div>
+      <%= problem.description %>
+    </div>
+    <div>
+      <div>
+        <%= `난이도: ${problem.difficulty_level} / 3` %>
+      </div>
+      <div>
+        <%= `정답자: ${problem.completed_users} 명` %>
+      </div>
+    </div>
+    <form action="/problems" method="POST" target="_blank">
+      <textarea class="code-input"></textarea>
+      <input type="submit" value="제출">
+    </form>
+    <script src="lib/codemirror.js"></script>
+  <script type="text/javascript" src="/javascripts/codeMirror.js"></script>
   </body>
 </html>

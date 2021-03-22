@@ -4,10 +4,12 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "NODE_ENV=development nodemon --inspect ./bin/www"
+    "dev": "NODE_ENV=development nodemon ./bin/www",
+    "debug": "NODE_ENV=development nodemon --inspect-brk ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
+    "codemirror": "^5.60.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
