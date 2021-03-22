@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require("mongoose");
 
 const index = require("./routes/index");
 
@@ -7,7 +8,13 @@ const app = express();
 // dbUser / vanillacoding
 // mongodb+srv://dbUser:vanillacoding@cluster0.hugiy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 
-
+mongoose.connect(
+  "mongodb+srv://dbUser:vanillacoding@cluster0.hugiy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+  { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }
+);
+const db = mongoose.connection;
+db.on("error", (err) => console.error(`DB connection Error : \n${err}`));
+db.once("open", () => console.log("Connected"));
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
