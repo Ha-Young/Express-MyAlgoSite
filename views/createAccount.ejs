@@ -8,37 +8,93 @@
   <body>
     <div class="create-account-container">
       <h1 class="create-account-title">Create account</h1>
-      <form action="" class="create-account-form">
-        <label>Name</label>
-        <input
-          class="input-user-name"
-          type="text"
-          name="user-name"
+      <form action="/create_account/new"
+        method="POST"
+        class="create-account-form"
+      >
+        <% if(isRetry){ %>
+          <label>Name</label>
+          <input
+            class="input-user-name"
+            type="text"
+            name="user-name"
+            value="<%=userInfo.name%>"
+          >
+          <label>Email</label>
+          <input
+            class="input-user-email"
+            type="text"
+            name="user-email"
+            autocomplete="username"
+            value="<%=userInfo.email%>"
+          >
+          <label>Password</label>
+          <input
+            class="input-user-password"
+            type="password"
+            name="user-password"
+            autocomplete="new-password"
+            value="<%=userInfo.password%>"
+          >
+          <label>Password confirm</label>
+          <input
+            class="input-user-password-confirm"
+            type="password"
+            name="user-password-confirm"
+            autocomplete="new-password"
+            value="<%=userInfo.password%>"
+          >
+          <div class="message-box">
+            <p class="message">
+              <%=message%>
+            </p>
+          </div>
+        <% }else{ %>
+          <label>Name</label>
+          <input
+            class="input-user-name"
+            type="text"
+            name="user-name"
+            value="<%=userInfo.name%>"
+          >
+          <label>Email</label>
+          <input
+            class="input-user-email"
+            type="email"
+            name="user-email"
+            autocomplete="username"
+            value="<%=userInfo.email%>"
+          >
+          <label>Password</label>
+          <input
+            class="input-user-password"
+            type="password"
+            name="user-password"
+            autocomplete="new-password"
+            value="<%=userInfo.password%>"
+          >
+          <label>Password confirm</label>
+          <input
+            class="input-user-password-confirm"
+            type="password"
+            name="user-password-confirm"
+            autocomplete="new-password"
+            value="<%=userInfo.password%>"
+          >
+          <div class="message-box">
+            <p class="message">
+            </p>
+          </div>
+        <% } %>
+        <button
+          class="login-link-button" 
+          type="button"
         >
-        <label>Email</label>
-        <input
-          class="input-user-email"
-          type="text"
-          name="user-email"
-          autocomplete="username"
-        >
-        <label>Password</label>
-        <input
-          class="input-user-password"
-          type="password"
-          name="user-password"
-          autocomplete="new-password"
-        >
-        <label>Password confirm</label>
-        <input
-          class="input-user-password-confirm"
-          type="password"
-          name="user-password-confirm"
-          autocomplete="new-password"
-        >
-        <button class="login-link-button" type="button">Return to log in page</button>
+          Return to log in page
+        </button>
         <button class="create-account-button" type="submit">Create account</button>
       </form>
     </div>
+    <script src="../javascripts/createAccount.js"></script>
   </body>
 </html>

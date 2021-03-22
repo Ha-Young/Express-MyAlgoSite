@@ -28,6 +28,14 @@
   outline: none;
 }
 
+.message-box {
+  height: 45px;
+}
+
+.message {
+  color: red
+}
+
 .login-link-button,
 .create-account-button {
   margin-top: 20px;
