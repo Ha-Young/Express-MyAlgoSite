@@ -6,7 +6,6 @@ const express = require('express');
 const morgan = require("morgan");
 const fs = require("fs");
 
-const index = require(`${ROOT_DIR_NAME}/routes`);
 
 const app = express();
 
@@ -17,7 +16,11 @@ const logStream = fs.createWriteStream(`${ROOT_DIR_NAME}/log/app.log`, { flags: 
 app.use(morgan("combined", { stream: logStream }));
 app.use(express.static("public"));
 
+const index = require(`${ROOT_DIR_NAME}/routes`);
+
+
 app.use('/', index);
+app.use
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

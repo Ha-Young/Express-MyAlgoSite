@@ -5,6 +5,10 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    "HI"
+    <% if (user) {%>
+      <h2><%= user.name %></h2>
+    <% } else { %>
+      <h2>Please <a href="/login">Log in</a></h2>
+    <% } %>
   </body>
 </html>
