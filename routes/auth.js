@@ -1,0 +1,51 @@
+const express = require('express');
+const router = express.Router();
+const passport = require("passport");
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const User = require('../models/User');
+
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id).then(user => {
+    done(null, user);
+  });
+});
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.CLIENT_ID,
+      clientSecret: process.env.CLIENT_SECRET,
+      callbackURL: '/auth/google/callback'
+    },
+    (accessToken, refreshToken, profile, done) => {
+      console.log('google return')
+      console.log(profile._json)
+      User.findOne({ sub: profile.id }).then((currentUser) => {
+        if (currentUser) {
+          done(null, currentUser);
+        } else {
+          new User({
+            ...profile._json
+          }).save().then((newUser) => {
+            done(null, newUser);
+          });
+        }
+      });
+    }
+  )
+);
+
+router.get('/google', passport.authenticate('google', {
+  scope: ['profile', 'email']
+}));
+
+router.get('/google/callback', passport.authenticate('google', {
+  successRedirect: '/',
+  failureRedirect: '/login'
+}));
+
+module.exports = router;
