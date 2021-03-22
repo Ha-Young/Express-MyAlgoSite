@@ -2,6 +2,8 @@ const express = require('express');
 const morgan = require('morgan');
 
 const index = require('./routes/index');
+const login = require('./routes/login');
+const problems = require('./routes/problems');
 
 const app = express();
 
@@ -16,6 +18,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/', index);
+app.use('/login', login);
+app.use('/problems', problems);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
