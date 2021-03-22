@@ -1,10 +1,38 @@
-const express = require('express');
+require("dotenv").config();
 
-const index = require('./routes/index');
+const express = require("express");
+const passport = require("passport");
+const GoogleStrategy = require("passport-google-oauth").OAuthStrategy;
+
+const index = require("./routes/index");
+const login = require("./routes/login");
 
 const app = express();
 
 app.use('/', index);
+
+passport.use(new GoogleStrategy({
+    consumerKey: process.env['GOOGLE_CONSUMER_KEY'],
+    consumerSecret: process.env["GOOGLE_CONSUMER_SECRET"],
+    callbackURL: "/return"
+  },
+  function (token, tokenSecret, profile, done) {
+    URLSearchParams.findOrCreate({ googleId: profile.id }, function (err, user) {
+      return done(err, user);
+    });
+  }
+));
+
+app.get("/auth/google",
+  passport.authenticate("google", { scope: ""}));
+
+app.get("/auth/google/callback",
+  passport.authenticate("google", { failureRedirect: "/login"}),
+  function (req, res) {
+    res.redirect("/");
+  });
+
+app.set("view engine", "ejs");
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
