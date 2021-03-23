@@ -12,6 +12,15 @@ const getUserByEmail = async (email) => {
   }
 };
 
+const getUserById = async (id) => {
+  try {
+    const user = await User.findById(id);
+    return user;
+  } catch (err) {
+    return null;
+  }
+};
+
 const initialize = (passport) => {
   const authenticateUser = async (email, password, done) => {
     const user = await getUserByEmail(email);
@@ -39,8 +48,12 @@ const initialize = (passport) => {
       authenticateUser
     )
   );
-  passport.serializeUser((user, done) => { });
-  passport.deserializeUser((id, done) => { });
+  passport.serializeUser((user, done) => {
+    done(null, user._id);
+  });
+  passport.deserializeUser((id, done) => {
+    return done(null, getUserById(id));
+  });
 }
 
 module.exports = initialize;

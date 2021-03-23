@@ -8,11 +8,13 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const flash = require("express-flash");
 const session = require("express-session");
+const methodOverride = require("method-override");
 
 const index = require("./routes/index");
 const login = require("./routes/login");
 const createAccount = require("./routes/createAccount");
 const initializePassport = require("./middlewares/passport");
+const checkAuth = require("./middlewares/checkAuthenticated");
 
 const app = express();
 
@@ -39,6 +41,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(methodOverride("_method"));
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -48,9 +51,13 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.use("/", index);
-app.use("/login", login);
-app.use("/create_account", createAccount);
+app.use("/login", checkAuth.checkNotAuthenticated, login);
+app.delete("/logout", (req, res, next) => {
+  req.logOut();
+  res.redirect("/login");
+});
+app.use("/create_account", checkAuth.checkNotAuthenticated, createAccount);
+app.use("/", checkAuth.checkAuthenticated, index);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
