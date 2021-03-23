@@ -1,0 +1,12 @@
+.problem-list {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.problem-list .problem-box {
+  display: inline-block;
+  width: calc(25% - 2em);
+  padding: 0.5em;
+  border: 1px solid #dddddd;
+}
