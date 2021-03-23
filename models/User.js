@@ -13,6 +13,9 @@ db.once("open", () => console.log("MongoDB Connected"));
 
  */
 
-const userSchema = new mongoose.Schema({});
+const userSchema = new mongoose.Schema({
+  username: String,
+  googleId: String,
+});
 
 module.exports = mongoose.model("User", userSchema);
