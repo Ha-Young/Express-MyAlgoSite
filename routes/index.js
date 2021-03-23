@@ -5,6 +5,10 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
+  if (req.user) {
+    return res.render('problemList', { problem: 'this is problemList' });
+  }
+
   res.render('index', { title: 'codeWars' });
 });
 
@@ -26,6 +30,10 @@ router.post('/login', (req, res, next) => {
 router.get('/login/google', passport.authenticate('google', { scope: ['profile', 'email', 'openid'] }));
 
 router.get('/login/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {res.redirect('/')});
+
+router.get('/check', (req, res, next) => {
+  console.log(req.user);
+});
 
 router.get('/join', (req, res, next) => {
   res.render('join', { title: 'Sign Up' });

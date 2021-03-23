@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
 const TestCase = new mongoose.Schema({
-  testcase: mongoose.Mixed,
-  answer: mongoose.Mixed,
+  testcase: mongoose.Schema.Types.Mixed,
+  answer: mongoose.Schema.Types.Mixed,
 });
 
 const Challenger = new mongoose.Schema({
-  _id: mongoose.ObjectId,
+  _id: mongoose.Schema.Types.ObjectId,
   solved: Boolean,
 });
 
@@ -18,7 +18,7 @@ const Accuracy = new mongoose.Schema({
 
 const ProblemSchema = new mongoose.Schema({
   _id: {
-    type: mongoose.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     index: true,
   },
   title: String,
