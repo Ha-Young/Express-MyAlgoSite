@@ -5,11 +5,14 @@ const cookieParser = require("cookie-parser");
 const expressSession = require("express-session");
 const logger = require("morgan");
 const expressLayouts = require("express-ejs-layouts");
+const passport = require("passport");
 
-const passport = require("./passport");
+const passportConfig = require("./config/passport");
 
 const index = require("./routes/index");
-const login = require("./routes/login");
+const signup = require("./routes/signup");
+const signin = require("./routes/signin");
+const problems = require("./routes/problems");
 
 const app = express();
 
@@ -31,14 +34,19 @@ app.use(expressSession({
   saveUninitialized: false,
   secret: process.env.COOKIE_SECRET,
   cookie: {
-    maxAge: parseInt(process.env.MAX_AGE),
+    // maxAge: parseInt(process.env.MAX_AGE),
+    httpOnly: true,
+    secure: process.env.NODE_ENV !== "development",
   },
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+passportConfig();
 
+app.use("/signup", signup);
+app.use("/signin", signin);
 app.use("/", index);
-app.use("/login", login);
+app.use("/problems", problems);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

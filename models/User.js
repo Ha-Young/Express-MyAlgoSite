@@ -1,22 +1,42 @@
 const mongoose = require('mongoose');
-const findOrCreate = require("mongoose-findorcreate");
+const bcrypt = require("bcrypt");
 
-/*
-
-  TODO: Fill in the model specification
-
- */
 const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, "please provide name."],
+  },
+  email: {
+    type: String,
+    unique: true,
+    lowercase: true,
+  },
+  password: {
+    type: String,
+    select: false,
+  },
   githubId: String,
   profileUrl: String,
-  userId: String,
-  userPassWord: String,
   score: {
     type: Number,
     default: 0,
   },
 });
 
-userSchema.plugin(findOrCreate);
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
+    return next();
+  }
+
+  this.password = await bcrypt.hash(this.password, 12);
+  next();
+});
+
+userSchema.methods.correctPassword = async function (
+  candidatePassword,
+  userPassword
+) {
+  return bcrypt.compare(candidatePassword, userPassword);
+};
 
 module.exports = mongoose.model('User', userSchema);

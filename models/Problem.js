@@ -7,7 +7,10 @@ const mongoose = require('mongoose');
  */
 const ProblemSchema = new mongoose.Schema({
   "id": Number,
-  "title": String,
+  "title": {
+    type: String,
+    unique: true,
+  },
   "completed_users": Number,
   "difficulty_level": Number,
   "description": String,

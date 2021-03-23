@@ -16,6 +16,7 @@ a {
 
 .main {
   padding: 40px;
+  overflow: scroll;
 }
 
 .footer {
@@ -26,17 +27,32 @@ a {
   border-top: 2px solid #d4dcff;
 }
 
-.login-button {
+.button {
   width: 200px;
   height: 30px;
-  color: #7d83ff;
   border: 2px solid #d4dcff;
   border-radius: 5px;
   background: white;
   transition: all 0.3s;
 }
 
-.login-button:hover {
+.button:hover {
   background: #d4dcff;
   color: white;
+}
+
+.problems {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.problem {
+  width: 200px;
+  height: 200px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  border: 2px solid #d4dcff;
+  border-radius: 5px;
+  background: white;
+  transition: all 0.3s;
 }
