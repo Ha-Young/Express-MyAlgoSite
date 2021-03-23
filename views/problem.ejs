@@ -13,10 +13,10 @@
     <article>문제 설명 : <%=problem.description%></article>
     <span>레벨 : <%=problem.difficulty_level%></span>
     <span>맞은 사람 수 : <%=problem.completed_users%></span>
-
-    <form>
+    <% const address =`/problems/${problem.id}`%>
+    <form method="post" action=<%=address %>>
       <textarea id="editor">console.log("Hello World");</textarea>
-      <button>Submit</button>
+      <input type="submit">Submit</button>
     </form>
   </body>
   <script>

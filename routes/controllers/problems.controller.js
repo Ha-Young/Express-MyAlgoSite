@@ -8,7 +8,5 @@ exports.getProblem = async function (req, res, next) {
 }
 
 exports.postSolution = async function (req, res,next) {
-  console.log(req.body);
-
-
+  res.render("success");
 }
