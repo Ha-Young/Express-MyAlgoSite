@@ -4,5 +4,12 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  all: unset;
+  color: gray;
+}
+
+nav {
+  width: 100vw;
+  height: 100px;
+  background-color: tomato;
 }
