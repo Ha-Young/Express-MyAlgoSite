@@ -6,14 +6,6 @@ const session = require('express-session');
 const flash = require('express-flash');
 require('dotenv').config();
 
-const users = [];
-const initializePassport = require('./config/passport-config');
-initializePassport(
-  passport,
-  email => users.find(user => user.email === email),
-  id => users.find(user => user.id === id)
-);
-
 const index = require('./routes/index');
 
 const app = express();
@@ -24,6 +16,13 @@ mongoose.connect(process.env.MONGODB_URL, {
   useCreateIndex: true,
   useUnifiedTopology: true,
 });
+
+const User = require('./models/User');
+const initializePassport = require('./config/passport-config');
+initializePassport(
+  passport,
+  async (email) => await User.findOne({ email }),
+);
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');

@@ -1,28 +1,34 @@
-const LocalStrategy = require('passport-local').Strategy
+const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 
-function initialize(passport, getUserByEmail, getUserById) {
-  const authenticate = async(email, password, done) => {
-    const user = getUserByEmail(email)
+function initialize(passport, getUserByEmail) {
+  const authenticate = async (email, password, done) => {
+    const user = await getUserByEmail(email);
+
     if (user == null) {
-        return done(null, false, { message: 'Invalid User' })
+        return done(null, false, { message: 'Invalid User' });
     }
 
     try {
         if (await bcrypt.compare(password, user.password)) {
-            return done(null, user)
+            return done(null, user);
         } else {
-            return done(null, false, { message: 'Invalid Password' })
+            return done(null, false, { message: 'Invalid Password' });
         }
     } catch (e) {
-        return done(e)
+        return done(e);
     }
   };
 
-  passport.use(new LocalStrategy({ usernameField: 'email' }, authenticate))
-  passport.serializeUser((user, done) => done(null, user.id))
-  passport.deserializeUser((id, done) => {
-      return done(null, getUserById(id))
+  passport.use(new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password',
+    session: true,
+    passReqToCallback: false,
+  }, authenticate));
+  passport.serializeUser((user, done) => done(null, user));
+  passport.deserializeUser(async (user, done) => {
+      return done(null, await getUserByEmail(user.email));
   });
 }
 

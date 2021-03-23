@@ -40,4 +40,20 @@ router.post('/register', async (req, res, next) => {
   }
 });
 
+router.get('/logout', (req, res, next) => {
+  res.render('logout');
+});
+
+router.get('/logout/success', (req, res, next) => {
+  if (req.session) {
+    try {
+      req.session.destroy();
+      res.redirect('/login');
+    } catch (e) {
+      next(e);
+    }
+  }
+  res.json({ body: req.session });
+});
+
 module.exports = router;
