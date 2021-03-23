@@ -1,4 +1,4 @@
-const AuthController = require("../controllers/auth");
+const AuthController = require("./controllers/auth");
 
 module.exports = function authRouter(app) {
   app.get('/join', AuthController.viewJoin);

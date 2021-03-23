@@ -2,6 +2,9 @@
   <form class="form-common" action="/login" method="POST">
     <h3>Login</h3>
     <h4>input your login information</h4>
+
+    <h5 style="color: red"><%= errMsg %></h5>
+
     <fieldset>
       <input placeholder="Your Email Address" name="email" type="email" tabindex="2" required>
     </fieldset>
