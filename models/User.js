@@ -32,10 +32,11 @@ const userSchema = new mongoose.Schema({
   }
 });
 
-userSchema.pre("save", async function(next) {
+userSchema.pre("save", function(next) {
   const user = this;
+
   if (user.isModified("userPassword")) {
-    await bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.genSalt(10, (err, salt) => {
       if (err) {
         next(err);
         return;
@@ -51,10 +52,7 @@ userSchema.pre("save", async function(next) {
         next();
       });
     });
-    return;
   }
-
-  next();
 });
 
 module.exports = mongoose.model('User', userSchema);
