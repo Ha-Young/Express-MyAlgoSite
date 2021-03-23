@@ -15,6 +15,7 @@ const ProblemSchema = new mongoose.Schema({
     default: 0
   },
   difficulty_level: Number,
+  description: String,
   tests: [{
     code: String,
     solution: mongoose.Schema.Types.Mixed
