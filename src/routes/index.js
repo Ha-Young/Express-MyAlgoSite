@@ -1,11 +1,12 @@
-const express = require('express');
+const express = require("express");
 
-const auth = require('./auth');
-const { home } = require('../controllers/home');
+const auth = require("./auth");
+const loginCheck = require("./middlewares/loginCheck");
+const { home } = require("./controllers/home");
 
 module.exports = function () {
   const app = express.Router();
-  app.get('/', home);
+  app.get("/", loginCheck, home);
 
   auth(app);
 
