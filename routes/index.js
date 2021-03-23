@@ -5,7 +5,7 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  res.render('index', { title: '바닐라코딩' });
+  res.render('index', { title: 'codeWars' });
 });
 
 router.get('/login', (req, res, next) => {
@@ -16,7 +16,7 @@ router.post('/login', (req, res, next) => {
   const {
     body: { email, password }
   } = req;
-  console.log(email, password);
+  
   next();
 }, passport.authenticate('local', {
   failureRedirect: '/login',
@@ -37,7 +37,6 @@ router.post('/join', async (req, res, next) => {
   } = req;
 
   try {
-
     const user = await User({
       email,
       name,
@@ -46,6 +45,7 @@ router.post('/join', async (req, res, next) => {
     await User.create(user);
   } catch (err) {
     console.log(err);
+    next(err);
   }
 
   next();
