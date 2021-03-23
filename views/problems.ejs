@@ -3,6 +3,7 @@
   <head>
     <title>Problem</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/codemirror/lib/codemirror.css">
   </head>
   <body>
     <h1><%= problem.title  %></h1>
@@ -19,8 +20,13 @@
     </div>
     <form action="/problems" method="POST" target="_blank">
       <textarea class="code-input"></textarea>
-      <input type="submit" value="제출">
+      <!-- <textarea class="code-input" style="display: block; width: 200px; height: 200px; background-color: red;"></textarea> -->
+   
+      <!-- <input type="submit" value="제출"> -->
     </form>
-  <script type="text/javascript" src="/javascripts/codeMirror.js"></script>
+    <script type="text/javascript" src="/codemirror/lib/codemirror.js"></script>
+    <script type="text/javascript" src="/javascripts/codeMirror.js"></script>
+
   </body>
 </html>
+
