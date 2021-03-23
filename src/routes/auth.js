@@ -6,4 +6,5 @@ module.exports = function authRouter(app) {
 
   app.post('/join', AuthController.join);
   app.post('/login', AuthController.login);
+  app.post('/logout', AuthController.logout);
 };

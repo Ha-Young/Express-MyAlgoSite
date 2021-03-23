@@ -6,11 +6,11 @@ const { jwtSecret } = require("../../config");
 const User = require("../../models/User");
 
 exports.viewJoin = function (req, res, next) {
-  res.render("pages/join");
+  res.render("pages/join", { user: req.user || {} });
 };
 
 exports.viewLogin = function (req, res, next) {
-  res.render("pages/login", { errMsg: "" });
+  res.render("pages/login", { user: req.user || {}, errMsg: "" });
 };
 
 exports.join = async function (req, res, next) {
@@ -49,7 +49,7 @@ exports.join = async function (req, res, next) {
 exports.login = function (req, res, next) {
   passport.authenticate("local", { session: false }, (err, user) => {
     if (err || !user) {
-      return res.render("pages/login", { errMsg: err.message });
+      return res.render("pages/login", { user: req.user || {}, errMsg: err.message });
     }
 
     jwt.sign(user.toJSON(), jwtSecret, (err, token) => {
@@ -66,4 +66,9 @@ exports.login = function (req, res, next) {
         .redirect("/");
     });
   })(req, res);
+};
+
+exports.logout = function (req, res, next) {
+  res.clearCookie("jwtToken");
+  res.redirect("/login");
 };

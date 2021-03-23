@@ -32,6 +32,11 @@ a {
   background-color: bisque;
 }
 
+.logo {
+  width: 70px;
+  height: 70px;
+}
+
 .container {
   padding: 20px;
   margin-top: 100px;

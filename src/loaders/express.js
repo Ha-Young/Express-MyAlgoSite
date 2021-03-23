@@ -44,6 +44,6 @@ module.exports = function ({ app, routerLoader }) {
 
     // render the error page
     res.status(err.status || 500);
-    res.render('pages/error');
+    res.render('pages/error', { user: req.user || {} });
   });
 };
