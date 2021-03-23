@@ -12,13 +12,6 @@ const setMessage = (message) => {
 }
 
 const verifyInput = (e) => {
-  if (!$inputName.value || !$inputEmail.value || !$inputPassword.value || !$inputPasswordConfirm.value) {
-    return {
-      return: false,
-      message: `Please input all informations.`,
-    };
-  }
-
   if ($inputName.value.length >= 20) {
     return {
       result: false,
