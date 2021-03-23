@@ -7,7 +7,7 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 const path = require("path");
 const passport = require("./passport");
-const session = require('express-session');
+const session = require("express-session");
 
 const { authenticateUser, localMiddleware, loginedUser } = require("./middlewares");
 const globalRouter = require("./routes/globalRouter");
@@ -17,7 +17,7 @@ require("dotenv").config();
 
 const app = express();
 
-app.set('layout', path.join('layouts/main'));
+app.set("layout", path.join("layouts/main"));
 app.set("layout extractScripts", true);
 
 app.set("views", path.join(__dirname, "views"));

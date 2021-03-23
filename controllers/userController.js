@@ -1,10 +1,5 @@
 const passport = require("passport");
-const problems = require("../models/sample_problems.json");
 const { TITLE } = require("../constants/common");
-
-exports.home = (req, res) => {
-  res.render("home", { pageTitle: TITLE.HOME, problems });
-};
 
 exports.login = (req, res) => {
   res.render("login", { pageTitle: TITLE.LOGIN });

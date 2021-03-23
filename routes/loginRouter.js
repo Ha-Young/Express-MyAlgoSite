@@ -1,5 +1,5 @@
 const express = require("express");
-const { login, loginGoogle, loginGoogleCallback } = require("../controllers/globalController");
+const { login, loginGoogle, loginGoogleCallback } = require("../controllers/userController");
 
 const loginRouter = express.Router();
 

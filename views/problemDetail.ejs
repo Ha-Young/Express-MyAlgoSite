@@ -1,0 +1,15 @@
+<%- include("./partial/header") %>
+<div class="problem-container">
+  <div class="problem-detail">
+    <h2><%= problem.title %></h2>
+    <div>정답자 <%= problem.completed_users %>명</div>
+    <div>Level <%= problem.difficulty_level %></div>
+    <p><%= problem.description %></p>
+  </div>
+  <div class="problem-solution">
+    <form action="/problems/<%= problem.id %>" method="POST">
+      <textarea id="editor"></textarea>
+      <button>ATTEMPT</button>
+    </form>
+  </div>
+</div>
