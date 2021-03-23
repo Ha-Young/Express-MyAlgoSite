@@ -8,10 +8,13 @@ const session = require("express-session");
 const passport = require("passport");
 const methodOverride = require("method-override");
 const mongoose = require("mongoose");
+const path = require("path");
 
 const index = require("./routes/index");
 const auth = require("./routes/auth");
 const problems = require("./routes/problems");
+const editor = require("./routes/editor");
+
 const { checkAuthenticated } = require("./middlewares/auth");
 
 const app = express();
@@ -37,8 +40,10 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(express.static(path.join(__dirname, 'public')));
 app.use("/auth", auth);
 app.use("/problems", problems);
+app.use("/editor", editor);
 app.use("/", checkAuthenticated, index);
 
 // catch 404 and forward to error handler
