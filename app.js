@@ -1,19 +1,54 @@
-const express = require('express');
+require("dotenv").config({ path: "./.env"});
+require("./config/db");
+require("./config/passport");
 
-const index = require('./routes/index');
+const express = require("express");
+const mongoose = require("mongoose");
+const morgan = require("morgan");
+const session = require("express-session");
+const passport = require("passport");
+const expressLayouts = require("express-ejs-layouts");
+const bodyParser = require("body-parser");
+const createError = require("http-errors");
+
+const home = require('./routes/route_options/home');
+const login = require("./routes/route_options/login");
+const logout = require("./routes/route_options/logout");
 
 const app = express();
 
-app.use('/', index);
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+} // === "production" ?
 
-// catch 404 and forward to error handler
+app.use(session({
+  secret: process.env.EXPRESS_SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+}))
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use(expressLayouts);
+app.set("layout", "./layouts/index_layout");
+app.set("view engine", "ejs");
+app.use(express.static("public"));
+
+// 다 모은 라우터로 대체
+app.use('/', home);
+app.use("/login", login);
+app.use("/logout", logout);
+
 app.use(function(req, res, next) {
   const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
-// error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
