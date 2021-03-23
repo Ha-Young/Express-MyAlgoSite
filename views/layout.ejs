@@ -12,10 +12,10 @@
         <img class="logo" src="/imgs/logo.ico" alt="logo" />
       </a>
       <h1>Code Wars</h1>
-      <form action="/logout" method="POST">
+      <form class="user-info" action="/logout" method="POST">
         <% if (user.name) {%>
           <h3>Hello <%= user.name %></h3>
-          <button>logout</button>
+          <button class="logout-btn" type="submit">logout</button>
         <% } %>
       </form>
     </div>
