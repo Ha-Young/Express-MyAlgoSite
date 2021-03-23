@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const ProblemSchema = new mongoose.Schema({
-  id: mongoose.isValidObjectId,
+  id: mongoose.ObjectId,
   title: {
     type: String,
-    required: true,
+    required: [true, "title is required"]
   },
   completed_users: {
     type: Number,
@@ -18,20 +18,20 @@ const ProblemSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: true,
+    required: [true, "description is required"]
   },
   tests: [{
     type: Object,
-    required: true,
+    required: [true, "tests is required"],
     code: {
       type: String,
-      required: true,
+      required: [true, "test code is required"],
     },
     solution: {
       type: mongoose.Schema.Types.Mixed,
-      required: true,
+      required: [true, "test solution is required"],
     },
   }],
-});
+}, { timestamps: true });
 
-module.exports = mongoose.model('Problem', ProblemSchema);
+module.exports = mongoose.model("Problem", ProblemSchema);

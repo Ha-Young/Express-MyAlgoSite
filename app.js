@@ -1,4 +1,5 @@
 require("dotenv").config();
+require(`${__dirname}/database/atlas.js`);
 require(`${__dirname}/authentication/passport`);
 
 const express = require('express');
@@ -28,8 +29,10 @@ app.use(passport.session());
 
 const index = require(`${__dirname}/routes`);
 const login = require(`${__dirname}/routes/login`);
+const upload = require(`${__dirname}/routes/upload`);
 const redirectByUnAuth = require(`${__dirname}/utils/redirectByUnAuth`);
 
+app.use("/upload", upload)
 app.use("/login", login);
 app.use(redirectByUnAuth);
 app.use('/', index);
