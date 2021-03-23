@@ -27,7 +27,7 @@ const ProblemSchema = new mongoose.Schema({
   author: String,
   tags: [String],
   testcases: [TestCase],
-  like: [mongoose.ObjectId],
+  like: [mongoose.Schema.Types.ObjectId],
   accuracy: {
     type: Accuracy,
   }

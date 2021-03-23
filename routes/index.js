@@ -6,6 +6,7 @@ const router = express.Router();
 /* GET home page. */
 router.get('/', (req, res, next) => {
   if (req.user) {
+
     return res.render('problemList', { problem: 'this is problemList' });
   }
 
