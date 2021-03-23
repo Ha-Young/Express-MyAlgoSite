@@ -6,27 +6,3 @@
   width: 100vw;
   height: 90vh;
 }
-
-.header {
-  background-color: red;
-}
-
-.header__wrapper {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.titleLogo__wrapper {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 30%;
-}
-
-.userButtons__container {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 20%;
-}

@@ -33,11 +33,6 @@ body {
   filter:blur(1px);
 }
 
-.header__wrapper {
-  width: 100%;
-  height: 10vh;
-}
-
 a {
   color: #00B7FF;
 }
