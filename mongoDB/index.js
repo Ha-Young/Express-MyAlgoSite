@@ -10,13 +10,13 @@ mongoose.connect(
   },
 );
 
-const db = mongoose.connection;
+const mongoDb = mongoose.connection;
 
-db.on("err", (err) => {
+mongoDb.on("err", (err) => {
   console.warn(`db connection is failed, ${err}`);
   process.exit(1);
 });
 
-db.once("open", () => console.log(`Mongodb connected, ${db.host}`));
+mongoDb.once("open", () => console.log(`Mongodb connected, ${mongoDb.host}`));
 
-module.exports = db;
+module.exports = mongoDb;

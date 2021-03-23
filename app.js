@@ -1,15 +1,13 @@
 require("dotenv").config({ path: "./.env"});
-require("./config/db");
-require("./config/passport");
+require("./mongoDB")
+require("./passport/google_passport");
 
 const express = require("express");
-const mongoose = require("mongoose");
 const morgan = require("morgan");
-const session = require("express-session");
+const mongoSession = require("./mongoDB/session");
 const passport = require("passport");
 const expressLayouts = require("express-ejs-layouts");
 const bodyParser = require("body-parser");
-const createError = require("http-errors");
 
 const home = require('./routes/route_options/home');
 const login = require("./routes/route_options/login");
@@ -19,14 +17,9 @@ const app = express();
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
-} // === "production" ?
+} // === "production" ????
 
-app.use(session({
-  secret: process.env.EXPRESS_SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false,
-}))
-
+app.use(mongoSession);
 app.use(passport.initialize());
 app.use(passport.session());
 

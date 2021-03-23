@@ -1,8 +1,9 @@
 const express = require("express");
 const passport = require("passport");
 const router = express.Router();
+const verifyUser = require("../../middlewares/verifyUser");
 
-router.get("/", (req, res, next) => {
+router.get("/", verifyUser, (req, res, next) => {
   res.render("login", { layout: "./layouts/login_layout", title: "Login" });
 });
 
