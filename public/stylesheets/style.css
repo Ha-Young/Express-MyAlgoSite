@@ -1,8 +1,35 @@
-html body {
-  position: relative;
+html {
   width: 100%;
   height: 100%;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.content__wrapper {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.content__wrapper::after {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  content: "";
+  top: 0;
+  left: 0;
+  background-image: url("../images/clash_of_code_codingame.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+  opacity: .7;
 }
 
 .header__wrapper {
