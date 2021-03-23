@@ -19,6 +19,11 @@
           <input name="userPassword" id="userPassword" type="password" required />
         </div>
       </fieldset>
+      <p class="validation">
+        <% if (messages.error) { %>
+          <%= messages.error %>
+        <% } %>
+      </p>
       <ul class="button-list">
         <li><input class="button" type="submit" value="SIGN IN" /></li>
         <li><a class="button" href="/users/signup">CREATE ACCOUNT</a></li>

@@ -19,9 +19,9 @@ fieldset {
   min-width: 200px;
 }
 
-.form-box .validation {
+.validation {
   margin: 0;
-  padding: 0.3em 0 0 155px;
+  padding: 0.5em 0;
   font-size: 0.9em;
   color: red;
 }
