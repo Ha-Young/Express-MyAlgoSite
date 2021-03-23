@@ -1,4 +1,5 @@
 const verifyUser = (req, res, next) => {
+
   if (req.isAuthenticated()) {
     next();
   } else {

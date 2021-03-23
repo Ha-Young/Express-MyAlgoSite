@@ -14,7 +14,7 @@ router.get(
   passport.authenticate(
     'google', {
       successRedirect: '/',
-      failureRedirect: 'auth/google'
+      failureRedirect: 'auth/google/'
     }
   )
 );

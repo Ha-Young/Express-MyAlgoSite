@@ -1,10 +1,16 @@
 require('dotenv').config();
 
+const indexRouter = require('./routes/index');
+const loginRouter = require('./routes/login');
+const authRouter = require('./routes/auth');
+const problemsRouter = require('./routes/problem');
+
 const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
+
 const db = process.env.DATABASE.replace(
   '<password>',
   process.env.DATABASE_PASSWORD
@@ -26,14 +32,11 @@ passport.use(
       callbackURL: "/auth/google/callback"
     },
     function (token, tokenSecret, profile, done) {
+
       return done(null, profile);
     }
   )
 );
-
-const index = require('./routes/index');
-const login = require('./routes/login');
-const auth = require('./routes/auth');
 
 const app = express();
 
@@ -54,31 +57,30 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser(function (user, done) {
+
   done(null, user);
 });
 
 passport.deserializeUser(function (user, done) {
+
   done(null, user);
 });
 
-app.use('/', index);
-app.use('/login', login);
-app.use('/auth', auth);
+app.use('/', indexRouter);
+app.use('/login', loginRouter);
+app.use('/auth', authRouter);
+app.use('/problems', problemsRouter);
 
-// catch 404 and forward to error handler
 app.use(function(req, res, next) {
   const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
-// error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
   res.status(err.status || 500);
   res.render('error');
 });
