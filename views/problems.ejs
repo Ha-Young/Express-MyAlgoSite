@@ -1,2 +1,15 @@
+
+
 <h1><%= title %></h1>
 
+<ul>
+  <% for(let i = 0; i < data.length; i++) { %>
+    <br />
+    <li>
+      <a href= '/problems/<%= data[i]._id %>' ><span><%= data[i].title %></span></a>
+      <br />
+      <br />
+      <span><%= data[i].description %></span>
+    </li>
+  <% } %>
+  </ul>

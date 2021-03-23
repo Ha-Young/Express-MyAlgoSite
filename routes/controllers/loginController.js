@@ -1,5 +1,4 @@
 const dotenv = require("dotenv");
-const { registerValidation } = require("../../util/validation");
 const User = require("../../models/User");
 const bcrypt = require("bcrypt");
 

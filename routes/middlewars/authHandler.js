@@ -31,7 +31,7 @@ exports.signToken = function (req, res, next) {
               httpOnly: true,
             })
             .status(200)
-            .json({ user, token });
+            .redirect("/problems");
         }
       );
     });

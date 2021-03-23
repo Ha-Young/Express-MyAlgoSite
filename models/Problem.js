@@ -1,12 +1,30 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-/*
-
-  TODO: Fill in the model specification
-
- */
 const ProblemSchema = new mongoose.Schema({
-
+  id: {
+    type: Number,
+    required: true,
+  },
+  title: {
+    type: String,
+    required: true,
+    max: 1024,
+  },
+  completed_users: {
+    type: Number,
+  },
+  difficulty_level: {
+    type: Number,
+    required: true,
+    min: 0,
+  },
+  description: {
+    type: String,
+    max: 1024,
+  },
+  tests: {
+    type: Array,
+  },
 });
 
-module.exports = mongoose.model('Problem', ProblemSchema);
+module.exports = mongoose.model("Problem", ProblemSchema);

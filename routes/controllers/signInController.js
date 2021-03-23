@@ -26,7 +26,7 @@ exports.createUser = async function (req, res, next) {
 
   try {
     await user.save();
-    res.send({ user: user._id });
+    res.redirect("/");
   } catch (error) {
     next("signIn error");
   }
