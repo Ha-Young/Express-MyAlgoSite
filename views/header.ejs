@@ -1,0 +1,14 @@
+<header>
+  <div class="header-container">
+    <a href="/">
+      <h1 class="header-title">Codewars</h1>
+    </a>
+    <div class="account-info-box">
+      <%= email %>
+      <form action="/logout?_method=DELETE" method="POST">
+        <button class="logout-button" type="submit">Log out</button>
+      </form>
+    </div>
+  </div>
+</header>
+

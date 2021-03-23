@@ -6,28 +6,20 @@
     <link rel='stylesheet' href='/stylesheets/index.css' />
   </head>
   <body>
-    <header>
-      <div class="header-container">
-        <h1>Codewars</h1>
-        <div class="account-info-box">
-          <%= email %>
-          <form action="/logout?_method=DELETE" method="POST">
-            <button class="logout-button" type="submit">Log out</button>
-          </form>
-        </div>
-      </div>
-    </header>
-    <h2 class="problems-title">Problems</h2>
-    <ul class="problems">
-      <%  for (const problem of problemList) { %>
-        <a class="problem-link" href="problems/<%=problem.id%>">
-          <li>
-            <h3 class="problem-title"><%=problem.title %></h3>
-            <div>정답자 : <%=problem.completed_users%>명</div>
-            <div>난이도 : Level <%=problem.difficulty_level%></div>
-          </li>
-        </a>
-      <%  } %>
-    </ul>
+    <%-include("header")%>
+    <main>
+      <h2 class="problems-title">Problems</h2>
+      <ul class="problems">
+        <%  for (const problem of problemList) { %>
+          <a class="problem-link" href="problems/<%=problem.id%>">
+            <li>
+              <h3 class="problem-title"><%=problem.title %></h3>
+              <div>정답자 : <%=problem.completed_users%>명</div>
+              <div>난이도 : Level <%=problem.difficulty_level%></div>
+            </li>
+          </a>
+        <%  } %>
+      </ul>
+    </main>
   </body>
 </html>
