@@ -18,6 +18,22 @@ db.once("open", function() {
   console.log("Connected..");
 });
 
+// const problem_db = require('./util/problem_db');
+// const Problem = require('./models/Problem');
+
+// problem_db.storeMockProblems()
+// .then(() => {
+//   Problem.find()
+//   .lean()
+//   .exec(function (err, problems) {
+//     if (err) return next(err.message);
+//     return JSON.stringify(problems);
+//   });
+// });
+
+// problem_db.deleteAllProblems();
+
+const indexRoutes = require('./routes/index');
 const authRoutes = require('./routes/auth-routes');
 const profileRoutes = require('./routes/profile-routes');
 
@@ -40,9 +56,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) => {
-  res.render('index');
-});
+app.use('/', indexRoutes);
 app.use('/auth', authRoutes);
 app.use('/profile', profileRoutes);
 

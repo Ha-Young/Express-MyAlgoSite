@@ -11,8 +11,8 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((id, done) => {
   // 누구아이디인지
-  User.findById(id).then((user) => {
-    done(null, user);
+  User.findById(id).then((userInfo) => {
+    done(null, userInfo);
   }).catch((err) => console.log(err.message));
 });
 
