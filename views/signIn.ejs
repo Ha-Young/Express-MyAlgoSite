@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ./partials/head %>
+  </head>
+  <body>
+    <% include ./partials/header %>
+
+    <h1>Sign In</h1>
+    <form action="/sign-in" method="POST">
+      <div>
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" required >
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" required >
+      </div>
+      <div>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required >
+      </div>
+      <button type="submit">Sign In</button>
+    </form>
+    <a href="/log-in">Log In</a>
+    <h2><%= messages.usedEmail %></h2>
+
+    <% include ./partials/footer %>
+    <script src='/javascripts/index.js'></script>
+  </body>
+</html>

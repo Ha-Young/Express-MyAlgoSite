@@ -27,7 +27,7 @@ initializePassport(
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-app.use(cookieParser('secret code'));
+app.use(cookieParser(process.env.SESSION_SECRET));
 app.use(session({
   resave: false,
   saveUninitialized: false,
@@ -46,6 +46,14 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(function (req, res, next) {
+  if(req.user === undefined){
+    res.locals.user = null;
+  }
+
+  next();
+});
 
 app.use('/', index);
 

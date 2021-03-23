@@ -4,27 +4,52 @@ const bcrypt = require('bcrypt');
 const router = express.Router();
 const User = require('../models/User');
 const forwardAuthenticated = require('./middlewares/forwardAuthenticated');
+const flash = require('express-flash');
 
 /* GET home page. */
 router.get('/', forwardAuthenticated, (req, res, next) => {
-  res.render('index', { title: '바닐라코딩' });
+  res.render('index');
 });
 
-router.get('/login', (req, res, next) => {
-  res.render('login');
+router.get('/log-in', (req, res, next) => {
+  res.render('logIn');
 });
 
-router.post('/login', passport.authenticate('local', {
+router.post('/log-in', passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: '/login',
-  failureFlash: false,
+  failureRedirect: '/log-in',
+  failureFlash: true,
 }));
 
-router.get('/register', (req, res, next) => {
-  res.render('register');
+router.get('/log-out', forwardAuthenticated, (req, res, next) => {
+  res.render('logOut');
 });
 
-router.post('/register', async (req, res, next) => {
+router.get('/log-out/done', forwardAuthenticated, (req, res, next) => {
+  if (req.session) {
+    try {
+      req.session.destroy();
+      res.redirect('/log-in');
+    } catch (e) {
+      next(e);
+    }
+  }
+});
+
+router.get('/sign-in', (req, res, next) => {
+  res.render('signIn');
+});
+
+router.post('/sign-in', async (req, res, next) => {
+  const email = await User.findOne({ email: req.body.email });
+
+  if (email) {
+    req.flash("usedEmail", "등록된 이메일입니다.");
+    res.redirect('/sign-in');
+
+    return;
+  }
+
   try {
     const hash = await bcrypt.hash(req.body.password, 10);
 
@@ -34,26 +59,30 @@ router.post('/register', async (req, res, next) => {
       password: hash,
     });
 
-    res.redirect('/login');
+    res.redirect('/log-in');
   } catch (e) {
     next(e);
   }
 });
 
-router.get('/logout', (req, res, next) => {
-  res.render('logout');
+router.get('/sign-out', forwardAuthenticated, (req, res, next) => {
+  res.render('signOut');
 });
 
-router.get('/logout/success', (req, res, next) => {
-  if (req.session) {
-    try {
-      req.session.destroy();
-      res.redirect('/login');
-    } catch (e) {
-      next(e);
-    }
+router.get('/sign-out/done', forwardAuthenticated, async (req, res, next) => {
+  const email = req.session.passport.user.email;
+
+  try {
+    await User.deleteOne({ email: email });
+    req.session.destroy();
+    res.redirect('/log-in');
+  } catch (e) {
+    next(e);
   }
-  res.json({ body: req.session });
+});
+
+router.get('/problems', forwardAuthenticated, (req, res, next) => {
+  res.render('problems');
 });
 
 module.exports = router;

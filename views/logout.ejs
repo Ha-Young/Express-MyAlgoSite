@@ -1,8 +1,18 @@
-<a href='/'>Home</a>
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ./partials/head %>
+  </head>
+  <body>
+    <% include ./partials/header %>
 
-<h1>Logout</h1>
+    <h1>Logout</h1>
+    <form action="/log-out/done" method="GET">
+      <h2>로그아웃 하시겠습니까?</h2>
+      <button type="submit">YES</button>
+    </form>
 
-<form action="/logout/success" method="GET">
-  <h2>로그아웃 하시겠습니까?</h2>
-  <button type="submit">YES</button>
-</form>
+    <% include ./partials/footer %>
+    <script src='/javascripts/index.js'></script>
+  </body>
+</html>
