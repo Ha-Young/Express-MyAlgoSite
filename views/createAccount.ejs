@@ -12,82 +12,46 @@
         method="POST"
         class="create-account-form"
       >
-        <% if(isRetry){ %>
-          <label>Name</label>
-          <input
-            class="input-user-name"
-            type="text"
-            name="name"
-            value="<%=userInfo.name%>"
-          >
-          <label>Email</label>
-          <input
-            class="input-user-email"
-            type="text"
-            name="email"
-            autocomplete="username"
-            value="<%=userInfo.email%>"
-          >
-          <label>Password</label>
-          <input
-            class="input-user-password"
-            type="password"
-            name="password"
-            autocomplete="new-password"
-            value="<%=userInfo.password%>"
-          >
-          <label>Password confirm</label>
-          <input
-            class="input-user-password-confirm"
-            type="password"
-            name="passwordConfirm"
-            autocomplete="new-password"
-            value="<%=userInfo.password%>"
-          >
-          <div class="message-box">
-            <p class="message">
-              <%=message%>
-            </p>
-          </div>
-        <% }else{ %>
-          <label>Name</label>
-          <input
-            class="input-user-name"
-            type="text"
-            name="name"
-            value="<%=userInfo.name%>"
-          >
-          <label>Email</label>
-          <input
-            class="input-user-email"
-            type="email"
-            name="email"
-            autocomplete="username"
-            value="<%=userInfo.email%>"
-          >
-          <label>Password</label>
-          <input
-            class="input-user-password"
-            type="password"
-            name="password"
-            autocomplete="new-password"
-            value="<%=userInfo.password%>"
-          >
-          <label>Password confirm</label>
-          <input
-            class="input-user-password-confirm"
-            type="password"
-            name="passwordConfirm"
-            autocomplete="new-password"
-            value="<%=userInfo.password%>"
-          >
-          <div class="message-box">
-            <p class="message">
-            </p>
-          </div>
-        <% } %>
+        <label>Name</label>
+        <input
+          class="input-user-name"
+          type="text"
+          name="name"
+          value="<%= name %>"
+          required
+        >
+        <label>Email</label>
+        <input
+          class="input-user-email"
+          type="text"
+          name="email"
+          autocomplete="username"
+          value="<%= email %>"
+          required
+        >
+        <label>Password</label>
+        <input
+          class="input-user-password"
+          type="password"
+          name="password"
+          autocomplete="new-password"
+          required
+        >
+        <label>Password confirm</label>
+        <input
+          class="input-user-password-confirm"
+          type="password"
+          name="passwordConfirm"
+          autocomplete="new-password"
+          required
+        >
+        <div class="message-box">
+          <p class="message">
+            <%= message %>
+          </p>
+        </div>
         <button
-          class="login-link-button" 
+          class="login-link-button"
           type="button"
         >
           Return to log in page

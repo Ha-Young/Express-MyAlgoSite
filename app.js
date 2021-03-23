@@ -1,11 +1,18 @@
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const dotenv = require("dotenv");
+const passport = require("passport");
+const flash = require("express-flash");
+const session = require("express-session");
 
 const index = require("./routes/index");
 const login = require("./routes/login");
-const createAccount = require("./routes/createAccount")
+const createAccount = require("./routes/createAccount");
+const initializePassport = require("./middlewares/passport");
 
 const app = express();
 
@@ -14,8 +21,6 @@ const app = express();
   mongodb+srv://dbUser:vanillacoding@cluster0.hugiy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 */
 
-dotenv.config();
-
 mongoose.connect(
   process.env.DB_ADDRESS,
   { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true }
@@ -23,6 +28,17 @@ mongoose.connect(
 const db = mongoose.connection;
 db.on("error", (err) => console.error(`DB connection Error : \n${err}`));
 db.once("open", () => console.log("Connected"));
+
+initializePassport(passport);
+
+app.use(flash());
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));

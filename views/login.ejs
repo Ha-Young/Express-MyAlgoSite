@@ -12,17 +12,28 @@
         <label>Email</label>
         <input
           class="input-user-email"
-          type="text"
-          name="user-email"
+          type="email"
+          name="email"
           autocomplete="username"
+          required
         >
         <label>Password</label>
         <input
           class="input-user-password"
           type="password"
-          name="user-password"
+          name="password"
           autocomplete="current-password"
+          required
         >
+
+        <div class="message-box">
+          <p class="message">
+            <% if (messages.error) { %>
+              <%= messages.error %>
+            <% } %>
+          </p>
+        </div>
+
         <button
           class="create-account-link-button"
           type="button"

@@ -3,21 +3,24 @@ const createError = require("http-errors");
 const url = require("url");
 
 const User = require("../models/User");
+const flash = require("express-flash");
 
 
 
 exports.get = async (req, res, next) => {
   try {
-    res.render("createAccount", {
-      isRetry: req.query.isRetry,
-      userInfo: {
-        name: req.query.name || "",
-        email: req.query.email || "",
-        password: req.query.password || "",
-        passwordConfirm: req.query.passwordConfirm || "",
-      },
-      message: req.query.message,
-    });
+    const flashContents = (req.flash("message")[0]);
+    const options = {
+      name: "",
+      email: "",
+      message: "",
+    };
+
+    if (flashContents) {
+      Object.assign(options, flashContents);
+    }
+
+    res.render("createAccount", options);
   } catch (err) {
     next(createError(500, err.message));
   }
@@ -36,15 +39,13 @@ exports.create = async (req, res, next) => {
         email,
       } = req.body
 
-      res.redirect(url.format({
-        pathname:"/create_account",
-        query: {
-          isRetry: true,
+      req.flash("message",
+        {
           name,
           email,
-          message: "This email has already been signed up.",
-        }
-      }));
+          message: "This email has already been signed up."
+        });
+      res.redirect("/create_account");
     } else {
       next(createError(500, err.message));
     }
