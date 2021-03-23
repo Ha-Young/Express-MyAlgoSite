@@ -1,13 +1,14 @@
 require("dotenv").config();
-
 const express = require("express");
+const app = express();
 
 const index = require("./routes/index");
 const login = require("./routes/login");
+
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 
-const app = express();
+
 
 const mongoose = require("mongoose");
 const db = mongoose.connection;
@@ -25,17 +26,25 @@ app.set("view engine", "ejs");
 
 app.use(passport.initialize());
 
+
+const session = require("express-session");
+app.use(passport.session());
+
+app.use(session({
+  secret: "hyeongju the genius",
+  resave: false,
+  saveUninitialized: true
+}));
+
 app.use('/', index);
 app.use("/login", login);
 
-// catch 404 and forward to error handler
 app.use(function(req, res, next) {
   const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
-// error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;

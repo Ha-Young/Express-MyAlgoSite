@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
+
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
-
 const User = require("../models/User");
 
 passport.serializeUser(function(user, done) {
@@ -22,8 +22,7 @@ function (accessToken, refreshToken, profile, done) {
   User.findOrCreate({ profile: profile }, function (err, user) {
     return done(err, user);
   });
-}
-));
+}));
 
 router.get("/auth/google",passport.authenticate("google",{ scope:
 ['profile', 'email'] }));
