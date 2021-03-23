@@ -3,38 +3,39 @@
   <head>
     <title>Codewars</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/index.css' />
   </head>
   <body>
-    <form action="/logout?_method=DELETE" method="POST">
-      <button type="submit">Log out</button>
-    </form>
-    <h1>Codewars</h1>
-    <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
-
-    <ul class="tabs">
-      <li>Level 1</li>
-      <li>Level 2</li>
-      <li>Level 3</li>
-    </ul>
-
+    <header>
+      <div class="header-container">
+        <h1>Codewars</h1>
+        <div class="account-info-box">
+          <%= email %>
+          <form action="/logout?_method=DELETE" method="POST">
+            <button class="logout-button" type="submit">Log out</button>
+          </form>
+        </div>
+      </div>
+    </header>
+    <h2 class="problems-title">Problems</h2>
     <ul class="problems">
       <li>
-        <div>피보나치 수열</div>
+        <h3 class="problem-title">피보나치 수열</h3>
         <div>정답자: 15명</div>
         <div>난이도: Level 1</div>
       </li>
       <li>
-        <div>서울에서 김서방 찾기</div>
+        <h3 class="problem-title">서울에서 김서방 찾기</h3>
         <div>정답자: 11명</div>
         <div>난이도: Level 2</div>
       </li>
       <li>
-        <div>수박수박수박수박수</div>
+        <h3 class="problem-title">수박수박수박수박수</h3>
         <div>정답자: 12명</div>
         <div>난이도: Level 2</div>
       </li>
       <li>
-        <div>하샤드 수</div>
+        <h3 class="problem-title">하샤드 수</h3>
         <div>정답자: 5명</div>
         <div>난이도: Level 3</div>
       </li>
