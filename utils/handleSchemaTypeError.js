@@ -1,3 +1,10 @@
+/**
+ * Used to reduce depth of async function by removing try-catch block
+ * @param {string} type - property schema type name
+ * @param {string} name - property name
+ * @param {(number|boolean)} [val] - any value to fit in schema type
+ * @return {(Object|Array)} return Schema type value array if (type === min, max, required)
+ */
 module.exports = function (type, name, val) {
   if (typeof type !== "string") {
     throw new Error('handleSchemaTypeError: type should be string');
