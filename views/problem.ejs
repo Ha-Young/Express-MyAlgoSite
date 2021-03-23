@@ -5,6 +5,10 @@
     <link rel='stylesheet' href='/stylesheets/reset.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/problems.css' />
+    <link rel='stylesheet' href='/codemirror/lib/codemirror.css' />
+    <link rel='stylesheet' href='/codemirror/theme/dracula.css' />
+    <script src="/codemirror/lib/codemirror.js"></script>
+    <script src="/codemirror/mode/javascript/javascript.js"></script>
   </head>
   <body>
     <h1>Problems</h1>
@@ -13,5 +17,16 @@
     </form>
     <p><%= problem.id %></p>
     <p><%= problem.description %></p>
+    <textarea id="editor"></textarea>
   </body>
+  <script>
+    const editor = document.getElementById("editor");
+    const codemirror = new CodeMirror.fromTextArea(editor, {
+      name: "javascript",
+      lineNumbers: true,
+      lineWrapping: true,
+      theme: "dracula",
+      val: editor.value
+    });
+  </script>
 </html>
