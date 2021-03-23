@@ -16,12 +16,15 @@
     "express-ejs-layouts": "^2.5.0",
     "express-session": "^1.17.1",
     "http-errors": "^1.8.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.1",
     "mongoose-findorcreate": "^3.0.0",
     "morgan": "~1.9.0",
     "nodemon": "^1.19.1",
     "passport": "^0.4.1",
     "passport-github": "^1.1.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
     "serve-favicon": "~2.4.5"
   },
   "devDependencies": {
