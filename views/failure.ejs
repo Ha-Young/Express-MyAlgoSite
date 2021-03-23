@@ -7,7 +7,19 @@
   <title>Document</title>
 </head>
 <body>
-  틀린 테스트 알려주기
-  만약 실행중에 오류난거면 오류 내용도 알려줘야함.
+  <% if (err) {%>
+    <span>오류가 발생했습니다.</span>
+    <%= err.message %>
+  <% } else {%>
+    <ul class="problems">
+      <% for (let i = 0; i < failTests?.length; i++) { %>
+        <li>
+          <div>이 문제가 틀렸습니다.</div>
+          <div><%= failTests[i]?.code %></div>
+        </li>
+      <% } %>
+    </ul>
+  <% } %>
+  <a href="<%= `/problems/${targetProblemId}` %>">문제로 돌아가기</a>
 </body>
 </html>

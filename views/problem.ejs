@@ -20,6 +20,7 @@
     <%= problem.description %>
   </div>
   <div id="codeEditor">
+    문제에 대한 해답을 solution 함수안에 담아서 작성해주세요.
     <form action="<%= `/problems/${problem.id}` %>" method="post">
       <textarea name="solution" cols="30" rows="10"></textarea>
       <input type="submit">

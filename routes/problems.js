@@ -3,55 +3,72 @@ const { NodeVM } = require('vm2');
 const router = express.Router();
 const { verifyUser } = require('./middlewares/verifyUser');
 const Problem = require('../models/Problem');
+const creatError = require('http-errors');
 
 router.get('/', verifyUser, (req, res, next) => {
   res.render('problem');
 });
 
 router.get('/:problem_id', verifyUser, async (req, res, next) => {
-  const targetProblemId = parseInt(req.params['problem_id']);
+  try {
+    const targetProblemId = parseInt(req.params['problem_id']);
+    const targetProblem = await Problem.findOne({ id: targetProblemId });
 
-  const targetProblem = await Problem.findOne({ id: targetProblemId });
-
-  res.status(200).render('problem', { problem: targetProblem });
+    res.status(200).render('problem', { problem: targetProblem });
+  } catch (err) {
+    next(creatError(400, err));
+  }
 });
 
 router.post('/:problem_id', verifyUser, async (req, res, next) => {
   const targetProblemId = parseInt(req.params['problem_id']);
-  const targetProblem = await Problem.findOne({ id: targetProblemId });
-  const userSolution = req.body.solution;
-  const judgeResult = {};
+  let targetProblem;
 
+  try {
+    targetProblem = await Problem.findOne({ id: targetProblemId });
+  } catch (err) {
+    next(creatError(400, err));
+  }
+
+  const userSolution = req.body.solution;
+  const judgeResult = [];
   const vm = new NodeVM({
       console: 'inherit',
       sandbox: {
         tests: targetProblem.tests,
         judgeResult,
-      },
-      require: {
-        builtin: ['*'],
-      },
+      }
   });
 
   try {
     vm.run(`
       ${userSolution}
 
-      for (const test of tests) {
-        console.log(eval(test.code))
-        console.log(test.solution)
-        if (eval(test.code) !== test.solution) {
-          judgeResult[test.code] = false;
+      for (let i = 0; i < tests.length; i++) {
+        if (eval(tests[i].code) !== tests[i].solution) {
+          judgeResult.push(false);
         } else {
-          judgeResult[test.code] = true;
+          judgeResult.push(true);
         }
       }
     `);
   } catch (err) {
-    console.log(err);
+    return res.render('failure', { err, targetProblemId, failTests: targetProblem.tests })
   }
 
-  res.render('success', { solution: userSolution })
+  if (judgeResult.every(result => result === true)) {
+    res.render('success');
+  } else {
+    const failTests = [];
+
+    judgeResult.forEach((result, index) => {
+      if (result === false) {
+        failTests.push(targetProblem.tests[index]);
+      }
+    });
+
+    res.render('failure', { failTests, targetProblemId, err: null });
+  }
 });
 
 module.exports = router;

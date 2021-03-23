@@ -9,9 +9,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  User.findById(id).then(user => {
-    done(null, user);
-  });
+  done(null, id);
 });
 
 passport.use(
@@ -22,8 +20,6 @@ passport.use(
       callbackURL: '/auth/google/callback'
     },
     (accessToken, refreshToken, profile, done) => {
-      console.log('google return')
-      console.log(profile._json)
       User.findOne({ sub: profile.id }).then((currentUser) => {
         if (currentUser) {
           done(null, currentUser);

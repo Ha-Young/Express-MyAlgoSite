@@ -3,6 +3,8 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const creatError = require('http-errors');
+const status = require('statuses');
 
 const db = mongoose.connection;
 db.on('error', console.error);
@@ -14,14 +16,13 @@ mongoose.connect(process.env.MONGODB_URL, {
   useFindAndModify: false
 });
 
-const { storeSampleProblems } = require('./loaders/loadSampleProblems');
-
+// const { storeSampleProblems } = require('./loaders/loadSampleProblems');
 // storeSampleProblems();
+
+const app = express();
 
 const publicDirectoryPath = path.join(__dirname, './public');
 const viewsDirectoryPath = path.join(__dirname, './views');
-
-const app = express();
 
 app.set('view engine', 'ejs');
 app.set('views', viewsDirectoryPath);
@@ -43,7 +44,7 @@ app.use(session({
   store: MongoStore.create({
     mongoUrl: process.env.MONGODB_URL,
     collection: "sessions"
-  })
+  }),
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -59,20 +60,23 @@ app.use('/auth', auth);
 app.use('/problems', problems);
 
 app.use(function(req, res, next) {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+  next(creatError(404));
 });
 
-// REVIEW 코드별 기본 메시지 저장되어 있는 라이브러리.
-const statuses = require('statuses')
-
-app.use(function(err, req, res, next) {
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  res.status(err.status || 500);
-  res.render('error');
-});
+app.use(errorHandler);
 
 module.exports = app;
+
+function errorHandler(err, req, res, next) {
+  // console.log('in error handler')
+  // console.log(err)
+  // console.log(err.status)
+
+  const message = err.customErrorMessage?.toLowerCase() || status[err.status];
+
+  res.locals.message = message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.status(err.status || 500);
+
+  res.render('error');
+}
