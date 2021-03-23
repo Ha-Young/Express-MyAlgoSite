@@ -1,15 +1,5 @@
 const Joi = require("joi");
 
-exports.register = function (req, res, next) {
-  const { error } = registerValidation(req.body);
-
-  if (error) {
-    return next(`${error.details[0].message}`);
-  }
-
-  next();
-};
-
 const registerValidation = (requestedBody) => {
   //camelcase 처리
   const schema = Joi.object({

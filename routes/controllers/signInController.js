@@ -1,5 +1,4 @@
 const dotenv = require("dotenv");
-const { registerValidation } = require("../../util/validation");
 const User = require("../../models/User");
 const bcrypt = require("bcrypt");
 
@@ -10,12 +9,6 @@ exports.renderSigninPage = function (req, res, next) {
 };
 
 exports.createUser = async function (req, res, next) {
-  const { error } = registerValidation(req.body);
-
-  if (error) {
-    next(`${error.details[0].message}`);
-  }
-
   const emailExist = await User.findOne({ email: req.body.email });
   if (emailExist) {
     next("Email already exists");
