@@ -1,0 +1,48 @@
+
+.play-box {
+  font-size: 1.2rem;
+}
+
+.title-box {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #d1d1d1;
+}
+
+.problem-info-box {
+  display: flex;
+  align-items: center;
+}
+
+.problem-info-box > div {
+  margin-right: 20px;
+}
+
+.level1 {
+  color: #ffb348;
+}
+
+.level2 {
+  color: #fe883c;
+}
+
+.level3 {
+  color: #fe6432;
+}
+
+.level4 {
+  color: #fe4128;
+}
+
+.level5 {
+  color: #fd1d1d;
+}
+
+.editor-box-header {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding-left: 20px;
+  color: white;
+  background-color: #54544b;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}

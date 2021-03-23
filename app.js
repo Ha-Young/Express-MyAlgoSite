@@ -13,6 +13,7 @@ const methodOverride = require("method-override");
 const index = require("./routes/index");
 const login = require("./routes/login");
 const createAccount = require("./routes/createAccount");
+const problems = require("./routes/problems");
 const initializePassport = require("./middlewares/passport");
 const checkAuth = require("./middlewares/checkAuthenticated");
 
@@ -57,6 +58,7 @@ app.delete("/logout", (req, res, next) => {
   res.redirect("/login");
 });
 app.use("/create_account", checkAuth.checkNotAuthenticated, createAccount);
+app.use("/problems", problems);
 app.use("/", checkAuth.checkAuthenticated, index);
 
 // catch 404 and forward to error handler

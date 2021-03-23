@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/problem.css" />
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.css">
+    </link>
+    <script type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.js">
+    </script>
+    <script type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/mode/javascript/javascript.min.js">
+    </script>
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/theme/monokai.min.css" />
+  </head>
+  <body>
+    <%-include("header")%>
+    <main>
+      <div class="play-box">
+        <div class="title-box">
+          <h1 class="title">
+            <%= problem.title %>
+          </h1>
+          <div class="problem-info-box">
+            <div class="level<%=problem.difficulty_level%>">
+              Level <%= problem.difficulty_level %>
+            </div>
+            <div class="complete-users-box">
+              ✔️ <%= problem.completed_users %>
+            </div>
+          </div>
+        </div>
+        <div class="description-box">
+          <p class="description">
+            <%= problem.description %>
+          </p>
+        </div>
+        <div class="editor-box">
+          <div class="editor-box-header">
+            Solution :
+          </div>
+          <div class="editor"></div>
+        </div>
+      </div>
+    </main>
+    <script>
+      const codeMirror = CodeMirror(document.querySelector(".editor"), {
+        lineNumbers: true,
+        tabSize: 2,
+        value: "function solution() {\n  // Your code...\n}",
+        mode: "javascript",
+        theme: "monokai",
+      });
+
+      codeMirror.setSize(null, 500);
+    </script>
+  </body>
+</html>
