@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <script src="/javascripts/codemirror.js"></script>
+    <link rel='stylesheet' href="/stylesheets/codemirror.css" />
+    <script src="/mode/javascript/javascript.js"></script>
+    <link href="/theme/moxer.css" rel="stylesheet" />
+  </head>
+  <body>
+    <h1><%=problem.title%></h1>
+    <article>문제 설명 : <%=problem.description%></article>
+    <span>레벨 : <%=problem.difficulty_level%></span>
+    <span>맞은 사람 수 : <%=problem.completed_users%></span>
+
+    <textarea id="editor">console.log("Hello World");</textarea>
+    <script>
+      var editor = CodeMirror.fromTextArea
+      (document.getElementById("editor"), {
+        mode: "javascript",
+        theme: "moxer",
+        lineNumbers: true
+      });
+      editor.setSize("600", "600");
+    </script>
+  </body>
+</html>

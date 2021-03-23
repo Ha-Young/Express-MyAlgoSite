@@ -4,11 +4,10 @@ const app = express();
 
 const index = require("./routes/index");
 const login = require("./routes/login");
+const problem = require("./routes/problem");
 
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
-
-
 
 const mongoose = require("mongoose");
 const db = mongoose.connection;
@@ -22,6 +21,7 @@ db.once("open", function () {
   console.log("Connected to mongod server");
 });
 
+app.use(express.static("public"));
 app.set("view engine", "ejs");
 
 app.use(passport.initialize());
@@ -38,6 +38,7 @@ app.use(session({
 
 app.use('/', index);
 app.use("/login", login);
+app.use("/problems", problem);
 
 app.use(function(req, res, next) {
   const err = new Error('Not Found');

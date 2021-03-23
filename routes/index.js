@@ -6,7 +6,6 @@ const Problem = require("../models/Problem");
 /* GET home page. */
 router.get("/", requiresLogin, async (req, res, next) => {
   const allProblems = await Problem.find().lean();
-  console.log(allProblems[0]);
   res.render('index', { title: '바닐라코딩', problems: allProblems });
 });
 
