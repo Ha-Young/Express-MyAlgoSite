@@ -6,12 +6,12 @@ const User = require("../models/User");
 require("dotenv").config();
 
 passport.serializeUser((user, done) => {
-  console.log(user.id);
+  console.log("serialize");
   done(null, user.id);
 });
 
 passport.deserializeUser(async function (id, done) {
-  console.log(id);
+  console.log("deserialize");
   const user = await User.findById(id);
 
   done(null, user);
@@ -55,8 +55,7 @@ router.get(
 );
 
 router.get("/authcallback", passport.authenticate("google"), (req, res) => {
-  console.log(req.user);
-  res.send("redirect");
+  res.status(308).redirect("/");
 });
 
 router.get("/github", (req, res, next) => {

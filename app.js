@@ -24,7 +24,10 @@ app.use(
 );
 
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session(), (req, res, next) => {
+  console.log("session");
+  next();
+});
 
 app.use("/", index);
 app.use("/login", login);
