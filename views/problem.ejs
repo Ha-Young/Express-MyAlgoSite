@@ -4,15 +4,15 @@
   <title><%= title %></title>
   <script src="/codemirror/codemirror.js"></script>
   <link href="/codemirror/codemirror.css" rel="stylesheet"/>
-  <script src="/codemirror/xml.js"></script>
   <script src="/codemirror/closebrackets.js"></script>
+  <script src="/codemirror/javascript/javascript.js"></script>
   <link href="/codemirror/dracula.css" rel="stylesheet" />
 </head>
 <body>
   <header>
     <h1><%= title %></h1>
   </header>
-  <form>
+  <form action="/routes/problem.js/">
     <div>
       <span>정답자 수: </span>
       <span><%= completed_users %></span>
@@ -29,7 +29,7 @@
   <script>
     const editor = CodeMirror.fromTextArea
     (document.getElementById("editor"), {
-      mode: "xml",
+      mode: "javascript",
       theme: "dracula",
       lineNumbers: true,
       autoCloseBrackets: true
