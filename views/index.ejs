@@ -5,11 +5,16 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <% if (!user) { %>
-      <h2>Please <a href="/login">Log in</a></h2>
-    <% } else { %>
-      <h2><%= user.name %></h2>
-    <%# 여기에 문제 선택할 수 있는 화면이 나오도록%>
-    <% } %>
+    <ul>
+      <% problems.forEach(problem => { %>
+        <li>
+          <a>
+            <h2><%= problem.title %></h2>
+            <h3>난이도 <%= problem.difficulty_level %></h3>
+            <h4>정답자 수 <%= problem.completed_users %></h4>
+          </a>
+        </li>
+      <% }) %>
+    </ul>
   </body>
 </html>

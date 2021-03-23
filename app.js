@@ -32,9 +32,9 @@ const login = require(`${__dirname}/routes/login`);
 const upload = require(`${__dirname}/routes/upload`);
 const redirectByUnAuth = require(`${__dirname}/utils/redirectByUnAuth`);
 
-app.use("/upload", upload)
 app.use("/login", login);
 app.use(redirectByUnAuth);
+app.use("/upload", upload);
 app.use('/', index);
 
 // catch 404 and forward to error handler
