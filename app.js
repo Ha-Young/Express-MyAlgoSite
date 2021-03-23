@@ -1,12 +1,13 @@
-require('dotenv').config();
-
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const creatError = require('http-errors');
 const status = require('statuses');
+require('dotenv').config();
+require('./loaders/passport');
 
 const db = mongoose.connection;
+// TODO error logger 추가
 db.on('error', console.error);
 db.once('open', () => console.log('Connected to mongoDB server'));
 

@@ -53,7 +53,7 @@ router.post('/:problem_id', verifyUser, async (req, res, next) => {
       }
     `);
   } catch (err) {
-    return res.render('failure', { err, targetProblemId, failTests: targetProblem.tests })
+    return res.render('failure', { err, targetProblemId, failTests: targetProblem.tests });
   }
 
   if (judgeResult.every(result => result === true)) {

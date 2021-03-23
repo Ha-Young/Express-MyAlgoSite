@@ -10,7 +10,7 @@ router.get('/', verifyUser, async (req, res, next) => {
 
     res.render('index', { problems });
   } catch (err) {
-    next(creatError(500, err))
+    next(creatError(500, err));
   }
 });
 
