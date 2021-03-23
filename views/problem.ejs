@@ -5,6 +5,7 @@
   <script src="/codemirror/codemirror.js"></script>
   <link href="/codemirror/codemirror.css" rel="stylesheet"/>
   <script src="/codemirror/xml.js"></script>
+  <script src="/codemirror/closebrackets.js"></script>
   <link href="/codemirror/dracula.css" rel="stylesheet" />
 </head>
 <body>
@@ -26,11 +27,12 @@
     <textarea id='editor'></textarea>
   </form>
   <script>
-    var editor = CodeMirror.fromTextArea
+    const editor = CodeMirror.fromTextArea
     (document.getElementById("editor"), {
       mode: "xml",
       theme: "dracula",
-      lineNumbers: true
+      lineNumbers: true,
+      autoCloseBrackets: true
     });
   </script>
 </body>
