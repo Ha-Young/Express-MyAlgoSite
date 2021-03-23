@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ./partials/head %>
+  </head>
+  <body>
+    <% include ./partials/header %>
+
+    <h1>결과</h1>
+    <h2><%= title %></h2>
+
+    <iframe>
+      
+    </iframe>
+
+    <% for (let i = 0; i < tests.length; i++) { %>
+      <h4><%= tests[i].code %></h4>
+      <h4><%= tests[i].solution %></h4>
+    <% } %>
+
+    <% include ./partials/footer %>
+    <script src='/javascripts/index.js'></script>
+  </body>
+</html>

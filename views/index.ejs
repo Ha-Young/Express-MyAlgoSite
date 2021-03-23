@@ -10,12 +10,20 @@
     <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
     <hr>
 
-    <% for (var i = 0; i < data.length; i++) { %>
-      <h1><%= `문제: ${data[i].title}` %></h1>
-      <h4><%= `문제 레벨: ${data[i].difficulty_level}` %></h4>
-      <h3><%= `완료한 유저수: ${data[i].completed_users}` %></h3>
-      <hr>
-    <% } %>
+    <ul>
+      <% for (let i = 0; i < data.length; i++) { %>
+        <li>
+          <form action="/problems/<%= data[i].id %>" method="GET">
+            <button type="submit">
+              <h1><%= `문제: ${data[i].title}` %></h1>
+              <h4><%= `문제 레벨: ${data[i].difficulty_level}` %></h4>
+              <h3><%= `완료한 유저수: ${data[i].completed_users}` %></h3>
+            </button>
+          </form>
+        </li>
+        <hr>
+      <% } %>
+    </ul>
 
     <% include ./partials/footer %>
     <script src='/javascripts/index.js'></script>

@@ -6,7 +6,13 @@
   <body>
     <% include ./partials/header %>
 
-    <% include ./partials/main %>
+    <form action="/problems/<%= problem.id %>" method="POST">
+      <h2><%= problem.title %></h2>
+      <textarea id="js">
+
+      </textarea>
+      <button type="submit">제출</button>
+    </form>
 
     <% include ./partials/footer %>
     <script src='/javascripts/index.js'></script>

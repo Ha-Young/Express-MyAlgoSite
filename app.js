@@ -7,6 +7,7 @@ const flash = require('express-flash');
 require('dotenv').config();
 
 const index = require('./routes/index');
+const problems = require('./routes/problems');
 
 const app = express();
 
@@ -56,6 +57,7 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', index);
+app.use('/problems', problems);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
