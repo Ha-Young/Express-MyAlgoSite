@@ -28,9 +28,11 @@ app.use(passport.session());
 
 const index = require(`${__dirname}/routes`);
 const login = require(`${__dirname}/routes/login`);
+const redirectByUnAuth = require(`${__dirname}/utils/redirectByUnAuth`);
 
-app.use('/', index);
 app.use("/login", login);
+app.use(redirectByUnAuth);
+app.use('/', index);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => next(createError(404)));

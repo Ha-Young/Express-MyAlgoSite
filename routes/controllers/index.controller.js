@@ -4,5 +4,6 @@ exports.getHome = (req, res, next) => {
   } else {
     res.locals.user = null;
   }
+
   res.render("index");
 };
