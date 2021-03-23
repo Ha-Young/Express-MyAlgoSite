@@ -3,46 +3,10 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const path = require("path");
 
-const home = require("./routes/index");
-
-const problemRouter = require("./routes/problems/index");
+const indexRouter = require("./routes/index");
 
 const app = express();
 const db = mongoose.connection;
-
-const session = require("express-session");
-const passport = require("passport");
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
-
-app.use(session({ secret: "SECRET_CODE", resave: true, saveUninitialized: false }));
-app.use(passport.initialize());
-app.use(passport.session());
-
-passport.use(new GoogleStrategy({
-    clientID: "727563612247-jv4u2v4uuf2n64flhgll5h5bheosflf4.apps.googleusercontent.com",
-    clientSecret: "2Mvzg8EGOC8tHZkD7wWbqNpl",
-    callbackURL: "http://localhost:3000/login/google/callback"
-  },
-  (accessToken, refreshToken, profile, cb) => {
-    return cb(null, profile);
-  }
-));
-
-passport.serializeUser((user, done) => {
-  done(null, user);
-});
-
-passport.deserializeUser((user, done) => {
-  done(null, user);
-});
-
-const authenticateUser = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    next();
-  } else {
-    res.status(301).redirect("/login");
-  }
-};
 
 mongoose.connect(
   "mongodb://127.0.0.1:27017",
@@ -66,23 +30,7 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.get("/", authenticateUser, home);
-
-app.get("/login", (req, res, next) => {
-  res.render("login");
-});
-
-app.get("/login/google",
-  passport.authenticate("google", { scope: ["profile"] })
-);
-
-app.get("/login/google/callback",
-	passport.authenticate("google", {
-    failureRedirect: "/login",
-    successRedirect: "/"
-}));
-
-app.use("/problems", authenticateUser, problemRouter);
+app.use("/", indexRouter);
 
 app.use(function(req, res, next) {
   const err = new Error("Not Found");

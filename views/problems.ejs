@@ -9,5 +9,9 @@
     <p>문제 레벨: <%= problem.difficulty_level %></p>
     <p>정답자: <%= problem.completed_users %></p>
     <p>설명: <%= problem.description %></p>
+    <form action="/problems/<%= problem._id %>" method="POST">
+      <textarea name="submit_text" cols="100" rows="30"></textarea>
+      <button type="submit">제출</button>
+    </form>
   </body>
 </html>
