@@ -37,6 +37,24 @@ a {
   height: 70px;
 }
 
+.user-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logout-btn {
+  cursor: pointer;
+  width: 100%;
+  border: none;
+  background: #4CAF50;
+  color: #FFF;
+  margin-top: 10px;
+  padding: 8px;
+  font-size: 1rem;
+}
+
 .container {
   padding: 20px;
   margin-top: 100px;
