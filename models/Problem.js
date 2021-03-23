@@ -30,7 +30,7 @@ const ProblemSchema = new mongoose.Schema({
   like: [mongoose.ObjectId],
   accuracy: {
     type: Accuracy,
-  },
+  }
 });
 
 module.exports = mongoose.model('Problem', ProblemSchema);

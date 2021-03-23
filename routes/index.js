@@ -1,5 +1,6 @@
 const express = require('express');
 const passport = require('passport');
+const User = require('../models/User');
 const router = express.Router();
 
 /* GET home page. */
@@ -16,24 +17,38 @@ router.post('/login', (req, res, next) => {
     body: { email, password }
   } = req;
   console.log(email, password);
-});
+  next();
+}, passport.authenticate('local', {
+  failureRedirect: '/login',
+  successRedirect: '/'
+}));
+
+router.get('/login/google', passport.authenticate('google', { scope: ['profile', 'email', 'openid'] }));
+
+router.get('/login/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {res.redirect('/')});
 
 router.get('/join', (req, res, next) => {
   res.render('join', { title: 'Sign Up' });
 });
 
-router.post('/join', (req, res, next) => {
+router.post('/join', async (req, res, next) => {
   const {
     body: { email, password, name }
   } = req;
 
-  console.log("email", email);
-  console.log("password", password);
-  console.log("name", name);
+  try {
+
+    const user = await User({
+      email,
+      name,
+      password,
+    });
+    await User.create(user);
+  } catch (err) {
+    console.log(err);
+  }
+
   next();
-}, passport.authenticate('local', {
-  failureRedirect: '/join',
-  successRedirect: '/'
-}));
+});
 
 module.exports = router;
