@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const dotenv = require("dotenv");
 
 const index = require("./routes/index");
 const login = require("./routes/login");
@@ -13,8 +14,10 @@ const app = express();
   mongodb+srv://dbUser:vanillacoding@cluster0.hugiy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 */
 
+dotenv.config();
+
 mongoose.connect(
-  "mongodb+srv://dbUser:vanillacoding@cluster0.hugiy.mongodb.net/codewars?retryWrites=true&w=majority",
+  process.env.DB_ADDRESS,
   { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true }
 );
 const db = mongoose.connection;
