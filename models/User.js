@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-
 /*
 
   TODO: Fill in the model specification
@@ -10,7 +9,6 @@ const userSchema = new mongoose.Schema({
   name: { type: String, maxlength:20, require: true },
   email: { type: String, require: true, unique: true },
   password: { type: String, require: true },
-  token: { type: String },
 });
 
 const saltRounds = 10;
