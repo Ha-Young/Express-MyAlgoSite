@@ -29,6 +29,7 @@ app.set('view engine', 'ejs');
 app.set('views', viewsDirectoryPath);
 
 app.use(express.static(publicDirectoryPath));
+app.use(express.static('node_modules/codemirror'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
