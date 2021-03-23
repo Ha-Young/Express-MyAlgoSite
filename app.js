@@ -58,7 +58,7 @@ app.use(session({
     clientPromise,
   }),
   cookie: {
-    secure: true,
+    //secure: true,
     httpOnly: true,
     expires: new Date(Date.now() + 60 * 60 * 1000)
   }

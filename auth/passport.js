@@ -8,7 +8,8 @@ module.exports = function (app) {
   app.use(passport.session());
 
   passport.serializeUser(function (user, done) {
-    done(null, user.username);
+    //console.log(user);
+    done(null, user.email);
   });
 
   passport.deserializeUser(function (id, done) {
@@ -19,17 +20,16 @@ module.exports = function (app) {
 
   passport.use(new LocalStrategy(
     {
-      usernameField: 'username',
-      session: true
+      usernameField: 'email',
     },
-    function (username, password, done) {
-      User.findOne({ username }, function (err, user) {
+    function (email, password, done) {
+      User.findOne({ email }, function (err, user) {
         if (err) {
           return done(err);
         }
 
-        if (!user || !user.validPassword(password)) {
-          return done(null, false, { message: 'Incorrect username or password.' });
+        if (!user) {//} || !user.validPassword(password)) {
+          return done(null, false, { message: 'Incorrect email or password.' });
         }
 
         return done(null, user);

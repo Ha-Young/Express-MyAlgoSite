@@ -10,36 +10,10 @@ module.exports = function (passport) {
       });
     },
 
-    authenticate: (req, res, next) => {
-      passport.authenticate('local', (err, user, info) => {
-
-        if (req.session.flash) {
-          req.session.flash = {};
-        }
-
-        req.flash('message', info.message);
-
-        req.session.save(() => {
-
-          if (err) {
-            return next(err);
-          }
-          if (!user) {
-            return res.redirect('/login');
-          }
-
-          req.logIn(user, (err) => {
-            if (err) {
-              return next(err);
-            }
-
-            return req.session.save(() => {
-              res.redirect('/');
-            });
-          });
-        });
-
-      })(req, res, next);
-    }
+    authenticate: passport.authenticate('local', {
+      successRedirect: '/',
+      failureRedirect: '/login',
+      failureFlash: true
+    })
   };
 }
