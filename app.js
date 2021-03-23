@@ -2,11 +2,40 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const path = require("path");
+const passport = require("passport");
+const session = require("express-session");
 
 const indexRouter = require("./routes/index");
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
+
+require("dotenv").config();
 
 const app = express();
 const db = mongoose.connection;
+
+passport.use(new GoogleStrategy(
+  {
+    clientID: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET_KEY,
+    callbackURL: process.env.CALLBACK_URL,
+  },
+  (accessToken, refreshToken, profile, cb) => {
+    return cb(null, profile);
+  }
+));
+
+passport.serializeUser((user, done) => {
+  console.log("세션에 저장");
+  done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
+
+app.use(session({ secret: process.env.SECCSION_SECRET_KEY, resave: true, saveUninitialized: false }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 mongoose.connect(
   "mongodb://127.0.0.1:27017",

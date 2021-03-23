@@ -48,8 +48,7 @@ exports.checkCode = async function (req, res, next) {
     }
 
     if (count === testCodes.length) {
-      console.log("성공이다.");
-      return res.render("success");
+      res.render("success");
     }
 
   } catch (error) {
