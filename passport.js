@@ -14,7 +14,8 @@ passport.use(new GoogleStrategy({
       _json: { name, email }
     } = profile;
     try {
-      const user = await User.find({ email: email });
+      const user = await User.findOne({ email: email });
+      console.log(user);
       if (email === user.email && user.isGoogle) {
         console.log('google user true');
         return cb(null, user);
