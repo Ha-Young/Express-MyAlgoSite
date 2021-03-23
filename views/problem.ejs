@@ -6,3 +6,19 @@
   <div>example: <%= test.code %></div>
   <div>result: <%= test.solution %></div>
 <% }) %>
+
+<form method="post" action="/problems/<%= problem._id %>">
+  <textarea id="code-area" name="solution">
+    function solution(n) {
+      return;
+    }
+  </textarea>
+  <p>
+    <input type="submit" value="Submit">
+  </p>
+</form>
+
+<link rel="stylesheet" href="/codemirror/styles/codeMirror.css">
+<script src="/codemirror/codemirror.js"></script>
+<script src="/codemirror/mode/javascript.js"></script>
+<script src="/javascripts/index.js"></script>

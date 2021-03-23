@@ -15,6 +15,7 @@ const path = require("path");
 
 const index = require("./routes/index");
 const auth = require("./routes/auth");
+const join = require("./routes/join");
 const problem = require("./routes/problem");
 const db = require('./db');
 
@@ -41,9 +42,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/login", auth);
 app.use("/", index);
-app.use("/problem", problem);
+app.use("/login", auth);
+app.use("/join", join);
+app.use("/problems", problem);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

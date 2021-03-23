@@ -1,0 +1,13 @@
+<h2><%= message %></h2>
+
+<% if (error) { %>
+  <div><%= error %></div>
+<% } else { %>
+  <% log.forEach((data, index) => { %>
+    <div>case<%= index %>: <%= data.result %></div>
+    <div>expected: <%= data.answer %></div>
+    <div>result: <%= data.wrongAnswer %></div>
+  <% }) %>
+<% } %>
+
+<a link href="/problems/<%= problemId %>">return</a>

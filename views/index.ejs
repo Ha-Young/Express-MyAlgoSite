@@ -15,9 +15,9 @@
     </ul>
 
     <% problems.forEach((problem) => { %>
-      <a link href="/problem/<%= problem._id %>">
+      <a link href="/problems/<%= problem._id %>">
         <div>title: <%= problem.title %></div>
-        <div>complited: <%= problem.complited_users %></div>
+        <div>complited: <%= problem.completed_users %></div>
         <div>Level: <%= problem.difficulty_level %></div>
       </a>
     <% }) %>

@@ -2,6 +2,8 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const GitHubStrategy = require('passport-github').Strategy;
 
+const bcrypt = require("bcrypt");
+
 const User = require("./models/User");
 
 // passport.use(new LocalStrategy(User.authenticate));
@@ -9,12 +11,15 @@ const User = require("./models/User");
 passport.use(new LocalStrategy({
   usernameField: "username",
   passwordField: "password",
-}, (username, password, cb) => {
+}, async (username, password, cb) => {
   if (!username || !password) {
     return cb(null, false);
   }
 
-  if (username === "user001" && password === "password") {
+  const user = await User.findOne({ username });
+  const validPassword = await bcrypt.compare(password, user.password);
+
+  if (user.length !== 0 && validPassword) {
     return cb(null, username);
   }
 
@@ -26,9 +31,31 @@ passport.use(new GitHubStrategy({
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
   },
   async (accessToken, refreshToken, profile, cb) => {
-    await User.findOrCreate({ githubId: profile.id }, (err, user) => {
-      return cb(err, user);
-    });
+    const {
+      username,
+      photos: [{ value: avatar }],
+    } = profile;
+
+    try {
+      const user = await User.findOne({ username });
+
+      if (!user) {
+        const newUser = User({
+          username,
+          avatar,
+        });
+
+        await newUser.save();
+
+        cb(null, newUser);
+        return;
+      }
+
+      cb(null, user);
+      return;
+    } catch (error) {
+      cb(error);
+    }
   },
 ));
 

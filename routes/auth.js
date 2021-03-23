@@ -1,20 +1,18 @@
 const express = require("express");
 const router = express.Router();
 
-const createError = require("http-errors");
 const passport = require("passport");
 
-router.get("/", (req, res) => {
-  res.status(200).render("login", { message: "Login" });
-});
+const authController = require("./controllers/auth.controller");
 
-router.get("/github",
-  passport.authenticate("github"));
+router.get("/", authController.localLogin);
 
-router.get("/github/callback", 
+router.get("/github", passport.authenticate("github"));
+
+router.get(
+  "/github/callback",
   passport.authenticate("github", { failureRedirect: '/login' }),
-  (req, res) => {
-    res.redirect('/');
-  });
+  authController.redirect,
+);
 
 module.exports = router;

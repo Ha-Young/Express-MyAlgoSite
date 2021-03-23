@@ -13,11 +13,17 @@ const userSchema = new mongoose.Schema({
     minlength: 1,
     maxlength: 20,
   },
+  email: {
+    type: String,
+    unique: true,
+    minlength: 1,
+  },
   password: {
     type: String,
-    required: true,
     minlength: 6,
-    maxlength: 20,
+  },
+  avatar: {
+    type: String,
   }
 });
 

@@ -31,11 +31,11 @@ const ProblemSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  complited_users: {
+  completed_users: {
     type: Number,
     required: true,
-    default: 0,
   },
+  completed_user_list: [String],
   description: {
     type: String,
     required: true,
