@@ -1,23 +1,23 @@
+const passport = require("passport");
 const { TITLE } = require("../constants/common");
 
 exports.home = (req, res) => {
   res.render("home", { pageTitle: TITLE.HOME });
 };
 
-exports.getLogin = (req, res) => {
+exports.login = (req, res) => {
   res.render("login", { pageTitle: TITLE.LOGIN });
-};
-exports.postLogin = (req, res) => {
-  const { id, password } = req.body;
 };
 
 exports.logout = (req, res) => {
+  req.logout();
   res.redirect("/login");
-}
-
-exports.getJoin = (req, res) => {
-  res.render("join", { pageTitle: TITLE.JOIN });
 };
-exports.postJoin = (req, res) => {
-  res.redirect("/");
-}
+
+exports.loginGoogle = passport.authenticate("google", { scope: ["profile"] });
+
+exports.loginGoogleCallback =
+  passport.authenticate("google", {
+    failureRedirect: "/login",
+    successRedirect: "/",
+  });

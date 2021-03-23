@@ -9,20 +9,35 @@ passport.use(new GoogleStrategy(
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: `http://localhost:${process.env.PORT}/login/google/callback`
   },
-  (accessToken, refreshToken, profile, done) => {
-    User.create({ googleId: profile.id });
+  async (accessToken, refreshToken, profile, done) => {
+    const isUser = await User.exists({ googleId: Number(profile.id) });
+    const {
+      displayName: name,
+      id: googleId,
+    } = profile;
+    const avatalUrl = profile.photos[0].value;
+
+    try {
+      if (!isUser) {
+        User.create({
+          name,
+          avatalUrl,
+          googleId,
+        });
+      }
+    } catch (err) {
+      throw new Error("failed join");
+    }
 
     done(null, profile);
   }
 ));
 
 passport.serializeUser((user, done) => {
-  console.log(user)
   done(null, user);
 });
 
 passport.deserializeUser((user, done) => {
-  console.log(user)
   done(null, user);
 });
 

@@ -5,3 +5,21 @@ exports.localMiddleware = (req, res, next) => {
 
   next();
 };
+
+exports.authenticateUser = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    next();
+    return;
+  }
+
+  res.status(301).redirect('/login');
+};
+
+exports.loginedUser = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    res.status(301).redirect("/");
+    return;
+  }
+
+  next();
+}

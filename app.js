@@ -6,10 +6,13 @@ const fs = require("fs");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const path = require("path");
-const globalRouter = require("./routes/globalRouter");
-const { localMiddleware } = require("./middlewares");
 const passport = require("./passport");
 const session = require('express-session');
+
+const { authenticateUser, localMiddleware, loginedUser } = require("./middlewares");
+const globalRouter = require("./routes/globalRouter");
+const loginRouter = require("./routes/loginRouter");
+
 require("dotenv").config();
 
 const app = express();
@@ -44,7 +47,8 @@ app.use(passport.session());
 
 app.use(localMiddleware);
 
-app.use("/", globalRouter);
+app.use("/login", loginedUser, loginRouter);
+app.use("/", authenticateUser, globalRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
