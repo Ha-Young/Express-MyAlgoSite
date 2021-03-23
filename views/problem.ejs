@@ -1,12 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 <head>
   <title><%= title %></title>
+  <script src="/codemirror/codemirror.js"></script>
+  <link href="/codemirror/codemirror.css" rel="stylesheet"/>
+  <script src="/codemirror/xml.js"></script>
+  <link href="/codemirror/dracula.css" rel="stylesheet" />
 </head>
 <body>
-  <h1><%= title %></h1>
-  <p><%= completed_users %></p>
-  <p><%= difficulty_level %></p>
-  <p><%= description %></p>
+  <header>
+    <h1><%= title %></h1>
+  </header>
+  <form>
+    <div>
+      <span>정답자 수: </span>
+      <span><%= completed_users %></span>
+    </div>
+    <div>
+      <span>문제 난이도: </span>
+      <span><%= difficulty_level %></span>
+    </div>
+    <div>
+      <p><%= description %></p>
+    </div>
+    <textarea id='editor'></textarea>
+  </form>
+  <script>
+    var editor = CodeMirror.fromTextArea
+    (document.getElementById("editor"), {
+      mode: "xml",
+      theme: "dracula",
+      lineNumbers: true
+    });
+  </script>
 </body>
 </html>

@@ -40,6 +40,8 @@ passport.use(
 
 const app = express();
 
+app.use(express.static("public"));
+
 app.use(session({
   secret: process.env.CLIENT_SECRET,
   cookie: { maxAge: 60 * 60 * 1000 },
