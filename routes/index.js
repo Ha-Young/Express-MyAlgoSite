@@ -8,7 +8,7 @@ router.get("/", async (req, res, next) => {
   const user = await req.user;
   res.render("index", {
     email: user.email,
-    problems: problemSample,
+    problemList: problemSample,
   });
 });
 

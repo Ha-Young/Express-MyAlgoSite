@@ -50,15 +50,15 @@ h1 {
   padding: 0;
 }
 
-.problems > li:first-child {
+.problems > a:first-child > li {
   border-top: solid 1px #d1d1d1;
 }
 
-.problems > li:hover {
+.problems li:hover {
   background-color: #f3f3f3;
 }
 
-.problems > li {
+.problems li {
   padding: 20px;
   border-bottom: solid 1px #d1d1d1;
   font-size: 1.1rem;
@@ -67,4 +67,13 @@ h1 {
 
 .problem-title {
   margin-top: 0;
+}
+
+.problem-link {
+  text-decoration: none;
+  color: black;
+}
+
+.problem-link:visited {
+  color: black;
 }

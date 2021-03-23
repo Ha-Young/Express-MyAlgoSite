@@ -19,12 +19,14 @@
     </header>
     <h2 class="problems-title">Problems</h2>
     <ul class="problems">
-      <%  for (const problem of problems) { %>
-        <li>
-          <h3 class="problem-title"><%=problem.title %></h3>
-          <div>정답자 : <%=problem.completed_users%>명</div>
-          <div>난이도 : Level <%=problem.difficulty_level%></div>
-        </li>
+      <%  for (const problem of problemList) { %>
+        <a class="problem-link" href="problems/<%=problem.id%>">
+          <li>
+            <h3 class="problem-title"><%=problem.title %></h3>
+            <div>정답자 : <%=problem.completed_users%>명</div>
+            <div>난이도 : Level <%=problem.difficulty_level%></div>
+          </li>
+        </a>
       <%  } %>
     </ul>
   </body>
