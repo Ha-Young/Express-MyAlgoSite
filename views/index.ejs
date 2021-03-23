@@ -19,26 +19,13 @@
     </header>
     <h2 class="problems-title">Problems</h2>
     <ul class="problems">
-      <li>
-        <h3 class="problem-title">피보나치 수열</h3>
-        <div>정답자: 15명</div>
-        <div>난이도: Level 1</div>
-      </li>
-      <li>
-        <h3 class="problem-title">서울에서 김서방 찾기</h3>
-        <div>정답자: 11명</div>
-        <div>난이도: Level 2</div>
-      </li>
-      <li>
-        <h3 class="problem-title">수박수박수박수박수</h3>
-        <div>정답자: 12명</div>
-        <div>난이도: Level 2</div>
-      </li>
-      <li>
-        <h3 class="problem-title">하샤드 수</h3>
-        <div>정답자: 5명</div>
-        <div>난이도: Level 3</div>
-      </li>
+      <%  for (const problem of problems) { %>
+        <li>
+          <h3 class="problem-title"><%=problem.title %></h3>
+          <div>정답자 : <%=problem.completed_users%>명</div>
+          <div>난이도 : Level <%=problem.difficulty_level%></div>
+        </li>
+      <%  } %>
     </ul>
   </body>
 </html>
