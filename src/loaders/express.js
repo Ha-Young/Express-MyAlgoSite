@@ -16,6 +16,7 @@ module.exports = function ({ app, routerLoader }) {
 
   app.use(cors());
   app.use(express.json());
+  app.use(express.urlencoded());
   app.use(methodOverride());
   app.use(express.static(path.resolve(__dirname, "../../public")));
 

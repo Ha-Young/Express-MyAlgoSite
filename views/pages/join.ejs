@@ -1,11 +1,12 @@
 <div class="form_wrapper">
-  <form class="form-common" action="/sign" method="POST">
+  <form class="form-common" action="/join" method="POST">
     <h3>Join Us</h3>
     <h4>input your information</h4>
     <fieldset>
       <input
         placeholder="Your Email Address"
         type="email"
+        name="email"
         tabindex="1"
         required
         autofocus
@@ -15,12 +16,22 @@
       <input
         placeholder="Your Password"
         type="password"
+        name="password"
         tabindex="2"
         required
       />
     </fieldset>
     <fieldset>
-      <button name="join-plain" type="submit">Join</button>
+      <input
+        placeholder="Your Name"
+        type="text"
+        name="name"
+        tabindex="2"
+        required
+      />
+    </fieldset>
+    <fieldset>
+      <button type="submit">Join</button>
     </fieldset>
 
     <div class="third-party__container">
@@ -60,7 +71,9 @@
             ></path>
           </g>
         </svg>
-        <button name="join-google" class="google-btn">Join with Google</button>
+        <a href="/google-join">
+          <button name="join_google" type="button" class="google-btn">Join with Google</button>
+        </a>
       </fieldset>
     </div>
   </form>
