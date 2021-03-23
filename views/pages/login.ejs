@@ -3,13 +3,13 @@
     <h3>Login</h3>
     <h4>input your login information</h4>
     <fieldset>
-      <input placeholder="Your Email Address" type="email" tabindex="2" required>
+      <input placeholder="Your Email Address" name="email" type="email" tabindex="2" required>
     </fieldset>
     <fieldset>
-      <input placeholder="Your Password" type="password" tabindex="3" required>
+      <input placeholder="Your Password" name="password" type="password" tabindex="3" required>
     </fieldset>
     <fieldset>
-      <button name="login-plain" type="submit">Login</button>
+      <button type="submit">Login</button>
     </fieldset>
     <div class="third-party__container">
       <p class="third-party__reg-option">
@@ -48,7 +48,9 @@
             ></path>
           </g>
         </svg>
-        <button name="login-google" class="google-btn">Sign in with Google</button>
+        <a href="/google-login">
+          <button name="login_google" type="button" class="google-btn">Login with Google</button>
+        </a>
       </fieldset>
     </div>
     <p class="join-info">New to codewar? <a href="/join" title="join">Join now</a></p>

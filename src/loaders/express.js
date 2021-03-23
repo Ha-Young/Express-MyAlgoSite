@@ -1,4 +1,5 @@
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const createError = require("http-errors");
 const express = require("express");
 const expressLayouts = require('express-ejs-layouts');
@@ -6,6 +7,7 @@ const methodOverride = require('method-override');
 const path = require("path");
 const { format } = require("date-fns");
 
+const passportLoader = require("./passport");
 const { logger } = require("./logger");
 
 module.exports = function ({ app, routerLoader }) {
@@ -16,10 +18,15 @@ module.exports = function ({ app, routerLoader }) {
 
   app.use(cors());
   app.use(express.json());
-  app.use(express.urlencoded());
+  app.use(express.urlencoded({ extended: true }));
   app.use(methodOverride());
   app.use(express.static(path.resolve(__dirname, "../../public")));
+  app.use(cookieParser());
 
+  //passport
+  passportLoader({ app });
+
+  // router
   routerLoader({ app });
 
   // catch 404 and forward to error handler
