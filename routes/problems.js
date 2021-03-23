@@ -1,12 +1,12 @@
 const express = require("express");
-const userController = require("./controllers/userController");
+const problemsController = require("./controllers/problemsController");
 const router = express.Router();
 const passport = require("passport");
 
 router.get(
   "/",
   passport.authenticate("jwt", { session: false }),
-  userController.renderUserPage
+  problemsController.renderProblemsPage
 );
 
 module.exports = router;

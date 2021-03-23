@@ -1,10 +1,9 @@
 const express = require("express");
-const logInController = require("./controllers/logInController");
+const logInController = require("./controllers/loginController");
 const router = express.Router();
 const authHandler = require("../routes/middlewars/authHandler");
-const passport = require("passport");
 
 router.get("/", logInController.renderLoginPage);
-router.post("/auth/tokens", authHandler.create);
+router.post("/auth/tokens", authHandler.signToken);
 
 module.exports = router;

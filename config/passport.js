@@ -1,13 +1,22 @@
 const passport = require("passport");
 const JwtStrategy = require("passport-jwt").Strategy;
-const ExtractJwt = require("passport-jwt").ExtractJwt;
 const LocalStrategy = require("passport-local").Strategy;
-
+const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 dotenv.config();
 
 const UserModel = require("../models/User");
 require("dotenv").config();
+
+const cookieExtractor = (req) => {
+  let jwt = null;
+
+  if (req && req.cookies) {
+    jwt = req.cookies["jwt"];
+  }
+
+  return jwt;
+};
 
 module.exports = () => {
   passport.use(
@@ -18,17 +27,18 @@ module.exports = () => {
         passwordField: "password",
         session: false,
       },
-      function (email, password, done) {
-        return UserModel.findOne({ email: email, password: password })
-          .then((user) => {
-            if (!user) {
-              return done(null, false, {
-                message: "Incorrect email or password.",
-              });
-            }
-            return done(null, user, { message: "log in sucess!" });
-          })
-          .catch((err) => done(err));
+      async function (email, password, done) {
+        const user = await UserModel.findOne({ email: email });
+        if (!user) {
+          return done(null, false);
+        }
+
+        const validPassword = await bcrypt.compare(password, user.password);
+        if (!validPassword) {
+          return done(null, false);
+        }
+
+        return done(null, user);
       }
     )
   );
@@ -38,19 +48,22 @@ module.exports = () => {
     "jwt",
     new JwtStrategy(
       {
-        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+        jwtFromRequest: cookieExtractor,
         secretOrKey: process.env.JWT_SECRET_KEY,
+        session: false,
       },
-      function (jwtPayload, done) {
-        console.log("jwt payload", jwtPayload);
+      async function (jwtPayload, done) {
+        const user = await UserModel.findById(jwtPayload._id);
 
-        return UserModel.findById(jwtPayload._id)
-          .then((user) => {
-            return done(null, user);
-          })
-          .catch((err) => {
-            return done(err);
-          });
+        try {
+          if (!user) {
+            return done(null, false);
+          }
+
+          return done(null, user);
+        } catch (error) {
+          return done(error);
+        }
       }
     )
   );
