@@ -1,6 +1,9 @@
 require("dotenv").config();
 const express = require("express");
+const session = require("express-session");
 const cookieParser = require("cookie-parser");
+const flash = require("express-flash");
+const passport = require("passport");
 const mongoose = require("mongoose");
 
 const users = require("./routes/users");
@@ -23,6 +26,19 @@ mongoose.connect(process.env.MONGO_DB, {
   useFindAndModify: false,
   dbName: "mydatabase"
 });
+
+app.use(session({
+  name: "authkey",
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 1000 * 60 * 60
+  }
+}));
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/users", users);
 app.use("/", index);
