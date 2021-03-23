@@ -1,10 +1,12 @@
 <div class="Nav">
   <a href='/'>Home</a>
   <a href='/problems'>Problems</a>
-  <a href='/log-out'>Logout</a>
-  <a href='/sign-out'>Secession</a>
+  <a href='/log-out'>Log out</a>
+  <a href='/sign-out'>Sign out</a>
 </div>
 
 <% if (user) { %>
   <h2><%= `반가워요. ${user.userName}님!` %></h2>
 <% } %>
+
+<hr>

@@ -3,12 +3,17 @@ const passport = require('passport');
 const bcrypt = require('bcrypt');
 const router = express.Router();
 const User = require('../models/User');
+const Problem = require('../models/Problem');
 const forwardAuthenticated = require('./middlewares/forwardAuthenticated');
-const flash = require('express-flash');
 
 /* GET home page. */
-router.get('/', forwardAuthenticated, (req, res, next) => {
-  res.render('index');
+router.get('/', forwardAuthenticated, async (req, res, next) => {
+  try {
+    const problems = await Problem.find();
+    res.render('index', { data: problems });
+  } catch (e) {
+    next(e);
+  }
 });
 
 router.get('/log-in', (req, res, next) => {
@@ -81,7 +86,7 @@ router.get('/sign-out/done', forwardAuthenticated, async (req, res, next) => {
   }
 });
 
-router.get('/problems', forwardAuthenticated, (req, res, next) => {
+router.get('/problems', forwardAuthenticated, async (req, res, next) => {
   res.render('problems');
 });
 
