@@ -5,6 +5,18 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const User = require("../models/User");
 require("dotenv").config();
 
+passport.serializeUser((user, done) => {
+  console.log(user.id);
+  done(null, user.id);
+});
+
+passport.deserializeUser(async function (id, done) {
+  console.log(id);
+  const user = await User.findById(id);
+
+  done(null, user);
+});
+
 passport.use(
   new GoogleStrategy(
     {
@@ -16,7 +28,7 @@ passport.use(
       const currentUser = await User.findOne({ googleId: profile.id });
       if (currentUser) {
         console.log("current user...");
-        done();
+        done(null, currentUser);
 
         return;
       }
@@ -26,7 +38,7 @@ passport.use(
         googleId: profile.id,
       }).save();
 
-      done();
+      done(null, newUser);
     },
   ),
 );
