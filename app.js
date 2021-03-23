@@ -2,6 +2,9 @@ const express = require("express");
 const path = require("path");
 const passport = require("passport");
 // const bodyParser = require("body-parser");
+const cookieSession = require("cookie-session");
+const connect = require("./models/connection");
+require("dotenv").config();
 
 const index = require("./routes/index");
 const login = require("./routes/login");
@@ -12,6 +15,13 @@ const app = express();
 
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use(
+  cookieSession({
+    maxAge: 24 * 60 * 60 * 1000,
+    keys: [process.env.COOKIE_KEY],
+  }),
+);
 
 app.use(passport.initialize());
 app.use(passport.session());

@@ -55,6 +55,7 @@ router.get(
 );
 
 router.get("/authcallback", passport.authenticate("google"), (req, res) => {
+  console.log(req.user);
   res.send("redirect");
 });
 
