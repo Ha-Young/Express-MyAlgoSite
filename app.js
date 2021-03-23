@@ -10,12 +10,12 @@ const methodOverride = require("method-override");
 const mongoose = require("mongoose");
 
 const index = require("./routes/index");
-const login = require("./routes/login");
+const auth = require("./routes/auth");
 const problems = require("./routes/problems");
+const { checkAuthenticated } = require("./middlewares/auth");
 
 const app = express();
 
-// db
 const mongoDB = process.env.MONGO_URL;
 
 mongoose.connect(mongoDB, { useNewUrlParser: true })
@@ -24,27 +24,22 @@ mongoose.connect(mongoDB, { useNewUrlParser: true })
 
 app.set("view engine", "ejs");
 
-app.use(express.urlencoded({ extended: false }));
-app.use(methodOverride("_method"));
-
-app.use(flash());
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
 }));
 
+app.use(express.urlencoded({ extended: false }));
+app.use(methodOverride("_method"));
+
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/login", checkNotAuthenticated, login);
-app.use("/", checkAuthenticated, index);
+app.use("/auth", auth);
 app.use("/problems", problems);
-
-app.delete("/logout", (req, res) => {
-  req.logOut();
-  res.redirect("/login");
-});
+app.use("/", checkAuthenticated, index);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -63,24 +58,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
-
-// move to middlewares dir
-function checkAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-
-  res.redirect("/login");
-}
-
-// move to middlewares dir
-function checkNotAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    res.redirect("/login");
-    return;
-  }
-
-  next();
-}
 
 module.exports = app;

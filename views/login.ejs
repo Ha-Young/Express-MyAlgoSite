@@ -14,7 +14,7 @@
           Log in with github
         </button>
       </div>
-      <Form action="/login" method="POST">
+      <Form action="/auth/login" method="POST">
         <div class="form-group">
           <label for="email">Email</label>
           <input class="form-control" type="email" id="email" name="email" required>
@@ -34,7 +34,7 @@
       </Form>
       <br>
       <div class="alert alert-dismissible alert-info">
-        <strong>If not a member?</strong> <a href="/login/register">Register Here</a>
+        <strong>If not a member?</strong> <a href="/auth/register">Register Here</a>
       </div>
     </div>
   </body>
