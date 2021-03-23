@@ -13,7 +13,7 @@ const index = require('./routes/index');
 const app = express();
 
 app.set('views', './views');
-app.set('view engine', 'ejs');
+app.set('view engine', 'pug');
 app.use(express.static('./public'));
 
 app.use(cookieParser());
