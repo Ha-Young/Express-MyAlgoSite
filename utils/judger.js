@@ -21,7 +21,11 @@ function judgeSolution (testcases, solution) {
           passed = false;
       }
 
-      testcaseResult.push({expected: answer, result: sandbox.result});
+      testcaseResult.push({
+          code: code,
+          expected: answer,
+          result: sandbox.result
+        });
     } catch (error) {
       return {error: error};
     }

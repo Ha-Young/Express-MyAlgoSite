@@ -22,7 +22,6 @@ exports.postSolution = async function (req, res, next) {
   const result = judgeSolution(testcases, solution);
 
   if (result.error) {
-    console.log(result.error);
     res.render("error", {
       name: result.error.name,
       message: result.error.message,
