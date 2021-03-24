@@ -35,7 +35,6 @@ exports.submitProblem = async (req, res, next) => {
 
       if (isFailed > -1) {
         res.render("solutionResult", {
-          result: "failure",
           tests,
           resultList: result.resultList,
           answerList: result.answerList
@@ -43,17 +42,14 @@ exports.submitProblem = async (req, res, next) => {
         return;
       }
 
-      res.render("solutionResult", {
-        result: "success",
-        tests,
-        resultList: result.resultList,
-        answerList: result.answerList
+      res.render("success", {
+        message: "SUCCESS"
       });
+
       return;
     }
 
     res.render("solutionResult", {
-      result: "failure",
       resultList: null,
       answerList: null,
       error: result
