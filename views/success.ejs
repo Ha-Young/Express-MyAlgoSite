@@ -8,7 +8,11 @@
   <body>
     <div><%= message %></div>
     <div class="button-list">
-     <a class="button" href="/users/login">TO LOGIN PAGE</a>
+      <% if (message === "SUCCESS") { %>
+        <a class="button" href="/">GO TO PROBLEM LIST</a>
+      <% } else { %>
+         <a class="button" href="/users/login">GO TO LOGIN PAGE</a>
+      <% } %>
     </div>
   </body>
 </html>
