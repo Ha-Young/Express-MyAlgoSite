@@ -6,9 +6,17 @@ block body
   link(rel="stylesheet" href="/codemirror/lib/codemirror.css")
   script(type="text/javascript" src="/codemirror/lib/codemirror.js")
   script(type="text/javascript" src="/codemirror/mode/javascript/javascript.js")
+  script(type="text/javascript" src="/codemirror/addon/fold/xml-fold.js")
+  script(type="text/javascript" src="/codemirror/addon/hint/show-hint.js")
+  script(type="text/javascript" src="/codemirror/addon/hint/javascript-hint.js")
+  script(type="text/javascript" src="/codemirror/addon/edit/closebrackets.js")
+  script(type="text/javascript" src="/codemirror/addon/edit/matchbrackets.js")
+  script(type="text/javascript" src="/codemirror/addon/edit/closetag.js")
+  script(type="text/javascript" src="/codemirror/addon/edit/matchtags.js")
+  script(type="text/javascript" src="/codemirror/addon/edit/trailingspace.js")
   .problem__container
     div.problem__description problemDetail
     form.problem__editorForm(action="/problem")
-      textarea.textEditor#textEditor
+      textarea.textEditor#textEditor function solution() {}
   script(type="text/javascript" src="/javascripts/problemDetail.js")
 
