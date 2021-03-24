@@ -1,0 +1,66 @@
+.problems {
+  color: white;
+}
+
+.problem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  margin: 10px;
+}
+
+.problem-setting {
+  position: relative;
+  width: 350px;
+  height: 200px;
+  margin-right: 10px;
+  background: #252829;
+  text-align: center;
+}
+
+.problem-setting > p {
+  position: absolute;
+  right: 10px;
+}
+
+.language {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  height: 50px;
+  margin: 0 auto;
+  margin-top: 80px;
+  background: #1E2021;
+  line-height: 14px;
+  text-align: center;
+}
+
+.language > img {
+  margin-left: 30px;
+}
+
+.problem-Info {
+  width: 700px;
+  height: 200px;
+  padding: 5px;
+  background: #3C3C3C;
+}
+
+.problem-header {
+  display: flex;
+}
+
+.problem-level {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  background: black;
+  border: 1px solid yellow;
+  border-radius: 50%;
+  font-size: 11px;
+}

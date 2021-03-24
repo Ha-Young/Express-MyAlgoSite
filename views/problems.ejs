@@ -3,30 +3,58 @@
   <head>
     <title>Codewars</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
-    <link rel="stylesheet" href="/lib/codemirror.css" />
-    <link rel="stylesheet" href="/theme/gruvbox-dark.css" />
-    <script src="/lib/codemirror.js"></script>
+    <link rel="stylesheet" href="/stylesheets/detailProblem.css" />
+    <link rel="stylesheet" href="/codemirror/lib/codemirror.css" />
+    <link rel="stylesheet" href="/codemirror/theme/gruvbox-dark.css" />
+    <script src="/codemirror/lib/codemirror.js"></script>
   </head>
   <body>
-    <h1>디테일 페이지</h1>
-    <p><%= problem.title %></p>
-    <p>문제 레벨: <%= problem.difficulty_level %></p>
-    <p>정답자: <%= problem.completed_users %></p>
-    <p>설명: <%= problem.description %></p>
-    <form action="/problems/<%= problem._id %>" method="POST">
-      <textarea id="code" name="submit_text">
-      </textarea>
-      <button type="submit">제출</button>
-    </form>
-    <script>
-      const editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-        lineNumbers: true,
-        styleActiveLine: true,
-        mode: "javascript",
-        indentUnit: 2,
-        identWithTabs: true,
-        theme: "gruvbox-dark"
-      });
-    </script>
+    <section class="problem-detail">
+      <article class="detail-info">
+        <div class="problem-header">
+          <div class="problem-level">
+            <span>
+              <%= problem.difficulty_level %> level
+            </span>
+          </div>
+          <p class="problem-title"><%= problem.title %></p>
+        </div>
+        <p>정답자: <%= problem.completed_users %></p>
+        문제 설명:
+        <p><%= problem.description %></p>
+      </article>
+      <article class="codes">
+        <div class="input-code">
+          <div class="problem-text">Solution:</div>
+          <form action="/problems/<%= problem._id %>" method="POST">
+            <textarea id="code" name="submit_text"></textarea>
+            <button class="submit-button" type="submit">제출</button>
+          </form>
+          <script>
+            const editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+              lineNumbers: true,
+              styleActiveLine: true,
+              mode: "javascript",
+              indentUnit: 2,
+              identWithTabs: true,
+              theme: "gruvbox-dark"
+            });
+
+            editor.setValue(`function solution() {\n\n}`);
+          </script>
+        </div>
+        <div>
+          <div class="problem-text">Examples:</div>
+          <article class="examples">
+            <% problem.tests.forEach(test => { %>
+              <div class="example">
+                <p>예제 실행 코드: <%= test.code %><p>
+                <p>결과: <%= test.solution %><p>
+              </div>
+            <% }) %>
+          </article>
+        </div>
+      </article>
+    </section>
   </body>
 </html>

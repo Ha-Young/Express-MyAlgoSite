@@ -24,8 +24,6 @@ exports.checkCode = async function (req, res, next) {
     sandbox: {},
   });
 
-  const userCode = vm.run(`module.exports = ${submitText};`);
-
   try {
     const problem = await Problem.findById(problemId);
     const testCodes = problem.tests;
@@ -36,7 +34,7 @@ exports.checkCode = async function (req, res, next) {
       const correctValue = testCodes[i].solution;
 
       const result = vm.run(
-        `const solution = ${userCode};
+        `const solution = ${submitText};
         module.exports = ${testCode};`
       );
 
@@ -52,7 +50,7 @@ exports.checkCode = async function (req, res, next) {
     }
 
   } catch (error) {
-    console.log(1);
+    console.log(error);
     res.render("success");
   }
 }

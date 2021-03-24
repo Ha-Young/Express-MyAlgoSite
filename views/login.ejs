@@ -2,11 +2,20 @@
 <html>
   <head>
     <title>Codewars</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/login.css" />
   </head>
   <body>
-    <h3>로그인페이지</h3>
-    <form action="/login/google" method="GET">
-      <input type="submit" value="Google login">
-    </form>
+    <section class="login">
+      <article class="login-items">
+        <div>
+          <img class="logo-image" src="/image/codewars.png" alt="logo">
+          <p>Codewars</p>
+          <form action="/login/google" method="GET">
+            <input class="login-button" type="submit" value="sign in with google">
+          </form>
+        </div>
+      </article>
+    </section>
   </body>
 </html>

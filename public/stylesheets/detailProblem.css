@@ -1,0 +1,60 @@
+.problem-detail {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  color: white;
+}
+
+.detail-info {
+  width: 400px;
+  height: 770px;
+  margin: 10px;
+  padding: 15px;
+  background: #252829;
+}
+
+.problem-header {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.problem-title {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.problem-level {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  margin: 10px;
+  background: black;
+  border: 1px solid yellow;
+  border-radius: 50%;
+  font-size: 11px;
+}
+
+.codes {
+  width: 600px;
+  margin: 10px;
+}
+
+.problem-text {
+  padding: 10px;
+  background: #252829;
+  font-size: 20px;
+}
+
+.examples {
+  width: 580px;
+  height: 370px;
+  padding: 10px;
+  background: #18181A;
+}
+
+.example {
+  margin-bottom: 50px;
+}

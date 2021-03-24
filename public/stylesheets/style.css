@@ -1,8 +1,21 @@
 body {
-  padding: 50px;
+  background: #303133;
+  margin: 0;
+  padding: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
+button {
+  width: 60px;
+  height: 25px;
+  margin-top: 30px;
+  background: #5791e7;
+  border: none;
+  border-radius: 4px;
+  color: black;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #7BA4E3;
 }

@@ -2,17 +2,35 @@
 <html>
   <head>
     <title>Codewars</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/mainPage.css" />
   </head>
   <body>
-    <h1>Codewars</h1>
-    <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
-
     <ul class="problems">
       <% problems.forEach(problem => { %>
-        <li onclick="location.href='/problems/<%= problem._id %>'">
-          <p><%= problem.title %></p>
-          <p>문제 레벨: <%= problem.difficulty_level %></p>
-          <p>정답자: <%= problem.completed_users %></p>
+        <li class="problem">
+          <article class="problem-setting">
+            <p>Your Challenge</p>
+            <div class="language">
+              Javascript
+              <img src="/image/check.png" alt="check-img">
+            </div>
+            <form action="/problems/<%= problem._id %>">
+              <button type="submit">TRAIN</button>
+            </form>
+          </article>
+          <article class="problem-Info">
+            <div class="problem-header">
+              <div class="problem-level">
+                <span>
+                  <%= problem.difficulty_level %> level
+                </span>
+              </div>
+              <p><%= problem.title %></p>
+            </div>
+            <p>Passer: <%= problem.completed_users %></p>
+            <p>설명: <%= problem.description %></p>
+          </article>
         </li>
       <%  }) %>
     </ul>
