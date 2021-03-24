@@ -1,0 +1,33 @@
+const vm = require("vm");
+
+function judgeSolution (testcases, solution) {
+  let passed = true;
+  const testcaseResult = [];
+
+  for (let i = 0; i < testcases.length; i++) {
+    const code = testcases[i].code;
+    const answer = testcases[i].solution;
+
+
+    try {
+      const sandbox = { result: "" };
+      const context = vm.createContext(sandbox);
+      const script = new vm.Script(solution + "result=" + code);
+
+      console.log(typeof sandbox.result, typeof answer);
+      script.runInContext(context);
+      console.log(sandbox.result, answer);
+      if (sandbox.result !== answer) {
+          passed = false;
+      }
+
+      testcaseResult.push({expected: answer, result: sandbox.result});
+    } catch (error) {
+      return {error: error};
+    }
+  }
+
+  return {passed: passed, testcaseResult: testcaseResult};
+}
+
+exports.judgeSolution = judgeSolution;

@@ -1,10 +1,5 @@
 const mongoose = require('mongoose');
 
-/*
-
-  TODO: Fill in the model specification
-
- */
 const ProblemSchema = new mongoose.Schema({
   id: Number,
   title: String,
@@ -14,7 +9,7 @@ const ProblemSchema = new mongoose.Schema({
   description: String,
   tests: [{
     code: String,
-    solution: String
+    solution: mongoose.Schema.Types.Mixed
   }
   ]
 });

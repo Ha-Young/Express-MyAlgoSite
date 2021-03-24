@@ -1,6 +1,8 @@
 const assert = require("assert");
-const vm = require("vm");
 const Problem = require("../../models/Problem");
+const { judgeSolution } = require("../../utils/judger");
+const {IS_CORRECT_SOLUTION, IS_WRONG_SOLUTION} = require("../../constants/ResultMessage");
+
 
 exports.getProblem = async function (req, res, next) {
   const problemId = req.params.problem_id;
@@ -11,35 +13,27 @@ exports.getProblem = async function (req, res, next) {
   res.render("problem", { problem: problem[0], firstLine: firstLine});
 }
 
-exports.postSolution = async function (req, res,next) {
+exports.postSolution = async function (req, res, next) {
   const problemId = req.params.problem_id;
   const problem = await Problem.find({id: problemId});
   const testcases = problem[0].tests;
+  const solution = req.body.solution;
 
-  for (let i = 0; i < testcases.length; i++) {
-    const solution = req.body.solution;
-    const code = testcases[i].code;
-    const answer = testcases[i].solution;
+  const result = judgeSolution(testcases, solution);
 
-    
-    try {
-      const sandbox = {
-        result: ""
-      }
-      const context = vm.createContext(sandbox);
-      const script = new vm.Script(solution + "result=" + code);
-      console.log(script);
-      script.runInContext(context);
+  if (result.error) {
+    console.log(result.error);
+    res.render("error", {
+      name: result.error.name,
+      message: result.error.message,
+      stack: result.error.stack
+    });
 
-      console.log(sandbox.result, answer);
-    } catch (error) {
-      res.render("problemError", {
-        name: error.name,
-        message: error.message,
-        stack: error.stack
-      });
-      return;
-    }
+    return;
   }
-  res.render("success");
+
+  res.render("success", {
+    message: result.passed ? IS_CORRECT_SOLUTION : IS_WRONG_SOLUTION,
+    testcaseResult : result.testcaseResult
+  });
 }
