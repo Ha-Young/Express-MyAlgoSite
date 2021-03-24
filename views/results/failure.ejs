@@ -41,15 +41,21 @@ function solution (<%=data.argument%>) {
       <% } %>
       <button type="submit">Run Code</button>
     </form>
-
-    <% if (data.results.length !== 0) { %>
+    <% if (data.error) { %>
+    <p>테스트 결과 : <%=data.finalResult%></p>
+    <div>에러내용: <%=data.results[0].userResult%></div>
+    <% } %> <% if (data.results.length !== 0 && !data.error ) { %>
     <ul>
       <p>테스트 결과 : <%=data.finalResult%></p>
       <% data.results.forEach(result => { %>
       <li>
-        <div><%=result.code%></div>
-        <div><%=result.userResult%></div>
-        <div><%=result.solution%></div>
+        <div>테스트코드: <%=result.code%></div>
+        <% if (result.userResult === undefined) { %>
+        <div>실행결과: undefined</div>
+        <% } %> <% if (result.userResult !== undefined) { %>
+        <div>실행결과: <%=result.userResult%></div>
+        <% } %>
+        <div>정답: <%=result.solution%></div>
       </li>
       <% }) %>
     </ul>

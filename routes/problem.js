@@ -24,7 +24,7 @@ router.get("/:problem_id", isLoggedIn, async (req, res, next) => {
       res.redirect("/");
     }
   } catch (err) {
-    res.redirect("/");
+    next(err);
   }
 });
 
@@ -106,7 +106,30 @@ router.post("/:problem_id", isLoggedIn, async (req, res, next) => {
       data: { ...currentProblem, results, finalResult, userAnswer: userCode },
     });
   } catch (error) {
-    res.render("error", { message: error, error });
+    try {
+      const currentProblem = await Problem.findById(
+        req.params.problem_id
+      ).lean();
+      const results = [
+        {
+          userResult: error.message,
+        },
+      ];
+      const userAnswer = req.body.userCode;
+      const finalResult = "에러 발생 ❌";
+
+      return res.render("results/failure", {
+        data: {
+          ...currentProblem,
+          results,
+          userAnswer,
+          finalResult,
+          error: true,
+        },
+      });
+    } catch (err) {
+      next(err);
+    }
   }
 });
 

@@ -34,7 +34,10 @@ router.get("/", isLoggedIn, async (req, res, next) => {
 
   try {
     const problemList = await Problem.find().lean();
-    res.render("index", { data: problemList });
+    const userList = await User.find().lean();
+    const sortedUser = userList.sort((a, b) => b.rating - a.rating);
+
+    res.render("index", { data: { problemList, sortedUser } });
   } catch (err) {
     res.render("index");
   }
@@ -99,7 +102,7 @@ router.get("/level/:level", isLoggedIn, async (req, res, next) => {
       difficulty: level,
     }).lean();
 
-    res.render("index", { data: currentLevelProblems });
+    res.render("index", { data: { problemList: currentLevelProblems } });
   } catch (err) {
     next(err);
   }
@@ -117,7 +120,7 @@ router.get("/solved", isLoggedIn, async (req, res, next) => {
         solvedList.push(problem);
       }
       console.log(solvedList);
-      res.render("index", { data: solvedList });
+      res.render("index", { data: { problemList: solvedList } });
     }
   } catch (err) {
     next(err);
@@ -136,7 +139,7 @@ router.get("/unsolved", isLoggedIn, async (req, res, next) => {
         (problem) => solvedProblems.indexOf(problem._id.toString()) === -1
       );
       console.log(unsolvedList);
-      res.render("index", { data: unsolvedList });
+      res.render("index", { data: { problemList: unsolvedList } });
     }
   } catch (err) {
     next(err);
