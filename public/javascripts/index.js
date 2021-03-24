@@ -18,6 +18,3 @@ if (problemForm) {
     },
   });
 }
-
-// const code = codeMirror.getTextArea();
-// console.log(code);

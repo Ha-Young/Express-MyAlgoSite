@@ -1,21 +1,22 @@
-<%= problem.title %>
+<div class="problem_container">
+  <div class="problem_details">
+    <%= problem.title %>
+    <%= problem.description %>
+  </div>
+  <form
+    action="/problems/result"
+    method="POST"
+    class="problem_form"
+  >
+    <textarea
+      class="problem_textarea"
+      name="code"
+    >
+      function solution() {
 
-<div class="question">
-  <%= problem.description %>
+      }
+    </textarea>
+    <input type="submit" value="SUBMIT">
+  </form>
 </div>
 
-<form
-  action="/problems/result"
-  method="POST"
-  class="problem_form"
->
-  <textarea
-    class="problem_textarea"
-    name="code"
-  >
-    function solution() {
-
-    }
-  </textarea>
-  <input type="submit" value="SUBMIT">
-</form>
