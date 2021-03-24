@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <% include ./partials/head %>
     <script src="/codemirror/lib/codemirror.js"></script>
     <script src="/codemirror/mode/javascript.js"></script>
     <script src="/codemirror/addon/line_numbers.js"></script>
@@ -17,21 +16,24 @@
 
     <link rel="stylesheet" href="/codemirror/addon/scroll/simplescrollbars.css">
     <link rel="stylesheet" href="/codemirror/lib/codemirror.css">
-    <link rel="stylesheet" href="/codemirror/theme/monokai.css">
+    <link rel="stylesheet" href="/codemirror/theme/material-palenight.css">
+
+    <% include ./partials/head %>
   </head>
   <body>
     <% include ./partials/header %>
 
     <form action="/problems/<%= problem.id %>" method="POST">
       <h2><%= problem.title %></h2>
-      <textarea id="editor">
-console.log('Hello World!');
-      </textarea>
+      <textarea id="editor" name="userAnswer">
+function solution() {
+  
+};
+</textarea>
       <button type="submit">제출</button>
     </form>
 
     <% include ./partials/footer %>
-
     <script src='/javascripts/editor.js'></script>
   </body>
 </html>

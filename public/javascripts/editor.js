@@ -1,7 +1,7 @@
 const codemirror = new CodeMirror.fromTextArea(document.getElementById("editor"), {
   mode: "javascript",
   lineNumbers: true,
-  theme: 'monokai',
+  theme: 'material-palenight',
   value: "console.log(Hi);",
   indentUnit: 2,
   matchBrackets: true,
@@ -14,4 +14,5 @@ const codemirror = new CodeMirror.fromTextArea(document.getElementById("editor")
   trailingSpace: true,
   scrollPastEnd: true,
   simpleScrollBars: true,
+  autofocus: true,
 });

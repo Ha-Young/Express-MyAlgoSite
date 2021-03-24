@@ -6,16 +6,16 @@
   <body>
     <% include ./partials/header %>
 
-    <h1>결과</h1>
     <h2><%= title %></h2>
-
-    <iframe>
-      
-    </iframe>
+    <h1>코드 실행 결과</h1>
 
     <% for (let i = 0; i < tests.length; i++) { %>
-      <h4><%= tests[i].code %></h4>
-      <h4><%= tests[i].solution %></h4>
+      <div>
+        <h4><%= `${i + 1}번 테스트 케이스: ${tests[i].code}` %></h4>
+        <h4>테스트 케이스 정답: <%= tests[i].solution %></h4>
+        <h4>제출 코드 실행 결과: <%= testResult[i] %></h4>
+      </div>
+      <hr>
     <% } %>
 
     <% include ./partials/footer %>
