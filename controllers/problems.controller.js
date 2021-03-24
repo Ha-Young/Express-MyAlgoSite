@@ -1,8 +1,10 @@
 const Problem = require('../models/Problem');
 const AppError = require('../utils/appError');
-const catchAsync = require('../utils/catchAsync');
+const catchAsync = require('../middlewares/catchAsync');
 
 exports.get = catchAsync(async (req, res, next) => {
+  //질문: db에 저장될 때 _id란 objectId로 이미 식별자랑 함께 저장되는데
+  //id가 필요한 이유가 무엇인가
   const problem = await Problem.findById(req.params.id).lean();
 
   if (problem === null) {

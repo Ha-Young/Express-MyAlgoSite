@@ -1,5 +1,4 @@
-const AppError = require("./appError");
-
+const AppError = require('../utils/appError');
 /**
  * Used to reduce depth of async function by removing try-catch block
  * @param {Function} fn - async function

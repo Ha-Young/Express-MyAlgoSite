@@ -1,6 +1,6 @@
 const passport = require('passport');
 const User = require('../models/User');
-const catchAsync = require('../utils/catchAsync');
+const catchAsync = require('../middlewares/catchAsync');
 
 exports.getLoginForm = (req, res) => {
   const flashMessage = req.flash().error?.[0] ?? '';

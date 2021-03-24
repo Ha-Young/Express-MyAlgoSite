@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const problemsController = require("../controllers/problems.controller");
+const checkAuthentication = require('../middlewares/checkAuthentication');
+const problemsController = require('../controllers/problems.controller');
+
+router.use(checkAuthentication);
 
 router
   .route('/:id')

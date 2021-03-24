@@ -1,5 +1,5 @@
 const Problem = require('../models/Problem');
-const catchAsync = require('../utils/catchAsync');
+const catchAsync = require('../middlewares/catchAsync');
 
 exports.getHome = catchAsync(async (req, res, next) => {
   const problems = await Problem.find().lean();
