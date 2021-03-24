@@ -7,13 +7,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/theme/dracula.min.css" />
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/addon/lint/lint.min.css" /> -->
 
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jshint/2.12.0/jshint.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/addon/hint/javascript-hint.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/mode/javascript/javascript.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vm2@3.9.2/index.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jshint/2.12.0/jshint.min.js"></script> -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/addon/lint/javascript-lint.min.js"></script> -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/addon/lint/lint.min.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/mode/javascript/javascript.min.js"></script>
   </head>
   <body>
+    <img src="https://cdnjs.com/_/0db8d9b5e4e8e9cda2e261ac4ea53dfc.svg" style="position: absolute; z-index: -1;"/>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <a class="navbar-brand" href="#">CodeWars</a>
       <div class="collapse navbar-collapse" id="navbarColor01">
@@ -41,9 +44,19 @@
     </nav>
     <br>
     <div class="container">
-      <textarea id="editor">
-      </textarea>
+      <form action="/problems/3" method="POST">
+        <textarea id="editor" name="userCode">
+          function solution (a, b) { 
+
+          }
+        </textarea>
+        <br>
+        <button type="submit" class="submit-btn btn btn-primary">SUBMIT</button>
+      </form>
     </div>
-    <script type="text/javascript" src="./javascripts/codeMirror.js"></script>
+    <div class="container result">
+      <%= result %>
+    </div>
+    <script type="text/javascript" src="../javascripts/codeMirror.js"></script>
   </body>
 </html>
