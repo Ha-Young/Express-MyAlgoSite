@@ -18,18 +18,24 @@
   </header>
   <div class="problem-wrapper">
     <div class="problem-left">
-      <div class="problem-left">
+      <div class="">
         <h2><%= problem.id %>. <%= problem.title %></h2>
       </div>
-      <div class="problem-left">
+      <div class="">
         <p><%= problem.description %></p>
       </div>
-      <div class="">Accepted: <%= problem.accepted %> Submissions: <%= problem.submission %></div>
+      <div class="">
+        <p>
+          Accepted: <%= problem.accepted %> Submissions: <%= problem.submission %>
+        </p>
+      </div>
     </div>
     <div class="problem-right">
       <form class="code-editor" action="<%= `/problems/${problem.id}` %>" method="post">
         <textarea name="solution" cols="30" rows="10"></textarea>
-        <input class="submit-button" type="submit">
+        <div class="button-wrapper">
+          <input class="submit-button" type="submit" />
+        </div>
       </form>
     </div>
   </div>
