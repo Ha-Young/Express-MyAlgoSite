@@ -1,5 +1,5 @@
 /**
- * Used to reduce depth of async function by removing try-catch block
+ * Used to generate validator for mongoose model schema
  * @param {string} type - property schema type name
  * @param {string} name - property name
  * @param {(number|boolean)} [val] - any value to fit in schema type
