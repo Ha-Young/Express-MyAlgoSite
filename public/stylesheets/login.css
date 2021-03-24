@@ -1,10 +1,19 @@
 h1 {
-  font-family: "Merriweather";
+  font-family: "Libre Franklin";
   font-size: 33px;
   font-weight: 500px;
   margin-top: 0px;
-  margin-bottom: 20px;
-  color: #746F6F;
+  margin-bottom: 18px;
+  color: #776E6E;
+}
+
+
+a, 
+a:focus, 
+a:hover {
+  color: #b1361e;
+  text-decoration: none;
+  background-color: transparent;
 }
 
 p {
@@ -27,7 +36,7 @@ input::placeholder {
 .logo {
   width: 180px;
   height: 180px;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .login {
@@ -82,14 +91,6 @@ input::placeholder {
   justify-content: center;
   margin-top: 10px;
   text-decoration: none;
-}
-
-a, 
-a:focus, 
-a:hover {
-  color: #b1361e;
-  text-decoration: none;
-  background-color: transparent;
 }
 
 .login-button {

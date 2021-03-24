@@ -2,9 +2,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.6.0/codemirror.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.6.0/mode/javascript/javascript.min.js"></script>
 
-<div>title: <%= problem.title %></div>
-<div>Level: <%= problem.difficulty_level %></div>
-<div>description: <%= problem.description %></div>
+<div class="problem-title"><%= problem.title %></div>
+<div class="problem-level">Level: <%= problem.difficulty_level %></div>
+<div class="problem-description"><%= problem.description %></div>
 
 <% problem.tests.forEach((test) => { %>
   <div>example: <%= test.code %></div>
