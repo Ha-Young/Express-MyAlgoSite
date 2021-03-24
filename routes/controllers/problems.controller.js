@@ -9,23 +9,33 @@ exports.getProblem = async (req, res, next) => {
 };
 
 exports.verifyUserCode = async (req, res, next) => {
-  const { tests } = await Problem.findOne({ id: Number(req.params.problem_id) }).exec();
+  const { tests }
+    = await Problem
+      .findOne({ id: Number(req.params.problem_id) })
+      .exec();
 
   const userCode = req.body.userCode;
-  const contexts = tests.map(() => ({ result: null }));
+  const contexts = tests.map(() => ({ userSolution: "undefined" }));
   const testScripts = tests.map(test => new vm.Script(`
       ${userCode};
-      result = ${test.code} || null;
+      userSolution = ${test.code} || "undefined";
       solution = ${test.solution};
   `));
   try {
     contexts.forEach((context, index) => {
       testScripts[index].runInNewContext(context, {timeout: 2000, microtaskMode: "afterEvaluate"});
     });
+
+    for (const { userSolution, solution } of contexts) {
+      if (userSolution !== solution) {
+        res.locals.failure = { solution: solution, userSolution: userSolution };
+        return res.render("failure");
+      }
+    }
+
+    return res.render("success");
   } catch (error) {
-    console.log(error);
+    res.locals.failure = { error: error.message };
+    return res.render("failure");
   }
-
-  console.log(contexts);
-
 };
