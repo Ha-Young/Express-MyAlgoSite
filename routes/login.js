@@ -1,21 +1,19 @@
 const express = require('express');
 const router = express.Router();
 
-module.exports = function (passport) {
-  const loginController = require("../controllers/login.controller")(passport);
+const loginController = require("../controllers/login.controller");
 
-  router
-    .route('/')
-    .get(loginController.getLoginForm)
+router
+  .route('/')
+  .get(loginController.getLoginForm);
 
-  router
-    .route('/signup')
-    .get(loginController.getSignUpForm)
-    .post(loginController.createUser)
+router
+  .route('/signup')
+  .get(loginController.getSignUpForm)
+  .post(loginController.createUser);
 
-  router
-    .route('/signin')
-    .post(loginController.authenticateLocal);
+router
+  .route('/signin')
+  .post(loginController.authenticateLocal);
 
-  return router;
-}
+module.exports = router;

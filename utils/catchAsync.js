@@ -6,7 +6,11 @@ const AppError = require("./appError");
  * @return {Function} to catch parameter function's error
  */
 module.exports = fn => {
-  return (req, res, next) => {
-    fn(req, res, next).catch(err => next(new AppError(err.message, 400)));
+  return async (req, res, next) => {
+    try {
+      await fn(req, res, next);
+    } catch (err) {
+      next(new AppError(err.message, 400));
+    }
   };
 };

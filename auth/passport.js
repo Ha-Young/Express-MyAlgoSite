@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const User = require('../models/User');
 
 module.exports = function (app) {
@@ -8,12 +9,11 @@ module.exports = function (app) {
   app.use(passport.session());
 
   passport.serializeUser(function (user, done) {
-    //console.log(user);
-    done(null, user.email);
+    done(null, user._id);
   });
 
-  passport.deserializeUser(function (id, done) {
-    User.findById(id, function (err, user) {
+  passport.deserializeUser(function (_id, done) {
+    User.findById(_id, function (err, user) {
       done(err, user);
     });
   });
@@ -23,12 +23,12 @@ module.exports = function (app) {
       usernameField: 'email',
     },
     function (email, password, done) {
-      User.findOne({ email }, function (err, user) {
+      User.findOne({ email }, async function (err, user) {
         if (err) {
           return done(err);
         }
 
-        if (!user) {//} || !user.validPassword(password)) {
+        if (!user || !await bcrypt.compare(password, user.password)) {
           return done(null, false, { message: 'Incorrect email or password.' });
         }
 

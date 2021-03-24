@@ -8,12 +8,11 @@ const flash = require('connect-flash');
 
 const app = express();
 
-const passport = require('./auth/passport')(app);
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/error.controller');
 
 const index = require('./routes/index');
-const login = require('./routes/login')(passport);
+const login = require('./routes/login');
 const problems = require('./routes/problems');
 
 const DB = process.env.DATABASE.replace(
@@ -29,18 +28,6 @@ const clientPromise = mongoose.connect(DB, {
 }).then(m => m.connection.getClient());
 
 if (process.env.NODE_ENV === 'development') {
-  const Problem = require('./models/Problem');
-  const mockProblems = require('./models/sample_problems.json');
-
-  const init = async () => {
-    await Problem.deleteMany({});
-
-    for (let i = 0; i < mockProblems.length; i++) {
-      await Problem.create(mockProblems[i]);
-    }
-  };
-
-  init();
   app.use(morgan('dev'));
 }
 
@@ -63,6 +50,9 @@ app.use(session({
     expires: new Date(Date.now() + 60 * 60 * 1000)
   }
 }));
+
+require('./auth/passport')(app);
+
 app.use(flash());
 
 app.use('/', index);

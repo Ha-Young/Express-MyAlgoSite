@@ -6,11 +6,11 @@
  * @return {(Object|Array)} return Schema type value array if (type === min, max, required)
  */
 module.exports = function (type, name, val) {
-  if (typeof type !== "string") {
+  if (typeof type !== 'string') {
     throw new Error('handleSchemaTypeError: type should be string');
   }
 
-  if (typeof name !== "string") {
+  if (typeof name !== 'string') {
     throw new Error('handleSchemaTypeError: name should be string');
   }
 
