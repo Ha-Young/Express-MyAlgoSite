@@ -5,8 +5,10 @@ const Problem = require("../../models/Problem");
 exports.getProblem = async function (req, res, next) {
   const problemId = req.params.problem_id;
   const problem = await Problem.find({id: problemId});
-
-  res.render("problem", { problem: problem[0]});
+  const parameters = problem[0].parameters.join(", ");
+  const firstLine = "function(" + parameters + ") {}";
+  
+  res.render("problem", { problem: problem[0], firstLine: firstLine});
 }
 
 exports.postSolution = function (req, res,next) {

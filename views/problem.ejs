@@ -15,7 +15,7 @@
     <span>맞은 사람 수 : <%=problem.completed_users%></span>
     <% const address =`/problems/${problem.id}`%>
     <form method="POST" action=<%=address%>>
-      <textarea id="editor" name="solution">function solution () { }</textarea>
+      <textarea id="editor" name="solution"><%=firstLine%></textarea>
       <input type="submit" value="submit"></button>
     </form>
   </body>
