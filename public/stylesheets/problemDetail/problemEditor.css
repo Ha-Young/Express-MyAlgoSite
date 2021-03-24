@@ -1,0 +1,23 @@
+.problem__editorForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  text-align: left;
+}
+
+.Codemirror {
+  width: 100%;
+  height: 85%;
+  border-radius: 0px 8px 8px 0px;
+  box-shadow: 1px 1px 9px black;
+}
+
+.submitButton__wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  padding: 15px;
+}

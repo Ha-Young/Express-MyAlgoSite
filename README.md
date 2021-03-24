@@ -84,9 +84,15 @@ yarn run dev or npm run dev
 - login validation(형식대로 잘 써넣었는지 확인 후 에러 메세지)
 - join validation(login validation과 동일)
 - local join 정리
-- 메인화면 -> 로고랑 시작버튼이 있어야함(시작버튼 누르면 problem list가 뜸)
-- problem list 등록하고 뿌리기()
-- problem 상세페이지 -> login 된 상태라면 들어가고 아니라면 login 창으로 redirect
-- problem 상세페이지에 code mirror
-- user가 적은 code를 돌려볼 수 있는 code server
-- 
+- 로그인 하면 헤더의 버튼 join없애고 logout보이게 하기
+- 메인화면 스타일 -> 이름이 갑자기 떨어지면서 쾅!! 떨어지자마자 전기가 퍼져나가는 연출 -> 후에 헤더랑 다른 버튼들 서서히 보임
+- 결과 화면 스타일 -> 모달에서 싸우는거 보여주다가(지고 이기는 애니메이션 다르게) 연출 끝나면 버튼 서서히 보이기
+- 받은 code 확인 = code에서 eval이 있으면 에러 메세지
+- style: problemList = 적당히 가로줄로 나누고 #전투지역이라고 써놓기
+- problemDetail: 상세 정보 보여주기
+- DB: 결과 저장
+
+# Q
+
+- css가 잔뜩이고 그래서 directory를 좀 나눴는데 괜찮은가...?
+- css classname들 괜찮은가...?
