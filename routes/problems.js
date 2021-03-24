@@ -57,6 +57,7 @@ router.post('/:problem_id', verifyUser, async (req, res, next) => {
   }
 
   if (judgeResult.every(result => result === true)) {
+    
     res.render('success');
   } else {
     const failTests = [];
