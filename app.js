@@ -4,6 +4,18 @@ const passportSetup = require('./config/passport-setup');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
+// const Codemirror = require('codemirror');
+// require('codemirror/mode/javascript/javascript.js');
+// require( 'codemirror/addon/lint/json-lint');
+// require( 'codemirror/addon/fold/brace-fold');
+// require( 'codemirror/addon/fold/comment-fold');
+// require( 'codemirror/addon/fold/foldcode');
+// require( 'codemirror/addon/fold/foldgutter');
+// require( 'codemirror/addon/fold/indent-fold');
+// require( 'codemirror/addon/fold/markdown-fold');
+// require( 'codemirror/addon/fold/xml-fold');
+// require( 'codemirror/addon/edit/closebrackets');
+// require( 'codemirror/addon/edit/closetag');
 
 const keys = require('./config/keys');
 
@@ -35,7 +47,7 @@ db.once("open", function() {
 
 const indexRoutes = require('./routes/index');
 const authRoutes = require('./routes/auth-routes');
-const profileRoutes = require('./routes/profile-routes');
+const problemsRoutes = require('./routes/problem-routes');
 
 const app = express();
 
@@ -58,7 +70,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRoutes);
 app.use('/auth', authRoutes);
-app.use('/profile', profileRoutes);
+app.use('/problem', problemsRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

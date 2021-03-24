@@ -55,3 +55,9 @@ section {
   display: flex;
   flex-direction: column;
 }
+
+.codemirror-textarea {
+  width: 200px;
+  height: 100px;
+  background-color: thistle;
+}

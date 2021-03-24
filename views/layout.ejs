@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/theme/material-palenight.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/addon/lint/lint.min.css" /> -->
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <title>Codewars</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="/">Codewars</a></li>
+          <% if (!user) { %>
+            <li><a href="/auth/login">Login</a></li>
+          <% } else { %>
+            <li><a href="/auth/logout">Logout</a></li>
+            <li>Welcome <%= user.name.familyName %></li>
+          <% } %>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      INDEX, CODEWARS
+      <%- body %>
+    </main>
+    <%- script %>
+
+    <!-- <link rel="stylesheet" href="lib/codemirror.css">
+    <script src="lib/codemirror.js"></script> -->
+    <script>
+      var editor = CodeMirror(document.querySelector('#editor'), {
+        lineNumbers: true,
+        tabSize: 2,
+        value: 'console.log("Hello, World");'
+      });
+    </script>
+
+  </body>
+</html>
