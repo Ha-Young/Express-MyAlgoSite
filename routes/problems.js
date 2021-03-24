@@ -13,46 +13,67 @@ router.get('/:problems_id', forwardAuthenticated, async (req, res, next) => {
 router.post('/:problems_id', forwardAuthenticated, async (req, res, next) => {
   const { id, title, tests } = await Problem.findOne({ id: req.params.problems_id });
   const { userAnswer } = req.body;
-  const sandbox = { result: [] };
-  let isPass = true;
+  const passOrFail = [];
+  let isAllPass = true;
 
+  const sandbox = { result: [] };
   vm.createContext(sandbox);
 
   try {
     for (let i = 0; i < tests.length; i++) {
       await vm.runInContext(userAnswer + `result.push(${tests[i].code});`, sandbox);
       if (sandbox.result[i] !== tests[i].solution) {
-        isPass = false;
+        passOrFail.push("fail");
+        isAllPass = false;
+      } else {
+        passOrFail.push("pass");
       }
     }
-
-    const testResult = {
+  } catch (e) {
+    const interimResult = {
       id,
       title,
-      tests,
-      result: sandbox.result,
-      isPass,
-      userAnswer,
+      userAnswer
     };
-    req.session.testResult = testResult;
+    const codeError = {
+      errorMessage: e.message,
+      errorName: e.name,
+      errorStack: e.stack,
+    };
 
-    if (isPass) res.redirect('/problems/' + req.params.problems_id + '/success');
-    res.redirect('/problems/' + req.params.problems_id + '/failure');
-  } catch (e) {
-    next(e);
+    req.session.codeError = codeError;
+    req.session.interimResult = interimResult;
+    res.redirect('/problems/' + req.params.problems_id + '/codeError');
+
+    return;
   }
+
+  const testResult = {
+    id,
+    title,
+    tests,
+    result: sandbox.result,
+    isAllPass,
+    userAnswer,
+    passOrFail,
+  };
+
+  req.session.testResult = testResult;
+  res.redirect('/problems/' + req.params.problems_id + '/result');
 });
 
-router.get('/:problems_id/success', forwardAuthenticated, async (req, res, next) => {
-  const { id, title, tests, result, isPass, userAnswer } = req.session.testResult;
+router.get('/:problems_id/result', forwardAuthenticated, async (req, res, next) => {
+  const { id, title, tests, result, isAllPass, userAnswer, passOrFail } = req.session.testResult;
 
-  res.render('success', { id, title, tests, result, isPass, userAnswer });
+  res.render('result', { id, title, tests, result, isAllPass, userAnswer, passOrFail });
 });
 
-router.get('/:problems_id/failure', forwardAuthenticated, async (req, res, next) => {
-  const { id, title, tests, result, isPass, userAnswer } = req.session.testResult;
+router.get('/:problems_id/codeError', forwardAuthenticated, async (req, res, next) => {
+  const { id, title, userAnswer } = req.session.interimResult;
+  const { errorMessage, errorName, errorStack } = req.session.codeError;
 
-  res.render('failure', { id, title, tests, result, isPass, userAnswer });
+  res.render('codeError', { errorMessage, errorName, errorStack, id, title, userAnswer });
+  req.session.codeError = null;
 });
 
 function findParameterType(solution) {

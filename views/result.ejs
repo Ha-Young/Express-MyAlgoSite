@@ -10,11 +10,7 @@
     <script src="/codemirror/addon/edit/matchbrackets.js"></script>
     <script src="/codemirror/addon/edit/matchtags.js"></script>
     <script src="/codemirror/addon/edit/trailingspace.js"></script>
-    <script src="/codemirror/addon/scroll/annotatescrollbar.js"></script>
-    <script src="/codemirror/addon/scroll/scrollpastend.js"></script>
-    <script src="/codemirror/addon/scroll/simplescrollbars.js"></script>
 
-    <link rel="stylesheet" href="/codemirror/addon/scroll/simplescrollbars.css">
     <link rel="stylesheet" href="/codemirror/lib/codemirror.css">
     <link rel="stylesheet" href="/codemirror/theme/material-palenight.css">
 
@@ -24,14 +20,19 @@
     <% include ./partials/header %>
 
     <h2><%= title %></h2>
-    <% if (isPass) { %>
+    <% if (isAllPass) { %>
       <h1>통과!</h1>
     <% } else { %>
       <h1>땡!</h1>
     <% } %>
 
+    <form>
+      <textarea id="editor" name="userAnswer">
+<%= userAnswer %></textarea>
+    </form>
+
     <% for (let i = 0; i < tests.length; i++) { %>
-      <div>
+      <div class="<%= passOrFail[i] %>">
         <h4><%= `${i + 1}번 테스트 케이스: ${tests[i].code}` %></h4>
         <h4>테스트 케이스 정답: <%= tests[i].solution %></h4>
         <h4>제출 코드 실행 결과: <%= result[i] %></h4>
@@ -39,10 +40,6 @@
       <hr>
     <% } %>
 
-    <form>
-      <textarea id="editor" name="userAnswer">
-<%= userAnswer %></textarea>
-    </form>
     <% include ./partials/footer %>
     <script src='/javascripts/editor.js'></script>
   </body>

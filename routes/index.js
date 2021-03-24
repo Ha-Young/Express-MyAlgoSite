@@ -86,8 +86,4 @@ router.get('/sign-out/done', forwardAuthenticated, async (req, res, next) => {
   }
 });
 
-router.get('/problems', forwardAuthenticated, async (req, res, next) => {
-  res.render('problems');
-});
-
 module.exports = router;

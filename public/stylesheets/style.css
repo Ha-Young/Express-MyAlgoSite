@@ -6,3 +6,11 @@ body {
 a {
   color: #00B7FF;
 }
+
+.pass {
+  color: #00B7FF;
+}
+
+.fail {
+  color: red;
+}
