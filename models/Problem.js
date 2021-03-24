@@ -1,12 +1,52 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 /*
 
   TODO: Fill in the model specification
 
  */
-const ProblemSchema = new mongoose.Schema({
+const { Schema } = mongoose;
+const {
+  Types: { ObjectId, Mixed },
+} = Schema;
 
+const TestSchema = new Schema({
+  code: {
+    type: String,
+  },
+  solution: {
+    type: Mixed,
+  },
 });
 
-module.exports = mongoose.model('Problem', ProblemSchema);
+// const CompletedUserSchema = new Schema({
+//   completedUsers: {
+//     type: ObjectId,
+//   },
+// });
+
+const ProblemSchema = new Schema({
+  title: {
+    type: String,
+  },
+  description: {
+    type: String,
+  },
+  difficulty: {
+    type: Number,
+    default: 1,
+  },
+  completedUsers: {
+    type: Number,
+    default: 0,
+  },
+  argument: {
+    type: String,
+    default: "",
+  },
+  tests: [TestSchema],
+});
+
+const Problem = mongoose.model("Problem", ProblemSchema);
+
+module.exports = { Problem };

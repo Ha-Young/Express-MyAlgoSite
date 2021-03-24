@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <script src="/codemirror/lib/codemirror.js"></script>
+    <script src="/codemirror/mode/javascript.js"></script>
+    <script src="/codemirror/edit/closebrackets.js"></script>
+    <script src="/codemirror/edit/matchbrackets.js"></script>
+    <script src="/codemirror/edit/javascript-lint.js"></script>
+    <script src="/codemirror/edit/trailingspace.js"></script>
+    <link rel="stylesheet" href="/codemirror/lib/codemirror.css" />
+    <link rel="stylesheet" href="/codemirror/theme/material-ocean.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <% include ./partials/header %>
+    <h1><%=data.title%></h1>
+    <p><%=data.description%></p>
+    <p>정답자 수 : <%=data.completedUsers%></p>
+    <p>난이도 : <%=data.difficulty%></p>
+    <ul>
+      <p>테스트 케이스 :</p>
+      <% data.tests.forEach(test => { %>
+      <li><%=test.code%></li>
+      <% }) %>
+    </ul>
+    <form action="/problem/<%=data._id%>" method="POST">
+      <textarea name="userCode" id="editor">
+function solution (<%=data.argument%>) {
+  if (n === 0 || n === 1) {
+    return n;
+  }
+  
+  return solution (n - 1) + solution (n - 2);
+}
+      </textarea>
+      <button type="submit">Run Code</button>
+    </form>
+
+    <% include ./partials/footer %>
+
+    <script>
+      const editor = CodeMirror.fromTextArea(
+        document.getElementById("editor"),
+        {
+          mode: "javascript",
+          theme: "material-ocean",
+          lineNumbers: true,
+          autoCloseBrackets: true,
+          matchBrackets: true,
+          trailingSpace: true,
+          lint: "javascript",
+          tabSize: 2,
+        }
+      );
+    </script>
+  </body>
+</html>

@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Codewars</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
+  <% include ./partials/head %>
   <body>
-    <h1>Codewars</h1>
+    <% include ./partials/header %>
+
     <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
 
     <ul class="tabs">
@@ -13,28 +11,18 @@
       <li>Level 2</li>
       <li>Level 3</li>
     </ul>
-
-    <ul class="problems">
+    <ul>
+      <p>테스트 케이스 :</p>
+      <% data.forEach(problem => { %>
       <li>
-        <div>피보나치 수열</div>
-        <div>정답자: 15명</div>
-        <div>난이도: Level 1</div>
+        <a href="/problem/<%=problem._id%>">
+          <div><%=problem.title%></div>
+          <div>정답자: <%=problem.completedUsers%>명</div>
+          <div>난이도: <%=problem.difficulty%></div>
+        </a>
       </li>
-      <li>
-        <div>서울에서 김서방 찾기</div>
-        <div>정답자: 11명</div>
-        <div>난이도: Level 2</div>
-      </li>
-      <li>
-        <div>수박수박수박수박수</div>
-        <div>정답자: 12명</div>
-        <div>난이도: Level 2</div>
-      </li>
-      <li>
-        <div>하샤드 수</div>
-        <div>정답자: 5명</div>
-        <div>난이도: Level 3</div>
-      </li>
+      <% }) %>
     </ul>
+    <% include ./partials/footer %>
   </body>
 </html>
