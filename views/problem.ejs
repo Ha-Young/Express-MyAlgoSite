@@ -16,14 +16,8 @@
     <% include ./partials/header %>
     <h1><%=data.title%></h1>
     <p><%=data.description%></p>
-    <p>정답자 수 : <%=data.completedUsers%></p>
-    <p>난이도 : <%=data.difficulty%></p>
-    <ul>
-      <p>테스트 케이스 :</p>
-      <% data.tests.forEach(test => { %>
-      <li><%=test.code%></li>
-      <% }) %>
-    </ul>
+    <p>정답자 수 : <%=data.completedCount%>명</p>
+    <p>난이도 : Level <%=data.difficulty%></p>
     <form action="/problem/<%=data._id%>" method="POST">
       <% if (data.userAnswer) { %>
       <textarea name="userCode" id="editor">

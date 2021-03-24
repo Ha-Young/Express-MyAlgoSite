@@ -19,11 +19,16 @@ const TestSchema = new Schema({
   },
 });
 
-// const CompletedUserSchema = new Schema({
-//   completedUsers: {
-//     type: ObjectId,
-//   },
-// });
+const CompletedUserSchema = new Schema({
+  count: {
+    type: Number,
+    default: 0,
+  },
+  users: {
+    type: [ObjectId],
+    default: [],
+  },
+});
 
 const ProblemSchema = new Schema({
   title: {
@@ -36,9 +41,13 @@ const ProblemSchema = new Schema({
     type: Number,
     default: 1,
   },
-  completedUsers: {
+  completedCount: {
     type: Number,
     default: 0,
+  },
+  completedUsers: {
+    type: [ObjectId],
+    ref: "User",
   },
   argument: {
     type: String,

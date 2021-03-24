@@ -37,7 +37,6 @@ router.post("/:problem_id", async (req, res, next) => {
     const userResult = { userSolution: null };
     let successCount = 0;
     let failCount = 0;
-    console.log(currentUser.answers);
 
     await User.updateOne(
       { _id: req.user._id },
@@ -58,8 +57,26 @@ router.post("/:problem_id", async (req, res, next) => {
 
     if (failCount !== 0) {
       return res.render("results/failure", { data: currentProblem });
-    }
+    } else {
+      const completedUsers = currentProblem.completedUsers.map((objectId) =>
+        objectId.toString()
+      );
+      const completedCount = currentProblem.completedCount;
 
+      if (completedUsers.indexOf(currentUser._id.toString()) === -1) {
+        const updatedList = [...completedUsers, currentUser._id];
+        const updatedCount = completedCount + 1;
+
+        await Problem.updateOne(
+          { _id: currentProblem._id },
+          { completedUsers: updatedList }
+        );
+        await Problem.updateOne(
+          { _id: currentProblem._id },
+          { completedCount: updatedCount }
+        );
+      }
+    }
     res.render("results/success", { data: currentProblem });
   } catch (error) {
     res.render("error", { message: error, error });

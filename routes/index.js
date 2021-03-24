@@ -5,9 +5,32 @@ const bcrypt = require("bcrypt");
 const { isLoggedIn, isNotLoggedIn } = require("./../middleware/checkLogin");
 const { User } = require("./../models/User");
 const { Problem } = require("./../models/Problem");
+const sampleList = require("../models/sample_problems");
 
 /* GET home page. */
 router.get("/", isLoggedIn, async (req, res, next) => {
+  // sample 넣는 부분
+  // for (const sample of sampleList) {
+  //   const title = sample.title;
+  //   const description = sample.description;
+  //   const difficulty = sample.difficulty_level;
+  //   const tests = sample.tests;
+  //   const argument = sample.argument;
+  //   const completedCount = 0;
+  //   const completedUsers = [];
+  //   await Problem.create({
+  //     title,
+  //     description,
+  //     difficulty,
+  //     tests,
+  //     argument,
+  //     completedCount,
+  //     completedUsers,
+  //   });
+  // }
+  // res.render("partials/footer");
+  // sample 넣는 부분
+
   try {
     const problemList = await Problem.find().lean();
     res.render("index", { data: problemList });
