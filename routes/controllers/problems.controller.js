@@ -52,6 +52,7 @@ exports.checkCode = async function (req, res, next) {
     }
 
   } catch (error) {
-    console.log(error.message);
+    console.log(1);
+    res.render("success");
   }
 }

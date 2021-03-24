@@ -2,6 +2,10 @@
 <html>
   <head>
     <title>Codewars</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/lib/codemirror.css" />
+    <link rel="stylesheet" href="/theme/gruvbox-dark.css" />
+    <script src="/lib/codemirror.js"></script>
   </head>
   <body>
     <h1>디테일 페이지</h1>
@@ -10,8 +14,19 @@
     <p>정답자: <%= problem.completed_users %></p>
     <p>설명: <%= problem.description %></p>
     <form action="/problems/<%= problem._id %>" method="POST">
-      <textarea name="submit_text" cols="100" rows="30"></textarea>
+      <textarea id="code" name="submit_text">
+      </textarea>
       <button type="submit">제출</button>
     </form>
+    <script>
+      const editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+        lineNumbers: true,
+        styleActiveLine: true,
+        mode: "javascript",
+        indentUnit: 2,
+        identWithTabs: true,
+        theme: "gruvbox-dark"
+      });
+    </script>
   </body>
 </html>
