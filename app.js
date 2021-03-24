@@ -60,7 +60,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/', index);
-app.use('/auth', auth); //auth로 변경예정
+app.use('/auth', auth);
 app.use('/problems', problems);
 
 

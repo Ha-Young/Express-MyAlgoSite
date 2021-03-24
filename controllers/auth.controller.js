@@ -1,8 +1,8 @@
 const passport = require('passport');
 const User = require('../models/User');
-const catchAsync = require('../utils/catchAsync')
+const catchAsync = require('../utils/catchAsync');
 
-exports.getLoginForm = (req, res, next) => {
+exports.getLoginForm = (req, res) => {
   const flashMessage = req.flash().error?.[0] ?? '';
 
   res.render('login', {
@@ -15,30 +15,36 @@ exports.authenticateLocal = passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/auth',
   failureFlash: true
-}),
+});
 
-  exports.getSignUpForm = (req, res, next) => {
-    res.render('signup', { message: req.flash('info') });
-  },
+exports.getSignUpForm = (req, res) => {
+  res.render('signup', { message: req.flash('info') });
+};
 
-  exports.createUser = catchAsync(async (req, res, next) => {
-    if (await User.findOne({ email: req.body.email })) {
-      req.flash('info', 'email already exist');
-      return res.redirect('/auth/signup');
+exports.createUser = catchAsync(async (req, res, next) => {
+  if (await User.findOne({ email: req.body.email })) {
+    req.flash('info', 'email already exist');
+    return res.redirect('/auth/signup');
+  }
+
+  if (await User.findOne({ username: req.body.username })) {
+    req.flash('info', 'username already exist');
+    return res.redirect('/auth/signup');
+  }
+
+  const user = await User.create(req.body);
+
+  req.login(user, (err) => {
+    if (err) {
+      return next(err);
     }
 
-    if (await User.findOne({ username: req.body.username })) {
-      req.flash('info', 'username already exist');
-      return res.redirect('/auth/signup');
-    }
-
-    const user = await User.create(req.body);
-
-    req.login(user, (err) => {
-      if (err) {
-        return next(err);
-      }
-
-      res.redirect('/');
-    });
+    res.redirect('/');
   });
+});
+
+exports.logOut = (req, res) => {
+  console.log(req.user);
+  req.logout();
+  res.redirect('/');
+};

@@ -42,7 +42,7 @@ userSchema.pre('save', async function (next) {
 
 userSchema.statics.authenticate = async function (email, password, callback) {
   try {
-    const user = await User.findOne({ email: email });
+    const user = await User.findOne({ email: email }).lean();
     let result;
 
     if (user) {
@@ -53,6 +53,7 @@ userSchema.statics.authenticate = async function (email, password, callback) {
       return callback(null, false, { message: 'Incorrect email or password.' });
     }
 
+    delete user.password;
     return callback(null, user);
   } catch (err) {
     callback(err);

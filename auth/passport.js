@@ -11,10 +11,14 @@ module.exports = function (app) {
     done(null, user._id);
   });
 
-  passport.deserializeUser(function (_id, done) {
-    User.findById(_id, function (err, user) {
-      done(err, user);
-    });
+  passport.deserializeUser(async function (_id, done) {
+    try {
+      const user = await User.findById(_id).lean();
+      delete user.password;
+      done(null, user);
+    } catch (err) {
+      done(err, null);
+    }
   });
 
   passport.use(new LocalStrategy(

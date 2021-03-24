@@ -1,19 +1,23 @@
 const express = require('express');
 const router = express.Router();
 
-const loginController = require("../controllers/auth.controller");
+const authController = require("../controllers/auth.controller");
 
 router
   .route('/')
-  .get(loginController.getLoginForm);
+  .get(authController.getLoginForm);
 
 router
   .route('/signup')
-  .get(loginController.getSignUpForm)
-  .post(loginController.createUser);
+  .get(authController.getSignUpForm)
+  .post(authController.createUser);
 
 router
   .route('/login')
-  .post(loginController.authenticateLocal);
+  .post(authController.authenticateLocal);
+
+router
+  .route('/logout')
+  .get(authController.logOut)
 
 module.exports = router;
