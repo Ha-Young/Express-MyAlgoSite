@@ -14,48 +14,53 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/mode/javascript/javascript.min.js">
     </script>
     <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/theme/monokai.min.css" />
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/theme/material.min.css" />
   </head>
   <body>
     <%-include("header")%>
-    <main>
+    <main class="main">
       <div class="play-box">
-        <div class="title-box">
-          <h1 class="title">
-            <%= problem.title %>
-          </h1>
-          <div class="problem-info-box">
-            <div class="level<%=problem.difficulty_level%>">
-              Level <%= problem.difficulty_level %>
-            </div>
-            <div class="complete-users-box">
-              ✔️ <%= problem.completed_users %>
+        <div class="instruction-box">
+          <div class="instruction-box-header">
+            Instruction :
+          </div>
+          <div class="title-box">
+            <h1 class="title">
+              <%= problem.title %>
+            </h1>
+            <div class="problem-info-box">
+              <div class="level<%=problem.difficulty_level%>">
+                Level <%= problem.difficulty_level %>
+              </div>
+              <div class="complete-users-box">
+                ✔️ <%= problem.completed_users %>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="description-box">
-          <p class="description">
-            <%= problem.description %>
-          </p>
+          <div class="description-box">
+            <p class="description">
+              <%= problem.description %>
+            </p>
+          </div>
         </div>
         <div class="editor-box">
           <div class="editor-box-header">
             Solution :
           </div>
-          <div class="editor"></div>
+          <form action="/problems/<%=problem.id%>/submit" method="post" class="editor-form">
+            <textarea class="editor" name="code">function solution() {&#13;&#10;  // Your code...&#13;&#10;}</textarea>
+            <button class="submit-button" type="submit">
+              Submit
+            </button>
+          </form>
         </div>
       </div>
+      <div class="control-box">
+        <button class="problem-list-link-button">
+          < Problem-list
+        </button>
+      </div>
     </main>
-    <script>
-      const codeMirror = CodeMirror(document.querySelector(".editor"), {
-        lineNumbers: true,
-        tabSize: 2,
-        value: "function solution() {\n  // Your code...\n}",
-        mode: "javascript",
-        theme: "monokai",
-      });
-
-      codeMirror.setSize(null, 500);
-    </script>
+    <script src="../javascripts/problem.js"></script>
   </body>
 </html>
