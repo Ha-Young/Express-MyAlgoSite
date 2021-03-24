@@ -1,6 +1,6 @@
 const { TITLE } = require("./constants/common");
 
-exports.localMiddleware = (req, res, next) => {
+exports.localMiddleware = async (req, res, next) => {
   res.locals.siteTitle = TITLE.SITE;
 
   next();

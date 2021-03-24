@@ -1,13 +1,16 @@
-const problems = require("../models/sample_problems.json");
+const Problem = require("../models/Problem");
 const { TITLE } = require("../constants/common");
+const { getArgument } = require("../utils/solution");
 
-exports.home = (req, res) => {
+exports.home = async (req, res) => {
+  problems = await Problem.find().lean();
+
   res.render("home", { pageTitle: TITLE.HOME, problems });
 };
 
-exports.getProblemDetail = (req, res) => {
+exports.getProblemDetail = async (req, res) => {
   const id = Number(req.params.id);
-  const problem = problems.filter(problem => problem.id === id)[0];
+  const problem = await Problem.findOne({ id });
   const pageTitle = problem.title;
 
   res.render("problemDetail", {
@@ -17,8 +20,21 @@ exports.getProblemDetail = (req, res) => {
   });
 };
 
-exports.postSolution = (req, res) => {
-  const userSolution = new Function(`return ${req.body.solution}`);
+exports.postSolution = async (req, res) => {
+  const id = Number(req.params.id);
+  const problem = await Problem.findOne({ id }).lean();
+  const userSolution = new Function(`return ${req.body.solution}`)();
 
-  console.log(userSolution);
+  const problemArgList = [];
+  const problemAnswerList = [];
+
+  problem.tests.map(example => {
+    problemArgList.push(getArgument(example.code)[0]);
+    problemAnswerList.push(example.solution);
+  });
+
+  const userAnserList = problemArgList.map(arg => userSolution(arg));
+
+  console.log(problemArgList, problemAnswerList);
+  console.log(userAnserList);
 }

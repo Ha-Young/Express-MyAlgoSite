@@ -1,4 +1,4 @@
-<%- include("./partial/header") %>
+<%- include("partial/header") %>
 
 <div>
   <h1>Codewars</h1>
@@ -15,8 +15,8 @@
       <li>
         <a href="/problems/<%= problem.id %>">
           <div><%= problem.title %></div>
-          <div>정답자: <%= problem.completed_users %></div>
-          <div>난이도: <%= problem.difficulty_level %></div>
+          <div>정답자: <%= problem.completedUsers %></div>
+          <div>난이도: <%= problem.difficultyLevel %></div>
         </a>
       </li>
     <% } %>
