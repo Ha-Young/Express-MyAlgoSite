@@ -19,11 +19,14 @@ mongoose.connect(process.env.MONGODB_URL, {
 });
 
 const User = require('./models/User');
-const initializePassport = require('./config/passport-config');
-initializePassport(
+const LocalPassport = require('./config/passport-local');
+LocalPassport(
   passport,
   async (email) => await User.findOne({ email }),
 );
+
+const GithubPassport = require('./config/passport-gitHub');
+GithubPassport(passport);
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');

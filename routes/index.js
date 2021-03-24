@@ -26,6 +26,16 @@ router.post('/sign-in', passport.authenticate('local', {
   failureFlash: true,
 }));
 
+router.get('/sign-in/github', passport.authenticate('github', {
+  scope: [ 'user:email' ]
+}));
+
+router.get('/sign-in/github/callback', passport.authenticate('github', {
+  successRedirect: '/',
+  failureRedirect: '/sign-in',
+  failureFlash: true,
+}));
+
 router.get('/sign-out', forwardAuthenticated, (req, res, next) => {
   res.render('signOut');
 });
