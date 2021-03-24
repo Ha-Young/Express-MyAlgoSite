@@ -9,6 +9,7 @@
     <script src="/codemirror/lib/codemirror.js"></script>
   </head>
   <body>
+    <%- include('partial/header') %>
     <section class="success-Info">
       <div></div>
       <article class="user-code">
@@ -38,8 +39,9 @@
         </ul>
       </article>
     </section>
+    <p class="end-comment">전부 통과했습니다. 고생하셨습니다.</p>
     <form action="/" method="GET">
-      <button type="submit">홈으로</button>
+      <button class="home-button" type="submit">홈으로</button>
     </form>
   </body>
 </html>
