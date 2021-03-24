@@ -19,6 +19,7 @@
         "solution": 1
       }
     ],
+    "argument": "index",
     "img": "https://clevelanddesign.com/wp-content/uploads/2020/09/the-golden-ratio-teaser.jpg"
   },
   {
@@ -37,6 +38,7 @@
         "solution": "김서방은 2에 있다"
       }
     ],
+    "argument": "seoul",
     "img": "https://lh3.googleusercontent.com/proxy/k1SDzMew7Xfmy6yEua3qOdEdJ2fUQmkraLF4o9QFew-CyCWszID5auaHCSMEhe5LFiMivV1yz3C-YNJ_pBuzHLoPxcrlHILfoEOQevkGP6R4bpnQa6OB4MNTN1rLOP5sfhjkW-g"
   },
   {
@@ -55,12 +57,13 @@
         "solution": "수박수박"
       }
     ],
+    "argument": "n",
     "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2pd-ENZvDGUe9jcjeoUyw6iyHdvHMYQfzug&usqp=CAU"
   },
   {
     "id": 4,
     "title": "하샤드 수",
-    "solution_count": 5,
+    "completed_users": 5,
     "difficulty_level": 3,
     "description": "양의 정수 x가 하샤드 수이려면 x의 자릿수의 합으로 x가 나누어져야 합니다. 예를 들어 18의 자릿수 합은 1+8=9이고, 18은 9로 나누어 떨어지므로 18은 하샤드 수입니다. 자연수 n을 입력받아 n이 하샤드 수인지 아닌지 검사하는 함수, solution을 완성해주세요.",
     "tests": [
@@ -73,6 +76,7 @@
         "solution": false
       }
     ],
+    "argument": "n",
     "img": "http://number27.org/assets/img/pages/27/harshad.jpg"
   }
 ]

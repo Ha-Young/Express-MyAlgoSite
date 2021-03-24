@@ -9,6 +9,8 @@ module.exports = function loginCheck(req, res, next) {
       return res.redirect("/login");
     }
 
+    res.locals.user = req.user || {};
+
     next();
   })(req, res, next);
 };

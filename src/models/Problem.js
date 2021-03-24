@@ -14,6 +14,7 @@ const joiProblemSchema = joi.object({
   difficulty_level: joi.number().required(),
   description: joi.string(),
   tests: joi.array().items(testSchema).required(),
+  argument: joi.string(),
   img: joi.string(),
 });
 
