@@ -1,15 +1,10 @@
-const mongoose = require("mongoose");
 const createError = require("http-errors");
-const url = require("url");
 
 const User = require("../models/User");
-const flash = require("express-flash");
-
-
 
 exports.get = async (req, res, next) => {
   try {
-    const flashContents = (req.flash("message")[0]);
+    const flashContents = req.flash("message")[0];
     const options = {
       name: "",
       email: "",
