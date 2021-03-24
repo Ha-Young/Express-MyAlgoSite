@@ -10,19 +10,30 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40%;
-  height: 100%;
+  width: 45%;
+  height: 70%;
 }
 
 .problem__editorForm {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 40%;
+  width: 45%;
   height: 100%;
   text-align: left;
 }
 
-.codemirror {
+.Codemirror {
   width: 100%;
+  height: 70%;
 }
+
+.submitButton__wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  padding: 15px;
+}
+

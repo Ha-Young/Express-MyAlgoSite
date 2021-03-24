@@ -3,6 +3,7 @@ CodeMirror.fromTextArea(document.getElementById('textEditor'), {
   tabSize: 2,
   mode: "javascript",
   theme: "material",
+  viewportMargin: Infinity,
   autoCloseBrackets: true,
   matchBrackets: true,
   matchTags: true,
@@ -10,5 +11,5 @@ CodeMirror.fromTextArea(document.getElementById('textEditor'), {
   showTrailingSpace: true,
   editor: {
     showHint: true
-  }
+  },
 });

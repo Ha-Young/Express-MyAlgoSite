@@ -16,7 +16,9 @@ block body
   script(type="text/javascript" src="/codemirror/addon/edit/trailingspace.js")
   .problem__container
     div.problem__description problemDetail
-    form.problem__editorForm(action="/problem")
-      textarea.textEditor#textEditor function solution() {}
+    form.problem__editorForm(action=`/problem/${id}` method="POST")
+      textarea.textEditor#textEditor(name="userCode") function solution() {}
+      .submitButton__wrapper
+        button.btn.btn-primary(type="submit") Run Code!
   script(type="text/javascript" src="/javascripts/problemDetail.js")
 

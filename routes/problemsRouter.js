@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { problemDetailController } = require("../controllers/problem.controller");
+const { problemDetailController, postProblemDetailController } = require("../controllers/problem.controller");
 const Problem = require("../models/Problem");
 const dummy = require("../routes/dummydata");
 
@@ -15,5 +15,6 @@ router.get("/remove", async function(req, res, next) {
 });
 
 router.get("/:problem_id", problemDetailController);
+router.post("/:problem_id", postProblemDetailController);
 
 module.exports = router;

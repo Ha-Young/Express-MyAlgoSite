@@ -11,5 +11,9 @@ module.exports.problemDetailController = async function problemDetailController(
     return res.redirect('/');
   }
 
-  res.render('problemDetail');
+  res.render('problemDetail',{ id: problem._id });
+}
+
+module.exports.postProblemDetailController = async function postProblemDetailController(req, res, next) {
+  console.log(req.body);
 }
