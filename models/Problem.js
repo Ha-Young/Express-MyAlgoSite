@@ -4,7 +4,7 @@ const ProblemSchema = new mongoose.Schema({
   id: {
     type: Number,
     required: [true, "id is required"],
-    index: true,
+    // index: true,
   },
   title: {
     type: String,
