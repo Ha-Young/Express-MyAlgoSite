@@ -6,6 +6,7 @@ const cookieSession = require("cookie-session");
 
 const mongoose = require("mongoose");
 const initializeMongoDB = require("./utils/initializeMongoDB");
+const data = require("./models/sample_problems.json");
 
 const index = require("./routes/index");
 const login = require("./routes/login");
@@ -44,7 +45,7 @@ db.on("error", () => console.log("MongoDB Connection Error"));
 db.once("open", () => console.log("MongoDB Connected"));
 
 if (process.env.INITIALIZE_MONGODB === "true") {
-  initializeMongoDB();
+  initializeMongoDB(data);
 }
 
 app.use("/", index);
