@@ -17,6 +17,7 @@ const logStream = fs.createWriteStream(`${__dirname}/log/app.log`, { flags: "a" 
 
 app.use(morgan("combined", { stream: logStream }));
 app.use(express.static(`${__dirname}/public`));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(session({
   secret: "keyboard cat",
