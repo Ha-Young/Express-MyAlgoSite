@@ -28,13 +28,13 @@ router.post('/:problem_id', async (req, res) => {
   const problem = await Problem.find({ id: problemId });
   const tests = problem[0].tests;
   const sandbox = {
-    result: 0
+    result: null
   };
-  // const code = func + "result = solution(5)";
-  // const context = new vm.createContext(sandbox);
-  // const script = new vm.Script(code);
 
-  // try {
+
+  try {
+    let correctCount = 0;
+    let wrongCount = 0;
 
     for (let i = 0; i < tests.length; i ++) {
       const code = func + `result = ${tests[i].code}`;
@@ -43,11 +43,22 @@ router.post('/:problem_id', async (req, res) => {
 
       script.runInContext(context);
 
-      console.log(sandbox.result);
-      console.log(tests[i].solution);
+      if (sandbox.result !== tests[i].solution) {
+        wrongCount ++;
+      } else {
+        correctCount ++;
+      }
     }
-  // } catch (err) {
-  // }
+
+    if (wrongcount !== 0) {
+      res.render('failure');
+      return;
+    }
+
+    res.render('success');
+  } catch (err) {
+    res.render('error');
+  }
 });
 
 module.exports = router;
