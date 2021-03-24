@@ -4,6 +4,7 @@ const indexRouter = require('./routes/index');
 const loginRouter = require('./routes/login');
 const authRouter = require('./routes/auth');
 const problemsRouter = require('./routes/problem');
+const logoutRouter = require('./routes/logout');
 
 const express = require('express');
 const mongoose = require('mongoose');
@@ -72,6 +73,7 @@ app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/auth', authRouter);
 app.use('/problems', problemsRouter);
+app.use('/logout', logoutRouter);
 
 app.use(function(req, res, next) {
   const err = new Error('Not Found');
