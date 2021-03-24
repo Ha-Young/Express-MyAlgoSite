@@ -23,6 +23,10 @@ label {
   margin-bottom: 10px;
 }
 
+br {
+  width: 100%;
+}
+
 .header-title {
   color: white;
   font-size: 1.5rem;
