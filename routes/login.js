@@ -7,7 +7,15 @@ module.exports = function (passport) {
   router
     .route('/')
     .get(loginController.getLoginForm)
-    .post(loginController.authenticate);
+
+  router
+    .route('/signup')
+    .get(loginController.getSignUpForm)
+    .post(loginController.createUser)
+
+  router
+    .route('/signin')
+    .post(loginController.authenticateLocal);
 
   return router;
 }
