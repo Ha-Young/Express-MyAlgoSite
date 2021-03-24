@@ -1,8 +1,8 @@
 const express = require("express");
+const router = express.Router();
 const { mainController, loginController, postLoginController, getGoogleController, getGoogleCallbackController } = require("../controllers/login.controller");
 const { joinController, postJoinController } = require("../controllers/join.controller");
 const { redirectToHome } = require("../middlewares");
-const router = express.Router();
 
 /* GET home page. */
 router.get("/", mainController);

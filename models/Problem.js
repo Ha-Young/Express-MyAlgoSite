@@ -6,7 +6,6 @@ const TestCase = new mongoose.Schema({
 });
 
 const Challenger = new mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
   solved: Boolean,
 });
 
@@ -17,17 +16,13 @@ const Accuracy = new mongoose.Schema({
 });
 
 const ProblemSchema = new mongoose.Schema({
-  _id: {
-    type: mongoose.Schema.Types.ObjectId,
-    index: true,
-  },
   title: String,
   description: String,
   difficuty_level: Number,
   author: String,
   tags: [String],
   testcases: [TestCase],
-  like: [mongoose.Schema.Types.ObjectId],
+  like: [mongoose.Schema.Types.Mixed],
   accuracy: {
     type: Accuracy,
   }
