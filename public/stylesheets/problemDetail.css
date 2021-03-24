@@ -1,0 +1,28 @@
+.problem__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.problem__description {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  height: 100%;
+}
+
+.problem__editorForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  height: 100%;
+  text-align: left;
+}
+
+.codemirror {
+  width: 100%;
+}

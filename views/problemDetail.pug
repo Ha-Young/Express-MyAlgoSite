@@ -1,1 +1,14 @@
-div problemDetail
+extends layouts/main.pug
+
+block body
+  link(rel="stylesheet" href="/stylesheets/problemDetail.css")
+  link(rel="stylesheet" href="https://codemirror.net/theme/material.css")
+  link(rel="stylesheet" href="/codemirror/lib/codemirror.css")
+  script(type="text/javascript" src="/codemirror/lib/codemirror.js")
+  script(type="text/javascript" src="/codemirror/mode/javascript/javascript.js")
+  .problem__container
+    div.problem__description problemDetail
+    form.problem__editorForm(action="/problem")
+      textarea.textEditor#textEditor
+  script(type="text/javascript" src="/javascripts/problemDetail.js")
+
