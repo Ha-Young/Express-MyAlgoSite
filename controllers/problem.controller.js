@@ -1,4 +1,5 @@
 const Problem = require("../models/Problem");
+const vm = require("vm");
 
 module.exports.problemDetailController = async function problemDetailController(req, res, next) {
   const problemId = req.params.problem_id;
@@ -8,12 +9,18 @@ module.exports.problemDetailController = async function problemDetailController(
 
   const problem = await Problem.findById(problemId);
   if (!problem) {
-    return res.redirect('/');
+    return res.redirect("/");
   }
 
-  res.render('problemDetail',{ id: problem._id });
+  res.render("problemDetail",{ id: problem._id });
 }
 
 module.exports.postProblemDetailController = async function postProblemDetailController(req, res, next) {
-  console.log(req.body);
+  const {
+    body: { userCode }
+  } = req;
+  const newUserCode = userCode.concat("\nsolution()");
+  console.log(newUserCode);
+  const using = vm.runInThisContext(newUserCode);
+  console.log(using);
 }
