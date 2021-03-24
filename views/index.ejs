@@ -14,7 +14,7 @@
     </form>
     <div class="problem-list">
       <% problems.forEach(problem => { %>
-        <a class="problem-box" href="<%= `/problems/${problem.id}` %>">
+        <a class="problem-box" href="<%= `/problems/${problem._id}` %>">
           <ul>
             <li><%= problem.title %></li>
             <li>정답자수 : <%= problem.completed_users %></li>
