@@ -3,7 +3,9 @@ const path = require("path");
 const passport = require("passport");
 const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
+
 const mongoose = require("mongoose");
+const initializeMongoDB = require("./utils/initializeMongoDB");
 
 const index = require("./routes/index");
 const login = require("./routes/login");
@@ -40,6 +42,10 @@ mongoose.connect(process.env.MONGODB_URI, {
 const db = mongoose.connection;
 db.on("error", () => console.log("MongoDB Connection Error"));
 db.once("open", () => console.log("MongoDB Connected"));
+
+if (process.env.INITIALIZE_MONGODB === "true") {
+  initializeMongoDB();
+}
 
 app.use("/", index);
 app.use("/login", login);
