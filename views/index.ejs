@@ -11,21 +11,23 @@
     </header>
     <div class="grid-wrapper">
       <div class="grid-container">
-        <div class="grid-item">난이도</div>
-        <div class="grid-item">제목</div>
-        <div class="grid-item">제출</div>
-        <div class="grid-item">정답</div>
-        <div class="grid-item">정답 비율</div>
+        <div class="grid-item"><span>난이도</span></div>
+        <div class="grid-item"><span>제목</span></div>
+        <div class="grid-item"><span>제출</span></div>
+        <div class="grid-item"><span>정답</span></div>
+        <div class="grid-item"><span>정답 비율</span></div>
         <% for (let i = 0; i < problems.length; i++) { %>
-          <div class="grid-item"><%= problems[i].difficulty_level %></div>
+          <div class="grid-item"><span><%= problems[i].difficulty_level %></span></div>
           <div class="grid-item">
-            <a href="<%= `/problems/${problems[i].id}` %>">
-              <%= problems[i].title %>
-            </a>
+            <span>
+              <a href="<%= `/problems/${problems[i].id}` %>">
+                <%= problems[i].title %>
+              </a>
+            </span>
           </div>
-          <div class="grid-item"><%= problems[i].submission %></div>
-          <div class="grid-item"><%= problems[i].accepted %></div>
-          <div class="grid-item"><%= acceptedRatio[i] %>%</div>
+          <div class="grid-item"><span><%= problems[i].submission %></span></div>
+          <div class="grid-item"><span><%= problems[i].accepted %></span></div>
+          <div class="grid-item"><span><%= acceptedRatio[i] %>%</span></div>
         <% } %>
       </div>
     </div>

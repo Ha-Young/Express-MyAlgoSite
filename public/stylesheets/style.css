@@ -14,3 +14,8 @@ body {
   height: 100%;
   margin: 0;
 }
+
+a, a:visited, a:hover, a:focus, a:active {
+  text-decoration: none;
+  color: black;
+}
