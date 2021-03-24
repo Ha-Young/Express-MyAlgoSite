@@ -28,7 +28,16 @@ const viewsDirectoryPath = path.join(__dirname, './views');
 app.set('view engine', 'ejs');
 app.set('views', viewsDirectoryPath);
 
-app.use(express.static(publicDirectoryPath));
+const sassMiddleware = require('node-sass-middleware');
+
+app.use(sassMiddleware({
+  src: path.join(__dirname, './scss'),
+  dest: path.join(__dirname, './public'),
+  indentedSyntax : false,
+  debug: true,
+  outputStyle: 'compressed'
+}));
+app.use(express.static(publicDirectoryPath))
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
