@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/codeMirror/styles/codemirror.css" rel="stylesheet">
+    <link href="/codeMirror/theme/base16-dark.css" rel="stylesheet">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <title><%= title %></title>
+</head>
+<body>
+    <%- include("./partials/header.ejs") %>
+    <div>
+        <form method="POST" action="/problems/ <%= selectedProblem.probelmId %>">
+          <%- include('partials/problemDetail') %>
+          <textarea id="editor"><p>hi</p></textarea>
+          <input type="submit" value="submit" />
+        </form>
+    </div>
+    <%- include("./partials/footer.ejs") %>
+    <script src="/codeMirror/js/codemirror.js"></script>
+    <script src="/codeMirror/js/javascript.js"></script>
+    <script src="/codeMirror/codemirrorConfig.js"></script>
+</body>
+</html>
+
+

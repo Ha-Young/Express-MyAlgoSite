@@ -8,10 +8,11 @@ const mongoSession = require("./mongoDB/session");
 const passport = require("passport");
 const expressLayouts = require("express-ejs-layouts");
 const bodyParser = require("body-parser");
-
+const path = require("path");
 const home = require('./routes/route_options/home');
 const login = require("./routes/route_options/login");
 const logout = require("./routes/route_options/logout");
+const problems = require("./routes/route_options/problems");
 
 const app = express();
 
@@ -26,15 +27,20 @@ app.use(passport.session());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(expressLayouts);
-app.set("layout", "./layouts/index_layout");
+
+//app.set("layout", "./layouts/index_layout");
+
+app.set('views', path.join(__dirname, 'views'));
 app.set("view engine", "ejs");
+//app.set('layout', path.join(__dirname, 'views/layouts/index_layout'));
 app.use(express.static("public"));
+//app.use(expressLayouts);
 
 // 다 모은 라우터로 대체
 app.use('/', home);
 app.use("/login", login);
 app.use("/logout", logout);
+app.use("/problems", problems);
 
 app.use(function(req, res, next) {
   const err = new Error('Not Found');
