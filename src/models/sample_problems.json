@@ -18,7 +18,8 @@
         "code": "solution(1)",
         "solution": 1
       }
-    ]
+    ],
+    "img": "https://clevelanddesign.com/wp-content/uploads/2020/09/the-golden-ratio-teaser.jpg"
   },
   {
     "id": 2,
@@ -35,7 +36,8 @@
         "code": "solution(['Jane', 'Huh', 'Kim'])",
         "solution": "김서방은 2에 있다"
       }
-    ]
+    ],
+    "img": "https://lh3.googleusercontent.com/proxy/k1SDzMew7Xfmy6yEua3qOdEdJ2fUQmkraLF4o9QFew-CyCWszID5auaHCSMEhe5LFiMivV1yz3C-YNJ_pBuzHLoPxcrlHILfoEOQevkGP6R4bpnQa6OB4MNTN1rLOP5sfhjkW-g"
   },
   {
     "id": 3,
@@ -52,7 +54,8 @@
         "code": "solution(4)",
         "solution": "수박수박"
       }
-    ]
+    ],
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2pd-ENZvDGUe9jcjeoUyw6iyHdvHMYQfzug&usqp=CAU"
   },
   {
     "id": 4,
@@ -69,6 +72,7 @@
         "code": "solution(11)",
         "solution": false
       }
-    ]
+    ],
+    "img": "http://number27.org/assets/img/pages/27/harshad.jpg"
   }
 ]

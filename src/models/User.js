@@ -1,17 +1,17 @@
-const Joi = require("joi");
-const Mongoose = require("mongoose");
-const Joigoose = require("joigoose")(Mongoose);
+const joi = require("joi");
+const mongoose = require("mongoose");
+const joigoose = require("joigoose")(mongoose);
 const bcrypt = require("bcrypt");
 
 const SALT_ROUNDS = 10;
 
-const JoiUserSchema = Joi.object({
-  email: Joi.string().email().required(),
-  password: Joi.string().required(),
-  name: Joi.string().required(),
+const joiUserSchema = joi.object({
+  email: joi.string().email().required(),
+  password: joi.string().required(),
+  name: joi.string().required(),
 });
 
-const UserSchema = new Mongoose.Schema(Joigoose.convert(JoiUserSchema));
+const UserSchema = new mongoose.Schema(joigoose.convert(joiUserSchema));
 
 UserSchema.methods.comparePassword = function (password) {
   return bcrypt.compare(password, this.password);
@@ -28,4 +28,4 @@ UserSchema.pre("save", async function (next) {
   }
 });
 
-module.exports = Mongoose.model("User", UserSchema);
+module.exports = mongoose.model("User", UserSchema);
