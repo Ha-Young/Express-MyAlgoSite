@@ -7,30 +7,34 @@
   <script src="/codemirror/closebrackets.js"></script>
   <script src="/codemirror/javascript/javascript.js"></script>
   <link href="/codemirror/dracula.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/stylesheets/index.css" />
 </head>
 <body>
   <header>
-    <h1><%= title %></h1>
+    <div class="logo-wrapper">
+      <img src="/src/logo.png" alt="logo" class="logo">
+      <span>CodeWars</span>
+    </div>
+    <div class="header-title-wrapper">
+      <span><%= title %></span>
+    </div>
+    <div class="logout-wrapper">
+      Logout
+    </div>
   </header>
-  <form action="<%= problemId %>" method="POST">
-    <div>
-      <span>정답자 수: </span>
-      <span><%= completed_users %></span>
-    </div>
-    <div>
-      <span>문제 난이도: </span>
-      <span><%= difficulty_level %></span>
-    </div>
-    <div>
+  <div class="problem-description">
+    <div class="description-wrapper">
       <p><%= description %></p>
     </div>
-    <textarea name="solution" id="editor">
+    <form action="<%= problemId %>" method="POST">
+      <textarea name="solution" id="editor">
 function solution (n) {
 
 }
-    </textarea>
-    <button type="submit">Submit</button>
-  </form>
+      </textarea>
+      <button type="submit" class="problem-btn">SUBMIT</button>
+    </form>
+  </div>
   <script>
     const editor = CodeMirror.fromTextArea
     (document.getElementById("editor"), {
