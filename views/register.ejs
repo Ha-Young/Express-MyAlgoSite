@@ -1,8 +1,9 @@
 <head>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
   <link rel='stylesheet' href="https://bootswatch.com/4/darkly/bootstrap.min.css" />
 </head>
 <body>
+  <%- include ./partials/nav.ejs %>
+  <%- include ./partials/bodyImage.js %>
   <div class="container">
     <h1 class="display-3">register</h1>
     <Form action="/auth/register" method="POST">

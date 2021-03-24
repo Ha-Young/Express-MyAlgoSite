@@ -2,15 +2,51 @@
 <html>
   <head>
     <title><%=title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css" />
   </head>
   <body>
-    <h1>Codewars</h1>
-    <h2>problems</h2>
-    <ul class="problems">
-      <li class="problem">
-        problem 1.
-      </li>
-    </ul>
+    <%- include ./partials/nav.ejs %>
+    <%- include ./partials/bodyImage.js %>
+    <div class="container">
+      <div class="btn-group mr-2" role="group" aria-label="First group">
+        <button type="button" class="btn btn-secondary">1</button>
+        <button type="button" class="btn btn-secondary">2</button>
+        <button type="button" class="btn btn-secondary">3</button>
+        <button type="button" class="btn btn-secondary">4</button>
+        <button type="button" class="btn btn-secondary">5</button>
+      </div>
+      <ul class="problems list-group">
+        <% for (const problem of problems) { %>
+          <li 
+            class="list-group-item d-flex justify-content-between align-items-center"
+            id=<%= problem.id %>
+          >
+            <div>
+              <div>
+                <%= problem.title %>
+              </div>
+              <div>Level:
+                <%= problem.difficulty_level %>
+              </div>
+              <span class="badge badge-primary badge-pill">
+                <%= problem.completed_users || 0 %>
+              </span>
+              <% if(problem.difficulty_level === 1) { %>
+                <span class="badge badge-pill badge-success">Easy</span>
+              <% } %>
+              <% if(problem.difficulty_level === 3) { %>
+                <span class="badge badge-pill badge-danger">Difficult</span>
+              <% } %>
+              <% if(problem.difficulty_level === 2) { %>
+                <span class="badge badge-pill badge-warning">Normal</span>
+              <% } %>
+            </div>
+            <a href=/problems/<%= problem.id %>>
+              <button type="button" class="btn btn-info">GO</button>
+            </a>
+            </li>
+        <% } %>
+      </ul>
+    </div>
   </body>
 </html>

@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel='stylesheet' href="https://bootswatch.com/4/darkly/bootstrap.min.css" />
+    <title>codewar</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css" />
   </head>
   <body>
-    <h1>코두워~</h1>
+    <%- include ./partials/nav.ejs %>
+    <%- include ./partials/bodyImage.js %>
     <div class="container">
       <h2 class="display-3">LOGIN</h2>
-      <div class="form-group social_login">
-        <button class="btn btn-primary social_login-button">
-          Log in with github
-        </button>
-      </div>
       <Form action="/auth/login" method="POST">
         <div class="form-group">
           <label for="email">Email</label>
@@ -36,6 +31,9 @@
       <div class="alert alert-dismissible alert-info">
         <strong>If not a member?</strong> <a href="/auth/register">Register Here</a>
       </div>
+      <button class="btn btn-success social_login-button">
+        Log in with github
+      </button>
     </div>
   </body>
 </html>
