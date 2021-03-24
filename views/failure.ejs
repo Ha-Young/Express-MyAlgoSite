@@ -24,15 +24,25 @@
     <% include ./partials/header %>
 
     <h2><%= title %></h2>
-    <form action="/problems/<%= id %>/" method="POST">
-      <textarea id="editor" name="userAnswer">
-function solution(<%= codeParameterType %>) {
-  
-};
-</textarea>
-      <button type="submit">제출</button>
-    </form>
+    <% if (isPass) { %>
+      <h1>통과!</h1>
+    <% } else { %>
+      <h1>땡!</h1>
+    <% } %>
 
+    <% for (let i = 0; i < tests.length; i++) { %>
+      <div>
+        <h4><%= `${i + 1}번 테스트 케이스: ${tests[i].code}` %></h4>
+        <h4>테스트 케이스 정답: <%= tests[i].solution %></h4>
+        <h4>제출 코드 실행 결과: <%= result[i] %></h4>
+      </div>
+      <hr>
+    <% } %>
+
+    <form>
+      <textarea id="editor" name="userAnswer">
+<%= userAnswer %></textarea>
+    </form>
     <% include ./partials/footer %>
     <script src='/javascripts/editor.js'></script>
   </body>

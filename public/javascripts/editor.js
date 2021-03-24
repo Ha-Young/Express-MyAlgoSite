@@ -7,7 +7,6 @@ const codemirror = new CodeMirror.fromTextArea(document.getElementById("editor")
   matchBrackets: true,
   autoCloseBrackets: true,
   autoCloseTags: true,
-  highlightSelectionMatches: { showToken: /\w/, annotateScrollbar: true },
   continueList: true,
   matchBrackets: true,
   matchtags: true,
@@ -15,4 +14,5 @@ const codemirror = new CodeMirror.fromTextArea(document.getElementById("editor")
   scrollPastEnd: true,
   simpleScrollBars: true,
   autofocus: true,
+  smartIndent: true,
 });
