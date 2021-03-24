@@ -6,9 +6,9 @@
   </head>
   <body>
     <ul>
-      <% problems.forEach(problem => { %>
+      <% problems.map((problem, index) => { %>
         <li>
-          <a>
+          <a href="/problems/<%= problem.id %>">
             <h2><%= problem.title %></h2>
             <h3>난이도 <%= problem.difficulty_level %></h3>
             <h4>정답자 수 <%= problem.completed_users %></h4>

@@ -4,7 +4,6 @@ const { readdir, readFile, rename } = require("fs/promises");
 const { ROOT_PATH } = require(`${__dirname}/../constants/constants`);
 
 const uploadAndRenameFile = (path, Model) => async (req, res, next) => {
-  debugger;
   const uploadFolderPath = `${ROOT_PATH}/upload/${path}`;
   let files = [];
 
@@ -22,7 +21,6 @@ const uploadAndRenameFile = (path, Model) => async (req, res, next) => {
 
     for (const file of files) {
       for (const data of file) {
-        data.id = new ObjectId();
         await new Model(data).save();
       }
     }
@@ -38,6 +36,7 @@ const uploadAndRenameFile = (path, Model) => async (req, res, next) => {
       <p>Files are : ${fileNames}</p>
     `);
   } catch (error) {
+    console.log(error)
     return next(createError(500), JSON.stringify(error));
   }
 };
