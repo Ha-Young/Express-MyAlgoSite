@@ -3,13 +3,14 @@ const path = require("path");
 const passport = require("passport");
 const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
-const connect = require("./models/connection");
-require("dotenv").config();
+const mongoose = require("mongoose");
 
 const index = require("./routes/index");
 const login = require("./routes/login");
 const logout = require("./routes/logout");
 const problems = require("./routes/problems");
+
+require("dotenv").config();
 
 const app = express();
 
@@ -30,6 +31,15 @@ app.use(passport.session(), (req, res, next) => {
   console.log("session");
   next();
 });
+
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+const db = mongoose.connection;
+db.on("error", () => console.log("MongoDB Connection Error"));
+db.once("open", () => console.log("MongoDB Connected"));
 
 app.use("/", index);
 app.use("/login", login);
