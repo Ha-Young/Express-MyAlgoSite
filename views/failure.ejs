@@ -2,11 +2,29 @@
 <html>
   <head>
     <title>Codewars</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/detailProblem.css" />
+    <link rel="stylesheet" href="/codemirror/lib/codemirror.css" />
+    <link rel="stylesheet" href="/codemirror/theme/gruvbox-dark.css" />
+    <script src="/codemirror/lib/codemirror.js"></script>
   </head>
   <body>
-    <h1>실패 페이지</h1>
-    <p>실패한 케이스입니다</p>
-    <p><%= failProblem %></p>
+    <section>
+      <article>
+          <textarea id="code" name="submit_text"><%= userCode %></textarea>
+        <script>
+          const editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+            lineNumbers: true,
+            styleActiveLine: true,
+            mode: "javascript",
+            indentUnit: 2,
+            identWithTabs: true,
+            theme: "gruvbox-dark"
+          });
+        </script>
+      </article>
+      <article></article>
+    </section>
     <form action="/" method="GET">
       <button type="submit">홈으로</button>
     </form>

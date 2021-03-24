@@ -1,0 +1,49 @@
+.success-Info {
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  height: 100vh;
+  margin: 0 auto;
+  color: white;
+}
+
+.user-code {
+  width: 50%;
+  height: 300px;
+  margin: 10px;
+}
+
+.result-info {
+  width: 50%;
+  height: 500px;
+  margin: 10px;
+  padding: 10px;
+  background: #151718;
+}
+
+.result-comment {
+  margin: 30px;
+  font-size: 30px;
+}
+
+.result-box {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin-bottom: 70px;
+}
+
+.success {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #2ecc71;
+}
+
+.solution {
+  margin: 10px;
+  margin-bottom: 0;
+  display: inline-block;
+  height: 30px;
+}

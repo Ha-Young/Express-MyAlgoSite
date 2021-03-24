@@ -50,11 +50,15 @@
 
 .examples {
   width: 580px;
-  height: 370px;
+  height: 360px;
   padding: 10px;
   background: #18181A;
 }
 
 .example {
   margin-bottom: 50px;
+}
+
+.submit-button {
+  margin: 5px;
 }

@@ -26,7 +26,7 @@
       <article class="codes">
         <div class="input-code">
           <div class="problem-text">Solution:</div>
-          <form action="/problems/<%= problem._id %>" method="POST">
+          <form id="submitText" action="/problems/<%= problem._id %>" method="POST">
             <textarea id="code" name="submit_text"></textarea>
             <button class="submit-button" type="submit">제출</button>
           </form>

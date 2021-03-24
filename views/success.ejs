@@ -2,9 +2,42 @@
 <html>
   <head>
     <title>Codewars</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/success.css" />
+    <link rel="stylesheet" href="/codemirror/lib/codemirror.css" />
+    <link rel="stylesheet" href="/codemirror/theme/gruvbox-dark.css" />
+    <script src="/codemirror/lib/codemirror.js"></script>
   </head>
   <body>
-    <h1>성공 페이지</h1>
+    <section class="success-Info">
+      <div></div>
+      <article class="user-code">
+          <textarea id="code" name="submit_text"><%= userCode %></textarea>
+        <script>
+          const editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+            lineNumbers: true,
+            styleActiveLine: true,
+            mode: "javascript",
+            indentUnit: 2,
+            identWithTabs: true,
+            theme: "gruvbox-dark"
+          });
+        </script>
+      </article>
+      <article class="result-info">
+        <p class="result-comment">코드 결과</p>
+        <ul>
+          <% testCase.forEach(result => { %>
+            <li class="result-box">
+              <div class="success"></div>
+              <div class="solution">
+                <%= result.solution %>
+              </div>
+            </li>
+          <% }) %>
+        </ul>
+      </article>
+    </section>
     <form action="/" method="GET">
       <button type="submit">홈으로</button>
     </form>

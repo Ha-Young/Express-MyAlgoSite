@@ -27,30 +27,42 @@ exports.checkCode = async function (req, res, next) {
   try {
     const problem = await Problem.findById(problemId);
     const testCodes = problem.tests;
-    let count = 0;
+    const results = [];
+    let isFail = false;
 
     for (let i = 0; i < testCodes.length; i++) {
-      const testCode = testCodes[i].code;
-      const correctValue = testCodes[i].solution;
+      const currentTestCode = testCodes[i];
+      const testCode = currentTestCode.code;
+      const correctValue = currentTestCode.solution;
 
-      const result = vm.run(
-        `const solution = ${submitText};
-        module.exports = ${testCode};`
-      );
+      try {
+        const result = vm.run(
+          `const solution = ${submitText};
+          module.exports = ${testCode};`
+        );
 
-      if (result !== correctValue) {
-        return res.render("failure", { failProblem: testCode });
+        if (result !== correctValue) {
+          const failTestCode = { solution: currentTestCode.code, results: "fail" };
+
+          isFail = true;
+          results.push(failTestCode);
+        } else {
+          const successTestCode = { solution: currentTestCode.code, results: "success" };
+
+          results.push(successTestCode);
+        }
+      } catch (error) {
+
       }
-
-      count++;
     }
 
-    if (count === testCodes.length) {
-      res.render("success");
-    }
-
+    res.render("success",
+      {
+        userCode: submitText,
+        testCase: results,
+      }
+    );
   } catch (error) {
-    console.log(error);
-    res.render("success");
+    next(error);
   }
 }
