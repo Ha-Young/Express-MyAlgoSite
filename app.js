@@ -12,7 +12,7 @@ const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/error.controller');
 
 const index = require('./routes/index');
-const login = require('./routes/login');
+const auth = require('./routes/auth');
 const problems = require('./routes/problems');
 
 const DB = process.env.DATABASE.replace(
@@ -53,10 +53,14 @@ app.use(session({
 
 require('./auth/passport')(app);
 
-app.use(flash());
+//because of flash timing issue,
+// made highorder middleware
+app.use((req, res, next) => {
+  flash()(req, res, next);
+});
 
 app.use('/', index);
-app.use('/login', login);
+app.use('/auth', auth); //auth로 변경예정
 app.use('/problems', problems);
 
 

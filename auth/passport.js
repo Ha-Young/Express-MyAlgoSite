@@ -1,4 +1,3 @@
-const bcrypt = require('bcrypt');
 const User = require('../models/User');
 
 module.exports = function (app) {
@@ -23,18 +22,9 @@ module.exports = function (app) {
       usernameField: 'email',
     },
     function (email, password, done) {
-      User.findOne({ email }, async function (err, user) {
-        if (err) {
-          return done(err);
-        }
-
-        if (!user || !await bcrypt.compare(password, user.password)) {
-          return done(null, false, { message: 'Incorrect email or password.' });
-        }
-
-        return done(null, user);
-      });
+      User.authenticate(email, password, done);
     }
   ));
+
   return passport;
 }

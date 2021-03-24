@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const loginController = require("../controllers/login.controller");
+const loginController = require("../controllers/auth.controller");
 
 router
   .route('/')
@@ -13,7 +13,7 @@ router
   .post(loginController.createUser);
 
 router
-  .route('/signin')
+  .route('/login')
   .post(loginController.authenticateLocal);
 
 module.exports = router;

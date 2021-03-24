@@ -13,7 +13,7 @@ exports.getLoginForm = (req, res, next) => {
 
 exports.authenticateLocal = passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: '/login',
+  failureRedirect: '/auth',
   failureFlash: true
 }),
 
@@ -24,12 +24,12 @@ exports.authenticateLocal = passport.authenticate('local', {
   exports.createUser = catchAsync(async (req, res, next) => {
     if (await User.findOne({ email: req.body.email })) {
       req.flash('info', 'email already exist');
-      return res.redirect('/login/signup');
+      return res.redirect('/auth/signup');
     }
 
     if (await User.findOne({ username: req.body.username })) {
       req.flash('info', 'username already exist');
-      return res.redirect('/login/signup');
+      return res.redirect('/auth/signup');
     }
 
     const user = await User.create(req.body);
