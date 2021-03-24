@@ -1,3 +1,62 @@
-<div>
-  fail....
-</div>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <link rel="stylesheet" href="/stylesheets/success.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo-wrapper">
+        <img src="/src/logo.png" alt="logo" class="logo">
+        <span>CodeWars</span>
+      </div>
+      <div class="header-title-wrapper">
+        <span>veni, vidi, vici</span>
+      </div>
+      <div class="logout-wrapper">
+        Logout
+      </div>
+    </header>
+    <main>
+      <div class="succeed-wrapper">
+        <h3 class="success-test">❌ Fail ! ❌</h3>
+        <div class="problem-test-result">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Test Answer</th>
+                <th>Your Answer</th>
+                <th>Result</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (let i = 0; i < tests.length; i++) { %>
+                <tr>
+                  <td>Test Case <%= i %></td>
+                  <td><%= resultArr[i] %></td>
+                  <td><%= tests[i].solution %></td>
+                  <td>
+                    <% if (resultArr[i] === tests[i].solution) { %>
+                      ⭕️
+                    <% } else { %>
+                      ❌
+                    <% } %>
+                  </td>
+                </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+        <a href="/">
+          <button class="another-problem-btn">다른 문제 풀러 가기</button>
+        </a>
+      </div>
+    </main>
+    <footer>
+      <div class="footer-copyright">
+        ©2020 Vanilla Coding All rights Reserved
+      </div>
+    </footer>
+  </body>
+</html>

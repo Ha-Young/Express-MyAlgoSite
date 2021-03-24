@@ -53,13 +53,14 @@ router.post('/:problem_id', async (req, res) => {
     }
 
     if (wrongCount !== 0) {
-      res.render('failure');
+      res.render('failure', {
+        resultArr,
+        tests
+      });
       return;
     }
 
     res.render('success', {
-      correctCount,
-      wrongCount,
       resultArr,
       tests
     });

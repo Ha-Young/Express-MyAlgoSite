@@ -1,0 +1,112 @@
+body {
+  width: 100%;
+  height: 100%;
+  background: #2B2B2B;
+  font-family: 'Fira Code', 'Noto Sans KR', sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  background: rgb(31, 31, 31);
+  color: white;
+}
+
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.header-title-wrapper {
+  font-size: 20px;
+}
+
+.logout-wrapper {
+  margin-right: 20px;
+  background: #A51A10;
+  padding: 4px 10px;
+  padding-bottom: 8px;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+}
+
+.succeed-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  height: 60vh;
+}
+
+.problem-test-result {
+  text-align: center;
+}
+
+.success-test {
+  font-size: 40px;
+  color: white;
+}
+
+table {
+  position: relative;
+  top: 30px;
+  border-collapse: collapse;
+  width: 600px;
+}
+
+table, td, th {
+  border: 1px solid #fff;
+}
+
+td, th {
+  padding: 4%;
+  color: white;
+}
+
+thead {
+  color: white;
+}
+
+tbody {
+  color: black;
+}
+
+footer {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  height: 40px;
+  font-size: 12px;
+  text-align: center;
+  border-top: 1px solid gray;
+  padding-top: 30px;
+}
+
+.another-problem-btn {
+  position: relative;
+  top: 140px;
+  height: 40px;
+  border-radius: 4px;
+}
+
+.another-problem-btn:hover {
+  cursor: pointer;
+}
+
+.footer-copyright {
+  color: gray;
+  font-size: 15px;
+}
