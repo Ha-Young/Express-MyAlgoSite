@@ -1,29 +1,71 @@
-<div class="windowbar">
-	<span>File</span><span>Editing</span><span>Search</span><span>Show</span><span>Navigation</span><span>Development</span><span>Tools</span><span>Help</span>
-	<div class="controls">
-		<span class="min"><ion-icon name="arrow-down"></ion-icon></span>
-		<span class="max"><ion-icon name="arrow-up"></ion-icon></span>
-		<a class="close" href="#save"><ion-icon name="close"></ion-icon></a>
-	</div>
-</div>
-<div class="menu">
-	<span>Work area</span>
-	<a href="#save" class="current save css">style<b>.css</b></a>
-	<a href="#" class="html">index<b>.html</b></a>
-	<a href="#" class="js">javascript<b>.js</b></a>
-	<a href="#" class="add"></a>
-</div>
-<div class="code">
+<div class="problem-wrapper">
+  <div class="windowbar">
+    <span>File</span><span>Editing</span><span>Search</span><span>Show</span><span>Navigation</span><span>Development</span><span>Tools</span><span>Help</span>
+    <div class="controls">
+      <a class="close" href="/">X</a>
+    </div>
+    </div>
+    <div class="info-section">
+      <div class="guide-section">
+        <div class="problem-title">
+          <%= problem.title %>
+        </div>
+        <div class="problem-desc">
+          <%= problem.description %>
+        </div>
+      </div>
+      <div class="testcase-section">
+        <div class="problem-title">
+          테스트 케이스
+        </div>
 
+        <textarea class="test-case-area"><% for (const test of problem.tests) { %>
+<%= test.code %> : <%= test.solution %><% } %></textarea>
+      </div>
+    </div>
+    <div class="run-section">
+      <div class="code-section">
+        <div class="problem-title">
+          Solution
+        </div>
+        <textarea id="code" class="code-textarea">
+function solution(<%= problem.argument %>) {
+
+}</textarea>
+      </div>
+      <div class="output-section">
+        <div class="problem-title">
+          실행 결과
+        </div>
+      </div>
+    </div>
+    <!--
+      <div id="save" class="message">
+      <a href="#" class="closeMessage"></a>
+      <div class="notification">
+        <span>Do you really want to close without save changes?</span>
+        <p>If you close now changes will not be saved and you will lose the cool code you wrote!</p>
+        <a href="#saved" class="save">Save</a>
+        <a href="#" class="dontsave">Don't save</a>
+        <a href="#" class="cancel">Cancel</a>
+      </div>
+    </div>
+  -->
+  </div>
 </div>
-<div id="save" class="message">
-	<a href="#" class="closeMessage"></a>
-	<div class="notification">
-		<span>Do you really want to close without save changes?</span>
-		<p>If you close now changes will not be saved and you will lose the cool code you wrote!</p>
-		<a href="#saved" class="save">Save</a>
-		<a href="#" class="dontsave">Don't save</a>
-		<a href="#" class="cancel">Cancel</a>
-	</div>
-</div>
-<a href="#" id="saved" class="error">There was an error saving the file. Please, try again.</a>
+
+<!-- code mirror -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.6.0/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.6.0/mode/javascript/javascript.min.js"></script>
+<script>
+  const cm = new CodeMirror.fromTextArea(document.getElementById("code"), {
+    lineNumbers: true,
+    lineWrapping: true,
+    styleActiveLine: true,
+    matchBrackets: true,
+    tabSize: 2,
+    mode: "javascript",
+    theme: "base16-light",
+  });
+  cm.setSize("100%", "calc(100% - 46px)");
+</script>
