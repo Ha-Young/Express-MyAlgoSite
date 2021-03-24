@@ -18,10 +18,10 @@ const Accuracy = new mongoose.Schema({
 const ProblemSchema = new mongoose.Schema({
   title: String,
   description: String,
-  difficuty_level: Number,
+  difficulty_level: Number,
   author: String,
   tags: [String],
-  testcases: [TestCase],
+  testCases: [TestCase],
   like: [mongoose.Schema.Types.Mixed],
   accuracy: {
     type: Accuracy,

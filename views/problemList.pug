@@ -1,5 +1,15 @@
 extends layouts/main
+include mixins/problemBlock
 
 block body
+  link(rel='stylesheet' href='/stylesheets/problemList.css')
   .problems__container
-    .problem #{problem}
+    each item in problems
+      +problemBlock({
+        id: item._id,
+        difficulty_level: item.difficulty_level,
+        title: item.title,
+        accuracy: item.accuracy
+      })
+  script(src='/javascripts/problemList.js')
+

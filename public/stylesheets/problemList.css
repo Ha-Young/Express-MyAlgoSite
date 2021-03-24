@@ -1,0 +1,15 @@
+.problems__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 90vh;
+}
+
+.problemBlock {
+  width: 60%;
+  height: 15%;
+  background-color: red;
+  cursor: pointer;
+}

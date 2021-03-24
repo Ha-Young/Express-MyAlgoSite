@@ -1,0 +1,6 @@
+mixin problemBlock(problem = {})
+  .problemBlock(id=problem.id)
+    div
+      div=(`Level: ${problem.difficulty_level}`)
+      div=(`challengers: ${problem.accuracy.challengers_count}`)
+    div=problem.title

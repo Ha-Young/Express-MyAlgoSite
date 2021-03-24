@@ -8,8 +8,8 @@ const session = require("express-session");
 const morgan = require("morgan");
 const passport = require("passport");
 
-const index = require("./routes/index");
-const problems = require("./routes/problemsRouter");
+const globalRouter = require("./routes/globalRouter");
+const problemsRouter = require("./routes/problemsRouter");
 
 const app = express();
 
@@ -31,8 +31,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // router
-app.use("/", index);
-app.use("/problem", problems);
+app.use("/", globalRouter);
+app.use("/problem", problemsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

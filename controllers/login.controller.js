@@ -1,13 +1,5 @@
 const passport = require("passport");
 
-module.exports.mainController = function mainController(req, res, next) {
-  if (req.user) {
-    return res.render("problemList", { problem: "this is problemList" });
-  }
-
-  res.render("index", { title: "codeWars" });
-}
-
 module.exports.loginController = function loginController(req, res, next) {
   res.render("login", { title: "Sign In" });
 }
