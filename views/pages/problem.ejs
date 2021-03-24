@@ -1,0 +1,29 @@
+<div class="windowbar">
+	<span>File</span><span>Editing</span><span>Search</span><span>Show</span><span>Navigation</span><span>Development</span><span>Tools</span><span>Help</span>
+	<div class="controls">
+		<span class="min"><ion-icon name="arrow-down"></ion-icon></span>
+		<span class="max"><ion-icon name="arrow-up"></ion-icon></span>
+		<a class="close" href="#save"><ion-icon name="close"></ion-icon></a>
+	</div>
+</div>
+<div class="menu">
+	<span>Work area</span>
+	<a href="#save" class="current save css">style<b>.css</b></a>
+	<a href="#" class="html">index<b>.html</b></a>
+	<a href="#" class="js">javascript<b>.js</b></a>
+	<a href="#" class="add"></a>
+</div>
+<div class="code">
+
+</div>
+<div id="save" class="message">
+	<a href="#" class="closeMessage"></a>
+	<div class="notification">
+		<span>Do you really want to close without save changes?</span>
+		<p>If you close now changes will not be saved and you will lose the cool code you wrote!</p>
+		<a href="#saved" class="save">Save</a>
+		<a href="#" class="dontsave">Don't save</a>
+		<a href="#" class="cancel">Cancel</a>
+	</div>
+</div>
+<a href="#" id="saved" class="error">There was an error saving the file. Please, try again.</a>
