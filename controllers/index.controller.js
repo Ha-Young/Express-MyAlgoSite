@@ -1,29 +1,11 @@
 const Problem = require('../models/Problem');
 const catchAsync = require('../middlewares/catchAsync');
+const generateHeaderData = require('../utils/generateHeaderData');
 
 exports.getHome = catchAsync(async (req, res, next) => {
+  const headerData = generateHeaderData(req.isAuthenticated(), req.user);
   const problems = await Problem.find().lean();
 
-  let status = {
-    problems,
-    user: '',
-    signupStatus: 'signup',
-    loginStatus: 'login',
-    signupRef: '/auth/signup',
-    loginRef: '/auth'
-  };
-
-  if (req.user) {
-    status = {
-      problems,
-      user: req.user,
-      signupStatus: '',
-      loginStatus: 'logout',
-      signupRef: '',
-      loginRef: '/auth/logout',
-    }
-  }
-
-  res.render('index', status);
+  res.render('index', { problems, ...headerData });
 });
 

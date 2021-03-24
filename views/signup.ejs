@@ -1,20 +1,36 @@
-<form action="/auth/signup" method="post">
-  <div>
-    <%= message %>
-  </div>
-  <div>
-    <label>email:</label>
-    <input type="email" name="email" />
-  </div>
-  <div>
-    <label>username:</label>
-    <input type="text" name="username" />
-  </div>
-  <div>
-    <label>Password:</label>
-    <input type="password" name="password" />
-  </div>
-  <div>
-    <input type="submit" value="submit" />
-  </div>
-</form>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Codewars</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <%- include('partials/header', {loginStatus}) %>
+
+    <main>
+      <form action="/auth/signup" method="post">
+        <div>
+          <%= message %>
+        </div>
+        <div>
+          <label>email:</label>
+          <input type="email" name="email" />
+        </div>
+        <div>
+          <label>username:</label>
+          <input type="text" name="username" />
+        </div>
+        <div>
+          <label>Password:</label>
+          <input type="password" name="password" />
+        </div>
+        <div>
+          <input type="submit" value="submit" />
+        </div>
+      </form>
+    </main>
+</body>
+
+</html>
