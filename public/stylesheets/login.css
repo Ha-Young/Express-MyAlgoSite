@@ -8,14 +8,13 @@
 .title-wrapper {
   z-index: 1;
   position: absolute;
-  top: 25%;
-  left: 30%;
+  top: 30%;
+  left: 34%;
 }
 
 .title {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: calc(4vw + 4vh + 0.5vmin);
-  text-shadow: 3px 3px #fff;
+  width: 600px;
+  height: 300px;
   animation: zoomout 2s;
   animation-timing-function: ease-in;
 }
