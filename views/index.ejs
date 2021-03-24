@@ -5,28 +5,14 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1>Codewars</h1>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/login">Login</a></li>
-      <li><a href="/logout">Logout</a></li>
-    </ul>
-    <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/problems">Problem</a></li>
+      </ul>
+    </nav>
+    <div>Logo</div>
+    <a href="/login/google">Google Login</a>
 
-    <ul class="tabs">
-      <li>Level 1</li>
-      <li>Level 2</li>
-      <li>Level 3</li>
-    </ul>
-
-    <ul class="problems">
-    <% for(let i = 0; i < problems.length; i++){%>
-      <li>
-      <div><a href=<%= `problems/${problems[i].id}` %>><%= problems[i].title %></a></div>
-      <div><%= `정답자: ${problems[i].completed_users}` %></div>
-      <div><%= `난이도: Level ${problems[i].difficulty_level}` %></div>
-    </li>
-    <%}%>
-    </ul>
   </body>
 </html>

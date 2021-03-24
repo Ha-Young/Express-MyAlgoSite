@@ -22,7 +22,7 @@ passport.use(
     {
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: "login/authcallback",
+      callbackURL: "login/auth",
     },
     async function (accessToken, refreshToken, profile, done) {
       const currentUser = await User.findOne({ googleId: profile.id });
@@ -43,10 +43,6 @@ passport.use(
   ),
 );
 
-router.get("/", (req, res, next) => {
-  res.render("login");
-});
-
 router.get(
   "/google",
   passport.authenticate("google", {
@@ -54,13 +50,8 @@ router.get(
   }),
 );
 
-router.get("/authcallback", passport.authenticate("google"), (req, res) => {
-  res.status(308).redirect("/");
-});
-
-router.get("/github", (req, res, next) => {
-  // handle with passport
-  res.send("login with github");
+router.get("/auth", passport.authenticate("google"), (req, res) => {
+  res.status(308).redirect("/problems");
 });
 
 module.exports = router;

@@ -1,32 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Problem</title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-    <link rel="stylesheet" href="/codemirror/lib/codemirror.css">
+    <title>Codewars</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= problem.title  %></h1>
-    <div>
-      <%= problem.description %>
-    </div>
-    <div>
-      <div>
-        <%= `난이도: ${problem.difficulty_level} / 3` %>
-      </div>
-      <div>
-        <%= `정답자: ${problem.completed_users} 명` %>
-      </div>
-    </div>
-    <form action="/problems" method="POST" target="_blank">
-      <textarea class="code-input"></textarea>
-      <!-- <textarea class="code-input" style="display: block; width: 200px; height: 200px; background-color: red;"></textarea> -->
-   
-      <!-- <input type="submit" value="제출"> -->
-    </form>
-    <script type="text/javascript" src="/codemirror/lib/codemirror.js"></script>
-    <script type="text/javascript" src="/javascripts/codeMirror.js"></script>
-
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/problems">Problem</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </nav>
+    <ul class="problems">
+    <% for(let i = 0; i < problems.length; i++){%>
+      <li>
+      <div><a href=<%= `problems/${problems[i].id}` %>><%= problems[i].title %></a></div>
+      <div><%= `정답자: ${problems[i].completed_users}` %></div>
+      <div><%= `난이도: Level ${problems[i].difficulty_level}` %></div>
+    </li>
+    <%}%>
+    </ul>
   </body>
 </html>
-
