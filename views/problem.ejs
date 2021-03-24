@@ -16,32 +16,32 @@
   <header>
     <% include ./header %>
   </header>
-  <div>
-    <%= problem.title %>
-  </div>
-  <div>
-    <%= problem.completed_users %>
-  </div>
-  <div>
-    <%= problem.difficulty_level %>
-  </div>
-  <div>
-    <%= problem.description %>
-  </div>
-  <div id="codeEditor">
-    문제에 대한 해답을 solution 함수안에 담아서 작성해주세요.
-    <form action="<%= `/problems/${problem.id}` %>" method="post">
-      <textarea name="solution" cols="30" rows="10"></textarea>
-      <input type="submit">
-    </form>
+  <div class="problem-wrapper">
+    <div class="problem-left">
+      <div class="problem-left">
+        <h2><%= problem.id %>. <%= problem.title %></h2>
+      </div>
+      <div class="problem-left">
+        <p><%= problem.description %></p>
+      </div>
+      <div class="">Accepted: <%= problem.accepted %> Submissions: <%= problem.submission %></div>
+    </div>
+    <div class="problem-right">
+      <form class="code-editor" action="<%= `/problems/${problem.id}` %>" method="post">
+        <textarea name="solution" cols="30" rows="10"></textarea>
+        <input class="submit-button" type="submit">
+      </form>
+    </div>
   </div>
 </body>
 <script>
   const myCodeMirror = CodeMirror.fromTextArea(document.querySelector("textarea"), {
     mode:  "javascript",
-    theme: "dracula"
+    theme: "dracula",
+    lineNumbers: true
   });
 
   myCodeMirror.getDoc().setValue("function solution(data) {\n  return ;\n}");
+  // myCodeMirror.setSize("100%", "1000px");
 </script>
 </html>
