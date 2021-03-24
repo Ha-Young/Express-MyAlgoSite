@@ -1,0 +1,36 @@
+.loginWrapper {
+  width: 100%;
+  height:100%;
+  margin: 0px;
+  position: relative;
+}
+
+.titleWrapper {
+  z-index: 1;
+  position: absolute;
+  top: 25%;
+  left: 30%;
+}
+
+.title {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: calc(4vw + 4vh + 0.5vmin);
+  text-shadow: 3px 3px #fff;
+  animation: zoomout 2s;
+  animation-timing-function: ease-in;
+}
+
+.buttonWrapper {
+  position: absolute;
+  width: 400px;
+  height: 30px;
+  left: 45%;
+  bottom: 25%;
+  background-color: purple;
+  color: pink;
+}
+
+@keyframes zoomout {
+  0% {transform: scale(15);}
+  100% {transform: scale(1);}
+}
