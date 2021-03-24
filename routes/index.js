@@ -2,9 +2,9 @@ const express = require("express");
 const passport = require("passport");
 const router = express.Router();
 const bcrypt = require("bcrypt");
-const { isLoggedIn, isNotLoggedIn } = require("./../middleware/checkLogin");
-const { User } = require("./../models/User");
-const { Problem } = require("./../models/Problem");
+const { isLoggedIn, isNotLoggedIn } = require("../middleware/checkLogin");
+const { User } = require("../models/User");
+const { Problem } = require("../models/Problem");
 const sampleList = require("../models/sample_problems");
 
 /* GET home page. */
@@ -18,6 +18,7 @@ router.get("/", isLoggedIn, async (req, res, next) => {
   //   const argument = sample.argument;
   //   const completedCount = 0;
   //   const completedUsers = [];
+
   //   await Problem.create({
   //     title,
   //     description,
@@ -75,6 +76,8 @@ router.post("/register", isNotLoggedIn, async (req, res, next) => {
       name,
       email,
       password: hashedPassword,
+      rating: 0,
+      solvedProblems: [],
     });
 
     res.redirect("/login");
@@ -87,6 +90,57 @@ router.get("/logout", isLoggedIn, (req, res, next) => {
   req.logout();
   req.session.destroy();
   res.redirect("/");
+});
+
+router.get("/level/:level", isLoggedIn, async (req, res, next) => {
+  try {
+    const level = parseInt(req.params.level);
+    const currentLevelProblems = await Problem.find({
+      difficulty: level,
+    }).lean();
+
+    res.render("index", { data: currentLevelProblems });
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get("/solved", isLoggedIn, async (req, res, next) => {
+  try {
+    if (req.user) {
+      const currentUser = await User.findById(req.user._id).lean();
+      const solvedProblems = currentUser.solvedProblems;
+      const solvedList = [];
+
+      for (const problemId of solvedProblems) {
+        const problem = await Problem.findById(problemId).lean();
+        solvedList.push(problem);
+      }
+      console.log(solvedList);
+      res.render("index", { data: solvedList });
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get("/unsolved", isLoggedIn, async (req, res, next) => {
+  try {
+    if (req.user) {
+      const currentUser = await User.findById(req.user._id).lean();
+      const allProblems = await Problem.find().lean();
+      const solvedProblems = currentUser.solvedProblems.map((problemId) =>
+        problemId.toString()
+      );
+      const unsolvedList = allProblems.filter(
+        (problem) => solvedProblems.indexOf(problem._id.toString()) === -1
+      );
+      console.log(unsolvedList);
+      res.render("index", { data: unsolvedList });
+    }
+  } catch (err) {
+    next(err);
+  }
 });
 
 module.exports = router;

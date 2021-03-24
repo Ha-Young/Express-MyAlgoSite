@@ -41,6 +41,14 @@ const userSchema = new Schema({
     type: Mixed,
     default: {},
   },
+  rating: {
+    type: Number,
+    default: 0,
+  },
+  solvedProblems: {
+    type: [ObjectId],
+    ref: "Problem",
+  },
 });
 
 userSchema.methods.comparePassword = function (plainPassword, cb) {

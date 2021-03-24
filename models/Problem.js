@@ -19,17 +19,6 @@ const TestSchema = new Schema({
   },
 });
 
-const CompletedUserSchema = new Schema({
-  count: {
-    type: Number,
-    default: 0,
-  },
-  users: {
-    type: [ObjectId],
-    default: [],
-  },
-});
-
 const ProblemSchema = new Schema({
   title: {
     type: String,

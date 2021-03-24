@@ -7,22 +7,29 @@
     <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
 
     <ul class="tabs">
-      <li>Level 1</li>
-      <li>Level 2</li>
-      <li>Level 3</li>
+      <li><a href="/level/1">Level 1</a></li>
+      <li><a href="/level/2">Level 2</a></li>
+      <li><a href="/level/3">Level 3</a></li>
+      <li><a href="/level/4">Level 4</a></li>
     </ul>
+    <% if (data) { %>
     <ul>
-      <p>테스트 케이스 :</p>
       <% data.forEach(problem => { %>
       <li>
         <a href="/problem/<%=problem._id%>">
           <div><%=problem.title%></div>
-          <div>정답자: <%=problem.completedUsers%>명</div>
+          <div>정답자: <%=problem.completedCount%>명</div>
           <div>난이도: <%=problem.difficulty%></div>
         </a>
       </li>
       <% }) %>
     </ul>
+    <% } %>
+    <div>
+      <% if (!data) { %>
+      <span>문제가 없습니다.</span>
+      <% } %>
+    </div>
     <% include ./partials/footer %>
   </body>
 </html>
