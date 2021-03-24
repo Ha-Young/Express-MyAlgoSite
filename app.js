@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 
 const users = require("./routes/users");
 const index = require("./routes/index");
+const problems = require("./routes/problems");
 
 const app = express();
 
@@ -42,6 +43,7 @@ app.use(passport.session());
 
 app.use("/users", users);
 app.use("/", index);
+app.use("/problems", problems);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

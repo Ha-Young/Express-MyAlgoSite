@@ -17,7 +17,10 @@
     </form>
     <p><%= problem.id %></p>
     <p><%= problem.description %></p>
-    <textarea id="editor"></textarea>
+    <form action="<%= `/problems/${problem._id}` %>" method="POST">
+      <textarea id="editor" name="code">function solution(arg) {&#13;&#10; // Your code here.. &#13;&#10;}</textarea>
+      <button type="submit">제출</button>
+    </form>
   </body>
   <script>
     const editor = document.getElementById("editor");
@@ -26,7 +29,6 @@
       lineNumbers: true,
       lineWrapping: true,
       theme: "dracula",
-      val: editor.value
     });
   </script>
 </html>

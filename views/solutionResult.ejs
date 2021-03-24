@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <link rel='stylesheet' href='/stylesheets/reset.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/problems.css' />
+  </head>
+  <body>
+    <h1>Result</h1>
+    <div>
+      <p><%= result %></p>
+      <% if (resultList) { %>
+        <ul>
+          <% for (let i = 0; i < tests.length; i++) { %>
+            <ul>
+              <li>결과: <%= resultList[i] %></li>
+              <li><%= tests[i].code %></li>
+              <li><%= tests[i].solution %></li>
+            </ul>
+          <% } %>
+        </ul>
+      <% } else { %>
+          <p><%= error.message %></p>
+      <% } %>
+    </div>
+  </body>
+</html>
