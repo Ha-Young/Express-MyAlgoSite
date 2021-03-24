@@ -2,28 +2,33 @@
 <html>
   <head>
     <title>Codewars</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel='stylesheet' href='/stylesheets/index.css' />
   </head>
   <body>
-    <h1>Codewars</h1>
-    <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
-
-    <ul class="tabs">
-      <li>Level 1</li>
-      <li>Level 2</li>
-      <li>Level 3</li>
-    </ul>
-
-    <ul class="problems">
-      <% for (let i = 0; i < problems.length; i++) { %>
-        <a href="<%= `/problems/${problems[i].id}` %>">
-          <li>
-            <div><%= problems[i].title %></div>
-            <div><%= problems[i].completed_users %></div>
-            <div><%= problems[i].difficulty_level %></div>
-          </li>
-        </a>
-      <% } %>
-    </ul>
+    <div class="header-container">
+      <div class="header-item"><h1 class="header-item">Codewars</h1></div>
+      <div class="header-item"><h2 class="header-item">HOME</h2></div>
+    </div>
+    <div class="grid-wrapper">
+      <div class="grid-container">
+        <div class="grid-item">난이도</div>
+        <div class="grid-item">제목</div>
+        <div class="grid-item">제출</div>
+        <div class="grid-item">정답</div>
+        <div class="grid-item">정답 비율</div>
+        <% for (let i = 0; i < problems.length; i++) { %>
+          <div class="grid-item"><%= problems[i].difficulty_level %></div>
+          <div class="grid-item">
+            <a href="<%= `/problems/${problems[i].id}` %>">
+              <%= problems[i].title %>
+            </a>
+          </div>
+          <div class="grid-item"><%= problems[i].submission %></div>
+          <div class="grid-item"><%= problems[i].accepted %></div>
+          <div class="grid-item"><%= acceptedRatio[i] %>%</div>
+        <% } %>
+      </div>
+    </div>
   </body>
 </html>
