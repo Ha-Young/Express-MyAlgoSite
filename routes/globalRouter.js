@@ -9,6 +9,6 @@ globalRouter.get("/", home);
 globalRouter.get("/logout", logout);
 
 globalRouter.get("/problems/:id", getProblemDetail);
-// globalRouter.post("/problems/:id", postSolution);
+globalRouter.post("/problems/:id", postSolution);
 
 module.exports = globalRouter;

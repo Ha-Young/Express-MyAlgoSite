@@ -6,13 +6,17 @@ const mongoose = require('mongoose');
 
  */
 const ProblemSchema = new mongoose.Schema({
-  id: Number,
+  id: {
+    type: Number,
+    unique: true,
+    index: true,
+  },
   title: String,
   completedUsers: Number,
-  dificultyLevel: Number,
+  difficultyLevel: Number,
   description: String,
   tests: [{
-    code: mongoose.Schema.Types.Mixed,
+    code: String,
     solution: mongoose.Schema.Types.Mixed,
   }],
 });

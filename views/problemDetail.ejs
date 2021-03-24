@@ -1,4 +1,5 @@
 <%- include("./partial/header") %>
+
 <div class="problem-container">
   <div class="problem-detail">
     <h2><%= problem.title %></h2>
@@ -8,8 +9,15 @@
   </div>
   <div class="problem-solution">
     <form action="/problems/<%= problem.id %>" method="POST">
-      <textarea id="editor"></textarea>
+      <textarea id="editor" name="solution">
+function solution(<%= parameter %>) {
+}
+      </textarea>
       <button>ATTEMPT</button>
     </form>
   </div>
 </div>
+
+<script type="text/javascript" src="/javascripts/codemirror@5.60.0/codemirror.min.js"></script>
+<script type="text/javascript" src="/javascripts/codemirror@5.60.0/javascript.min.js"></script>
+<script type="text/javascript" src="/javascripts/codemirror@5.60.0/init.js"></script>
