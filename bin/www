@@ -8,7 +8,8 @@ require('dotenv').config();
 const app = require('../app');
 const debug = require('debug')('cms:server');
 const http = require('http');
-const mongoose = require('mongoose');
+
+require("../db");
 
 /**
  * Get port from environment and store in Express.
@@ -26,19 +27,6 @@ const server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
-const DB = process.env.DATABASE.replace(
-  "<password>",
-  process.env.DATABASE_PASSWORD
-);
-
-mongoose.connect(
-  DB,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-  },
-).then(() => console.log("DB connection successful!"));
 
 server.listen(port);
 server.on('error', onError);

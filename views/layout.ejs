@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Codewars</title>
+    <link rel="shortcut icon" href="#">
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/theme/monokai.min.css" />
@@ -10,8 +11,12 @@
     <header class="header">
       <nav>
         <a href="/">Home</a>
-        <a href="/signup">Sign Up</a>
-        <a href="/signin">Sign In</a>
+        <% if (name) { %>
+          <a href="/auth/logout">Log Out</a>
+        <% } else { %>
+          <a href="/auth/signup">Sign Up</a>
+          <a href="/auth">Sign In</a>
+        <% } %>
       </nav>
     </header>
     <section class="main">

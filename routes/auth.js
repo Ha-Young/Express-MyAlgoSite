@@ -2,14 +2,26 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 
+const authController = require("./controllers/authController");
+
+
 router.get("/", function (req, res) {
-  res.render("signin");
+  res.locals.name = req.user?.name || null;
+  res.render("auth");
+});
+
+router.post("/signup", authController.signup);
+router.get("/signup", authController.renderSignup);
+
+router.get("/logout", function (req, res) {
+  req.logout();
+  res.redirect("/auth");
 });
 
 router.post(
   "/local",
   passport.authenticate("local", {
-    failureRedirect: "/signin",
+    failureRedirect: "/auth",
     successRedirect: "/",
   })
 );
@@ -22,7 +34,7 @@ router.get(
 router.get(
   "/github/callback",
   passport.authenticate("github", {
-    failureRedirect: "/signin",
+    failureRedirect: "/auth",
     successRedirect: "/",
   })
 );

@@ -11,7 +11,7 @@ const passportConfig = require("./config/passport");
 
 const index = require("./routes/index");
 const signup = require("./routes/signup");
-const signin = require("./routes/signin");
+const auth = require("./routes/auth");
 const problems = require("./routes/problems");
 
 const app = express();
@@ -43,8 +43,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 passportConfig();
 
-app.use("/signup", signup);
-app.use("/signin", signin);
+// app.use("/signup", signup);
+app.use("/auth", auth);
 app.use("/", index);
 app.use("/problems", problems);
 

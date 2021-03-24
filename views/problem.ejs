@@ -1,22 +1,20 @@
 <h1><%= problem.title %></h1>
-<p>난이도: level <%= problem.difficulty_level %></p>
-<p>정답자: <%= problem.completed_users %>명</p>
+<p>난이도: level <%= problem.difficultyLevel %></p>
+<p>정답자: <%= problem.completedUsers %>명</p>
 <p><%= problem.description %></p>
 
 <div>
   <form action="/problems/<%= problem.id %>" method="POST">
     <textarea id="code" name="code">
-function solution() {
+function solution(<%= problem.param %>) {
   let result;
 
   return result;
 }
     </textarea>
-    <button type="submit">Submit</button>
+    <button class="button" type="submit">Submit</button>
   </form>
 </div>
-
-<p><%= rest %></p>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/mode/javascript/javascript.min.js"></script>

@@ -12,8 +12,8 @@
   <% problems.forEach((problem) => { %>
     <form class="problem" action="/problems/<%= problem.id %>" method="GET">
       <div><%= problem.title %></div>
-      <div>정답자: <%= problem.completed_users %>명</div>
-      <div>난이도: Level <%= problem.difficulty_level %></div>
+      <div>정답자: <%= problem.completedUsers %>명</div>
+      <div>난이도: Level <%= problem.difficultyLevel %></div>
       <button class="button" type="submit">도전</button>
     </form>
   <% }); %>

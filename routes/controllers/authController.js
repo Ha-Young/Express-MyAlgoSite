@@ -13,5 +13,6 @@ exports.signup = async (req, res, next) => {
 };
 
 exports.renderSignup = (req, res, next) => {
+  res.locals.name = req.user?.name || null;
   res.render("signup");
 };
