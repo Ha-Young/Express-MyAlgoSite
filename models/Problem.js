@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const TestCase = new mongoose.Schema({
   testcase: mongoose.Schema.Types.Mixed,
@@ -33,4 +33,4 @@ const ProblemSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('Problem', ProblemSchema);
+module.exports = mongoose.model("Problem", ProblemSchema);

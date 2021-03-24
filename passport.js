@@ -1,7 +1,7 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const GithubStrategy = require("passport-github").Strategy;
-const User = require('./models/User');
+const User = require("./models/User");
 
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
@@ -9,7 +9,7 @@ passport.use(new GoogleStrategy({
     callbackURL: `${process.env.SERVICE_URL}/login/google/callback`,
   },
   async function(accessToken, refreshToken, profile, cb) {
-    console.log('google auth start');
+    console.log("google auth start");
     const {
       _json: { name, email }
     } = profile;
@@ -17,14 +17,14 @@ passport.use(new GoogleStrategy({
       const user = await User.findOne({ email: email });
       console.log(user);
       if (email === user.email && user.isGoogle) {
-        console.log('google user true');
+        console.log("google user true");
         return cb(null, user);
       } else {
-        console.log('google user false so setting');
+        console.log("google user false so setting");
         const newUser = User({
           email,
           name,
-          password: '',
+          password: "",
           isGoogle: true,
           isGithub: false,
           exprience_point: 0,
@@ -48,7 +48,7 @@ passport.use(new GithubStrategy({
   },
   async (accessToken, refreshToken, profile, cb) => {
     const { _json: { id, avatar_url, name, email} } = profile;
-    console.log('github auth come');
+    console.log("github auth come");
     console.log(profile._json);
     try{
         const user = await User.findOne({email});

@@ -1,7 +1,7 @@
 const User = require("../models/User");
 
 module.exports.joinController = function joinController(req, res, next) {
-  res.render('join', { title: 'Sign Up' });
+  res.render("join", { title: "Sign Up" });
 }
 
 module.exports.postJoinController = async function postJoinController(req, res, next) {

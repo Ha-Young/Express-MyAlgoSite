@@ -78,3 +78,15 @@ yarn run dev or npm run dev
 - [Deploying Express app to production](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/deployment)
 
 **곧 AWS Cloud Service를 이용하여 서버를 배포하는 방법에 대해 배우게 될테니, 우선 위 링크를 따라해보세요.**
+
+# todo...
+
+- login validation(형식대로 잘 써넣었는지 확인 후 에러 메세지)
+- join validation(login validation과 동일)
+- local join 정리
+- 메인화면 -> 로고랑 시작버튼이 있어야함(시작버튼 누르면 problem list가 뜸)
+- problem list 등록하고 뿌리기()
+- problem 상세페이지 -> login 된 상태라면 들어가고 아니라면 login 창으로 redirect
+- problem 상세페이지에 code mirror
+- user가 적은 code를 돌려볼 수 있는 code server
+- 

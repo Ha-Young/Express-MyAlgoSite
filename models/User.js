@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const passportLocalMongoose = require('passport-local-mongoose');
+const mongoose = require("mongoose");
+const passportLocalMongoose = require("passport-local-mongoose");
 
 const Problem = new mongoose.Schema({
   score: Number,
@@ -32,4 +32,4 @@ const UserSchema = new mongoose.Schema({
 
 UserSchema.plugin(passportLocalMongoose, {usernameField: "email"})
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model("User", UserSchema);
