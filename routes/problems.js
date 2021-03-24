@@ -34,18 +34,27 @@ router.post("/:problem_id", async (req, res, next) => {
     const problems = await Problem.find({});
     const problem = getProblem(problems, problem_id);
     const { tests } = problem;
-    const { args, body } = getArgsAndBody(solution);
+    const { functionArgs, functionBody } = getArgsAndBody(solution);
 
-    const solutionFunc = new Function(...args, body)
+    const solutionFunc = new Function(...functionArgs, functionBody)
       .toString()
       .replace("function anonymous", "function solution");
 
+    const testResults = [];
+
     tests.forEach((test) => {
-      const executionFuncBody = solutionFunc.concat(" ", test.code);
+      const executionFuncBody = solutionFunc.concat(" return ", test.code);
       const executionFunc = new Function(executionFuncBody);
-      executionFunc();
+
+      if (executionFunc() === test.solution) {
+        testResults.push(true);
+        return;
+      }
+
+      testResults.push(false);
     });
 
+    console.log(testResults);
     res.send("POST 구현해야 합니다.");
   } catch (err) {
     res.send("함수를 입력하세요.");

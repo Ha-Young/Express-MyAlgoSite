@@ -1,21 +1,15 @@
 const getArgsAndBody = (func) => {
   const funcStr = func.toString();
 
-  const trimmedFuncStr = funcStr.replace(/\n|\r| /g, "");
-  const reOfArgsBracket = /\([^\)]*\)/;
-  const reOfBodyBracket = /\{.*\}/;
+  const startArgIdx = funcStr.indexOf("(");
+  const endArgIdx = funcStr.indexOf(")");
+  const functionArgs = funcStr.slice(startArgIdx + 1, endArgIdx).split(",");
 
-  try {
-    const argsBracket = trimmedFuncStr.match(reOfArgsBracket)[0];
-    const bodyBracket = trimmedFuncStr.match(reOfBodyBracket)[0];
+  const startBodyIdx = funcStr.indexOf("{");
+  const endBodyIdx = funcStr.lastIndexOf("}");
+  const functionBody = funcStr.slice(startBodyIdx, endBodyIdx + 1);
 
-    const args = argsBracket.slice(1, -1).split(",");
-    const body = bodyBracket.slice(1, -1);
-
-    return { args, body };
-  } catch (err) {
-    return err;
-  }
+  return { functionArgs, functionBody };
 };
 
 module.exports = getArgsAndBody;
