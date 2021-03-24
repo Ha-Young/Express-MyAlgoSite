@@ -4,9 +4,9 @@
     <title>Codewars</title>
     <script src="/javascripts/codemirror.js"></script>
     <link rel='stylesheet' href="/stylesheets/codemirror.css" />
-    <script src="/mode/javascript/javascript.js"></script>
-    <script src="/addon/edit/closebrackets.js"></script>
-    <link href="/theme/moxer.css" rel="stylesheet" />
+    <script src="/codemirror/mode/javascript/javascript.js"></script>
+    <script src="/codemirror/addon/edit/closebrackets.js"></script>
+    <link href="/codemirror/theme/moxer.css" rel="stylesheet" />
   </head>
   <body>
     <h1><%=problem.title%></h1>
@@ -14,9 +14,9 @@
     <span>레벨 : <%=problem.difficulty_level%></span>
     <span>맞은 사람 수 : <%=problem.completed_users%></span>
     <% const address =`/problems/${problem.id}`%>
-    <form method="post" action=<%=address %>>
-      <textarea id="editor">console.log("Hello World");</textarea>
-      <input type="submit">Submit</button>
+    <form method="POST" action=<%=address%>>
+      <textarea id="editor" name="solution">function solution () { }</textarea>
+      <input type="submit" value="submit"></button>
     </form>
   </body>
   <script>

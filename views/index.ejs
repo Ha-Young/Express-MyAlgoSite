@@ -13,10 +13,10 @@
       <li>Level 3</li>
     </ul>
     <ul class="problems">
-      <% for (let i = 0; i < problems.length; i++) { %>
-        <% const address =`/problems/${problems[i].id}`%>
+      <% for (let i = 0; i < allTitle.length; i++) { %>
+        <% const address =`/problems/${allTitle[i].id}`%>
         <a href=<%=address %>>
-          <li><%= problems[i].title %></li>
+          <li><%= allTitle[i].title %></li>
         </a>
       <% } %>
     </ul>

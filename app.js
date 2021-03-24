@@ -12,6 +12,8 @@ const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 const mongoose = require("mongoose");
 const db = mongoose.connection;
 
+const bodyParser = require("body-parser");
+
 mongoose.connect("mongodb+srv://hyeongju:WwHdtPxR6b-PibR@codewars.zwtye.mongodb.net/myFirstDatabase", {
   useUnifiedTopology: true,
   useNewUrlParser: true,
@@ -21,6 +23,7 @@ db.once("open", function () {
   console.log("Connected to mongod server");
 });
 
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 
