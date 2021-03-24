@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
-    <% include ./partials/header %>
+    <% include ./../partials/header %>
     <h1><%=data.title%></h1>
     <p><%=data.description%></p>
     <p>정답자 수 : <%=data.completedUsers%></p>
@@ -37,7 +37,7 @@ function solution (<%=data.argument%>) {
       <button type="submit">Run Code</button>
     </form>
 
-    <% include ./partials/footer %>
+    <% include ./../partials/footer %>
 
     <script>
       const editor = CodeMirror.fromTextArea(

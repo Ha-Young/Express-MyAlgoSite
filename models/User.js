@@ -3,14 +3,9 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-/*
-
-  TODO: Fill in the model specification
-
- */
 const { Schema } = mongoose;
 const {
-  Types: { ObjectId },
+  Types: { ObjectId, Mixed },
 } = Schema;
 
 const solvedSchema = new Schema({
@@ -21,7 +16,7 @@ const solvedSchema = new Schema({
   answer: {
     type: String,
   },
-  solved: {
+  result: {
     type: Boolean,
   },
 });
@@ -42,11 +37,9 @@ const userSchema = new Schema({
     // minlength: 5,
     required: true,
   },
-  solved: {
-    type: [solvedSchema],
-  },
-  token: {
-    type: String,
+  answers: {
+    type: Mixed,
+    default: {},
   },
 });
 

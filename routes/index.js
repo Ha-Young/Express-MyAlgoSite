@@ -9,7 +9,7 @@ const { Problem } = require("./../models/Problem");
 /* GET home page. */
 router.get("/", isLoggedIn, async (req, res, next) => {
   try {
-    const problemList = await Problem.find();
+    const problemList = await Problem.find().lean();
     res.render("index", { data: problemList });
   } catch (err) {
     res.render("index");

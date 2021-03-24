@@ -25,15 +25,18 @@
       <% }) %>
     </ul>
     <form action="/problem/<%=data._id%>" method="POST">
+      <% if (data.userAnswer) { %>
+      <textarea name="userCode" id="editor">
+<%=data.userAnswer%> 
+      </textarea>
+      <% } else { %>
       <textarea name="userCode" id="editor">
 function solution (<%=data.argument%>) {
-  if (n === 0 || n === 1) {
-    return n;
-  }
   
-  return solution (n - 1) + solution (n - 2);
 }
-      </textarea>
+</textarea
+      >
+      <% } %>
       <button type="submit">Run Code</button>
     </form>
 

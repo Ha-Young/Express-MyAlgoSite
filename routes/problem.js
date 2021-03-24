@@ -1,16 +1,24 @@
 const express = require("express");
 const vm = require("vm");
 const router = express.Router();
+const { User } = require("./../models/User");
 const { Problem } = require("./../models/Problem");
 
 /* GET home page. */
 
 router.get("/:problem_id", async (req, res, next) => {
   try {
-    const currentProblem = await Problem.findById(req.params.problem_id);
+    const problemId = req.params.problem_id;
+    const currentProblem = await Problem.findById(problemId).lean();
+    const currentUser = await User.findById(req.user._id);
+    let userAnswer = "";
+
+    if (currentUser.answers[problemId]) {
+      userAnswer = currentUser.answers[problemId];
+    }
+
     if (currentProblem) {
-      problem = currentProblem;
-      res.render("problem", { data: currentProblem });
+      res.render("problem", { data: { ...currentProblem, userAnswer } });
     } else {
       res.redirect("/");
     }
@@ -21,15 +29,20 @@ router.get("/:problem_id", async (req, res, next) => {
 
 router.post("/:problem_id", async (req, res, next) => {
   try {
-    // 제출된 data를 받아서 결과에 출력해야한다
-    // db에 내 정답도 저장해야 한다.
-    // 정답이라면, 정답자 수도 카운트 해야한다.
+    const problemId = req.params.problem_id;
     const userCode = req.body.userCode;
-    const currentProblem = await Problem.findById(req.params.problem_id);
+    const currentProblem = await Problem.findById(problemId).lean();
+    const currentUser = await User.findById(req.user._id).lean();
     const tests = currentProblem.tests;
     const userResult = { userSolution: null };
     let successCount = 0;
     let failCount = 0;
+    console.log(currentUser.answers);
+
+    await User.updateOne(
+      { _id: req.user._id },
+      { answers: { ...currentUser.answers, [problemId]: userCode } }
+    );
 
     for (const test of tests) {
       const fullCode = userCode + `userSolution = ${test.code}`;
@@ -44,12 +57,12 @@ router.post("/:problem_id", async (req, res, next) => {
     }
 
     if (failCount !== 0) {
-      return res.render("results/failure");
+      return res.render("results/failure", { data: currentProblem });
     }
 
-    res.render("results/success");
+    res.render("results/success", { data: currentProblem });
   } catch (error) {
-    res.render("results/failure", { message: error, error });
+    res.render("error", { message: error, error });
   }
 });
 
