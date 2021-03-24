@@ -15,15 +15,15 @@
           <%= title %>
         </div>
         <div>
-          <%= flashMessage %>
+          <%= message %>
         </div>
         <div>
           <label>email:</label>
-          <input type="text" name="email" />
+          <input type="email" name="email" maxlength="50" minlength="5" required />
         </div>
         <div>
           <label>Password:</label>
-          <input type="password" name="password" />
+          <input type="password" name="password" maxlength="50" minlength="8" required />
         </div>
         <div>
           <input type="submit" value="Log In" />

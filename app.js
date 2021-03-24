@@ -53,11 +53,10 @@ app.use(session({
 
 require('./auth/passport')(app);
 
-//because of flash timing issue,
-// made highorder middleware
-app.use((req, res, next) => {
-  flash()(req, res, next);
-});
+// because of flash timing issue,
+// message does not show up sometimes
+// (if refresh then work)
+app.use(flash());
 
 app.use('/', index);
 app.use('/auth', auth);

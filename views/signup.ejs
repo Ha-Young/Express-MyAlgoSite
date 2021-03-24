@@ -12,19 +12,22 @@
     <main>
       <form action="/auth/signup" method="post">
         <div>
+          <%= title %>
+        </div>
+        <div>
           <%= message %>
         </div>
         <div>
           <label>email:</label>
-          <input type="email" name="email" />
+          <input type="email" name="email" maxlength="50" minlength="5" required />
         </div>
         <div>
           <label>username:</label>
-          <input type="text" name="username" />
+          <input type="text" name="username" maxlength="15" minlength="2" required />
         </div>
         <div>
           <label>Password:</label>
-          <input type="password" name="password" />
+          <input type="password" name="password" maxlength="50" minlength="8" required />
         </div>
         <div>
           <input type="submit" value="submit" />

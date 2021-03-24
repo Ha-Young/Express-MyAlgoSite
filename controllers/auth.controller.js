@@ -2,15 +2,17 @@ const passport = require('passport');
 const User = require('../models/User');
 const catchAsync = require('../middlewares/catchAsync');
 const generateHeaderData = require('../utils/generateHeaderData');
+const validateEmail = require('../utils/validateEmail');
 
 exports.getLoginForm = (req, res) => {
   const headerData = generateHeaderData(req.isAuthenticated(), req.user);
-  const flashMessage = req.flash().error?.[0] ?? '';
+  const title = 'Log In';
+  const message = req.flash('error');
 
   res.render('login', {
     ...headerData,
-    title: 'Login',
-    flashMessage,
+    title,
+    message,
   });
 };
 
@@ -22,13 +24,22 @@ exports.authenticateLocal = passport.authenticate('local', {
 
 exports.getSignUpForm = (req, res) => {
   const headerData = generateHeaderData(req.isAuthenticated(), req.user);
+  const title = 'Sign Up';
+  const message = req.flash('info');
+
   res.render('signup', {
     ...headerData,
-    message: req.flash('info')
+    title,
+    message,
   });
 };
 
 exports.createUser = catchAsync(async (req, res, next) => {
+  if (!validateEmail(req.body.email)) {
+    req.flash('info', 'please type valid email');
+    return res.redirect('/auth/signup');
+  }
+
   if (await User.findOne({ email: req.body.email })) {
     req.flash('info', 'email already exist');
     return res.redirect('/auth/signup');

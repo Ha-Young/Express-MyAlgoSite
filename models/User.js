@@ -15,15 +15,15 @@ const userSchema = new mongoose.Schema({
     type: String,
     unique: true,
     required: [true, 'Please tell us your username!'],
-    minlength: 2,
     maxlength: 15,
+    minlength: 2,
   },
   password: {
     type: String,
     unique: true,
     required: [true, 'Please provide a password'],
+    maxlength: 50,
     minlength: 8,
-    maxlength: 20,
     select: false,
   },
 });
