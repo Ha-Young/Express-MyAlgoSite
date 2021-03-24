@@ -1,11 +1,11 @@
-.loginWrapper {
+.login-wrapper {
   width: 100%;
   height:100%;
   margin: 0px;
   position: relative;
 }
 
-.titleWrapper {
+.title-wrapper {
   z-index: 1;
   position: absolute;
   top: 25%;
@@ -20,7 +20,7 @@
   animation-timing-function: ease-in;
 }
 
-.btnWrapper {
+.btn-wrapper {
   z-index: 2;
   position: absolute;
   width: 400px;
@@ -29,7 +29,7 @@
   bottom: 25%;
 }
 
-.btnWrapper :hover {
+.btn-wrapper :hover {
   cursor: pointer;
 }
 
