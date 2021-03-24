@@ -37,18 +37,6 @@ header {
   padding-bottom: 8px;
 }
 
-main {
-  display: flex;
-  justify-content: center;
-}
-
-.succeed-wrapper {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-}
-
 .problem-test-result {
   text-align: center;
 }
