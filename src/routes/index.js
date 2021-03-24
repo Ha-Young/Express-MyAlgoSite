@@ -1,6 +1,7 @@
 const express = require("express");
 
-const auth = require("./auth");
+const authRouter = require("./auth");
+const problemRouter = require("./problem");
 const loginCheck = require("./middlewares/loginCheck");
 const { home } = require("./controllers/home");
 
@@ -8,7 +9,8 @@ module.exports = function () {
   const app = express.Router();
   app.get("/", loginCheck, home);
 
-  auth(app);
+  authRouter(app);
+  problemRouter(app);
 
   return app;
 };
