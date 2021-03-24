@@ -1,0 +1,74 @@
+.problem-list {
+  display: grid;
+  grid-auto-rows: 200px;
+  grid-gap: 1rem;
+  place-items: center;
+
+  --radius: 1rem;
+}
+
+.problem-item {
+  display: grid;
+  grid-template-columns: 30% 1fr;
+  font-family: "Work Sans", sans-serif;
+  width: 80%;
+  height: 200px;
+  background-color: white;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: transform .3s;
+}
+
+.problem-item:hover {
+  transform: translateY(-0.5rem);
+}
+
+.problem-item .image {
+  overflow: hidden;
+  border-radius: var(--radius);
+}
+
+.problem-item .image img {
+  display: block;
+  width: 100%;
+}
+
+.problem-item .item-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-size: 1rem;
+  color: #aaa;
+}
+
+.problem-item .item-content .tags {
+  display: flex;
+}
+
+.problem-item .item-content .tag {
+  display: flex;
+  align-items: center;
+}
+
+.problem-item .item-content .tag:not(:last-child) {
+  margin-right: 10px;
+}
+
+.problem-item h1 {
+  font-weight: 500;
+  margin: 20px auto;
+  font-size: 1.6rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: #000;
+}
+
+.problem-item svg {
+  fill: currentColor;
+  width: 1em;
+  height: 1em;
+}
