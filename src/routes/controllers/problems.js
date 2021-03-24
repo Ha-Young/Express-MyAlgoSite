@@ -12,3 +12,17 @@ exports.viewProblem = async function (req, res, next) {
     next(err);
   }
 };
+
+exports.solveProblem = function (req, res, next) {
+  const {
+    code,
+    testCase,
+  } = req.body;
+
+  try {
+    const parsedTestCase = JSON.parse(testCase);
+
+  } catch (err) {
+    return next(err);
+  }
+};

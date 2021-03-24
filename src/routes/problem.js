@@ -10,5 +10,5 @@ module.exports = function authRouter(app) {
 
   route.get("/:problem_id", ProblemController.viewProblem);
 
-  // app.post("/problem/:id", ProblemController.sendSolution);
+  route.post("/:problem_id", ProblemController.solveProblem);
 };
