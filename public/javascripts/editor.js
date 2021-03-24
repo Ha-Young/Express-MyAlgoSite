@@ -1,0 +1,17 @@
+const codemirror = new CodeMirror.fromTextArea(document.getElementById("editor"), {
+  mode: "javascript",
+  lineNumbers: true,
+  theme: 'monokai',
+  value: "console.log(Hi);",
+  indentUnit: 2,
+  matchBrackets: true,
+  autoCloseBrackets: true,
+  autoCloseTags: true,
+  highlightSelectionMatches: { showToken: /\w/, annotateScrollbar: true },
+  continueList: true,
+  matchBrackets: true,
+  matchtags: true,
+  trailingSpace: true,
+  scrollPastEnd: true,
+  simpleScrollBars: true,
+});
