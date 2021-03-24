@@ -16,36 +16,36 @@ router.get('/', forwardAuthenticated, async (req, res, next) => {
   }
 });
 
-router.get('/log-in', (req, res, next) => {
-  res.render('logIn');
+router.get('/sign-in', (req, res, next) => {
+  res.render('signIn');
 });
 
-router.post('/log-in', passport.authenticate('local', {
+router.post('/sign-in', passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: '/log-in',
+  failureRedirect: '/sign-in',
   failureFlash: true,
 }));
 
-router.get('/log-out', forwardAuthenticated, (req, res, next) => {
-  res.render('logOut');
+router.get('/sign-out', forwardAuthenticated, (req, res, next) => {
+  res.render('signOut');
 });
 
-router.get('/log-out/done', forwardAuthenticated, (req, res, next) => {
+router.get('/sign-out/callback', forwardAuthenticated, (req, res, next) => {
   if (req.session) {
     try {
       req.session.destroy();
-      res.redirect('/log-in');
+      res.redirect('/sign-in');
     } catch (e) {
       next(e);
     }
   }
 });
 
-router.get('/sign-in', (req, res, next) => {
-  res.render('signIn');
+router.get('/sign-up', (req, res, next) => {
+  res.render('signUp');
 });
 
-router.post('/sign-in', async (req, res, next) => {
+router.post('/sign-up', async (req, res, next) => {
   const email = await User.findOne({ email: req.body.email });
 
   if (email) {
@@ -64,23 +64,23 @@ router.post('/sign-in', async (req, res, next) => {
       password: hash,
     });
 
-    res.redirect('/log-in');
+    res.redirect('/sign-in');
   } catch (e) {
     next(e);
   }
 });
 
-router.get('/sign-out', forwardAuthenticated, (req, res, next) => {
-  res.render('signOut');
+router.get('/delete-account', forwardAuthenticated, (req, res, next) => {
+  res.render('deleteAccount');
 });
 
-router.get('/sign-out/done', forwardAuthenticated, async (req, res, next) => {
+router.get('/delete-account/callback', forwardAuthenticated, async (req, res, next) => {
   const email = req.session.passport.user.email;
 
   try {
     await User.deleteOne({ email: email });
     req.session.destroy();
-    res.redirect('/log-in');
+    res.redirect('/sign-in');
   } catch (e) {
     next(e);
   }
