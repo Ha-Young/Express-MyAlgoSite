@@ -7,27 +7,37 @@
     <link rel='stylesheet' href='/stylesheets/login.css' />
   </head>
   <body>
-    <form method="POST" action="/users/login/check">
-      <fieldset>
-        <legend>LOGIN</legend>
-        <div class="form-box">
-          <label for="userId">ID</label>
-          <input name="userId" id="userId" type="text" required/>
-        </div>
-        <div class="form-box">
-          <label>PASSWORD</label>
-          <input name="userPassword" id="userPassword" type="password" required />
-        </div>
-      </fieldset>
-      <p class="validation">
-        <% if (messages.error) { %>
-          <%= messages.error %>
-        <% } %>
-      </p>
-      <ul class="button-list">
-        <li><input class="button" type="submit" value="SIGN IN" /></li>
-        <li><a class="button" href="/users/signup">CREATE ACCOUNT</a></li>
-      </ul>
-    </form>
+    <main class="flex-main">
+      <h1>
+        <img class="logo" src="/images/logo.png" alt="CODE WARS" />
+      </h1>
+      <div class="form-box">
+        <form id="login-form" method="POST" action="/users/login/check">
+          <fieldset>
+            <legend>LOGIN</legend>
+            <div class="input-box">
+              <label for="userId">ID</label>
+              <input name="userId" id="userId" type="text" placeholder="ID" required/>
+            </div>
+            <div class="input-box">
+              <label>PASSWORD</label>
+              <input name="userPassword" id="userPassword" type="password" placeholder="PASSWORD" required />
+            </div>
+          </fieldset>
+        </form>
+        <p class="validation">
+          <% if (messages.error) { %>
+            <%= messages.error %>
+          <% } %>
+        </p>
+        <ul class="button-list">
+          <li><button class="button yellow" type="submit" form="login-form">SIGN IN</button></li>
+          <li><a class="button yellow" href="/users/signup">CREATE ACCOUNT</a></li>
+        </ul>
+      </div>
+      <video autoplay muted loop id="video">
+        <source src="/videos/video.mp4" type="video/mp4" />
+      </video>
+    </main>
   </body>
 </html>

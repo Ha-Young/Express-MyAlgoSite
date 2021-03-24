@@ -7,39 +7,47 @@
     <link rel='stylesheet' href='/stylesheets/login.css' />
   </head>
   <body>
-    <form method="POST" action="/users/signup">
-      <fieldset>
-        <legend>CREATE ACCOUNT</legend>
-        <div class="form-box">
-          <label for="userId">ID</label>
-          <input name="userId" id="userId" type="text" required/>
-        </div>
-        <div class="form-box">
-          <label>PASSWORD</label>
-          <input name="userPassword" id="userPassword" type="password" required />
-        </div>
-        <div class="form-box">
-          <label for="userName">NAME</label>
-          <input name="userName" id="userName" type="text" required />
-        </div>
-        <div class="form-box">
-          <label for="userNickname">NICKNAME</label>
-          <input name="userNickname" id="userNickname" type="text" required />
-        </div>
-        <div class="form-box">
-          <label>E-MAIL</label>
-          <input name="userEmail" id="userEmail" type="userEmail" required />
-        </div>
-      </fieldset>
-      <p class="validation">
-        <% if (messages.validation) { %>
-          <%= messages.validation %>
-        <% } %>
-      </p>
-      <ul class="button-list">
-        <li><a class="button" href="/users/login">LOGIN PAGE</a></li>
-        <li><input class="button" type="submit" value="SIGN UP" /></li>
-      </ul>
-    </form>
+    <main class="flex-main">
+      <h1>
+        <img class="icon" src="/images/icon/icon_08.png" alt="darth vador icon" />
+        <p class="title">SIGN UP</p>
+      </h1>
+      <div class="form-box">
+        <form id="signup-form" method="POST" action="/users/signup">
+          <fieldset>
+            <legend>CREATE ACCOUNT</legend>
+            <div class="input-box">
+              <label for="userId">ID</label>
+              <input name="userId" id="userId" type="text" placeholder="ID" required/>
+            </div>
+            <div class="input-box">
+              <label>PASSWORD</label>
+              <input name="userPassword" id="userPassword" type="password" placeholder="PASSWORD" required />
+            </div>
+            <div class="input-box">
+              <label for="userName">NAME</label>
+              <input name="userName" id="userName" type="text" placeholder="NAME" required />
+            </div>
+            <div class="input-box">
+              <label for="userNickname">NICKNAME</label>
+              <input name="userNickname" id="userNickname" type="text" placeholder="NICKNAME" required />
+            </div>
+            <div class="input-box">
+              <label>E-MAIL</label>
+              <input name="userEmail" id="userEmail" type="userEmail" placeholder="EMAIL" required />
+            </div>
+          </fieldset>
+        </form>
+        <p class="validation">
+          <% if (messages.validation) { %>
+            <%= messages.validation %>
+          <% } %>
+        </p>
+        <ul class="button-list">
+          <li><a class="button red" href="/users/login">LOGIN PAGE</a></li>
+          <li><button class="button red" type="submit" form="signup-form">SIGN UP</button></li>
+        </ul>
+      </div>
+    </main>
   </body>
 </html>
