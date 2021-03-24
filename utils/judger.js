@@ -14,9 +14,8 @@ function judgeSolution (testcases, solution) {
       const context = vm.createContext(sandbox);
       const script = new vm.Script(solution + "result=" + code);
 
-      console.log(typeof sandbox.result, typeof answer);
       script.runInContext(context);
-      console.log(sandbox.result, answer);
+      
       if (sandbox.result !== answer) {
           passed = false;
       }
