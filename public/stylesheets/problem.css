@@ -78,7 +78,6 @@
   background: #32353d;
   color: #fafafa;
   box-shadow: inset 0 2px 0 rgba(255,255,255,.05), inset 0 1px 0 rgba(0,0,0,.4);
-  overflow-y: scroll;
   transition: all 0.2s ease;
   -webkit-transition: all 0.2s ease;
 }
@@ -98,8 +97,9 @@
 }
 
 .guide-section {
+  overflow-y: scroll;
   box-shadow: inset 0 -1px 0 rgba(255, 255, 255, .05),
-    inset 0 -1px 0 rgba(0, 0, 0, .4);
+  inset 0 -1px 0 rgba(0, 0, 0, .4);
 }
 
 .testcase-section {
@@ -135,7 +135,6 @@
   user-select: text;
   -webkit-user-select: text;
   outline: none;
-  overflow: auto;
   transition: all 0.2s ease;
   -webkit-transition: all 0.2s ease;
 }
@@ -143,11 +142,24 @@
 .code-section {
   box-shadow: inset 0 -1px 0 rgba(255, 255, 255, .05),
     inset 0 -1px 0 rgba(0, 0, 0, .4);
+  overflow-y: scroll;
 }
 
-.CodeMirror {
-  width: 100%;
-  height: 100%;
+.btn-group {
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+}
+
+.send-btn {
+  cursor: pointer;
+  width: 60px;
+  border: none;
+  background: #4CAF50;
+  color: #FFF;
+  margin: 0 0 5px;
+  padding: 10px;
+  font-size: 1rem;
 }
 
 .message {

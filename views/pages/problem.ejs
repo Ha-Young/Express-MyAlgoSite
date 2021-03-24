@@ -30,7 +30,8 @@
         </div>
         <textarea id="code" class="code-textarea">
 function solution(<%= problem.argument %>) {
-
+  let result = 0;
+  return result;
 }</textarea>
       </div>
       <div class="output-section">
@@ -52,20 +53,12 @@ function solution(<%= problem.argument %>) {
     </div>
   -->
   </div>
+  <div class="btn-group">
+    <button class="send-btn">제출</button>
+  </div>
 </div>
 
 <!-- code mirror -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.6.0/codemirror.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.6.0/mode/javascript/javascript.min.js"></script>
-<script>
-  const cm = new CodeMirror.fromTextArea(document.getElementById("code"), {
-    lineNumbers: true,
-    lineWrapping: true,
-    styleActiveLine: true,
-    matchBrackets: true,
-    tabSize: 2,
-    mode: "javascript",
-    theme: "base16-light",
-  });
-  cm.setSize("100%", "calc(100% - 46px)");
-</script>
+<script src="/javascripts/problem.js"></script>
