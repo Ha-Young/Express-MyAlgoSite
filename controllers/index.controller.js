@@ -1,13 +1,29 @@
 const Problem = require('../models/Problem');
-const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 
 exports.getHome = catchAsync(async (req, res, next) => {
-  console.log(req.user);
   const problems = await Problem.find().lean();
-  const loginStatus = req.user ? 'logout' : 'login';
-  const ref = req.user ? '/auth/logout' : '/auth';
 
-  res.render('index', { user: req.user, problems, loginStatus, ref });
+  let status = {
+    problems,
+    user: '',
+    signupStatus: 'signup',
+    loginStatus: 'login',
+    signupRef: '/auth/signup',
+    loginRef: '/auth'
+  };
+
+  if (req.user) {
+    status = {
+      problems,
+      user: req.user,
+      signupStatus: '',
+      loginStatus: 'logout',
+      signupRef: '',
+      loginRef: '/auth/logout',
+    }
+  }
+
+  res.render('index', status);
 });
 

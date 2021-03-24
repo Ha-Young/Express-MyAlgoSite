@@ -44,7 +44,6 @@ exports.createUser = catchAsync(async (req, res, next) => {
 });
 
 exports.logOut = (req, res) => {
-  console.log(req.user);
   req.logout();
   res.redirect('/');
 };

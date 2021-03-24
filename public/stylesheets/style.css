@@ -31,13 +31,21 @@ header {
   margin-left: -195px;
 }
 
-.login {
+.login,
+.signup {
   flex-grow: 1;
   text-align: center;
   padding: 1em;
   position: absolute;
-  top: 0px;
   right: 26px;
   text-decoration: none;
   color: inherit;
+}
+
+.login {
+  right: 26px;
+}
+
+.signup {
+  right: 100px;
 }

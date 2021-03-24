@@ -2,18 +2,6 @@ const Problem = require('../models/Problem');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 
-exports.getAll = catchAsync(async (req, res, next) => {
-  const problems = await Problem.find().lean();
-
-  res.status(200).json({
-    status: 'success',
-    results: problems.length,
-    data: {
-      problems
-    }
-  });
-});
-
 exports.get = catchAsync(async (req, res, next) => {
   const problem = await Problem.findById(req.params.id).lean();
 

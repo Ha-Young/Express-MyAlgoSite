@@ -24,6 +24,7 @@ const userSchema = new mongoose.Schema({
     required: [true, 'Please provide a password'],
     minlength: 8,
     maxlength: 20,
+    select: false,
   },
 });
 
@@ -42,7 +43,7 @@ userSchema.pre('save', async function (next) {
 
 userSchema.statics.authenticate = async function (email, password, callback) {
   try {
-    const user = await User.findOne({ email: email }).lean();
+    const user = await User.findOne({ email: email }).select('+password').lean();
     let result;
 
     if (user) {

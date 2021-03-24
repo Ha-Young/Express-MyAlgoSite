@@ -14,7 +14,6 @@ module.exports = function (app) {
   passport.deserializeUser(async function (_id, done) {
     try {
       const user = await User.findById(_id).lean();
-      delete user.password;
       done(null, user);
     } catch (err) {
       done(err, null);
