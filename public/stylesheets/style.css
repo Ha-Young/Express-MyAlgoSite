@@ -200,12 +200,103 @@ form {
 }
 
 /* problems 분리해야함 */
+/* 전체 태그로 만들어야될수도 */
+.page-nav-li > a {
+  text-decoration: none;
+
+  color: #8c8c8c;
+  font-size: 25px;
+  font-weight: 300;
+}
 
 .problems-wrapper {
   width: 100%;
   height: 100%;
-  background-color: blue;
 
   display: flex;
   flex-direction: column;
+}
+
+.problems-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: #666;
+  height: 7%;
+  background-color: #222222;
+
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.problems-list {
+  padding: 20px;
+
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 20px;
+
+  height: 83%;
+  background-color: #303133;
+}
+
+.problem-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  border-radius: 7px;
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.14);
+
+  height: 700px;
+  width: 100%;
+  background: linear-gradient(
+    10deg,
+    rgba(181, 55, 55, 1) 23%,
+    rgba(34, 34, 34, 1) 23%
+  );
+}
+
+.problem-card > a {
+  text-decoration: none;
+
+  color: #e32c2c;
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.level-font {
+  color: #8c8c8c;
+}
+
+.problems-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 10%;
+  background-color: #303133;
+  color: #666;
+}
+
+.page-nav {
+  width: 200px;
+}
+
+.page-nav-ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  list-style: none;
+
+  margin: 0;
+  padding: 0;
+}
+
+.page-nav-li {
+  margin: 0;
+  padding: 0;
 }

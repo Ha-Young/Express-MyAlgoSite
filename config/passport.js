@@ -28,7 +28,8 @@ module.exports = () => {
         session: false,
       },
       async function (email, password, done) {
-        const user = await UserModel.findOne({ email: email });
+        const user = await UserModel.findOne({ email });
+
         if (!user) {
           return done(null, false);
         }
@@ -43,7 +44,6 @@ module.exports = () => {
     )
   );
 
-  //JWT Strategy
   passport.use(
     "jwt",
     new JwtStrategy(

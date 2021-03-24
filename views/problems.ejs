@@ -1,19 +1,32 @@
 <link rel='stylesheet' href='/stylesheets/style.css' />
 
 <div class="problems-wrapper">
-  <header class="problems-header">header</header>
+  <header class="problems-header">
+    <div class="logo"><img src="/images/codewars.png"></div>
+    <nav class="page-nav">
+      <ul class="page-nav-ul">
+        <li class="page-nav-li">
+          <a class="home" href="/">Home</a>
+        </li>
+
+        <li class="page-nav-li">
+          <a class="problem" href="/">Problem</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="logOut">Logout</div>
+  </header>
 
   <main class="problems-list">
-    <ul>
+
       <% for(let i = 0; i < data.length; i++) { %>
-        <br />
-        <li>
+        <div class="problem-card">
           <a href= '/problems/<%= data[i]._id %>' ><span><%= data[i].title %></span></a>
-          <span><%= data[i].description %></span>
-        </li>
+          <span class="level-font">Level <%= data[i].difficulty_level %></span>
+        </div>
       <% } %>
-      </ul>
+
   </main>
 
-  <footer class="problems-footer">footer</footer>
+  <footer class="problems-footer">© 2021 Codewars</footer>
 </div>
