@@ -18,6 +18,7 @@ app.use(passport.initialize());
 const index = require("./routes/index");
 const signIn = require("./routes/signIn");
 const logIn = require("./routes/login");
+const problem = require("./routes/problem");
 const problems = require("./routes/problems");
 const dotenv = require("dotenv");
 
@@ -38,6 +39,7 @@ mongoose
 app.use("/", index);
 app.use("/signIn", signIn);
 app.use("/logIn", logIn);
+app.use("/problem", problem);
 app.use("/problems", problems);
 
 //404 handler

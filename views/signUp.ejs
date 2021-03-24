@@ -1,26 +1,34 @@
 <link rel='stylesheet' href='/stylesheets/style.css' />
 
-<div class="form-wrapper">
-  <h1 class="Signup-title">Sign up</h1>
-  <form action="/signIn" method="POST">
+<div class="flex-wrapper">
+  <% include header.ejs %>
+
+  <div class="form-wrapper">
+    <div class="signup-wrapper">
+      <h1 class="Signup-title">Sign up</h1>
+      <form action="/signIn" method="POST">
+        
+        <div class="form-item name">
+          <label for="name"></label>
+          <input name="name" placeholder="name"></input>
+        </div>
+      
+        <div class="form-item email">
+          <label for="email"></label>
+          <input name="email" placeholder="email"></input>
+        </div>
     
-    <div class="form-item name">
-      <label for="name"></label>
-      <input name="name" placeholder="name"></input>
+        <div class="form-item password">
+          <label for="password"></label>
+          <input name="password" placeholder="password"></input>
+        </div>
+    
+        <div class="button-panel">
+          <button type="submit" class="button">SIGN UP</button>
+      </div>
+      </form>
     </div>
-  
-    <div class="form-item email">
-      <label for="email"></label>
-      <input name="email" placeholder="email"></input>
-    </div>
-
-    <div class="form-item password">
-      <label for="password"></label>
-      <input name="password" placeholder="password"></input>
-    </div>
-
-    <div class="button-panel">
-      <button type="submit" class="button">SIGN UP</button>
   </div>
-  </form>
+
+  <% include footer.ejs %>
 </div>

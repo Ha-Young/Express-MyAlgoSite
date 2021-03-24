@@ -1,32 +1,16 @@
 <link rel='stylesheet' href='/stylesheets/style.css' />
 
-<div class="problems-wrapper">
-  <header class="problems-header">
-    <div class="logo"><img src="/images/codewars.png"></div>
-    <nav class="page-nav">
-      <ul class="page-nav-ul">
-        <li class="page-nav-li">
-          <a class="home" href="/">Home</a>
-        </li>
-
-        <li class="page-nav-li">
-          <a class="problem" href="/">Problem</a>
-        </li>
-      </ul>
-    </nav>
-    <div class="logOut">Logout</div>
-  </header>
+<div class="flex-wrapper">
+  <% include header.ejs %>
 
   <main class="problems-list">
-
-      <% for(let i = 0; i < data.length; i++) { %>
-        <div class="problem-card">
-          <a href= '/problems/<%= data[i]._id %>' ><span><%= data[i].title %></span></a>
-          <span class="level-font">Level <%= data[i].difficulty_level %></span>
-        </div>
-      <% } %>
-
+    <% for(let i = 0; i < problems.length; i++) { %>
+      <div class="problem-card">
+        <a href= '/problem/<%= problems[i]._id %>' ><span><%= problems[i].title %></span></a>
+        <span class="level-font">Level <%= problems[i].difficulty_level %></span>
+      </div>
+    <% } %>
   </main>
 
-  <footer class="problems-footer">© 2021 Codewars</footer>
+  <% include footer.ejs %>
 </div>

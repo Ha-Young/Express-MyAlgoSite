@@ -119,12 +119,22 @@ canvas {
 }
 
 /* signUp logIn button 분리해야함*/
-.Signup-title .LogIn-title {
+.Signup-title,
+.LogIn-title {
   color: black;
   font-weight: 900;
 }
 
 .form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 83%;
+  background-color: #303133;
+}
+
+.login-wrapper,
+.signup-wrapper {
   background: #fafafa;
   width: 500px;
   height: 500px;
@@ -209,7 +219,8 @@ form {
   font-weight: 300;
 }
 
-.problems-wrapper {
+/* 공융 바디 wrapper */
+.flex-wrapper {
   width: 100%;
   height: 100%;
 
@@ -217,7 +228,8 @@ form {
   flex-direction: column;
 }
 
-.problems-header {
+/* 공용 헤더 wrapper */
+.header-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -228,6 +240,17 @@ form {
 
   padding-left: 50px;
   padding-right: 50px;
+}
+
+/* 공용 푸터 wrapper */
+.footer-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 10%;
+  background-color: #303133;
+  color: #666;
 }
 
 .problems-list {
@@ -250,7 +273,7 @@ form {
   border-radius: 7px;
   box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.14);
 
-  height: 700px;
+  height: 750px;
   width: 100%;
   background: linear-gradient(
     10deg,
@@ -271,16 +294,6 @@ form {
   color: #8c8c8c;
 }
 
-.problems-footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  height: 10%;
-  background-color: #303133;
-  color: #666;
-}
-
 .page-nav {
   width: 200px;
 }
@@ -299,4 +312,26 @@ form {
 .page-nav-li {
   margin: 0;
   padding: 0;
+}
+
+/* problem 문제 상세 페이지 분리해야함 */
+
+.problem-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 83%;
+
+  background-color: #303133;
+}
+
+.problem-board {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 70%;
+  height: 100%;
+
+  background-color: blue;
 }

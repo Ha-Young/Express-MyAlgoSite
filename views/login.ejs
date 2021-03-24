@@ -1,24 +1,33 @@
 <link rel='stylesheet' href='/stylesheets/style.css' />
 
-<div class="form-wrapper">
-  <h1 class="LogIn-title">Log In</h1>
-  <form action="/login/auth/tokens" method="POST">
-  
-    <div class="form-item email">
-      <label for="email"></label>
-      <input name="email" placeholder="email"></input>
-    </div>
 
-    <div class="form-item password">
-      <label for="password"></label>
-      <input name="password" placeholder="password"></input>
-    </div>
+<div class="flex-wrapper">
+  <% include header.ejs %>
 
-    <div class="button-panel">
-      <button type="submit" class="button">LOG IN</button>
+  <div class="form-wrapper">
+    <div class="login-wrapper">
+      <h1 class="LogIn-title">Log In</h1>
+      <form action="/login/auth/tokens" method="POST">
+      
+        <div class="form-item email">
+          <label for="email"></label>
+          <input name="email" placeholder="email"></input>
+        </div>
+    
+        <div class="form-item password">
+          <label for="password"></label>
+          <input name="password" type="password" placeholder="password"></input>
+        </div>
+    
+        <div class="button-panel">
+          <button type="submit" class="button">LOG IN</button>
+      </div>
+      </form>
+      <div class="form-footer">
+        <p><a href="/">Forgot password?</a></p>
+      </div>
+    </div>
   </div>
-  </form>
-  <div class="form-footer">
-    <p><a href="/">Forgot password?</a></p>
-  </div>
+
+  <% include footer.ejs %>
 </div>
