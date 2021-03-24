@@ -1,3 +1,19 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/stylesheets/error.css" />
+  <title>Error</title>
+</head>
+<body>
+  <div class="error-wrapper">
+    <div class="error-message-box">
+      <h1>Error</h1>
+      <p class="error-message">
+        <%= name %>:
+        <%= message %>
+      </p>
+      <a href="/" class="back">Back</a>
+    </div>
+  </div>
+</body>
+</html>

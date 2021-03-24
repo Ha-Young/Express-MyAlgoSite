@@ -65,7 +65,12 @@ router.post('/:problem_id', async (req, res) => {
       tests
     });
   } catch (err) {
-    res.render('error');
+    const { message, name } = err;
+
+    res.render('error', {
+      message,
+      name
+    });
   }
 });
 
