@@ -15,3 +15,9 @@ exports.getProblems = async (req, res, next) => {
   res.locals.problems = problems;
   next();
 };
+
+exports.checkCode = async (req, res, next) => {
+  
+
+  next();
+};

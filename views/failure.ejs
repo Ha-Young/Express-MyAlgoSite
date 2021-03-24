@@ -6,17 +6,11 @@
 <div>
   <form action="/problems/<%= problem.id %>" method="POST">
     <textarea id="code" name="code">
-function solution() {
-  let result;
-
-  return result;
-}
+<%= prevCode %>
     </textarea>
     <button type="submit">Submit</button>
   </form>
 </div>
-
-<p><%= rest %></p>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/mode/javascript/javascript.min.js"></script>
@@ -30,3 +24,4 @@ function solution() {
     theme: "monokai",
   });
 </script>
+
