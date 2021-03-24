@@ -1,44 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/stylesheets/style.css">
-    <title>Codewars</title>
-  </head>
-  <body>
-    <header>
-      <nav>
-        <ul>
-          <li><a href="/">Codewars</a></li>
-          <% if (!user) { %>
-            <li><a href="/auth/login">Login</a></li>
-          <% } else { %>
-            <li><a href="/auth/logout">Logout</a></li>
-            <li>Welcome <%= user.name.familyName %></li>
-          <% } %>
-        </ul>
-      </nav>
-    </header>
-    <main>
-      <form action="/problem/result" method="POST" class="problem_form">
-        <%= problem.title %>
+<%= problem.title %>
 
-        <div class="question">
-          <%= problem.description %>
-        </div>
+<div class="question">
+  <%= problem.description %>
+</div>
 
-        <textarea id="problem_textarea"></textarea>
-        <input type="submit" value="SUBMIT">
-      </form>
-    </main>
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.css">
-    </link>
-    <script type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.js">
-    </script>
-    <%- script %>
-  </body>
-</html>
+<form
+  action="/problems/result"
+  method="POST"
+  class="problem_form"
+>
+  <textarea
+    class="problem_textarea"
+    name="code"
+  >
+    function solution() {
+
+    }
+  </textarea>
+  <input type="submit" value="SUBMIT">
+</form>

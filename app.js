@@ -4,18 +4,7 @@ const passportSetup = require('./config/passport-setup');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
-// const Codemirror = require('codemirror');
-// require('codemirror/mode/javascript/javascript.js');
-// require( 'codemirror/addon/lint/json-lint');
-// require( 'codemirror/addon/fold/brace-fold');
-// require( 'codemirror/addon/fold/comment-fold');
-// require( 'codemirror/addon/fold/foldcode');
-// require( 'codemirror/addon/fold/foldgutter');
-// require( 'codemirror/addon/fold/indent-fold');
-// require( 'codemirror/addon/fold/markdown-fold');
-// require( 'codemirror/addon/fold/xml-fold');
-// require( 'codemirror/addon/edit/closebrackets');
-// require( 'codemirror/addon/edit/closetag');
+const expressLayouts = require('express-ejs-layouts');
 
 const keys = require('./config/keys');
 
@@ -51,8 +40,14 @@ const problemsRoutes = require('./routes/problem-routes');
 
 const app = express();
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+app.use(expressLayouts);
+app.set('layout', 'layout');
+app.set('layout extractScripts', true);
 
 // encrypt cookie
 app.use(cookieSession({
@@ -66,11 +61,10 @@ app.use(passport.session());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRoutes);
 app.use('/auth', authRoutes);
-app.use('/problem', problemsRoutes);
+app.use('/problems', problemsRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,11 +1,13 @@
-<nav>
-  <ul>
-    <li><a href="/">Codewars</a></li>
-    <% if (!user) { %>
-      <li><a href="/auth/login">Login</a></li>
-    <% } else { %>
-      <li><a href="/auth/logout">Logout</a></li>
-      <li>Welcome <%= user.name.familyName %></li>
-    <% } %>
-  </ul>
-</nav>
+<header>
+  <nav>
+    <ul>
+      <li><a href="/">Codewars</a></li>
+      <% if (!user) { %>
+        <li><a href="/auth/login">Login</a></li>
+      <% } else { %>
+        <li><a href="/auth/logout">Logout</a></li>
+        <li>Welcome <%= user.name.familyName %></li>
+      <% } %>
+    </ul>
+  </nav>
+</header>
