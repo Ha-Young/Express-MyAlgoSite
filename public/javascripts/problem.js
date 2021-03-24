@@ -6,7 +6,7 @@ const codeMirror =
     theme: "material",
   });
 
-codeMirror.setSize("100%", 700);
+codeMirror.setSize("100%", 500);
 
 const problemListLinkButton = document.querySelector(".problem-list-link-button");
 const submitButton = document.querySelector(".submit-button");
