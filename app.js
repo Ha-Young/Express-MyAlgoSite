@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 const passportConfig = require("./config/passport");
 const app = express();
 app.use(express.static("public"));
+
 app.set("view engine", "ejs");
 app.use(express.json());
 app.use(

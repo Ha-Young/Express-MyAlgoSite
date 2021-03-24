@@ -1,8 +1,13 @@
 <link rel='stylesheet' href='/stylesheets/style.css' />
 
 <div class="form-wrapper">
-  <h1 class="LogIn-title">Log In</h1>
-  <form action="/login/auth/tokens" method="POST">
+  <h1 class="Signup-title">Sign up</h1>
+  <form action="/signIn" method="POST">
+    
+    <div class="form-item name">
+      <label for="name"></label>
+      <input name="name" placeholder="name"></input>
+    </div>
   
     <div class="form-item email">
       <label for="email"></label>
@@ -15,10 +20,7 @@
     </div>
 
     <div class="button-panel">
-      <button type="submit" class="button">LOG IN</button>
+      <button type="submit" class="button">SIGN UP</button>
   </div>
   </form>
-  <div class="form-footer">
-    <p><a href="/">Forgot password?</a></p>
-  </div>
 </div>

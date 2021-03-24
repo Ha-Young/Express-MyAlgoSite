@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 dotenv.config();
 
 exports.renderSigninPage = function (req, res, next) {
-  res.status(200).render("signIn", { title: "this is signIn page" });
+  res.status(200).render("signUp");
 };
 
 exports.createUser = async function (req, res, next) {

@@ -1,15 +1,19 @@
+<link rel='stylesheet' href='/stylesheets/style.css' />
 
+<div class="problems-wrapper">
+  <header class="problems-header">header</header>
 
-<h1><%= title %></h1>
+  <main class="problems-list">
+    <ul>
+      <% for(let i = 0; i < data.length; i++) { %>
+        <br />
+        <li>
+          <a href= '/problems/<%= data[i]._id %>' ><span><%= data[i].title %></span></a>
+          <span><%= data[i].description %></span>
+        </li>
+      <% } %>
+      </ul>
+  </main>
 
-<ul>
-  <% for(let i = 0; i < data.length; i++) { %>
-    <br />
-    <li>
-      <a href= '/problems/<%= data[i]._id %>' ><span><%= data[i].title %></span></a>
-      <br />
-      <br />
-      <span><%= data[i].description %></span>
-    </li>
-  <% } %>
-  </ul>
+  <footer class="problems-footer">footer</footer>
+</div>

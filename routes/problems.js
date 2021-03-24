@@ -12,7 +12,7 @@ router.get(
 router.get(
   "/:id",
   passport.authenticate("jwt", { session: false }),
-  problemsController.renderProblemsPage
+  problemsController.renderProblemPageById
 );
 
 module.exports = router;

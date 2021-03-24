@@ -12,8 +12,5 @@ exports.renderProblemsPage = async function (req, res, next) {
 };
 
 exports.renderProblemPageById = function (req, res, next) {
-  console.log("in");
-  res
-    .status(200)
-    .render("problems", { title: "problems", data: fetchedProblems });
+  res.status(200).render("problem", { title: "problem" });
 };
