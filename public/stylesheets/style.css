@@ -1,19 +1,125 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
+  margin: 0;
+  padding: 0;
   color: #00B7FF;
+  text-decoration: none;
+}
+
+main {
+  width: 100vw;
+  height: 100vh;
+  background: #0a0a0c;
+}
+.flex-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flex-main.success {
+  flex-direction: column;
+}
+
+.button-list li {
+  margin: 0 0 0.5em 0;
+  box-sizing: border-box;
+}
+.button-list li:last-child {
+  margin: 0;
 }
 
 .button {
+  display: inline-block;
+  width: 100%;
   padding: 0.5em;
-  background: #00B7FF;
-  border: transparent;
+  background: transparent;
+  border-radius: 3px;
+  font-size: 1.1em;
+  text-align: center;
+  box-sizing: border-box;
+}
+.button:hover {
+  transition: 0.5s all;
+}
+
+.button.yellow {
+  border: 2px solid #e3c001;
+  color: #e3c001;
+}
+.button.yellow:hover {
+  background: #e3c001;
+  color: #ffffff;
+}
+
+.button.red {
+  border: 2px solid #f23d4c;
+  color: #f23d4c;
+}
+.button.red:hover {
+  background: #f23d4c;
   color: #ffffff;
 }
 
 .button:hover {
   cursor: pointer;
+}
+
+.tooltip {
+  display: inline-block;
+  position: relative;
+  width: auto;
+  padding: 1em;
+  border-radius: 5px;
+  background: #ffffff;
+  font-size: 1.3em;
+  font-weight: bold;
+  text-align: center;
+  word-break: keep-all;
+}
+.tooltip::after {
+  content: "";
+  width: 0;
+  height: 0;
+  margin-top: -3px;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-right: 6px solid white;
+  position: absolute;
+  top: 50%;
+  left: -6px;
+}
+
+.typewriter {
+  display: inline-block;
+  overflow: hidden;
+  border-right: .15em solid orange;
+  white-space: nowrap;
+  margin: 0 auto;
+  animation:
+    typing 2s steps(40, end),
+    blink-caret .75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange; }
+}
+
+.success h1 {
+  display: flex;
+  align-items: center;
+}
+
+.success-box {
+  width: auto;
+  height: auto;
+  padding: 1em;
 }

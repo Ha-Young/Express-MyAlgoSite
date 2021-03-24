@@ -6,13 +6,22 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <div><%= message %></div>
-    <div class="button-list">
-      <% if (message === "SUCCESS") { %>
-        <a class="button" href="/">GO TO PROBLEM LIST</a>
-      <% } else { %>
-         <a class="button" href="/users/login">GO TO LOGIN PAGE</a>
-      <% } %>
-    </div>
+    <main class="flex-main success">
+      <div class="success-box">
+        <h1>
+          <img class="icon" src="/images/icon/icon_03.png" alt="c3po icon" />
+          <div class="tooltip">
+            <span class="typewriter"><%= message %></span>
+          </div>
+        </h1>
+        <div class="button-list">
+          <% if (message === "SUCCESS") { %>
+            <a class="button yellow" href="/">GO TO PROBLEM LIST</a>
+          <% } else { %>
+              <a class="button yellow" href="/users/login">GO TO LOGIN PAGE</a>
+          <% } %>
+        </div>
+      </div>
+    </main>
   </body>
 </html>
