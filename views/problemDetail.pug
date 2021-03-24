@@ -1,7 +1,11 @@
-extends layouts/main.pug
+extends layouts/main
+include mixins/failure
+include mixins/success
 
 block body
   link(rel="stylesheet" href="/stylesheets/problemDetail.css")
+  link(rel="stylesheet" href="/stylesheets/failure.css")
+  link(rel="stylesheet" href="/stylesheets/success.css")
   link(rel="stylesheet" href="https://codemirror.net/theme/material.css")
   link(rel="stylesheet" href="/codemirror/lib/codemirror.css")
   script(type="text/javascript" src="/codemirror/lib/codemirror.js")
@@ -14,10 +18,12 @@ block body
   script(type="text/javascript" src="/codemirror/addon/edit/closetag.js")
   script(type="text/javascript" src="/codemirror/addon/edit/matchtags.js")
   script(type="text/javascript" src="/codemirror/addon/edit/trailingspace.js")
+  +failure({id: failure})
+  +success({id: success})
   .problem__container
     div.problem__description problemDetail
     form.problem__editorForm(action=`/problem/${id}` method="POST")
-      textarea.textEditor#textEditor(name="userCode") function solution() {}
+      textarea.textEditor#textEditor(name="userCode") #{initCode}
       .submitButton__wrapper
         button.btn.btn-primary(type="submit") Run Code!
   script(type="text/javascript" src="/javascripts/problemDetail.js")

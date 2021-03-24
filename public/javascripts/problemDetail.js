@@ -13,3 +13,13 @@ CodeMirror.fromTextArea(document.getElementById('textEditor'), {
     showHint: true
   },
 });
+
+document.getElementById("successButton").addEventListener("click", () => {
+  document.location.href = "/";
+});
+
+document.getElementById("failureButton").addEventListener("click", () => {
+  const $failureDiv = document.getElementById("failure");
+  $failureDiv.style.display = "none";
+  $failureDiv.id = "";
+});

@@ -12,7 +12,7 @@ module.exports.problemDetailController = async function problemDetailController(
     return res.redirect("/");
   }
 
-  res.render("problemDetail",{ id: problem._id });
+  res.render("problemDetail",{ id: problem._id, initCode: "function solution() {\n\n}", failure: '', success: '' });
 }
 
 module.exports.postProblemDetailController = async function postProblemDetailController(req, res, next) {
@@ -21,6 +21,11 @@ module.exports.postProblemDetailController = async function postProblemDetailCon
   } = req;
   const newUserCode = userCode.concat("\nsolution()");
   console.log(newUserCode);
-  const using = vm.runInThisContext(newUserCode);
-  console.log(using);
+  try {
+    const using = vm.runInThisContext(newUserCode);
+    console.log('result', using);
+  } catch (err) {
+    console.log('err log', err.message);
+    next(err);
+  }
 }
