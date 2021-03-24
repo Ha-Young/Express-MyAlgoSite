@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <% if (problem) { %>
+      <h1><%= problem.title %></h1>
+      <div>정답자 수 : <%= problem.completed_users %></div>
+      <div>난이도 : <%= problem.difficulty_level %></div>
+      <div>Instructions : <%= problem.description %></div>
+      <form id="Solution Code" action="/problems/<%= problem._id %>" method="POST">
+        <p>Solution Code</p>
+        <textarea
+          form="Solution Code"
+          rows="35"
+          cols="100"
+        >function solution() {}</textarea>
+        <button type="submit">제출</button>
+      </form>
+    <% } %>
+  </body>
+</html>
+
