@@ -10,8 +10,8 @@ mongoose.connect(process.env.MONGO_DB_URL, {
 
 const db = mongoose.connection;
 
-const Problem = require("./models/Problem");
-const mockProblem = require("./models/sample_problems.json");
+// const Problem = require("./models/Problem");
+// const mockProblem = require("./models/sample_problems.json");
 
 // if (process.env.NODE_ENV === "development") {
 //   const mock = async () => {

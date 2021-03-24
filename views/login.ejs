@@ -1,19 +1,39 @@
-<%- include("partials/header") %>
+<link rel='stylesheet' href='/stylesheets/login.css' />
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
+/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap" rel="stylesheet">
 
-<h1>Login</h1>
-
-<form method="post" action="/login">
-  <p>
-    <label>Username:</label>
-    <input type="text" name="username">
-  </p>
-  <p>
-    <label>Password:</label>
-    <input type="password" name="password">
-  </p>
-  <p>
-    <input type="submit" value="Login">
-  </p>
-
-  <a href="/login/github">Sign On with Github</a>
-</form>
+<div class="login">
+  <div class="login-form">
+    <img class="logo" src="logo2.png" />
+    <h1>Code Wars</h1>
+  
+    <form method="post" action="/login">
+      <p class="github-button">
+        <a href="/login/github">
+          Sign In with Github
+          <i class="fab fa-github"></i>
+        </a>
+      </p>
+  
+      <div class="login-input-set">
+        <p>
+          <input class="login-input" type="text" name="username" placeholder="&#xf1d8; Username">
+        </p>
+        <p>
+          <input class="login-input" type="password" name="password" placeholder="&#xf084; Password">
+        </p>
+      </div>
+      <p>
+        <input class="login-button" type="submit" value="Login">
+      </p>
+      <p class="join-button">
+        <a href="/join">join</a>
+      </p>
+    </form>
+  </div>
+</div>

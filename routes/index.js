@@ -4,19 +4,19 @@ const router = express.Router();
 const passport = require("passport");
 
 const problemController = require("./controllers/problems.controller");
-const { isAuthenticated, isNotAuthenticated } = require("./middlewares/authorization");
+const authController = require("./controllers/auth.controller");
+const { isAuthenticated } = require("./middlewares/authorization");
 
-router.post("/login", passport.authenticate("local", { failureRedirect: "/login" }), // success일때 바로 리다이렉트 하게.. 바꾸기..?
-  (req, res) => {
-    res.redirect("/");
-  },
-);
+router.get("/login", authController.getLoginPage);
+router.post("/login", passport.authenticate("local", { failureRedirect: "/login", successRedirect: "/" }));
 
-router.get("/logout", isAuthenticated, (req, res, next) => { // profile로 옮겨주기..
-  req.logout();
-  res.redirect("/login");
-});
+router.get("/login/github", passport.authenticate("github"));
+router.get(
+  "/login/github/callback",
+  passport.authenticate("github", { failureRedirect: "/login", successRedirect: "/" }));
 
 router.get("/", isAuthenticated, problemController.getAll);
+
+router.get("/logout", isAuthenticated, authController.logout);
 
 module.exports = router;

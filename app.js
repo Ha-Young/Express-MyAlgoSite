@@ -5,7 +5,6 @@ require("./passport");
 
 const express = require("express");
 const bodyParser = require("body-parser");
-// const cookieParser = require("cookie-parser");
 const createError = require("http-errors");
 const session = require("express-session");
 const passport = require("passport");
@@ -14,7 +13,6 @@ const MongoStore = require("connect-mongo")(session);
 const path = require("path");
 
 const index = require("./routes/index");
-const auth = require("./routes/auth");
 const join = require("./routes/join");
 const problem = require("./routes/problem");
 const db = require('./db');
@@ -26,7 +24,6 @@ app.set('view engine', "ejs");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(cookieParser());
 
 app.use(express.static(__dirname + "/public"));
 
@@ -39,11 +36,11 @@ app.use(session({
     mongooseConnection: db,
   }),
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/", index);
-app.use("/login", auth);
 app.use("/join", join);
 app.use("/problems", problem);
 

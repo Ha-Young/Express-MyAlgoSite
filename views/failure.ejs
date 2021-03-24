@@ -1,6 +1,6 @@
 <h2><%= message %></h2>
 
-<% if (error) { %>
+<% if (typeof error !== "undefined") { %>
   <div><%= error %></div>
 <% } else { %>
   <% log.forEach((data, index) => { %>

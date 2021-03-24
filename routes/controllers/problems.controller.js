@@ -28,18 +28,21 @@ exports.postSolution = async (req, res, next) => {
     const {
       params: { problem_id: problemId },
       body: { solution },
+      user,
     } = req;
     const problem = await Problem.findById(problemId);
 
     const { isPassed, log, error } = checkSolution(problem.tests, solution);
-
+    
     if (error) {
       res.status(400).render("failure", { message: "Failure", error, problemId });
       return;
     }
 
     if (isPassed) {
-      res.status(200).render("success", { message: "Success", log });
+      res.status(200).render("success", { message: "Success", log, problemId });
+
+      
       return;
     }
 
@@ -49,11 +52,12 @@ exports.postSolution = async (req, res, next) => {
   }
 };
 
-function checkSolution(tests, solution) { // typecheck
-  try {
-    const log = [];
+function checkSolution(tests, solution) { // typecheck, 수정도 해야함..
+  const log = [];
+  let error;
 
-    tests.forEach((test) => {
+  tests.forEach((test) => {
+    try {
       const script = solution + test.code;
       const usingScript = vm.runInNewContext(script, {});
 
@@ -71,12 +75,12 @@ function checkSolution(tests, solution) { // typecheck
           wrongAnswer: usingScript,
         });
       }
-    });
+    } catch (err) {
+      error = err;
+    }
+  });
 
-    const isPassed = log.every((data) => "SUCCESS" === data.result);
+  const isPassed = log.every((data) => "SUCCESS" === data.result);
 
-    return { isPassed, log };
-  } catch (error) {
-    return { error };
-  }
+  return { isPassed, log, error };
 }

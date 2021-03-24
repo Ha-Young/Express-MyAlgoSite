@@ -13,17 +13,26 @@ passport.use(new LocalStrategy({
   passwordField: "password",
 }, async (username, password, cb) => {
   if (!username || !password) {
-    return cb(null, false);
+    cb(null, false);
+    return;
   }
 
   const user = await User.findOne({ username });
+
+  if (!user) {
+    cb(null, false);
+    return;
+  }
+
   const validPassword = await bcrypt.compare(password, user.password);
 
   if (user.length !== 0 && validPassword) {
-    return cb(null, username);
+    cb(null, username);
+    return;
   }
 
-  return cb(null, false);
+  cb(null, false);
+  return;
 }));
 
 passport.use(new GitHubStrategy({

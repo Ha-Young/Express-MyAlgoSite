@@ -4,7 +4,7 @@ const createError = require("http-errors");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 
-exports.localLogin = (req, res) => {
+exports.getLoginPage = (req, res) => {
   res.status(200).render("login", { message: "Login" });
 };
 
@@ -42,6 +42,7 @@ exports.postUserData = async (req, res, next) => {
   }
 };
 
-exports.redirect = (req, res) => {
-  res.redirect('/');
+exports.logout = (req, res, next) => {
+  req.logout();
+  res.redirect("/login");
 };

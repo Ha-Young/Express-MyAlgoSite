@@ -1,0 +1,98 @@
+h1 {
+  font-family: "Merriweather";
+  font-size: 33px;
+  font-weight: 500px;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  color: #746F6F;
+}
+
+p {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+body {
+  font-family: "Noto Sans JP", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+input::placeholder {
+  color: #999696;
+}
+
+.logo {
+  width: 180px;
+  height: 180px;
+  margin-top: 20px;
+}
+
+.login {
+  position: absolute;
+  top: 18%;
+  width: 310px;
+  height: 570px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #F9F6F6;
+  border: 1px solid #F9F6F6;
+  border-radius: 20px;
+}
+
+.login-form {
+  position: absolute;
+  text-align: center;
+}
+
+.login-input-set {
+  margin: 20px 0px;
+}
+
+.login-input,
+.join-button,
+.github-button {
+  width: 240px;
+  height: 35px;
+  font-family:"Font Awesome 5 Brands", "Font Awesome 5 Free";
+  font-weight: 600;
+  border: 1px solid #E2DCDC;
+  border-radius: 8px;
+  background-color: #FEFCFC;
+}
+
+.login-button {
+  width: 240px;
+  height: 35px;
+  font-family:"Font Awesome 5 Brands", "Font Awesome 5 Free";
+  font-weight: 600;
+  border: 0px;
+  border: 1px solid #b1361e;
+  border-radius: 8px;
+}
+
+.join-button,
+.github-button {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  text-decoration: none;
+}
+
+a, 
+a:focus, 
+a:hover {
+  color: #b1361e;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.login-button {
+  background-color: #b1361e;
+  color: #FAF9F8;
+}
