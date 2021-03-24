@@ -62,11 +62,14 @@ app.use(passport.session());
 const index = require('./routes/index');
 const login = require('./routes/login');
 const auth = require('./routes/auth');
-const problems = require('./routes/problems');
+const problems = require('./routes/problems')
+const { verifyUser } = require('./routes/middlewares/verifyUser')
 
-app.use('/', index);
+
 app.use('/login', login);
 app.use('/auth', auth);
+app.use(verifyUser)
+app.use('/', index);
 app.use('/problems', problems);
 
 app.use(function(req, res, next) {

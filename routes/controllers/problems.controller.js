@@ -1,8 +1,11 @@
 const creatError = require('http-errors');
 const { NodeVM } = require('vm2');
 const Problem = require('../../models/Problem');
+const User = require('../../models/User');
 
 exports.getAll = async function (req, res, next) {
+  const userInfo = await User.findById(req.session.passport.user);
+
   try {
     const problems = await Problem.find();
     const acceptedRatio = problems.map(problem => {
@@ -11,13 +14,15 @@ exports.getAll = async function (req, res, next) {
       return ((problem.accepted * 100) / problem.submission).toFixed(2);
     });
 
-    res.render('index', { problems, acceptedRatio });
+    res.render('index', { problems, acceptedRatio, userInfo });
   } catch (err) {
     next(creatError(500, err));
   }
 }
 
 exports.getOneProblem = async function (req, res, next) {
+  const userInfo = await User.findById(req.session.passport.user);
+
   try {
     const targetProblemId = parseInt(req.params['problem_id']);
     const targetProblem = await Problem.findOne({ id: targetProblemId });
