@@ -1,5 +1,6 @@
 const assert = require("assert");
 const Problem = require("../../models/Problem");
+const User = require("../../models/User");
 const { judgeSolution } = require("../../utils/judger");
 const {IS_CORRECT_SOLUTION, IS_WRONG_SOLUTION} = require("../../constants/ResultMessage");
 
@@ -29,6 +30,23 @@ exports.postSolution = async function (req, res, next) {
     });
 
     return;
+  }
+
+  const userGoogleId = req.session.passport.user.googleId;
+  const userData = await User.find({googleId: userGoogleId});
+
+  const problemList = userData[0].completed_problems;
+
+  if (problemList.length === 0 || !problemList.includes(problemId)) {
+    problemList.push(problemId);
+    await User.updateOne(
+      { googleId: userGoogleId},
+      { $push: { completed_problems: problemId }}
+    );
+    await Problem.updateOne(
+      { id: problemId},
+      { $set: { completed_users: problem[0].completed_users + 1 }}
+    );
   }
 
   res.render("success", {

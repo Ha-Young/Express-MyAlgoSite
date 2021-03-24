@@ -4,6 +4,7 @@ const userSchema = new mongoose.Schema({
   googleId: String,
   username: String,
   email: String,
+  completed_problems: [String]
 });
 
 userSchema.statics.findOrCreate = async function findOrCreate (pdata, cb) {

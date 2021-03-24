@@ -15,7 +15,7 @@ function judgeSolution (testcases, solution) {
       const script = new vm.Script(solution + "result=" + code);
 
       script.runInContext(context);
-      
+
       if (sandbox.result !== answer) {
           passed = false;
       }
