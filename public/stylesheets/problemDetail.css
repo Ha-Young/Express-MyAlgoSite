@@ -1,4 +1,4 @@
-.problem__container {
+.problem {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6,18 +6,109 @@
   height: 100%;
 }
 
-.problem__description {
+.problem__container {
   display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  height: 85%;
+}
+
+.problem__text {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 45%;
-  height: 70%;
+  height: 85%;
+  background-color: white;
+  overflow-y: scroll;
+}
+
+.text__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 90%;
+  height: 90%;
+}
+
+.problem__title {
+  width: 100%;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: left;
+  padding-left: 5%;
+}
+
+.hrLine {
+  width: 100%;
+  height: 1px;
+}
+
+.problem__description {
+  line-height: 180%;
+  white-space: normal;
+  word-break: keep-all;
+  font-weight: 600;
+}
+
+.dummy {
+  width: 100%;
+  height: 10%;
+}
+
+.problem__testcases {
+  width: 100%;
+  height: auto;
+}
+
+.testCase {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  height: 50%;
+  font-size: 16px;
+}
+
+.testCase__title {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 30%;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.testCase__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  padding-left: 5%;
+  background-color: antiquewhite;
+  word-spacing: 100%;
+}
+
+.testCase__content {
+  width: 100%;
+  text-align: left;
+}
+
+.testCase__case--label {
+  font-weight: bold;
+}
+
+.testCase__case--content {
+  padding-left: 2%;
 }
 
 .problem__editorForm {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   width: 45%;
   height: 100%;
@@ -26,7 +117,7 @@
 
 .Codemirror {
   width: 100%;
-  height: 70%;
+  height: 85%;
 }
 
 .submitButton__wrapper {

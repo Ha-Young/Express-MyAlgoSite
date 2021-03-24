@@ -1,0 +1,10 @@
+mixin testCase(testCase = {})
+  .testCase
+    label.testCase__title Example :
+    .testCase__container
+      .testCase__content
+        label.testCase__case--label="case : "
+        label.testCase__case--content=testCase.testcase
+      .testCase__content
+        label.testCase__case--label="answer : "
+        label.testCase__case--content=testCase.answer

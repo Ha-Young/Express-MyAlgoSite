@@ -1,6 +1,7 @@
 extends layouts/main
 include mixins/failure
 include mixins/success
+include mixins/testCase
 
 block body
   link(rel="stylesheet" href="/stylesheets/problemDetail.css")
@@ -20,11 +21,20 @@ block body
   script(type="text/javascript" src="/codemirror/addon/edit/trailingspace.js")
   +failure({id: failure})
   +success({id: success})
-  .problem__container
-    div.problem__description problemDetail
-    form.problem__editorForm(action=`/problem/${id}` method="POST")
-      textarea.textEditor#textEditor(name="userCode") #{initCode}
-      .submitButton__wrapper
-        button.btn.btn-primary(type="submit") Run Code!
+  .problem
+    .problem__container
+      .problem__text
+        .text__wrapper
+          .problem__title #{problem.title}
+          hr.hrLine
+          .problem__description #{problem.description}
+          .dummy
+          .problem__testcases
+            each testCase in problem.testCases
+              +testCase(testCase)
+      form.problem__editorForm(action=`/problem/${problem._id}` method="POST")
+        textarea.textEditor#textEditor(name="userCode") #{initCode}
+        .submitButton__wrapper
+          button.btn.btn-primary(type="submit") Run Code!
   script(type="text/javascript" src="/javascripts/problemDetail.js")
 

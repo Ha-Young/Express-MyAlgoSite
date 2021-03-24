@@ -12,7 +12,9 @@ module.exports.problemDetailController = async function problemDetailController(
     return res.redirect("/");
   }
 
-  res.render("problemDetail",{ id: problem._id, initCode: "function solution() {\n\n}", failure: '', success: '' });
+  console.log(problem);
+
+  res.render("problemDetail",{ problem, initCode: "function solution() {\n\n}", failure: '', success: '' });
 }
 
 module.exports.postProblemDetailController = async function postProblemDetailController(req, res, next) {
