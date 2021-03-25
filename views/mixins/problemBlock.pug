@@ -9,4 +9,6 @@ mixin problemBlock(problem = {})
           i.fas.fa-tags
           each tag in problem.tags
             .tag=(`#${tag}`)
-        .problemBlock__challengers=(`winner: ${problem.accuracy.challengers_count}`)
+        .problemBlock__challengers
+          i.fas.fa-trophy.trophy
+          div=(`winner: ${problem.accuracy.challengers_count}`)

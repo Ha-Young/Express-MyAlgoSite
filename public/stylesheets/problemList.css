@@ -83,9 +83,9 @@
 
 .problemBlock__tags {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  width: 70%;
+  width: 50%;
 }
 
 .tag {
@@ -94,6 +94,13 @@
 }
 
 .problemBlock__challengers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 30%;
   font-weight: bold;
+}
+
+.trophy {
+  margin-right: 10px;
 }
