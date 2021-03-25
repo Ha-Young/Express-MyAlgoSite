@@ -27,7 +27,9 @@
           <p class="code"><%= code %></p>
         </div> -->
         <div class="editor-box">
-          <textarea id="editor" name="code"><%= code %></textarea>
+          <form id="code-form" action="<%= `/problems/${id}` %>" method="POST">
+            <textarea id="editor" name="code"><%= code %></textarea>
+          </form>
           <p class="editor-title">
             <span class="light-saber-icon"></span>
             <span class="title">BATTLE AGAIN</span>
@@ -49,10 +51,6 @@
               <% } %>
             </ul>
           </div>
-          <ul class="button-list">
-            <li><a class="button big yellow" href="/problems">SUBMIT AGAIN</a></li>
-            <li><a class="button big blue" href="/">GO TO PROBLEM LIST</a></li>
-          </ul>
         <% } else { %>
             <div class="code-box">
               <ul class="error-list">
@@ -61,6 +59,10 @@
               </ul>
             </div>
         <% } %>
+        <ul class="button-list">
+          <li><button class="button big yellow" type="submit" form="code-form">SUBMIT AGAIN</button></li>
+          <li><a class="button big blue" href="/">GO TO PROBLEM LIST</a></li>
+        </ul>
       </div>
     </main>
     <%- include("./footer.ejs"); %>
