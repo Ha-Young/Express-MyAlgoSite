@@ -3,13 +3,13 @@ const getArgsAndBody = (func) => {
 
   const startArgIdx = funcStr.indexOf("(");
   const endArgIdx = funcStr.indexOf(")");
-  const functionArgs = funcStr.slice(startArgIdx + 1, endArgIdx).split(",");
+  const funcArgs = funcStr.slice(startArgIdx + 1, endArgIdx).split(",");
 
   const startBodyIdx = funcStr.indexOf("{");
   const endBodyIdx = funcStr.lastIndexOf("}");
-  const functionBody = funcStr.slice(startBodyIdx, endBodyIdx + 1);
+  const funcBody = funcStr.slice(startBodyIdx, endBodyIdx + 1);
 
-  return { functionArgs, functionBody };
+  return { funcArgs, funcBody };
 };
 
 module.exports = getArgsAndBody;
