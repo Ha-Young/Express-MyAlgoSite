@@ -71,7 +71,7 @@ yarn run dev or npm run dev
 
 - Server Unit Test 작성하기
 - Deploy your Express application
-- Deploy your MongoDB using cloud services: [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/lp/general)
+- Deploy your MongoDB using cloud services: [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/lp/general).
 
 #### Resources
 
