@@ -12,9 +12,9 @@
 <body>
     <%- include("./partials/header.ejs") %>
     <div>
-        <form method="POST" action="/problems/ <%= selectedProblem.probelmId %>">
+        <form method="post" action="/problems/<%= selectedProblem.problemId %>"" name="codemirrorForm">>
           <%- include('partials/problemDetail') %>
-          <textarea id="editor"><p>hi</p></textarea>
+          <textarea id="editor" name="codemirrorText"></textarea>
           <input type="submit" value="submit" />
         </form>
     </div>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+<body>
+    <div>
+        <%- include("./partials/header.ejs") %>
+        <h3> Congratulation 🎉, You are passed!</h3>
+        <% if (totalTestcaseResult.length) {%>
+            <div class="testcases-wrapper">
+              <% for (let testcase of totalTestcaseResult) {%>
+                <div class="testcase-container <%= testcase.isPassed ? "passed" : "" %>"</div>
+                  <h2><div><%= testcase.testCode %> expected <%= testcase.testSolution %></div></h2>
+                </div>
+            <%}%>
+        <%}%>
+        <div><h3>Passed <%= totalTestcaseResult.length %> / <%= totalTestcaseResult.length %></h3></div>
+        <div><h3><a href="/">Go back to Problem list</a></h3></div>
+        <div><h3><a href="/problems/:problemId/solutions">Go back to User solution list</a></h3></div>
+      </div>
+      <%- include("./partials/footer.ejs") %>
+</body>
+</html>

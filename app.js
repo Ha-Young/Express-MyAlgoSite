@@ -13,6 +13,7 @@ const home = require('./routes/route_options/home');
 const login = require("./routes/route_options/login");
 const logout = require("./routes/route_options/logout");
 const problems = require("./routes/route_options/problems");
+//const solutions = require("./routes/route_options/solutions");
 
 const app = express();
 
@@ -27,7 +28,6 @@ app.use(passport.session());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-
 //app.set("layout", "./layouts/index_layout");
 
 app.set('views', path.join(__dirname, 'views'));
@@ -41,6 +41,7 @@ app.use('/', home);
 app.use("/login", login);
 app.use("/logout", logout);
 app.use("/problems", problems);
+//app.use("/solutions", solutions);
 
 app.use(function(req, res, next) {
   const err = new Error('Not Found');
@@ -55,7 +56,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render("error", { err });
 });
 
 module.exports = app;

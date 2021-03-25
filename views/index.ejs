@@ -13,8 +13,8 @@
           <% for (let problem of problems) {%>
             <div class="problem-container">
               <h1><a href="/problems/<%= problem.problemId %>"><%= problem.title %></a></h1>
-              <h3>난이도: <%= problem.level %></h2>
-              <h3>정답자 수: <%= problem.completedUsers.length %></h3>
+              <h3>Level: <%= problem.level %></h2>
+              <h3>Completed Users: <%= problem.completedUsers.length %></h3>
             </div>
         </div>
         <%}%>

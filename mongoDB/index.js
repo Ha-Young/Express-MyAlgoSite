@@ -34,7 +34,7 @@ const storeSampleProblems = async () => {
         title: title,
         description: description,
         level: difficulty_level,
-        testcase: tests,
+        testcases: tests,
       }
       await Problem.create(newProblem);
     } catch (err) {

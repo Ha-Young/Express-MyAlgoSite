@@ -1,5 +1,17 @@
 const mongoose = require('mongoose');
 
+const solvedProblemSchema = new mongoose.Schema({ //참조..
+  solvedProblemObjectId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Problem",
+    required: true,
+  },
+  userCode: {
+    type: String,
+    required: true,
+  },
+}, { timestamps: true });
+
 const userSchema = new mongoose.Schema({
   googleId: {
     type: String,
@@ -10,11 +22,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     trime: true,
   },
-  solvedProblem: { // extra 작성 코드 넣어줘야 하는가
-    type: [mongoose.Schema.Types.ObjectId],
-    ref: "Problem",
-    default: [],
-  }
+  solvedProblem: [solvedProblemSchema]
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);

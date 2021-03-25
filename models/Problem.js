@@ -1,16 +1,14 @@
 const mongoose = require('mongoose');
-const Testcase = require("./Testcase");
 
-const TestcaseSchema = new mongoose.Schema({ // 테케 아이디를 안가져도 되는가?
-  _id: false,
+const TestcaseSchema = new mongoose.Schema({
   code: {
     type: String,
     required: true,
   },
   solution: {
     type: mongoose.Schema.Types.Mixed,
-    require: true,
-  }
+    required: true,
+  },
 }, { timestamps: true });
 
 const ProblemSchema = new mongoose.Schema({
@@ -35,11 +33,10 @@ const ProblemSchema = new mongoose.Schema({
   },
   level: {
     type: Number,
-    enum: [1, 2, 3],
     default: 1,
     required: true,
   },
-  testcase: [TestcaseSchema]
+  testcases: [TestcaseSchema],
 }, { timestamps: true });
 
 module.exports = mongoose.model('Problem', ProblemSchema);

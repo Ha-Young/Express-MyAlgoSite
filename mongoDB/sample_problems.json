@@ -70,5 +70,39 @@
         "solution": false
       }
     ]
+  },
+  {
+    "id": 5,
+    "title": "못풀면 바보",
+    "solution_count": 30,
+    "difficulty_level": 100,
+    "description": "1을 리턴해주셈요",
+    "tests": [
+      {
+        "code": "solution()",
+        "solution": 1
+      },
+      {
+        "code": "solution(10)",
+        "solution": 1
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "삼육구 삼육구",
+    "solution_count": 10,
+    "difficulty_level": 100,
+    "description": "받은 인자에 3+6+9를 더한 값을 리턴하셈요",
+    "tests": [
+      {
+        "code": "solution(10)",
+        "solution": 28
+      },
+      {
+        "code": "solution(5)",
+        "solution": 23
+      }
+    ]
   }
 ]

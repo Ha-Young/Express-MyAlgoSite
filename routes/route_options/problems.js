@@ -6,5 +6,6 @@ const problemController = require("../../controllers/problemController");
 
 router.get("/:problemId", verifyAuth, problemController.getSelectedProblem);
 router.post("/:problemId", verifyAuth, problemController.postSelectedProblemSolution);
+router.get("/solutions", verifyAuth, problemController.getUsersSolutions);
 
 module.exports = router;
