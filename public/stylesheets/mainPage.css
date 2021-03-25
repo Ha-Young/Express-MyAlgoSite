@@ -10,13 +10,19 @@
   margin: 10px;
 }
 
+.problem:hover {
+  transform: scale(1.02);
+  transition: .5s;
+}
+
 .problem-setting {
   position: relative;
   width: 350px;
-  height: 200px;
+  height: 210px;
   margin-right: 10px;
   background: #252829;
   text-align: center;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
 }
 
 .problem-setting > p {
@@ -46,6 +52,7 @@
   height: 200px;
   padding: 5px;
   background: #3C3C3C;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
 }
 
 .problem-header {

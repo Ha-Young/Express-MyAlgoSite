@@ -42,18 +42,40 @@ exports.checkCode = async function (req, res, next) {
         );
 
         if (result !== correctValue) {
-          const failTestCode = { solution: currentTestCode.code, results: "fail" };
+          const failTestCode = {
+            solution: currentTestCode.code,
+            resultValue: String(result),
+            status: "fail"
+          };
 
           isFail = true;
           results.push(failTestCode);
         } else {
-          const successTestCode = { solution: currentTestCode.code, results: "success" };
+          const successTestCode = {
+            solution: currentTestCode.code,
+            resultValue: result,
+            status: "success"
+          };
 
           results.push(successTestCode);
         }
       } catch (error) {
-
+        res.render("failure",
+          {
+            userCode: submitText,
+            testCase: results,
+          }
+        );
       }
+    }
+
+    if (isFail) {
+      return res.render("failure",
+        {
+          userCode: submitText,
+          testCase: results,
+        }
+      );
     }
 
     res.render("success",

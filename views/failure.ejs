@@ -3,14 +3,16 @@
   <head>
     <title>Codewars</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
-    <link rel="stylesheet" href="/stylesheets/detailProblem.css" />
+    <link rel="stylesheet" href="/stylesheets/resultPage.css" />
     <link rel="stylesheet" href="/codemirror/lib/codemirror.css" />
     <link rel="stylesheet" href="/codemirror/theme/gruvbox-dark.css" />
     <script src="/codemirror/lib/codemirror.js"></script>
   </head>
   <body>
-    <section>
-      <article>
+    <%- include('partial/header') %>
+    <section class="success-Info">
+      <div></div>
+      <article class="user-code">
           <textarea id="code" name="submit_text"><%= userCode %></textarea>
         <script>
           const editor = CodeMirror.fromTextArea(document.getElementById("code"), {
@@ -23,10 +25,31 @@
           });
         </script>
       </article>
-      <article></article>
+      <article class="result-info">
+        <p class="result-comment">코드 결과</p>
+        <ul>
+          <% testCase.forEach(result => { %>
+            <li class="result-box">
+              <% if (result.status === "fail") { %>
+                <div class="fail"></div>
+                <div class="solution">
+                  <%= result.solution %>
+                </div>
+              <% } else { %>
+                <div class="success"></div>
+                <div class="solution">
+                  <%= result.solution %>
+                </div>
+              <% } %>
+              <p>result value: <%= result.resultValue %></p>
+            </li>
+          <% }) %>
+        </ul>
+      </article>
     </section>
+    <p class="end-comment">테스트에 통과하지 못했습니다. 코드 결과를 봐주십셔</p>
     <form action="/" method="GET">
-      <button type="submit">홈으로</button>
+      <button class="home-button" type="submit">홈으로</button>
     </form>
   </body>
 </html>

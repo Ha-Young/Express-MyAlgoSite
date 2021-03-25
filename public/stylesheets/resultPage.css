@@ -41,6 +41,14 @@
   background: #2ecc71;
 }
 
+.fail {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #c0392b;
+}
+
 .solution {
   margin: 10px;
   margin-bottom: 0;
