@@ -4,25 +4,74 @@
     <title>Codewars</title>
     <link rel='stylesheet' href='/stylesheets/reset.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel='stylesheet' href='/stylesheets/problems.css' />
+    <link rel='stylesheet' href='/stylesheets/problem.css' />
+    <link rel='stylesheet' href='/codemirror/lib/codemirror.css' />
+    <link rel='stylesheet' href='/codemirror/theme/ayu-dark.css' />
+    <script src="/codemirror/lib/codemirror.js"></script>
+    <script src="/codemirror/mode/javascript/javascript.js"></script>
   </head>
   <body>
-    <h1>Result</h1>
-    <div>
-      <p>FAILURE</p>
-      <% if (resultList) { %>
-        <ul>
-          <% for (let i = 0; i < tests.length; i++) { %>
-            <ul>
-              <li>결과: <%= resultList[i] %></li>
-              <li><%= tests[i].code %></li>
-              <li><%= tests[i].solution %></li>
+    <%- include("./header.ejs"); %>
+    <main>
+      <div class="result-box">
+        <div class="result-title">
+          <h1>
+            <span class="typewriter">FAIL...</span>
+          </h1>
+          <p class="result-icon">
+            <img src="/images/icon/icon_04.png" alt="bb8 icon" />
+            <span class="tooltip">TRY AGAIN...</span>
+          </p>
+        </div>
+        <!-- <div class="code-box">
+          <p class="code"><%= code %></p>
+        </div> -->
+        <div class="editor-box">
+          <textarea id="editor" name="code"><%= code %></textarea>
+          <p class="editor-title">
+            <span class="light-saber-icon"></span>
+            <span class="title">BATTLE AGAIN</span>
+            <span class="light-saber-icon right blue"></span>
+          </p>
+        </div>
+        <% if (resultList) { %>
+          <div class="code-box">
+            <ul class="test-list">
+              <% for (let i = 0; i < tests.length; i++) { %>
+                <li>// <%= i + 1%></li>
+                <li><%= tests[i].code %></li>
+                <li>solution: <%= tests[i].solution %> / return: <%= answerList[i] %></li>
+                <% if (resultList[i] === "failure") { %>
+                  <li class="failure"><%= resultList[i] %></li>
+                <% } else { %>
+                  <li class="success"><%= resultList[i] %></li>
+                <% } %>
+              <% } %>
             </ul>
-          <% } %>
-        </ul>
-      <% } else { %>
-          <p><%= error.message %></p>
-      <% } %>
-    </div>
+          </div>
+          <ul class="button-list">
+            <li><a class="button big yellow" href="/problems">SUBMIT AGAIN</a></li>
+            <li><a class="button big blue" href="/">GO TO PROBLEM LIST</a></li>
+          </ul>
+        <% } else { %>
+            <div class="code-box">
+              <ul class="error-list">
+                <li><%= error.name %></li>
+                <li><%= error.message %></li>
+              </ul>
+            </div>
+        <% } %>
+      </div>
+    </main>
+    <%- include("./footer.ejs"); %>
   </body>
+  <script>
+    const editor = document.getElementById("editor");
+    const codemirror = new CodeMirror.fromTextArea(editor, {
+      name: "javascript",
+      lineNumbers: true,
+      lineWrapping: true,
+      theme: "ayu-dark",
+    });
+  </script>
 </html>

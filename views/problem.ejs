@@ -4,23 +4,48 @@
     <title>Codewars</title>
     <link rel='stylesheet' href='/stylesheets/reset.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel='stylesheet' href='/stylesheets/problems.css' />
+    <link rel='stylesheet' href='/stylesheets/problem.css' />
     <link rel='stylesheet' href='/codemirror/lib/codemirror.css' />
-    <link rel='stylesheet' href='/codemirror/theme/dracula.css' />
+    <link rel='stylesheet' href='/codemirror/theme/ayu-dark.css' />
     <script src="/codemirror/lib/codemirror.js"></script>
     <script src="/codemirror/mode/javascript/javascript.js"></script>
   </head>
   <body>
-    <h1>Problems</h1>
-    <form method="GET" action="/users/logout">
-      <button class="button" type="submit">LOGOUT</button>
-    </form>
-    <p><%= problem.id %></p>
-    <p><%= problem.description %></p>
-    <form action="<%= `/problems/${problem._id}` %>" method="POST">
-      <textarea id="editor" name="code">function solution(arg) {&#13;&#10; // Your code here.. &#13;&#10;}</textarea>
-      <button type="submit">제출</button>
-    </form>
+    <%- include("./header.ejs"); %>
+    <main>
+      <div class="problem-box">
+        <div class="code-box">
+          <p class="quiz-title">
+            <span class="typewriter blue"><%= problem.title %></span>
+          </p>
+          <p class="quiz-desc"><%= problem.description %></p>
+          <p class="quiz-comment">
+            /****** EXAMPLE ******/
+          </p>
+          <% problem.tests.forEach((test, index) => { %>
+            <ul class="test-list">
+              <li>// <%= index + 1 %></li>
+              <li><%= test.code %></li>
+              <li>>> <%= test.solution %></li>
+            </ul>
+          <% }) %>
+        </div>
+        <div class="editor-box">
+          <p class="editor-title">
+            <span class="light-saber-icon"></span>
+            <span class="title">BATTLE</span>
+            <span class="light-saber-icon right blue"></span>
+          </p>
+          <form id="code-form" action="<%= `/problems/${problem._id}` %>" method="POST">
+            <textarea id="editor" name="code">function solution(arg) {&#13;&#10; // Your code here.. &#13;&#10;}</textarea>
+          </form>
+        </div>
+        <div class="button-list">
+          <button class="button big blue" type="submit" form="code-form">SUBMIT</button>
+        </div>
+      </div>
+    </main>
+    <%- include("./footer.ejs"); %>
   </body>
   <script>
     const editor = document.getElementById("editor");
@@ -28,7 +53,7 @@
       name: "javascript",
       lineNumbers: true,
       lineWrapping: true,
-      theme: "dracula",
+      theme: "ayu-dark",
     });
   </script>
 </html>

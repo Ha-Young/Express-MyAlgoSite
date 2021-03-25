@@ -4,24 +4,26 @@
     <title>Codewars</title>
     <link rel='stylesheet' href='/stylesheets/reset.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel='stylesheet' href='/stylesheets/problems.css' />
+    <link rel='stylesheet' href='/stylesheets/main.css' />
   </head>
   <body>
-    <h1>Codewars</h1>
-    <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
-    <form method="GET" action="/users/logout">
-      <button class="button" type="submit">LOGOUT</button>
-    </form>
-    <div class="problem-list">
-      <% problems.forEach(problem => { %>
-        <a class="problem-box" href="<%= `/problems/${problem._id}` %>">
-          <ul>
-            <li><%= problem.title %></li>
-            <li>정답자수 : <%= problem.completed_users %></li>
-            <li>레벨 : <%= problem.difficulty_level %></li>
-          </ul>
-        </a>
-      <% }) %>
-      </div>
+    <%- include("./header.ejs"); %>
+    <main>
+      <p class="main-title">
+        <span class="typewriter font-dgm">PROBLEM LIST</span>
+      </p>
+      <div class="problem-list">
+        <% problems.forEach(problem => { %>
+          <a class="problem-box" href="<%= `/problems/${problem._id}` %>">
+            <p class="title"><%= problem.title %></p>
+            <ul>
+              <li class="completed-users">completed_users: <%= problem.completed_users %></li>
+              <li class="level">level: <%= problem.difficulty_level %></li>
+            </ul>
+          </a>
+        <% }) %>
+        </div>
+    </main>
+    <%- include("./footer.ejs"); %>
   </body>
 </html>
