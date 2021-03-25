@@ -1,3 +1,6 @@
+<%-include("title"); %>
+<%-include("menu"); %>
 <h1><%=name%></h1>
 <span><%=message%></span>
 <article><%=stack%></article>
+<%- include("back", {originalUrl})%>

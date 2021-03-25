@@ -25,6 +25,11 @@ db.once("open", function () {
   console.log("Connected to mongod server");
 });
 
+app.use((req, res, next) => {
+  res.set('Cache-Control', 'no-store')
+  next()
+})
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
@@ -36,7 +41,7 @@ const session = require("express-session");
 app.use(passport.session());
 
 app.use(session({
-  secret: "hyeongju the genius",
+  secret: "hyeongju",
   resave: false,
   saveUninitialized: true
 }));

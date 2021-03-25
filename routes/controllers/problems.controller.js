@@ -26,7 +26,8 @@ exports.postSolution = async function (req, res, next) {
     res.render("failure", {
       name: result.error.name,
       message: result.error.message,
-      stack: result.error.stack
+      stack: result.error.stack,
+      originalUrl: req.originalUrl,
     });
 
     return;
@@ -51,6 +52,7 @@ exports.postSolution = async function (req, res, next) {
 
   res.render("success", {
     message: result.passed ? IS_CORRECT_SOLUTION : IS_WRONG_SOLUTION,
-    testcaseResult : result.testcaseResult
+    testcaseResult : result.testcaseResult,
+    originalUrl: req.originalUrl
   });
 }

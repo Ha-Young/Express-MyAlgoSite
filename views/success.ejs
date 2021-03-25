@@ -1,3 +1,5 @@
+<%-include("title"); %>
+<%-include("menu"); %>
 <h1><%=message%></h1>
 <ul>
 <% for (let i = 0; i < testcaseResult.length; i++) { %>
@@ -8,3 +10,4 @@
   </li>
 <% } %>
 </ul>
+<%- include("back", {originalUrl})%>
