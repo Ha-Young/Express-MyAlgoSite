@@ -25,7 +25,7 @@
           <a href="/problems/<%= tests[i]._id %>">
             <div class="problem">
               <div class="problem-title"><%= tests[i].title %></div>
-              <div class="problem-solved-count">정답자: <%= tests[i].completed_users %>명</div>
+              <div class="problem-solved-count">정답자: <%= tests[i].solved_users.length %>명</div>
               <div class="problem-level">난이도: <%= tests[i].difficulty_level %></div>
             </div>
           </a>

@@ -1,5 +1,5 @@
-const Problem = require('../models/Problem');
-const vm = require('vm');
+const Problem = require("../models/Problem");
+const vm = require("vm");
 
 exports.getProblem =  async (req, res) => {
   const problemId = req.params.problem_id;
@@ -12,7 +12,7 @@ exports.getProblem =  async (req, res) => {
     description
   } = problem[0];
 
-  res.render('problem', {
+  res.render("problem", {
     title,
     problemId,
     completed_users,
@@ -49,21 +49,27 @@ exports.checkSolution = async (req, res) => {
     }
 
     if (wrongCount !== 0) {
-      res.render('failure', {
+      res.render("failure", {
         resultArr,
         tests
       });
       return;
     }
 
-    res.render('success', {
+    await Problem.findOneAndUpdate(
+      { _id: problemId },
+      { $addToSet: { solved_users: [ req.user ] } },
+      { new: true }
+    );
+
+    res.render("success", {
       resultArr,
       tests
     });
   } catch (err) {
     const { message, name } = err;
 
-    res.render('error', {
+    res.render("error", {
       message,
       name
     });

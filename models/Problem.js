@@ -10,17 +10,15 @@ const ProblemSchema = new mongoose.Schema({
     type: String,
     default: "problem title"
   },
-  completed_users: {
-    type: Number,
-    default: 0
-  },
   difficulty_level: Number,
   description: String,
   tests: [{
     code: String,
     solution: mongoose.Schema.Types.Mixed
   }],
-  solved_users: [String]
+  solved_users: {
+    type: Array
+  }
 });
 
 module.exports = mongoose.model("Problem", ProblemSchema);
