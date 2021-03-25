@@ -1,6 +1,12 @@
 mixin problemBlock(problem = {})
   .problemBlock(id=problem.id)
-    div
-      div=(`Level: ${problem.difficulty_level}`)
-      div=(`challengers: ${problem.accuracy.challengers_count}`)
-    div=problem.title
+    .problemBlock__levelContainer(id=(`lv${problem.difficulty_level}`))
+      div.problemBlock__level=(`Lv \n${problem.difficulty_level}`)
+    .problemBlock__container
+      .problemBlock__title=problem.title
+      .problemBlock__contents
+        .problemBlock__tags
+          i.fas.fa-tags
+          each tag in problem.tags
+            .tag=(`#${tag}`)
+        .problemBlock__challengers=(`winner: ${problem.accuracy.challengers_count}`)
