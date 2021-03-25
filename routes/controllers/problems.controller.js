@@ -60,10 +60,11 @@ exports.checkCode = async function (req, res, next) {
           results.push(successTestCode);
         }
       } catch (error) {
-        res.render("failure",
+        return res.render("failure",
           {
             userCode: submitText,
             testCase: results,
+            error: error.message,
           }
         );
       }
@@ -74,6 +75,7 @@ exports.checkCode = async function (req, res, next) {
         {
           userCode: submitText,
           testCase: results,
+          error: null,
         }
       );
     }

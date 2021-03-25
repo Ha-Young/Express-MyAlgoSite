@@ -1,4 +1,4 @@
-.success-Info {
+.solution-Info {
   display: flex;
   justify-content: center;
   width: 90%;
@@ -13,17 +13,30 @@
   margin: 10px;
 }
 
-.result-info {
-  width: 50%;
-  height: 500px;
-  margin: 10px;
+.error-comment {
+  height: 187px;
   padding: 10px;
   background: #151718;
+  font-size: 18px;
+  color: red;
 }
 
 .result-comment {
-  margin: 30px;
-  font-size: 30px;
+  height: 40px;
+  line-height: 40px;
+  margin-top: 10px;
+  margin-bottom: 0;
+  padding: 10px;
+  background: #232626;
+  font-size: 20px;
+}
+
+.result-info {
+  width: 750px;
+  height: 495px;
+  margin-top: 0;
+  padding: 10px;
+  background: #151718;
 }
 
 .result-box {

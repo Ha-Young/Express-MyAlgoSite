@@ -10,8 +10,7 @@
   </head>
   <body>
     <%- include('partial/header') %>
-    <section class="success-Info">
-      <div></div>
+    <section class="solution-Info">
       <article class="user-code">
           <textarea id="code" name="submit_text"><%= userCode %></textarea>
         <script>
@@ -24,10 +23,14 @@
             theme: "gruvbox-dark"
           });
         </script>
+        <p class="result-comment">Error Comment: </p>
+        <article class="error-comment">
+          <%= error %>
+        </article>
       </article>
-      <article class="result-info">
-        <p class="result-comment">코드 결과</p>
-        <ul>
+      <article class="result-boxes">
+        <p class="result-comment">코드 결과: </p>
+        <ul class="result-info">
           <% testCase.forEach(result => { %>
             <li class="result-box">
               <% if (result.status === "fail") { %>
@@ -47,7 +50,7 @@
         </ul>
       </article>
     </section>
-    <p class="end-comment">테스트에 통과하지 못했습니다. 코드 결과를 봐주십셔</p>
+    <p class="end-comment">테스트에 통과하지 못했습니다.</p>
     <form action="/" method="GET">
       <button class="home-button" type="submit">홈으로</button>
     </form>
