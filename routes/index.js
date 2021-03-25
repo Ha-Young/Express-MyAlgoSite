@@ -1,9 +1,12 @@
-const express = require('express');
-const { verifyUser } = require('./middlewares/verifyUser');
+const express = require("express");
+const Problem = require("../models/Problem");
+const { verifyUser } = require("./middlewares/verifyUser");
 const router = express.Router();
 
-router.get('/', verifyUser, (req, res, next) => {
-  res.render('index', { title: '바닐라코딩' });
+router.get("/", verifyUser, async (req, res) => {
+  const tests = await Problem.find({});
+  console.log(tests);
+  res.render("index", { tests });
 });
 
 module.exports = router;

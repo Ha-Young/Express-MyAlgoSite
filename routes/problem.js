@@ -32,7 +32,6 @@ router.post('/:problem_id', async (req, res) => {
     result: null
   };
 
-  let correctCount = 0;
   let wrongCount = 0;
 
   try {
@@ -47,8 +46,6 @@ router.post('/:problem_id', async (req, res) => {
 
       if (sandbox.result !== tests[i].solution) {
         wrongCount+= 1;
-      } else {
-        correctCount+= 1;
       }
     }
 

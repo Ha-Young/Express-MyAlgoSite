@@ -110,3 +110,8 @@ footer {
   color: gray;
   font-size: 15px;
 }
+
+a {
+  text-decoration: none;
+  color: white;
+}

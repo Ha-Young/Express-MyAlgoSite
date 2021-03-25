@@ -21,37 +21,15 @@
     </header>
     <main>
       <ul class="problems">
-        <a href="/problems/1">
-          <div class="problem">
-            <div class="problem-title">피보나치 수열</div>
-            <div class="problem-solved-count">정답자 15명</div>
-            <div class="problem-level">난이도: 1</div>
-          </div>
-        </a>
-        <a href="/problems/2">
-          <div class="problem">
-            <div class="problem-title">서울에서 김서방 찾기</div>
-            <div class="problem-solved-count">정답자 11명</div>
-            <div class="problem-level">난이도: 2</div>
-          </div>
-        </div>
-        </a>
-        <a href="/problems/3">
-          <div class="problem">
-            <div class="problem-title">수박수박수박수</div>
-            <div class="problem-solved-count">정답자 12명</div>
-            <div class="problem-level">난이도: 2</div>
-          </div>
-        </div>
-        </a>
-        <a href="/problems/4">
-          <div class="problem">
-            <div class="problem-title">하샤드 수</div>
-            <div class="problem-solved-count">정답자 1명</div>
-            <div class="problem-level">난이도: 3</div>
-          </div>
-        </div>
-        </a>
+        <% for (let i = 0; i < tests.length; i ++) { %>
+          <a href="/problem/<%= tests[i]._id %>">
+            <div class="problem">
+              <div class="problem-title"><%= tests[i].title %></div>
+              <div class="problem-solved-count">정답자: <%= tests[i].completed_users %>명</div>
+              <div class="problem-level">난이도: <%= tests[i].difficulty_level %></div>
+            </div>
+          </a>
+        <% } %>
       </ul>
     </main>
     <footer>
