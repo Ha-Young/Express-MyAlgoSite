@@ -1,0 +1,110 @@
+.problem-box,
+.result-box {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2em 0 0 0;
+}
+
+.code-box {
+  height: 280px;
+  padding: 1.5em;
+  overflow-y: auto;
+  background: #000000;
+  color: #ffffff;
+  font-size: 18px;
+  box-sizing: border-box;
+}
+
+.code {
+  white-space: pre-wrap;
+}
+
+.quiz-title {
+  display: inline-block;
+  padding: 0 0 0.5em 0;
+  color: #00B7FF;
+  font-size: 2em;
+}
+
+.quiz-desc {
+  padding: 0 0 0.5em 0;
+}
+
+.quiz-comment {
+  padding: 0 0 0.5em 0;
+  color: rgba(255, 255, 255, 0.3);
+  white-space: pre-line;
+}
+
+.test-list {
+  padding: 0 0 0.5em 0;
+}
+.test-list li {
+  line-height: 1.4em;
+}
+.test-list li:first-child {
+  color: rgba(255, 255, 255, 0.3);
+}
+.test-list li:nth-child(2) {
+  color: #e3c001;
+}
+.test-list li.failure {
+  color: red;
+}
+.test-list li.success {
+  color: yellowgreen;
+}
+
+.editor-box .editor-title {
+  width: 100%;
+  padding: 0.3em;
+  background: #e3c001;
+  text-align: center;
+  font-size: 1.4em;
+  font-weight: bold;
+}
+.editor-box textarea {
+  white-space: pre-line;
+}
+.CodeMirror {
+  font-family: "DungGeunMo", monospace, sans-serif !important;
+  font-size: 18px;
+}
+
+.result-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.result-title h1 {
+  display: inline-block;
+  padding: 30px 0 0 0;
+  text-shadow: -2px 0 #e3c001, 0 2px #e3c001, 2px 0 #e3c001, 0 -2px #e3c001;
+  font-size: 4em;
+  color: rgba(10, 10, 12, 0.88);
+}
+.result-icon {
+  text-align: right;
+}
+.result-icon img {
+  vertical-align: middle;
+}
+.result-icon .tooltip {
+  text-shadow: none;
+}
+
+.error-list li {
+  line-height: 1.4em;
+}
+.error-list li:first-child {
+  font-size: 1.4em;
+  font-weight: bold;
+  color: red;
+}
+
+.button-list {
+  margin: 1em 0 0 0;
+  display: flex;
+  justify-content: space-between;
+}
