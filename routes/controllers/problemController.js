@@ -12,40 +12,36 @@ exports.renderProblemPageById = async function (req, res, next) {
 };
 
 exports.checkUserSolution = async function (req, res, next) {
-  const vm2 = new VM({
-    sandbox: { solution: null },
-  });
-
-  const submitedCode = vm2.run(`solution = ${req.body.solution}`);
-  console.log(submitedCode);
-
-  const submitedCode2 = vm2.run(`solution(['Jane', 'Kim'])`);
-  console.log(submitedCode2);
-
-  // const sandbox = { solution: null };
-
-  // vm.createContext(sandbox);
-  // const submitedCode = vm.runInNewContext(
-  //   `solution = ${req.body.solution}`,
-  //   sandbox
-  // );
-
-  // const submitedCode2 = vm.runInNewContext(
-  //   `solution(['Jane', 'Kim'])`,
-  //   sandbox
-  // );
-
-  // console.log(submitedCode2);
-
-  // const submitedCode3 = vm.runInNewContext(
-  //   `solution(['Jane', 'Huh', 'Kim'])`,
-  //   sandbox
-  // );
-
-  // console.log(submitedCode3);
-  // console.log(sandbox);
-
   const requestedId = req.params.id;
   const fetchedProblem = await Problem.findById(requestedId);
+  const tests = fetchedProblem.tests;
+
+  const vm2 = new VM();
+  const submittedCodeByUser = req.body.solution;
+
+  const testResult = [];
+
+  tests.forEach((test, index) => {
+    try {
+      const executionTest = test.code;
+      const testSolution = test.solution;
+      const runTest = submittedCodeByUser + executionTest;
+      const userSolution = vm2.run(runTest);
+      console.log("user code solution is", userSolution);
+
+      if (userSolution === testSolution) {
+        testResult.push(true);
+        console.log("passed case index", index);
+      } else {
+        testResult.push(false);
+        console.log("fail case index", index);
+      }
+    } catch (err) {
+      next("Failed to execute script. Error in vm2");
+    }
+  });
+
+  console.log(testResult);
+
   res.status(200).render("problem", { problem: fetchedProblem });
 };
