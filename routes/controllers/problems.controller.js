@@ -21,15 +21,30 @@ exports.getOne = async function (req, res) {
 };
 
 exports.post = async function (req, res) {
-  const newFunction = req.body.result;
-  console.log('-----')
+  let result = [];
 
-  console.log(req.body.problemId)
+  // try {
+  //   const checkTestCode = (test) => {
+  //     const resultValue = req.body.newFunction(test.arguments);
 
+  //     result.push([resultValue, test.solution]);
+  //     console.log(result)
+  //     return resultValue === JSON.parse(test.solution);
+  //   };
 
-  try {
-    newFunction();
-  } catch (err) {
-    console.log(err.message);
-  }
+  //   const checkResult = req.body.tests.every(checkTestCode);
+  //   res.locals.user = req.user;
+
+  //   if (checkResult) {
+  //     res.render('partial/success', { problemId: req.body.problemId });
+  //   } else {
+  //     res.render('partial/failure', { result: result.pop() });
+  //   }
+  // } catch (err) {
+  //   res.locals.user = req.user;
+  //   res.render('error', err.message);
+  // }
+
+  // 정답일 때 db 업데이트
+
 };
