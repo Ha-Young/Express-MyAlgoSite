@@ -12,10 +12,13 @@ const problems = require('./routes/problems');
 const app = express();
 
 const mongoose = require('mongoose');
-mongoose.connect(process.env.MONGODB_URL, {
+mongoose.connect(process.env.MONGODB_ATLAS_URL, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
+});
+mongoose.connection.once("open", () => {
+  console.log("🔥🌏🔥 MongoDB Atlas database connected successfully!");
 });
 
 const User = require('./models/User');
