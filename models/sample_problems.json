@@ -2,6 +2,7 @@
   {
     "id": 1,
     "title": "피보나치 수열",
+    "solver": [],
     "accepted": 0,
     "submission": 0,
     "difficulty_level": 1,
@@ -24,6 +25,7 @@
   {
     "id": 2,
     "title": "서울에서 김서방 찾기",
+    "solver": [],
     "accepted": 0,
     "submission": 0,
     "difficulty_level": 2,
@@ -42,6 +44,7 @@
   {
     "id": 3,
     "title": "수박수박수박수박수",
+    "solver": [],
     "accepted": 0,
     "submission": 0,
     "difficulty_level": 2,
@@ -60,6 +63,7 @@
   {
     "id": 4,
     "title": "하샤드 수",
+    "solver": [],
     "accepted": 0,
     "submission": 0,
     "difficulty_level": 3,
@@ -78,6 +82,7 @@
   {
     "id": 5,
     "title": "test용 알고리즘",
+    "solver": [],
     "accepted": 0,
     "submission": 0,
     "difficulty_level": 0,

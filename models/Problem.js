@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const ProblemSchema = new mongoose.Schema({
   id: Number,
   title: String,
+  solver: Array,
   accepted: Number,
   submission: Number,
   difficulty_level: Number,

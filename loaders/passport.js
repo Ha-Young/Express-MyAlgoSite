@@ -24,8 +24,8 @@ passport.use(
         } else {
           new User({
             ...profile._json,
-            failed_problem: [],
-            solved_problem: [],
+            failed_problem: [4, 5],
+            solved_problem: [1, 2, 3],
             accepted_submission: 0,
             total_submission: 0
           }).save().then((newUser) => {

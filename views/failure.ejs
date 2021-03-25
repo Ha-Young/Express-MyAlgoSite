@@ -4,26 +4,46 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="/codemirror/lib/codemirror.js"></script>
+  <script src="/codemirror/mode/javascript/javascript.js"></script>
+  <link rel="stylesheet" href="/codemirror/lib/codemirror.css">
+  <link rel="stylesheet" href="/codemirror/theme/dracula.css">
   <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="/stylesheets/problem.css">
   <title>Document</title>
 </head>
 <body>
   <header>
     <% include ./header %>
   </header>
-  <% if (err) {%>
-    <span>오류가 발생했습니다.</span>
-    <%= err.message %>
-  <% } else {%>
-    <ul class="problems">
-      <% for (let i = 0; i < failTests?.length; i++) { %>
-        <li>
-          <div>이 문제가 틀렸습니다.</div>
-          <div><%= failTests[i]?.code %></div>
-        </li>
-      <% } %>
-    </ul>
-  <% } %>
-  <a href="<%= `/problems/${targetProblemId}` %>">문제로 돌아가기</a>
+  <div class="problem-wrapper">
+    <div class="problem-left">
+      <p>
+        executed code : <%= failTests[0].expect.code %>
+      </p>
+      <p>
+        expected return : <%= failTests[0].expect.solution %>
+      </p>
+      <p>
+        actual return : <%= failTests[0].actual %>
+      </p>
+    </div>
+    <div class="problem-right">
+      <form class="code-editor" action="<%= `/problems/${problem.id}` %>" method="post">
+        <textarea name="solution" cols="30" rows="10"><%= userSolution %></textarea>
+        <div class="button-wrapper">
+          <input class="burning-button" type="submit" />
+        </div>
+      </form>
+    </div>
+  </div>
 </body>
+<script>
+  // TODO 얘도 파일로 따로 뺀다음에 스크립트 로딩하는게 나을듯
+  const myCodeMirror = CodeMirror.fromTextArea(document.querySelector("textarea"), {
+    mode:  "javascript",
+    theme: "dracula",
+    lineNumbers: true
+  });
+</script>
 </html>

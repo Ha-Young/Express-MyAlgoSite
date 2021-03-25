@@ -82,7 +82,19 @@ exports.getOneAndUpdateProblem = async function (req, res, next) {
     return res.render('failure', { err, targetProblemId, failTests: targetProblem.tests, userInfo });
   }
   //TODO 여기도 에러 핸들링 필요함.
-  if (judgeResult.every(testCase => testCase.result === true)) {
+  const isPassEveryTest = judgeResult.every(testCase => testCase.result === true);
+
+  // TODO add submission logic
+
+
+  if (isPassEveryTest) {
+    const currentSolver = targetProblem.solver;
+
+    if (!currentSolver.includes(userInfo._id)) {
+      targetProblem.solver.push(userInfo._id);
+      await targetProblem.save();
+    }
+
     await Problem.findOneAndUpdate(
       { id: targetProblemId },
       { $inc: { accepted: 1 }}
@@ -122,6 +134,6 @@ exports.getOneAndUpdateProblem = async function (req, res, next) {
       }
     });
 
-    res.render('test', { failTests, userInfo, problem: targetProblem, userSolution });
+    res.render('failure', { failTests, userInfo, problem: targetProblem, userSolution });
   }
 }

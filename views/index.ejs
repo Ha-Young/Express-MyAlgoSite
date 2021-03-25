@@ -13,6 +13,7 @@
       <div class="grid-container">
         <div class="grid-item"><span>난이도</span></div>
         <div class="grid-item"><span>제목</span></div>
+        <div class="grid-item"><span>맞은 사람</span></div>
         <div class="grid-item"><span>정답</span></div>
         <div class="grid-item"><span>제출</span></div>
         <div class="grid-item"><span>정답률</span></div>
@@ -26,11 +27,12 @@
               </a>
             </span>
           </div>
+          <div class="grid-item"><span><%= problems[i].solver.length %></span></div>
           <div class="grid-item"><span><%= problems[i].accepted %></span></div>
           <div class="grid-item"><span><%= problems[i].submission %></span></div>
           <div class="grid-item"><span><%= acceptedRatio[i] %>%</span></div>
           <div class="grid-item">
-            <a href="<%= `/user/problems/${problems[i].id}` %>">
+            <a href="<%= `/user/${userInfo._id}/${problems[i].id}` %>">
               과거 제출 코드 확인하기
             </a>
           </div>

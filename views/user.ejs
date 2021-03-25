@@ -20,5 +20,20 @@
       Submission: <%= userInfo.total_submission %>
     </div>
   </div>
+  <div class="">
+    <div class="">맞은문제</div>
+    <div class="">
+      <% for (const test of userInfo.solved_problem) { %>
+        <a href="/problems/<%= test %>"><%= test %></a>
+      <% } %>
+    </div>
+    <div class="">공백예정</div>
+    <div class="">시도했지만 틀린문제</div>
+    <div class="">
+      <% for (const test of userInfo.failed_problem) { %>
+        <a href="/problems/<%= test %>"><%= test %></a>
+      <% } %>
+    </div>
+  </div>
 </body>
 </html>
