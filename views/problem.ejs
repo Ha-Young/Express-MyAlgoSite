@@ -16,17 +16,18 @@
           <span><%= problem.title %> </span>
         </div>
         <div class="problem-info-board">
-         completed user: <%= problem.completed_users %>
-         difficulty level: <%= problem.difficulty_level %>
+          Difficulty level <%= problem.difficulty_level %>
+          /
+          Completed user <%= problem.completed_users %>
         </div>
-        <div class="problem-description-board">
+        <p class="problem-description-board">
           <%= problem.description %>
-        </div>
+        </p>
       </div>
 
       <div class="problem-solution-wrapper">
         <form id="solution-board" action="/problem/<%=problem._id%>" method="POST">
-          <textarea id="editor" name="solution"></textarea>
+          <textarea id="editor" name="solution">function solution() {};</textarea>
         </form>
       </div>
   
@@ -37,7 +38,6 @@
 
   </main>
 
-  <% include footer.ejs %>
 </div>
 
 <script type="text/javascript" src="/javascripts/codemirror.js"></script>

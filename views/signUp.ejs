@@ -2,33 +2,40 @@
 
 <div class="flex-wrapper">
   <% include header.ejs %>
+  
+  <main class="signin-signup-wrapper">
 
-  <div class="signin-wrapper">
-    <div class="signup-wrapper">
-      <h1 class="signup-title">Sign up</h1>
-      <form class="signin-form" action="/signIn" method="POST">
-        
-        <div class="form-item name">
-          <label for="name"></label>
-          <input name="name" placeholder="name"></input>
-        </div>
-      
-        <div class="form-item email">
-          <label for="email"></label>
-          <input name="email" placeholder="email"></input>
-        </div>
-    
-        <div class="form-item password">
-          <label for="password"></label>
-          <input name="password" placeholder="password"></input>
-        </div>
-    
-        <div class="form-button-board">
-          <button type="submit" class="button">SIGN UP</button>
-      </div>
-      </form>
+    <div class="background-wrapper">
+      <span>...your code/></span>
     </div>
-  </div>
 
-  <% include footer.ejs %>
+    <div class="signup-wrapper">
+      <div class="signup-form-wrapper">
+        <h1 class="signup-title">SIGN UP</h1>
+        <form class="signin-form" action="/signIn" method="POST">
+          
+          <div class="form-item name">
+            <label for="name"></label>
+            <input name="name" placeholder="name"></input>
+          </div>
+        
+          <div class="form-item email">
+            <label for="email"></label>
+            <input name="email" placeholder="email"></input>
+          </div>
+      
+          <div class="form-item password">
+            <label for="password"></label>
+            <input name="password" placeholder="password"></input>
+          </div>
+      
+          <div class="form-button-board">
+            <button type="submit" class="button">SIGN UP</button>
+        </div>
+        </form>
+      </div>
+    </div>
+
+  </main>
+
 </div>

@@ -1,17 +1,49 @@
-.signin-wrapper {
+.signin-signup-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 83%;
+  height: 100%;
   background-color: #303133;
+
+  background: linear-gradient(
+    9deg,
+    rgba(181, 55, 55, 1) 23%,
+    rgba(34, 34, 34, 1) 23%
+  );
+}
+
+.signin-login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: #303133;
+
+  background: linear-gradient(
+    -9deg,
+    rgba(181, 55, 55, 1) 23%,
+    rgba(34, 34, 34, 1) 23%
+  );
+}
+
+.background-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+  width: 40%;
+
+  font-size: 80px;
+  font-weight: 900;
+  color: #c7c0c0;
 }
 
 .signup-wrapper,
 .login-wrapper {
-  border-radius: 8px;
   background: #fafafa;
   width: 500px;
-  height: 500px;
+  height: 100%;
 }
 
 .signup-title,
@@ -20,6 +52,13 @@
   color: black;
   font-weight: 900;
   text-align: center;
+
+  margin-bottom: 50px;
+}
+
+.signup-form-wrapper,
+.login-form-wrapper {
+  margin-top: 80px;
 }
 
 .signin-form,
@@ -67,6 +106,8 @@
   text-align: center;
   transition: 0.3s ease-in-out;
   width: 100%;
+
+  margin-top: 30px;
 }
 
 .button:hover {

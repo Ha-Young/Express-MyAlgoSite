@@ -5,7 +5,7 @@
   grid-template-columns: repeat(6, 1fr);
   grid-gap: 20px;
 
-  height: 83%;
+  height: 100%;
   background-color: #303133;
 }
 
@@ -17,6 +17,8 @@
 
   border-radius: 7px;
   box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.14);
+
+  margin-top: 100px;
 
   height: 750px;
   width: 100%;

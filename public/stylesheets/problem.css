@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 83%;
+  height: 100%;
 
   background-color: #303133;
 }
@@ -15,24 +15,53 @@
   justify-content: center;
   align-items: center;
 
-  height: 50%;
+  height: 100%;
+}
+
+.problem-info-board {
+  font-size: large;
+  color: antiquewhite;
+
+  margin-bottom: 50px;
+  font-weight: lighter;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-style: italic;
+  font-weight: lighter;
 }
 
 .problem-solution-wrapper {
   width: 100%;
-  height: 50%;
+  height: 100%;
+
+  padding: 0;
+  margin: 0;
+
+  border-left: tomato 30px solid;
+}
+
+.problem-title-board {
+  font-size: 3.5em;
+  font-weight: 900;
+  color: #e32c2c;
+  text-align: left;
+}
+
+.problem-description-board {
+  color: #c7c0c0;
+  text-align: center;
+
+  word-break: keep-all;
 }
 
 .problem-board {
   display: flex;
-  flex-direction: column;
   justify-content: flex-start;
   align-items: center;
 
   width: 70%;
   height: 100%;
 
-  background-color: blue;
+  background-color: #303133;
 }
 
 .problem-description-board {
@@ -42,6 +71,9 @@
 
 .problem-submit-button {
   position: absolute;
+  background-color: #e32c2c;
+  border-radius: 50px;
 
-  top: 90%;
+  top: 70%;
+  left: 32%;
 }

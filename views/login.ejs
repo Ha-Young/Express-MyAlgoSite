@@ -1,33 +1,38 @@
 <link rel='stylesheet' href='/stylesheets/style.css' />
 
-
 <div class="flex-wrapper">
   <% include header.ejs %>
 
-  <div class="signin-wrapper">
+  <main class="signin-login-wrapper">
+
+    <div class="background-wrapper">
+      <span>...log in/></span>
+    </div>
+
     <div class="login-wrapper">
-      <h1 class="logIn-title">Log In</h1>
-      <form class="login-form" action="/login/auth/tokens" method="POST">
+      <div class="login-form-wrapper">
+        <h1 class="logIn-title">Log In</h1>
+        <form class="login-form" action="/login/auth/tokens" method="POST">
+        
+          <div class="form-item email">
+            <label for="email"></label>
+            <input name="email" placeholder="email"></input>
+          </div>
       
-        <div class="form-item email">
-          <label for="email"></label>
-          <input name="email" placeholder="email"></input>
+          <div class="form-item password">
+            <label for="password"></label>
+            <input name="password" type="password" placeholder="password"></input>
+          </div>
+      
+          <div class="form-button-board">
+            <button type="submit" class="button">LOG IN</button>
         </div>
-    
-        <div class="form-item password">
-          <label for="password"></label>
-          <input name="password" type="password" placeholder="password"></input>
+        </form>
+        <div class="form-footer">
+          <p><a href="/">Forgot password?</a></p>
         </div>
-    
-        <div class="form-button-board">
-          <button type="submit" class="button">LOG IN</button>
-      </div>
-      </form>
-      <div class="form-footer">
-        <p><a href="/">Forgot password?</a></p>
       </div>
     </div>
-  </div>
-
-  <% include footer.ejs %>
+  
+  </main>
 </div>
