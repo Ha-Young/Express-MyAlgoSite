@@ -1,11 +1,13 @@
-<% if (!Array.isArray(resultList)) { %>
-  <div><%= resultList %></div>
-<% } else { %>
-  <% for (const result of resultList) { %>
-    <% if (result.output) { %>
-      <div class="true">passed</div>
-    <% } else { %>
-      <div class="false">expected: <%= result.expected %> instead got: <%= result.got %></div>
+<div class="result-box fail-box">
+  <% if (!Array.isArray(resultList)) { %>
+    <div><%= resultList %></div>
+  <% } else { %>
+    <% for (const result of resultList) { %>
+      <% if (result.output) { %>
+        <div class="true">Test Passed: Value == <%= result.got %></div>
+      <% } else { %>
+        <div class="false">expected: <%= result.expected %> instead got: <%= result.got %></div>
+      <% } %>
     <% } %>
   <% } %>
-<% } %>
+</div>

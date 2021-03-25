@@ -15,7 +15,7 @@ exports.getProblemDetail = async (req, res) => {
   res.render("problemDetail", {
     pageTitle,
     problem,
-    parameter: "argument",
+    parameter: "arg",
   });
 };
 

@@ -7,16 +7,23 @@
     <div>Level <%= problem.difficultyLevel %></div>
     <p><%= problem.description %></p>
   </div>
-  <div class="problem-solution">
-    <form action="/problems/<%= problem.id %>" method="POST" target="result">
-      <textarea id="editor" name="solution">
+  <div class="solution-container">
+    <div class="a">
+      <div class="">Solution:</div>
+      <form action="/problems/<%= problem.id %>" method="POST" id="submit" target="result-viewer">
+        <textarea id="editor" name="solution">
 function solution(<%= parameter %>) {
+
 }
-      </textarea>
-      <button>ATTEMPT</button>
-    </form>
+        </textarea>
+      </form>
+    </div>
+    <div class="result-viewer-container a">
+      <div class="">Result:</div>
+      <iframe id="result-viewer" name="result-viewer"></iframe>
+    </div>
   </div>
-  <iframe id="result" name="result"></iframe>
+  <button form="submit">ATTEMPT</button>
 </div>
 
 <script type="text/javascript" src="/javascripts/codemirror@5.60.0/codemirror.min.js"></script>

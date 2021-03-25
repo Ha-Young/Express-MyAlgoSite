@@ -1,1 +1,6 @@
-<div>Success</div>
+<div class="result-box success-box">
+  <% for (const result of resultList) { %>
+    <div class="true">Test Passed: Value == <%= result.got %></div>
+  <% } %>
+  <div class="success-message">You have passed all of the tests! :)</div>
+</div>
