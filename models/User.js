@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcrypt');
 
-const userSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
   email: {
     type: String,
     unique: true,
@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.pre('save', async function (next) {
+UserSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
     next();
   }
@@ -41,7 +41,7 @@ userSchema.pre('save', async function (next) {
   }
 });
 
-userSchema.statics.authenticate = async function (email, password, callback) {
+UserSchema.statics.authenticate = async function (email, password, callback) {
   try {
     const user = await User.findOne({ email: email }).select('+password').lean();
     let result;
@@ -61,6 +61,6 @@ userSchema.statics.authenticate = async function (email, password, callback) {
   }
 }
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', UserSchema);
 
 module.exports = User;

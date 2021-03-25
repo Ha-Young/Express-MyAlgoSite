@@ -18,21 +18,41 @@
             <%= problem.title %>
           </h3>
         </div>
+
         <div class="contents-container">
           <div class="description-container">
             <p class="description">
               <%= problem.description %>
             </p>
-            <% for (const test of problem.tests) { %>
-              <p class="test">
-                <%= test.code %>
-              </p>
-              <% } %>
           </div>
           <div class="code-container">
-            <textarea class="code"></textarea>
+            <textarea class="code" name="code">
+function solution(<%= problem.params.toString() %>) {
+  let result;
+
+  return result;
+}
+</textarea>
+            <div class="test-container">
+              <p class="test-title">실행 결과: </p>
+
+              <div class="test-content">
+                <% if (results) { %>
+                  <% problem.tests.forEach((test, i)=> { %>
+                    <p class="test">
+                      <%= test.code %>
+                    </p>
+                    <p class="result <%= results[i] %>">
+                      <%= results[i] %>
+                    </p>
+                    <% }); %>
+                      <% } %>
+              </div>
+
+            </div>
           </div>
         </div>
+
         <div class="submit-container">
           <input class="submit" type="submit" value="submit" />
         </div>

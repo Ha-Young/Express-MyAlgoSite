@@ -9,9 +9,4 @@ const cm = new CodeMirror.fromTextArea(document.querySelector('.code'), {
   theme: 'monokai',
 });
 
-cm.setSize(500, 500);
-cm.getDoc().setValue(`function solution(param) {
-  let result;
-
-  return result;
-}`);
+cm.setSize('65vw', 400);
