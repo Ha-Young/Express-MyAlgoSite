@@ -98,11 +98,7 @@ async function handleTestCaseSendBtnClick(e) {
 async function handleAnswerSendBtnClick(e) {
   const reqBody = getSolveReqBody("answer");
 
-  console.log('reqBody', reqBody);
-
   const testCaseSolveResult = await getSolveResult(reqBody);
-
-  console.log('response', testCaseSolveResult);
 
   const templateStr = testCaseSolveResult.errMsg || getAnswerSolveTemplates(testCaseSolveResult);
 

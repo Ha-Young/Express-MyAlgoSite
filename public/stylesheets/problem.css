@@ -1,14 +1,18 @@
-.windowbar {
+.problem-wrapper {
   position: fixed;
-  top: 0px;
-  left: 0px;
+  top:0;
+  left:0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.windowbar {
   height: 30px;
   width: 100%;
   background: #202227;
   color: rgba(255, 255, 255, 0.6);
   line-height: 28px;
   z-index: 100;
-  overflow: hidden;
 }
 
 .windowbar span {
@@ -17,7 +21,6 @@
   font-size: 13px;
   border-radius: 3px;
   cursor: pointer;
-  transition: all 0.1s ease-in-out;
 }
 
 .windowbar span:hover {
@@ -33,6 +36,7 @@
   right: 0px;
   top: 0px;
   height: 30px;
+  overflow: hidden;
 }
 
 .windowbar .controls span {
@@ -52,15 +56,36 @@
   box-sizing: border-box;
   padding: 10px;
   background: #e87460;
+  text-decoration: none;
+  color: white;
 }
+
+.windowbar .controls .close:hover {
+  background: rgb(232, 116, 96, 0.8);
+}
+
 .windowbar .controls .close:active {
   opacity: 0.9;
 }
 
+.problem-content-wrapper {
+  display: flex;
+
+  width: 100%;
+  height: 100%;
+}
+
+.horizontal-split-bar {
+  width: 10px;
+  height:100%;
+  cursor: col-resize;
+  border-right: 0.0625rem solid #172334;
+  background: url(/imgs/split_horizontal.png) no-repeat 2px 50%;
+  background-size: 8px 30px;
+  background-color: #26282e;
+}
+
 .info-section {
-  position: fixed;
-  top: 30px;
-  left: 0px;
   display: grid;
   grid-template-rows: .6fr .4fr;
   width: 30vw;
@@ -68,8 +93,6 @@
   background: #32353d;
   color: #fafafa;
   box-shadow: inset 0 2px 0 rgba(255,255,255,.05), inset 0 1px 0 rgba(0,0,0,.4);
-  transition: all 0.2s ease;
-  -webkit-transition: all 0.2s ease;
 }
 
 .problem-title {
@@ -90,7 +113,7 @@
 }
 
 .problem-desc {
-  padding: 20px;
+  padding: 20px 10px 20px 20px;
 }
 
 .guide-section {
@@ -117,9 +140,6 @@
 }
 
 .run-section {
-  position: absolute;
-  top: 30px;
-  left: 30vw;
   display: grid;
   grid-template-rows: .6fr .4fr;
   width: calc(70vw);
@@ -129,8 +149,6 @@
   user-select: text;
   -webkit-user-select: text;
   outline: none;
-  transition: all 0.2s ease;
-  -webkit-transition: all 0.2s ease;
 }
 
 .code-section {
@@ -156,6 +174,15 @@
   margin: 0 0 5px;
   padding: 10px;
   font-size: 1rem;
+  border-radius: 2px;
+}
+
+.send-testcase-btn:hover {
+  background: rgba(76, 175, 79, 0.8);
+}
+
+.send-testcase-btn:active {
+  background: #38813a;
 }
 
 .send-answer-btn {
@@ -166,6 +193,14 @@
   margin: 0 0 5px;
   padding: 10px;
   font-size: 1rem;
+  border-radius: 2px;
+}
+
+.send-answer-btn:hover {
+  background: rgb(255, 0, 0, 0.8);
+}
+.send-answer-btn:active {
+  background: rgb(204, 0, 0);
 }
 
 .output-section {

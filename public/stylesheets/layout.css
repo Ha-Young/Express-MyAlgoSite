@@ -70,6 +70,10 @@ a {
   font-size: .8rem;
 }
 
+button {
+  border-radius: 2px;
+}
+
 
 @media (max-width: 767px) {
   .container {
