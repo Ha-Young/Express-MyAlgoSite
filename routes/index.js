@@ -43,6 +43,7 @@ router.get('/sign-out', forwardAuthenticated, (req, res, next) => {
 router.get('/sign-out/callback', forwardAuthenticated, (req, res, next) => {
   if (req.session) {
     try {
+      req.logOut();
       req.session.destroy();
       res.redirect('/sign-in');
     } catch (e) {
@@ -69,7 +70,7 @@ router.post('/sign-up', async (req, res, next) => {
     const hash = await bcrypt.hash(req.body.password, 10);
 
     await User.create({
-      userName: req.body.name,
+      username: req.body.name,
       email: req.body.email,
       password: hash,
     });

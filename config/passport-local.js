@@ -6,17 +6,17 @@ const initialize = (passport, getUserByEmail) => {
     const user = await getUserByEmail(email);
 
     if (user === null) {
-        return done(null, false, { message: '등록되지 않은 Email 입니다.' });
+      return done(null, false, { message: '등록되지 않은 Email 입니다.' });
     }
 
     try {
-        if (await bcrypt.compare(password, user.password)) {
-            return done(null, user);
-        } else {
-            return done(null, false, { message: '비밀번호가 맞지 않습니다.' });
-        }
+      if (await bcrypt.compare(password, user.password)) {
+        return done(null, user);
+      } else {
+        return done(null, false, { message: '비밀번호가 맞지 않습니다.' });
+      }
     } catch (e) {
-        return done(e);
+      return done(e);
     }
   };
 
@@ -26,9 +26,13 @@ const initialize = (passport, getUserByEmail) => {
     session: true,
     passReqToCallback: false,
   }, authenticate));
+
   passport.serializeUser((user, done) => done(null, user));
   passport.deserializeUser(async (user, done) => {
+    if (user.local) {
       return done(null, await getUserByEmail(user.email));
+    }
+    done(null, user);
   });
 };
 
