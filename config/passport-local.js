@@ -29,10 +29,8 @@ const initialize = (passport, getUserByEmail) => {
 
   passport.serializeUser((user, done) => done(null, user));
   passport.deserializeUser(async (user, done) => {
-    if (user.local) {
-      return done(null, await getUserByEmail(user.email));
-    }
-    done(null, user);
+    console.log(user.id);
+    done(null, await getUserByEmail(user.email));
   });
 };
 

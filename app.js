@@ -22,21 +22,22 @@ mongoose.connection.once("open", () => {
 });
 
 const User = require('./models/User');
+
+const GithubPassport = require('./config/passport-gitHub');
+GithubPassport(passport);
+
 const LocalPassport = require('./config/passport-local');
 LocalPassport(
   passport,
   async (email) => await User.findOne({ email }),
 );
 
-const GithubPassport = require('./config/passport-gitHub');
-GithubPassport(passport);
-
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 app.use(cookieParser(process.env.SESSION_SECRET));
 app.use(session({
-  resave: false,
+  resave: true,
   saveUninitialized: false,
   secret: process.env.SESSION_SECRET,
   cookie: {

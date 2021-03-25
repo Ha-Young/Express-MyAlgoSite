@@ -9,6 +9,11 @@ const initialize = (passport) => {
   function(accessToken, refreshToken, profile, done) {
     return done(null, profile);
   }));
+
+  passport.serializeUser((user, done) => done(null, user));
+  passport.deserializeUser((user, done) => {
+    done(null, user);
+  });
 };
 
 module.exports = initialize;

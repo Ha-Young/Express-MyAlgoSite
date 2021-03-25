@@ -2,27 +2,35 @@
 <html>
   <head>
     <% include ./partials/head %>
+    <link rel="stylesheet" href="../stylesheets/signIn.css" />
   </head>
   <body>
-    <% include ./partials/header %>
-
-    <h1>Sign In</h1>
-    <form action="/sign-in" method="POST">
-      <div>
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
+    <div class="container">
+      <div class="sign-in form">
+        <img >
+        <h1>codewars</h1>
+        <a href="/sign-in/github">
+          <div class="git-in">
+            <span>
+              Sign in with GitHub
+            </span>
+            <img class="git-logo" src="/assets/images/githubLogoWhite.png">
+          </div>
+        </a>
+        <form action="/sign-in" method="POST">
+          <div class="sign-input">
+            <input type="email" id="email" name="email" placeholder="email" required>
+          </div>
+          <div class="sign-input">
+            <input type="password" id="password" name="password" placeholder="password" required>
+          </div>
+          <button class="sign-in-button" type="submit">Sign In</button>
+        </form>
+        <a class="sign-up-button" href="/sign-up">Sign Up</a>
+        <h2><%= messages.error ? messages.error : ""  %></h2>
       </div>
-      <div>
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required>
-      </div>
-      <button type="submit">Sign In</button>
-    </form>
-    <h2><%= messages.error ? messages.error : ""  %></h2>
-    <a href="/sign-up">Sign Up</a>
-    <a href="/sign-in/github">Github</a>
+    </div>
 
-    <% include ./partials/footer %>
     <script src='/javascripts/index.js'></script>
   </body>
 </html>

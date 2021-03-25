@@ -1,0 +1,99 @@
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  color: #A7A7A8;
+  text-decoration: none;
+}
+
+input:hover {
+  box-shadow: 0 14px 44px 0 rgba(0, 0, 0, 0.077);
+}
+
+.git-logo {
+  width: 1.5rem;
+  margin-left: 0.3rem;
+  padding: 0.2rem;
+  color: #A7A7A8;
+}
+
+#email, #password {
+  width: 14rem;
+  height: 2rem;
+  margin-top: 0.5rem;
+  padding: 0.3rem;
+  background-color: #262829;
+  color: #A7A7A8;
+  font-size: 1.3rem;
+  border: 1px solid #4B5563;
+  border-radius: 0.2rem;
+}
+
+.container {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  width: 30rem;
+  height: auto;
+  transform: translate(-50%, -50%);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  height: auto;
+  width: 100%;
+  background-color: #262829;
+  border-radius: 0.2rem;
+  color: #A7A7A8;
+}
+
+.git-in {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 14rem;
+  margin: 2rem 0rem;
+  padding: 0.2rem;
+  border: 1px solid #4B5563;
+  border-radius: 0.2rem;
+  font-size: 1.2rem;
+}
+
+.sign-input {
+  position: relative;
+}
+
+.sign-in-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  height: auto;
+  width: 100%;
+  margin-top: 2rem;
+  padding: 0.2rem;
+  background-color: #374152;
+  border-radius: 0.2rem;
+  font-size: 1.5rem;
+  color: #A7A7A8;
+}
+
+.sign-in-button:hover {
+  cursor: pointer;
+}
+
+.sign-up-button {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+}
