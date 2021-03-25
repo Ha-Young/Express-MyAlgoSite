@@ -17,6 +17,11 @@ const UserSchema = new mongoose.Schema({
   },
   githubId: String,
   profileUrl: String,
+  problems: [{
+    id: Number,
+    status: String,
+    code: String,
+  }],
   score: {
     type: Number,
     default: 0,
@@ -37,6 +42,15 @@ UserSchema.methods.correctPassword = async function (
   userPassword
 ) {
   return bcrypt.compare(candidatePassword, userPassword);
+};
+
+UserSchema.methods.updateProblems = async function (id, status, code) {
+  console.log(this);
+  // this.id = id;
+  // this.status = status;
+  // this.code = code;
+
+  // await this.save();
 };
 
 module.exports = mongoose.model('User', UserSchema);

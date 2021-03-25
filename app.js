@@ -1,6 +1,5 @@
 const express = require("express");
 const createError = require("http-errors");
-const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const expressSession = require("express-session");
 const logger = require("morgan");
@@ -10,7 +9,6 @@ const passport = require("passport");
 const passportConfig = require("./config/passport");
 
 const index = require("./routes/index");
-const signup = require("./routes/signup");
 const auth = require("./routes/auth");
 const problems = require("./routes/problems");
 
@@ -30,7 +28,7 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(expressSession({
-  resave: true,
+  resave: false,
   saveUninitialized: false,
   secret: process.env.COOKIE_SECRET,
   cookie: {

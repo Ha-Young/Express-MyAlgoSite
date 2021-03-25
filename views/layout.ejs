@@ -11,7 +11,7 @@
     <header class="header">
       <nav>
         <a href="/">Home</a>
-        <% if (name) { %>
+        <% if (isLogIn) { %>
           <a href="/auth/logout">Log Out</a>
         <% } else { %>
           <a href="/auth/signup">Sign Up</a>

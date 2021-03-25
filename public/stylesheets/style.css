@@ -31,6 +31,7 @@ a {
 }
 
 .main {
+  max-width: 800px;
   padding: 40px;
   overflow: scroll;
 }
@@ -57,6 +58,11 @@ a {
   color: white;
 }
 
+.auth-container {
+  width: 300px;
+  height: 400px;
+}
+
 .tabs {
   display: flex;
   justify-content: center;
@@ -74,8 +80,11 @@ a {
 }
 
 .problem {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 200px;
-  height: 200px;
+  height: 150px;
   margin-right: 5px;
   margin-bottom: 5px;
   padding: 10px;
@@ -91,4 +100,16 @@ a {
 
 .fail {
   color: red;
+}
+
+.result-container {
+  margin-top: 10px;
+}
+
+.result {
+  border: 2px solid #d4dcff;
+}
+
+.result + .result {
+  margin-top: 10px;
 }

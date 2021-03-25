@@ -6,12 +6,12 @@ const authController = require("./controllers/authController");
 
 
 router.get("/", function (req, res) {
-  res.locals.name = req.user?.name || null;
+  res.locals.isLogIn = req.isAuthenticated();
   res.render("auth");
 });
 
-router.post("/signup", authController.signup);
 router.get("/signup", authController.renderSignup);
+router.post("/signup", authController.signup);
 
 router.get("/logout", function (req, res) {
   req.logout();
