@@ -2,24 +2,24 @@
 <html>
   <head>
     <title>Codewars</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/reset.css' />
+    <link rel='stylesheet' href='/stylesheets/problems.css' />
   </head>
   <body>
-    <nav>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/problems">Problem</a></li>
-        <li><a href="/logout">Logout</a></li>
-      </ul>
-    </nav>
-    <ul class="problems">
-    <% for(let i = 0; i < problems.length; i++){%>
-      <li>
-      <div><a href=<%= `problems/${problems[i].id}` %>><%= problems[i].title %></a></div>
-      <div><%= `정답자: ${problems[i].completed_users}` %></div>
-      <div><%= `난이도: Level ${problems[i].difficulty_level}` %></div>
-    </li>
-    <%}%>
-    </ul>
+    <div class="problems-container">
+      <nav class="problems-nav">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </nav>
+      <% for(let i = 0; i < problems.length; i++){%>
+      <a class="problem-item" href=<%= `problems/${problems[i].id}` %>>
+        <h2><%= problems[i].title %></h2>
+        <p><%= `정답자: ${problems[i].completed_users}` %></p>
+        <p><%= `난이도: Level ${problems[i].difficulty_level}` %></p>
+      </a>
+      <%}%>
+    </div>
   </body>
 </html>

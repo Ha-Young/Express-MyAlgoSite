@@ -6,14 +6,11 @@ const User = require("../models/User");
 require("dotenv").config();
 
 passport.serializeUser((user, done) => {
-  console.log("serialize");
   done(null, user.id);
 });
 
 passport.deserializeUser(async function (id, done) {
-  console.log("deserialize");
   const user = await User.findById(id);
-
   done(null, user);
 });
 

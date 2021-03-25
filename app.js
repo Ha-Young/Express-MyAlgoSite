@@ -12,6 +12,7 @@ const index = require("./routes/index");
 const login = require("./routes/login");
 const logout = require("./routes/logout");
 const problems = require("./routes/problems");
+const validateLoginStatus = require("./utils/validateLoginStatus");
 
 require("dotenv").config();
 
@@ -51,11 +52,12 @@ if (process.env.INITIALIZE_MONGODB === "true") {
 app.use("/", index);
 app.use("/login", login);
 app.use("/logout", logout);
+app.use((req, res, next) => validateLoginStatus(req, res, next));
 app.use("/problems", problems);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  const err = new Error("Not Found");
+  const err = new Error("Not found");
   err.status = 404;
   next(err);
 });
