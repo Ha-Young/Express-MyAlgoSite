@@ -327,11 +327,18 @@ form {
 
 .problem-board {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
 
   width: 70%;
   height: 100%;
 
   background-color: blue;
+}
+
+.problem-description-board {
+  text-align: start;
+
+  width: 60%;
 }

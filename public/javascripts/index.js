@@ -56,5 +56,5 @@ const render = function () {
 const png = new Image();
 png.crossOrigin = "anonymous";
 png.onload = drawScene;
-png.src =
-  "https://cdn.icon-icons.com/icons2/2622/PNG/128/brand_codewars_icon_158954.png";
+png.src = "/images/codewars.png";
+// "https://cdn.icon-icons.com/icons2/2622/PNG/128/brand_codewars_icon_158954.png";

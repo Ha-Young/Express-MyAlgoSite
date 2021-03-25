@@ -1,4 +1,8 @@
-<link rel='stylesheet' href='/stylesheets/style.css' />
+<link rel="stylesheet" href="/stylesheets/style.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.css" integrity="sha512-xIf9AdJauwKIVtrVRZ0i4nHP61Ogx9fSRAkCLecmE2dL/U8ioWpDvFCAy4dcfecN72HHB9+7FfQj3aiO68aaaw==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/theme/dracula.min.css" integrity="sha512-gFMl3u9d0xt3WR8ZeW05MWm3yZ+ZfgsBVXLSOiFz2xeVrZ8Neg0+V1kkRIo9LikyA/T9HuS91kDfc2XWse0K0A==" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.js" integrity="sha512-hc0zo04EIwTzKLvp2eycDTeIUuvoGYYmFIjYx7DmfgQeZPC5N27sPG2wEQPq8d8fCTwuguLrI1ffatqxyTbHJw==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/mode/javascript/javascript.min.js" integrity="sha512-isTDQTpVc8nKKMQmhm0b6fccRPjzo2g0q6l2VLy9/jDn5s8bEUu9WuSGkkAfN/NCwI3+Qi5wEVCaPRoWvT6YPw==" crossorigin="anonymous"></script>
 
 <div class="flex-wrapper">
   <% include header.ejs %>
@@ -6,10 +10,31 @@
   <main class="problem-wrapper">
 
     <div class="problem-board">
+      <div class="problem-title-board">
+        <span><%= problem.title %> </span>
+      </div>
 
+      <div class="problem-info-board">
+       completed user: <%= problem.completed_users %>
+       difficulty level: <%= problem.difficulty_level %>
+      </div>
+
+      <div class="problem-description-board">
+        <%= problem.description %>
+      </div>
+
+      <form id="form-solution" action="/problem/<%=problem._id%>" method="POST">
+        <textarea id="editor" name="solution"></textarea>
+      </form>
+
+      <button type="submit" form="form-solution"></button>
     </div>
     
   </main>
 
   <% include footer.ejs %>
 </div>
+
+<script type="text/javascript" src="/javascripts/codemirror.js"></script>
+
+

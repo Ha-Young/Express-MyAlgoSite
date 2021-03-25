@@ -9,4 +9,10 @@ router.get(
   problemController.renderProblemPageById
 );
 
+router.post(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  problemController.checkUserSolution
+);
+
 module.exports = router;
