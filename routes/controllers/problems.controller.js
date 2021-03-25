@@ -21,6 +21,15 @@ exports.getOne = async function (req, res) {
 };
 
 exports.post = async function (req, res) {
-  console.log('post?!?!?')
-  // console.log(req.body.code)
+  const newFunction = req.body.result;
+  console.log('-----')
+
+  console.log(req.body.problemId)
+
+
+  try {
+    newFunction();
+  } catch (err) {
+    console.log(err.message);
+  }
 };

@@ -1,4 +1,3 @@
-
 const problemForm = document.querySelector('.problem_form');
 const problemTextArea = document.querySelector('.problem_textarea');
 

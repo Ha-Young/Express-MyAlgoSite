@@ -1,13 +1,18 @@
 <div class="problem_container">
-  <div class="problem_details">
-    <%= problem.title %>
-    <%= problem.description %>
-  </div>
   <form
     action="/problems/result"
     method="POST"
     class="problem_form"
   >
+    <input
+      name="problemId"
+      value="<%= problem.id %>"
+      readonly
+    />
+    <div class="problem_details">
+      <%= problem.title %>
+      <%= problem.description %>
+    </div>
     <textarea
       class="problem_textarea"
       name="code"

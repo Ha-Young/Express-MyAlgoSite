@@ -10,7 +10,7 @@
 
   <ul class="problems">
     <% problems.forEach(function(problem){ %>
-      <% const { title, completed_users } = problem; %>
+      <% const { id, title, completed_users } = problem; %>
       <li>
         <a href="/problems/<%= problem.id %>">
           <%= title %>
