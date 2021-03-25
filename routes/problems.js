@@ -34,8 +34,16 @@ router.post("/:problem_id", async (req, res, next) => {
   const problems = await Problem.find({});
   const problem = getProblem(problems, problem_id);
   const { tests } = problem;
+  const { _id, username } = req.user;
+  console.log(req.isAuthenticated());
 
   // next(createError(404, "There is no problem :("));
+  const updatedUser = await User.findByIdAndUpdate(
+    _id,
+    { solution },
+    { new: true },
+  );
+  console.log(updatedUser);
 
   const { funcArgs, funcBody } = getArgsAndBody(solution);
   const testResults = makeAndExcuteSolutionFunc(funcArgs, funcBody, tests);
