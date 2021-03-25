@@ -5,16 +5,6 @@ const TestCase = new mongoose.Schema({
   answer: mongoose.Schema.Types.Mixed,
 });
 
-const Challenger = new mongoose.Schema({
-  solved: Boolean,
-});
-
-const Accuracy = new mongoose.Schema({
-  accuracy: Number,
-  challengers_count: Number,
-  challengers: [Challenger],
-});
-
 const ProblemSchema = new mongoose.Schema({
   title: String,
   description: String,
@@ -23,9 +13,7 @@ const ProblemSchema = new mongoose.Schema({
   tags: [String],
   testCases: [TestCase],
   like: [mongoose.Schema.Types.Mixed],
-  accuracy: {
-    type: Accuracy,
-  }
+  winner: Number,
 });
 
 module.exports = mongoose.model("Problem", ProblemSchema);
