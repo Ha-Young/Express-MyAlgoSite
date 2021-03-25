@@ -3,7 +3,6 @@
 .main-page {
   display: flex;
   justify-content: space-between;
-  /* height: 90vh; */
   color: white;
   background-color: #222f3e;
   padding: 30px 60px;
