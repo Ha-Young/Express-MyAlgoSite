@@ -1,5 +1,7 @@
 mixin success(props = {})
   .success(id=props.id)
     .successContent__container
-      label success!
-      button#successButton(href="/") Home!
+      label You Win!
+      each result in results
+        .result=(`testcase ${result.index} : ${result.message}`)
+      button#successButton(href="/") Good Job!

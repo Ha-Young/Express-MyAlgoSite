@@ -81,14 +81,14 @@ yarn run dev or npm run dev
 
 # todo...
 
-- style: problemList = 적당히 가로줄로 나누고 #전투지역이라고 써놓기
+[x] style: problemList = 적당히 가로줄로 나누고 #전투지역이라고 써놓기
+[ ] 받은 code 확인 = code에서 eval이 있으면 에러 메세지
 - login validation(형식대로 잘 써넣었는지 확인 후 에러 메세지)
 - join validation(login validation과 동일)
 - local join 정리
 - 로그인 하면 헤더의 버튼 join없애고 logout보이게 하기
 - 메인화면 스타일 -> 이름이 갑자기 떨어지면서 쾅!! 떨어지자마자 전기가 퍼져나가는 연출 -> 후에 헤더랑 다른 버튼들 서서히 보임
 - 결과 화면 스타일 -> 모달에서 싸우는거 보여주다가(지고 이기는 애니메이션 다르게) 연출 끝나면 버튼 서서히 보이기
-- 받은 code 확인 = code에서 eval이 있으면 에러 메세지
 - problemDetail: 상세 정보 보여주기
 - DB: 결과 저장
 - bycrypt 비밀번호 암호화하기
