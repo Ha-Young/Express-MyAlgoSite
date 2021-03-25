@@ -2,26 +2,29 @@
 <html>
   <head>
     <title>Problem</title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel='stylesheet' href='/stylesheets/reset.css' />
     <link rel="stylesheet" href="/codemirror/lib/codemirror.css">
+    <link rel='stylesheet' href='/stylesheets/problem.css' />
   </head>
   <body>
-    <h1><%= problem.title  %></h1>
-    <div>
-      <%= problem.description %>
+    <div class="problem-container">
+      <nav class="problem-nav">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </nav>
+      <section class="problem-section">
+        <h2><%= problem.title %></h2>
+        <p><%= problem.description %></p>
+        <p><%= `정답자: ${problem.completed_users}` %></p>
+        <p><%= `난이도: Level ${problem.difficulty_level}` %></p>
+      </section>
+      <form action=<%= `/problems/${problem.id}` %> method="post">
+        <textarea class="code-input" name="solution">function solution() {}</textarea>
+        <input type="submit" value="제출">
+      </form>
     </div>
-    <div>
-      <div>
-        <%= `난이도: ${problem.difficulty_level} / 3` %>
-      </div>
-      <div>
-        <%= `정답자: ${problem.completed_users} 명` %>
-      </div>
-    </div>
-    <form action=<%= `/problems/${problem.id}` %> method="post">
-      <textarea class="code-input" name="solution">function solution() {}</textarea>
-      <input type="submit" value="제출">
-    </form>
     <script type="text/javascript" src="/codemirror/lib/codemirror.js"></script>
     <script type="text/javascript" src="/javascripts/codeMirror.js"></script>
   </body>

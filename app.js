@@ -31,10 +31,7 @@ app.use(
 );
 
 app.use(passport.initialize());
-app.use(passport.session(), (req, res, next) => {
-  console.log("session");
-  next();
-});
+app.use(passport.session());
 
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
@@ -62,19 +59,22 @@ app.use(function (req, res, next) {
   next(err);
 });
 
-// error handler
 app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
-  if (err.status === 404) {
-    return res.send(err.message);
-  }
+  // if (err.status === 404) {
+  //   return res.send(err.message);
+  // }
+
+  // if (err.status === 500) {
+  //   return res.send(err.message);
+  // }
 
   // render the error page
+  console.log(err.message);
   res.status(err.status || 500);
-  res.render("error");
+  res.render("error", { err });
 });
 
 module.exports = app;
