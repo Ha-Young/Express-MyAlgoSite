@@ -22,11 +22,6 @@
 
   height: 750px;
   width: 100%;
-  background: linear-gradient(
-    10deg,
-    rgba(181, 55, 55, 1) 23%,
-    rgba(34, 34, 34, 1) 23%
-  );
 }
 
 .problem-card > a {
