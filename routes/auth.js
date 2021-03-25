@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 
 const User = require("../models/User");
 const initializePassport = require("../passport-config");
-const { checkNotAuthenticated } = require("../middlewares/auth");
+const { checkNotAuthenticated, checkAuthenticated } = require("../middlewares/auth");
 
 const router = express.Router();
 
@@ -46,7 +46,7 @@ router.post("/register", async (req, res, next) => {
   }
 });
 
-router.delete("/logout", (req, res) => {
+router.delete("/logout", checkAuthenticated, (req, res) => {
   req.logOut();
   res.redirect("/auth/login");
 });

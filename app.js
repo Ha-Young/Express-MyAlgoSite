@@ -7,23 +7,21 @@ if (!isProduction) {
 const express = require("express");
 const session = require("express-session");
 const flash = require("express-flash");
-
 const passport = require("passport");
-
+const path = require("path");
 const methodOverride = require("method-override");
 
-const mongoose = require("mongoose");
-const path = require("path");
-const { checkAuthenticated } = require("./middlewares/auth");
-
+const db = require("./middlewares/db");
 const app = express();
 
-const mongoDB = process.env.MONGO_URL;
+async function appStart() {
+  // try-catch여기서도 해야하는지
+  // 당초 분기를 하는게 맞는지
+  // 그냥 db.init() 하면 안되는지
+  await db.init();
+}
 
-mongoose.connect(mongoDB, { useNewUrlParser: true })
-  .then(() => console.log("mongoDB connected!"))
-  .catch(() => console.log("ERROR! can't connect mongoDB!"));
-
+appStart();
 app.set("view engine", "ejs");
 
 app.use(session({
@@ -33,13 +31,14 @@ app.use(session({
 }));
 
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(methodOverride("_method"));
 
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(require("./routes"));
 
 module.exports = app;
