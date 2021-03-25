@@ -34,23 +34,22 @@ const index = require(`${__dirname}/routes`);
 const login = require(`${__dirname}/routes/login`);
 const upload = require(`${__dirname}/routes/upload`);
 const problems = require(`${__dirname}/routes/problems`);
+const logout = require(`${__dirname}/routes/logout`);
 
 app.use("/login", login);
 app.use(redirectByUnAuth);
 app.use("/upload", upload);
 app.use("/", index);
 app.use("/problems", problems);
+app.use("/logout", logout);
 
-// catch 404 and forward to error handler
 app.use((req, res, next) => next(createError(404)));
 
-// error handler
 app.use((err, req, res, next) => {
-  // set locals, only providing error in development
+  console.error(err);
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
   res.status(err.status || 500);
   res.render('error');
 });

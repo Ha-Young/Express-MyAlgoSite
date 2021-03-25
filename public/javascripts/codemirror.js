@@ -1,5 +1,4 @@
 const codemirrorEl = document.getElementById("codemirror");
-const submitBtn = document.getElementById("submit");
 
 const cm = CodeMirror.fromTextArea(codemirrorEl, {
   mode: "javascript",

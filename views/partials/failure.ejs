@@ -1,0 +1,9 @@
+<div>
+  <% if (failure.error) { %>
+    <h2><%= failure.error %></h2>
+  <% } else { %>
+    <p>expected: <%= failure.solution %></p>
+    <p>result: <%= failure.userSolution %></p>
+    <p>time: <%= failure.time %></p>
+  <% } %>
+</div>

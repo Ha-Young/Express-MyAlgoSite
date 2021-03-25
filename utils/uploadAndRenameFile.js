@@ -11,7 +11,10 @@ const uploadAndRenameFile = (path, Model) => async (req, res, next) => {
     const fileNames = await readdir(uploadFolderPath);
 
     if (!fileNames.length) {
-      return render("<h1>There is no file to upload</h1>");
+      return res.render(
+        "upload",
+        { title: "failed", fileNames: "There is no file to upload" },
+      );
     }
 
     for (const fileName of fileNames) {
@@ -21,6 +24,7 @@ const uploadAndRenameFile = (path, Model) => async (req, res, next) => {
 
     for (const file of files) {
       for (const data of file) {
+        delete data.id;
         await new Model(data).save();
       }
     }
@@ -31,12 +35,12 @@ const uploadAndRenameFile = (path, Model) => async (req, res, next) => {
       await rename(`${uploadFolderPath}/${fileName}`, `${uploadedFolderPath}/${fileName}`);
     }
 
-    res.render(`
-      <h1>Upload file Success</h1>
-      <p>Files are : ${fileNames}</p>
-    `);
+    return res.render(
+      "upload",
+      { title: "success", fileNames },
+    );
   } catch (error) {
-    console.log(error)
+    console.error(error);
     return next(createError(500), JSON.stringify(error));
   }
 };

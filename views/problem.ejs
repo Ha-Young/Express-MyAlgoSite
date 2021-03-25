@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <%- include("partials/header") %>
+    <%- include("partials/head") %>
     <link rel='stylesheet' href='/stylesheets/codemirror.css' />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.css" integrity="sha512-xIf9AdJauwKIVtrVRZ0i4nHP61Ogx9fSRAkCLecmE2dL/U8ioWpDvFCAy4dcfecN72HHB9+7FfQj3aiO68aaaw==" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/theme/cobalt.min.css" integrity="sha512-dAYwzcmdv0GvCo9UJmVP430Mc9kmvpdDVk/pHNG90qTZR6tpHQlR9BsVdK9ZGpnNtQNVl+j7UQppCwOPN0TTNQ==" crossorigin="anonymous" />
   </head>
   <body>
-    <h1><%= problem.title %></h1>
-    <h6>Level <%= problem.difficulty_level %></h6>
-    <p><%= problem.description %></p>
-    <form name="form" action="http://localhost:8000/problems/<%- problem.id %>" method="post">
-    <textarea id="codemirror" name="userCode">function solution(n) {}</textarea>
-    <button id="submit">Submit</button>
+    <%- include("partials/bodyHeader") %>
+    <%- include("partials/problemHeader") %>
+    <form
+      name="form"
+      action="http://localhost:<%- process.env.PORT %>/problems/<%- problem.id %>"
+      method="post"
+    >
+      <textarea id="codemirror" name="userCode"><%- codesInTextarea %></textarea>
+      <input type="submit" value="Submit" />
   </form>
+    <div class="problem-result">
+      <% if (success) { %>
+        <%- include("partials/success") %>
+      <% } else if (failure) { %>
+        <%- include("partials/failure") %>
+      <% } %>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.js"
     integrity="sha512-hc0zo04EIwTzKLvp2eycDTeIUuvoGYYmFIjYx7DmfgQeZPC5N27sPG2wEQPq8d8fCTwuguLrI1ffatqxyTbHJw==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/mode/javascript/javascript.min.js" integrity="sha512-isTDQTpVc8nKKMQmhm0b6fccRPjzo2g0q6l2VLy9/jDn5s8bEUu9WuSGkkAfN/NCwI3+Qi5wEVCaPRoWvT6YPw==" crossorigin="anonymous"></script>
