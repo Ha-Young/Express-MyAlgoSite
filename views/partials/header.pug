@@ -4,7 +4,9 @@ header.header
       image.title__logo(src="/images/codewars_logo_icon_big.png")
       label.title__label CodeWars
     .userButtons__container
-      .joinButton 
-        a.btn.btn-primary(href="/join") Join
-      .logButton 
-        a.btn.btn-primary(href="/login/") Sign In
+      .joinButton
+      .logButton
+        if (isNeedLogin)
+          a.btn.btn-primary(href="/login/google") Sign In
+        else
+          a.btn.btn-primary(href="/logout") Sign Out

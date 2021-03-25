@@ -15,7 +15,7 @@ module.exports.problemDetailController = async function problemDetailController(
   }
 
   const initCode = `function solution(${problem.params}) {\n\n}`;
-
+  
   res.render("problemDetail",{ problem, initCode, failure: '', success: '', results: [] });
 }
 
@@ -27,22 +27,31 @@ module.exports.postProblemDetailController = async function postProblemDetailCon
   try {
     const problem = await Problem.findById(problem_id);
     let isSuccess = true;
+    let isError = false;
 
     const resultArr = problem.testCases.map((el, i) => {
-      let param = el.testCase;
-      if (Array.isArray(param)) {
-        param = getArrayParamString(param);
-      }
+      try {
+        if (isError) return;
+        let param = el.testCase;
+        if (Array.isArray(param)) {
+          param = getArrayParamString(param);
+        }
 
-      const context = userCode.concat(`\nsolution(${param})`);
-      const result = vm.runInNewContext(context);
-      if (el.answer === result) {
-        return { index: i, message: "Success!"}
-      }
+        const context = userCode.concat(`\nsolution(${param})`);
+        const result = vm.runInNewContext(context);
+        if (el.answer === result) {
+          return { index: i, message: "Success!"}
+        }
 
-      isSuccess = false;
-      return { index: i, message: "Fail...!"};
+        isSuccess = false;
+        return { index: i, message: "Fail...!"};
+      } catch (err) {
+        isError = true;
+        return res.render('problemDetail', { problem, initCode: userCode, failure: 'failure', success: '', results: err, err });
+      }
     });
+
+    if (isError) return;
 
     if (isSuccess) {
       const currentUser = await User.findById(req.user._id);
@@ -54,7 +63,6 @@ module.exports.postProblemDetailController = async function postProblemDetailCon
 
     res.render('problemDetail', { problem, initCode: userCode, failure: 'failure', success: '', results: resultArr });
   } catch (err) {
-    console.log('err log', err.message);
     next(err);
   }
 }

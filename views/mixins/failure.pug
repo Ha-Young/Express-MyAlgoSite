@@ -3,7 +3,10 @@ mixin failure(props = {})
     .failureContent__container
       label.failureContent__title You Lose...!
       .failureContent__results
-        each result in results
-          .result=(`testcase:${result.index} : ${result.message}`)
+        if (err)
+          .result=err
+        else
+          each result in results
+            .result=(`testcase:${result.index} : ${result.message}`)
       .failureContent__button
         button.btn.btn-dark#failureButton try again!

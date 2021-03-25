@@ -1,6 +1,14 @@
 extends layouts/main
 
 block body
-  h1 #{message}
-  h2 #{error.status}
-  pre #{error.stack}
+  link(rel='stylesheet' href='/stylesheets/error.css')
+  .errorPage
+    .errorPage__container
+      .errorPage__imageWrapper
+        image.errorImage(src="/images/villain.png")
+      .errorPage__textContainer
+        .errorPage__title Error!
+        .errorPage__textWrapper
+          h2 #{error.status}
+          h1 #{message}
+          a.btn.btn-danger(href="/") Home

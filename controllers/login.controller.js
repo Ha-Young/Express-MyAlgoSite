@@ -22,3 +22,8 @@ const getGoogleCallbackController = passport.authenticate("google", {
 });
 
 module.exports.getGoogleCallbackController = getGoogleCallbackController;
+
+module.exports.logoutContorller = function logoutContorller(req, res, next) {
+  req.logout();
+  res.redirect("/");
+}

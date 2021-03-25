@@ -6,5 +6,5 @@ module.exports.mainController = async function mainController(req, res, next) {
     return res.render("problemList", { problems: allProblems });
   }
 
-  res.render("index", { title: "codeWars" });
+  res.render("index", { title: "codeWars", isNeedLogin: true });
 }
