@@ -12,6 +12,11 @@ body {
   background-color: #454647;;
 }
 
+.navbar {
+  position: fixed;
+  width: 100%;
+}
+
 .main {
   height: 100%;
   width: 100%;
@@ -37,5 +42,9 @@ body {
 
 .problems {
   width: 100%;
-  max-width: 50rem;
+  max-width: 60rem;
+}
+
+.each-problem {
+  margin-top: 5rem;
 }
