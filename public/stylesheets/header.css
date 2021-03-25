@@ -17,8 +17,7 @@
 
 .header-middle-container {
   position: absolute;
-  left: 20%;
-  width: 50%;
+  right: 50%;
   display: flex;
   justify-content: center;
 }

@@ -4,9 +4,8 @@ const Problem = require('../../models/Problem');
 const User = require('../../models/User');
 
 exports.getAll = async function (req, res, next) {
-  const userInfo = await User.findById(req.session.passport.user);
-
   try {
+    const userInfo = await User.findById(req.session.passport.user);
     const problems = await Problem.find();
     const acceptedRatio = problems.map(problem => {
       if (problem.submission === 0) return 0;
@@ -21,19 +20,19 @@ exports.getAll = async function (req, res, next) {
 }
 
 exports.getOneProblem = async function (req, res, next) {
-  const userInfo = await User.findById(req.session.passport.user);
-
   try {
+    const userInfo = await User.findById(req.session.passport.user);
     const targetProblemId = parseInt(req.params['problem_id']);
     const targetProblem = await Problem.findOne({ id: targetProblemId });
 
-    res.status(200).render('problem', { problem: targetProblem });
+    res.status(200).render('problem', { problem: targetProblem, userInfo });
   } catch (err) {
     next(creatError(400, err));
   }
 }
 
 exports.getOneAndUpdateProblem = async function (req, res, next) {
+  const userInfo = await User.findById(req.session.passport.user);
   const targetProblemId = parseInt(req.params['problem_id']);
   let targetProblem;
 
@@ -66,7 +65,7 @@ exports.getOneAndUpdateProblem = async function (req, res, next) {
       }
     `);
   } catch (err) {
-    return res.render('failure', { err, targetProblemId, failTests: targetProblem.tests });
+    return res.render('failure', { err, targetProblemId, failTests: targetProblem.tests, userInfo });
   }
 
   if (judgeResult.every(result => result === true)) {
@@ -78,7 +77,7 @@ exports.getOneAndUpdateProblem = async function (req, res, next) {
       }
     ).exec();
 
-    res.render('success');
+    res.render('success', { userInfo });
   } else {
     await Problem.findOneAndUpdate(
       { id: targetProblemId },
@@ -93,6 +92,6 @@ exports.getOneAndUpdateProblem = async function (req, res, next) {
       }
     });
 
-    res.render('failure', { failTests, targetProblemId, err: null });
+    res.render('failure', { failTests, targetProblemId, err: null, userInfo });
   }
 }
