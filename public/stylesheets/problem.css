@@ -27,6 +27,13 @@
   font-size: 2em;
 }
 
+.quiz-info {
+  padding: 0 0 0.5em 0;
+  font-size: 1em;
+  text-align: right;
+  color: rgba(255, 255, 255, 0.8);
+}
+
 .quiz-desc {
   padding: 0 0 0.5em 0;
 }

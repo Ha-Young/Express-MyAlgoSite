@@ -78,6 +78,7 @@ header h1 .logo {
 }
 .profile-list .nickname span {
   color: #ffffff;
+  font-size: 1.2em;
 }
 
 main {

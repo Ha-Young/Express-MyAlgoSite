@@ -19,14 +19,14 @@ main {
   min-height: 400px;
   margin: 0 auto;
   flex-wrap: wrap;
-  justify-content: space-between;
   box-sizing: border-box;
 }
 
 .problem-box {
   display: flex;
-  width: calc(33% - 0.5em);
-  margin: 0 0 1em 0;
+  width: calc(33% - 1em);
+  min-height: 200px;
+  margin: 0 1em 1em 0;
   padding: 1.5em;
   background: rgba(10, 10, 12, 1);
   justify-content: space-between;
@@ -36,7 +36,7 @@ main {
 .problem-box:hover {
   transition: 0.3s all;
   box-shadow: 7px 7px 0px 0px #e3c001;
-  margin: -10px 0 1em -10px;
+  margin: -10px 1em 1em -10px;
 }
 
 .problem-box .title {
