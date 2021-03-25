@@ -16,10 +16,7 @@ passport.use(new GoogleStrategy({
     try {
       const user = await User.findOne({ email: email });
       console.log(user);
-      if (email === user.email && user.isGoogle) {
-        console.log("google user true");
-        return cb(null, user);
-      } else {
+      if (!user) {
         console.log("google user false so setting");
         const newUser = User({
           email,
@@ -32,6 +29,11 @@ passport.use(new GoogleStrategy({
           problems: []
         });
         await User.create(newUser);
+        return cb(null, newUser);
+      }
+
+      if (email === user.email && user.isGoogle) {
+        console.log("google user true");
         return cb(null, user);
       }
     } catch (err) {

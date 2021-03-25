@@ -16,6 +16,9 @@ const getGoogleController = passport.authenticate("google", { scope: ["profile",
 
 module.exports.getGoogleController = getGoogleController;
 
-const getGoogleCallbackController = passport.authenticate("google", { failureRedirect: "/login" })
+const getGoogleCallbackController = passport.authenticate("google", {
+  successRedirect: "/",
+  failureRedirect: "/login",
+});
 
 module.exports.getGoogleCallbackController = getGoogleCallbackController;
