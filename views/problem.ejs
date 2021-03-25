@@ -21,9 +21,6 @@
     <main class="main">
       <div class="play-box">
         <div class="instruction-box">
-          <div class="instruction-box-header">
-            Instruction
-          </div>
           <div class="title-box">
             <h1 class="title">
               <%= problem.title %>
@@ -64,10 +61,10 @@
         </div>
         <div class="editor-box">
           <form
-          action="/problems/<%=problem.id%>/submit"
-          method="post"
-          class="editor-form"
-          id="code-form"
+            action="/problems/<%=problem.id%>/submit"
+            method="post"
+            class="editor-form"
+            id="code-form"
           >
             <div class="editor-box-header">
               Solution
@@ -75,13 +72,13 @@
             <textarea
               class="editor"
               name="code"
-            ><% if (result) {%><%= result.code %><% } else { %>function solution() {&#13;&#10;  // Your code...&#13;&#10;}<% } %></textarea>
+            ><% if (codes) {%><%= codes.code %><% } else { %>function solution(arg) {&#13;&#10;  // Your code...&#13;&#10;}<% } %></textarea>
           </form>
           <div class="result-box">
             <div class="result-box-header">
               Result
             </div>
-            <pre class="result"><% if (result) {%><p class="log">- log -</p>&#13;&#10;<% for (const log of result.log) { %><%= log + "\n" %><% } %><p class="result-log">- result -</p>&#13;&#10;<%= result.result %><% } else { %><p class="log">- log -</p>&#13;&#10;<p class="result-log">- result -</p><% } %></pre>
+            <pre class="result"><% if (codes) {%><p class="log">- log -</p>&#13;&#10;<% for (const log of codes.log) { %><%= log + "\n" %><% } %><p class="result-log">- result -</p>&#13;&#10;<%= codes.result %><% } else { %><p class="log">- log -</p>&#13;&#10;<p class="result-log">- result -</p><% } %></pre>
           </div>
         </div>
       </div>
