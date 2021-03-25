@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Codewars</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel='stylesheet' href='/stylesheets/problemBlock.css' />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/theme/base16-dark.min.css"
+    integrity="sha512-KwSvkuZgl9lncVFB+vPkAhZXTTkrEIAfBJoYIXunMfvyM3gsjiAcMXF8yNyHpEPasrEA7CZVcefUvpbJFHEcow=="
+    crossorigin="anonymous" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.js"
+    integrity="sha512-hc0zo04EIwTzKLvp2eycDTeIUuvoGYYmFIjYx7DmfgQeZPC5N27sPG2wEQPq8d8fCTwuguLrI1ffatqxyTbHJw=="
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <%- include('partials/header', {loginStatus}) %>
+
+    <main>
+      <form action="/problems/<%= problem.id %>" method="post">
+        <textarea class="editor"></textarea>
+      </form>
+    </main>
+</body>
+
+</html>

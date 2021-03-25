@@ -1,22 +1,19 @@
 const Problem = require('../models/Problem');
 const AppError = require('../utils/appError');
 const catchAsync = require('../middlewares/catchAsync');
+const generateHeaderData = require('../utils/generateHeaderData');
 
 exports.get = catchAsync(async (req, res, next) => {
+  const headerData = generateHeaderData(req.isAuthenticated(), req.user);
   //질문: db에 저장될 때 _id란 objectId로 이미 식별자랑 함께 저장되는데
   //id가 필요한 이유가 무엇인가
-  const problem = await Problem.findById(req.params.id).lean();
+  const problem = await Problem.findOne({ id: req.params.id }).lean();
 
   if (problem === null) {
     return next(new AppError('No problem found with that ID', 404));
   }
 
-  res.status(200).json({
-    status: 'success',
-    data: {
-      problem
-    }
-  });
+  res.render('problem', { problem, ...headerData });
 });
 
 exports.post = catchAsync(async (req, res, next) => {
