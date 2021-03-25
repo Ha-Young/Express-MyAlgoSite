@@ -1,11 +1,13 @@
-<div class="Nav">
-  <a href='/'>Home</a>
-  <a href='/sign-out'>Sign Out</a>
-  <a href='/delete-account'>Delete Account</a>
+<div class="header">
+  <div class="header-left">
+    <h1 class="logo">Codewars</h1>
+    <% if (user) { %>
+      <h1><%= `반가워요. ${user}님!` %></h2>
+    <% } %>
+  </div>
+  <div class="header-right">
+    <a class="header-button" href='/'>Home</a>
+    <a class="header-button" href='/sign-out'>Sign Out</a>
+    <a class="header-button" href='/delete-account'>Delete Account</a>
+  </div>
 </div>
-
-<% if (user) { %>
-  <h2><%= `반가워요. ${user}님!` %></h2>
-<% } %>
-
-<hr>

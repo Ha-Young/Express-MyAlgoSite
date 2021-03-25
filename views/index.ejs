@@ -2,28 +2,24 @@
 <html>
   <head>
     <% include ./partials/head %>
+    <link rel="stylesheet" href="/stylesheets/main.css" >
   </head>
   <body>
     <% include ./partials/header %>
 
-    <h1>Codewars</h1>
-    <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
-    <hr>
-
-    <ul>
+    <div class="grid-container">
       <% for (let i = 0; i < data.length; i++) { %>
-        <li>
+        <div class="grid-box">
           <form action="/problems/<%= data[i].id %>" method="GET">
             <button type="submit">
-              <h1><%= `문제: ${data[i].title}` %></h1>
-              <h4><%= `문제 레벨: ${data[i].difficulty_level}` %></h4>
+              <h1><%= `${data[i].title}` %></h1>
+              <h2><%= `레벨: ${data[i].difficulty_level}` %></h2>
               <h3><%= `완료한 유저수: ${data[i].completed_users}` %></h3>
             </button>
           </form>
-        </li>
-        <hr>
+        </div>
       <% } %>
-    </ul>
+    </div>
 
     <% include ./partials/footer %>
     <script src='/javascripts/index.js'></script>
