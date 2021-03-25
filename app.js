@@ -41,9 +41,12 @@ app.use((req, res, next) => {
 });
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
-app.use(express.static("public"));
+app.engine("html", require("ejs").renderFile);
+
+app.use(express.static(__dirname + "/public"));
 app.use(flash());
 app.use(
   session({
