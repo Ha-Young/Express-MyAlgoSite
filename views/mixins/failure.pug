@@ -1,7 +1,9 @@
 mixin failure(props = {})
   .failure(id=props.id)
     .failureContent__container
-      label You Lose...!
-      each result in results
-        .result=(`testcase:${result.index} : ${result.message}`)
-      button#failureButton try again!
+      label.failureContent__title You Lose...!
+      .failureContent__results
+        each result in results
+          .result=(`testcase:${result.index} : ${result.message}`)
+      .failureContent__button
+        button.btn.btn-dark#failureButton try again!

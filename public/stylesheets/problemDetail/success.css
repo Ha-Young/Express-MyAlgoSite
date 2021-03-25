@@ -9,12 +9,49 @@
   background-color: rgba(0,0,0,.3);
 }
 
-.successContent__container {
-  width: 50%;
-  height: 50%;
-  background-color: blue;
-}
-
 #success {
   display: flex;
 }
+
+.successContent__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 50%;
+  height: 50%;
+  background-color: rgb(25, 146, 194);
+  border: 3px solid rgb(25, 146, 194);
+  border-radius: 10px;
+}
+
+.successContent__title {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.successContent__results {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 50%;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.successContent__button {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 80%;
+}
+

@@ -9,12 +9,48 @@
   background-color: rgba(0,0,0,.3);
 }
 
-.failureContent__container {
-  width: 50%;
-  height: 50%;
-  background-color: red;
-}
-
 #failure {
   display: flex;
+}
+
+.failureContent__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 50%;
+  height: 50%;
+  background-color: rgb(245, 29, 29);
+  border: 3px solid rgb(245, 29, 29);
+  border-radius: 10px;
+}
+
+.failureContent__title {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.failureContent__results {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 50%;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.failureContent__button {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 80%;
 }
