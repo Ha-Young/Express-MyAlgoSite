@@ -7,7 +7,8 @@ exports.getAll = async function (req, res) {
       return next(err.message);
     }
 
-    res.render('problems', { user: req.user, problems });
+    res.locals.user = req.user;
+    res.render('partial/problems', { problems });
   });
 };
 
@@ -15,7 +16,7 @@ exports.getOne = async function (req, res) {
   Problem.findOne({ id: req.params.problem_id })
   .lean()
   .exec(function (err, problem) {
-    res.render('problemView', { problem, user: req.user });
+    res.render('partial/problemView', { problem, user: req.user });
   });
 };
 
