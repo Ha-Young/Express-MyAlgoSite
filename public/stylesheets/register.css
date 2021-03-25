@@ -45,6 +45,13 @@
   margin-bottom: 20px;
 }
 
+.register-error {
+  display: block;
+  margin-top: 20px;
+  color: #e84118;
+  font-size: 1.2rem;
+}
+
 .register-form {
   display: flex;
   flex-direction: column;

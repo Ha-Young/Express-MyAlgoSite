@@ -116,7 +116,7 @@ router.post("/:problem_id", isLoggedIn, async (req, res, next) => {
         },
       ];
       const userAnswer = req.body.userCode;
-      const finalResult = "에러 발생 ❌";
+      const finalResult = "에러입니다 ❌";
 
       return res.render("results/failure", {
         data: {

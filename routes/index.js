@@ -35,9 +35,9 @@ router.get("/", isLoggedIn, async (req, res, next) => {
   try {
     const problemList = await Problem.find().lean();
     const userList = await User.find().lean();
-    sortedUser = userList.sort((a, b) => b.rating - a.rating).splice(0, 5);
+    sortedUser = userList.sort((a, b) => b.rating - a.rating).splice(0, 10);
 
-    res.render("index", { data: { problemList, sortedUser } });
+    res.render("index", { data: { problemList, sortedUser, user: req.user } });
   } catch (err) {
     next(err);
   }
@@ -69,7 +69,7 @@ router.post("/register", isNotLoggedIn, async (req, res, next) => {
     const isUserExist = await User.findOne({ email });
 
     if (isUserExist) {
-      req.session.userExist = "이미 존재하는 이메일입니다.";
+      req.session.userExist = "이미 존재하는 이메일입니다";
       return res.redirect("/register");
     }
 
@@ -103,7 +103,7 @@ router.get("/level/:level", isLoggedIn, async (req, res, next) => {
     }).lean();
 
     res.render("index", {
-      data: { problemList: currentLevelProblems, sortedUser },
+      data: { problemList: currentLevelProblems, sortedUser, user: req.user },
     });
   } catch (err) {
     next(err);
@@ -122,7 +122,9 @@ router.get("/solved", isLoggedIn, async (req, res, next) => {
         solvedList.push(problem);
       }
 
-      res.render("index", { data: { problemList: solvedList, sortedUser } });
+      res.render("index", {
+        data: { problemList: solvedList, sortedUser, user: req.user },
+      });
     }
   } catch (err) {
     next(err);
@@ -141,7 +143,9 @@ router.get("/unsolved", isLoggedIn, async (req, res, next) => {
         (problem) => solvedProblems.indexOf(problem._id.toString()) === -1
       );
 
-      res.render("index", { data: { problemList: unsolvedList, sortedUser } });
+      res.render("index", {
+        data: { problemList: unsolvedList, sortedUser, user: req.user },
+      });
     }
   } catch (err) {
     next(err);

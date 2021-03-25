@@ -31,7 +31,7 @@
             <% data.tests.forEach(test => { %>
             <li class="problem-testcase-item">
               <div class="problem-input">입력 <%=test.code%></div>
-              <div class="problem-output">출력 <%=test.solution%></div>
+              <div class="problem-output">출력 <%=test.output%></div>
             </li>
             <% }) %>
           </ul>
@@ -54,23 +54,26 @@ function solution (<%=data.argument%>) {
           <% } %>
           <button class="answer-submit-button" type="submit">Run Code</button>
         </form>
-
         <div class="result-container">
           <% if (data.results.length !== 0) { %>
-          <ul>
-            <p>최종 결과: <%=data.finalResult%></p>
+          <ul class="result-list">
+            <div class="result-finalresult"><%=data.finalResult%></div>
             <% data.results.forEach(result => { %>
-            <li>
-              <div>테스트 코드: <%=result.code%></div>
-              <div>제출한 답: <%=result.userResult%></div>
-              <div>정답: <%=result.solution%></div>
+            <li class="result-item">
+              <div class="result-code">입력 <%=result.code%></div>
+              <div class="result-answer">
+                출력 <%=result.userResult.toString()%> <% if (result.userResult
+                === undefined) { %> <%="undefined"%> <% } %>
+              </div>
+              <div class="result-solution">정답 <%=result.output%></div>
             </li>
             <% }) %>
           </ul>
-          <% } %> <% include ./../partials/footer %>
+          <% } %>
         </div>
       </section>
     </main>
+    <% include ./../partials/footer %>
     <script>
       const editor = CodeMirror.fromTextArea(
         document.getElementById("editor"),

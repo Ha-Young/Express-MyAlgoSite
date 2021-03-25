@@ -10,7 +10,12 @@
         <h1 class="main-title">VANILLALGO</h1>
       </section>
       <section class="register-container">
-        <h1 class="register-title">REGISTER</h1>
+        <h1 class="register-title">
+          REGISTER
+          <span class="register-error">
+            <% if (message) {%> <%= message %> <% } %>
+          </span>
+        </h1>
         <form class="register-form" action="/register" method="POST">
           <div class="register-input-container">
             <div class="register-input">

@@ -9,6 +9,9 @@ const TestSchema = new Schema({
   code: {
     type: String,
   },
+  output: {
+    type: String,
+  },
   solution: {
     type: Mixed,
   },

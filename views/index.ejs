@@ -4,10 +4,19 @@
     <% include ./partials/head %>
     <link rel="stylesheet" href="/stylesheets/index.css" />
   </head>
-  <body>
+<body>
     <% include ./partials/header %>
     <main class="main-page">
       <section class="info-container">
+        <section class="user-container">
+          <p class="user-welcome">Welcome</p>
+          <div class="user-name-container">
+            <span class="user-name"><%=data.user.name%></span>
+          </div>
+          <div class="user-rating-container">
+            Your Score: <%=data.user.rating%>
+          </div>
+        </section>
         <section class="level-container">
           <h2 class="level-title">Levels</h2>
           <ul class="level-list">
@@ -30,7 +39,7 @@
         </section>
         <section class="ranking-container">
           <% if (data.sortedUser) { %>
-          <h2 class="ranking-title">Ranking</h2>
+          <h2 class="ranking-title">User Rank</h2>
           <ul class="ranking-list">
             <% data.sortedUser.forEach(user => { %>
             <li class="ranking-item">
@@ -78,7 +87,7 @@
         <div>
           <% if (data.problemList.length === 0) { %>
             <div class="problem-noproblem-container">
-          <span class="problem-noproblem">문제가 곧 업데이트 될 예정입니다!</spanㅊ>
+          <span class="problem-noproblem">문제가 없습니다 🙀</spanㅊ>
           </div>
           <% } %>
         </div>

@@ -4,5 +4,8 @@ footer {
   background-color: #1e272e;
   position: fixed;
   bottom: 0px;
+  height: 2vh;
+  line-height: 2vh;
+  text-align: center;
   padding: 20px;
 }

@@ -10,7 +10,12 @@
         <h1 class="main-title">VANILLALGO</h1>
       </section>
       <section class="login-container">
-        <h1 class="login-title">LOG IN</h1>
+        <h1 class="login-title">
+          LOGIN
+          <span class="login-error">
+            <% if (messages.error) {%> <%= messages.error %> <% } %>
+          </span>
+        </h1>
         <form class="login-form" action="/login" method="POST">
           <div class="login-input-container">
             <div class="login-input">

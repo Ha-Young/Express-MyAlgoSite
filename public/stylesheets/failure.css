@@ -108,24 +108,46 @@
 }
 
 .result-container {
+  margin-top: 30px;
 }
 
 .result-finalresult {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #ea2027;
+  margin-bottom: 10px;
 }
 
 .result-list {
-  font-family: monospace;
   padding: 18px;
   border-radius: 8px;
-  background-color: #f1f2f6;
+  border: 6px solid #ea2027;
+  background-color: #ffe0e0;
+  font-family: monospace;
   color: black;
 }
 
+.result-item {
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
 .result-code {
+  padding: 2px 10px;
+  font-weight: 600;
+  background-color: #dfe4ea;
 }
 
 .result-answer {
+  padding: 2px 10px;
+  font-weight: 600;
+  background-color: white;
+  color: #ea2027;
 }
 
 .result-solution {
+  padding: 2px 10px;
+  font-weight: 600;
+  background-color: white;
+  color: #009432;
 }

@@ -7,7 +7,7 @@ const {
   Types: { ObjectId, Mixed },
 } = Schema;
 
-const userSchema = new Schema({
+const UserSchema = new Schema({
   name: {
     type: String,
     maxlength: 50,
@@ -37,13 +37,13 @@ const userSchema = new Schema({
   },
 });
 
-userSchema.methods.comparePassword = function (plainPassword, cb) {
+UserSchema.methods.comparePassword = function (plainPassword, cb) {
   bcrypt.compare(plainPassword, this.password, function (err, isMatch) {
     if (err) return cb(err);
     cb(null, isMatch);
   });
 };
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model("User", UserSchema);
 
 module.exports = { User };
