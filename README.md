@@ -80,6 +80,7 @@ yarn run dev or npm run dev
 **곧 AWS Cloud Service를 이용하여 서버를 배포하는 방법에 대해 배우게 될테니, 우선 위 링크를 따라해보세요.**
 
 1. function to run user's code
-2. view -> partial
-3. 환경변수 정리
-4. problems route
+<!-- 2. view -> partial -->
+<!-- 3. 환경변수 정리 -->
+<!-- 4. problems route -->
+5. dev mode일 때 DB insert

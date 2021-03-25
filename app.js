@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const path = require('path');
 const passportSetup = require('./config/passport-setup');
@@ -6,33 +8,19 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 const expressLayouts = require('express-ejs-layouts');
 
-const keys = require('./config/keys');
+const problem_db = require('./util/problem_db');
 
 mongoose.connect(
-  keys.mongodb.dbURI,
+  process.env.MONGODB_URI,
   { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true }
 );
 
 const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
+db.on('error', console.error.bind(console, 'connection error:'));
 db.once("open", function() {
   console.log("Connected..");
+  problem_db.dbCheck();
 });
-
-// const problem_db = require('./util/problem_db');
-// const Problem = require('./models/Problem');
-
-// problem_db.storeMockProblems()
-// .then(() => {
-//   Problem.find()
-//   .lean()
-//   .exec(function (err, problems) {
-//     if (err) return next(err.message);
-//     return JSON.stringify(problems);
-//   });
-// });
-
-// problem_db.deleteAllProblems();
 
 const indexRoutes = require('./routes/index');
 const authRoutes = require('./routes/auth-routes');
@@ -40,11 +28,14 @@ const problemsRoutes = require('./routes/problem-routes');
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, 'public')));
+if (process.env.DB_INITIALIZE !== 'false') {
+  console.log(process.env.DB_INITIALIZE)
+  problem_db.deleteAllProblems();
+}
 
+app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
 app.use(expressLayouts);
 app.set('layout', 'layout');
 app.set('layout extractScripts', true);
@@ -52,13 +43,10 @@ app.set('layout extractScripts', true);
 // encrypt cookie
 app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000,
-  keys: [keys.session.cookieKey]
+  keys: [process.env.COOKIE_KEY]
 }));
-
-// initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
