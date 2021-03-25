@@ -1,16 +1,17 @@
 const creatError = require('http-errors');
-const { NodeVM } = require('vm2');
+const { VM } = require('vm2');
 const Problem = require('../../models/Problem');
 const User = require('../../models/User');
+const Submission = require('../../models/Submission');
 
 exports.getAll = async function (req, res, next) {
   try {
     const userInfo = await User.findById(req.session.passport.user);
     const problems = await Problem.find();
     const acceptedRatio = problems.map(problem => {
-      if (problem.submission === 0) return 0;
+    if (problem.submission === 0) return 0;
 
-      return ((problem.accepted * 100) / problem.submission).toFixed(2);
+    return ((problem.accepted * 100) / problem.submission).toFixed(2);
     });
 
     res.render('index', { problems, acceptedRatio, userInfo });
@@ -30,7 +31,7 @@ exports.getOneProblem = async function (req, res, next) {
     next(creatError(400, err));
   }
 }
-
+// TODO function is too big..
 exports.getOneAndUpdateProblem = async function (req, res, next) {
   const userInfo = await User.findById(req.session.passport.user);
   const targetProblemId = parseInt(req.params['problem_id']);
@@ -44,13 +45,23 @@ exports.getOneAndUpdateProblem = async function (req, res, next) {
 
   const userSolution = req.body.solution;
   const judgeResult = [];
-  const vm = new NodeVM({
-      console: 'inherit',
-      sandbox: {
-        tests: targetProblem.tests,
-        judgeResult,
-      }
+  const vm = new VM({
+    timeout: 500,
+    sandbox: {
+      tests: targetProblem.tests,
+      judgeResult,
+    }
   });
+
+  await Problem.findOneAndUpdate(
+    { id: targetProblemId },
+    { $inc: { submission: 1 }}
+  );
+
+  await User.findByIdAndUpdate(
+    req.session.passport.user,
+    {$inc : { total_submission: 1 }}
+  );
 
   try {
     vm.run(`
@@ -65,25 +76,42 @@ exports.getOneAndUpdateProblem = async function (req, res, next) {
       }
     `);
   } catch (err) {
+    // TODO error 띄우는게 맞지않나??
     return res.render('failure', { err, targetProblemId, failTests: targetProblem.tests, userInfo });
   }
-
+  //TODO 여기도 에러 핸들링 필요함.
   if (judgeResult.every(result => result === true)) {
     await Problem.findOneAndUpdate(
       { id: targetProblemId },
-      {
-        accepted: targetProblem.accepted + 1,
-        submission: targetProblem.submission + 1
-      }
-    ).exec();
+      { $inc: { accepted: 1 }}
+    );
+
+    await User.findByIdAndUpdate(
+      req.session.passport.user,
+      {$inc : { accepted_submission: 1 }}
+    );
+
+    // const isFirstSubmission = await Submission.exists({ user_id: req.session.passport.user });
+
+    // if (isFirstSubmission) {
+    //   new Submission({
+    //     user_id: req.session.passport.user,
+    //     submission_history: {
+    //       : userSolution
+    //     }
+    //   })
+    // } else {
+    //   await Submission.findOneAndUpdate(
+    //     { user_id: req.session.passport.user },
+    //     { submission_history: {
+            
+    //       }
+    //     }
+    //   )
+    // }
 
     res.render('success', { userInfo });
   } else {
-    await Problem.findOneAndUpdate(
-      { id: targetProblemId },
-      { submission: targetProblem.submission + 1 }
-    ).exec();
-
     const failTests = [];
 
     judgeResult.forEach((result, index) => {

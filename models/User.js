@@ -8,7 +8,11 @@ const UserSchema = new mongoose.Schema({
   picture: String,
   email: String,
   email_verified: Boolean,
-  locale: String
+  locale: String,
+  failed_problem: Array,
+  solved_problem: Array,
+  accepted_submission: Number,
+  total_submission: Number
 });
 
 module.exports = mongoose.model('User', UserSchema);

@@ -6,6 +6,8 @@ const status = require('statuses');
 require('dotenv').config();
 require('./loaders/passport');
 
+// TODO move load logic to loader index.
+
 const db = mongoose.connection;
 // TODO error logger 추가
 db.on('error', console.error);
@@ -37,7 +39,7 @@ app.use(sassMiddleware({
   debug: true,
   outputStyle: 'compressed'
 }));
-app.use(express.static(publicDirectoryPath))
+app.use(express.static(publicDirectoryPath));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
@@ -47,6 +49,7 @@ const MongoStore = require('connect-mongo');
 const cookieParser = require('cookie-parser');
 
 app.use(cookieParser(process.env.COOKIE_SECRET));
+// TODO change session store to redis
 app.use(session({
   secret: process.env.COOKIE_SECRET,
   resave: false,
@@ -62,13 +65,12 @@ app.use(passport.session());
 const index = require('./routes/index');
 const login = require('./routes/login');
 const auth = require('./routes/auth');
-const problems = require('./routes/problems')
-const { verifyUser } = require('./routes/middlewares/verifyUser')
-
+const problems = require('./routes/problems');
+const { verifyUser } = require('./routes/middlewares/verifyUser');
 
 app.use('/login', login);
 app.use('/auth', auth);
-app.use(verifyUser)
+app.use(verifyUser);
 app.use('/', index);
 app.use('/problems', problems);
 

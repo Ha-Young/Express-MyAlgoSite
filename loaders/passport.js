@@ -16,14 +16,18 @@ passport.use(
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
       callbackURL: '/auth/google/callback'
-    },
+    }, //TODO change to async
     (accessToken, refreshToken, profile, done) => {
       User.findOne({ sub: profile.id }).then((currentUser) => {
         if (currentUser) {
           done(null, currentUser);
         } else {
           new User({
-            ...profile._json
+            ...profile._json,
+            failed_problem: [],
+            solved_problem: [],
+            accepted_submission: 0,
+            total_submission: 0
           }).save().then((newUser) => {
             done(null, newUser);
           });
