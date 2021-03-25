@@ -2,12 +2,15 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
 
-const indexLoader = require("./loaders/index").loger;
+const passportConfig = require("./config/passport");
+const mongooseConfig = require("./config/mongoose");
+
 const indexRouter = require("./routes/index");
 
 const app = express();
 
-indexLoader(app);
+passportConfig(app);
+mongooseConfig();
 
 app.set("views", path.join(__dirname, "/views"));
 app.set("view engine", "ejs");

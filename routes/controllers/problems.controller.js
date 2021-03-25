@@ -20,6 +20,7 @@ exports.checkCode = async function (req, res, next) {
   const submitText = req.body.submit_text;
 
   const vm = new NodeVM({
+    timeout: 10,
     console: 'inherit',
     sandbox: {},
   });
@@ -44,7 +45,7 @@ exports.checkCode = async function (req, res, next) {
         if (result !== correctValue) {
           const failTestCode = {
             solution: currentTestCode.code,
-            resultValue: String(result),
+            resultValue: result,
             status: "fail"
           };
 
