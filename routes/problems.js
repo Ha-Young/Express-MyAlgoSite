@@ -31,10 +31,13 @@ router.post("/:problem_id", async (req, res, next) => {
   const problem = problems.find(problem => problem.id === Number(id));
   const tests = problem.tests;
   let result;
+  
+  const vm = new VM({
+    timeout: 1000
+  });
 
   try {
     for (const test of tests) {
-      const vm = new VM();
       const script = userCode + test.code;
       result = await vm.run(script);
 

@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Codewar</title>
+    <title>CodeWave</title>
     <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css" />
+    <link rel="stylesheet" href="../stylesheets/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/theme/seti.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.js"></script>
@@ -11,30 +12,34 @@
   </head>
   <body>
     <%- include ./partials/nav.ejs %>
-    <%- include ./partials/bodyImage.js %>
-    <br>
-    <div class="container">
-      <div class="jumbotron">
-        <div>
-          <div>Level:
-            <%= problem.difficulty_level %>
-          </div>
-          <h3>
-            <%= problem.title %>
-          </h3>
+    <main class="main">
+      <div class="container">
+        <div class="jumbotron">
           <div>
-            <%= problem.description %>
+            <div>Level:
+              <%= problem.difficulty_level %>
+            </div>
+            <h3>
+              <%= problem.title %>
+            </h3>
+            <div>
+              <%= problem.description %>
+            </div>
+            <br>
+            <form action="/problems/<%= problem.id %>" method="POST">
+              <textarea id="editor" name="userCode"><%= code %></textarea>
+              <br>
+              <textarea id="result"><%= result %></textarea>
+              <br>
+              <button type="submit" class="submit-btn btn btn-primary">SUBMIT</button>
+            </form>
+            <br>
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;"></div>
+            </div>
           </div>
-          <br>
-          <form action="/problems/<%= problem.id %>" method="POST">
-            <textarea id="editor" name="userCode"><%= code %></textarea>
-            <br>
-            <textarea id="result"><%= result %></textarea>
-            <br>
-            <button type="submit" class="submit-btn btn btn-primary">SUBMIT</button>
-          </form>
-        </div>
-        <script type="text/javascript" src="../javascripts/codeMirror.js"></script>
-    </div>
+          <script type="text/javascript" src="../javascripts/codeMirror.js"></script>
+      </div>
+    </main>
   </body>
 </html>

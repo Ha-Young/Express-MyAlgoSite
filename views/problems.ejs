@@ -1,20 +1,9 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%=title %></title>
-    <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css" />
-  </head>
+  <%- include ./partials/head %>
   <body>
     <%- include ./partials/nav.ejs %>
-    <%- include ./partials/bodyImage.js %>
-    <div class="container">
-      <div class="btn-group mr-2" role="group" aria-label="First group">
-        <button type="button" class="btn btn-secondary">1</button>
-        <button type="button" class="btn btn-secondary">2</button>
-        <button type="button" class="btn btn-secondary">3</button>
-        <button type="button" class="btn btn-secondary">4</button>
-        <button type="button" class="btn btn-secondary">5</button>
-      </div>
+    <div class="problems-container container">
       <ul class="problems list-group">
         <% for (const problem of problems) { %>
           <li 
