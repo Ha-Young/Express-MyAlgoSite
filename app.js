@@ -9,7 +9,6 @@ const logout = require("./routes/logout");
 const problem = require("./routes/problem");
 
 const passport = require("passport");
-const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 
 const mongoose = require("mongoose");
 const db = mongoose.connection;

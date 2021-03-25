@@ -1,8 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@100&display=swap');
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 30px;
+  font: 14px;
+  font-family: "Work Sans", sans-serif;
 }
 
 a {
-  color: #00B7FF;
+  color: black;
+  height: 50px;
+  margin: 0 10px;
+}
+
+#app-title {
+  font-size: xx-large;
+  justify-content: center;
+}
+
+#problem-title {
+  justify-content: center;
+  font: 14px "Work Sans", sans-serif;
+}
+
+#header {
+  display: flex;
+}
+
+#menu {
+  height: 50px;
+}
+
+#menu-container {
+  display: flex;
+  justify-content: center;
+  width: 90%;
+}
+
+#logout-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#problem-container {
+  display: flex;
+  justify-content: center;
+  margin: 40px 30px;
+}
+
+#description-container {
+  width: 40%;
+  margin: 40px 30px;
+}
+
+#description {
+
+}
+
+#sandbox {
+
+}
+
+
+button {
+  height: 50px;
+  width: 120px;
+  font-family: "Work Sans", sans-serif;
 }

@@ -2,24 +2,31 @@
 <html>
   <head>
     <title>Codewars</title>
-    <script src="/javascripts/codemirror.js"></script>
+    <link rel='stylesheet' href="/stylesheets/style.css" />
     <link rel='stylesheet' href="/stylesheets/codemirror.css" />
+    <link rel="stylesheet" href="/codemirror/theme/moxer.css" />
+    <script src="/javascripts/codemirror.js"></script>
     <script src="/codemirror/mode/javascript/javascript.js"></script>
     <script src="/codemirror/addon/edit/closebrackets.js"></script>
-    <link href="/codemirror/theme/moxer.css" rel="stylesheet" />
   </head>
   <body>
     <%-include("title"); %>
     <%-include("menu"); %>
-    <h1><%=problem.title%></h1>
-    <article>문제 설명 : <%=problem.description%></article>
-    <span>레벨 : <%=problem.difficulty_level%></span>
-    <span>맞은 사람 수 : <%=problem.completed_users%></span>
-    <% const address =`/problems/${problem.id}`%>
-    <form method="POST" action=<%=address%>>
-      <textarea id="editor" name="solution"><%=firstLine%></textarea>
-      <input type="submit" value="submit"></button>
-    </form>
+    <div id="problem-container">
+      <div id="description-container">
+        <h3 id="problem-title"><%=problem.title%></h3>
+        <article id="description">문제 설명 : <%=problem.description%></article>
+        <span>레벨 : <%=problem.difficulty_level%></span>
+        <span>맞은 사람 수 : <%=problem.completed_users%></span>
+      </div>
+      <div id="sandbox-container">
+        <% const address =`/problems/${problem.id}`%>
+        <form id="sandbox" method="POST" action=<%=address%>>
+          <textarea id="editor" name="solution"><%=firstLine%></textarea>
+          <input type="submit" value="submit"></button>
+        </form>
+      </div>
+    </div>
   </body>
   <script>
     var editor = CodeMirror.fromTextArea
@@ -29,6 +36,6 @@
       lineNumbers: true,
       autoCloseBrackets: true
     });
-    editor.setSize("400", "500");
+    editor.setSize("400", "400");
   </script>
 </html>
