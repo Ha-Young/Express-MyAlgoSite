@@ -1,0 +1,49 @@
+.codemirror {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.editor-container {
+  width: 100%;
+  border: 1px solid #4B5563;
+  border-radius: 0.2rem;
+  font-size: 1rem;
+}
+
+.codemirror-button {
+  width: 5rem;
+  padding: 0.5rem;
+  background-color: #262829;
+  border-radius: 0.2rem;
+  border: 1px solid #4B5563;
+}
+
+.problem-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.test-cases {
+  width: 60%;
+  height: 100%;
+  padding: 2rem;
+}
+
+.test-case {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+}
+
+.test-code {
+  
+}
+
+.test-solution {
+
+}

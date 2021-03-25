@@ -13,21 +13,37 @@
 
     <link rel="stylesheet" href="/codemirror/lib/codemirror.css">
     <link rel="stylesheet" href="/codemirror/theme/material-palenight.css">
-
+    <link rel="stylesheet" href="/stylesheets/problem.css">
     <% include ./partials/head %>
   </head>
   <body>
     <% include ./partials/header %>
 
     <h2><%= title %></h2>
-    <form action="/problems/<%= id %>/" method="POST">
-      <textarea id="editor" name="userAnswer">
-function solution(<%= codeParameterType %>) {
+
+    <div class="problem-container">
+      <div class="test-cases">
+        <% for (let i = 0; i < tests.length; i++) { %>
+          <div class="test-case">
+            <span class="test-number"><%= `${i + 1}번 테스트 케이스` %></span>
+            <div class="test-box">
+              <span class="test-code"><%= tests[i].code %></span>
+              <span class="test-solution"><%= tests[i].solution %></span>
+            </div>
+          </div>
+        <% } %>
+      </div>
+      <form class="codemirror" action="/problems/<%= id %>/" method="POST">
+        <div class="editor-container">
+        <textarea id="editor" name="userAnswer">
+function solution(<%= codeParameter %>) {
   
 };
 </textarea>
-      <button type="submit">제출</button>
-    </form>
+        </div>
+        <button class="codemirror-button" type="submit">제출</button>
+      </form>
+    </div>
 
     <% include ./partials/footer %>
     <script src='/javascripts/editor.js'></script>
