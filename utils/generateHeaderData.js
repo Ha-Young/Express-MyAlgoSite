@@ -20,7 +20,7 @@ const generateHeaderData = (isAuthenticated, user) => {
     signupStatus: 'signup',
     loginStatus: 'login',
     signupRef: '/auth/signup',
-    loginRef: '/auth'
+    loginRef: '/auth/login'
   };
 };
 

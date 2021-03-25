@@ -63,5 +63,22 @@ exports.createUser = catchAsync(async (req, res, next) => {
 
 exports.logOut = (req, res) => {
   req.logout();
+  req.session.destroy();
   res.redirect('/');
+};
+
+exports.checkAuthentication = (req, res, next) => {
+  if (req.path.includes('logout')) {
+    if (req.isAuthenticated()) {
+      return next();
+    }
+
+    return res.redirect('/');
+  }
+
+  if (req.isAuthenticated()) {
+    return res.redirect('/');
+  }
+
+  return next();
 };

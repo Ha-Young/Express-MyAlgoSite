@@ -1,0 +1,45 @@
+.problem {
+  display: flex;
+  flex-flow: column;
+  margin: 40px;
+  width: 90%;
+}
+
+.title-container {
+  margin-bottom: 10px;
+}
+
+.contents-container {
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.description-container {
+  margin: 5px;
+  max-width: 45%;
+}
+
+.submit-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.description {
+  margin-bottom: 10px;
+}
+
+.test {
+  margin-top: 10px;
+}
+
+.submit {
+  height: 50px;
+  width: 100px;
+  color: #fafafa;
+  background-color: black;
+  font-size: 20px;
+  font-weight: 400;
+}
