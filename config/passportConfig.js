@@ -19,7 +19,6 @@ function initialize(passport) {
       return done(err);
     }
   };
-  console.log("initialize passport");
 
   passport.use(
     new LocalStrategy(
@@ -33,12 +32,9 @@ function initialize(passport) {
   );
 
   passport.serializeUser((user, done) => {
-    console.log(user._id);
-    console.log("serialize");
     return done(null, user._id);
   });
   passport.deserializeUser((id, done) => {
-    console.log("deserialize");
     return User.findOne({ _id: id })
       .then((user) => done(null, user))
       .catch((err) => done(err));

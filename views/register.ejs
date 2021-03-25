@@ -1,26 +1,60 @@
 <!DOCTYPE html>
 <html>
-  <% include ./partials/head %>
+  <head>
+    <% include ./partials/head %>
+    <link rel="stylesheet" href="/stylesheets/register.css" />
+  </head>
   <body>
-    <% include ./partials/header %>
-    <h1>Register</h1>
-    <% if (message) {%> <%= message %> <% } %>
-    <form action="/register" method="POST">
-      <div>
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" required />
-      </div>
-
-      <div>
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required />
-      </div>
-      <div>
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required />
-      </div>
-      <button type="submit">Register</button>
-    </form>
-    <a href="/login">Login</a>
+    <div class="register-page">
+      <section class="main-title-container">
+        <h1 class="main-title">VANILLALGO</h1>
+      </section>
+      <section class="register-container">
+        <h1 class="register-title">REGISTER</h1>
+        <form class="register-form" action="/register" method="POST">
+          <div class="register-input-container">
+            <div class="register-input">
+              <input
+                class="register-input_email"
+                type="name"
+                id="name"
+                name="name"
+                placeholder="Enter Name"
+                required
+              />
+            </div>
+            <div class="register-input">
+              <input
+                class="register-input_email"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter Email"
+                required
+              />
+            </div>
+            <div class="register-input">
+              <input
+                class="register-input_password"
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter Password"
+                required
+              />
+            </div>
+          </div>
+          <div class="register-form_button-container">
+            <button class="register-button" type="submit">Register</button>
+            <button class="login-button" onClick="location.href='/login'">
+              Log In
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+    <video autoplay muted loop class="register-background">
+      <source src="/images/loginBackground.mp4" type="video/mp4" />
+    </video>
   </body>
 </html>

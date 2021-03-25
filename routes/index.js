@@ -5,9 +5,9 @@ const bcrypt = require("bcrypt");
 const { isLoggedIn, isNotLoggedIn } = require("../middleware/checkLogin");
 const { User } = require("../models/User");
 const { Problem } = require("../models/Problem");
+let sortedUser;
 const sampleList = require("../models/sample_problems");
 
-/* GET home page. */
 router.get("/", isLoggedIn, async (req, res, next) => {
   // sample 넣는 부분
   // for (const sample of sampleList) {
@@ -35,11 +35,11 @@ router.get("/", isLoggedIn, async (req, res, next) => {
   try {
     const problemList = await Problem.find().lean();
     const userList = await User.find().lean();
-    const sortedUser = userList.sort((a, b) => b.rating - a.rating);
+    sortedUser = userList.sort((a, b) => b.rating - a.rating).splice(0, 5);
 
     res.render("index", { data: { problemList, sortedUser } });
   } catch (err) {
-    res.render("index");
+    next(err);
   }
 });
 
@@ -102,7 +102,9 @@ router.get("/level/:level", isLoggedIn, async (req, res, next) => {
       difficulty: level,
     }).lean();
 
-    res.render("index", { data: { problemList: currentLevelProblems } });
+    res.render("index", {
+      data: { problemList: currentLevelProblems, sortedUser },
+    });
   } catch (err) {
     next(err);
   }
@@ -119,8 +121,8 @@ router.get("/solved", isLoggedIn, async (req, res, next) => {
         const problem = await Problem.findById(problemId).lean();
         solvedList.push(problem);
       }
-      console.log(solvedList);
-      res.render("index", { data: { problemList: solvedList } });
+
+      res.render("index", { data: { problemList: solvedList, sortedUser } });
     }
   } catch (err) {
     next(err);
@@ -138,8 +140,8 @@ router.get("/unsolved", isLoggedIn, async (req, res, next) => {
       const unsolvedList = allProblems.filter(
         (problem) => solvedProblems.indexOf(problem._id.toString()) === -1
       );
-      console.log(unsolvedList);
-      res.render("index", { data: { problemList: unsolvedList } });
+
+      res.render("index", { data: { problemList: unsolvedList, sortedUser } });
     }
   } catch (err) {
     next(err);

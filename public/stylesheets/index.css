@@ -1,0 +1,142 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;900&family=Source+Code+Pro:wght@300;400;500;600&display=swap");
+
+.main-page {
+  display: flex;
+  justify-content: space-between;
+  height: 90vh;
+  color: white;
+  background-color: #222f3e;
+  padding: 30px 60px;
+  margin-bottom: 20px;
+}
+
+.level-container {
+  width: 100%;
+  padding: 40px 0;
+  text-align: center;
+  border-radius: 18px;
+  background-color: #353b48;
+  margin-bottom: 30px;
+}
+
+.level-title {
+  color: #f7d51d;
+  margin-bottom: 40px;
+  font-size: 1.2rem;
+}
+
+.level-item {
+  margin-bottom: 28px;
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+
+.level-item:last-child {
+  margin-bottom: 0;
+}
+
+.level-item:hover {
+  color: #1e90ff;
+}
+
+.ranking-container {
+  width: 100%;
+  padding: 40px 0;
+  text-align: center;
+  border-radius: 18px;
+  background-color: #353b48;
+}
+
+.ranking-title {
+  color: #f7d51d;
+  margin-bottom: 40px;
+  font-size: 1.2rem;
+}
+
+.ranking-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 50px;
+  margin-bottom: 18px;
+  font-size: 1.05rem;
+}
+
+.ranking-item:last-child {
+  margin-bottom: 0;
+}
+
+.ranking-item_name {
+  display: block;
+  width: 180px;
+  overflow: hidden;
+  text-align: left;
+}
+
+.problem-container {
+  margin-left: 40px;
+  width: 100%;
+  padding: 30px;
+  text-align: center;
+  border-radius: 18px;
+  background-color: #353b48;
+}
+
+.problem-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Noto Sans KR", sans-serif;
+  font-family: "Source Code Pro", monospace;
+  margin-bottom: 30px;
+  padding: 40px 20px;
+  border-radius: 18px;
+  background-color: #222f3e;
+  cursor: pointer;
+  transition: all ease-in-out 0.1s;
+}
+
+.problem-item:hover {
+  color: #74b9ff;
+  transform: scale(1.02);
+}
+
+.problem-item_info-container {
+  width: 90%;
+  padding: 0 20px;
+}
+
+.problem-item_title {
+  width: 100%;
+  display: block;
+  font-weight: 600;
+  text-align: left;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.problem-item_description {
+  width: 100%;
+  display: block;
+  font-weight: 400;
+  text-align: left;
+  font-size: 0.9rem;
+  line-height: 1.4rem;
+  color: #ced6e0;
+}
+
+.problem-item_metadata-container {
+  width: 10%;
+  padding: 0 20px;
+  font-size: 1.1em;
+  font-weight: 800;
+}
+
+.problem-item_completed-container {
+  margin-bottom: 5px;
+  /* color: #f7d51d; */
+}
+
+.problem-item_difficulty-container {
+  margin-top: 5px;
+  /* color: #0984e3; */
+}

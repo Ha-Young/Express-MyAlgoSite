@@ -1,0 +1,90 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+.register-background {
+  object-fit: cover;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: 0;
+}
+
+.register-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-title-container {
+  height: 20vh;
+  font-size: 2.5rem;
+  z-index: 3;
+}
+
+.main-title {
+  font-family: "Press Start 2P", cursive;
+  animation: blink 1s steps(4, start) infinite;
+  color: white;
+  line-height: 40px;
+  letter-spacing: 5px;
+  text-shadow: -2px 0 0 #fdff2a, -4px 0 0 #df4a42, 2px 0 0 #91fcfe,
+    4px 0 0 #4405fc;
+  animation: blink 1.8s steps(4, start) infinite;
+}
+
+.register-container {
+  z-index: 3;
+}
+
+.register-title {
+  text-align: center;
+  color: #f7d51d;
+  margin-bottom: 20px;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 440px;
+}
+
+.register-input input {
+  width: 400px;
+}
+
+.register-input_password {
+  margin-bottom: 40px;
+}
+
+.register-form_button-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-button {
+  width: 230px;
+  margin-right: 10px;
+}
+
+.login-button {
+  width: 180px;
+  margin-left: 10px;
+  background-color: #a4b0be;
+}
+
+.login-button:hover {
+  background-color: #f7d51d;
+}
+
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}

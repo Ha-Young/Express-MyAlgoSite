@@ -1,10 +1,5 @@
 const mongoose = require("mongoose");
 
-/*
-
-  TODO: Fill in the model specification
-
- */
 const { Schema } = mongoose;
 const {
   Types: { ObjectId, Mixed },

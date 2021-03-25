@@ -1,17 +1,21 @@
-<nav class="header-container">
-  <!-- <span>
-    <a href="/"> Home </a>
-  </span> -->
-
-  <h1 class="header-title"><a href="/">Codewar</a></h1>
-
-  <span class="header-link">
-    <a href="/solved"> 성공한 문제 </a>
-  </span>
-  <span class="header-link">
-    <a href="/unsolved"> 못 푼 문제 </a>
-  </span>
-  <span class="header-link">
-    <a href="/logout"> Logout </a>
-  </span>
-</nav>
+<head>
+  <link rel="stylesheet" href="/stylesheets/header.css" />
+</head>
+<body>
+  <nav class="header-container">
+    <section class="header_title-container" onClick="location.href='/'">
+      <h1 class="header_title">VANILLALGO</h1>
+    </section>
+    <secion class="header_option-container">
+      <div class="header_option solved" onClick="location.href='/solved'">
+        <span>Solved </span>
+      </div>
+      <div class="header_option unsolved" onClick="location.href='/unsolved'">
+        <span> Unsolved </span>
+      </div>
+      <div class="header_option logout" onClick="location.href='/logout'">
+        <span> Logout </span>
+      </div>
+    </secion>
+  </nav>
+</body>

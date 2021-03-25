@@ -1,0 +1,44 @@
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 40px 30px 60px;
+  color: white;
+  background-color: #1e272e;
+}
+
+.header_title-container {
+  cursor: pointer;
+}
+
+.header_title {
+  font-size: 1.8rem;
+}
+
+.header_option-container {
+  display: flex;
+  align-items: center;
+}
+
+.header_option {
+  margin-left: 20px;
+  width: 180px;
+  text-align: center;
+  cursor: pointer;
+  transition: all ease-in-out 0.1s;
+}
+
+.solved:hover {
+  color: #76c442;
+  font-size: 1.05rem;
+}
+
+.unsolved:hover {
+  color: #f7d51d;
+  font-size: 1.05rem;
+}
+
+.logout:hover {
+  color: #ff3f34;
+  font-size: 1.05rem;
+}

@@ -1,43 +1,89 @@
 <!DOCTYPE html>
 <html>
-  <% include ./partials/head %>
+  <head>
+    <% include ./partials/head %>
+    <link rel="stylesheet" href="/stylesheets/index.css" />
+  </head>
   <body>
     <% include ./partials/header %>
-    <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
-    <ul class="tabs">
-      <li><a href="/level/1">Level 1</a></li>
-      <li><a href="/level/2">Level 2</a></li>
-      <li><a href="/level/3">Level 3</a></li>
-      <li><a href="/level/4">Level 4</a></li>
-    </ul>
-    <% if (data.sortedUser) { %>
-    <ul>
-      <p>현재 순위</p>
-      <% data.sortedUser.forEach(user => { %>
-      <li>
-        <span><%=user.name%></span>
-        <span><%=user.rating%>점</span>
-      </li>
-      <% }) %>
-    </ul>
-    <% } %> <% if (data.problemList.length !== 0) { %>
-    <ul>
-      <% data.problemList.forEach(problem => { %>
-      <li>
-        <a href="/problem/<%=problem._id%>">
-          <div><%=problem.title%></div>
-          <div>정답자: <%=problem.completedCount%>명</div>
-          <div>난이도: <%=problem.difficulty%></div>
-        </a>
-      </li>
-      <% }) %>
-    </ul>
-    <% } %>
-    <div>
-      <% if (data.problemList.length === 0) { %>
-      <span>문제가 곧 업데이트 예정입니다!</span>
-      <% } %>
-    </div>
+    <main class="main-page">
+      <section class="info-container">
+        <section class="level-container">
+          <h2 class="level-title">Levels</h2>
+          <ul class="level-list">
+            <li class="level-item">
+              <div onClick="location.href='/level/1'">Level 1</div>
+            </li>
+            <li class="level-item">
+              <div onClick="location.href='/level/2'">Level 2</div>
+            </li>
+            <li class="level-item">
+              <div onClick="location.href='/level/3'">Level 3</div>
+            </li>
+            <li class="level-item">
+              <div onClick="location.href='/level/4'">Level 4</div>
+            </li>
+            <li class="level-item">
+              <div onClick="location.href='/level/5'">Level 5</div>
+            </li>
+          </ul>
+        </section>
+        <section class="ranking-container">
+          <% if (data.sortedUser) { %>
+          <h2 class="ranking-title">Ranking</h2>
+          <ul class="ranking-list">
+            <% data.sortedUser.forEach(user => { %>
+            <li class="ranking-item">
+              <span class="ranking-item_name"><%=user.name%></span>
+              <span class="ranking-item_rating"><%=user.rating%></span>
+            </li>
+            <% }) %>
+          </ul>
+        </section>
+      </section>
+      <section class="problem-container">
+        <% } %> <% if (data.problemList.length !== 0) { %>
+        <ul class="problem-list">
+          <% data.problemList.forEach(problem => { %>
+          <li
+            class="problem-item"
+            onClick="location.href='/problem/<%=problem._id%>'"
+          >
+            <div class="problem-item_info-container">
+              <div class="problem-item_title-container">
+                <span class="problem-item_title"><%=problem.title%></span>
+              </div>
+              <div class="problem-item_description-container">
+                <span class="problem-item_description"
+                  ><%=problem.description%></span
+                >
+              </div>
+            </div>
+            <div class="problem-item_metadata-container">
+              <div class="problem-item_completed-container">
+                <span class="problem-item_completed"
+                  >정답자 <%=problem.completedCount%></span
+                >
+              </div>
+              <div class="problem-item_difficulty-container">
+                <span class="problem-item_difficulty"
+                  >난이도 <%=problem.difficulty%></span
+                >
+              </div>
+            </div>
+          </li>
+          <% }) %>
+        </ul>
+        <% } %>
+        <div>
+          <% if (data.problemList.length === 0) { %>
+            <div class="problem-noproblem-container">
+          <span class="problem-noproblem">문제가 곧 업데이트 될 예정입니다!</spanㅊ>
+          </div>
+          <% } %>
+        </div>
+      </section>
+    </main>
     <% include ./partials/footer %>
   </body>
 </html>
