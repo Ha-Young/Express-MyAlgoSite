@@ -14,6 +14,7 @@ const methodOverride = require("method-override");
 
 const mongoose = require("mongoose");
 const path = require("path");
+const { checkAuthenticated } = require("./middlewares/auth");
 
 const app = express();
 

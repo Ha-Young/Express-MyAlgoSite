@@ -1,12 +1,12 @@
 const express = require("express");
+const { checkAuthenticated } = require("../middlewares/auth");
 const router = express.Router();
 
-const { checkAuthenticated } = require("../middlewares/auth");
-
 router.use("/auth", require("./auth"));
+router.use(checkAuthenticated);
+router.use("/", require("./home"));
 router.use("/editor", require("./editor"));
 router.use("/problems", require("./problems"));
-router.use("/", checkAuthenticated, require("./home"));
 
 // catch 404 and forward to error handler
 router.use(function(req, res, next) {
