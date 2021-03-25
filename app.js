@@ -36,7 +36,6 @@ app.use(sassMiddleware({
   src: path.join(__dirname, './scss'),
   dest: path.join(__dirname, './public'),
   indentedSyntax : false,
-  debug: true,
   outputStyle: 'compressed'
 }));
 app.use(express.static(publicDirectoryPath));
@@ -66,6 +65,7 @@ const index = require('./routes/index');
 const login = require('./routes/login');
 const auth = require('./routes/auth');
 const problems = require('./routes/problems');
+const user = require('./routes/user');
 const { verifyUser } = require('./routes/middlewares/verifyUser');
 
 app.use('/login', login);
@@ -73,6 +73,7 @@ app.use('/auth', auth);
 app.use(verifyUser);
 app.use('/', index);
 app.use('/problems', problems);
+app.use('/user', user);
 
 app.use(function(req, res, next) {
   next(creatError(404));

@@ -13,8 +13,8 @@
       <div class="grid-container">
         <div class="grid-item"><span>난이도</span></div>
         <div class="grid-item"><span>제목</span></div>
-        <div class="grid-item"><span>제출</span></div>
         <div class="grid-item"><span>정답</span></div>
+        <div class="grid-item"><span>제출</span></div>
         <div class="grid-item"><span>정답률</span></div>
         <div class="grid-item"><span>제출 기록</span></div>
         <% for (let i = 0; i < problems.length; i++) { %>
@@ -26,8 +26,8 @@
               </a>
             </span>
           </div>
-          <div class="grid-item"><span><%= problems[i].submission %></span></div>
           <div class="grid-item"><span><%= problems[i].accepted %></span></div>
+          <div class="grid-item"><span><%= problems[i].submission %></span></div>
           <div class="grid-item"><span><%= acceptedRatio[i] %>%</span></div>
           <div class="grid-item">
             <a href="<%= `/user/problems/${problems[i].id}` %>">

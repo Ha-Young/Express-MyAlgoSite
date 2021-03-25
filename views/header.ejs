@@ -15,7 +15,7 @@
     <div class="header-middle-container">
       <div class="header-item">
         <img class="profile-img" src="<%= userInfo.picture %>" alt="">
-        <span><%= userInfo.name %></span>
+        <a href="/user/<%= userInfo._id %>"><span><%= userInfo.name %></span></a>
       </div>
     </div>
     <div class="header-right-container">

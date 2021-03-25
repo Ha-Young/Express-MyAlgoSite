@@ -18,21 +18,19 @@
   </header>
   <div class="problem-wrapper">
     <div class="problem-left">
-      <div class="">
-        <h2><%= problem.id %>. <%= problem.title %></h2>
-      </div>
-      <div class="">
-        <p><%= problem.description %></p>
-      </div>
-      <div class="">
-        <p>
-          Accepted: <%= problem.accepted %> Submissions: <%= problem.submission %>
-        </p>
-      </div>
+      <p>
+        executed code : <%= failTests[0].expect.code %>
+      </p>
+      <p>
+        expected return : <%= failTests[0].expect.solution %>
+      </p>
+      <p>
+        actual return : <%= failTests[0].actual %>
+      </p>
     </div>
     <div class="problem-right">
       <form class="code-editor" action="<%= `/problems/${problem.id}` %>" method="post">
-        <textarea name="solution" cols="30" rows="10"></textarea>
+        <textarea name="solution" cols="30" rows="10"><%= userSolution %></textarea>
         <div class="button-wrapper">
           <input class="burning-button" type="submit" />
         </div>
@@ -47,7 +45,5 @@
     theme: "dracula",
     lineNumbers: true
   });
-
-  myCodeMirror.getDoc().setValue("function solution(data) {\n  return ;\n}");
 </script>
 </html>

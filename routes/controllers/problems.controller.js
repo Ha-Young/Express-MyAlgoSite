@@ -68,10 +68,12 @@ exports.getOneAndUpdateProblem = async function (req, res, next) {
       ${userSolution}
 
       for (let i = 0; i < tests.length; i++) {
-        if (eval(tests[i].code) !== tests[i].solution) {
-          judgeResult.push(false);
+        const actualReturn = eval(tests[i].code);
+
+        if (eval(tests[i].code) === tests[i].solution) {
+          judgeResult.push({ actualReturn, result: true});
         } else {
-          judgeResult.push(true);
+          judgeResult.push({ actualReturn, result: false});
         }
       }
     `);
@@ -80,7 +82,7 @@ exports.getOneAndUpdateProblem = async function (req, res, next) {
     return res.render('failure', { err, targetProblemId, failTests: targetProblem.tests, userInfo });
   }
   //TODO 여기도 에러 핸들링 필요함.
-  if (judgeResult.every(result => result === true)) {
+  if (judgeResult.every(testCase => testCase.result === true)) {
     await Problem.findOneAndUpdate(
       { id: targetProblemId },
       { $inc: { accepted: 1 }}
@@ -114,12 +116,12 @@ exports.getOneAndUpdateProblem = async function (req, res, next) {
   } else {
     const failTests = [];
 
-    judgeResult.forEach((result, index) => {
-      if (result === false) {
-        failTests.push(targetProblem.tests[index]);
+    judgeResult.forEach((testResult, index) => {
+      if (testResult.result === false) {
+        failTests.push({expect: targetProblem.tests[index], actual: judgeResult[index].actualReturn});
       }
     });
 
-    res.render('failure', { failTests, targetProblemId, err: null, userInfo });
+    res.render('test', { failTests, userInfo, problem: targetProblem, userSolution });
   }
 }
