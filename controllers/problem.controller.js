@@ -1,4 +1,5 @@
 const vm = require("vm");
+const User = require('../models/User');
 const Problem = require("../models/Problem");
 const { getArrayParamString } = require("../utils/utils");
 
@@ -13,7 +14,9 @@ module.exports.problemDetailController = async function problemDetailController(
     return res.redirect("/");
   }
 
-  res.render("problemDetail",{ problem, initCode: "function solution() {\n\n}", failure: '', success: '', results: [] });
+  const initCode = `function solution(${problem.params}) {\n\n}`;
+
+  res.render("problemDetail",{ problem, initCode, failure: '', success: '', results: [] });
 }
 
 module.exports.postProblemDetailController = async function postProblemDetailController(req, res, next) {
@@ -25,15 +28,15 @@ module.exports.postProblemDetailController = async function postProblemDetailCon
 
   try {
     let isSuccess = true;
-    const resultArr = problem.testCases.map((testcase, i) => {
-      let param = testcase.testcase;
+    const resultArr = problem.testCases.map((el, i) => {
+      let param = el.testCase;
       if (Array.isArray(param)) {
         param = getArrayParamString(param);
       }
 
       const context = userCode.concat(`\nsolution(${param})`);
       const result = vm.runInNewContext(context);
-      if (testcase.answer === result) {
+      if (el.answer === result) {
         return { index: i, message: "Success!"}
       }
 
@@ -42,6 +45,10 @@ module.exports.postProblemDetailController = async function postProblemDetailCon
     });
 
     if (isSuccess) {
+      const currentUser = await User.findById(req.user._id);
+      const newWinnerArr = [...problem.winner];
+      newWinnerArr.push(currentUser._id);
+      await Problem.findByIdAndUpdate(problem_id, { $set : { winner: newWinnerArr } });
       return res.render('problemDetail', { problem, initCode: userCode, failure: '', success: 'success', results: resultArr });
     }
 
