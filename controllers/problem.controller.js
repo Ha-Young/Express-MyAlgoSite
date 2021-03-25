@@ -24,10 +24,10 @@ module.exports.postProblemDetailController = async function postProblemDetailCon
     body: { userCode },
     params: { problem_id }
   } = req;
-  const problem = await Problem.findById(problem_id);
-
   try {
+    const problem = await Problem.findById(problem_id);
     let isSuccess = true;
+
     const resultArr = problem.testCases.map((el, i) => {
       let param = el.testCase;
       if (Array.isArray(param)) {

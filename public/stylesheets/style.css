@@ -35,6 +35,10 @@ body {
   filter:blur(1px);
 }
 
-a {
-  color: #00B7FF;
+.main__Logo {
+  font-size: 400px;
+}
+
+.main__Title {
+  font-size: 80px;
 }
