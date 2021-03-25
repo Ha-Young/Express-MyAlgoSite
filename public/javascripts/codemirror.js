@@ -5,5 +5,5 @@ let cm = new CodeMirror.fromTextArea(document.getElementById("editor"), {
   lineWrapping: false,
 });
 
-cm.setSize(500, 300);
+cm.setSize("100%", "100%");
 console.log(cm);

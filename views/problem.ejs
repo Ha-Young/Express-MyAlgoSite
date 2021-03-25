@@ -10,26 +10,31 @@
   <main class="problem-wrapper">
 
     <div class="problem-board">
-      <div class="problem-title-board">
-        <span><%= problem.title %> </span>
+
+      <div class="problem-info-wrapper">
+        <div class="problem-title-board">
+          <span><%= problem.title %> </span>
+        </div>
+        <div class="problem-info-board">
+         completed user: <%= problem.completed_users %>
+         difficulty level: <%= problem.difficulty_level %>
+        </div>
+        <div class="problem-description-board">
+          <%= problem.description %>
+        </div>
       </div>
 
-      <div class="problem-info-board">
-       completed user: <%= problem.completed_users %>
-       difficulty level: <%= problem.difficulty_level %>
+      <div class="problem-solution-wrapper">
+        <form id="solution-board" action="/problem/<%=problem._id%>" method="POST">
+          <textarea id="editor" name="solution"></textarea>
+        </form>
       </div>
-
-      <div class="problem-description-board">
-        <%= problem.description %>
-      </div>
-
-      <form id="form-solution" action="/problem/<%=problem._id%>" method="POST">
-        <textarea id="editor" name="solution"></textarea>
-      </form>
-
-      <button type="submit" form="form-solution">Submit</button>
+  
     </div>
-    
+
+
+    <button class="problem-submit-button" type="submit" form="solution-board">Submit</button>
+
   </main>
 
   <% include footer.ejs %>

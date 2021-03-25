@@ -16,7 +16,6 @@ exports.getUserScript = async function (req, res, next) {
     const userScript = req.body.solution;
 
     const testResults = runTest(fetchedTests, userScript);
-    console.log("testResults", testResults);
 
     isAllPassed(testResults)
       ? res.status(200).render("sucess", { testResults: testResults })

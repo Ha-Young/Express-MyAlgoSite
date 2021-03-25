@@ -8,6 +8,7 @@
 
 .signup-wrapper,
 .login-wrapper {
+  border-radius: 8px;
   background: #fafafa;
   width: 500px;
   height: 500px;
@@ -54,6 +55,7 @@
 }
 
 .form-button-board .button {
+  border-radius: 5px;
   background: #666;
   border: none;
   color: #fff;
