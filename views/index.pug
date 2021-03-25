@@ -2,7 +2,8 @@ extends layouts/main
 
 block body
   link(rel='stylesheet' href='/stylesheets/index.css')
+  link(rel='stylesheet' href='/stylesheets/effects/glowingEffect.css')
   .main__wrapper
     img.main__Logo(src="/images/codewars_logo_icon_big.png")
-    label.main__Title Code Wars
+    label.main__Title.glowing__text Code Wars
     a.btn.btn-primary(href="/login/google") Sign In

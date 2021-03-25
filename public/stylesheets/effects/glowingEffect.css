@@ -1,0 +1,27 @@
+.glowing__text{
+  color: rgb(0, 0, 0);
+  font-size:8em;
+  margin:0;
+  text-shadow: 0px -1px 2px black,
+  0px -2px 6px rgba(200, 200, 255, 1),
+  0px -4px 12px rgba(150,150,255,1),
+  0px -8px 20px rgba(100,100,255,1),
+  0px -12px 30px rgba(50,50,255,1),
+  0px -18px 42px rgba(0,0,255,1);
+  animation:fire 2s ease infinite,colorSpin 10s linear infinite;
+}
+
+@keyframes fire{
+  50%{
+    text-shadow:0px -2px 6px black,
+  0px -6px 24px rgba(200, 200, 255, 1),
+  0px -12px 48px rgba(150,150,255,1),
+  0px -20px 80px rgba(100,100,255,1),
+  0px -30px 120px rgba(50,50,255,1),
+  0px -42px 168px rgba(0,0,255,1);
+  }
+}
+
+@keyframes colorSpin{
+  to{filter:hue-rotate(0deg)}
+}

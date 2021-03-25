@@ -31,7 +31,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   z-index: -1;
-  opacity: .7;
+  opacity: .8;
   filter:blur(1px);
 }
 
