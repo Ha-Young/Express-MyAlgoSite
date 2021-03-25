@@ -1,11 +1,10 @@
 const Problem = require("../models/Problem");
-const { TITLE } = require("../constants/common");
-const { getArgument } = require("../utils/solution");
+const { getArgument, getResultList, getUserAnwerList } = require("../utils/solution");
 
 exports.home = async (req, res) => {
   problems = await Problem.find().lean();
 
-  res.render("home", { pageTitle: TITLE.HOME, problems });
+  res.render("home", { problems });
 };
 
 exports.getProblemDetail = async (req, res) => {
@@ -16,25 +15,43 @@ exports.getProblemDetail = async (req, res) => {
   res.render("problemDetail", {
     pageTitle,
     problem,
-    parameter: "n",
+    parameter: "argument",
   });
 };
 
-exports.postSolution = async (req, res) => {
-  const id = Number(req.params.id);
-  const problem = await Problem.findOne({ id }).lean();
-  const userSolution = new Function(`return ${req.body.solution}`)();
+exports.postSolution = async (req, res, next) => {
+  try{
+    const id = Number(req.params.id);
+    const problem = await Problem.findOne({ id }).lean();
+    const userSolution = new Function(`return ${req.body.solution}`)();
+    const problemArgList = [];
+    const problemAnswerList = [];
 
-  const problemArgList = [];
-  const problemAnswerList = [];
+    problem.tests.forEach(example => {
+      problemArgList.push(getArgument(example.code)[0]);
+      problemAnswerList.push(example.solution);
+    });
 
-  problem.tests.map(example => {
-    problemArgList.push(getArgument(example.code)[0]);
-    problemAnswerList.push(example.solution);
-  });
+    let userAnswerList;
 
-  const userAnserList = problemArgList.map(arg => userSolution(arg));
+    try {
+      userAnswerList = getUserAnwerList(problemArgList, userSolution);
+    } catch (err) {
+      res.render("failure", { resultList: err });
+      return;
+    }
 
-  console.log(problemArgList, problemAnswerList);
-  console.log(userAnserList);
+    const resultList = getResultList(problemAnswerList, userAnswerList);
+
+    for (const result of resultList) {
+      if (!result.output) {
+        res.render("failure", { resultList });
+        return;
+      }
+    }
+
+    res.render("success", { resultList });
+  } catch (err) {
+    res.render("failure", { resultList: err });
+  }
 }

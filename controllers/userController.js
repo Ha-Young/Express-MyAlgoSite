@@ -1,8 +1,7 @@
 const passport = require("passport");
-const { TITLE } = require("../constants/common");
 
 exports.login = (req, res) => {
-  res.render("login", { pageTitle: TITLE.LOGIN });
+  res.render("login");
 };
 
 exports.logout = (req, res) => {

@@ -63,7 +63,13 @@ a {
   border-radius: 6px;
 }
 
-#editor {
-  width: 700px;
-  height: 500px;
+iframe {
+  width: 400px;
+  height: 400px;
+}
+
+.solution-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

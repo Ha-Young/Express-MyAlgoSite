@@ -8,7 +8,7 @@
     <p><%= problem.description %></p>
   </div>
   <div class="problem-solution">
-    <form action="/problems/<%= problem.id %>" method="POST">
+    <form action="/problems/<%= problem.id %>" method="POST" target="result">
       <textarea id="editor" name="solution">
 function solution(<%= parameter %>) {
 }
@@ -16,6 +16,7 @@ function solution(<%= parameter %>) {
       <button>ATTEMPT</button>
     </form>
   </div>
+  <iframe id="result" name="result"></iframe>
 </div>
 
 <script type="text/javascript" src="/javascripts/codemirror@5.60.0/codemirror.min.js"></script>

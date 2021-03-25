@@ -3,4 +3,6 @@ exports.TITLE = {
   HOME: "Home",
   LOGIN: "LogIn",
   LOGOUT: "LogOut",
+  SUCCESS: "success",
+  FAILURE: "Failure",
 };
