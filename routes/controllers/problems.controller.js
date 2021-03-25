@@ -1,5 +1,6 @@
 const Problem = require("../../models/Problem");
-const { NodeVM, VMScript } = require("vm2");
+const { VM } = require("vm2");
+const deepEqual = require("fast-deep-equal");
 
 exports.getProblems = async (req, res, next) => {
   try {
@@ -35,6 +36,7 @@ exports.submitProblem = async (req, res, next) => {
 
       if (isFailed > -1) {
         res.render("solutionResult", {
+          code,
           tests,
           resultList: result.resultList,
           answerList: result.answerList
@@ -50,6 +52,7 @@ exports.submitProblem = async (req, res, next) => {
     }
 
     res.render("solutionResult", {
+      code,
       resultList: null,
       answerList: null,
       error: result
@@ -61,35 +64,26 @@ exports.submitProblem = async (req, res, next) => {
 };
 
 function checkSolution (tests, code) {
-  const solution = {};
-  const vm = new NodeVM({
+  const vm = new VM({
     console: "inherit",
     compiler: "javascript",
     timeout: 5000,
-    require: { external: false },
-    sandbox: {
-      solution
-    }
+    require: { external: false }
   });
 
   try {
     const resultList = [];
     const answerList = [];
 
-    vm.run(`
-      solution = ${code};
-    `);
-
     for (const test of tests) {
-      const testCode = test.code;
-      const result = vm.run(`
-        module.exports = ${testCode};
-      `);
+      const testCode = code + test.code;
+      const result = vm.run(testCode);
+      const compareResult = deepEqual(result, JSON.parse(test.solution));
 
-      if (result != test.solution) {
-        resultList.push("failure");
-      } else {
+      if (compareResult) {
         resultList.push("success");
+      } else {
+        resultList.push("failure");
       }
       answerList.push(result);
     }
