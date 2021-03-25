@@ -1,7 +1,7 @@
 require('dotenv').config();
 
-require("./db");
-require("./passport");
+require("./loader/db");
+require("./loader/passport");
 
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
@@ -10,13 +10,14 @@ const createError = require("http-errors");
 const session = require("express-session");
 const passport = require("passport");
 const MongoStore = require("connect-mongo")(session);
+const mongoose = require("mongoose");
 
 const path = require("path");
 
 const global = require("./routes/global");
 const join = require("./routes/join");
 const problem = require("./routes/problem");
-const db = require('./db');
+const db = require('./loader/db');
 
 const app = express();
 
@@ -48,15 +49,19 @@ app.use("/", global);
 app.use("/join", join);
 app.use("/problems", problem);
 
-// catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// error handler
 app.use(function(err, req, res, next) {
+  if (err instanceof mongoose.CastError) {
+    err.message = "Internal Server Error";
+    err.status = 500;
+    err.stack = null;
+  }
+
   // set locals, only providing error in development
-  res.locals.message = err.message;
+  res.locals.message = err.message || "Internal Server Error";
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
   // render the error page

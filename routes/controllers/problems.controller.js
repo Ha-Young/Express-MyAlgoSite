@@ -1,5 +1,3 @@
-const createError = require("http-errors");
-
 const Problem = require("../../models/Problem");
 
 const { checkSolution } = require("../../services/problemService");
@@ -25,7 +23,7 @@ exports.getProblem = async (req, res, next) => {
 
     res.status(200).render("problem", { problem, user });
   } catch (error) {
-    next(createError(error));
+    next(error);
   }
 };
 
@@ -49,7 +47,7 @@ exports.postSolution = async (req, res, next) => {
 
     if (error) {
       res
-        .status(400)
+        .status(400) // 여기서도 400을 쏘아줘야 할 필요가 있나..?
         .render("failure", {
           message: "Failure",
           error,
@@ -77,6 +75,6 @@ exports.postSolution = async (req, res, next) => {
       .status(200)
       .render("failure", { message: "Failure", log, userCode, user, problem });
   } catch (error) {
-    next(createError(error));
+    next(error);
   }
 };

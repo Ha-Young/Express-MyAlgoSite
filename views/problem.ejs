@@ -9,7 +9,10 @@
 <div class="problem-wrapper">
   <div class="problem-header">
     <div class="problem-title">
-      <h2><%= problem.title %></h2>
+      <h2>        
+        <i class="far fa-question-circle"></i>
+        <%= problem.title %>
+      </h2>
       <div class="problem-level">Level: <%= problem.difficulty_level %></div>
     </div>
   </div>
@@ -21,7 +24,9 @@
       </div>
     </div>
     <div class="problem-code">
-      <div class="problem-code-title">Solution</div>
+      <div class="problem-code-title">
+        Solution
+      </div>
       <form method="post" action="/problems/<%= problem._id %>">
         <textarea id="answer-area" name="solution">
 function solution(n) {
@@ -31,8 +36,8 @@ function solution(n) {
         <div class="problem-code-title">Test</div>
         <textarea class="test-area" id="test-area" name="solution">
 <% problem.tests.forEach((test) => { %>
-example: <%= test.code %>
-result: <%= test.solution %>
+<%= test.code %>
+<%= test.solution %>
 <% }) %>
         </textarea>
         <div class="problem-submit" >

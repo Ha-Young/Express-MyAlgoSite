@@ -22,12 +22,11 @@ h3 {
 
 .problem-header {
   height: 80px;
-  border-bottom: 1px solid #F9F6F6;
 }
 
 .problem-information {
   display: flex;
-  height: 750px;
+  height: 700px;
   justify-content: center;
   align-content: center;
   background-color: #F9F6F6;
@@ -42,18 +41,21 @@ h3 {
 .problem-submit {
   display: flex;
   margin-top: 20px;
-  justify-content: center;
+  justify-content: flex-end;
 }
 
 .problem-submit-button {
   display: flex;
   height: 30px;
   margin-right: 10px;
-  text-align: center;
-  background-color: #F9F6F6;
+  justify-content: flex-end;
   color: black;
-  border: 0px;
+  background-color: white;
+  color: #b1361e;
+  border: 1px solid #b1361e;
+  border-radius: 10px;
 }
+
 .problem-code {
   max-height: 750px;
 }

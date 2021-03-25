@@ -2,9 +2,9 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const GitHubStrategy = require('passport-github').Strategy;
 
-const User = require("./models/User");
-const { ErrorHandler } = require("./util/error");
-const { compareHashPassword } = require("./services/userService");
+const User = require("../models/User");
+const { ErrorHandler } = require("../util/error");
+const { compareHashPassword } = require("../services/userService");
 
 passport.use(new LocalStrategy({
   usernameField: "username",
@@ -17,18 +17,12 @@ passport.use(new LocalStrategy({
 
     const user = await User.findOne({ username });
 
-    if (!user) {
-      throw new ErrorHandler(400, "Invalid User");
-    }
-
     const validPassword = await compareHashPassword(password, user.password);
 
     if (validPassword) {
       cb(null, username);
       return;
     } 
-
-    throw new ErrorHandler(400, "Wrong Password");
   } catch (error) {
     cb(error);
   }

@@ -1,15 +1,22 @@
 const passport = require("passport");
-const createError = require("http-errors");
 
 const { signUp } = require("../../services/userService");
 const { ErrorHandler } = require("../../util/error");
 
-exports.getLogin = (req, res) => {
-  res.status(200).render("login", { title: "Codewars" });
+exports.getLogin = (req, res, next) => {
+  try {
+    res.status(200).render("login", { title: "Codewars" });
+  } catch (error) {
+    next(error);
+  }
 };
 
-exports.getLocalJoin = (req, res) => {
-  res.status(200).render("join", { title: "Join" });
+exports.getLocalJoin = (req, res, next) => {
+  try {
+    res.status(200).render("join", { title: "Join" });
+  } catch (error) {
+    next(error);
+  }
 };
 
 exports.postLocalJoin = async (req, res, next) => {
@@ -17,7 +24,7 @@ exports.postLocalJoin = async (req, res, next) => {
     const { user, error } = await signUp(req.body);
     
     if (error) {
-      throw new ErrorHandler(error.status, error.message);
+      throw new ErrorHandler(error);
     }
     
     if (user) {
@@ -26,7 +33,7 @@ exports.postLocalJoin = async (req, res, next) => {
 
     res.redirect("/login");
   } catch (error) {
-    next(createError(error));
+    next(error);
   }
 };
 

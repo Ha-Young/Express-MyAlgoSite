@@ -25,7 +25,7 @@ async function signUp(userData) {
     } = userData;
   
     if (password !== confirmPassword) {
-      throw new ErrorHandler(401, "Wrong Password");
+      throw new ErrorHandler(400, "Bad Request");
     }
 
     const hashedPassword = await hashPassword(password, process.env.SALT_ROUNDS);

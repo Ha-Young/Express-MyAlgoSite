@@ -1,6 +1,6 @@
 const vm = require("vm");
 
-function checkSolution(tests, solution) { // typecheck, 수정도 해야함..
+function checkSolution(tests, solution) {
   const log = [];
   let error;
 
