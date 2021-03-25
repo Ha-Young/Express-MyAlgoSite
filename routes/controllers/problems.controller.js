@@ -1,4 +1,5 @@
 const Problem = require("../../models/Problem");
+const User = require("../../models/User");
 const { VM } = require("vm2");
 const deepEqual = require("fast-deep-equal");
 
@@ -36,6 +37,29 @@ exports.submitProblem = async (req, res, next) => {
     const problem = await Problem.findById(id);
     const tests = problem.tests;
     const result = checkSolution(tests, code);
+    const userInfo = await User.findById(req.user._id);
+    const solvedProblems = userInfo.problems;
+
+    if (solvedProblems.findIndex(obj => obj.problem.toString() === id) === -1) {
+      console.log("new");
+      await User.findByIdAndUpdate(req.user._id, {
+        $push: {
+          problems: {
+            problem: id,
+            code,
+            isSolved: false
+          }
+        }
+      });
+    } else {
+      console.log("duplicate!");
+      await User.findOneAndUpdate({
+        _id: req.user._id,
+        "problems.problem": id
+      }, {
+        "problems.$.code": code
+      });
+    }
 
     if (Array.isArray(result.resultList)) {
       const isFailed = result.resultList.indexOf("failure");
@@ -49,13 +73,32 @@ exports.submitProblem = async (req, res, next) => {
           answerList: result.answerList,
           nickname: req.user.userNickname
         });
-        return;
-      }
+      } else {
+        const userInfo = await User.findOne({
+          _id: req.user._id,
+          "problems.problem": id
+        });
 
-      res.render("success", {
-        message: "SUCCESS",
-        nickname: req.user.userNickname
-      });
+        if (!userInfo.problems[0].isSolved) {
+          await Problem.findByIdAndUpdate(id, {
+            $inc: {
+              completed_users: 1
+            }
+          });
+        }
+
+        await User.findOneAndUpdate({
+          _id: req.user._id,
+          "problems.problem": id
+        }, {
+          "problems.$.isSolved": true
+        });
+
+        res.render("success", {
+          message: "SUCCESS",
+          nickname: req.user.userNickname
+        });
+      }
 
       return;
     }
@@ -89,18 +132,20 @@ function checkSolution (tests, code) {
     for (const test of tests) {
       const testCode = code + test.code;
       const result = vm.run(testCode);
-      const compareResult = deepEqual(result, JSON.parse(test.solution));
+      const compareResult = deepEqual(result, test.solution);
 
       if (compareResult) {
         resultList.push("success");
       } else {
         resultList.push("failure");
       }
+
       answerList.push(result);
     }
 
     return { resultList, answerList };
   } catch (err) {
+    console.log(err);
     return err;
   }
 }
