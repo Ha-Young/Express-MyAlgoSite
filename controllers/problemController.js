@@ -1,31 +1,50 @@
 const Problem = require("../models/Problem");
+const createHttpError = require("http-errors");
 const { getArgument, getResultList, getUserAnwerList } = require("../utils/solution");
 
-exports.home = async (req, res) => {
-  problems = await Problem.find().lean();
+exports.home = async (req, res, next) => {
+  try {
+    const problems = await Problem.find().lean();
 
-  res.render("home", { problems });
+    res.render("home", { problems });
+  } catch (err) {
+    next(createHttpError(500));
+  }
 };
 
-exports.getProblemDetail = async (req, res) => {
-  const id = Number(req.params.id);
-  const problem = await Problem.findOne({ id });
-  const pageTitle = problem.title;
+exports.getProblemDetail = async (req, res, next) => {
+  try {
+    const id = Number(req.params.id);
+    let problem;
 
-  res.render("problemDetail", {
-    pageTitle,
-    problem,
-    parameter: "arg",
-  });
+    try {
+      problem = await Problem.findOne({ id }).lean();
+    } catch (err) {
+      next(createHttpError(500));
+    }
+
+    res.render("problemDetail", {
+      problem,
+      parameter: "arg",
+    });
+  } catch (err) {
+    next(createHttpError(404));
+  }
 };
 
 exports.postSolution = async (req, res, next) => {
   try{
     const id = Number(req.params.id);
-    const problem = await Problem.findOne({ id }).lean();
     const userSolution = new Function(`return ${req.body.solution}`)();
     const problemArgList = [];
     const problemAnswerList = [];
+    let problem;
+
+    try {
+      problem = await Problem.findOne({ id }).lean();
+    } catch (err) {
+      next(createHttpError(500));
+    }
 
     problem.tests.forEach(example => {
       problemArgList.push(getArgument(example.code)[0]);
