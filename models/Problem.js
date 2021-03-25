@@ -11,7 +11,8 @@ const testSchema = new mongoose.Schema({
     required: true
   },
   solution: {
-    any: mongoose.Schema.Types.Mixed
+    type: mongoose.Schema.Types.Mixed,
+    required: true
   }
 });
 
