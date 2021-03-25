@@ -1,8 +1,8 @@
 <div class="page-wrapper">
   <div class="join">
     <div class="join-form">
-      <img class="logo" src="logo2.png" />
-      <h1>Join</h1>
+      <img class="logo" src="/logo.png" />
+      <h1><%= title %></h1>
 
       <form method="post" action="/join">
         <p>
@@ -15,7 +15,7 @@
           >
         </p>
         <p>
-          <input 
+          <input
             class="join-input" 
             type="email" 
             name="email" 
@@ -42,7 +42,7 @@
           >
         </p>
         <p class="join-button">
-          <a href="/login">join</a>
+          <input class="join-submit" type="submit" value="joins">
         </p>
         <p class="github-button">
           <a href="/login/github">

@@ -13,7 +13,7 @@ const MongoStore = require("connect-mongo")(session);
 
 const path = require("path");
 
-const index = require("./routes/index");
+const global = require("./routes/global");
 const join = require("./routes/join");
 const problem = require("./routes/problem");
 const db = require('./db');
@@ -44,7 +44,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/", index);
+app.use("/", global);
 app.use("/join", join);
 app.use("/problems", problem);
 

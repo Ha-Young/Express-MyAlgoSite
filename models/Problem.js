@@ -35,7 +35,7 @@ const ProblemSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  completed_user_list: [String],
+  completed_user_list: [{ type: String, unique: true }],
   description: {
     type: String,
     required: true,

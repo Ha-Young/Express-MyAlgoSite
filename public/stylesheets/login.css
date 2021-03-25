@@ -37,7 +37,8 @@ input::placeholder {
   margin-top: 15px;
 }
 
-.login {
+.login,
+.join {
   position: absolute;
   top: 18%;
   width: 310px;
@@ -50,7 +51,8 @@ input::placeholder {
   border-radius: 20px;
 }
 
-.login-form {
+.login-form,
+.join-form {
   position: absolute;
   text-align: center;
 }
@@ -95,4 +97,11 @@ input::placeholder {
 .login-button {
   background-color: #b1361e;
   color: #FAF9F8;
+}
+
+.join-submit {
+  font-weight: bold;
+  background-color: transparent;
+  color: #b1361e;
+  border: 0px;
 }

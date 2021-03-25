@@ -1,48 +1,42 @@
-const User = require("../../models/User");
-
+const passport = require("passport");
 const createError = require("http-errors");
-const bcrypt = require("bcrypt");
-const mongoose = require("mongoose");
 
-exports.getLoginPage = (req, res) => {
-  res.status(200).render("login", { message: "Login" });
+const { signUp } = require("../../services/userService");
+const { ErrorHandler } = require("../../util/error");
+
+exports.getLogin = (req, res) => {
+  res.status(200).render("login", { title: "Codewars" });
 };
 
-exports.localJoin = (req, res) => {
-  res.status(200).render("join", { message: "Join" });
+exports.getLocalJoin = (req, res) => {
+  res.status(200).render("join", { title: "Join" });
 };
 
-exports.postUserData = async (req, res, next) => {
+exports.postLocalJoin = async (req, res, next) => {
   try {
-    const {
-      username,
-      email,
-      password,
-      confirmPassword,
-    } = req.body;
-
-    if (password !== confirmPassword) {
-      throw new Error("password is not matched");
+    const { user, error } = await signUp(req.body);
+    
+    if (error) {
+      throw new ErrorHandler(error.status, error.message);
     }
-
-    const hashedPassword = await bcrypt.hash(password, Number(process.env.SALT_ROUNDS));
-
-    const user = User({
-      username,
-      email,
-      password: hashedPassword,
-    });
-
-    await user.save();
+    
+    if (user) {
+      await user.save();
+    }
 
     res.redirect("/login");
   } catch (error) {
-    console.log(error); // 에러 핸들링 필요...
-    next(createError());
+    next(createError(error));
   }
 };
 
-exports.logout = (req, res, next) => {
+exports.getLogout = (req, res, next) => {
   req.logout();
   res.redirect("/login");
 };
+
+exports.postLogin = passport.authenticate("local", { failureRedirect: "/login", successRedirect: "/" });
+
+exports.getGithubLogin = passport.authenticate("github");
+
+exports.getGithubLoginCallback = passport.authenticate("github", { failureRedirect: "/login", successRedirect: "/" });
