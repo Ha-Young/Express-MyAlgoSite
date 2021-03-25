@@ -1,47 +1,64 @@
 const Problem = require("../../models/Problem");
 const { VM } = require("vm2");
-const vm = require("vm");
 
 exports.renderProblemPageById = async function (req, res, next) {
-  console.log("global", global);
-
   const requestedId = req.params.id;
   const fetchedProblem = await Problem.findById(requestedId);
 
   res.status(200).render("problem", { problem: fetchedProblem });
 };
 
-exports.checkUserSolution = async function (req, res, next) {
-  const requestedId = req.params.id;
-  const fetchedProblem = await Problem.findById(requestedId);
-  const tests = fetchedProblem.tests;
+exports.getUserScript = async function (req, res, next) {
+  try {
+    const requestedId = req.params.id;
+    const fetchedProblem = await Problem.findById(requestedId);
+    const fetchedTests = fetchedProblem.tests;
+    const userScript = req.body.solution;
 
+    const testResults = runTest(fetchedTests, userScript);
+    console.log("testResults", testResults);
+
+    isAllPassed(testResults)
+      ? res.status(200).render("sucess", { testResults: testResults })
+      : res.status(200).render("failure", { testResults: testResults });
+  } catch (error) {
+    next("server Error");
+  }
+};
+
+function checkUserSolution(userSolutionResult, testSolutionResult) {
+  return userSolutionResult === testSolutionResult ? true : false;
+}
+
+function isAllPassed(testResults) {
+  if (!testResults.runSuccess) {
+    return false;
+  }
+
+  return testResults.result.every((result) => result === true);
+}
+
+function runTest(fetchedTests, userScript) {
   const vm2 = new VM();
-  const submittedCodeByUser = req.body.solution;
+  const testResults = [];
 
-  const testResult = [];
+  try {
+    fetchedTests.forEach((test) => {
+      const testScript = test.code;
+      const testSolutionResult = test.solution;
+      const userSolution = userScript + testScript;
+      const userSolutionResult = vm2.run(userSolution);
 
-  tests.forEach((test, index) => {
-    try {
-      const executionTest = test.code;
-      const testSolution = test.solution;
-      const runTest = submittedCodeByUser + executionTest;
-      const userSolution = vm2.run(runTest);
-      console.log("user code solution is", userSolution);
+      const testResult = checkUserSolution(
+        userSolutionResult,
+        testSolutionResult
+      );
 
-      if (userSolution === testSolution) {
-        testResult.push(true);
-        console.log("passed case index", index);
-      } else {
-        testResult.push(false);
-        console.log("fail case index", index);
-      }
-    } catch (err) {
-      next("Failed to execute script. Error in vm2");
-    }
-  });
+      testResults.push(testResult);
+    });
 
-  console.log(testResult);
-
-  res.status(200).render("problem", { problem: fetchedProblem });
-};
+    return { runSuccess: true, result: testResults };
+  } catch (error) {
+    return { runSuccess: false, result: error.message };
+  }
+}

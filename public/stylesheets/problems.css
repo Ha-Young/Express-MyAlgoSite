@@ -1,0 +1,40 @@
+.problems-card-board {
+  padding: 20px;
+
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 20px;
+
+  height: 83%;
+  background-color: #303133;
+}
+
+.problem-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  border-radius: 7px;
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.14);
+
+  height: 750px;
+  width: 100%;
+  background: linear-gradient(
+    10deg,
+    rgba(181, 55, 55, 1) 23%,
+    rgba(34, 34, 34, 1) 23%
+  );
+}
+
+.problem-card > a {
+  text-decoration: none;
+
+  color: #e32c2c;
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.problem-card-level {
+  color: #8c8c8c;
+}

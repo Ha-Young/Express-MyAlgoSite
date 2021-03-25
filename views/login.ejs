@@ -4,10 +4,10 @@
 <div class="flex-wrapper">
   <% include header.ejs %>
 
-  <div class="form-wrapper">
+  <div class="signin-wrapper">
     <div class="login-wrapper">
-      <h1 class="LogIn-title">Log In</h1>
-      <form action="/login/auth/tokens" method="POST">
+      <h1 class="logIn-title">Log In</h1>
+      <form class="login-form" action="/login/auth/tokens" method="POST">
       
         <div class="form-item email">
           <label for="email"></label>
@@ -19,7 +19,7 @@
           <input name="password" type="password" placeholder="password"></input>
         </div>
     
-        <div class="button-panel">
+        <div class="form-button-board">
           <button type="submit" class="button">LOG IN</button>
       </div>
       </form>

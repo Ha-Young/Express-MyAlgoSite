@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="/stylesheets/style.css" />
+
+<div class="flex-wrapper">
+  <% include header.ejs %>
+
+  <main class="problem-wrapper">
+    sucess
+    
+
+    <% for(let i = 0; i < testResults.result.length; i++) { %>
+      <h2>test status <%= testResults.result[i] %></h2>
+    <% } %>
+  </main>
+
+  <% include footer.ejs %>
+</div>

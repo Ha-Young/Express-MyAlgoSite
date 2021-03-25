@@ -1,0 +1,21 @@
+<link rel="stylesheet" href="/stylesheets/style.css" />
+
+<div class="flex-wrapper">
+  <% include header.ejs %>
+
+  <main class="problem-wrapper">
+    failure
+
+    <% if(!testResults.runSuccess){ %>
+      <h2>Error occured!</h2>
+      <h1><%= testResults.result %></h1>
+    <% } else{ %>  
+      <% for(let i = 0; i < testResults.result.length; i++) { %>
+        <h2>test status <%= testResults.result[i] %></h2>
+      <% } %>
+    <% } %>
+
+  </main>
+
+  <% include footer.ejs %>
+</div>

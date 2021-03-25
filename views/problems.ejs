@@ -3,11 +3,11 @@
 <div class="flex-wrapper">
   <% include header.ejs %>
 
-  <main class="problems-list">
+  <main class="problems-card-board">
     <% for(let i = 0; i < problems.length; i++) { %>
       <div class="problem-card">
         <a href= '/problem/<%= problems[i]._id %>' ><span><%= problems[i].title %></span></a>
-        <span class="level-font">Level <%= problems[i].difficulty_level %></span>
+        <span class="problem-card-level">Level <%= problems[i].difficulty_level %></span>
       </div>
     <% } %>
   </main>

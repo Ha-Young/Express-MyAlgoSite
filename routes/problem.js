@@ -12,7 +12,7 @@ router.get(
 router.post(
   "/:id",
   passport.authenticate("jwt", { session: false }),
-  problemController.checkUserSolution
+  problemController.getUserScript
 );
 
 module.exports = router;
