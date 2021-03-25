@@ -1,11 +1,15 @@
 <li>
-  <div class="problem-block">
-    <%= problem.title %>
-  </div>
-  <div>
-    정답자 수: <%= problem.completed_users %>
-  </div>
-  <div>
-    난이도: <%= problem.difficulty_level %>
-  </div>
+  <a class="problem-block" href=<%=problem.problemRef %> >
+    <h4>
+      <%= problem.title %>
+    </h4>
+    <div class="info">
+      <h6>
+        난이도: <%= problem.difficulty_level %>
+      </h6>
+      <h6>
+        정답자 수: <%= problem.completed_users %>
+      </h6>
+    </div>
+  </a>
 </li>

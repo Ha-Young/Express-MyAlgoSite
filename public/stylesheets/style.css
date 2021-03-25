@@ -10,10 +10,10 @@ body {
 }
 
 header {
+  position: relative;
   text-align: center;
   box-shadow: 0 0 5px rgb(0 0 0 / 10%);
   background: #282828;
-  position: relative;
 }
 
 .logo {
@@ -22,12 +22,13 @@ header {
 }
 
 .title {
-  font: normal 2em 'Playfair Display SC', serif;
-  text-align: center;
   position: absolute;
-  top: 54px;
+  top: 42px;
   left: 50%;
-  margin-left: -195px;
+  margin-left: -273px;
+  font: normal 3em 'Playfair Display SC', serif;
+  font-weight: 1000;
+  text-align: center;
 }
 
 .login,

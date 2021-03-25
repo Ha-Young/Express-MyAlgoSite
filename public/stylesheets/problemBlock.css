@@ -1,0 +1,27 @@
+.problem-block {
+  display: block;
+  padding: 1rem 0 2rem 0;
+  border-top: 0.0625rem solid #D7E2EB;
+  border-radius: 0;
+  box-shadow: none;
+  background-color: transparent;
+  color: #fafafa;
+  text-decoration: none;
+  font-family: "Inter", 'NotoSansKR', "Helvetica Neue", Helvetica, Arial, "맑은 고딕", malgun gothic, "돋움", Dotum, sans-serif, "Apple Color Emoji", "Noto Color Emoji";
+  cursor: pointer;
+  background-color: transparent;
+}
+
+h4 {
+  font-size: 20px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+h6 {
+  display: inline-block;
+  vertical-align: top;
+  color: #B2C0CC;
+  font-size: 14px;
+  line-height: 1.5;
+}
