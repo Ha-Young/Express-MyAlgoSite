@@ -92,6 +92,13 @@
     inset 0 -1px 0 rgba(0, 0, 0, .4);
 }
 
+.fixed-title {
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  background-color: #FAFAFA;
+}
+
 .problem-desc {
   padding: 20px;
 }
@@ -172,12 +179,17 @@
   font-size: 1rem;
 }
 
+.output-section {
+  overflow-y: auto;
+}
+
 .result-view-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 10px auto;
+  overflow: scroll;
 }
 
 .console-testcase {

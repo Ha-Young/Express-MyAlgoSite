@@ -48,6 +48,10 @@ exports.solveProblem = async function (req, res, next) {
     console.log(userCode, checkAnswerCases);
 
     checkAnswerCases.forEach((testCase, index) => {
+      if (!testCase) {
+        return;
+      }
+
       const testCaseResult = Object.assign(testCase);
       testCaseResult.index = index + 1;
 

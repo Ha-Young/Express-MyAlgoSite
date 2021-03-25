@@ -42,6 +42,10 @@ function convertTestCaseStrToList(testCaseStr) {
   return testCaseStrList.map(str => {
     const [code, solution] = str.split(":");
 
+    if (!code || !solution) {
+      return null;
+    }
+
     return {
       code: code.trim(),
       solution: solution.indexOf('"') > -1 ? solution.trim() : Number(solution),
@@ -90,9 +94,9 @@ async function handleTestCaseSendBtnClick(e) {
 
   console.log('response', testCaseSolveResult);
 
-  const templateStr = testCaseSolveResult.errMsg || testCaseSolveResult;
+  const templateStr = testCaseSolveResult.errMsg || getTestCaseSolveTemplates(testCaseSolveResult);
 
-  solveResultElemet.innerHTML = getTestCaseSolveTemplates(templateStr);
+  solveResultElemet.innerHTML = templateStr;
 }
 
 function handleAnswerSendBtnClick(e) {
