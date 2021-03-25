@@ -9,6 +9,8 @@
     <link href="/codemirror/theme/moxer.css" rel="stylesheet" />
   </head>
   <body>
+    <%-include("title"); %>
+    <%-include("menu"); %>
     <h1><%=problem.title%></h1>
     <article>문제 설명 : <%=problem.description%></article>
     <span>레벨 : <%=problem.difficulty_level%></span>

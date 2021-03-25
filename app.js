@@ -3,7 +3,9 @@ const express = require("express");
 const app = express();
 
 const index = require("./routes/index");
+const level = require("./routes/level");
 const login = require("./routes/login");
+const logout = require("./routes/logout");
 const problem = require("./routes/problem");
 
 const passport = require("passport");
@@ -39,8 +41,10 @@ app.use(session({
   saveUninitialized: true
 }));
 
-app.use('/', index);
+app.use("/", index);
+app.use("/level", level);
 app.use("/login", login);
+app.use("/logout", logout);
 app.use("/problems", problem);
 
 app.use(function(req, res, next) {
