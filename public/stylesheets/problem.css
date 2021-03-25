@@ -1,18 +1,66 @@
-.problem-wrapper {
-  margin-top: 70px;
+h2 {
+  margin-bottom: 10px;
 }
 
-.problem-content {
+h3 {
+  font-weight: normal;
+}
+
+.problem-wrapper {
+  margin: 80px 120px 30px 170px;
+}
+
+.problem-page-content {
   display: grid;
   grid-template-columns: 40% 55%;
-  grid-column-gap: 2%;
+  grid-column-gap: 3%;
 }
 
 .problem-code-title {
   height: 50px;
 }
 
-.test-area {
-  height: 100px;
+.problem-header {
+  height: 80px;
+  border-bottom: 1px solid #F9F6F6;
 }
 
+.problem-information {
+  display: flex;
+  height: 750px;
+  justify-content: center;
+  align-content: center;
+  background-color: #F9F6F6;
+}
+
+.problem-description {
+  display: flex;
+  justify-content: center;
+  width: 90%;
+}
+
+.problem-submit {
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.problem-submit-button {
+  display: flex;
+  height: 30px;
+  margin-right: 10px;
+  text-align: center;
+  background-color: #F9F6F6;
+  color: black;
+  border: 0px;
+}
+.problem-code {
+  max-height: 750px;
+}
+
+.problem-code-title {
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+  font-weight: 200;
+}

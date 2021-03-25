@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.6.0/codemirror.min.css" />
-<link rel="stylesheet" href="/stylesheets/codeMirror.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/theme/base16-light.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/theme/3024-day.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.6.0/codemirror.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.6.0/mode/javascript/javascript.min.js"></script>
 
@@ -8,33 +9,35 @@
 <div class="problem-wrapper">
   <div class="problem-header">
     <div class="problem-title">
-      <%= problem.title %>
+      <h2><%= problem.title %></h2>
       <div class="problem-level">Level: <%= problem.difficulty_level %></div>
     </div>
   </div>
 
-  <div class="problem-content">
+  <div class="problem-page-content">
     <div class="problem-information">
-      <div class="problem-description"><%= problem.description %></div>
+      <div class="problem-description">
+        <h3><%= problem.description %></h3>
+      </div>
     </div>
     <div class="problem-code">
       <div class="problem-code-title">Solution</div>
       <form method="post" action="/problems/<%= problem._id %>">
         <textarea id="answer-area" name="solution">
-          function solution(n) {
-            return;
-          }
+function solution(n) {
+  return;
+}
         </textarea>
         <div class="problem-code-title">Test</div>
         <textarea class="test-area" id="test-area" name="solution">
-          <% problem.tests.forEach((test) => { %>
-            example: <%= test.code %>
-            result: <%= test.solution %>
-          <% }) %>
+<% problem.tests.forEach((test) => { %>
+example: <%= test.code %>
+result: <%= test.solution %>
+<% }) %>
         </textarea>
-        <p>
-          <input type="submit" value="Submit">
-        </p>
+        <div class="problem-submit" >
+          <input class="problem-submit-button" type="submit" value="Submit">
+        </div>
       </form>
     </div>
   </div>

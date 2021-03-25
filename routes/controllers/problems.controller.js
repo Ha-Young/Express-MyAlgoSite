@@ -31,27 +31,25 @@ exports.postSolution = async (req, res, next) => {
   try {
     const {
       params: { problem_id: problemId },
-      body: { solution },
+      body: { solution: [ userCode ] },
       user,
     } = req;
 
     const problem = await Problem.findById(problemId);
 
-    const { isPassed, log, error } = checkSolution(problem.tests, solution[0]);
+    const { isPassed, log, error } = checkSolution(problem.tests, userCode);
 
     if (error) {
-      res.status(400).render("failure", { message: "Failure", error, problemId, user  });
+      res.status(400).render("failure", { message: "Failure", error, problem, user, userCode });
       return;
     }
 
     if (isPassed) {
-      res.status(200).render("success", { message: "Success", log, problemId, user });
-
-
+      res.status(200).render("success", { message: "Success", log, problem, user, userCode });
       return;
     }
 
-    res.status(200).render("failure", { message: "Failure", log, problemId, user });
+    res.status(200).render("failure", { message: "Failure", log, problem, user, userCode });
   } catch (error) {
     next(error);
   }
@@ -64,7 +62,7 @@ function checkSolution(tests, solution) { // typecheck, 수정도 해야함..
   tests.forEach((test) => {
     try {
       const script = solution + test.code;
-      const usingScript = vm.runInNewContext(script, {});
+      const usingScript = vm.runInNewContext(script);
 
       if (usingScript === test.solution) {
         log.push({

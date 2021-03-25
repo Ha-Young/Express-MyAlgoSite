@@ -1,7 +1,42 @@
-<h2><%= message %></h2>
+<%- include("partials/header") %>
 
-<% log.forEach((data, index) => { %>
-  <div>case<%= index %>: <%= data.result %></div>
-<% }) %>
-
-<a link href="/">return to main</a>
+<div class="result-wrapper">
+  <h1><%= message %></h1>
+  <div class="result-table">
+    <div class="result-table-top">
+      <h2><%= problem.title %></h2>
+      <div class="result-description">
+        <h4><%= problem.description %></h4>
+      </div>
+    </div>
+    <div class="result-table-content">
+      <div class="result-table-content-panel">
+        <div class="result-table-header-title">
+          <h3>Answer</h3>
+        </div>
+        <div class="result-table-user-code">
+          <%- include("partials/userCode") %>
+        </div>
+      </div>
+      <div class="result-table-content-panel">
+        <div class="result-table-header-title">
+          <h3>Result</h3>
+        </div>
+        <div class="result-table-user-result">
+          <% if (typeof error !== "undefined") { %>
+            <div><%= error %></div>
+          <% } else { %>
+            <% log.forEach((data, index) => { %>
+              <div class="user-result-content">
+                <li><%= data.result %></li>
+              </div>
+            <% }) %>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="result-table-button">
+    <a link href="/problems/<%= problem._id %>">return</a>
+  </div>
+</div>

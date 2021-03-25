@@ -2,6 +2,7 @@
 @import "./login.css";
 @import "./main.css";
 @import "./problem.css";
+@import "./result.css";
 
 body {
   font-family: "Noto Sans JP", sans-serif;

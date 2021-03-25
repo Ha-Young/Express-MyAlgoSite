@@ -11,14 +11,14 @@ a:hover {
   height: 80%;
   font-family: "Noto Sans JP", sans-serif;
   margin: 0px;
-  background-color: #FEFCFC;
+  background-color: white;
   align-items: center;
   justify-content: center;
 }
 
 .problem-board {
   display: grid;
-  margin-top: 100px;
+  margin-top: 200px;
   width: 80%;
   grid-template-columns: repeat(3, 300px);
   grid-template-rows: repeat(2, 200px);

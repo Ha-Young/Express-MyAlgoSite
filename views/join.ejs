@@ -1,24 +1,56 @@
-<h1>Join</h1>
+<div class="page-wrapper">
+  <div class="join">
+    <div class="join-form">
+      <img class="logo" src="logo2.png" />
+      <h1>Join</h1>
 
-<form method="post" action="/join">
-  <p>
-    <label>Username:</label>
-    <input type="text" name="username" required>
-  </p>
-  <p>
-    <label>email:</label>
-    <input type="email" name="email" required>
-  </p>
-  <p>
-    <label>Password:</label>
-    <input type="password" name="password" required>
-  </p>
-  <p>
-    <label>confirmPassword:</label>
-    <input type="password" name="confirmPassword" required>
-  </p>
-  <p>
-    <input type="submit" value="join">
-  </p>
-  <a href="/login/github">Sign On with Github</a>
-</form>
+      <form method="post" action="/join">
+        <p>
+          <input 
+            class="join-input" 
+            type="text" 
+            name="username" 
+            placeholder="&#xf1d8; Username" 
+            required
+          >
+        </p>
+        <p>
+          <input 
+            class="join-input" 
+            type="email" 
+            name="email" 
+            placeholder="&#xf0e0; email" 
+            required
+          >
+        </p>
+        <p>
+          <input 
+            class="join-input" 
+            type="password" 
+            name="password" 
+            placeholder="&#xf084; Password" 
+            required
+          >
+        </p>
+        <p>
+          <input 
+            class="join-input" 
+            type="password" 
+            name="confirmPassword" 
+            placeholder="&#xf084; confirmPassword" 
+            required
+          >
+        </p>
+        <p class="join-button">
+          <a href="/login">join</a>
+        </p>
+        <p class="github-button">
+          <a href="/login/github">
+            Sign In with Github
+            <i class="fab fa-github"></i>
+          </a>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
