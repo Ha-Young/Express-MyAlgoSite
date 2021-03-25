@@ -1,12 +1,8 @@
 const express = require("express");
-const Problem = require("../models/Problem");
 const { verifyUser } = require("./middlewares/verifyUser");
+const { getAllProblems } = require("../controllers/indexController");
 const router = express.Router();
 
-router.get("/", verifyUser, async (req, res) => {
-  const tests = await Problem.find({});
-  console.log(tests);
-  res.render("index", { tests });
-});
+router.get("/", verifyUser, getAllProblems);
 
 module.exports = router;
