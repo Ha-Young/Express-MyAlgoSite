@@ -1,0 +1,18 @@
+.problem-wrapper {
+  margin-top: 70px;
+}
+
+.problem-content {
+  display: grid;
+  grid-template-columns: 40% 55%;
+  grid-column-gap: 2%;
+}
+
+.problem-code-title {
+  height: 50px;
+}
+
+.test-area {
+  height: 100px;
+}
+

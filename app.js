@@ -4,6 +4,7 @@ require("./db");
 require("./passport");
 
 const express = require("express");
+const expressLayouts = require("express-ejs-layouts");
 const bodyParser = require("body-parser");
 const createError = require("http-errors");
 const session = require("express-session");
@@ -26,6 +27,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(__dirname + "/public"));
+app.use(expressLayouts);
+
+app.set("layout", "layout");
 
 app.use(session({
   secret: process.env.SECRET_SESSION,

@@ -1,25 +1,43 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.6.0/codemirror.min.css" />
+<link rel="stylesheet" href="/stylesheets/codeMirror.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.6.0/codemirror.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.6.0/mode/javascript/javascript.min.js"></script>
 
-<div class="problem-title"><%= problem.title %></div>
-<div class="problem-level">Level: <%= problem.difficulty_level %></div>
-<div class="problem-description"><%= problem.description %></div>
+<%- include("partials/header") %>
 
-<% problem.tests.forEach((test) => { %>
-  <div>example: <%= test.code %></div>
-  <div>result: <%= test.solution %></div>
-<% }) %>
+<div class="problem-wrapper">
+  <div class="problem-header">
+    <div class="problem-title">
+      <%= problem.title %>
+      <div class="problem-level">Level: <%= problem.difficulty_level %></div>
+    </div>
+  </div>
 
-<form method="post" action="/problems/<%= problem._id %>">
-  <textarea id="code-area" name="solution">
-    function solution(n) {
-      return;
-    }
-  </textarea>
-  <p>
-    <input type="submit" value="Submit">
-  </p>
-</form>
+  <div class="problem-content">
+    <div class="problem-information">
+      <div class="problem-description"><%= problem.description %></div>
+    </div>
+    <div class="problem-code">
+      <div class="problem-code-title">Solution</div>
+      <form method="post" action="/problems/<%= problem._id %>">
+        <textarea id="answer-area" name="solution">
+          function solution(n) {
+            return;
+          }
+        </textarea>
+        <div class="problem-code-title">Test</div>
+        <textarea class="test-area" id="test-area" name="solution">
+          <% problem.tests.forEach((test) => { %>
+            example: <%= test.code %>
+            result: <%= test.solution %>
+          <% }) %>
+        </textarea>
+        <p>
+          <input type="submit" value="Submit">
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
 
 <script src="/javascripts/index.js"></script>

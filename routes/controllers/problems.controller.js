@@ -5,8 +5,9 @@ const createError = require("http-errors");
 exports.getAll = async (req, res, next) => {
   try {
     const problems = await Problem.find().lean();
+    const { user } = req;
 
-    res.render("index", { title: "바닐라코딩", problems, });
+    res.render("index", { title: "바닐라코딩", problems, user });
   } catch (error) {
     next(createError(500));
   }
@@ -14,10 +15,13 @@ exports.getAll = async (req, res, next) => {
 
 exports.getProblem = async (req, res, next) => {
   try {
-    const { problem_id: problemId } = req.params;
+    const {
+      params: { problem_id: problemId },
+      user,
+    } = req;
     const problem = await Problem.findById(problemId);
 
-    res.status(200).render("problem", { problem });
+    res.status(200).render("problem", { problem, user });
   } catch (error) {
     next(error);
   }
@@ -30,23 +34,24 @@ exports.postSolution = async (req, res, next) => {
       body: { solution },
       user,
     } = req;
+
     const problem = await Problem.findById(problemId);
 
-    const { isPassed, log, error } = checkSolution(problem.tests, solution);
-    
+    const { isPassed, log, error } = checkSolution(problem.tests, solution[0]);
+
     if (error) {
-      res.status(400).render("failure", { message: "Failure", error, problemId });
+      res.status(400).render("failure", { message: "Failure", error, problemId, user  });
       return;
     }
 
     if (isPassed) {
-      res.status(200).render("success", { message: "Success", log, problemId });
+      res.status(200).render("success", { message: "Success", log, problemId, user });
 
-      
+
       return;
     }
 
-    res.status(200).render("failure", { message: "Failure", log, problemId });
+    res.status(200).render("failure", { message: "Failure", log, problemId, user });
   } catch (error) {
     next(error);
   }

@@ -1,8 +1,11 @@
+@import "./header.css";
+@import "./login.css";
+@import "./main.css";
+@import "./problem.css";
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: "Noto Sans JP", sans-serif;
+  margin: 0px;
+  padding: 0px;
 }
 
-a {
-  color: #00B7FF;
-}

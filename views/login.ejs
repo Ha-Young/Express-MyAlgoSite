@@ -1,39 +1,32 @@
-<link rel='stylesheet' href='/stylesheets/login.css' />
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
-/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@500&display=swap" rel="stylesheet">
+<div class="page-wrapper">
+  <div class="login">
+    <div class="login-form">
+      <img class="logo" src="logo2.png" />
+      <h1>Codewars</h1>
 
-<div class="login">
-  <div class="login-form">
-    <img class="logo" src="logo2.png" />
-    <h1>Codewars</h1>
-  
-    <form method="post" action="/login">
-      <p class="github-button">
-        <a href="/login/github">
-          Sign In with Github
-          <i class="fab fa-github"></i>
-        </a>
-      </p>
-  
-      <div class="login-input-set">
-        <p>
-          <input class="login-input" type="text" name="username" placeholder="&#xf1d8; Username">
+      <form method="post" action="/login">
+        <p class="github-button">
+          <a href="/login/github">
+            Sign In with Github
+            <i class="fab fa-github"></i>
+          </a>
         </p>
+
+        <div class="login-input-set">
+          <p>
+            <input class="login-input" type="text" name="username" placeholder="&#xf1d8; Username">
+          </p>
+          <p>
+            <input class="login-input" type="password" name="password" placeholder="&#xf084; Password">
+          </p>
+        </div>
         <p>
-          <input class="login-input" type="password" name="password" placeholder="&#xf084; Password">
+          <input class="login-button" type="submit" value="Login">
         </p>
-      </div>
-      <p>
-        <input class="login-button" type="submit" value="Login">
-      </p>
-      <p class="join-button">
-        <a href="/join">join</a>
-      </p>
-    </form>
+        <p class="join-button">
+          <a href="/join">join</a>
+        </p>
+      </form>
+    </div>
   </div>
 </div>

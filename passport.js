@@ -6,33 +6,32 @@ const bcrypt = require("bcrypt");
 
 const User = require("./models/User");
 
-// passport.use(new LocalStrategy(User.authenticate));
-
 passport.use(new LocalStrategy({
   usernameField: "username",
   passwordField: "password",
 }, async (username, password, cb) => {
-  if (!username || !password) {
+  try {
+    if (!username || !password) {
+      throw new Error("");
+    }
+
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      throw new Error("");
+    }
+
+    const validPassword = await bcrypt.compare(password, user.password);
+
+    if (user.length !== 0 && validPassword) {
+      cb(null, username);
+      return;
+    }
+
+    throw new Error("");
+  } catch (error) {
     cb(null, false);
-    return;
   }
-
-  const user = await User.findOne({ username });
-
-  if (!user) {
-    cb(null, false);
-    return;
-  }
-
-  const validPassword = await bcrypt.compare(password, user.password);
-
-  if (user.length !== 0 && validPassword) {
-    cb(null, username);
-    return;
-  }
-
-  cb(null, false);
-  return;
 }));
 
 passport.use(new GitHubStrategy({

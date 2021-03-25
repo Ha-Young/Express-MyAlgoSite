@@ -1,7 +1,3 @@
-h3 {
-  margin-left: 35px;
-}
-
 header {
   display: flex;
   position: fixed;
@@ -13,20 +9,65 @@ header {
   border-bottom: 1px solid #E2DCDC;
 }
 
+h3 {
+  margin-left: 10px;
+}
+
+a {
+  font-weight: 100px;
+}
+
 .header-logo {
   display: flex;
 }
 
+.header-button-logout,
+.header-button-home {
+  display: flex;
+  height: 40px;
+  margin-right: 10px;
+  text-align: center;
+  background-color: #b1361e;
+  color: white;
+  border-radius: 20px;
+}
+
+.header-button-logout {
+  width: 110px;
+}
+
+.header-button-home {
+  width: 90px;
+}
+
+.header-user-data,
+.header-button-set {
+  display: flex;
+}
+
+.header-user-avatar {
+  width: 45px;
+  height: 45px;
+  margin-top: 10px;
+  border-radius: 55%;
+}
+
 .header-logo-image {
-  position: fixed;
-  top: 1.7%;
+  margin-top: 18px;
+  width: 30px;
+  height: 30px;
+}
+
+.header-icon {
+  margin-top: 14px;
+  margin-left: 2px;
   width: 30px;
   height: 30px;
 }
 
 .header-logout {
   display: flex;
-  text-align: end;
+  align-items: center;
 }
 
 .header-wrapper {

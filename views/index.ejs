@@ -1,25 +1,14 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Codewars</title>
-    <link rel='stylesheet' href='/stylesheets/main.css' />
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <%- include("partials/header") %>
-    <div class="main">
-      <div class="problem-board">
-        <% problems.forEach((problem) => { %>
-          <a class="problem" link href="/problems/<%= problem._id %>">
-            <div class="problem-content">
-              <div class="problem-title"><%= problem.title %></div>
-              <div class="problem-level">Level: <%= problem.difficulty_level %></div>
-              <div class="problem-complited">complited: <%= problem.completed_users %></div>
-            </div>
-          </a>
-        <% }) %>
-      </div>
-    </div>
-  </body>
-</html>
+<%- include("partials/header") %>
+<div class="main">
+  <div class="problem-board">
+    <% problems.forEach((problem) => { %>
+      <a class="problem" link href="/problems/<%= problem._id %>">
+        <div class="problem-content">
+          <div class="problem-content-title"><%= problem.title %></div>
+          <div class="problem-content-level">Level: <%= problem.difficulty_level %></div>
+          <div class="problem-complited">complited: <%= problem.completed_users %></div>
+        </div>
+      </a>
+    <% }) %>
+  </div>
+</div>

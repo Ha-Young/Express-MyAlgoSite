@@ -7,9 +7,8 @@ h1 {
   color: #776E6E;
 }
 
-
-a, 
-a:focus, 
+a,
+a:focus,
 a:hover {
   color: #b1361e;
   text-decoration: none;
@@ -21,7 +20,7 @@ p {
   margin-block-end: 0;
 }
 
-body {
+.page-wrapper {
   font-family: "Noto Sans JP", sans-serif;
   display: flex;
   flex-direction: column;
