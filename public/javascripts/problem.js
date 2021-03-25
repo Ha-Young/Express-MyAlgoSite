@@ -88,19 +88,25 @@ async function getSolveResult(reqBody) {
 async function handleTestCaseSendBtnClick(e) {
   const reqBody = getSolveReqBody("testcase");
 
-  console.log('reqBody', reqBody);
-
   const testCaseSolveResult = await getSolveResult(reqBody);
-
-  console.log('response', testCaseSolveResult);
 
   const templateStr = testCaseSolveResult.errMsg || getTestCaseSolveTemplates(testCaseSolveResult);
 
   solveResultElemet.innerHTML = templateStr;
 }
 
-function handleAnswerSendBtnClick(e) {
-  submitCodeOnMode("answer");
+async function handleAnswerSendBtnClick(e) {
+  const reqBody = getSolveReqBody("answer");
+
+  console.log('reqBody', reqBody);
+
+  const testCaseSolveResult = await getSolveResult(reqBody);
+
+  console.log('response', testCaseSolveResult);
+
+  const templateStr = testCaseSolveResult.errMsg || getAnswerSolveTemplates(testCaseSolveResult);
+
+  solveResultElemet.innerHTML = templateStr;
 }
 
 function init() {

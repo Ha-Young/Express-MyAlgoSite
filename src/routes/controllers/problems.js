@@ -27,7 +27,7 @@ exports.solveProblem = async function (req, res, next) {
 
   try {
     const problem = await Problem.findOne({ id: problemId }).lean();
-    const vm = new VM();
+
     const caseResultList = [];
     let collectCaseCount = 0;
     let checkAnswerCases;
@@ -40,6 +40,7 @@ exports.solveProblem = async function (req, res, next) {
       }
       case "answer":
       default: {
+        console.log('here', problem.tests);
         checkAnswerCases = problem.tests;
         break;
       }
@@ -52,13 +53,29 @@ exports.solveProblem = async function (req, res, next) {
         return;
       }
 
+      const outputs = [];
+      const vm = new VM({
+        sandbox: {
+          outputs,
+        },
+      });
+
+      vm.run('console.log = (msg) => { outputs.push(msg) }');
+
       const testCaseResult = Object.assign(testCase);
       testCaseResult.index = index + 1;
 
       const script = userCode + testCase.code;
+
       try {
+        let startTime = new Date();
         let scriptResult = vm.run(script);
-        // const answer = problem.result_type === "string"
+        let endTime = new Date();
+
+        const excutionTime = String(endTime - startTime);
+
+        testCaseResult.outputs = outputs;
+
         if (typeof scriptResult === "string") {
           scriptResult = `"${scriptResult}"`;
         }
@@ -66,28 +83,27 @@ exports.solveProblem = async function (req, res, next) {
         if (scriptResult === testCase.solution) {
           testCaseResult.isCollect = true;
           testCaseResult.msg = "테스트를 성공하였습니다.";
+          testCaseResult.summary = `성공 (${excutionTime}ms)`;
           collectCaseCount += 1;
         } else {
           testCaseResult.isCollect = false;
           testCaseResult.msg = `실행한 결괏값 ${scriptResult}이(가) 기댓값 ${testCase.solution}와(과) 다릅니다.`;
+          testCaseResult.summary = `실패 (${excutionTime}ms)`;
         }
       } catch (err) {
         testCaseResult.isCollect = false;
         testCaseResult.msg = `다음과 같은 애러가 발생하였습니다. ${err.message}`;
+        testCaseResult.summary = `실패 (런타임 애러)`;
       }
 
       caseResultList.push(testCaseResult);
     });
-
-    console.log(caseResultList);
 
     const result = {
       caseResultList,
       totalCaseCount: caseResultList.length,
       collectCaseCount,
     };
-
-    console.log(result);
 
     res.json(result);
 
