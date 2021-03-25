@@ -2,8 +2,8 @@
 <html>
   <head>
     <title>Codewars</title>
-    <link rel='stylesheet' href="/stylesheets/style.css" />
-    <link rel='stylesheet' href="/stylesheets/codemirror.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/codemirror.css" />
     <link rel="stylesheet" href="/codemirror/theme/moxer.css" />
     <script src="/javascripts/codemirror.js"></script>
     <script src="/codemirror/mode/javascript/javascript.js"></script>
@@ -23,7 +23,7 @@
         <% const address =`/problems/${problem.id}`%>
         <form id="sandbox" method="POST" action=<%=address%>>
           <textarea id="editor" name="solution"><%=firstLine%></textarea>
-          <input type="submit" value="submit"></button>
+          <button type="submit">submit</button>
         </form>
       </div>
     </div>
@@ -36,6 +36,6 @@
       lineNumbers: true,
       autoCloseBrackets: true
     });
-    editor.setSize("400", "400");
+    editor.setSize("500", "450");
   </script>
 </html>

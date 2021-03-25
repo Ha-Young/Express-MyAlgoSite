@@ -1,6 +1,18 @@
-<%-include("title"); %>
-<%-include("menu"); %>
-<h1><%=name%></h1>
-<span><%=message%></span>
-<article><%=stack%></article>
-<%- include("back", {originalUrl})%>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+   <%-include("title"); %>
+   <%-include("menu"); %>
+
+   <h3><%=name%></h3>
+   <span><%=message%></span>
+   <article><%=stack%></article>
+   <%- include("back", {originalUrl})%>
+  </body>
+</html>
+
+

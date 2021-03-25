@@ -1,13 +1,24 @@
-<%-include("title"); %>
-<%-include("menu"); %>
-<h1><%=message%></h1>
-<ul>
-<% for (let i = 0; i < testcaseResult.length; i++) { %>
-  <li>
-    <div>실행 코드 : <%=testcaseResult[i].code%></div>
-    <span>기대값 : <%=testcaseResult[i].expected%></span>
-    <span>결과값 : <%=testcaseResult[i].result%></span>
-  </li>
-<% } %>
-</ul>
-<%- include("back", {originalUrl})%>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <%-include("title"); %>
+    <%-include("menu"); %>
+    <div id="result-container">
+      <h3><%=message%></h3>
+      <ul>
+      <% for (let i = 0; i < testcaseResult.length; i++) { %>
+        <li>
+          <div>실행 코드 : <%=testcaseResult[i].code%></div>
+          <span>기대값 : <%=testcaseResult[i].expected%></span>
+          <span>결과값 : <%=testcaseResult[i].result%></span>
+        </li>
+      <% } %>
+      </ul>
+      <%- include("back", {originalUrl})%>
+    </div>
+  </body>
+</html>

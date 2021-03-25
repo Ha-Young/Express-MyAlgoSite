@@ -7,6 +7,7 @@ body {
 
 a {
   color: black;
+  vertical-align: center;
   height: 50px;
   margin: 0 10px;
 }
@@ -43,25 +44,20 @@ a {
 #problem-container {
   display: flex;
   justify-content: center;
-  margin: 40px 30px;
+  margin: 40px 0;
 }
 
 #description-container {
-  width: 40%;
-  margin: 40px 30px;
+  width: 35%;
+  margin: 0 20px;
 }
 
-#description {
-
+#sandbox-container {
+  margin: 0 20px;
 }
-
-#sandbox {
-
-}
-
 
 button {
-  height: 50px;
+  height: 30px;
   width: 120px;
   font-family: "Work Sans", sans-serif;
 }
