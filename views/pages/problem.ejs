@@ -4,7 +4,8 @@
     <div class="controls">
       <a class="close" href="/">X</a>
     </div>
-    </div>
+  </div>
+  <div class="problem-content-wrapper">
     <div class="info-section">
       <div class="guide-section">
         <div class="problem-title">
@@ -20,9 +21,10 @@
         </div>
 
         <textarea class="test-case-area"><% for (const test of problem.tests) { %>
-<%= test.code %> : <%= test.solution %><% } %></textarea>
+  <%= test.code %> : <%= test.solution %><% } %></textarea>
       </div>
     </div>
+    <div class="horizontal-split-bar"></div>
     <div class="run-section">
       <div class="code-section">
         <div class="problem-title">
@@ -50,8 +52,10 @@ function solution(<%= problem.argument %>) {
   </div>
 </div>
 
-<!-- code mirror -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.6.0/codemirror.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.6.0/mode/javascript/javascript.min.js"></script>
 <script src="/javascripts/templates/problemTemplate.js"></script>
 <script src="/javascripts/problem.js"></script>
+<script src="/javascripts/splitBar.js"></script>
