@@ -1,6 +1,14 @@
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 
+const User = require("../models/User");
+const initializePassport = require("../passport-config");
+
+initializePassport(
+  passport,
+  email => User.find({ email }),
+  id => User.findById(id),
+);
 
 function renderLogin(req, res, next) {
   res.render("login", { title: "login" });
@@ -15,7 +23,6 @@ const authenticate = passport.authenticate("local", {
   failureRedirect: "/login",
   failureFlash: true,
 });
-
 
 async function register(req, res, next) {
   try {
@@ -35,7 +42,13 @@ async function register(req, res, next) {
   }
 }
 
+function logout(req, res, next) {
+  req.logOut();
+  res.redirect("/auth/login");
+}
+
 exports.renderLogin = renderLogin;
 exports.renderRegister = renderRegister;
-exports.authenticate = authenticate;
 exports.register = register;
+exports.logout = logout;
+exports.authenticate = authenticate;
