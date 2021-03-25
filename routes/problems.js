@@ -4,7 +4,6 @@ const router = express.Router();
 
 const problems = require("../models/sample_problems.json");
 
-/* GET problems page. */
 router.get("/", (req, res, next) => {
   res.render("problems", { 
     title: "problems",
