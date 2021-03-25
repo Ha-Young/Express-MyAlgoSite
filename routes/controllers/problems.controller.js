@@ -5,7 +5,10 @@ const deepEqual = require("fast-deep-equal");
 exports.getProblems = async (req, res, next) => {
   try {
     const problems = await Problem.find();
-    res.render("index", { problems });
+    res.render("index", {
+      problems,
+      nickname: req.user.userNickname
+    });
   } catch (err) {
     next(err);
   }
@@ -16,7 +19,10 @@ exports.getOneProblem = async (req, res, next) => {
 
   try {
     const problem = await Problem.findById(id);
-    res.render("problem", { problem });
+    res.render("problem", {
+      problem,
+      nickname: req.user.userNickname
+    });
   } catch (err) {
     next(err);
   }
@@ -36,26 +42,31 @@ exports.submitProblem = async (req, res, next) => {
 
       if (isFailed > -1) {
         res.render("solutionResult", {
+          id,
           code,
           tests,
           resultList: result.resultList,
-          answerList: result.answerList
+          answerList: result.answerList,
+          nickname: req.user.userNickname
         });
         return;
       }
 
       res.render("success", {
-        message: "SUCCESS"
+        message: "SUCCESS",
+        nickname: req.user.userNickname
       });
 
       return;
     }
 
     res.render("solutionResult", {
+      id,
       code,
       resultList: null,
       answerList: null,
-      error: result
+      error: result,
+      nickname: req.user.userNickname
     });
 
   } catch(err) {
