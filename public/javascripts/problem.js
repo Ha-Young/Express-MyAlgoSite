@@ -1,6 +1,8 @@
 /* eslint-disable no-undef */
-const sendBtnElement = document.querySelector(".send-btn");
+const sendTestCaseBtnElement = document.querySelector(".send-testcase-btn");
+const sendAnswerBtnElement = document.querySelector(".send-answer-btn");
 const testCaseInputElement = document.querySelector(".test-case-area");
+const solveResultElemet = document.querySelector(".result-view-section");
 
 const myCodeMirror = getCodeMirror();
 
@@ -14,6 +16,7 @@ function getCodeMirror() {
     mode: "javascript",
     theme: "base16-light",
   });
+
   cm.setSize("100%", "calc(100% - 46px)");
 
   return cm;
@@ -38,46 +41,68 @@ function convertTestCaseStrToList(testCaseStr) {
 
   return testCaseStrList.map(str => {
     const [code, solution] = str.split(":");
+
     return {
       code: code.trim(),
-      solution: solution.trim(),
+      solution: solution.indexOf('"') > -1 ? solution.trim() : Number(solution),
     };
   });
 }
 
-function handleSendBtnClick(e) {
-  const dummyForm = document.createElement("form");
-  const currentPath = window.location.pathname;
+function getSolveReqBody(mode) {
+  const solveReqBody = {
+    mode,
+    userCode: myCodeMirror.getValue(),
+  };
 
-  dummyForm.method = "POST";
-  dummyForm.action = `${currentPath}`;
+  if (mode === "testcase") {
+    console.log('testCaseInputElement.textContent', testCaseInputElement.value);
+    solveReqBody.testCases = convertTestCaseStrToList(testCaseInputElement.value);
+  }
 
-  const codeInput = document.createElement("input");
-  const testCaseInput = document.createElement("input");
+  return solveReqBody;
+}
 
-  const codeStr = myCodeMirror.getValue();
-  const testCaseStr = JSON.stringify(
-    convertTestCaseStrToList(testCaseInputElement.textContent)
-  );
+async function getSolveResult(reqBody) {
+  try {
+    const response = await window.fetch(window.location.pathname, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify(reqBody),
+    });
 
-  codeInput.setAttribute("type", "text");
-  codeInput.setAttribute("name", "code");
-  codeInput.setAttribute("value", codeStr);
-  testCaseInput.setAttribute("type", "text");
-  testCaseInput.setAttribute("name", "testCase");
-  testCaseInput.setAttribute("value", testCaseStr);
+    return await response.json();
+  } catch (err) {
+    return {
+      errMsg: '결과를 받아오지 못했습니다.\n다시 시도해주세요.',
+    };
+  }
+}
 
-  dummyForm.appendChild(codeInput);
-  dummyForm.appendChild(testCaseInput);
+async function handleTestCaseSendBtnClick(e) {
+  const reqBody = getSolveReqBody("testcase");
 
-  document.body.appendChild(dummyForm);
+  console.log('reqBody', reqBody);
 
-  dummyForm.submit();
+  const testCaseSolveResult = await getSolveResult(reqBody);
+
+  console.log('response', testCaseSolveResult);
+
+  const templateStr = testCaseSolveResult.errMsg || testCaseSolveResult;
+
+  solveResultElemet.innerHTML = getTestCaseSolveTemplates(templateStr);
+}
+
+function handleAnswerSendBtnClick(e) {
+  submitCodeOnMode("answer");
 }
 
 function init() {
   window.addEventListener("load", handleWindowLoad);
-  sendBtnElement.addEventListener("click", handleSendBtnClick);
+  sendTestCaseBtnElement.addEventListener("click", handleTestCaseSendBtnClick);
+  sendAnswerBtnElement.addEventListener("click", handleAnswerSendBtnClick);
 }
 
 init();

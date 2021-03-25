@@ -20,7 +20,8 @@
       }
     ],
     "argument": "index",
-    "img": "https://clevelanddesign.com/wp-content/uploads/2020/09/the-golden-ratio-teaser.jpg"
+    "img": "https://pics.me.me/fibonacci-cholos-42200295.png",
+    "result_type": "number"
   },
   {
     "id": 2,
@@ -31,15 +32,16 @@
     "tests": [
       {
         "code": "solution(['Jane', 'Kim'])",
-        "solution": "김서방은 1에 있다"
+        "solution": "\"김서방은 1에 있다\""
       },
       {
         "code": "solution(['Jane', 'Huh', 'Kim'])",
-        "solution": "김서방은 2에 있다"
+        "solution": "\"김서방은 2에 있다\""
       }
     ],
     "argument": "seoul",
-    "img": "https://lh3.googleusercontent.com/proxy/k1SDzMew7Xfmy6yEua3qOdEdJ2fUQmkraLF4o9QFew-CyCWszID5auaHCSMEhe5LFiMivV1yz3C-YNJ_pBuzHLoPxcrlHILfoEOQevkGP6R4bpnQa6OB4MNTN1rLOP5sfhjkW-g"
+    "img": "https://file.mk.co.kr/meet/neds/2020/03/image_readtop_2020_276086_15844186744126303.jpg",
+    "result_type": "string"
   },
   {
     "id": 3,
@@ -50,15 +52,16 @@
     "tests": [
       {
         "code": "solution(3)",
-        "solution": "수박수"
+        "solution": "\"수박수\""
       },
       {
         "code": "solution(4)",
-        "solution": "수박수박"
+        "solution": "\"수박수박\""
       }
     ],
     "argument": "n",
-    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2pd-ENZvDGUe9jcjeoUyw6iyHdvHMYQfzug&usqp=CAU"
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2pd-ENZvDGUe9jcjeoUyw6iyHdvHMYQfzug&usqp=CAU",
+    "result_type": "string"
   },
   {
     "id": 4,
@@ -77,7 +80,8 @@
       }
     ],
     "argument": "n",
-    "img": "http://number27.org/assets/img/pages/27/harshad.jpg"
+    "img": "http://number27.org/assets/img/pages/27/harshad.jpg",
+    "result_type": "number"
   },
   {
     "id": 5,
@@ -100,7 +104,8 @@
       }
     ],
     "argument": "n",
-    "img": "https://i2.wp.com/sharehows.com/wp-content/uploads/2017/05/square-law-05.jpg?resize=800%2C450"
+    "img": "https://i2.wp.com/sharehows.com/wp-content/uploads/2017/05/square-law-05.jpg?resize=800%2C450",
+    "result_type": "number"
   },
   {
     "id": 6,
@@ -115,6 +120,7 @@
       }
     ],
     "argument": "n",
-    "img": "https://i.pinimg.com/474x/24/14/43/241443712f40f0e7ca4d01d4456f22ec.jpg"
+    "img": "https://i.pinimg.com/474x/24/14/43/241443712f40f0e7ca4d01d4456f22ec.jpg",
+    "result_type": "number"
   }
 ]
