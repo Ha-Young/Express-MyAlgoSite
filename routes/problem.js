@@ -5,7 +5,8 @@ const vm = require('vm');
 
 router.get('/:problem_id', async (req, res) => {
   const problemId = req.params.problem_id;
-  const problem = await Problem.find({ id: problemId });
+  const problem = await Problem.find({ _id: problemId });
+
   const {
     title,
     completed_users,
@@ -25,7 +26,7 @@ router.get('/:problem_id', async (req, res) => {
 router.post('/:problem_id', async (req, res) => {
   const func = req.body.solution;
   const problemId = req.params.problem_id;
-  const problem = await Problem.find({ id: problemId });
+  const problem = await Problem.find({ _id: problemId });
   const tests = problem[0].tests;
   const resultArr = [];
   const sandbox = {

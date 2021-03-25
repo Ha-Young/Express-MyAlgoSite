@@ -22,7 +22,7 @@
     <main>
       <ul class="problems">
         <% for (let i = 0; i < tests.length; i ++) { %>
-          <a href="/problem/<%= tests[i]._id %>">
+          <a href="/problems/<%= tests[i]._id %>">
             <div class="problem">
               <div class="problem-title"><%= tests[i].title %></div>
               <div class="problem-solved-count">정답자: <%= tests[i].completed_users %>명</div>
