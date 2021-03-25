@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:700');
+
+.rotateContent {
+  display:block;
+  padding: 30px 0px;
+  width:100%;
+  color:#999;
+  text-transform: uppercase;
+  text-align: center;
+  font-size:36px;
+  font-weight:bold;
+  font-family:'Roboto';
+  bottom:45%;
+}
+
+.rotateFlip {
+  height:50px;
+  overflow:hidden;
+}
+
+.rotateFlip > div > div {
+  color:#fff;
+  padding:4px 12px;
+  height:45px;
+  margin-bottom:45px;
+  display:inline-block;
+}
+
+.rotateFlip div:first-child {
+  animation: show 5s linear infinite;
+}
+
+.rotateFlip div div {
+  background:#42c58a;
+}
+.rotateFlip div:first-child div {
+  background:#4ec7f3;
+}
+.rotateFlip div:last-child div {
+  background:#DC143C;
+}
+
+@keyframes show {
+  0% {margin-top:-270px;}
+  5% {margin-top:-170px;}
+  33% {margin-top:-170px;}
+  38% {margin-top:-80px;}
+  66% {margin-top:-80px;}
+  71% {margin-top:0px;}
+  99.99% {margin-top:0px;}
+  100% {margin-top:-270px;}
+}

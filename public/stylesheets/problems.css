@@ -1,7 +1,7 @@
 .problem-list {
   display: grid;
   grid-auto-rows: 200px;
-  grid-gap: 1rem;
+  grid-gap: 2.5rem;
   place-items: center;
   list-style:none;
 
@@ -11,9 +11,10 @@
 .problem-item {
   font-family: "Work Sans", sans-serif;
   width: 80%;
-  background-color: white;
+  background-color: #F9F9F9;
   border-radius: var(--radius);
   cursor: pointer;
+  box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%), 0 5px 5px 0 rgb(0 0 0 / 24%);
   transition: transform .3s;
 }
 

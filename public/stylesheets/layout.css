@@ -1,6 +1,5 @@
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: beige;
+  font-family: exo, ubuntu, "segoe ui", helvetica, arial, sans-serif;
 }
 
 a {
@@ -29,7 +28,7 @@ a {
   align-items: center;
   width: 100%;
   height: 100px;
-  background-color: bisque;
+  background-color: #AAAAAA;
 }
 
 .logo {
