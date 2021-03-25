@@ -5,7 +5,6 @@ const router = express.Router();
 router.use("/auth", require("./auth"));
 router.use(checkAuthenticated);
 router.use("/", require("./home"));
-router.use("/editor", require("./editor"));
 router.use("/problems", require("./problems"));
 
 // catch 404 and forward to error handler
