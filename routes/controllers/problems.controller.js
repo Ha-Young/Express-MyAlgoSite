@@ -1,11 +1,7 @@
 const { VM } = require("vm2");
 
-const createError = require("http-errors");
-const mongoose = require("mongoose");
-
 const Problem = require("../../models/Problem");
 
-const ERROR = require("../../constants/errorConstants");
 const PROBLEM_RESULT = require("../../constants/problemConstants");
 
 const Controller = {};
@@ -16,11 +12,7 @@ Controller.getAll = async function (req, res, next) {
 
     res.render("index", { problems });
   } catch (error) {
-    if (error instanceof mongoose.CastError) {
-      return next(createError(500, ERROR.DATABASE_MESSAGE));
-    }
-
-    next(createError(500, ERROR.SERVER_MESSAGE));
+    next(error);
   }
 };
 
@@ -32,21 +24,18 @@ Controller.detail = async function (req, res, next) {
 
     res.render("problems", { problem });
   } catch (error) {
-    if (error instanceof mongoose.CastError) {
-      return next(createError(500, ERROR.DATABASE_MESSAGE));
-    }
-
-    next(createError(500, ERROR.SERVER_MESSAGE));
+    next(error);
   }
 };
 
 Controller.checkCode = async function (req, res, next) {
   const problemId = req.params.problem_id;
-  const submitText = req.body.submit_text;
+  const submitCode = req.body.submit_text;
   const vm = new VM({
     sandbox: {},
     timeout: 10000,
     fixAsync: true,
+    wasm: false,
   });
 
   try {
@@ -62,7 +51,7 @@ Controller.checkCode = async function (req, res, next) {
 
       try {
         const result = vm.run(
-          `solution = ${submitText};
+          `solution = ${submitCode};
 
           ${testCode};`
         );
@@ -85,18 +74,18 @@ Controller.checkCode = async function (req, res, next) {
 
           results.push(successTestCode);
         }
-      } catch (error) {
+      } catch (userSolutionError) {
         return res.render("failure", {
-          userCode: submitText,
+          userCode: submitCode,
           testCase: results,
-          error: error.message,
+          error: userSolutionError.message,
         });
       }
     }
 
     if (isFail) {
       return res.render("failure", {
-        userCode: submitText,
+        userCode: submitCode,
         testCase: results,
         error: null,
       });
@@ -108,22 +97,18 @@ Controller.checkCode = async function (req, res, next) {
     });
 
     if (!checkSuccessUser) {
-      problem.completed_users += 1;
+      problem.completed_users += PROBLEM_RESULT.INCREASE_VALUE;
       problem.completed_list.push(currentUserId);
 
       await problem.save();
     }
 
     res.render("success", {
-      userCode: submitText,
+      userCode: submitCode,
       testCase: results,
     });
   } catch (error) {
-    if (error instanceof mongoose.CastError) {
-      return next(createError(400, ERROR.DATABASE_MESSAGE));
-    }
-
-    next(createError(500, ERROR.SERVER_MESSAGE));
+    next(error);
   }
 }
 

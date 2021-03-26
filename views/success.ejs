@@ -14,14 +14,17 @@
       <article class="user-code">
           <textarea id="code" name="submit_text"><%= userCode %></textarea>
         <script>
-          const editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-            lineNumbers: true,
-            styleActiveLine: true,
-            mode: "javascript",
-            indentUnit: 2,
-            identWithTabs: true,
-            theme: "gruvbox-dark"
-          });
+          const editor = CodeMirror.fromTextArea(
+            document.getElementById("code"),
+            {
+              lineNumbers: true,
+              styleActiveLine: true,
+              mode: "javascript",
+              indentUnit: 2,
+              identWithTabs: true,
+              theme: "gruvbox-dark",
+            }
+          );
         </script>
         <p class="result-comment">Error Comment: </p>
         <article class="error-comment">
@@ -32,7 +35,7 @@
         <ul class="result-info">
           <% testCase.forEach(result => { %>
             <li class="result-box">
-              <div class="success"></div>
+              <div class="success-circle"></div>
               <div class="solution">
                 <%= result.solution %>
               </div>

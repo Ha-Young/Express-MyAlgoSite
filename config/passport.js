@@ -22,7 +22,13 @@ function passportConfig(app) {
     done(null, user);
   });
 
-  app.use(session({ secret: process.env.SECCSION_SECRET_KEY, resave: true, saveUninitialized: false }));
+  app.use(session(
+    {
+      secret: process.env.SECCSION_SECRET_KEY,
+      resave: true,
+      saveUninitialized: false,
+    }
+  ));
   app.use(passport.initialize());
   app.use(passport.session());
 }

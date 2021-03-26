@@ -1,5 +1,5 @@
 module.exports = {
-  DATABASE_MESSAGE: "DB Server ERROR",
-  SERVER_MESSAGE: "Server Error",
-  NOT_FOUND :"Not Found",
+  SERVER_MESSAGE: "Internal Server Error",
+  NOT_FOUND : "Not Found",
+  MONGOOSE_ERROR: "mongoose Cast Error",
 };

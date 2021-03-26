@@ -25,19 +25,26 @@
       <article class="codes">
         <div>
           <div class="problem-text">Solution:</div>
-          <form id="submitText" action="/problems/<%= problem._id %>" method="POST">
+          <form
+            id="submitText"
+            action="/problems/<%= problem._id %>"
+            method="POST"
+          >
             <textarea id="code" name="submit_text"></textarea>
             <button class="submit-button" type="submit">제출</button>
           </form>
           <script>
-            const editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-              lineNumbers: true,
-              styleActiveLine: true,
-              mode: "javascript",
-              indentUnit: 2,
-              identWithTabs: true,
-              theme: "gruvbox-dark",
-            });
+            const editor = CodeMirror.fromTextArea(
+              document.getElementById("code"),
+              {
+                lineNumbers: true,
+                styleActiveLine: true,
+                mode: "javascript",
+                indentUnit: 2,
+                identWithTabs: true,
+                theme: "gruvbox-dark",
+              },
+            );
 
             editor.setValue(`function solution() {\n\n}`);
           </script>

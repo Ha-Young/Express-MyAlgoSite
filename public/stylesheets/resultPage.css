@@ -46,7 +46,7 @@
   margin-bottom: 70px;
 }
 
-.success {
+.success-circle {
   display: inline-block;
   width: 15px;
   height: 15px;
@@ -54,7 +54,7 @@
   background: #2ecc71;
 }
 
-.fail {
+.fail-circle {
   display: inline-block;
   width: 15px;
   height: 15px;
@@ -75,7 +75,7 @@
   height: 70px;
   margin: 0 auto;
   margin-top: 150px;
-  font-size: 40px;
+  font-size: 30px;
   text-align: center;
 }
 

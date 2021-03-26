@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
+const mongoose = require("mongoose");
 const createError = require("http-errors");
 
 const passportConfig = require("./config/passport");
@@ -32,6 +33,14 @@ app.use(function(req, res, next) {
 });
 
 app.use(function(err, req, res, next) {
+  if (err instanceof mongoose.CastError) {
+    console.log(ERROR.MONGOOSE_ERROR);
+  }
+
+  if (!error.message) {
+    err.message = ERROR.SERVER_MESSAGE;
+  }
+
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
