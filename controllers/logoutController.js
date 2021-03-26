@@ -5,6 +5,6 @@ exports.getLogOut = async function(req, res, next) {
     req.logout();
     res.redirect("/login");
   } catch (err) {
-    next(createError(500), "failed to logout");
+    next(err);
   }
 };

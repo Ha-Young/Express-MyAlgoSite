@@ -15,7 +15,7 @@ exports.getAllProblems = async function(req, res, next) {
 
     res.render("index", { title: "Codewars", problems, displayName });
   } catch (err) {
-    next(createError(500, "failed to fetch problems from db"));
+    next(err);
   }
 };
 
@@ -26,7 +26,7 @@ exports.getSelectedProblem = async function(req, res, next) {
 
     res.render("problem", { title: "problem", selectedProblem, displayName });
   } catch(err) {
-    next(createError(500), "failed to fetch probelm from db");
+    next(err);
   }
 }
 
@@ -39,9 +39,8 @@ exports.postSelectedProblemSolution = async function(req, res, next) {
     } = req;
     const { _id, testcases } = await Problem.findOne({ problemId });
 
-
     if (!_id) {
-      next(createError(500, "failed to get selectedProblem from db"));
+      next(err);
       return;
     }
 
@@ -73,7 +72,7 @@ exports.postSelectedProblemSolution = async function(req, res, next) {
 
     res.render("success", { title: "success", totalTestcaseResult, problemId, displayName });
   } catch (err) {
-    next(createError(500, "failed to post selectedProblem"));
+    next(err);
   }
 };
 

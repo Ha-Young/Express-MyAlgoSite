@@ -1,11 +1,10 @@
 const passport = require("passport");
-const createError = require("http-errors");
 
 exports.getLoginPage = async function(req, res, next) {
   try {
     res.render("login", { title: "login" });
   } catch(err) {
-    next(createError(500), "failed to render login page");
+    next(err);
   }
 };
 
