@@ -59,13 +59,13 @@
 .windowbar .controls .close {
   box-sizing: border-box;
   padding: 10px;
-  background: #DC143C;
+  background: #ac4142;
   text-decoration: none;
   color: white;
 }
 
 .windowbar .controls .close:hover {
-  background: rgb(220, 20, 60, 0.8);
+  background: rgba(172, 65, 66, 0.8);
 }
 
 .windowbar .controls .close:active {
@@ -163,7 +163,7 @@
   right: 50px;
   display: flex;
   flex-direction: column;
-  width: 5vw;
+  width: 90px;
 }
 
 .send-testcase-btn {
@@ -173,6 +173,7 @@
   color: #FFF;
   margin: 0 0 5px;
   padding: 10px;
+  width: 100%;
   font-size: 1rem;
   border-radius: 2px;
 }
@@ -191,7 +192,8 @@
   background: #ac4142;
   color: #FFF;
   margin: 0 0 5px;
-  padding: 10px;
+  padding: 10px 15px;
+  width: 100%;
   font-size: 1rem;
   border-radius: 2px;
 }
