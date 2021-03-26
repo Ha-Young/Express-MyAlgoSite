@@ -1,0 +1,134 @@
+const vm = require("vm");
+const { User } = require("../models/User");
+const { Problem } = require("../models/Problem");
+
+exports.getProblem = async (req, res, next) => {
+  try {
+    const problemId = req.params.problem_id;
+    const currentProblem = await Problem.findById(problemId).lean();
+    const currentUser = await User.findById(req.user._id);
+    let userAnswer = "";
+
+    if (currentUser.answers[problemId]) {
+      userAnswer = currentUser.answers[problemId];
+    }
+
+    if (currentProblem) {
+      res.render("problem", { data: { ...currentProblem, userAnswer } });
+    } else {
+      res.redirect("/");
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.postProblem = async (req, res, next) => {
+  try {
+    const problemId = req.params.problem_id;
+    const userCode = req.body.userCode;
+    const currentProblem = await Problem.findById(problemId).lean();
+    const currentUser = await User.findById(req.user._id).lean();
+    const tests = currentProblem.tests;
+    const userResult = { userSolution: null };
+
+    const results = [];
+    let finalResult = "";
+    let successCount = 0;
+    let failCount = 0;
+
+    await User.updateOne(
+      { _id: req.user._id },
+      { answers: { ...currentUser.answers, [problemId]: userCode } }
+    );
+
+    for (const test of tests) {
+      const fullCode = userCode + `userSolution = ${test.code}`;
+      vm.createContext(userResult);
+      vm.runInContext(fullCode, userResult);
+
+      if (userResult.userSolution === test.solution) {
+        successCount++;
+      } else {
+        failCount++;
+      }
+
+      const currentResult = {
+        code: test.code,
+        userResult: userResult.userSolution,
+        solution: test.solution,
+      };
+
+      results.push(currentResult);
+    }
+
+    if (failCount !== 0) {
+      finalResult = "틀렸습니다 😹";
+      return res.render("results/failure", {
+        data: { ...currentProblem, results, finalResult, userAnswer: userCode },
+      });
+    }
+
+    if (failCount === 0) {
+      const completedUsers = currentProblem.completedUsers.map((objectId) =>
+        objectId.toString()
+      );
+      const completedCount = currentProblem.completedCount;
+      const currentRating = currentUser.rating;
+      const currentSolved = currentUser.solvedProblems;
+
+      if (completedUsers.indexOf(currentUser._id.toString()) === -1) {
+        const updatedList = [...completedUsers, currentUser._id];
+        const updatedCount = completedCount + 1;
+        const updatedRating = currentRating + currentProblem.difficulty;
+        const updatedSolved = [...currentSolved, currentProblem._id];
+
+        await Problem.updateOne(
+          { _id: currentProblem._id },
+          { completedUsers: updatedList }
+        ).updateOne(
+          { _id: currentProblem._id },
+          { completedCount: updatedCount }
+        );
+
+        await User.updateOne(
+          { _id: currentUser._id },
+          { rating: updatedRating }
+        ).updateOne(
+          { _id: currentUser._id },
+          { solvedProblems: updatedSolved }
+        );
+      }
+    }
+
+    finalResult = "정답입니다 😺";
+    res.render("results/success", {
+      data: { ...currentProblem, results, finalResult, userAnswer: userCode },
+    });
+  } catch (error) {
+    try {
+      const currentProblem = await Problem.findById(
+        req.params.problem_id
+      ).lean();
+      const results = [
+        {
+          userResult: error.message,
+        },
+      ];
+      const userAnswer = req.body.userCode;
+      const finalResult = "에러입니다 ❌";
+
+      return res.render("results/failure", {
+        data: {
+          ...currentProblem,
+          results,
+          userAnswer,
+          finalResult,
+          error: true,
+        },
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+};

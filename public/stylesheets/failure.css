@@ -6,6 +6,7 @@
   height: 80vh;
   color: white;
   background-color: #222f3e;
+  padding-bottom: 200px;
 }
 
 .problem-container {
@@ -125,6 +126,7 @@
   background-color: #ffe0e0;
   font-family: monospace;
   color: black;
+  margin-bottom: 60px;
 }
 
 .result-item {
