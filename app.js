@@ -6,11 +6,11 @@ const flash = require("express-flash");
 const createError = require("http-errors");
 const passport = require("passport");
 const mongoose = require("mongoose");
+const logger = require("morgan");
 
 const users = require("./routes/users");
 const index = require("./routes/index");
 const problems = require("./routes/problems");
-const { create } = require("./models/User");
 
 const app = express();
 
@@ -19,6 +19,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.SECRET_KEY));
 app.engine(".html", require("ejs").__express);
 app.set("view engine", "ejs");
+
+app.use(logger("dev"));
 
 app.use(express.static("public"));
 
@@ -63,7 +65,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
-
-debugger;
 
 module.exports = app;
