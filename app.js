@@ -37,7 +37,7 @@ app.use(function(err, req, res, next) {
     console.log(ERROR.MONGOOSE_ERROR);
   }
 
-  if (!error.message) {
+  if (!err.message) {
     err.message = ERROR.SERVER_MESSAGE;
   }
 
