@@ -1,8 +1,8 @@
 const Problem = require("../../models/Problem");
-const runVMTest = require("../../utils/testFetchCode");
+const testFetchCode = require("../../utils/testFetchCode");
 const updateSuccessUser = require("../../utils/updateSuccessUser");
 
-const PROBLEM_RESULT = require("../../constants/problemConstants");
+const PROBLEM = require("../../constants/problemConstants");
 
 const Controller = {};
 
@@ -31,28 +31,29 @@ Controller.detail = async function (req, res, next) {
 Controller.checkCode = async function (req, res, next) {
   const currentUserId = req.user.id;
   const problemId = req.params.problem_id;
-  const submitCode = req.body.submit_text;
+  const fetchedCode = req.body.submit_text;
 
   try {
     const problem = await Problem.findById(problemId);
-    const testCodes = problem.tests;
+    const testCases = problem.tests;
+
     let results;
     let isFail = false;
 
-    results = runVMTest(submitCode, testCodes);
+    results = testFetchCode(fetchedCode, testCases);
 
-    if (!Array.isArray(results)) {
+    if (results.hasOwnProperty(PROBLEM.ERROR)) {
       return res.render("failure",
         {
-          userCode: submitCode,
+          userCode: fetchedCode,
           testCase: [],
-          error: results,
+          error: results.error,
         }
       );
     }
 
     results.forEach(result => {
-      if (result.status === PROBLEM_RESULT.FAIL) {
+      if (result.status === PROBLEM.FAIL) {
         isFail = true;
       }
     });
@@ -60,7 +61,7 @@ Controller.checkCode = async function (req, res, next) {
     if (isFail) {
       return res.render("failure",
         {
-          userCode: submitCode,
+          userCode: fetchedCode,
           testCase: results,
           error: null,
         }
@@ -71,7 +72,7 @@ Controller.checkCode = async function (req, res, next) {
 
     res.render("success",
       {
-        userCode: submitCode,
+        userCode: fetchedCode,
         testCase: results,
       }
     );

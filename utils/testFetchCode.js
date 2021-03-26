@@ -2,7 +2,7 @@ const { VM } = require("vm2");
 
 const validationResult = require("./validationResult");
 
-function runVMTest(fetchCode, runningCodes) {
+function testFetchCode(fetchedCode, testCases) {
   const vm = new VM({
     sandbox: {},
     timeout: 10000,
@@ -12,23 +12,25 @@ function runVMTest(fetchCode, runningCodes) {
 
   let resultList = [];
 
-  for (let i = 0; i < runningCodes.length; i++) {
-    const runningCode = runningCodes[i];
+  for (let i = 0; i < testCases.length; i++) {
+    const testCase = testCases[i];
 
     try {
       const result = vm.run(
-        `solution = ${fetchCode};
+        `solution = ${fetchedCode};
 
-        ${runningCode.code}`
+        ${testCase.code};`
       );
 
-      resultList.push(validationResult(result, runningCode));
+      resultList.push(validationResult(result, testCase));
     } catch (userSolutionError) {
-      return userSolutionError.message;
+      return {
+        error: userSolutionError.message,
+      };
     }
   }
 
   return resultList;
 }
 
-module.exports = runVMTest;
+module.exports = testFetchCode;

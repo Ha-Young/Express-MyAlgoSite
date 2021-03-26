@@ -1,4 +1,4 @@
-const PROBLEM_RESULT = require("../constants/problemConstants");
+const PROBLEM = require("../constants/problemConstants");
 
 function validationResult(result, runningCode) {
   const testCode = runningCode.code;
@@ -8,7 +8,7 @@ function validationResult(result, runningCode) {
     const failTestCode = {
       solution: testCode,
       resultValue: String(result),
-      status: PROBLEM_RESULT.FAIL,
+      status: PROBLEM.FAIL,
     };
 
     return failTestCode;
@@ -17,7 +17,7 @@ function validationResult(result, runningCode) {
   const successTestCode = {
     solution: testCode,
     resultValue: String(result),
-    status: PROBLEM_RESULT.SUCCESS,
+    status: PROBLEM.SUCCESS,
   };
 
   return successTestCode;

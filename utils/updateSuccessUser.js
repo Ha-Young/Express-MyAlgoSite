@@ -1,13 +1,16 @@
-const PROBLEM_RESULT = require("../constants/problemConstants");
+const PROBLEM = require("../constants/problemConstants");
 
 async function updateSuccessUser(problem, currentUserId) {
-  const checkSuccessUser = problem.completed_list.some(userId => {
+  const successList = problem.completed_list;
+  let problemSucessCount = problem.completed_users;
+
+  const isSuccessUser = successList.some(userId => {
     return userId === currentUserId;
   });
 
-  if (!checkSuccessUser) {
-    problem.completed_users += PROBLEM_RESULT.INCREASE_VALUE;
-    problem.completed_list.push(currentUserId);
+  if (!isSuccessUser) {
+    problemSucessCount += PROBLEM.INCREASE_VALUE;
+    successList.push(currentUserId);
 
     await problem.save();
   }
