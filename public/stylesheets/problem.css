@@ -90,6 +90,8 @@
   text-align: right;
 }
 .result-icon img {
+  width: 45px;
+  margin: 0 1.5em 0 0;
   vertical-align: middle;
 }
 .result-icon .tooltip {
