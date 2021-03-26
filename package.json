@@ -1,6 +1,9 @@
 {
   "name": "codewars",
   "version": "1.0.0",
+  "engines": {
+    "node": "15.5.0"
+  },
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
@@ -22,8 +25,5 @@
   "devDependencies": {
     "dotenv": "^8.2.0",
     "nodemon": "^1.19.1"
-  },
-  "engines": {
-    "node": "15.5.0"
   }
 }
