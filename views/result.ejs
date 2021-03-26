@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <link rel='stylesheet' href='/stylesheets/header.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/result.css' />
+    <link rel='stylesheet' href='/stylesheets/problem.css' />
+  </head>
+  <body>
+    <%- include('partials/header') %>
+    <div class="problem-container">
+      <div class="problem-detail">
+        <div class="problem-header">
+          <h2>LV.<%= problem.difficulty_level %><%= problem.title %></h2>
+        </div>
+        <p class="problem-descreption"><%= problem.description %></p>
+      </div>
+      <div class="result-container">
+        <form action="/problems/<%= problem._id %>">
+          <textarea id="editor"><%= userCode %></textarea>
+          <button class="button" type="submit">다시풀기</button>
+        </form>
+        <div class="output-container">
+          <h2>output</h2>
+          <div class="output">
+            <% if (isAllPassed) { %>
+              <%- include('success') %>
+            <%} else { %>
+              <%- include('failure') %>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%- include('partials/codemirror') %>
+  </body>
+</html>
