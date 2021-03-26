@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-const signInController = require("./controllers/signInController");
+const signinController = require("./controllers/signinController");
 const validationHandler = require("./middlewars/validationHandler");
 
-router.get("/", signInController.renderSigninPage);
-router.post("/", validationHandler.register, signInController.createUser);
+router.get("/", signinController.renderSigninPage);
+router.post("/", validationHandler.register, signinController.createUser);
 
 module.exports = router;

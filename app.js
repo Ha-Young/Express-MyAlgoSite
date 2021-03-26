@@ -21,7 +21,7 @@ app.use(
 );
 
 const index = require("./routes/index");
-const signIn = require("./routes/signIn");
+const signin = require("./routes/signin");
 const login = require("./routes/login");
 const logout = require("./routes/logout");
 const problem = require("./routes/problem");
@@ -32,7 +32,7 @@ mongooseLoader();
 passportLoader();
 
 app.use("/", index);
-app.use("/signin", signIn);
+app.use("/signin", signin);
 app.use("/login", login);
 app.use("/logout", logout);
 app.use("/problem", problem);
