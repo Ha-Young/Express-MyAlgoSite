@@ -1,4 +1,3 @@
-const assert = require("assert");
 const User = require("../../models/User");
 const Problem = require("../../models/Problem");
 const { judgeSolution } = require("../../utils/judger");
@@ -60,7 +59,6 @@ exports.postSolution = async function (req, res, next) {
       { $set: { failure_count: problem[0].failure_count + 1 }}
     );
   }
-
 
   res.render("success", {
     message: result.passed ? IS_CORRECT_SOLUTION : IS_WRONG_SOLUTION,

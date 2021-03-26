@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
   completed_problems: [String]
 });
 
-userSchema.statics.findOrCreate = async function findOrCreate (pdata, cb) {
+userSchema.statics.findOrCreate = async function findOrCreate (pdata, callback) {
   const data =  await this.findOne({ googleId: pdata.profile.id, });
   if (!data) {
     const newData = {
@@ -18,7 +18,7 @@ userSchema.statics.findOrCreate = async function findOrCreate (pdata, cb) {
     await this(newData).save();
   }
 
-  cb(null, data);
+  callback(null, data);
 }
 
 module.exports = mongoose.model('User', userSchema);

@@ -9,6 +9,7 @@ const logout = require("./routes/logout");
 const problem = require("./routes/problem");
 
 const passport = require("passport");
+const session = require("express-session");
 
 const mongoose = require("mongoose");
 const db = mongoose.connection;
@@ -25,8 +26,8 @@ db.once("open", function () {
 });
 
 app.use((req, res, next) => {
-  res.set('Cache-Control', 'no-store')
-  next()
+  res.set('Cache-Control', 'no-store');
+  next();
 });
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -34,8 +35,6 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 
 app.use(passport.initialize());
-
-const session = require("express-session");
 app.use(passport.session());
 app.use(session({
   secret: "hyeongju",

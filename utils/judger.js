@@ -30,7 +30,7 @@ function judgeSolution (testcases, solution) {
     }
   }
 
-  return {passed: passed, testcaseResult: testcaseResult};
+  return { passed: passed, testcaseResult: testcaseResult };
 }
 
 exports.judgeSolution = judgeSolution;
