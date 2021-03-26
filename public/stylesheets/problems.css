@@ -52,11 +52,17 @@
 
 .problem-item .item-content .tags {
   display: flex;
+  justify-content: space-around;
+  width: 150px;
 }
 
 .problem-item .item-content .tag {
   display: flex;
   align-items: center;
+}
+
+.tag i {
+  margin-right: 5px;
 }
 
 .problem-item .item-content .tag:not(:last-child) {
