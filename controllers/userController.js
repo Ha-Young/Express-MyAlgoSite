@@ -1,3 +1,4 @@
+const createHttpError = require("http-errors");
 const passport = require("passport");
 
 exports.login = (req, res) => {
@@ -9,7 +10,13 @@ exports.logout = (req, res) => {
   res.redirect("/login");
 };
 
-exports.loginGoogle = passport.authenticate("google", { scope: ["profile"] });
+exports.loginGoogle = (req, res, next) => {
+  try {
+    return passport.authenticate("google", { scope: ["profile"] });
+  } catch (err) {
+    next(createHttpError(500));
+  }
+};
 
 exports.loginGoogleCallback =
   passport.authenticate("google", {

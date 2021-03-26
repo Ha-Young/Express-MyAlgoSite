@@ -1,10 +1,22 @@
 const Problem = require("../models/Problem");
 const createHttpError = require("http-errors");
-const { getArgument, getResultList, getUserAnwerList } = require("../utils/solution");
+const { getSolution, getArgument, getResultList, getUserAnwerList } = require("../utils/solution");
+const { path } = require("path");
 
 exports.home = async (req, res, next) => {
   try {
     const problems = await Problem.find().lean();
+
+    res.render("home", { problems });
+  } catch (err) {
+    next(createHttpError(500));
+  }
+};
+
+exports.getProblemById = async (req, res, next) => {
+  try {
+    const { level } = req.params;
+    const problems = await Problem.find({ difficultyLevel: level });
 
     res.render("home", { problems });
   } catch (err) {
@@ -34,8 +46,9 @@ exports.getProblemDetail = async (req, res, next) => {
 
 exports.postSolution = async (req, res, next) => {
   try{
+    const start = Date.now();
     const id = Number(req.params.id);
-    const userSolution = new Function(`return ${req.body.solution}`)();
+    const userSolution = new Function(`return ${getSolution(req.body.solution)}`)();
     const problemArgList = [];
     const problemAnswerList = [];
     let problem;
@@ -51,12 +64,20 @@ exports.postSolution = async (req, res, next) => {
       problemAnswerList.push(example.solution);
     });
 
+    const end = Date.now();
+    const runtime = `${end - start} ms`;
+
     let userAnswerList;
 
     try {
       userAnswerList = getUserAnwerList(problemArgList, userSolution);
     } catch (err) {
-      res.render("failure", { resultList: err });
+      res.render("failure", {
+        layout: "../views/layouts/result",
+        resultList: err,
+        runtime,
+      });
+
       return;
     }
 
@@ -64,13 +85,26 @@ exports.postSolution = async (req, res, next) => {
 
     for (const result of resultList) {
       if (!result.output) {
-        res.render("failure", { resultList });
+        res.render("failure", {
+          layout: "../views/layouts/result",
+          resultList,
+          runtime,
+        });
+
         return;
       }
     }
 
-    res.render("success", { resultList });
+    res.render("success", {
+      layout: "../views/layouts/result",
+      resultList,
+      runtime,
+    });
   } catch (err) {
-    res.render("failure", { resultList: err });
+    res.render("failure", {
+      layout: "../views/layouts/result",
+      resultList: err,
+      runtime,
+    });
   }
-}
+};

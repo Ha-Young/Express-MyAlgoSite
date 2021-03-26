@@ -2,6 +2,25 @@ const _ = require("lodash");
 
 /**
  *
+ * @param {String} str - Solution user send
+ * @returns String removed remark
+ */
+exports.getSolution = (str) => {
+  const splitByLine = str.match(/[^\r\n]+/g);
+
+  for (let i = 0; i < splitByLine.length; i++) {
+    const remark = splitByLine[i].indexOf("//");
+
+    if (remark !== -1) {
+      splitByLine[i] = splitByLine[i].slice(0, i).trim();
+    }
+  }
+
+  return splitByLine.join(" ");
+};
+
+/**
+ *
  * @param {String} fn - Function execution statement as a string named solution
  * @returns - Arguments of executed fn
  */
