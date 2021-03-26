@@ -11,6 +11,8 @@ const saveAllSampleProblems = async () => {
     }
   };
 
+// saveAllSampleProblems();
+
 const problemController = require("./controllers/problems.controller");
 router.get("/:problem_id", requiresLogin, problemController.getProblem);
 router.post("/:problem_id", requiresLogin, problemController.postSolution);

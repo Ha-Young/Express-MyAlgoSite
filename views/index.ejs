@@ -7,11 +7,11 @@
   <body>
    <%-include("title"); %>
    <%-include("menu"); %>
-    <ul class="problems">
+    <ul id="problems">
       <% for (let i = 0; i < allTitle.length; i++) { %>
         <% const address =`/problems/${allTitle[i].id}`%>
         <a href=<%=address %>>
-          <li><%= allTitle[i].title %></li>
+          <li id="problem"><%= allTitle[i].title %></li>
         </a>
       <% } %>
     </ul>

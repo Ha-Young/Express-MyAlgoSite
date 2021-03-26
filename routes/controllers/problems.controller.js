@@ -38,15 +38,20 @@ exports.postSolution = async function (req, res, next) {
 
   const problemList = userData[0].completed_problems;
 
-  if (problemList.length === 0 || !problemList.includes(problemId)) {
+  if (!problemList.includes(problemId)) {
     problemList.push(problemId);
     await User.updateOne(
-      { googleId: userGoogleId},
+      { googleId: userGoogleId },
       { $push: { completed_problems: problemId }}
     );
     await Problem.updateOne(
-      { id: problemId},
-      { $set: { completed_users: problem[0].completed_users + 1 }}
+      { id: problemId },
+      { $set: { completed_count: problem[0].completed_count + 1 }}
+    );
+  } else if (!result.passed) {
+    await Problem.updateOne(
+      { id: problemId },
+      { $set: { failure_count: problem[0].failure_count + 1 }}
     );
   }
 

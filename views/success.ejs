@@ -8,13 +8,17 @@
     <%-include("title"); %>
     <%-include("menu"); %>
     <div id="result-container">
-      <h3><%=message%></h3>
-      <ul>
+      <h3 id="result-title"><%=message%></h3>
+      <ul id="testcase-container">
       <% for (let i = 0; i < testcaseResult.length; i++) { %>
-        <li>
-          <div>실행 코드 : <%=testcaseResult[i].code%></div>
-          <span>기대값 : <%=testcaseResult[i].expected%></span>
-          <span>결과값 : <%=testcaseResult[i].result%></span>
+        <% const icon= (testcaseResult[i].passed) ? "o" : "x" %>
+        <li id="testcase">
+          <div id="solution-container">
+            <span>실행 코드 : <%=testcaseResult[i].code%></span>
+            <span><%=icon%></span>
+            </div>
+          <div>기대값 : <%=testcaseResult[i].expected%></div>
+          <div>결과값 : <%=testcaseResult[i].result%></div>
         </li>
       <% } %>
       </ul>

@@ -5,7 +5,9 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <%- include("title")%>
-    <button onclick="location.href='/login/auth/google'">Sign In with Google</button>
+    <div id="login-container">
+      <h1 id="app-title">Codewars</h1>
+      <button id="login" onclick="location.href='/login/auth/google'">Sign In with Google</button>
+    </div>
   </body>
 </html>

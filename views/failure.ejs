@@ -5,13 +5,14 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-   <%-include("title"); %>
-   <%-include("menu"); %>
-
-   <h3><%=name%></h3>
-   <span><%=message%></span>
-   <article><%=stack%></article>
-   <%- include("back", {originalUrl})%>
+    <%-include("title"); %>
+    <%-include("menu"); %>
+    <h3 id="result-title"><%=name%></h3>
+    <div id="result-container">
+      <span><%=message%></span>
+      <article><%=stack%></article>
+      <%- include("back", {originalUrl})%>
+    </div>
   </body>
 </html>
 

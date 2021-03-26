@@ -23,7 +23,8 @@ function judgeSolution (testcases, solution) {
       testcaseResult.push({
           code: code,
           expected: answer,
-          result: sandbox.result
+          result: sandbox.result,
+          passed: answer === sandbox.result
         });
     } catch (error) {
       return {error: error};
