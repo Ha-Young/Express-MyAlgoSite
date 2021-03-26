@@ -81,7 +81,7 @@ fieldset {
   cursor: pointer;
   width: 100%;
   border: none;
-  background: #4CAF50;
+  background: #42c58a;
   color: #FFF;
   margin: 0 0 5px;
   padding: 10px;
@@ -167,13 +167,13 @@ fieldset {
 }
 
 .google-btn {
-  background: bisque;
-  font: 400 12px/16px "Roboto", Helvetica, Arial, sans-serif;
+  margin: 0 0 5px;
+  padding: 10px;
+  background: #4ec7f3;
+  color: white;
+  font: 400 12px/16px;
   cursor: pointer;
   width: 100%;
   border: none;
-  color: black;
-  margin: 0 0 5px;
-  padding: 10px;
   font-size: 15px;
 }

@@ -13,12 +13,10 @@
 .windowbar {
   height: 30px;
   width: 100%;
-  background: white;
+  background: #42C58A;
   color: rgba(0, 0, 0, 0.5);
   line-height: 28px;
   z-index: 100;
-  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, .05),
-  inset 0 -1px 0 rgba(0, 0, 0, .4);
 }
 
 .windowbar span {
@@ -61,13 +59,13 @@
 .windowbar .controls .close {
   box-sizing: border-box;
   padding: 10px;
-  background: #e87460;
+  background: #DC143C;
   text-decoration: none;
   color: white;
 }
 
 .windowbar .controls .close:hover {
-  background: rgb(232, 116, 96, 0.8);
+  background: rgb(220, 20, 60, 0.8);
 }
 
 .windowbar .controls .close:active {
@@ -96,9 +94,8 @@
   grid-template-rows: .6fr .4fr;
   width: 30vw;
   height: calc(100% - 30px);
-  background: #888888;
+  background: #847577;
   color: white;
-  box-shadow: inset 0 2px 0 rgba(255,255,255,.05), inset 0 1px 0 rgba(0,0,0,.4);
 }
 
 .problem-title {
@@ -109,9 +106,7 @@
   font-size: 1.3rem;
   z-index: -1;
   border-top: solid 1px #454545;
-  /* border-bottom: solid 1px #454545; */
-  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, .05),
-  inset 0 -1px 0 rgba(0, 0, 0, .4);
+  border-bottom: solid 1px #454545;
 }
 
 .fixed-title {
@@ -128,15 +123,13 @@
 
 .guide-section {
   overflow-y: scroll;
-  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, .05),
-  inset 0 -1px 0 rgba(0, 0, 0, .4);
 }
 
 .test-case-area {
   padding: 20px;
   width: 100%;
   height: 100%;
-  background: #888888;
+  background: #847577;
   color: #fafafa;
   border: none;
   -moz-user-select: none;
@@ -155,15 +148,12 @@
   width: calc(70vw);
   height: calc(100% - 30px);
   background: #fafafa;
-  box-shadow: inset 0 2px 0 rgba(255,255,255,.05), inset 0 1px 0 rgba(0,0,0,.4);
   user-select: text;
   -webkit-user-select: text;
   outline: none;
 }
 
 .code-section {
-  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, .05),
-    inset 0 -1px 0 rgba(0, 0, 0, .4);
   overflow-y: scroll;
 }
 
@@ -179,7 +169,7 @@
 .send-testcase-btn {
   cursor: pointer;
   border: none;
-  background: #4CAF50;
+  background: #42c58a;
   color: #FFF;
   margin: 0 0 5px;
   padding: 10px;
@@ -188,7 +178,7 @@
 }
 
 .send-testcase-btn:hover {
-  background: rgba(76, 175, 79, 0.8);
+  background: rgb(66, 197, 138, 0.8);
 }
 
 .send-testcase-btn:active {
@@ -198,7 +188,7 @@
 .send-answer-btn {
   cursor: pointer;
   border: none;
-  background: red;
+  background: #DC143C;
   color: #FFF;
   margin: 0 0 5px;
   padding: 10px;
@@ -207,7 +197,7 @@
 }
 
 .send-answer-btn:hover {
-  background: rgb(255, 0, 0, 0.8);
+  background: rgb(220, 20, 60, 0.8);
 }
 .send-answer-btn:active {
   background: rgb(204, 0, 0);
@@ -235,6 +225,7 @@
 }
 
 .console-testcase td {
+  vertical-align: top;
   height: 25px;
 }
 
@@ -266,5 +257,5 @@ td[colspan="2"] {
 }
 
 .failed {
-  color: red;
+  color: #DC143C;
 }
