@@ -16,7 +16,7 @@ passport.deserializeUser(function(user, done) {
 passport.use(new GoogleStrategy({
   clientID: process.env['GOOGLE_CLIENT_ID'],
   clientSecret: process.env["GOOGLE_CLIENT_SECRET"],
-  callbackURL: "http://localhost:3000/login/auth/google/callback"
+  callbackURL: "https://vaco-codewars-hyeongju.herokuapp.com/login/auth/google/callback"
 },
 function (accessToken, refreshToken, profile, done) {
   User.findOrCreate({ profile: profile }, function (err, user) {

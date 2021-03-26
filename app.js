@@ -17,7 +17,7 @@ const db = mongoose.connection;
 
 const bodyParser = require("body-parser");
 
-mongoose.connect("mongodb+srv://hyeongju:WwHdtPxR6b-PibR@codewars.zwtye.mongodb.net/myFirstDatabase", {
+mongoose.connect(process.env.MONGODB_ADDRESS, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
 });
