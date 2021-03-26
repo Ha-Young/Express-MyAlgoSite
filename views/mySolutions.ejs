@@ -8,12 +8,23 @@
     <title><%= title %></title>
   </head>
 <body>
+    <%- include("./partials/header.ejs") %>
     <h1>내가 푼 문제</h1>
     <div>
-        목록..
-    </div>
-    <div>
-      <div><a href="/"><h2>Go back to Home</h2></a></div>
+      <% if (solutions.length) {%>
+        <div class="list-wrapper">
+          <% solutions.forEach(function (solution, idx) {%>
+            <div class="solution-container">
+                <div><%= idx + 1 %></div><h1><%= solution.problemTitle %></h1>
+              <div class="solution-desc">
+                <div>
+                  <%= solution.mySolution %>
+                </div>
+              </div>
+            </div>
+          <%})%>
+        </div>
+      <%}%>
     </div>
 </body>
 </html>

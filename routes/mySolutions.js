@@ -3,6 +3,6 @@ const router = express.Router();
 const verifyAuth = require("../middlewares/verifyAuth");
 const solutionController = require("../controllers/solutionController");
 
-router.get("/", verifyAuth, solutionController.getMySolvedProblems);
+router.get("/", verifyAuth, solutionController.getMySolutions);
 
 module.exports = router;
