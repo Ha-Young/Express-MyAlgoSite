@@ -39,4 +39,4 @@ const ProblemSchema = new mongoose.Schema({
   tests: [ TestSchema ]
 });
 
-module.exports = mongoose.model('Problem', ProblemSchema);
+module.exports = mongoose.model("Problem", ProblemSchema);
