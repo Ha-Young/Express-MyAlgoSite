@@ -7,18 +7,18 @@ const {
   AUTH_CALLBACK_URL,
 } = process.env;
 
-passport.use(new GoogleStrategy({
-  clientID: GOOGLE_CLIENT_ID,
-  clientSecret: GOOGLE_CLIENT_SECRET,
-  callbackURL: AUTH_CALLBACK_URL,
-}, (accessToken, refreshToken, profile, done) => {
-  done(null, profile);
-}));
+const googleStrategy = new GoogleStrategy(
+  {
+    clientID: GOOGLE_CLIENT_ID,
+    clientSecret: GOOGLE_CLIENT_SECRET,
+    callbackURL: AUTH_CALLBACK_URL,
+  },
+  (accessToken, refreshToken, profile, done) => {
+    done(null, profile);
+  },
+);
 
-passport.serializeUser((user, done) => {
-  done(null, user);
-});
+passport.use(googleStrategy);
 
-passport.deserializeUser((user, done) => {
-  done(null, user);
-});
+passport.serializeUser((user, done) => done(null, user));
+passport.deserializeUser((user, done) => done(null, user));

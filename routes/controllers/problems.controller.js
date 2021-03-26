@@ -2,20 +2,26 @@ const createError = require("http-errors");
 const Problem = require(`${__dirname}/../../models/Problem`);
 const vm = require("vm");
 
-
 exports.getProblem = async (req, res, next) => {
   const problemId = req.params.problem_id;
+  const isContinuedProblem
+    = !!req.session.problem
+    && req.session.problem._id === problemId;
   let problem;
 
-  try {
-    problem = await Problem.findById(problemId).exec();
+  if (!isContinuedProblem) {
+    delete req.session.userCode;
 
-    if (!problem) return next(createError(404));
+    try {
+      problem = await Problem.findById(problemId).exec();
+      req.session.problem = problem;
+    } catch (error) {
+      console.error(error);
 
-    req.session.problem = problem;
-  } catch(error) {
-    console.error(error);
-    return next(createError(500));
+      return next(createError(404));
+    }
+  } else {
+    problem = req.session.problem;
   }
 
   res.locals= {
@@ -33,57 +39,57 @@ exports.verifyUserCode = (req, res, next) => {
   const { tests } = req.session.problem;
   const userCode = req.body.userCode;
   req.session.userCode = userCode;
-
   res.locals = {
     problem: req.session.problem,
-    codesInTextarea: req.session.userCode,
+    codesInTextarea: req.session.userCode || "function solution(n) {}",
+    isLogin: res.app.locals.isLogin,
+    success: null,
+    failure: null,
   };
 
   const contexts = tests.map(() => ({}));
   const testScripts = tests.map(test => new vm.Script(`
       ${userCode};
       var time = 0;
-      for (let i = 0; i < 10; i++) {
         const start = Date.now();
-        var userSolution = ${test.code} || "undefined";
-        time += Date.now() - start;
-      }
-      time = Number((time / 10 * 2.1).toFixed(4)) ;
-      var solution = ${test.solution};
+        var userSolution = "" + ${test.code} || "undefined";
+        time = Date.now() - start;
+      var solution = "${test.solution}";
   `));
+
   try {
+    const testOptions = {
+      timeout: tests.length * 1000,
+      microtaskMode: "afterEvaluate",
+    };
     contexts.forEach((context, index) => {
-      testScripts[index].runInNewContext(context, {timeout: 20000, microtaskMode: "afterEvaluate"});
+      testScripts[index].runInNewContext(context, testOptions);
     });
 
     for (const { userSolution, solution, time } of contexts) {
       if (time >= 1000) {
-        Object.assign(
-          res.locals,
-          { failure: { error: "Time Limit Exceed" } }
-        );
+        const failure = {
+          solution,
+          userSolution,
+          time: "Time Limit Exceed",
+        };
+        Object.assign(res.locals, { failure });
 
         return res.render("problem");
       } else if (userSolution !== solution) {
-        Object.assign(
-          res.locals,
-          { failure: { solution, userSolution, time } }
-        );
+        const failure = { solution, userSolution, time };
+        Object.assign(res.locals, { failure });
 
         return res.render("problem");
       }
     }
-    Object.assign(
-      res.locals,
-      { success: { contexts } }
-    );
+
+    Object.assign(res.locals, { success: contexts });
 
     return res.render("problem");
   } catch (error) {
-    Object.assign(
-      res.locals,
-      { failure: { error: error.message } }
-    );
+    const failure = { error: error.message };
+    Object.assign(res.locals, { failure });
 
     return res.render("problem");
   }

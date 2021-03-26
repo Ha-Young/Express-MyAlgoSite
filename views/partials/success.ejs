@@ -1,0 +1,13 @@
+<h2>성공!</h2>
+<a href="/">
+  <button>다른 문제 풀러 가기</button>
+</a>
+<ul>
+  <% success.map(result => { %>
+    <li>
+      <p>예상 결과: <%- result.solution %></p>
+      <p>실제 결과: <%- result.userSolution %></p>
+      <p>실행 시간: <%- result.time %>ms</p>
+    </li>
+  <% }) %>
+</ul>

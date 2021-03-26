@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
   <head>
     <%- include("partials/head") %>
     <link rel='stylesheet' href='/stylesheets/style.css' />
@@ -7,9 +7,9 @@
   <body>
     <%- include("partials/bodyHeader") %>
     <ul>
-      <% problems.map((problem, index) => { %>
+      <% problems.map(problem => { %>
         <li>
-          <a href="/problems/<%= problem.id %>">
+          <a href="/problems/<%= problem._id %>">
             <h2><%= problem.title %></h2>
             <h3>난이도 <%= problem.difficulty_level %></h3>
             <h4>정답자 수 <%= problem.completed_users %></h4>

@@ -1,22 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
   <head>
     <%- include("partials/head") %>
-    <link rel='stylesheet' href='/stylesheets/codemirror.css' />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.css" integrity="sha512-xIf9AdJauwKIVtrVRZ0i4nHP61Ogx9fSRAkCLecmE2dL/U8ioWpDvFCAy4dcfecN72HHB9+7FfQj3aiO68aaaw==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/theme/cobalt.min.css" integrity="sha512-dAYwzcmdv0GvCo9UJmVP430Mc9kmvpdDVk/pHNG90qTZR6tpHQlR9BsVdK9ZGpnNtQNVl+j7UQppCwOPN0TTNQ==" crossorigin="anonymous" />
+    <link
+      rel='stylesheet'
+      href='/stylesheets/codemirror.css'
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.css"
+      integrity="sha512-xIf9AdJauwKIVtrVRZ0i4nHP61Ogx9fSRAkCLecmE2dL/U8ioWpDvFCAy4dcfecN72HHB9+7FfQj3aiO68aaaw=="
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/theme/cobalt.min.css"
+      integrity="sha512-dAYwzcmdv0GvCo9UJmVP430Mc9kmvpdDVk/pHNG90qTZR6tpHQlR9BsVdK9ZGpnNtQNVl+j7UQppCwOPN0TTNQ=="
+      crossorigin="anonymous"
+    />
   </head>
   <body>
     <%- include("partials/bodyHeader") %>
     <%- include("partials/problemHeader") %>
     <form
       name="form"
-      action="http://localhost:<%- process.env.PORT %>/problems/<%- problem.id %>"
+      action="http://localhost:<%- process.env.PORT %>/problems/<%- problem._id %>"
       method="post"
     >
       <textarea id="codemirror" name="userCode"><%- codesInTextarea %></textarea>
       <input type="submit" value="Submit" />
-  </form>
+    </form>
     <div class="problem-result">
       <% if (success) { %>
         <%- include("partials/success") %>
@@ -24,10 +37,21 @@
         <%- include("partials/failure") %>
       <% } %>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.js"
-    integrity="sha512-hc0zo04EIwTzKLvp2eycDTeIUuvoGYYmFIjYx7DmfgQeZPC5N27sPG2wEQPq8d8fCTwuguLrI1ffatqxyTbHJw==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/mode/javascript/javascript.min.js" integrity="sha512-isTDQTpVc8nKKMQmhm0b6fccRPjzo2g0q6l2VLy9/jDn5s8bEUu9WuSGkkAfN/NCwI3+Qi5wEVCaPRoWvT6YPw==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/addon/edit/closebrackets.min.js" integrity="sha512-+xi2SgGCBFIGog8JZv+X1dte+mhaJ6i73ZV2icqQk+onxz+ZkrSgtXdNfvqX2YYzwMsGAqpcjyIxvC9ytAXXPw==" crossorigin="anonymous"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.js"
+      integrity="sha512-hc0zo04EIwTzKLvp2eycDTeIUuvoGYYmFIjYx7DmfgQeZPC5N27sPG2wEQPq8d8fCTwuguLrI1ffatqxyTbHJw=="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/mode/javascript/javascript.min.js"
+      integrity="sha512-isTDQTpVc8nKKMQmhm0b6fccRPjzo2g0q6l2VLy9/jDn5s8bEUu9WuSGkkAfN/NCwI3+Qi5wEVCaPRoWvT6YPw=="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/addon/edit/closebrackets.min.js"
+      integrity="sha512-+xi2SgGCBFIGog8JZv+X1dte+mhaJ6i73ZV2icqQk+onxz+ZkrSgtXdNfvqX2YYzwMsGAqpcjyIxvC9ytAXXPw=="
+      crossorigin="anonymous"
+    ></script>
     <script src="/javascripts/codemirror.js"></script>
   </body>
 </html>

@@ -4,8 +4,9 @@ require(`${__dirname}/authentication/passport`);
 
 const express = require('express');
 const fs = require("fs");
-const morgan = require("morgan");
 const createError = require("http-errors");
+
+const morgan = require("morgan");
 const passport = require("passport");
 const session = require("express-session");
 
@@ -24,11 +25,10 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
 }));
-
 app.use(passport.initialize());
 app.use(passport.session());
 
-const redirectByUnAuth = require(`${__dirname}/utils/redirectByUnAuth`);
+const redirectByUnAuth = require(`${__dirname}/middlewares/redirectByUnAuth`);
 
 const index = require(`${__dirname}/routes`);
 const login = require(`${__dirname}/routes/login`);
@@ -51,7 +51,7 @@ app.use((err, req, res, next) => {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   res.status(err.status || 500);
-  res.render('error');
+  return res.render('error');
 });
 
 module.exports = app;

@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const ProblemSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: [true, "title is required"]
+    required: [true, "title is required"],
   },
   completed_users: {
     type: Number,
@@ -17,7 +17,7 @@ const ProblemSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: [true, "description is required"]
+    required: [true, "description is required"],
   },
   tests: [{
     type: Object,

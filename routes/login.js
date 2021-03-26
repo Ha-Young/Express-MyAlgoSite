@@ -4,11 +4,15 @@ const {
   getLogin,
   getAuthWithGoogle,
   getAuthCallbackWithGoogle,
-  getSuccessfulAuthWithGoogle
+  getSuccessfulAuthWithGoogle,
 } = require(`${__dirname}/controllers/login.controller`);
 
 router.get("/", getLogin);
 router.get("/google", getAuthWithGoogle);
-router.get("/google/auth-callback", getAuthCallbackWithGoogle, getSuccessfulAuthWithGoogle);
+router.get(
+  "/google/auth-callback",
+  getAuthCallbackWithGoogle,
+  getSuccessfulAuthWithGoogle,
+);
 
 module.exports = router;

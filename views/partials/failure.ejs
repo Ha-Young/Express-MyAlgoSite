@@ -2,8 +2,8 @@
   <% if (failure.error) { %>
     <h2><%= failure.error %></h2>
   <% } else { %>
-    <p>expected: <%= failure.solution %></p>
-    <p>result: <%= failure.userSolution %></p>
-    <p>time: <%= failure.time %></p>
+    <p>예상 결과: <%= failure.solution %></p>
+    <p>실제 결과: <%= failure.userSolution %></p>
+    <p>시간: <%- Number.isNaN(Number(failure.time)) ? failure.time : failure.time + "ms" %></p>
   <% } %>
 </div>

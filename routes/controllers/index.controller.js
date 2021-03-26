@@ -11,5 +11,5 @@ exports.getHome = async (req, res, next) => {
   res.locals.problems = problems;
   res.locals.isLogin = res.app.locals.isLogin;
 
-  res.render("index");
+  return res.render("index");
 };
