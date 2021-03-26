@@ -30,7 +30,8 @@ exports.createUser = async function (req, res, next) {
       await user.save();
       res.redirect("/");
     } catch (error) {
-      next("signIn error");
+      const createdErr = createError(500, errorMessage.SERVER_ERROR);
+      next(createdErr);
     }
   } catch (error) {
     const createdErr = createError(500, errorMessage.SERVER_ERROR);

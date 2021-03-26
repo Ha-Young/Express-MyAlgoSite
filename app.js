@@ -39,11 +39,12 @@ app.use("/problem", problem);
 app.use("/problems", problems);
 
 app.use(function (req, res, next) {
-  const createdError = createError(404, errorMessage.PAGE_NOT_EXIST);
-  res.status(404).render("error", { createdError });
+  const error = createError(404, errorMessage.PAGE_NOT_EXIST);
+  res.status(404).render("error", { error });
 });
 
 app.use(function (error, req, res, next) {
+  console.log(error);
   res.locals.message = error.message;
   res.locals.error = req.app.get("env") === "development" ? error : {};
 
