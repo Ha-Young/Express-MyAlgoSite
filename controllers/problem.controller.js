@@ -1,5 +1,6 @@
 const createError = require("http-errors");
 const { VM } = require("vm2");
+
 const Problem = require("../models/Problem");
 
 const TEXTS = {
@@ -29,14 +30,7 @@ async function getByEachId(req, res, next) {
   });
 }
 
-async function postByEachId(req, res, next) {
-  const { problemId } = res.locals;
-  const { userCode } = req.body;
-
-  const problem = await Problem.findById(problemId);
-  const tests = problem.tests;
-  let result;
-  
+async function getTestResult(userCode, tests) {
   const vm = new VM({
     timeout: 1000,
   });
@@ -45,36 +39,58 @@ async function postByEachId(req, res, next) {
     for (const test of tests) {
       const { code: testCode, solution } = test;
       const script = userCode + testCode;
-
+  
       result = await vm.run(script);
 
       if (result !== solution) {
-        res.render("eachProblem", {
+        return {
+          isCorrect: false,
           result: TEXTS.RESULT(result, solution),
-          code: userCode,
-          problem,
-        });
+        };
+      }
+    }
+
+    return {
+      isCorrect: true,
+      result: TEXTS.CORRECT,
+    };
+  } catch (error) {
+    return {
+      isCorrect: false,
+      result: error,
+    };
+  }
+}
+
+async function postByEachId(req, res, next) {
+  const { problemId } = res.locals;
+  const { userCode } = req.body;
+
+  const problem = await Problem.findById(problemId);
+  const tests = problem.tests;
+
+  try {
+    const { isCorrect, result } = await getTestResult(userCode, tests);
+    
+    if (isCorrect) {
+      try {
+        await problem.addCompletedUser(req.user._id);
+      } catch (error) {
+        next(createError(500));
         return;
       }
     }
 
-    try {
-      await problem.addCompletedUser(req.user._id);
-    } catch (error) {
-      next(createError(500));
-      return;
-    }
-
     res.render("eachProblem", {
-      result: TEXTS.CORRECT,
       code: userCode,
+      result,
       problem,
     });
   } catch (error) {
     res.render("eachProblem", { 
+      code: userCode,
       result: error,
       problem,
-      code: userCode,
     });
   }
 }
