@@ -1,11 +1,22 @@
 const User = require("../../models/User");
 const Problem = require("../../models/Problem");
 const { judgeSolution } = require("../../utils/judger");
-const {IS_CORRECT_SOLUTION, IS_WRONG_SOLUTION} = require("../../constants/ResultMessage");
+const { IS_CORRECT_SOLUTION, IS_WRONG_SOLUTION } = require("../../constants/ResultMessage");
 
 exports.getProblem = async function (req, res, next) {
   const problemId = req.params.problem_id;
-  const problem = await Problem.find({id: problemId});
+  let problem;
+
+  try {
+    problem = await Problem.find({ id: problemId });
+    if (!problem.length) {
+      throw new Error();
+    }
+  } catch (error) {
+    next();
+    return;
+  }
+
   const parameters = problem[0].parameters.join(", ");
   const firstLine = "function solution (" + parameters + ") {}";
   const passed = problem[0].completed_count;

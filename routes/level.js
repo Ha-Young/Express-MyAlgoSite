@@ -6,11 +6,18 @@ const { getPercentage } = require("../utils/getPercentage");
 
 router.get("/:difficulty_level", requiresLogin, async(req,res, next) => {
   const level = req.params.difficulty_level;
-  const filteredProblem = await Problem.find({
-    difficulty_level: level})
-  .select([
-    "title", "completed_count", "failure_count", "id"
-  ]);
+  let filteredProblem;
+  try {
+    filteredProblem = await Problem.find({
+      difficulty_level: level})
+    .select([
+      "title", "completed_count", "failure_count", "id"
+    ]);
+  } catch (error) {
+    next();
+    return;
+  }
+
 
   for (let i = 0; i < filteredProblem.length; i++) {
     const passed = filteredProblem[i].completed_count;
@@ -19,6 +26,7 @@ router.get("/:difficulty_level", requiresLogin, async(req,res, next) => {
 
     filteredProblem[i].passRate = passRate;
   }
+
   res.render('index', { problem: filteredProblem });
 });
 
