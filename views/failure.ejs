@@ -7,10 +7,16 @@
     <% resultList.forEach(result => { %>
       <div>
         <% if (result.isFailed) { %>
-          <span class="fail">Expected: <%= result.expectedResult %></span>
-          <span class="fail">instead got: <%= result.testResult %></span>
+          <span class="fail">
+            Expected: <%= result.expectedResult %>
+          </span>
+          <span class="fail">
+            instead got: <%= result.testResult %>
+          </span>
         <% } else { %>
-          <span class="pass">Test Passed: Value === <%= result.expectedResult %></span>
+          <span class="pass">
+            Test Passed: Value === <%= result.expectedResult %>
+          </span>
         <% } %>
       </div>
     <% }) %>
