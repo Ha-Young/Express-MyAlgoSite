@@ -44,35 +44,38 @@ ProblemSchema.methods.checkCode = function (code, next) {
 
   vm.run(`solution = ${code}`);
 
-  try {
-    for (const test of this.tests) {
-      const startedAt = Date.now();
-      const actual = vm.run(test.code) ?? "undefined";
-      const time = Date.now() - startedAt;
-      const expected = test.solution;
-      const testResult = (actual === expected) ? "Pass" : "Fail";
+  for (const test of this.tests) {
+    const startedAt = Date.now();
+    let actual = null;
 
-      if (testResult === "Fail") {
-        status = "failure";
-      }
-
-      results.push({
-        time,
-        testResult,
-        testCase: test.code,
-        actual: JSON.stringify(actual),
-        expected,
-      });
+    try {
+      actual = vm.run(test.code) ?? "undefined";
+    } catch (err) {
+      actual = err.message;
     }
 
-    if (status === "success") {
-      this.completedUsers++;
+    const time = Date.now() - startedAt;
+    const expected = test.solution;
+    const testResult = (actual === expected) ? "Pass" : "Fail";
+
+    if (testResult === "Fail") {
+      status = "failure";
     }
 
-    return { status, results };
-  } catch (err) {
-    next(createError(400, err.message))
+    results.push({
+      time,
+      testResult,
+      testCase: test.code,
+      actual: JSON.stringify(actual),
+      expected,
+    });
   }
+
+  if (status === "success") {
+    this.completedUsers++;
+  }
+
+  return { status, results };
 };
 
 module.exports = mongoose.model('Problem', ProblemSchema);

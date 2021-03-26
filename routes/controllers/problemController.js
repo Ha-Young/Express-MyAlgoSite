@@ -1,5 +1,4 @@
 const createError = require("http-errors");
-const mongoose = require("mongoose");
 
 const Problem = require("../../models/Problem");
 const User = require("../../models/User");
@@ -59,6 +58,6 @@ exports.renderResult = async (req, res, next) => {
       res.render("failure");
     }
   } catch (err) {
-    next(createError())
+    next(err);
   }
 };
