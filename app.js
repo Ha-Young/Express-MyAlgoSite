@@ -7,6 +7,7 @@ const session = require("express-session");
 const passport = require("passport");
 const MongoStore = require('connect-mongo');
 const cookieParser = require('cookie-parser');
+const sassMiddleware = require('node-sass-middleware');
 require('dotenv').config();
 require('./loaders/passport');
 
@@ -18,7 +19,9 @@ db.once('open', () => console.log('Connected to mongoDB server'));
 mongoose.connect(process.env.MONGODB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useCreateIndex: true,
   useFindAndModify: false,
+  dbName: "codeWars"
 });
 
 const app = express();
@@ -29,8 +32,6 @@ const viewsDirectoryPath = path.join(__dirname, './views');
 app.set('view engine', 'ejs');
 app.set('views', viewsDirectoryPath);
 app.use(express.static(publicDirectoryPath));
-
-const sassMiddleware = require('node-sass-middleware');
 
 app.use(sassMiddleware({
   src: path.join(__dirname, './scss'),

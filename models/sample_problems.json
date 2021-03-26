@@ -78,24 +78,5 @@
         "solution": false
       }
     ]
-  },
-  {
-    "id": 5,
-    "title": "test용 알고리즘",
-    "solver": [],
-    "accepted": 0,
-    "submission": 0,
-    "difficulty_level": 0,
-    "description": "무조건 맞아야함",
-    "tests": [
-      {
-        "code": "solution(1)",
-        "solution": 1
-      },
-      {
-        "code": "solution(11)",
-        "solution": 11
-      }
-    ]
   }
 ]
