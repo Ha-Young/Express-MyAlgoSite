@@ -4,18 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='/stylesheets/problem.css' />
     <link href="/codeMirror/styles/codemirror.css" rel="stylesheet">
     <link href="/codeMirror/theme/base16-dark.css" rel="stylesheet">
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="path/to/starwars-glyphicons/css/starwars-glyphicons.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
     <title><%= title %></title>
 </head>
 <body>
     <%- include("./partials/header.ejs") %>
-    <div>
-        <form method="post" action="/problems/<%= selectedProblem.problemId %>"" name="codemirrorForm">>
+    <div class="form-wrapper">
+        <form class="code-form" method="post" action="/problems/<%= selectedProblem.problemId %>"" name="codemirrorForm">
           <%- include('partials/problemDetail') %>
           <textarea id="editor" name="codemirrorText"></textarea>
-          <input type="submit" value="submit" />
+          <div class="submit-input-wrapper">
+            <input class="submit-input" type="submit" value="submit" />
+          </div>
         </form>
     </div>
     <%- include("./partials/footer.ejs") %>

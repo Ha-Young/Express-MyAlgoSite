@@ -1,10 +1,11 @@
 <body>
-    <div>
-        <h1><%= selectedProblem.problemTitle %></h1>
-        <h3>난이도: <%= selectedProblem.level %></h3>
-        <div>
+    <div class="detail-wrapper">
+        <div class="detail-title">
+            <h1><%= selectedProblem.title %></h1>
+        </div>
+        <div class="detail-desc">
             <h2>문제 설명</h2>
-            <h3><%= selectedProblem.description %></h3>
+            <h2>: <%= selectedProblem.description %></h2>
         </div>
     </div>
 </body>

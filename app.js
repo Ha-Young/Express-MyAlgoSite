@@ -13,7 +13,8 @@ const home = require('./routes/route_options/home');
 const login = require("./routes/route_options/login");
 const logout = require("./routes/route_options/logout");
 const problems = require("./routes/route_options/problems");
-//const solutions = require("./routes/route_options/solutions");
+
+const mySolutions = require("./routes/route_options/mysolutions");
 
 const app = express();
 
@@ -41,7 +42,7 @@ app.use('/', home);
 app.use("/login", login);
 app.use("/logout", logout);
 app.use("/problems", problems);
-//app.use("/solutions", solutions);
+app.use("/mysolutions", mySolutions);
 
 app.use(function(req, res, next) {
   const err = new Error('Not Found');

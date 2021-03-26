@@ -2,24 +2,28 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/index.css' />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
   </head>
   <body>
     <%- include("./partials/header.ejs") %>
-    <div>
-      <h1><%= title %></h1>
+      <h1 class="home-text">HOME</h1>
       <% if (problems.length) {%>
-        <div class="problem-wrapper">
+        <div class="list-wrapper">
           <% for (let problem of problems) {%>
+         
             <div class="problem-container">
-              <h1><a href="/problems/<%= problem.problemId %>"><%= problem.title %></a></h1>
-              <h3>Level: <%= problem.level %></h2>
-              <h3>Completed Users: <%= problem.completedUsers.length %></h3>
+              <a href="/problems/<%= problem.problemId %>"><h1><%= problem.title %></h1></a>
+              <div class="problem-desc">
+                <h4>Level: <%= problem.level %></h4>
+                <h4>Completed Users: <%= problem.completedUsers.length %></h4>
+              </div>
             </div>
+         
+          <%}%>
         </div>
-        <%}%>
       <%}%>
-    </div>
     <%- include("./partials/footer.ejs") %>
   </body>
 </html>

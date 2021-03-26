@@ -62,7 +62,6 @@ exports.postSelectedProblemSolution = async function(req, res, next) {
 
     if (!isAllPassed) {
       const passedCaseLength = totalTestcaseResult.filter(testcase => testcase.isPassed).length;
-      console.log(passedCaseLength);
       res.render("failure", { title: "failure", totalTestcaseResult, passedCaseLength, displayName });
       return;
     }
@@ -109,6 +108,8 @@ const getTestcaseResultsFromUserCode = function(testcases, codemirrorText) {
       const result = script.runInContext(context, { timeout: 3000 });
 
       testcaseResultFormat.userSolution = result;
+
+      console.log(testcaseResultFormat.userSolution, "????")
 
       if (result === testcase.solution) {
         testcaseResultFormat.isPassed = true;

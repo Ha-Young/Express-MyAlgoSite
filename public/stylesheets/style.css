@@ -7,3 +7,9 @@ body {
 a {
   color: #00B7FF;
 }
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  background-color: blue;
+}

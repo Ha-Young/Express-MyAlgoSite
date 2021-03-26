@@ -5,6 +5,6 @@ const verifyAuth = require("../../middlewares/verifyAuth");
 const verifyUser = require("../../middlewares/verifyUser");
 const solutionController = require("../../controllers/solutionController");
 
-//router.get("/", solutionController.getAllSolutions);
+router.get("/", verifyAuth, solutionController.getUserSolutions);
 
-//module.exports = router;
+module.exports = router;

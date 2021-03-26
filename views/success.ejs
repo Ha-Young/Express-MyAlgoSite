@@ -4,24 +4,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+    <link rel='stylesheet' href='/stylesheets/success.css' />
     <title><%= title %></title>
 </head>
 <body>
-    <div>
+  <div>
         <%- include("./partials/header.ejs") %>
-        <h3> Congratulation 🎉, You are passed!</h3>
-        <% if (totalTestcaseResult.length) {%>
+
+        <div class="success-result-wrapper">
+          <h1> Congratulation 🎉, You are passed!</h1>
+          <% if (totalTestcaseResult.length) {%>
             <div class="testcases-wrapper">
               <% for (let testcase of totalTestcaseResult) {%>
-                <div class="testcase-container <%= testcase.isPassed ? "passed" : "" %>"</div>
-                  <h2><div><%= testcase.testCode %> expected <%= testcase.testSolution %></div></h2>
-                </div>
-            <%}%>
-        <%}%>
-        <div><h3>Passed <%= totalTestcaseResult.length %> / <%= totalTestcaseResult.length %></h3></div>
-        <div><h3><a href="/">Go back to Problem list</a></h3></div>
-        <div><h3><a href="/problems/:problemId/solutions">Go back to User solution list</a></h3></div>
+                <div class="testcase-container <%= testcase.isPassed ? "passed" : "" %>">
+                <div class="testcase-explain"><h2><%= testcase.testCode %> expected <%= testcase.testSolution %></h2></div></div>
+              <%}%>
+            </div>
+          <%}%>
+        </div>
+
+      <div class="final-result-wrapper">
+        <div class="final-result"><h1>Passed <%= totalTestcaseResult.length %> / <%= totalTestcaseResult.length %></h1></div>
+        <div class="problem-list-link"><h3><a href="/">Go back to Problem list</a></h3></div>
+        <!-- <div><h3><a href="/problems/:problemId/solutions">Go back to User solution list</a></h3></div> -->
+        <%- include("./partials/footer.ejs") %>
       </div>
-      <%- include("./partials/footer.ejs") %>
+
+  </div>
 </body>
 </html>
