@@ -17,18 +17,13 @@ mongoose.connect(process.env.MONGODB_URL, {
   useFindAndModify: false,
 });
 
-// const { storeSampleProblems } = require('./loaders/loadSampleProblems');
-// storeSampleProblems();
-
 const app = express();
-
 const publicDirectoryPath = path.join(__dirname, './public');
 const viewsDirectoryPath = path.join(__dirname, './views');
+const sassMiddleware = require('node-sass-middleware');
 
 app.set('view engine', 'ejs');
 app.set('views', viewsDirectoryPath);
-
-const sassMiddleware = require('node-sass-middleware');
 
 app.use(sassMiddleware({
   src: path.join(__dirname, './scss'),

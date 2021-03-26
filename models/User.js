@@ -16,4 +16,34 @@ const UserSchema = new mongoose.Schema({
   submission_history: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Submission' }]
 });
 
+UserSchema.methods.addTotalSubmissionCount = function () {
+  this.total_submission += 1;
+  return this.save();
+}
+
+UserSchema.methods.addAcceptedSubmissionCount = function () {
+  this.accepted_submission += 1;
+  return this.save();
+}
+
+UserSchema.methods.addSolvedProblem = function (id) {
+  if (!this.solved_problem.includes(id)) {
+    this.solved_problem.push(id);
+  }
+
+  if (this.failed_problem.includes(id)) {
+    this.failed_problem = this.failed_problem.filter(problem => problem !== id);
+  }
+
+  return this.save();
+}
+
+UserSchema.methods.addFailedProblem = function (id) {
+  if (!this.solved_problem.includes(id)) {
+    this.failed_problem.push(id);
+  }
+
+  return this.save();
+}
+
 module.exports = mongoose.model('User', UserSchema);

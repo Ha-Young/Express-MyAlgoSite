@@ -24,8 +24,9 @@ passport.use(
         done(null, currentUser);
       } else {
         const newUser = await new User({
-          failed_problem: [4, 5],
-          solved_problem: [1, 2, 3],
+          ...profile._json,
+          failed_problem: [],
+          solved_problem: [],
           accepted_submission: 0,
           total_submission: 0,
           submission_history: []

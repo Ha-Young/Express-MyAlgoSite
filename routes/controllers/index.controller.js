@@ -4,11 +4,7 @@ const Problem = require('../../models/Problem');
 exports.getProblems = async function (req, res, next) {
   try {
     const problems = await Problem.find();
-    const acceptedRatio = problems.map(problem => {
-      if (problem.submission === 0) return 0;
-
-      return ((problem.accepted * 100) / problem.submission).toFixed(2);
-    });
+    const acceptedRatio = problems.map(problem => problem.getAcceptedRatio());
 
     res.render('index', { problems, acceptedRatio });
   } catch (err) {
