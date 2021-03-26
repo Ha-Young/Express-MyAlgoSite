@@ -18,7 +18,7 @@ const UserSchema = new mongoose.Schema({
   },
   photo_url: {
     type: String
-  },
+  }
 });
 
 UserSchema.plugin(findOrCreate);
