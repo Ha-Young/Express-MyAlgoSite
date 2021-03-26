@@ -7,6 +7,7 @@ const level = require("./routes/level");
 const login = require("./routes/login");
 const logout = require("./routes/logout");
 const problem = require("./routes/problem");
+const { requiresLogin } = require("./routes/middlewares/requiresLogin");
 
 const passport = require("passport");
 const session = require("express-session");
@@ -48,7 +49,7 @@ app.use("/login", login);
 app.use("/logout", logout);
 app.use("/problems", problem);
 
-app.use(function(req, res, next) {
+app.use(requiresLogin, function(req, res, next) {
   const err = new Error("Not Found");
   err.status = 404;
   next(err);

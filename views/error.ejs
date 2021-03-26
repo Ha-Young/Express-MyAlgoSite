@@ -1,2 +1,15 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <%-include("title"); %>
+    <%-include("menu"); %>
+    <div id="error-container">
+      <h1><%= message %></h1>
+      <h2><%= error.status %></h2>
+    </div>
+  </body>
+</html>
