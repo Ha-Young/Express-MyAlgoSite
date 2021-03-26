@@ -19,7 +19,7 @@ const app = express();
 app.set("layout", path.join("layouts/main"));
 app.set("layout extractScripts", true);
 
-app.set("views", path.join(__dirname, "views"));
+app.set("views", "./views");
 app.set("view engine", "ejs");
 
 app.use(express.static(path.join(__dirname, "public")));
@@ -64,7 +64,7 @@ app.use((err, req, res, next) => {
 
   // render the error page
   res.status(err.status || 500);
-  res.json({ error: err });
+  res.render("error", { title: "ERROR" });
 });
 
 module.exports = app;
