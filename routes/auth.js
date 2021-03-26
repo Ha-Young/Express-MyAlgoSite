@@ -33,10 +33,20 @@ router.get(
 
 router.get(
   "/github/callback",
+  (req, res, next) => {
+    console.log("❗️ after GET /github/callback, before passport.");
+
+    next();
+  },
   passport.authenticate("github", {
     failureRedirect: "/auth",
     successRedirect: "/",
-  })
+  }),
+  (req, res, next) => {
+    console.log("❗️ after GET /github/callback, after passport");
+
+    next();
+  },
 );
 
 module.exports = router;
