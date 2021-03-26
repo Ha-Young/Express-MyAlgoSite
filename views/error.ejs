@@ -1,3 +1,25 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Error</title>
+    <link rel='stylesheet' href='/stylesheets/reset.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/error.css' />
+  </head>
+  <body>
+    <main class="flex-main">
+      <div class="error-box">
+        <img class="error-image" src="/images/error_darth_vader.png" alt="error darth vader" />
+        <div class="error-status">
+          <h1 class="code"><%= error.status %> ERROR</h1>
+          <p><%= message %></p>
+          <p class="text">YOU'RE ON THE DARK SIDE</p>
+          <p></p>
+        </div>
+        <div class="button-list">
+          <a class="button big red" href="/">GO TO MAIN</a>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
