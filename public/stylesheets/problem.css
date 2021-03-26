@@ -17,8 +17,8 @@
   width: 10rem;
   margin-top: 1rem;
   padding: 0.5rem;
-  background-color: #262829;
   border-radius: 0.2rem;
+  background-color: #262829;
   border: 3px solid #4B5563;
   font-size: 1.5rem;
   color: #A7A7A8;
@@ -30,9 +30,9 @@
 }
 
 .description {
-  font-size: 1rem;
   width: 100%;
   margin-bottom: 3rem;
+  font-size: 1rem;
   color: #A7A7A8;
 }
 
@@ -53,9 +53,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: left;
+  margin-bottom: 1rem;
   padding: 0.5rem;
   padding-left: 10%;
-  margin-bottom: 1rem;
   border: 1px solid #4B5563;
 }
 

@@ -11,11 +11,28 @@ const TestSchema = new mongoose.Schema({
 });
 
 const ProblemSchema = new mongoose.Schema({
-  id: Number,
-  title: String,
-  completed_users: Number,
-  difficulty_level: Number,
-  description: String,
+  id: {
+    type: Number,
+    unique: true,
+    required: true,
+  },
+  title: {
+    type: String,
+    required: true,
+  },
+  completed_users: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
+  difficulty_level: {
+    type: Number,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
   tests: [TestSchema],
 });
 

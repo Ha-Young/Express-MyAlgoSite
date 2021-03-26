@@ -25,25 +25,25 @@ exports.post = async (req, res, next) => {
   const passOrFail = [];
   let isAllPass = true;
 
-  const sandbox = { result: [] };
   const timeout = { timeout: limitTime }
+  const sandbox = { result: [] };
   vm.createContext(sandbox);
 
   try {
     for (let i = 0; i < tests.length; i++) {
       await vm.runInContext(userAnswer + `result.push(${tests[i].code});`, sandbox, timeout);
-      if (sandbox.result[i] !== tests[i].solution) {
+      if (sandbox.result[i] === tests[i].solution) {
+        passOrFail.push("pass");
+      } else {
         passOrFail.push("fail");
         isAllPass = false;
-      } else {
-        passOrFail.push("pass");
       }
     }
   } catch (e) {
     const interimResult = {
       id,
       title,
-      userAnswer
+      userAnswer,
     };
     const codeError = {
       errorMessage: e.message,
@@ -62,10 +62,10 @@ exports.post = async (req, res, next) => {
     id,
     title,
     tests,
-    result: sandbox.result,
     isAllPass,
     userAnswer,
     passOrFail,
+    result: sandbox.result,
   };
 
   req.session.testResult = testResult;

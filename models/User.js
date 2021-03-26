@@ -21,10 +21,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  local: {
-    type: Boolean,
-    default: true
-  }
 });
 
 module.exports = mongoose.model('User', userSchema);

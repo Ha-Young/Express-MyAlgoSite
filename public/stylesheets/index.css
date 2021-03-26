@@ -2,12 +2,6 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: #303133;
-
-/*   background-image: url('../assets/images/space-man.jpeg');
-  height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover; */
 }
 
 h1 {
@@ -19,14 +13,14 @@ a {
 }
 
 ul {
-  list-style: none;
   padding: 0;
+  list-style: none;
 }
 
 button {
   padding: 0;
-  border: none;
   background: none;
+  border: none;
 }
 
 button:hover {
@@ -41,15 +35,15 @@ input {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 1rem;
   margin: 0;
   margin-bottom: 3rem;
+  padding-bottom: 1rem;
   border-bottom: 2px solid #A7A7A8;
 }
 
 .logo {
+  font-size: 3.5rem;
   color: #16679a;
-  font-size: 3.5rem
 }
 
 .name {
@@ -71,8 +65,8 @@ input {
 .header-button {
   padding: 0.5rem;
   background-color: #262829;
-  border-radius: 0.2rem;
   border: 3px solid #4B5563;
+  border-radius: 0.2rem;
   font-size: 1rem;
 }
 

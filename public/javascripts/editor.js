@@ -2,7 +2,6 @@ const codemirror = new CodeMirror.fromTextArea(document.getElementById("editor")
   mode: "javascript",
   lineNumbers: true,
   theme: 'material-palenight',
-  value: "console.log(Hi);",
   indentUnit: 2,
   matchBrackets: true,
   autoCloseBrackets: true,

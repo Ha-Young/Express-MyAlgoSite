@@ -23,10 +23,10 @@ a {
   margin-top: 0.5rem;
   padding: 0.3rem;
   background-color: #262829;
-  color: #A7A7A8;
-  font-size: 1.3rem;
   border: 1px solid #4B5563;
   border-radius: 0.2rem;
+  font-size: 1.3rem;
+  color: #A7A7A8;
 }
 
 .container {
@@ -46,10 +46,10 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
-  height: auto;
   width: 100%;
+  height: auto;
   background-color: #262829;
+  border: 1px solid black;
   border-radius: 0.2rem;
   color: #A7A7A8;
 }
@@ -74,12 +74,12 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
-  height: auto;
   width: 100%;
+  height: auto;
   margin-top: 2rem;
   padding: 0.2rem;
   background-color: #374152;
+  border: 1px solid black;
   border-radius: 0.2rem;
   font-size: 1.5rem;
   color: #A7A7A8;
