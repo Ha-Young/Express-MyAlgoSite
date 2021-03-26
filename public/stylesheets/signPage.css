@@ -1,0 +1,22 @@
+.page-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 6rem;
+  height: auto;
+  margin-top: 2rem;
+  padding: 0.2rem;
+  background-color: #374152;
+  border: 1px solid black;
+  border-radius: 0.2rem;
+  font-size: 1.5rem;
+  color: #A7A7A8;
+}
+
+.page-title {
+  font-size: 3rem;
+}
+
+.page-title, .page-ment {
+  color: #A7A7A8;
+}

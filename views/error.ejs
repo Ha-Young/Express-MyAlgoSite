@@ -6,9 +6,9 @@
   <body>
     <% include ./partials/header %>
 
-    <h1><%= message %></h1>
-    <h2><%= error.status %></h2>
-    <pre><%= error.stack %></pre>
+    <h1 class="error"><%= message %></h1>
+    <h2 class="error"><%= error.status %></h2>
+    <pre class="error"><%= error.stack %></pre>
 
     <% include ./partials/footer %>
     <script src='/javascripts/index.js'></script>

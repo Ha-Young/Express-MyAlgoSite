@@ -2,14 +2,15 @@
 <html>
   <head>
     <% include ./partials/head %>
+    <link rel="stylesheet" href="stylesheets/signPage.css">
   </head>
   <body>
     <% include ./partials/header %>
 
-    <h1>Delete Account</h1>
+    <h1 class="page-title">Delete Account</h1>
     <form action="/delete-account/callback" method="GET" >
-      <h2>탈퇴 하시겠습니까?</h2>
-      <button type="submit">Yes</button>
+      <h2 class="page-ment">탈퇴 하시겠습니까?</h2>
+      <button class="page-button" type="submit">Yes</button>
     </form>
 
     <% include ./partials/footer %>

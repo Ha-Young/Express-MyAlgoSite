@@ -2,14 +2,15 @@
 <html>
   <head>
     <% include ./partials/head %>
+    <link rel="stylesheet" href="/stylesheets/signPage.css">
   </head>
   <body>
     <% include ./partials/header %>
 
-    <h1>Sign Out</h1>
+    <h1 class="page-title">Sign Out</h1>
     <form action="/sign-out/callback" method="GET">
-      <h2>로그아웃 하시겠습니까?</h2>
-      <button type="submit">YES</button>
+      <h2 class="page-ment">로그아웃 하시겠습니까?</h2>
+      <button class="page-button" type="submit">YES</button>
     </form>
 
     <% include ./partials/footer %>
