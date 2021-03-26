@@ -8,8 +8,12 @@
     <div class="right">
       <ul class="profile-list">
         <li class="nickname">
-          <img src="/images/icon/icon_09.png" alt="profile icon" />
-          <span><%= nickname %></span>
+          <% if (side === "LIGHT SIDE") { %>
+            <span class="light-saber-icon diagonal blue"></span>
+          <% } else { %>
+            <span class="light-saber-icon diagonal red"></span>
+          <% } %>
+          <span>Hello, <%= nickname %></span>
         </li>
         <li class="logout">
           <form method="GET" action="/users/logout">
