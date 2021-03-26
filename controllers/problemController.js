@@ -1,7 +1,7 @@
 const vm = require("vm");
 const createError = require("http-errors");
-const Problem = require("../../models/Problem");
-const User = require("../../models/User");
+const Problem = require("../models/Problem");
+const User = require("../models/User");
 
 exports.getAllProblems = async function(req, res, next) {
   try {
@@ -24,7 +24,6 @@ exports.getSelectedProblem = async function(req, res, next) {
     next(createError(500), "failed to fetch probelm from db");
   }
 }
-
 
 exports.postSelectedProblemSolution = async function(req, res, next) {
   try {

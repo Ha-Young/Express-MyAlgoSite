@@ -1,15 +1,5 @@
-const mongoose = require('mongoose');
-
-const TestcaseSchema = new mongoose.Schema({
-  code: {
-    type: String,
-    required: true,
-  },
-  solution: {
-    type: mongoose.Schema.Types.Mixed,
-    required: true,
-  },
-}, { timestamps: true });
+const mongoose = require("mongoose");
+const TestcaseSchema = require("./subSchema/Testcase");
 
 const ProblemSchema = new mongoose.Schema({
   problemId: {
@@ -40,4 +30,4 @@ const ProblemSchema = new mongoose.Schema({
   testcases: [TestcaseSchema],
 }, { timestamps: true });
 
-module.exports = mongoose.model('Problem', ProblemSchema);
+module.exports = mongoose.model("Problem", ProblemSchema);

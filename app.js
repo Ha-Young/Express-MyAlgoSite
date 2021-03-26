@@ -1,15 +1,15 @@
 require("dotenv").config({ path: "./.env"});
-require("./mongoDB")
-require("./passport/google_passport");
+require("./config/mongoDB")
+require("./config/passport/google_passport");
 
 const express = require("express");
 const morgan = require("morgan");
-const mongoSession = require("./mongoDB/session");
+const mongoSession = require("./config/mongoDB/session");
 const passport = require("passport");
 const path = require("path");
 const bodyParser = require("body-parser");
 const createError = require("http-errors");
-const home = require('./routes/home');
+const home = require("./routes/home");
 const login = require("./routes/login");
 const logout = require("./routes/logout");
 const problems = require("./routes/problems");
@@ -29,11 +29,11 @@ app.use(passport.session());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.set('views', path.join(__dirname, 'views'));
+app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 
-app.use('/', home);
+app.use("/", home);
 app.use("/login", login);
 app.use("/logout", logout);
 app.use("/problems", problems);
@@ -44,7 +44,7 @@ app.use(function(req, res, next) {
 
 app.use(function(err, req, res, next) {
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.error = req.app.get("env") === "development" ? err : {};
 
   res.status(err.status || 500);
   res.render("error", { err });

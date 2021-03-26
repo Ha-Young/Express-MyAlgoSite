@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Problem = require("../models/Problem");
+const Problem = require("../../models/Problem");
 const sampleProblems= require("./sample_problems.json");
 const DB_APP_URL = process.env.DB_APP_URL.replace("<DB_PASSWORD>", process.env.DB_PASSWORD);
 const mongoDb = mongoose.connection;

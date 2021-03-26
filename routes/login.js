@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const verifyUser = require("./middlewares/verifyUser");
-const loginController = require("./controllers/loginController");
+const verifyUser = require("../middlewares/verifyUser");
+const loginController = require("../controllers/loginController");
 
 router.get("/", verifyUser, loginController.getLoginPage);
 router.get("/google", loginController.authenticateUserThroughGoogle);

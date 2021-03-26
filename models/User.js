@@ -1,16 +1,5 @@
-const mongoose = require('mongoose');
-
-const solvedProblemSchema = new mongoose.Schema({
-  solvedProblemObjectId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Problem",
-    required: true,
-  },
-  userCode: {
-    type: String,
-    required: true,
-  },
-}, { timestamps: true });
+const mongoose = require("mongoose");
+const solvedProblemSchema = require("./subSchema/SolvedProblem");
 
 const userSchema = new mongoose.Schema({
   googleId: {
@@ -25,4 +14,4 @@ const userSchema = new mongoose.Schema({
   solvedProblem: [solvedProblemSchema]
 }, { timestamps: true });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model("User", userSchema);
