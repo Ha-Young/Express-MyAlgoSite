@@ -16,6 +16,7 @@ require("dotenv").config();
 
 const app = express();
 
+app.use(expressEjsLayouts);
 app.set("layout", path.join("layouts/main"));
 app.set("layout extractScripts", true);
 
@@ -31,8 +32,6 @@ app.use(morgan("combined", {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-
-app.use(expressEjsLayouts);
 
 app.use(session({
   secret: process.env.SECRET_CODE,
