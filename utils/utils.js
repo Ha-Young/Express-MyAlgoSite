@@ -5,8 +5,8 @@ module.exports.getArrayParamString = function getArrayParamString(array) {
       ? param += (changeWordFormat(el))
       : param += (changeWordFormat(el) + ",");
   });
-  param += "]";
 
+  param += "]";
   return param;
 }
 
@@ -21,7 +21,7 @@ module.exports.getObjectParamString = function getObjectParamString(object) {
   for (let key in object) {
     param.concat(`\n ${key} : ${object[key]}`);
   }
-  param.concat("}");
 
+  param.concat("}");
   return param;
 }

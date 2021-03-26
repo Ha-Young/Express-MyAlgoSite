@@ -1,6 +1,4 @@
-
-
-module.exports.redirectToHome = function redirectToHome(req, res) {
+module.exports.redirectToHome = function redirectToHome(_, res) {
   res.redirect("/");
 }
 

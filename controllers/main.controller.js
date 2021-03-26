@@ -1,6 +1,6 @@
 const Problem = require("../models/Problem");
 
-module.exports.mainController = async function mainController(req, res, next) {
+module.exports.mainController = async function mainController(req, res) {
   if (req.user) {
     const allProblems = await Problem.find({});
     return res.render("problemList", { problems: allProblems, user: req.user });

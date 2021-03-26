@@ -30,6 +30,6 @@ const UserSchema = new mongoose.Schema({
   problems: [Problem]
 });
 
-UserSchema.plugin(passportLocalMongoose, {usernameField: "email"})
+UserSchema.plugin(passportLocalMongoose, {usernameField: "email"});
 
 module.exports = mongoose.model("User", UserSchema);
