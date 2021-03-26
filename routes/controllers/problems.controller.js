@@ -58,7 +58,7 @@ Controller.checkCode = async function (req, res, next) {
 
         if (result !== correctValue) {
           const failTestCode = {
-            solution: currentTestCode.code,
+            solution: testCode,
             resultValue: String(result),
             status: PROBLEM_RESULT.FAIL,
           };
@@ -67,7 +67,7 @@ Controller.checkCode = async function (req, res, next) {
           results.push(failTestCode);
         } else {
           const successTestCode = {
-            solution: currentTestCode.code,
+            solution: testCode,
             resultValue: String(result),
             status: PROBLEM_RESULT.SUCCESS,
           };
