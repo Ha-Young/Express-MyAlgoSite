@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 gsap.set("svg", { visibility: "visible" });
+
 gsap.to("#headStripe", {
   y: 0.5,
   rotation: 1,
@@ -8,6 +9,7 @@ gsap.to("#headStripe", {
   ease: "sine.inOut",
   duration: 1,
 });
+
 gsap.to("#spaceman", {
   y: 0.5,
   rotation: 1,
@@ -16,6 +18,7 @@ gsap.to("#spaceman", {
   ease: "sine.inOut",
   duration: 1,
 });
+
 gsap.to("#craterSmall", {
   x: -3,
   yoyo: true,
@@ -23,6 +26,7 @@ gsap.to("#craterSmall", {
   duration: 1,
   ease: "sine.inOut",
 });
+
 gsap.to("#craterBig", {
   x: 3,
   yoyo: true,
@@ -30,6 +34,7 @@ gsap.to("#craterBig", {
   duration: 1,
   ease: "sine.inOut",
 });
+
 gsap.to("#planet", {
   rotation: -2,
   yoyo: true,
@@ -46,11 +51,13 @@ gsap.to("#starsBig g", {
   repeat: -1,
   ease: "sine.inOut",
 });
+
 gsap.fromTo(
   "#starsSmall g",
   { scale: 0, transformOrigin: "50% 50%" },
   { scale: 1, transformOrigin: "50% 50%", yoyo: true, repeat: -1, stagger: 0.1 }
 );
+
 gsap.to("#circlesSmall circle", {
   y: -4,
   yoyo: true,
@@ -58,6 +65,7 @@ gsap.to("#circlesSmall circle", {
   ease: "sine.inOut",
   repeat: -1,
 });
+
 gsap.to("#circlesBig circle", {
   y: -2,
   yoyo: true,
@@ -82,7 +90,7 @@ gsap.to("#glassShine", {
 const burger = document.querySelector(".burger");
 const nav = document.querySelector("nav");
 
-burger.addEventListener("click", (e) => {
+burger.addEventListener("click", e => {
   burger.dataset.state === "closed"
     ? (burger.dataset.state = "open")
     : (burger.dataset.state = "closed");
