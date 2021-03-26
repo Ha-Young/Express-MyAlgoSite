@@ -1,6 +1,5 @@
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const createError = require("http-errors");
 const express = require("express");
 const expressLayouts = require('express-ejs-layouts');
 const methodOverride = require('method-override');
@@ -31,7 +30,7 @@ module.exports = function ({ app, routerLoader }) {
 
   // catch 404 and forward to error handler
   app.use(function (req, res, next) {
-    next(createError(404));
+    res.render('pages/404', { user: req.user || {} });
   });
 
   // error handler

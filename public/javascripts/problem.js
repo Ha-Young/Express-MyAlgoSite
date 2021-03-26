@@ -37,6 +37,12 @@ function convertDescStrToHTMLStr() {
   descElement.innerHTML = htmlStr;
 }
 
+function getValueOfType(solution) {
+  return solution.indexOf('"') > -1
+    ? solution.trim()
+    : JSON.parse(solution);
+}
+
 function convertTestCaseStrToList(testCaseStr) {
   const testCaseStrList = testCaseStr.split("\n");
 
@@ -49,7 +55,7 @@ function convertTestCaseStrToList(testCaseStr) {
 
     return {
       code: code.trim(),
-      solution: solution.indexOf('"') > -1 ? solution.trim() : Number(solution),
+      solution: getValueOfType(solution),
     };
   });
 }
