@@ -43,6 +43,8 @@ exports.solveProblem = async function (req, res, next) {
       }
     }
 
+    console.log(checkAnswerCases);
+
     checkAnswerCases.forEach((testCase, index) => {
       if (!testCase) {
         return;
