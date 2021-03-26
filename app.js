@@ -6,17 +6,15 @@ const status = require('statuses');
 require('dotenv').config();
 require('./loaders/passport');
 
-// TODO move load logic to loader index.
-
 const db = mongoose.connection;
-// TODO error logger 추가
+
 db.on('error', console.error);
 db.once('open', () => console.log('Connected to mongoDB server'));
 
 mongoose.connect(process.env.MONGODB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useFindAndModify: false
+  useFindAndModify: false,
 });
 
 // const { storeSampleProblems } = require('./loaders/loadSampleProblems');

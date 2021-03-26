@@ -2,7 +2,6 @@ const creatError = require('http-errors');
 const Problem = require('../../models/Problem');
 
 exports.getProblems = async function (req, res, next) {
-  console.log(req.user)
   try {
     const problems = await Problem.find();
     const acceptedRatio = problems.map(problem => {
