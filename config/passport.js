@@ -8,7 +8,7 @@ passport.use(new GoogleStrategy(
   {
     clientID: configs.googleClientId,
     clientSecret: configs.googleClientSecret,
-    callbackURL: "http://solsol-codewars.herokuapp.com",
+    callbackURL: "https://solsol-codewars.herokuapp.com/auth/google/callback",
   },
   async (accessToken, refreshToken, profile, done) => {
     await User.findOrCreate({
