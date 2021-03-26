@@ -39,7 +39,7 @@ exports.checkSolution = async (req, res, next) => {
       const context = new vm.createContext(sandbox);
       const script = new vm.Script(code);
 
-      const result = script.runInContext(context, { timeout: 5000 });
+      const result = script.runInContext(context, { timeout: 1000 });
 
       resultArr.push(result);
 
