@@ -1,0 +1,53 @@
+.result-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.output {
+  width: 100%;
+  height: 100%;
+}
+
+.output-container {
+  margin: 1em;
+  height: 100%;
+}
+
+.fail {
+  color: #c05c48;
+}
+
+.pass {
+  color: #67b04b;
+}
+
+.success {
+  color: #67b04b;
+  padding: 1em;
+  margin: 0;
+}
+
+.success-container {
+  width: 100%;
+  border: 1px dotted #67b04b;
+}
+
+.failure-container,
+.code-error {
+  width: 100%;
+  border: 1px dotted #c05c48;
+}
+
+.code-error p {
+  color: #c05c48;
+  padding: 1em;
+  margin: 0;
+}
+
+.failure-container div {
+  padding: 0 1em;
+  margin: 0;
+}

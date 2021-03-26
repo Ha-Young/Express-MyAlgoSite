@@ -1,0 +1,27 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 10em;
+  border-bottom: 1px solid black;
+}
+
+.header-menu {
+  display: flex;
+  list-style: none;
+  padding-left: 0;
+}
+
+.header-menu li {
+  padding: 1em;
+}
+
+.current-user {
+  display: flex;
+  justify-content: center;
+}
+
+.current-user p {
+  display: inline;
+  margin-left: 0.5em;
+}
