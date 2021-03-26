@@ -12,33 +12,29 @@
   <header>
     <% include ./header %>
   </header>
-  <div class="grid-wrapper">
-    <div class="grid-container">
-      <div class="grid-item"><span>문제</span></div>
-      <div class="grid-item"><span>결과</span></div>
-      <div class="grid-item"><span>제출한 시간</span></div>
-      <% for (let i = 0; i < problems.length; i++) { %>
-        <div class="grid-item"><span><%= problems[i].difficulty_level %></span></div>
-        <div class="grid-item">
-          <span>
-            <a href="<%= `/problems/${problems[i].id}` %>">
-              <%= problems[i].title %>
-            </a>
-          </span>
-        </div>
-        <div class="grid-item"><span><%= problems[i].solver.length %></span></div>
-        <div class="grid-item"><span><%= problems[i].accepted %></span></div>
-        <div class="grid-item"><span><%= problems[i].submission %></span></div>
-        <div class="grid-item"><span><%= acceptedRatio[i] %>%</span></div>
-        <div class="grid-item">
-          <span>
-            <a href="<%= `/user/${userInfo._id}/${problems[i].id}` %>">
-              과거 제출 코드 확인하기
-            </a>
-          </span>
-        </div>
-      <% } %>
+  <% if (submissions.length !== 0) { %>
+    <div class="grid-wrapper">
+      <div class="grid-container">
+        <div class="grid-item"><span>문제</span></div>
+        <div class="grid-item"><span>결과</span></div>
+        <div class="grid-item"><span>제출한 시간</span></div>
+        <div class="grid-item"><span>상세보기</span></div>
+        <% for (const submission of submissions) { %>
+          <div class="grid-item"><span><%= submission.problem_id %></span></div>
+          <div class="grid-item"><span><%= submission.result %></span></div>
+          <div class="grid-item"><span><%= submission.createdAt.toISOString() %></span></div>
+          <div class="grid-item">
+            <span>
+              <a href="<%= `/user/submission/${submission._id}` %>">
+                제출한 코드 보러가기
+              </a> 
+            </span>
+          </div>
+        <% } %>
+      </div>
     </div>
-  </div>
+  <% } else { %>
+    <h1>아직 문제를 풀지 않았습니다!! 츄라이!!</h1>
+  <% } %>
 </body>
 </html>

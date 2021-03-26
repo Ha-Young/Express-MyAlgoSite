@@ -31,7 +31,7 @@ exports.getOneAndUpdateProblem = async function (req, res, next) {
       const newSubmission = await Submission.create({
         problem_id: targetProblemId,
         code: userSolution,
-        result: err.message
+        result: `에러발생!! (${err.message})`
       });
 
       await currentUser.addSubmissionHistory(newSubmission._id);

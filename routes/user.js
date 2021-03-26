@@ -1,10 +1,15 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router({ strict: true });
 const usersController = require('./controllers/users.controller');
 
 router.get(
   '/:user_id',
   usersController.getUser
+);
+
+router.get(
+  '/submission/:submission_id',
+  usersController.getSubmissionedCode
 );
 
 router.get(

@@ -1,5 +1,6 @@
 const creatError = require('http-errors');
 const User = require('../../models/User');
+const Submission = require('../../models/Submission');
 
 exports.getUser = async function (req, res, next) {
   res.render('user');
@@ -13,6 +14,17 @@ exports.getUserSubmissions = async function (req, res, next) {
     const targetProblemSubmissions = await currentUser.getTargetProblemSubmissions(targetProblemId);
 
     res.render('submission', { submissions: targetProblemSubmissions });
+  } catch (err) {
+    next(creatError(500, err));
+  }
+}
+
+exports.getSubmissionedCode = async function (req, res, next) {
+  try {
+    const targetSubmissionId = req.params['submission_id'];
+    const submission = await Submission.findById(targetSubmissionId);
+
+    res.render('submissionDetail', {submission});
   } catch (err) {
     next(creatError(500, err));
   }
