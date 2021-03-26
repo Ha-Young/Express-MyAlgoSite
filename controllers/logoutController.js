@@ -1,5 +1,3 @@
-const createError = require("http-errors");
-
 exports.getLogOut = async function(req, res, next) {
   try {
     req.logout();

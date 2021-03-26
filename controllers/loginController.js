@@ -3,7 +3,7 @@ const passport = require("passport");
 exports.getLoginPage = async function(req, res, next) {
   try {
     res.render("login", { title: "login" });
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 };
