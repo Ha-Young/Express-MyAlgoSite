@@ -37,6 +37,7 @@ module.exports = function ({ app, routerLoader }) {
   app.use(function (err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
+    res.locals.status = err.status || 500;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
     logger.error(format(new Date(), 'yyyy-MM-dd hh:mm:ss'), err);
