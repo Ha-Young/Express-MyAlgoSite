@@ -46,6 +46,8 @@ router.post("/:problem_id", async (req, res, next) => {
       (docs) => docs[0],
     );
 
+    console.log(problem);
+
     const updatedUser = await User.findByIdAndUpdate(
       _id,
       { solution },
@@ -61,7 +63,7 @@ router.post("/:problem_id", async (req, res, next) => {
     const { funcArgs, funcBody } = getArgsAndBody(solution);
     const testResults = makeAndExcuteSolutionFunc(funcArgs, funcBody, tests);
     const isPass = testResults.every((testResult) => testResult === true);
-
+    console.log(testResults);
     if (isPass) {
       res.render("success");
     } else {

@@ -6,7 +6,7 @@ const ProblemSchema = new mongoose.Schema({
   completed_users: Number,
   difficulty_level: Number,
   description: String,
-  tests: [{ code: String, solution: String }],
+  tests: [{ code: String, solution: mongoose.Schema.Types.Mixed }],
 });
 
 module.exports = mongoose.model("Problem", ProblemSchema);
