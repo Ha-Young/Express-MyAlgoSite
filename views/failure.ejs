@@ -17,17 +17,25 @@
     <% include ./header %>
   </header>
   <div class="problem-wrapper">
-    <div class="problem-left">
-      <p>
-        executed code : <%= failTests[0].expect.code %>
-      </p>
-      <p>
-        expected return : <%= failTests[0].expect.solution %>
-      </p>
-      <p>
-        actual return : <%= failTests[0].actual %>
-      </p>
-    </div>
+    <% if (locals.err) { %>
+      <div class="problem-left">
+        <p><%= err.message %></p>
+      </div>
+    <% } %>
+    <% if (locals.failTests) { %>
+      <div class="problem-left">
+        <h1>틀렸습니다!</h1>
+        <p>
+          executed code : <%= failTests[0].expect.code %>
+        </p>
+        <p>
+          expected return : <%= failTests[0].expect.solution %>
+        </p>
+        <p>
+          actual return : <%= failTests[0].actual %>
+        </p>
+      </div>
+    <% } %>
     <div class="problem-right">
       <form class="code-editor" action="<%= `/problems/${problem.id}` %>" method="post">
         <textarea name="solution" cols="30" rows="10"><%= userSolution %></textarea>
@@ -39,7 +47,6 @@
   </div>
 </body>
 <script>
-  // TODO 얘도 파일로 따로 뺀다음에 스크립트 로딩하는게 나을듯
   const myCodeMirror = CodeMirror.fromTextArea(document.querySelector("textarea"), {
     mode:  "javascript",
     theme: "dracula",

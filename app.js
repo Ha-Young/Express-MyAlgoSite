@@ -48,7 +48,6 @@ const MongoStore = require('connect-mongo');
 const cookieParser = require('cookie-parser');
 
 app.use(cookieParser(process.env.COOKIE_SECRET));
-// TODO change session store to redis
 app.use(session({
   secret: process.env.COOKIE_SECRET,
   resave: false,
@@ -84,10 +83,6 @@ app.use(errorHandler);
 module.exports = app;
 
 function errorHandler(err, req, res, next) {
-  // console.log('in error handler')
-  // console.log(err)
-  // console.log(err.status)
-
   const message = err.customErrorMessage?.toLowerCase() || status[err.status];
 
   res.locals.message = message;
