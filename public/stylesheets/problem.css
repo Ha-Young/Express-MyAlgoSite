@@ -6,6 +6,7 @@ body {
   display: flex;
   flex-flow: column nowrap;
   min-height: 100vh;
+  width: 100%;
   padding-bottom: 50px;
 }
 
@@ -103,9 +104,11 @@ body {
   padding: 30px;
   margin: 0;
   max-height: 400px;
-  color: white;;
+  color: white;
+  font-family: monospace, sans-serif;
   background-color: #2a3d44;
   overflow: auto;
+  white-space: pre-wrap
 }
 
 .log {
