@@ -76,7 +76,6 @@ exports.verifyUserCode = (req, res, next) => {
 
     return res.render("problem");
   } catch (error) {
-    debugger;
     const failure = { error: error.message };
     Object.assign(res.locals, { failure });
 
