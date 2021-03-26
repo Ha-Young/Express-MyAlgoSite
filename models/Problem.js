@@ -15,4 +15,13 @@ const ProblemSchema = new mongoose.Schema({
   ],
 });
 
+ProblemSchema.methods.addCompletedUser = async function (id) {
+  if (this.completedUsers.find(userId => userId.toString() === id.toString())) {
+    return;
+  }
+  
+  this.completedUsers.push(id);
+  await this.save();
+}
+
 module.exports = mongoose.model("Problem", ProblemSchema);

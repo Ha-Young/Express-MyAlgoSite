@@ -14,14 +14,7 @@ const methodOverride = require("method-override");
 const db = require("./middlewares/db");
 const app = express();
 
-async function appStart() {
-  // try-catch여기서도 해야하는지
-  // 당초 분기를 하는게 맞는지
-  // 그냥 db.init() 하면 안되는지
-  await db.init();
-}
-
-appStart();
+db.init();
 app.set("view engine", "ejs");
 
 app.use(session({
@@ -37,7 +30,6 @@ app.use(methodOverride("_method"));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
-
 
 app.use(require("./routes"));
 

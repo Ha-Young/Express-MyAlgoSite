@@ -13,10 +13,11 @@ async function renderMain(req, res, next) {
 async function renderEachProblem(req, res, next) {
   const { problemId } = res.locals;
   const problem = await Problem.findById(problemId);
+  const tests = problem.tests.map(test => test.code);
   
   res.render("eachProblem", { 
     title: "problems",
-    result: "> result will be here",
+    result: tests,
     code: "function solution() {}",
     problem,
   });
@@ -49,8 +50,7 @@ async function testUserCode(req, res, next) {
       }
     }
 
-    problem.completedUsers.push(req.user._id);
-    await problem.save();
+    await problem.addCompletedUser(req.user._id);
 
     res.render("eachProblem", {
       result: `CORRECT!`,
