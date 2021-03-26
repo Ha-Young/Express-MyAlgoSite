@@ -6,7 +6,7 @@ main {
 }
 .main-title {
   padding: 30px 0;
-  text-shadow: -2px 0 #e3c001, 0 2px #e3c001, 2px 0 #e3c001, 0 -2px #e3c001;
+  text-shadow: -2px 0 var(--yellow-color), 0 2px var(--yellow-color), 2px 0 var(--yellow-color), 0 -2px var(--yellow-color);
   font-size: 4em;
   color: rgba(10, 10, 12, 0.88);
 }
@@ -33,7 +33,7 @@ main {
 }
 .problem-box:hover {
   transition: 0.3s all;
-  box-shadow: 7px 7px 0px 0px #e3c001;
+  box-shadow: 7px 7px 0px 0px var(--yellow-color);
   margin: -10px 1em 1em -10px;
 }
 .problem-box .title {

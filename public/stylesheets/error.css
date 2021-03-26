@@ -20,7 +20,7 @@ body {
   height: auto;
   margin: -180px 0 0 0;
   padding: 40px 50px;
-  background: #ffffff;
+  background: var(--white-color);
   text-align: center;
   font-size: 3.5em;
 }

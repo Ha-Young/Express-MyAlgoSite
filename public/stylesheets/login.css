@@ -16,7 +16,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #0a0a0c;
+  background: var(--black-color);
 }
 
 h1 {
@@ -36,16 +36,16 @@ h1 .icon {
   margin: 0 1.5em 0 0;
 }
 h1 .title {
-  text-shadow: -2px 0 #f23d4c, 0 2px #f23d4c, 2px 0 #f23d4c, 0 -2px #f23d4c;
+  text-shadow: -2px 0 var(--red-color), 0 2px var(--red-color), 2px 0 var(--red-color), 0 -2px var(--red-color);
   font-size: 4em;
-  color: #0a0a0c;
+  color: var(--black-color);
 }
 
 .form-box {
   width: 300px;
   height: auto;
   padding: 1em;
-  background: #0a0a0c;
+  background: var(--black-color);
 }
 
 video {
@@ -88,7 +88,7 @@ legend {
   background: rgba(255, 255, 255, 0.1);
   box-sizing: border-box;
   font-size: 1.1em;
-  color: #ffffff;
+  color: var(--white-color);
 }
 .input-box select {
   width: 100%;
@@ -96,7 +96,7 @@ legend {
   padding: 0.7em;
   border: transparent;
   background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
+  color: var(--white-color);
 }
 
 .validation {
