@@ -78,7 +78,7 @@
             <div class="result-box-header">
               Result
             </div>
-            <pre class="result"><% if (codes) {%><p class="log">- log -</p>&#13;&#10;<% for (const log of codes.log) { %><%= log + "\n" %><% } %><p class="result-log">- result -</p>&#13;&#10;<%= codes.result %><% } else { %><p class="log">- log -</p>&#13;&#10;<p class="result-log">- result -</p><% } %></pre>
+            <div class="result"><% if (codes) {%><p class="log">- log -</p>&#13;&#10;<% for (const log of codes.log) { %><%= log + "\n" %><% } %><p class="result-log">- result -</p>&#13;&#10;<%= codes.result %><% } else { %><p class="log">- log -</p>&#13;&#10;<p class="result-log">- result -</p><% } %></div>
           </div>
         </div>
       </div>
