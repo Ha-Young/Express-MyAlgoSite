@@ -2,7 +2,6 @@ const creatError = require('http-errors');
 const { VM } = require('vm2');
 const Problem = require('../../models/Problem');
 const User = require('../../models/User');
-const Submission = require('../../models/Submission');
 
 exports.getOneProblem = async function (req, res, next) {
   try {

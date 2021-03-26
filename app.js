@@ -3,6 +3,10 @@ const path = require('path');
 const mongoose = require('mongoose');
 const creatError = require('http-errors');
 const status = require('statuses');
+const session = require("express-session");
+const passport = require("passport");
+const MongoStore = require('connect-mongo');
+const cookieParser = require('cookie-parser');
 require('dotenv').config();
 require('./loaders/passport');
 
@@ -18,12 +22,15 @@ mongoose.connect(process.env.MONGODB_URL, {
 });
 
 const app = express();
+
 const publicDirectoryPath = path.join(__dirname, './public');
 const viewsDirectoryPath = path.join(__dirname, './views');
-const sassMiddleware = require('node-sass-middleware');
 
 app.set('view engine', 'ejs');
 app.set('views', viewsDirectoryPath);
+app.use(express.static(publicDirectoryPath));
+
+const sassMiddleware = require('node-sass-middleware');
 
 app.use(sassMiddleware({
   src: path.join(__dirname, './scss'),
@@ -31,15 +38,8 @@ app.use(sassMiddleware({
   indentedSyntax : false,
   outputStyle: 'compressed'
 }));
-app.use(express.static(publicDirectoryPath));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
-const session = require("express-session");
-const passport = require("passport");
-const MongoStore = require('connect-mongo');
-const cookieParser = require('cookie-parser');
-
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(session({
   secret: process.env.COOKIE_SECRET,
