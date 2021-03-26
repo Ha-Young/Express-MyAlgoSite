@@ -7,12 +7,7 @@
   </head>
   <body>
     <div class="problems-container">
-      <nav class="problems-nav">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/logout">Logout</a></li>
-        </ul>
-      </nav>
+      <% include ./header %>
       <% for(let i = 0; i < problems.length; i++){%>
       <a class="problem-item" href=<%= `problems/${problems[i].id}` %>>
         <h2><%= problems[i].title %></h2>

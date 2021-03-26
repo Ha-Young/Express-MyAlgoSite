@@ -8,12 +8,7 @@
   </head>
   <body>
     <div class="problem-container">
-      <nav class="problem-nav">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/logout">Logout</a></li>
-        </ul>
-      </nav>
+      <% include ./header %>
       <section class="problem-section">
         <h2><%= problem.title %></h2>
         <p><%= problem.description %></p>
