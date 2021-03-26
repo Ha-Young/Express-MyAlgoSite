@@ -1,0 +1,35 @@
+body {
+  background: #000000;
+}
+
+.error-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-image {
+  width: 800px;
+  height: auto;
+  opacity: 0.5;
+}
+
+.error-status {
+  width: auto;
+  max-width: 700px;
+  height: auto;
+  margin: -180px 0 0 0;
+  padding: 40px 50px;
+  background: #ffffff;
+  text-align: center;
+  font-size: 3.5em;
+}
+.error-status .code {
+  color: red;
+}
+
+.button-list {
+  margin: 2em 0 0 0;
+}

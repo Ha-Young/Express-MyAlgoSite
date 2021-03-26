@@ -72,7 +72,7 @@
   font-weight: bold;
 }
 .editor-box textarea {
-  white-space: pre-line;
+  white-space: normal;
 }
 .CodeMirror {
   font-family: "DungGeunMo", monospace, sans-serif !important;

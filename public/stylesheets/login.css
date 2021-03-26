@@ -20,6 +20,7 @@ main {
 }
 
 h1 {
+  margin: 0 0 0.5em 0;
   display: flex;
   align-items: center;
   z-index: 5;
@@ -32,8 +33,9 @@ h1 .logo {
 }
 
 h1 .icon {
-  width: 100px;
+  width: 50px;
   height: auto;
+  margin: 0 1.5em 0 0;
 }
 
 h1 .title {
@@ -92,6 +94,15 @@ legend {
   background: rgba(255, 255, 255, 0.1);
   box-sizing: border-box;
   font-size: 1.1em;
+  color: #ffffff;
+}
+
+.input-box select {
+  width: 100%;
+  margin: 0 0 0.5em 0;
+  padding: 0.7em;
+  border: transparent;
+  background: rgba(255, 255, 255, 0.1);
   color: #ffffff;
 }
 

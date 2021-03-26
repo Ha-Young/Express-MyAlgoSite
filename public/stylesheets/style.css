@@ -27,6 +27,7 @@ body {
   height: auto;
   min-height: 100vh;
   font: 14px "VT323", "DungGeunMo", sans-serif;
+  overflow-x: hidden;
 }
 
 a {
@@ -214,6 +215,11 @@ footer {
   cursor: pointer;
 }
 
+.icon {
+  width: 50px;
+  height: auto;
+}
+
 .light-saber-icon {
   width: 58px;
   height: 7px;
@@ -222,6 +228,9 @@ footer {
 }
 .light-saber-icon.right {
   transform: rotate(180deg);
+}
+.light-saber-icon.diagonal {
+  transform: rotate(-45deg);
 }
 .light-saber-icon::before {
   content: "";
@@ -308,6 +317,13 @@ footer {
 .success h1 {
   display: flex;
   align-items: center;
+  margin: 0 0 1.5em 0;
+}
+
+.success h1 .icon {
+  width: 70px;
+  height: auto;
+  margin: 0 1.5em 0 0;
 }
 
 .success-box {
