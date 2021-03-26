@@ -15,19 +15,19 @@
                 <%= problem.title %>
               </div>
               <div>Level:
-                <%= problem.difficulty_level %>
+                <%= problem.difficultyLevel %>
               </div>
               <span class="badge badge-primary badge-pill">
-                <%= problem.completed_users || 0 %>
+                <%= problem.completedUsers.length || 0 %>
               </span>
-              <% if(problem.difficulty_level === 1) { %>
+              <% if(problem.difficultyLevel === 1) { %>
                 <span class="badge badge-pill badge-success">Easy</span>
               <% } %>
-              <% if(problem.difficulty_level === 3) { %>
-                <span class="badge badge-pill badge-danger">Difficult</span>
-              <% } %>
-              <% if(problem.difficulty_level === 2) { %>
+              <% if(problem.difficultyLevel === 2) { %>
                 <span class="badge badge-pill badge-warning">Normal</span>
+                <% } %>
+              <% if(problem.difficultyLevel > 2) { %>
+                <span class="badge badge-pill badge-danger">Difficult</span>
               <% } %>
             </div>
             <a href=/problems/<%= problem.id %>>

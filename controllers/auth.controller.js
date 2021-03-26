@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const passport = require("passport");
 
 const User = require("../models/User");
-const initializePassport = require("../passport-config");
+const initializePassport = require("../config/passport");
 
 initializePassport(
   passport,

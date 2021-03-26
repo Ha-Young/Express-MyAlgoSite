@@ -1,28 +1,24 @@
 const { VM } = require("vm2");
+const Problem = require("../models/Problem");
 
-const problems = require("../models/sample_problems.json");
+async function renderMain(req, res, next) {
+  const problems = await Problem.find();
 
-// util? middleware ?
-function getEachProblemById(id) {
-  return problems.find(problem => problem.id === Number(id));
-}
-
-function renderMain(req, res, next) {
   res.render("problems", { 
     title: "problems",
     problems,
   });
 }
 
-function renderEachProblem(req, res, next) {
+async function renderEachProblem(req, res, next) {
   const { problemId } = res.locals;
-  const problem = getEachProblemById(problemId);
-
+  const problem = await Problem.findById(problemId);
+  
   res.render("eachProblem", { 
     title: "problems",
     result: "> result will be here",
-    problem,
     code: "function solution() {}",
+    problem,
   });
 }
 
@@ -30,7 +26,7 @@ async function testUserCode(req, res, next) {
   const { problemId } = res.locals;
   const { userCode } = req.body;
 
-  const problem = getEachProblemById(problemId);
+  const problem = await Problem.findById(problemId);
   const tests = problem.tests;
   let result;
   
@@ -52,6 +48,10 @@ async function testUserCode(req, res, next) {
         return;
       }
     }
+
+    problem.completedUsers.push(req.user._id);
+    await problem.save();
+
     res.render("eachProblem", {
       result: `CORRECT!`,
       problem,
