@@ -21,7 +21,7 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  border: 2px solid #E2DCDC;
+  border: 2px solid var(--theme-input-border-beige);
 }
 
 .result-table-content-panel {
@@ -40,8 +40,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-left: 1px solid #E2DCDC;
-  border-bottom: 2px solid #E2DCDC;
+  border-left: 1px solid var(--theme-input-border-beige);
+  border-bottom: 2px solid var(--theme-input-border-beige);
 }
 
 .result-table-button {
@@ -49,8 +49,8 @@
   height: 30px;
   margin-top: 20px;
   text-align: center;
-  border: 1px solid #b1361e;
-  color: white;
+  border: 1px solid var(--theme-red);
+  color: var(--theme-white);
   border-radius: 15px;
 }
 

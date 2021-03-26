@@ -28,7 +28,6 @@ function checkUserCode(tests, solution) {
 
       resultLog.push({
         result: "ERROR",
-        case: test.solution,
         error,
       });
     }

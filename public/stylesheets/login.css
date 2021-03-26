@@ -4,7 +4,7 @@ h1 {
   font-weight: 500px;
   margin-top: 0px;
   margin-bottom: 18px;
-  color: #776E6E;
+  color: var(--theme-card-border-gray);
 }
 
 a,
@@ -28,7 +28,7 @@ p {
 }
 
 input::placeholder {
-  color: #999696;
+  color: var(--theme-placeholder-gray);
 }
 
 .logo {
@@ -46,8 +46,8 @@ input::placeholder {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #F9F6F6;
-  border: 1px solid #F9F6F6;
+  background-color: var(--theme-background-beige);
+  border: 1px solid var(--theme-background-beige);
   border-radius: 20px;
 }
 
@@ -69,9 +69,9 @@ input::placeholder {
   height: 35px;
   font-family: "Font Awesome 5 Brands", "Font Awesome 5 Free";
   font-weight: 600;
-  border: 1px solid #E2DCDC;
+  border: 1px solid var(--theme-input-border-beige);
   border-radius: 8px;
-  background-color: #FEFCFC;
+  background-color: var(--theme-input-beige);
 }
 
 .login-button {
@@ -80,7 +80,7 @@ input::placeholder {
   font-family: "Font Awesome 5 Brands", "Font Awesome 5 Free";
   font-weight: 600;
   border: 0px;
-  border: 1px solid #b1361e;
+  border: 1px solid var(--theme-red);
   border-radius: 8px;
 }
 
@@ -91,23 +91,23 @@ input::placeholder {
   align-items: center;
   justify-content: center;
   margin-top: 10px;
-  color: #b1361e;
+  color: var(--theme-red);
   text-decoration: none;
 }
 
 .join-button-content,
 .github-button-content {
-  color: #b1361e;
+  color: var(--theme-red);
 }
 
 .login-button {
-  background-color: #b1361e;
-  color: #FAF9F8;
+  background-color: var(--theme-red);
+  color: var(--theme-button-beige);
 }
 
 .join-submit {
   font-weight: bold;
   background-color: transparent;
-  color: #b1361e;
+  color: var(--theme-red);
   border: 0px;
 }

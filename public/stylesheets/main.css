@@ -5,7 +5,7 @@
   flex-direction: column;
   font-family: "Noto Sans JP", sans-serif;
   margin: 0px;
-  background-color: white;
+  background-color: var(--theme-white);
   align-items: center;
   justify-content: center;
 }
@@ -20,10 +20,10 @@
 .main-options-button {
   width: 70px;
   height: 30px;
-  color: #b1361e;
+  color: var(--theme-red);
   text-align: center;
   text-decoration: none;
-  border: 1px solid #b1361e;
+  border: 1px solid var(--theme-red);
   border-radius: 10px;
 }
 
@@ -52,14 +52,14 @@
   margin-top: 10px;
   width: 300px;
   height: 200px;
-  border: 1px solid #E2DCDC;
+  border: 1px solid var(--theme-border-beige);
   border-radius: 10px;
-  background-color: #F9F6F6;
+  background-color: var(--theme-background-beige);
 }
 
 .problem-content {
   display: flex;
-  color: black;
+  color: var(--theme-black);
   flex-direction: column;
   margin: 10px;
   width: 100%;
@@ -77,5 +77,5 @@
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  color: #D6CFCF;
+  color: var(--theme-point-font-beige);
 }

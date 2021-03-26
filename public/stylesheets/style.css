@@ -4,6 +4,21 @@
 @import "./problem.css";
 @import "./result.css";
 
+:root {
+  --theme-red: #b1361e;
+  --theme-black: #000000;
+  --theme-white: #FFFFFF;
+  --theme-header-gray: rgb(32 33 36 / 28%);
+  --theme-border-beige: #E2DCDC;
+  --theme-background-beige: #F9F6F6;
+  --theme-point-font-beige: #D6CFCF;
+  --theme-card-border-gray: #776E6E;
+  --theme-placeholder-gray: #999696;
+  --theme-input-beige: #FEFCFC;
+  --theme-input-border-beige: #E2DCDC;
+  --theme-button-beige: #FAF9F8;
+}
+
 body {
   font-family: "Noto Sans JP", sans-serif;
   margin: 0px;

@@ -26,10 +26,10 @@
           <% resultLog.forEach((data, index) => { %>
             <div class="user-result-content">
               <div><%= data.result %></div>
-              <div>expected: <%= data.expected %></div>
               <% if (data.result === "ERROR") { %>
                 <div><%= data.error %></div>
               <% } else { %>
+                <div>expected: <%= data.expected %></div>
                 <div>result: <%= data.output %></div>
               <% } %>
             </div>

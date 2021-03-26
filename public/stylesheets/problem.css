@@ -29,7 +29,7 @@ h3 {
   height: 700px;
   justify-content: center;
   align-content: center;
-  background-color: #F9F6F6;
+  background-color: var(--theme-background-beige);
 }
 
 .problem-description {
@@ -49,10 +49,10 @@ h3 {
   height: 30px;
   margin-right: 10px;
   justify-content: flex-end;
-  color: black;
-  background-color: white;
-  color: #b1361e;
-  border: 1px solid #b1361e;
+  color: var(--theme-black);
+  background-color: var(--theme-white);
+  color: var(--theme-red);
+  border: 1px solid var(--theme-red);
   border-radius: 10px;
 }
 
