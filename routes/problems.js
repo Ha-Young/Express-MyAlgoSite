@@ -5,8 +5,8 @@ const problemsController = require('./controllers/problems.controller');
 
 router.get('/:problems_id', forwardAuthenticated, problemsController.get);
 router.post('/:problems_id', forwardAuthenticated, problemsController.post);
-router.post('/:problems_id/restart', forwardAuthenticated, problemsController.restart);
 router.get('/:problems_id/result', forwardAuthenticated, problemsController.getResult);
+router.post('/:problems_id/restart', forwardAuthenticated, problemsController.restart);
 router.get('/:problems_id/codeError', forwardAuthenticated, problemsController.getCodeError);
 
 module.exports = router;
