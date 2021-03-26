@@ -1,20 +1,19 @@
 const express = require("express");
 const passport = require("passport");
 const router = express.Router();
+
 const problemsController = require("../routes/controllers/problems.controller");
+const authenticateUser = require("./middlewares/authenticateUser");
 
-const { authenticateUser } = require("./middlewares/authorization");
-
-/* GET home page. */
-
-// router.get("/", authenticateUser, (req, res, next) => {
-//   res.render("index", { title: "vaco" });
-// });
-
-router.get("/", authenticateUser, problemsController.getProblems);
+router.get("/", authenticateUser, problemsController.getAll);
 
 router.get("/login", (req, res, next) => {
   res.render("login");
+});
+
+router.get("/logout", (req, res, next) => {
+  req.logout();
+  res.redirect("/");
 });
 
 router.get("/auth/google",
