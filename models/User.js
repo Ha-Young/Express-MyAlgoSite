@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     trime: true,
   },
-  solvedProblem: [solvedProblemSchema]
+  solvedProblems: [solvedProblemSchema]
 }, { timestamps: true });
 
 module.exports = mongoose.model("User", userSchema);

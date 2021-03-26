@@ -1,7 +1,12 @@
-const vm = require("vm");
 const createError = require("http-errors");
 const Problem = require("../models/Problem");
 const User = require("../models/User");
+const {
+  runCodemirrorCode,
+  determinePassStatus,
+  checkAllTestcasePassed,
+  isDuplicatedProblem
+} = require("../services/problem");
 
 exports.getAllProblems = async function(req, res, next) {
   try {
@@ -44,21 +49,16 @@ exports.postSelectedProblemSolution = async function(req, res, next) {
       isAllPassed,
     } = getTestcaseResultsFromUserCode(testcases, codemirrorText);
 
-    const isDuplicatedProblem = req.user.solvedProblem.findIndex(
-      problem => String(problem.solvedProblemObjectId) === String(_id)) === -1
-        ? false
-        : true;
-
     if (!isAllPassed) {
       const passedCaseLength = totalTestcaseResult.filter(testcase => testcase.isPassed).length;
       res.render("failure", { title: "failure", totalTestcaseResult, passedCaseLength, displayName });
       return;
     }
 
-    if (!isDuplicatedProblem) {
+    if (!isDuplicatedProblem(req.user.solvedProblems)) {
       await User.findByIdAndUpdate(
         { _id: req.user._id },
-        { $push: { solvedProblem: { solvedProblemObjectId: _id, userCode: codemirrorText }}}
+        { $push: { solvedProblems: { solvedProblemObjectId: _id, userCode: codemirrorText }}}
       );
       await Problem.findByIdAndUpdate(
         { _id: _id }, { $push: { completedUsers: req.user._id }}
@@ -66,8 +66,8 @@ exports.postSelectedProblemSolution = async function(req, res, next) {
     }
 
     await User.findOneAndUpdate(
-      { "solvedProblem.solvedProblemObjectId": _id },
-      { "solvedProblem.$.userCode": codemirrorText }
+      { "solvedProblems.solvedProblemObjectId": _id },
+      { "solvedProblems.$.userCode": codemirrorText }
     );
 
     res.render("success", { title: "success", totalTestcaseResult, problemId, displayName });
@@ -101,28 +101,3 @@ const getTestcaseResultsFromUserCode = function(testcases, codemirrorText) {
 
   return { totalTestcaseResult, isAllPassed };
 };
-
-const runCodemirrorCode = function(codemirrorText, testcaseCode) {
-  try {
-    const totalRunningCode = codemirrorText + testcaseCode;
-    const context = vm.createContext();
-    const script = new vm.Script(totalRunningCode);
-    const resultCode = script.runInContext(context, { timeout: 3000 });
-
-    return resultCode;
-  } catch (err) {
-    resultCode = err;
-    return resultCode;
-  }
-}
-
-const determinePassStatus = function(codeRunningResult, testcaseSolution) {
-  if (codeRunningResult === testcaseSolution) {
-    return true;
-  }
-  return false;
-}
-
-const checkAllTestcasePassed = function(totalTestcaseResult) {
-  return totalTestcaseResult.every((testcase) => testcase.isPassed === true);
-}
