@@ -1,3 +1,11 @@
-<%= result[0] %>
+<h1>Fail</h1>
+<% result.forEach(function(data, index){ %>
+  <div>
+    <h3>TEST <%= index %></h3>
+    <%= data.isSuccess %>
+    Your answer is <%= data.answer %>
+    <%= data.solution %>
+  </div>
+<% }); %>
 
-<h2><%= result[1] %></h2>
+<a href="/problems/<%= problemId %>">문제로 돌아가기</a>

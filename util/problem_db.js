@@ -24,5 +24,28 @@ const deleteAllProblems = async () => {
   });
 };
 
+const getTestCaseById = async (problemId) => {
+  return await Problem.findOne({ id: problemId })
+    .exec()
+    .then(data => {
+      return data.tests.map(test => {
+        const { code, solution } = test;
+        const startIndex = code.indexOf('(');
+        const endIndex = code.indexOf(')');
+        const testArguments = code.slice(startIndex + 1, endIndex).split(',');
+
+        return {
+          arguments: testArguments,
+          solution
+        };
+      });
+    });
+}
+
+const updateCompletedUser = async (id) => {
+  await Problem.findById()
+}
+
 exports.dbCheck = dbCheck;
 exports.deleteAllProblems = deleteAllProblems;
+exports.getTestCaseById = getTestCaseById;

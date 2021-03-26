@@ -16,7 +16,7 @@ const ProblemSchema = new mongoose.Schema({
   description: String,
   tests: [{
     code: String,
-    solution: String
+    solution: mongoose.SchemaTypes.Mixed
   }]
 });
 

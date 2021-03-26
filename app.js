@@ -28,7 +28,7 @@ const problemsRoutes = require('./routes/problem-routes');
 
 const app = express();
 
-if (process.env.DB_INITIALIZE !== 'false') {
+if (process.env.DB_INITIALIZE === 'true') {
   console.log(process.env.DB_INITIALIZE)
   problem_db.deleteAllProblems();
 }

@@ -21,5 +21,9 @@
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
     "serve-favicon": "~2.4.5"
+  },
+  "devDependencies": {
+    "eslint": "^7.22.0",
+    "eslint-plugin-react": "^7.23.1"
   }
 }
