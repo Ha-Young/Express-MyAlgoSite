@@ -32,9 +32,11 @@
           <div class="grid-item"><span><%= problems[i].submission %></span></div>
           <div class="grid-item"><span><%= acceptedRatio[i] %>%</span></div>
           <div class="grid-item">
-            <a href="<%= `/user/${userInfo._id}/${problems[i].id}` %>">
-              과거 제출 코드 확인하기
-            </a>
+            <span>
+              <a href="<%= `/user/${userInfo._id}/${problems[i].id}` %>">
+                과거 제출 코드 확인하기
+              </a>
+            </span>
           </div>
         <% } %>
       </div>

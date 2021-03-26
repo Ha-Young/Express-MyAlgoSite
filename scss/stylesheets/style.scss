@@ -20,11 +20,12 @@ body {
   -o-background-size: cover;
   background-size: cover;
   backdrop-filter: blur(10px) brightness(70%);
+  color: white;
 }
 
 a, a:visited, a:hover, a:focus, a:active {
   text-decoration: none;
-  color: black;
+  color: white;
 }
 
 .burning-button {

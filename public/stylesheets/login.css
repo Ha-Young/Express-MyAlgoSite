@@ -11,9 +11,13 @@ body {
   backdrop-filter: none;
 }
 
-.loginBtnWrapper {
+.login-btn-wrapper {
   position: absolute;
   left: 72%;
   top: 67%;
   width: 300px;
+}
+
+.login-btn-text {
+  color: black;
 }

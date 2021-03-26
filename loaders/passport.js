@@ -16,24 +16,23 @@ passport.use(
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
       callbackURL: '/auth/google/callback'
-    }, //TODO change to async
-    (accessToken, refreshToken, profile, done) => {
-      User.findOne({ sub: profile.id }).then((currentUser) => {
-        if (currentUser) {
-          done(null, currentUser);
-        } else {
-          new User({
-            ...profile._json,
-            failed_problem: [4, 5],
-            solved_problem: [1, 2, 3],
-            accepted_submission: 0,
-            total_submission: 0,
-            submission_history: []
-          }).save().then((newUser) => {
-            done(null, newUser);
-          });
-        }
-      });
+    },
+    async function (accessToken, refreshToken, profile, done) {
+      const currentUser = await User.findOne({ sub: profile.id });
+
+      if (currentUser) {
+        done(null, currentUser);
+      } else {
+        const newUser = await new User({
+          failed_problem: [4, 5],
+          solved_problem: [1, 2, 3],
+          accepted_submission: 0,
+          total_submission: 0,
+          submission_history: []
+        }).save();
+
+        done(null, newUser);
+      }
     }
   )
 );
