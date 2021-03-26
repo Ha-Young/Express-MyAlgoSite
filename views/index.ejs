@@ -4,6 +4,7 @@
 <head>
   <title>Codewars</title>
   <link rel="stylesheet" href="/stylesheets/style.css" />
+  <Link rel="stylesheet" href="/stylesheets/index.css" />
   <link rel="stylesheet" href="/stylesheets/problemBlock.css" />
 </head>
 
@@ -11,7 +12,14 @@
   <%- include("partials/header", {loginStatus}) %>
 
     <main>
-      <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
+      <div class="centerize">
+        <div class="galaxy"></div>
+        <div class="planet">
+          <div class="clouds"></div>
+          <div class="land"></div>
+        </div>
+        <div class="moon"></div>
+      </div>
 
       <% if (user) { %>
         <ul class="problems">
