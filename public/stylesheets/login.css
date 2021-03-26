@@ -38,6 +38,7 @@ p {
   border-radius: 10px;
   color: white;
   cursor: pointer;
+  outline: none;
 }
 
 .login-button:hover {
