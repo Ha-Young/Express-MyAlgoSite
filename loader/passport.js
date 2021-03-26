@@ -22,6 +22,7 @@ passport.use(new LocalStrategy({
 
     if (validPassword) {
       cb(null, username);
+      
       return;
     } 
   } catch (error) {
@@ -52,7 +53,7 @@ passport.use(new GitHubStrategy({
       }
       
       cb(null, user);
-      
+
       return;
     } catch (error) {
       cb(error);
