@@ -1,6 +1,8 @@
 const Problem = require('../../models/Problem');
 const vm = require('vm');
 
+const limitTime = 3000;
+
 exports.get = async (req, res, next) => {
   const { id, title, tests, description } = await Problem.findOne({ id: req.params.problems_id });
   const { userAnswer } = req.body;
@@ -24,11 +26,12 @@ exports.post = async (req, res, next) => {
   let isAllPass = true;
 
   const sandbox = { result: [] };
+  const timeout = { timeout: limitTime }
   vm.createContext(sandbox);
 
   try {
     for (let i = 0; i < tests.length; i++) {
-      await vm.runInContext(userAnswer + `result.push(${tests[i].code});`, sandbox);
+      await vm.runInContext(userAnswer + `result.push(${tests[i].code});`, sandbox, timeout);
       if (sandbox.result[i] !== tests[i].solution) {
         passOrFail.push("fail");
         isAllPass = false;
