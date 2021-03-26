@@ -1,21 +1,27 @@
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const dotenv = require("dotenv");
+const createError = require("http-errors");
+
+const errorMessage = require("../../constants/errorMessage");
 dotenv.config();
 
 exports.signToken = function (req, res, next) {
   passport.authenticate("local", { session: false }, (err, user) => {
     if (err) {
-      return next("err in authenticate");
+      const createdError = createError(500, errorMessage.SERVER_ERROR);
+      return next(createdError);
     }
 
     if (!user) {
-      return next("Email or password incorrect"); // http error로 처리
+      const createdError = createError(400, errorMessage.INCORRECT_AUTH);
+      return next(createdError);
     }
 
     req.login(user, { session: false }, (err) => {
       if (err) {
-        return next("login error");
+        const createdError = createError(500, errorMessage.SERVER_ERROR);
+        return next(createdError);
       }
 
       jwt.sign(
@@ -24,7 +30,8 @@ exports.signToken = function (req, res, next) {
         { expiresIn: "1d" },
         (err, token) => {
           if (err) {
-            return next("jwt sign error");
+            const createdError = createError(500, errorMessage.SERVER_ERROR);
+            return next(createdError);
           }
           return res
             .cookie("jwt", token, {

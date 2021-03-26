@@ -46,7 +46,7 @@
   align-items: center;
   height: 100%;
 
-  background-color: #303133;
+  background-color: #222222;
 }
 
 .problem-info-wrapper {
@@ -56,6 +56,7 @@
   align-items: center;
 
   height: 100%;
+  background-color: #222222;
 }
 
 .problem-info-board {

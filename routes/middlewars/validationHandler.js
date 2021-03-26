@@ -20,7 +20,8 @@ exports.login = function (req, res, next) {
   const { error } = loginValidation(req.body);
 
   if (error) {
-    return next(`${error.details[0].message}`);
+    const createdError = createError(400, error.message);
+    return next(createdError);
   }
 
   next();

@@ -8,9 +8,7 @@
   <% include header.ejs %>
 
   <main class="problem-wrapper">
-
     <div class="problem-board">
-
       <div class="problem-info-wrapper">
         <div class="problem-info-font-wrapper">
           <div class="problem-title-board">
@@ -27,22 +25,13 @@
           <button class="problem-submit-button" type="submit" form="solution-board">제출!</button>
         </div>
       </div>
-
       <div class="problem-solution-wrapper">
         <form id="solution-board" action="/problem/<%=problem._id%>" method="POST">
           <textarea id="editor" name="solution">function solution() {};</textarea>
         </form>
       </div>
-  
     </div>
-
-
-    
-
   </main>
-
 </div>
 
 <script type="text/javascript" src="/javascripts/codemirror.js"></script>
-
-

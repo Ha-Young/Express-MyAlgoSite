@@ -4,17 +4,17 @@
   <% include header.ejs %>
 
   <main class="result-success-wrapper">
-      <div class="result-board">
-        <span class="sucess-title">Success</span>
-        <ul class="result-test-board">
-          <% for(let i = 0; i < testResults.result.length; i++) { %>
-            <li class="result-test">Test <%= i %> 실행 결과 
-                <span class="result-test-true">
-                  <%= testResults.result[i] %>
-                </span>
-            </li>
-          <% } %>
-        </ul>
-      </div>
+    <div class="result-board">
+      <span class="sucess-title">Success</span>
+      <ul class="result-test-board">
+        <% for(let i = 0; i < testResults.result.length; i++) { %>
+          <li class="result-test">Test <%= i %> 실행 결과 
+            <span class="result-test-true">
+              <%= testResults.result[i] %>
+            </span>
+          </li>
+        <% } %>
+      </ul>
+    </div>
   </main>
 </div>
