@@ -6,7 +6,7 @@ const Submission = require('../../models/Submission');
 
 exports.getAll = async function (req, res, next) {
   try {
-    const userInfo = await User.findById(req.session.passport.user);
+    const userInfo = await User.findById(req.user);
     const problems = await Problem.find();
     const acceptedRatio = problems.map(problem => {
     if (problem.submission === 0) return 0;
@@ -22,7 +22,7 @@ exports.getAll = async function (req, res, next) {
 
 exports.getOneProblem = async function (req, res, next) {
   try {
-    const userInfo = await User.findById(req.session.passport.user);
+    const userInfo = await User.findById(req.user);
     const targetProblemId = parseInt(req.params['problem_id']);
     const targetProblem = await Problem.findOne({ id: targetProblemId });
 
@@ -33,7 +33,7 @@ exports.getOneProblem = async function (req, res, next) {
 }
 // TODO function is too big..
 exports.getOneAndUpdateProblem = async function (req, res, next) {
-  const userInfo = await User.findById(req.session.passport.user);
+  const userInfo = await User.findById(req.user);
   const targetProblemId = parseInt(req.params['problem_id']);
   let targetProblem;
 
@@ -63,6 +63,26 @@ exports.getOneAndUpdateProblem = async function (req, res, next) {
     {$inc : { total_submission: 1 }}
   );
 
+// TODO add submission logic
+  const isFirstSubmission = await Submission.exists({ user_id: req.user });
+
+  if (!isFirstSubmission) {
+    await new Submission({
+      user_id: req.user,
+      history: [{ id: targetProblemId, codes: [userSolution]}]
+    }).save();
+  } else {
+    const userSubmission = await Submission.findOne({ user_id: req.user });
+    const targetProblemHistory = userSubmission.history.find(problem => problem.id === targetProblemId);
+
+    if (targetProblemHistory) {
+      await Submission.findOneAndUpdate({ user_id: req.user }, )
+    } else {
+      userSubmission.history.push({ id: targetProblemId, codes: [userSolution]});
+    }
+    await userSubmission.save();
+  }
+
   try {
     vm.run(`
       ${userSolution}
@@ -81,11 +101,8 @@ exports.getOneAndUpdateProblem = async function (req, res, next) {
     // TODO error 띄우는게 맞지않나??
     return res.render('failure', { err, targetProblemId, failTests: targetProblem.tests, userInfo });
   }
-  //TODO 여기도 에러 핸들링 필요함.
+
   const isPassEveryTest = judgeResult.every(testCase => testCase.result === true);
-
-  // TODO add submission logic
-
 
   if (isPassEveryTest) {
     const currentSolver = targetProblem.solver;
@@ -100,32 +117,32 @@ exports.getOneAndUpdateProblem = async function (req, res, next) {
       { $inc: { accepted: 1 }}
     );
 
+    const currentUser = await User.findById(userInfo._id);
+
+    if (!currentUser.solved_problem.includes(targetProblemId)) {
+      if (currentUser.failed_problem.includes(targetProblemId)) {
+        currentUser.failed_problem = currentUser.failed_problem.filter(problem => problem !== targetProblemId);
+      }
+
+      currentUser.solved_problem.push(targetProblemId);
+
+      await currentUser.save();
+    }
+
     await User.findByIdAndUpdate(
       req.session.passport.user,
       {$inc : { accepted_submission: 1 }}
     );
 
-    // const isFirstSubmission = await Submission.exists({ user_id: req.session.passport.user });
-
-    // if (isFirstSubmission) {
-    //   new Submission({
-    //     user_id: req.session.passport.user,
-    //     submission_history: {
-    //       : userSolution
-    //     }
-    //   })
-    // } else {
-    //   await Submission.findOneAndUpdate(
-    //     { user_id: req.session.passport.user },
-    //     { submission_history: {
-            
-    //       }
-    //     }
-    //   )
-    // }
-
     res.render('success', { userInfo });
   } else {
+    const currentUser = await User.findById(userInfo._id);
+
+    if (!currentUser.solved_problem.includes(targetProblemId)) {
+      currentUser.failed_problem.push(targetProblemId);
+      await currentUser.save();
+    }
+
     const failTests = [];
 
     judgeResult.forEach((testResult, index) => {

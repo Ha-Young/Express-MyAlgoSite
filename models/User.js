@@ -12,7 +12,8 @@ const UserSchema = new mongoose.Schema({
   failed_problem: Array,
   solved_problem: Array,
   accepted_submission: Number,
-  total_submission: Number
+  total_submission: Number,
+  submission_history: Array
 });
 
 module.exports = mongoose.model('User', UserSchema);

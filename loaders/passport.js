@@ -27,7 +27,8 @@ passport.use(
             failed_problem: [4, 5],
             solved_problem: [1, 2, 3],
             accepted_submission: 0,
-            total_submission: 0
+            total_submission: 0,
+            submission_history: []
           }).save().then((newUser) => {
             done(null, newUser);
           });
