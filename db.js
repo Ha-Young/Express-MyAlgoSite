@@ -28,6 +28,6 @@ if (process.env.NODE_ENV === "development") {
 }
 
 db.on("error", () => console.log("❌ Connection Failed!"));
-db.once("open", () => console.log(`✅ Connected to: http://localhost:${process.env.PORT}`));
+db.once("open", () => console.log(`✅ Connected to: http://localhost:${process.env.PORT || 3000}`));
 
 module.exports = db;
