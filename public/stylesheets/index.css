@@ -28,11 +28,11 @@
 }
 
 .solved {
-  border-left: 4px solid dodgerblue;
+  border-left: 6px solid dodgerblue;
 }
 
 .not-solved {
-  border-left: 4px solid crimson;
+  border-left: 6px solid crimson;
 }
 
 .level {
