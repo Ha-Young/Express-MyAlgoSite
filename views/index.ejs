@@ -14,7 +14,7 @@
             <div><%= problem.title %></div>
             <div>정답자: <%= problem.completed_users %></div>
             <div>난이도: <%= problem.difficulty_level %></div>
-            <form action="/problems/<%= problem._id %>" method="GET">
+            <form action="/problems/<%= problem._id %>" method="get">
               <button type="submit">Start</button>
             </form>
           </li>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <h1>Failure</h1>
+    <% if (locals.error) { %>
+      <span><%= error %></span>
+    <%} else { %>
+      <ul class="testResults">
+        <% testResults.forEach((testResult) => { %>
+          <li>
+            <div><%= testResult %></div>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </body>
+</html>

@@ -77,7 +77,13 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render("error");
+  if (req.headers["content-type"] === "application/json") {
+    res.json({
+      error: err.message || "error",
+    });
+  } else {
+    res.render("error");
+  }
 });
 
 module.exports = app;

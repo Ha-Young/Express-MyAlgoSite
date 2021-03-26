@@ -10,10 +10,10 @@
       <div>정답자 수 : <%= problem.completed_users %></div>
       <div>난이도 : <%= problem.difficulty_level %></div>
       <div>Instructions : <%= problem.description %></div>
-      <form id="Solution Code" action="/problems/<%= problem._id %>" method="POST">
+      <form action="/problems/<%= problem._id %>" method="post">
         <p>Solution Code</p>
         <textarea
-          form="Solution Code"
+          name="submissionCode"
           rows="35"
           cols="100"
         >function solution() {}</textarea>

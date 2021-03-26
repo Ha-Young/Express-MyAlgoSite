@@ -3,8 +3,8 @@ const router = express.Router();
 
 const passport = require("passport");
 
-router.get("/", (req, res, next)  => {
-  res.render("login", { title: "Login" })
+router.get("/", (req, res, next) => {
+  res.render("login", { title: "Login" });
 });
 
 router.get("/google",
