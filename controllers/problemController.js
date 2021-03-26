@@ -1,7 +1,7 @@
 const Problem = require("../models/Problem");
 const vm = require("vm");
 
-exports.getProblem =  async (req, res) => {
+exports.getProblem =  async (req, res, next) => {
   const problemId = req.params.problem_id;
   const problem = await Problem.find({ _id: problemId });
 
@@ -21,7 +21,7 @@ exports.getProblem =  async (req, res) => {
   });
 };
 
-exports.checkSolution = async (req, res) => {
+exports.checkSolution = async (req, res, next) => {
   const func = req.body.solution;
   const problemId = req.params.problem_id;
   const problem = await Problem.find({ _id: problemId });
@@ -31,7 +31,7 @@ exports.checkSolution = async (req, res) => {
     result: null
   };
 
-  let wrongCount = 0;
+  let isSolutionWrong = false;
 
   try {
     for (let i = 0; i < tests.length; i ++) {
@@ -44,15 +44,17 @@ exports.checkSolution = async (req, res) => {
       resultArr.push(result);
 
       if (sandbox.result !== tests[i].solution) {
-        wrongCount+= 1;
+        isSolutionWrong = true;
       }
     }
 
-    if (wrongCount !== 0) {
+    if (isSolutionWrong) {
+
       res.render("failure", {
         resultArr,
         tests
       });
+
       return;
     }
 

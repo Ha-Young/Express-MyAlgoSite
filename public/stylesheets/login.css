@@ -15,7 +15,7 @@
 .title {
   width: 600px;
   height: 300px;
-  animation: zoomout 2s;
+  animation: zoomout 1.5s;
   animation-timing-function: ease-in;
 }
 
@@ -37,7 +37,6 @@
   height: 42px;
   background-color: #4285f4;
   border-radius: 2px;
-  box-shadow: 0 3px 4px 0;
 }
 
 .google-icon-wrapper {
@@ -67,6 +66,6 @@
 }
 
 @keyframes zoomout {
-  0% {transform: scale(15);}
+  0% {transform: scale(20);}
   100% {transform: scale(1);}
 }

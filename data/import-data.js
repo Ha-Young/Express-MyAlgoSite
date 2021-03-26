@@ -20,8 +20,10 @@ mongoose.connect(db, {
 const problems = JSON.parse(fs.readFileSync(`${__dirname}/sample_problems.json`, 'utf-8'));
 
 const importData = async () => {
+
   try {
     await Problem.create(problems);
+
     console.log('Data succesfully loaded!');
   } catch (err) {
     console.log(err);
@@ -31,8 +33,10 @@ const importData = async () => {
 };
 
 const deleteData = async () => {
+
   try {
     await Problem.deleteMany();
+
     console.log('Data succesfully deleted!');
   } catch {
     console.log(err);
