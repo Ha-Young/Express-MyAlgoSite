@@ -15,7 +15,7 @@ module.exports.problemDetailController = async function problemDetailController(
   }
 
   const initCode = `function solution(${problem.params}) {\n\n}`;
-  
+
   res.render("problemDetail",{ problem, initCode, failure: '', success: '', results: [] });
 }
 
