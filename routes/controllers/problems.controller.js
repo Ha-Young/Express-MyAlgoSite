@@ -1,6 +1,6 @@
-const { VM } = require("vm2");
-
 const Problem = require("../../models/Problem");
+const runVMTest = require("../../utils/testFetchCode");
+const updateSuccessUser = require("../../utils/updateSuccessUser");
 
 const PROBLEM_RESULT = require("../../constants/problemConstants");
 
@@ -29,84 +29,52 @@ Controller.detail = async function (req, res, next) {
 };
 
 Controller.checkCode = async function (req, res, next) {
+  const currentUserId = req.user.id;
   const problemId = req.params.problem_id;
   const submitCode = req.body.submit_text;
-  const vm = new VM({
-    sandbox: {},
-    timeout: 10000,
-    fixAsync: true,
-    wasm: false,
-  });
 
   try {
     const problem = await Problem.findById(problemId);
     const testCodes = problem.tests;
-    const results = [];
+    let results;
     let isFail = false;
 
-    for (let i = 0; i < testCodes.length; i++) {
-      const currentTestCode = testCodes[i];
-      const testCode = currentTestCode.code;
-      const correctValue = currentTestCode.solution;
+    results = runVMTest(submitCode, testCodes);
 
-      try {
-        const result = vm.run(
-          `solution = ${submitCode};
-
-          ${testCode};`
-        );
-
-        if (result !== correctValue) {
-          const failTestCode = {
-            solution: testCode,
-            resultValue: String(result),
-            status: PROBLEM_RESULT.FAIL,
-          };
-
-          isFail = true;
-          results.push(failTestCode);
-        } else {
-          const successTestCode = {
-            solution: testCode,
-            resultValue: String(result),
-            status: PROBLEM_RESULT.SUCCESS,
-          };
-
-          results.push(successTestCode);
-        }
-      } catch (userSolutionError) {
-        return res.render("failure", {
+    if (!Array.isArray(results)) {
+      return res.render("failure",
+        {
           userCode: submitCode,
-          testCase: results,
-          error: userSolutionError.message,
-        });
-      }
+          testCase: [],
+          error: results,
+        }
+      );
     }
+
+    results.forEach(result => {
+      if (result.status === PROBLEM_RESULT.FAIL) {
+        isFail = true;
+      }
+    });
 
     if (isFail) {
-      return res.render("failure", {
+      return res.render("failure",
+        {
+          userCode: submitCode,
+          testCase: results,
+          error: null,
+        }
+      );
+    }
+
+    updateSuccessUser(problem, currentUserId);
+
+    res.render("success",
+      {
         userCode: submitCode,
         testCase: results,
-        error: null,
-      });
-    }
-
-    const currentUserId = req.user.id;
-    const checkSuccessUser = problem.completed_list.some(userId => {
-      return userId === currentUserId;
-    });
-
-    if (!checkSuccessUser) {
-      problem.completed_users += PROBLEM_RESULT.INCREASE_VALUE;
-      problem.completed_list.push(currentUserId);
-
-      await problem.save();
-    }
-
-    res.render("success", {
-      userCode: submitCode,
-      testCase: results,
-    });
+      }
+    );
   } catch (error) {
     next(error);
   }
