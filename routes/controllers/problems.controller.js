@@ -26,7 +26,7 @@ exports.getOneProblem = async (req, res, next) => {
   try {
     const problem = await Problem.findById(problemId);
     const user = await User.findOne({
-      _id: userId,
+      _id: currentUser._id,
     }, {
       problems: {
         $elemMatch: {
