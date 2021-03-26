@@ -1,28 +1,30 @@
-<div>제목: <%= problem.title %></div>
-<div>설명: <%= problem.description %></div>
-<div>정답자 수: <%= problem.completed_users %></div>
-<div>난이도: <%= problem.difficulty_level %></div>
-<script src="/codemirror/codemirror.js"></script>
-<script src="/codemirror/javascript/javascript.js"></script>
-<script src="/codemirror/closebrackets.js"></script>
-<link rel="stylesheet" href="/codemirror/codemirror.css"/>
-<link rel="stylesheet" href="/codemirror/dracula.css"/>
-<form action="/problems/<%= problem._id %>" method="POST">
-  <textarea id="editor" name="solution">
-    function solution() {
-
-    }
-  </textarea>
-  <button type="submit">제출</button>
-</form>
-
-<script>
-  const editor = CodeMirror.fromTextArea
-  (document.getElementById("editor"), {
-    mode: "javascript",
-    theme: "dracula",
-    lineNumbers: true,
-    autoCloseBrackets: true,
-  });
-  editor.setSize("1000", "500");
-</script>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codewars</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/problem.css' />
+    <link rel='stylesheet' href='/stylesheets/header.css' />
+  </head>
+  <body>
+    <%- include('partials/header') %>
+    <div class="problem-container">
+      <div class="problem-detail">
+        <div class="problem-header">
+          <h2>LV.<%= problem.difficulty_level %> <%= problem.title %></h2>
+          <p>정답자 수: <%= problem.completed_users.length %></p>
+        </div>
+        <p class="problem-descreption"><%= problem.description %></p>
+      </div>
+      <form action="/problems/<%= problem._id %>" method="POST">
+        <textarea id="editor" name="solution">
+function solution(n) {
+  return n;
+}
+        </textarea>
+        <button class="button" type="submit">제출</button>
+      </form>
+    </div>
+    <%- include('partials/codemirror') %>
+  </body>
+</html>

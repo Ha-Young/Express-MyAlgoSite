@@ -2,28 +2,31 @@
 <html>
   <head>
     <title>Codewars</title>
+    <link rel='stylesheet' href='/stylesheets/list.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/problem.css' />
+    <link rel='stylesheet' href='/stylesheets/header.css' />
   </head>
   <body>
-    <h1>Codewars</h1>
-    <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
-
-    <ul class="tabs">
-      <li>Level 1</li>
-      <li>Level 2</li>
-      <li>Level 3</li>
-    </ul>
-
-    <ul class="problems">
-      <% problems.forEach(problem => { %>
-        <a href="/problems/<%= problem._id %>">
-          <li>
-            <%= problem.title %>
-            <%= problem.completed_users %>
-            <%= problem.difficulty_level %>
-          </li>
-        </a>
-      <%})%>
-    </ul>
+    <%- include('partials/header') %>
+    <div class="list-container">
+      <ul class="problems">
+        <% problems.forEach(problem => { %>
+          <a href="/problems/<%= problem._id %>">
+            <li class="problem">
+              <div class="problem-info">
+                <div class="title">
+                  | 레벨<%= problem.difficulty_level %> |
+                  <%= problem.title %>
+                </div>
+                <div class="passed-user-info">
+                  <%= problem.completed_users.length %>명 통과
+                </div>
+              </div>
+            </li>
+          </a>
+        <%})%>
+      </ul>
+    </div>
   </body>
 </html>
