@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap');
 
-.error-container {
+.success-container {
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -10,7 +10,7 @@
   font-family: 'Single Day', cursive;
 }
 
-.error-content-container {
+.success-content-container {
   display: flex;
   flex-flow: column;
   justify-content: center;
@@ -21,8 +21,7 @@
   background-color: #E3D26F;
 }
 
-.error-content-container p {
-
+.success-content-container p {
   height: 30%;
   font-weight: bold;
   font-size: 30px;

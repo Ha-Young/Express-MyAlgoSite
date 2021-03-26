@@ -2,9 +2,15 @@
 <html>
   <head>
     <title>Codewars</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/reset.css' />
+    <link rel='stylesheet' href='/stylesheets/failure.css' />
   </head>
   <body>
-  실패 ㅠ
+    <div class="failure-container">
+      <% include ./header %>
+      <div class="failure-content-container">
+        <p>다시 풀어보세요 : (</p>
+      </div>
+    </div>
   </body>
 </html>

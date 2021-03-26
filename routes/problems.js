@@ -2,18 +2,22 @@ const express = require("express");
 const router = express.Router();
 const createError = require("http-errors");
 
-const Problem = require("../models/Problem");
 const User = require("../models/User");
+const {
+  getProblem,
+  getProblems,
+  saveUserSolution,
+} = require("./controllers/problems.controller");
 
 const getArgsAndBody = require("../utils/getArgsAndBody");
-const getProblem = require("../utils/getProblem");
 const makeAndExcuteSolutionFunc = require("../utils/makeAndExcuteSolutionFunc");
 
-//Q. DB는 미들웨어 or 라우터마다 호출?
-// render에서 error...
 router.get("/", async (req, res, next) => {
   try {
-    const problems = await Problem.find({});
+    const problems = await getProblems();
+
+    if (!problems) throw new Error();
+
     res.render("problems", { problems: problems });
   } catch (err) {
     next(createError(500, "there are problems :("));
@@ -23,9 +27,7 @@ router.get("/", async (req, res, next) => {
 router.get("/:problem_id", async (req, res, next) => {
   try {
     const { problem_id } = req.params;
-    const problem = await Problem.find({ id: problem_id }).then(
-      (docs) => docs[0],
-    );
+    const problem = await getProblem(problem_id);
 
     if (!problem) throw new Error();
 
@@ -42,35 +44,25 @@ router.post("/:problem_id", async (req, res, next) => {
   let tests;
 
   try {
-    const problem = await Problem.find({ id: problem_id }).then(
-      (docs) => docs[0],
-    );
-
-    console.log(problem);
-
-    const updatedUser = await User.findByIdAndUpdate(
-      _id,
-      { solution },
-      { new: true },
-    );
-
+    const problem = await getProblem(problem_id);
     tests = problem.tests;
+
+    await saveUserSolution(User, _id, solution);
   } catch (err) {
-    next(createError(500, "There is no problem :("));
+    return next(createError(500, "There is no problem :("));
   }
 
   try {
     const { funcArgs, funcBody } = getArgsAndBody(solution);
     const testResults = makeAndExcuteSolutionFunc(funcArgs, funcBody, tests);
     const isPass = testResults.every((testResult) => testResult === true);
-    console.log(testResults);
     if (isPass) {
-      res.render("success");
+      res.status(200).render("success");
     } else {
-      res.render("failure");
+      res.status(200).render("failure");
     }
   } catch (err) {
-    next(createError(400, `작성한 코드의 오류 : ${err.message}`));
+    res.status(200).render("failure");
   }
 });
 
