@@ -5,8 +5,7 @@
 }
 
 .problems-title {
-  padding-left: 20px;
-  font-size: 1.4rem;
+  font-size: 2rem;
 }
 
 .problems {
@@ -14,23 +13,63 @@
   padding: 0;
 }
 
-.problems > a:first-child > li {
-  border-top: solid 1px #d1d1d1;
-}
-
-.problems li:hover {
-  background-color: #f3f3f3;
-}
-
-.problems li {
+.problem-item {
   padding: 20px;
-  border-bottom: solid 1px #d1d1d1;
+  min-width: 250px;
+  margin-bottom: 20px;
   font-size: 1.1rem;
   cursor: pointer;
+  background-color: white;
+  box-shadow: 0px 2px 5px 1px rgb(0 0 0 / 20%);
+}
+
+.problem-item:hover {
+  background-color: #fafafa;
+}
+
+.solved {
+  border-left: 4px solid dodgerblue;
+}
+
+.not-solved {
+  border-left: 4px solid crimson;
+}
+
+.level {
+  font-weight: bold;
+}
+
+.level1 {
+  color: #4ec04f;
+}
+
+.level2 {
+  color: #9ab648;
+}
+
+.level3 {
+  color: #c9a33c;
+}
+
+.level4 {
+  color: #f38848;
+}
+
+.level5 {
+  color: #eb4941;
 }
 
 .problem-title {
   margin-top: 0;
+}
+
+.problem-info-box {
+  display: flex;
+  align-items: center;
+}
+
+.problem-info-box > div {
+  margin-right: 30px;
 }
 
 .problem-link {

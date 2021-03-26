@@ -10,12 +10,32 @@
     <main class="main">
       <h2 class="problems-title">Problems</h2>
       <ul class="problems">
-        <%  for (const problem of problemList) { %>
-          <a class="problem-link" href="problems/<%=problem.id%>">
-            <li>
-              <h3 class="problem-title"><%=problem.title %></h3>
-              <div>정답자 : <%=problem.completed_users%>명</div>
-              <div>난이도 : Level <%=problem.difficulty_level%></div>
+        <%  for (const problemItem of problemList) { %>
+          <a class="problem-link"
+            href="problems/<%=problemItem.problem.id%>"
+          >
+            <li
+              class=
+                "problem-item
+                <% if (problemItem.isSolved) { %>
+                  solved
+                <% } else { %>
+                  not-solved
+                <% } %>""
+            >
+              <h3 class="problem-title">
+                <%=problemItem.problem.title %>
+              </h3>
+              <div class="problem-info-box">
+                <div
+                  class="level level<%=problemItem.problem.difficulty_level%>"
+                >
+                  Level <%=problemItem.problem.difficulty_level%>
+                </div>
+                <div class="complete-user">
+                  ✔️ : <%=problemItem.problem.completed_users%>
+                </div>
+              </div>
             </li>
           </a>
         <%  } %>
