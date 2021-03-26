@@ -1,14 +1,10 @@
 <header>
-  <nav>
-    <ul>
-      <li><a href="/">Codewars</a></li>
-      <li><a href="/problems">Problem</a></li>
-      <% if (!user) { %>
-        <li><a href="/auth/login">Login</a></li>
-      <% } else { %>
-        <li><a href="/auth/logout">Logout</a></li>
-        <li>Welcome <%= user.name.familyName %></li>
-      <% } %>
-    </ul>
-  </nav>
+  <div class="routes"><a href="/">Codewars</a></div>
+  <div class="routes"><a href="/problems">Problems</a></div>
+  <% if (!user) { %>
+    <div class="routes"><a href="/auth/login">Login</a></div>
+  <% } else { %>
+    <div class="routes"><a href="/auth/logout">Logout</a></div>
+    <div>Welcome <%= user.name.familyName %></div>
+  <% } %>
 </header>

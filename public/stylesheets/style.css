@@ -2,63 +2,138 @@ body {
   width: 100vw;
   height: 100vh;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  overflow-y: hidden;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 a {
   all: unset;
+  width: 100%;
+  height: 100%;
+  color: #EBF6FF;
+  cursor: pointer;
 }
 
-nav {
+ul, li {
+  all: unset;
+}
+
+header {
   width: 100vw;
-  height: 100px;
+  height: 13vh;
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgb(148, 204, 187);
+  display: flex;
+  align-items: center;
+  padding-left: 2vw;
+  background-color: #575761;
 }
 
-nav a {
-  width: 100%;
-  height: 100%;
-  color: white;
-}
-
-ul li {
+header div {
   all: unset;
   padding: 1vw;
+  margin: 0 0.5vw;
   background-color: rgba(255, 255, 255, 0.349);
+}
+
+nav div:hover {
+  background-color: #EBF6FF;
+}
+
+nav div:hover a {
+  color: #575761;
 }
 
 main {
   all: unset;
-  margin-top: 100px;
-  width: 100%;
-  height: 20px;
+  position: fixed;
+  top: 13vh;
+  left: 0;
+  width: 100vw;
+  height: 87vh;
   display: flex;
   justify-content: center;
 }
 
-main a:hover {
-  background-color: teal;
-  color: white;
-}
-
-main a {
-  display: block;
-  padding: 5vw;
-  color:rgb(148, 204, 187);
-}
-
-.problem_container {
+.social_login_container {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40vw;
+  height: 20vh;
+  color: #575761;
+}
+
+.google_btn {
+  width: 10vw;
+}
+
+.google_btn:hover{
+  border-radius: 2vw;
+  background-color: #EBF6FF;
+}
+
+.social_login_container img {
+  width: 100%;
+  animation: rotateGoogleLogo infinite 2s ease-in-out alternate-reverse;
+}
+
+@keyframes rotateGoogleLogo {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 section {
-  margin-top: 100px;
+  all: unset;
+  width: 100vw;
+  display: flex;
+  padding: 2vw;
+}
+
+section p {
+  flex-basis: 50%;
+}
+
+.problems_container {
+  flex-basis: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border: #BCAF9C 1px solid;
+  border-radius: 2vw;
+  padding: 2vw;
+}
+
+.problems_box {
   width: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  position: static;
+  background-color: #BCAF9C;
+  padding: 2vw 0;
+  margin: 1vw 0;
+  border-radius: 2vw;
+}
+
+.problems_box:hover {
+  background-color: #C84630;
+}
+
+.problems_users {
+  position: relative;
+  top: -20%;
+  right: -30%;
 }
 
 .codemirror-textarea {

@@ -1,23 +1,16 @@
 <section>
-  <h1>Codewars</h1>
-  <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
-
-  <ul class="tabs">
+  <p>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</p>
+  <div class="problems_container">
     <% problems.forEach(function(problem){ %>
-      <li>LEVEL <%= problem.difficulty_level %></li>
-    <% }); %>
-  </ul>
-
-  <ul class="problems">
-    <% problems.forEach(function(problem){ %>
-      <% const { id, title, completed_users } = problem; %>
-      <li>
-        <div>
-          <a href="/problems/<%= problem.id %>">
-            <%= title %>
-            <%= completed_users.length %></a>
-        </div>
-      </li>
+      <% const { id, title, completed_users, difficulty_level } = problem; %>
+        <a
+          class="problems_box"
+          href="/problems/<%= problem.id %>"
+        >
+          <p class="problems_users">해결사들: <%= completed_users.length %></p>
+          <div>LEVEL <%= difficulty_level %></div>
+          <%= title %>
+        </a>
     <% }); %>
   </ul>
 </section>
