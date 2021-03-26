@@ -12,6 +12,7 @@ const path = require("path");
 const methodOverride = require("method-override");
 
 const db = require("./middlewares/db");
+
 const app = express();
 
 db.init();
