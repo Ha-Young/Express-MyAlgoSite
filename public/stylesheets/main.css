@@ -24,6 +24,6 @@
   height: 100%;
 }
 
-.grid-box button:hover {
-  cursor: pointer;
+.grid-box h1, h2, h3 {
+  color: #A7A7A8;
 }

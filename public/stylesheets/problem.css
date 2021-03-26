@@ -8,29 +8,44 @@
 
 .editor-container {
   width: 100%;
-  border: 1px solid #4B5563;
+  border: 3px solid #4B5563;
   border-radius: 0.2rem;
   font-size: 1rem;
 }
 
 .codemirror-button {
-  width: 5rem;
+  width: 10rem;
+  margin-top: 1rem;
   padding: 0.5rem;
   background-color: #262829;
   border-radius: 0.2rem;
-  border: 1px solid #4B5563;
+  border: 3px solid #4B5563;
+  font-size: 1.5rem;
+  color: #A7A7A8;
+}
+
+.problem-title {
+  font-size: 2rem;
+  color: #A7A7A8;
+}
+
+.description {
+  font-size: 1rem;
+  width: 100%;
+  margin-bottom: 3rem;
+  color: #A7A7A8;
 }
 
 .problem-container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: top;
 }
 
 .test-cases {
   width: 60%;
   height: 100%;
-  padding: 2rem;
+  margin-right: 10%;
 }
 
 .test-case {
@@ -38,12 +53,33 @@
   flex-direction: column;
   justify-content: center;
   align-items: left;
+  padding: 0.5rem;
+  padding-left: 10%;
+  margin-bottom: 1rem;
+  border: 1px solid #4B5563;
 }
 
-.test-code {
-  
+.test-number {
+  font-size: 1.5rem;
+  color: #A7A7A8;
 }
 
-.test-solution {
+.test-box {
+  color: #A7A7A8;
+}
 
+.test-code, .test-solution, .user-code-run {
+  font-size: 1.3rem;
+}
+
+.pass {
+  color: #00B7FF;
+}
+
+.fail {
+  color: #ee4266;
+}
+
+.user-code-run {
+  margin-top: 1rem;
 }

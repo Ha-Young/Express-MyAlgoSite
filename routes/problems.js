@@ -5,9 +5,17 @@ const Problem = require('../models/Problem');
 const forwardAuthenticated = require('./middlewares/forwardAuthenticated');
 
 router.get('/:problems_id', forwardAuthenticated, async (req, res, next) => {
-  const { id, title, tests } = await Problem.findOne({ id: req.params.problems_id });
+  const { id, title, tests, description } = await Problem.findOne({ id: req.params.problems_id });
+  const { userAnswer } = req.body;
   const codeParameter = findParameterType(tests[0].code);
-  res.render('problem', { id, title, codeParameter, tests });
+  res.render('problem', { id, title, codeParameter, tests, description, userAnswer });
+});
+
+router.post('/:problems_id/restart', forwardAuthenticated, async (req, res, next) => {
+  const { id, title, tests, description } = await Problem.findOne({ id: req.params.problems_id });
+  const { userAnswer } = req.body;
+  const codeParameter = findParameterType(tests[0].code);
+  res.render('problem', { id, title, codeParameter, tests, description, userAnswer });
 });
 
 router.post('/:problems_id', forwardAuthenticated, async (req, res, next) => {

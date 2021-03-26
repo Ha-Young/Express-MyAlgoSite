@@ -19,15 +19,16 @@
   <body>
     <% include ./partials/header %>
 
-    <h2><%= title %></h2>
+    <h2 class="problem-title"><%= title %></h2>
 
+    <div class="description"><%= description %></div>
     <div class="problem-container">
       <div class="test-cases">
         <% for (let i = 0; i < tests.length; i++) { %>
           <div class="test-case">
             <span class="test-number"><%= `${i + 1}번 테스트 케이스` %></span>
             <div class="test-box">
-              <span class="test-code"><%= tests[i].code %></span>
+              <span class="test-code">: <%= tests[i].code %> = </span>
               <span class="test-solution"><%= tests[i].solution %></span>
             </div>
           </div>
@@ -35,13 +36,15 @@
       </div>
       <form class="codemirror" action="/problems/<%= id %>/" method="POST">
         <div class="editor-container">
-        <textarea id="editor" name="userAnswer">
+        <textarea id="editor" name="userAnswer"><% if (userAnswer) { %>
+<%= userAnswer %>
+<% } else { %>
 function solution(<%= codeParameter %>) {
   
 };
-</textarea>
+<% } %></textarea>
         </div>
-        <button class="codemirror-button" type="submit">제출</button>
+        <button class="codemirror-button" type="submit">제 출</button>
       </form>
     </div>
 

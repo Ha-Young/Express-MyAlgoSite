@@ -29,6 +29,10 @@ button {
   background: none;
 }
 
+button:hover {
+  cursor: pointer;
+}
+
 input {
   outline: none;
 }
@@ -37,12 +41,19 @@ input {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-bottom: 1rem;
   margin: 0;
   margin-bottom: 3rem;
+  border-bottom: 2px solid #A7A7A8;
 }
 
 .logo {
-  font-size: 3rem
+  color: #16679a;
+  font-size: 3.5rem
+}
+
+.name {
+  color: #0899ba;
 }
 
 .header-left {
@@ -62,13 +73,5 @@ input {
   padding: 0.5rem;
   background-color: #262829;
   border-radius: 0.2rem;
-  border: 1px solid #4B5563;
-}
-
-.pass {
-  color: #00B7FF;
-}
-
-.fail {
-  color: red;
+  border: 3px solid #4B5563;
 }
