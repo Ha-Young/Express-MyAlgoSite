@@ -3,7 +3,6 @@ const path = require("path");
 const passport = require("passport");
 const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
-// const expressLayouts = require("express-ejs-layouts");
 
 const mongoose = require("mongoose");
 const initializeMongoDB = require("./utils/initializeMongoDB");
@@ -22,7 +21,7 @@ const app = express();
 app.use(bodyParser.urlencoded());
 
 app.set("view engine", "ejs");
-// app.use(expressLayouts);
+
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(
@@ -51,10 +50,10 @@ if (process.env.INITIALIZE_MONGODB === "true") {
 app.use("/", index);
 app.use("/login", login);
 app.use("/logout", logout);
-app.use((req, res, next) => validateLoginStatus(req, res, next));
+app.use(validateLoginStatus);
+// app.use((req, res, next) => validateLoginStatus(req, res, next));
 app.use("/problems", problems);
 
-// catch 404 and forward to error handler
 app.use(function (req, res, next) {
   const err = new Error("Not found");
   err.status = 404;
@@ -65,7 +64,12 @@ app.use(function (err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
-  console.log(err.message);
+  if (err.status === 404) {
+    res.set("content-type", "text/plain");
+    res.status(404).send("404 Not Found");
+    return;
+  }
+
   res.status(err.status || 500);
   res.render("error", { err });
 });
