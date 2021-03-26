@@ -1,23 +1,27 @@
 const Problem = require("../../models/Problem");
 const User = require("../../models/User");
+const createError = require("http-errors");
 const { VM } = require("vm2");
 const deepEqual = require("fast-deep-equal");
 
 exports.getProblems = async (req, res, next) => {
+  const currentUser = req.user;
+
   try {
     const problems = await Problem.find();
     res.render("index", {
       problems,
-      nickname: req.user.userNickname
+      nickname: currentUser.userNickname,
+      side: currentUser.userSide
     });
   } catch (err) {
-    next(err);
+    next(createError(500, "Internal Server Error"));
   }
 };
 
 exports.getOneProblem = async (req, res, next) => {
   const problemId = req.params.problem_id;
-  const userId = req.user._id;
+  const currentUser = req.user;
 
   try {
     const problem = await Problem.findById(problemId);
@@ -33,99 +37,103 @@ exports.getOneProblem = async (req, res, next) => {
 
     res.render("problem", {
       problem,
-      submittedProblem: user.problems,
-      nickname: req.user.userNickname
+      submittedProblem: user.problems[0],
+      nickname: currentUser.userNickname,
+      side: currentUser.userSide
     });
   } catch (err) {
-    next(err);
+    next(createError(500, "Internal Server Error"));
   }
 };
 
 exports.submitProblem = async (req, res, next) => {
-  const id = req.params.problem_id;
+  const problemId = req.params.problem_id;
+  const currentUser = req.user;
   const code = req.body.code;
 
   try {
-    const problem = await Problem.findById(id);
+    const currentUser = req.user;
+    const solvedProblems = currentUser.problems;
+
+    const problem = await Problem.findById(problemId);
     const tests = problem.tests;
     const result = checkSolution(tests, code);
-    const userInfo = await User.findById(req.user._id);
-    const solvedProblems = userInfo.problems;
 
-    if (solvedProblems.findIndex(obj => obj.problem.toString() === id) === -1) {
-      console.log("new");
-      await User.findByIdAndUpdate(req.user._id, {
+    if (solvedProblems.findIndex(obj => obj.problem.toString() === problemId) === -1) {
+      await User.findByIdAndUpdate(currentUser._id, {
         $push: {
           problems: {
-            problem: id,
+            problem: problemId,
             code,
             isSolved: false
           }
         }
       });
     } else {
-      console.log("duplicate!");
       await User.findOneAndUpdate({
-        _id: req.user._id,
-        "problems.problem": id
+        _id: currentUser._id,
+        "problems.problem": problemId
       }, {
         "problems.$.code": code
       });
     }
 
     if (Array.isArray(result.resultList)) {
-      const isFailed = result.resultList.indexOf("failure");
+      const isFailed = result.resultList.includes("failure");
 
-      if (isFailed > -1) {
+      if (isFailed) {
         res.render("solutionResult", {
-          id,
+          id: problemId,
           code,
           tests,
           resultList: result.resultList,
           answerList: result.answerList,
-          nickname: req.user.userNickname
+          nickname: currentUser.userNickname,
+          side: currentUser.userSide
         });
-      } else {
-        const userInfo = await User.findOne({
-          _id: req.user._id,
-          "problems.problem": id
-        });
+        return;
+      }
 
-        if (!userInfo.problems[0].isSolved) {
-          await Problem.findByIdAndUpdate(id, {
-            $inc: {
-              completed_users: 1
-            }
-          });
-        }
+      const userInfo = await User.findOne({
+        _id: req.user._id,
+        "problems.problem": problemId
+      });
 
-        await User.findOneAndUpdate({
-          _id: req.user._id,
-          "problems.problem": id
-        }, {
-          "problems.$.isSolved": true
-        });
-
-        res.render("success", {
-          message: "SUCCESS",
-          nickname: req.user.userNickname
+      if (!userInfo.problems[0].isSolved) {
+        await Problem.findByIdAndUpdate(problemId, {
+          $inc: {
+            completed_users: 1
+          }
         });
       }
+
+      await User.findOneAndUpdate({
+        _id: req.user._id,
+        "problems.problem": problemId
+      }, {
+        "problems.$.isSolved": true
+      });
+
+      res.render("success", {
+        message: "SUCCESS",
+        nickname: req.user.userNickname,
+        side: req.user.userSide
+      });
 
       return;
     }
 
     res.render("solutionResult", {
-      id,
+      id: problemId,
       code,
       resultList: null,
       answerList: null,
       error: result,
-      nickname: req.user.userNickname
+      nickname: req.user.userNickname,
+      side: req.user.userSide
     });
-
   } catch(err) {
-    next(err);
+    next(createError(500, "Internal Server Error"));
   }
 };
 
@@ -157,7 +165,6 @@ function checkSolution (tests, code) {
 
     return { resultList, answerList };
   } catch (err) {
-    console.log(err);
     return err;
   }
 }
