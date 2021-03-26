@@ -32,7 +32,7 @@ exports.create = async (req, res, next) => {
       const {
         name,
         email,
-      } = req.body
+      } = req.body;
 
       req.flash("message",
         {

@@ -60,7 +60,7 @@ exports.submit = async (req, res, next) => {
       vm.run(`submitted.log = []`);
       vm.run(`
         console.log = (message) => {
-          submitted.log.push(message)
+          submitted.log.push(message);
           if (submitted.log.length > 50) {
             throw new Error("too long log");
           }

@@ -9,7 +9,7 @@ const $form = document.querySelector(".create-account-form");
 
 const setMessage = (message) => {
   $message.textContent = message;
-}
+};
 
 const verifyInput = (e) => {
   if ($inputName.value.length >= 20) {
