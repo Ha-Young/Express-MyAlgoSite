@@ -3,6 +3,7 @@ const path = require("path");
 const passport = require("passport");
 const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
+// const expressLayouts = require("express-ejs-layouts");
 
 const mongoose = require("mongoose");
 const initializeMongoDB = require("./utils/initializeMongoDB");
@@ -21,6 +22,7 @@ const app = express();
 app.use(bodyParser.urlencoded());
 
 app.set("view engine", "ejs");
+// app.use(expressLayouts);
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(
