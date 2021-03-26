@@ -10,11 +10,11 @@ initializePassport(
   id => User.findById(id),
 );
 
-function renderLogin(req, res, next) {
+function getLogin(req, res, next) {
   res.render("login", { title: "login" });
 }
 
-function renderRegister(req, res, next) {
+function getRegister(req, res, next) {
   res.render("register", { title: "register" });
 }
 
@@ -24,7 +24,7 @@ const authenticate = passport.authenticate("local", {
   failureFlash: true,
 });
 
-async function register(req, res, next) {
+async function postRegister(req, res, next) {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     
@@ -47,8 +47,8 @@ function logout(req, res, next) {
   res.redirect("/auth/login");
 }
 
-exports.renderLogin = renderLogin;
-exports.renderRegister = renderRegister;
-exports.register = register;
+exports.getLogin = getLogin;
+exports.getRegister = getRegister;
+exports.postLogin = authenticate;
+exports.postRegister = postRegister;
 exports.logout = logout;
-exports.authenticate = authenticate;
