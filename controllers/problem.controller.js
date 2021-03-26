@@ -16,7 +16,7 @@ module.exports.problemDetailController = async function problemDetailController(
 
   const initCode = `function solution(${problem.params}) {\n\n}`;
 
-  res.render("problemDetail",{ problem, initCode, failure: '', success: '', results: [] });
+  res.render("problemDetail",{ problem, initCode, failure: '', success: '', results: [], user: req.user });
 }
 
 module.exports.postProblemDetailController = async function postProblemDetailController(req, res, next) {
@@ -47,7 +47,7 @@ module.exports.postProblemDetailController = async function postProblemDetailCon
         return { index: i, message: "Fail...!"};
       } catch (err) {
         isError = true;
-        return res.render('problemDetail', { problem, initCode: userCode, failure: 'failure', success: '', results: err, err });
+        return res.render('problemDetail', { problem, initCode: userCode, failure: 'failure', success: '', results: err, err, user: req.user });
       }
     });
 
@@ -58,10 +58,10 @@ module.exports.postProblemDetailController = async function postProblemDetailCon
       const newWinnerArr = [...problem.winner];
       newWinnerArr.push(currentUser._id);
       await Problem.findByIdAndUpdate(problem_id, { $set : { winner: newWinnerArr } });
-      return res.render('problemDetail', { problem, initCode: userCode, failure: '', success: 'success', results: resultArr });
+      return res.render('problemDetail', { problem, initCode: userCode, failure: '', success: 'success', results: resultArr, user: req.user });
     }
 
-    res.render('problemDetail', { problem, initCode: userCode, failure: 'failure', success: '', results: resultArr });
+    res.render('problemDetail', { problem, initCode: userCode, failure: 'failure', success: '', results: resultArr, user: req.user });
   } catch (err) {
     next(err);
   }
