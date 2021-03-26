@@ -25,6 +25,6 @@
     "dotenv": "^8.2.0"
   },
   "devDependencies": {
-    "nodemon": "^1.19.1",
+    "nodemon": "^1.19.1"
   }
 }
