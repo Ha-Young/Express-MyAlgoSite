@@ -5,8 +5,8 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-   <%-include("title"); %>
-   <%-include("menu"); %>
+   <%-include("partials/title"); %>
+   <%-include("partials/menu"); %>
     <ul id="problems">
       <% for (let i = 0; i < problem.length; i++) { %>
         <% const address =`/problems/${problem[i].id}`%>

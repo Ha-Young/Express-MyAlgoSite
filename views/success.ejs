@@ -5,8 +5,8 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <%-include("title"); %>
-    <%-include("menu"); %>
+    <%-include("partials/title"); %>
+    <%-include("partials/menu"); %>
     <div id="result-container">
       <h3 id="result-title"><%=message%></h3>
       <ul id="testcase-container">
@@ -22,7 +22,7 @@
         </li>
       <% } %>
       </ul>
-      <%- include("back", {originalUrl})%>
+      <%- include("partials/back", {originalUrl})%>
     </div>
   </body>
 </html>

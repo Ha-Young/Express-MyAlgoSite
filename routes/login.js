@@ -5,6 +5,10 @@ const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 const User = require("../models/User");
 
+const CALLBACK_URL = require("../config/googleAuth").GOOGLE_AUTH_CALLBACK_URL;
+const CLIENT_ID = require("../config/googleAuth").GOOGLE_CLIENT_ID;
+const CLIENT_SECRET = require("../config/googleAuth").GOOGLE_CLIENT_SECRET;
+
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
@@ -14,9 +18,9 @@ passport.deserializeUser(function(user, done) {
 });
 
 passport.use(new GoogleStrategy({
-  clientID: process.env['GOOGLE_CLIENT_ID'],
-  clientSecret: process.env["GOOGLE_CLIENT_SECRET"],
-  callbackURL: "https://vaco-codewars-hyeongju.herokuapp.com/login/auth/google/callback"
+  clientID: CLIENT_ID,
+  clientSecret: CLIENT_SECRET,
+  callbackURL: CALLBACK_URL
 },
 function (accessToken, refreshToken, profile, done) {
   User.findOrCreate({ profile: profile }, function (err, user) {
