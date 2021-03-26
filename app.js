@@ -3,12 +3,14 @@ const express = require("express");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const flash = require("express-flash");
+const createError = require("http-errors");
 const passport = require("passport");
 const mongoose = require("mongoose");
 
 const users = require("./routes/users");
 const index = require("./routes/index");
 const problems = require("./routes/problems");
+const { create } = require("./models/User");
 
 const app = express();
 
@@ -47,8 +49,7 @@ app.use("/problems", problems);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  const err = new Error('Not Found');
-  err.status = 404;
+  const err = createError(404, "Not Found");
   next(err);
 });
 
@@ -60,7 +61,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render("error");
 });
 
 debugger;

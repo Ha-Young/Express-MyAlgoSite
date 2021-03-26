@@ -1,6 +1,7 @@
 const User = require("../../models/User");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");
+const createError = require("http-errors");
 
 const initialize = (passport) => {
   const customFields = {
@@ -12,7 +13,7 @@ const initialize = (passport) => {
     const user = await User.findOne({ userId: id });
 
     if (user === null) {
-      done(null, false, { message: "No user with that id" });
+      done(null, false, { message: "You're not our member" });
       return;
     }
 
@@ -23,7 +24,7 @@ const initialize = (passport) => {
         return done(null, false, { message: "Password incorrect" });
       }
     } catch (err) {
-      return done(err);
+      done(createError(500, "Internal Server Error"));
     }
   }
 
@@ -38,7 +39,7 @@ const initialize = (passport) => {
       const user = await User.findById(id);
       done(null, user);
     } catch (err) {
-      done(err);
+      done(createError(500, "Internal Server Error"));
     }
   });
 }
