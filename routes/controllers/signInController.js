@@ -5,7 +5,7 @@ const User = require("../../models/User");
 const errorMessage = require("../../constants/errorMessage");
 
 exports.renderSigninPage = function (req, res, next) {
-  res.status(200).render("signup");
+  res.status(200).render("signin");
 };
 
 exports.createUser = async function (req, res, next) {
