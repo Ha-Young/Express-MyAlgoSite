@@ -12,6 +12,7 @@
   margin: 10px;
   padding: 15px;
   background: #252829;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
 }
 
 .problem-header {

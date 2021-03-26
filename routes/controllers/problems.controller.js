@@ -1,28 +1,52 @@
-const { NodeVM } = require("vm2");
+const { VM } = require("vm2");
+
+const createError = require("http-errors");
+const mongoose = require("mongoose");
 
 const Problem = require("../../models/Problem");
 
-exports.getAll = async function (req, res, next) {
-  const problems = await Problem.find();
+const ERROR = require("../../constants/errorConstants");
+const PROBLEM_RESULT = require("../../constants/problemConstants");
 
-  res.render("index", { problems });
+const Controller = {};
+
+Controller.getAll = async function (req, res, next) {
+  try {
+    const problems = await Problem.find();
+
+    res.render("index", { problems });
+  } catch (error) {
+    if (error instanceof mongoose.CastError) {
+      return next(createError(500, ERROR.DATABASE_MESSAGE));
+    }
+
+    next(createError(500, ERROR.SERVER_MESSAGE));
+  }
 };
 
-exports.detail = async function (req, res, next) {
+Controller.detail = async function (req, res, next) {
   const problemId = req.params.problem_id;
-  const problem = await Problem.findById(problemId);
 
-  res.render("problems", { problem });
+  try {
+    const problem = await Problem.findById(problemId);
+
+    res.render("problems", { problem });
+  } catch (error) {
+    if (error instanceof mongoose.CastError) {
+      return next(createError(500, ERROR.DATABASE_MESSAGE));
+    }
+
+    next(createError(500, ERROR.SERVER_MESSAGE));
+  }
 };
 
-exports.checkCode = async function (req, res, next) {
+Controller.checkCode = async function (req, res, next) {
   const problemId = req.params.problem_id;
   const submitText = req.body.submit_text;
-
-  const vm = new NodeVM({
-    timeout: 10,
-    console: 'inherit',
+  const vm = new VM({
     sandbox: {},
+    timeout: 10000,
+    fixAsync: true,
   });
 
   try {
@@ -38,15 +62,16 @@ exports.checkCode = async function (req, res, next) {
 
       try {
         const result = vm.run(
-          `const solution = ${submitText};
-          module.exports = ${testCode};`
+          `solution = ${submitText};
+
+          ${testCode};`
         );
 
         if (result !== correctValue) {
           const failTestCode = {
             solution: currentTestCode.code,
-            resultValue: result,
-            status: "fail"
+            resultValue: String(result),
+            status: PROBLEM_RESULT.FAIL,
           };
 
           isFail = true;
@@ -54,40 +79,52 @@ exports.checkCode = async function (req, res, next) {
         } else {
           const successTestCode = {
             solution: currentTestCode.code,
-            resultValue: result,
-            status: "success"
+            resultValue: String(result),
+            status: PROBLEM_RESULT.SUCCESS,
           };
 
           results.push(successTestCode);
         }
       } catch (error) {
-        return res.render("failure",
-          {
-            userCode: submitText,
-            testCase: results,
-            error: error.message,
-          }
-        );
+        return res.render("failure", {
+          userCode: submitText,
+          testCase: results,
+          error: error.message,
+        });
       }
     }
 
     if (isFail) {
-      return res.render("failure",
-        {
-          userCode: submitText,
-          testCase: results,
-          error: null,
-        }
-      );
-    }
-
-    res.render("success",
-      {
+      return res.render("failure", {
         userCode: submitText,
         testCase: results,
-      }
-    );
+        error: null,
+      });
+    }
+
+    const currentUserId = req.user.id;
+    const checkSuccessUser = problem.completed_list.some(userId => {
+      return userId === currentUserId;
+    });
+
+    if (!checkSuccessUser) {
+      problem.completed_users += 1;
+      problem.completed_list.push(currentUserId);
+
+      await problem.save();
+    }
+
+    res.render("success", {
+      userCode: submitText,
+      testCase: results,
+    });
   } catch (error) {
-    next(error);
+    if (error instanceof mongoose.CastError) {
+      return next(createError(400, ERROR.DATABASE_MESSAGE));
+    }
+
+    next(createError(500, ERROR.SERVER_MESSAGE));
   }
 }
+
+module.exports = Controller;

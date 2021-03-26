@@ -3,7 +3,7 @@ const db = mongoose.connection;
 
 function mongooseConfig() {
   mongoose.connect(
-    "mongodb://127.0.0.1:27017",
+    `mongodb+srv://takhyunkim:${process.env.MONGOOSE_PASSWORD}@cluster0.tjfio.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,

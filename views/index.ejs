@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/stylesheets/mainPage.css" />
   </head>
   <body>
-    <%- include('partial/header') %>
+    <%- include("partial/header") %>
     <ul class="problems">
       <% problems.forEach(problem => { %>
         <li class="problem">
@@ -29,7 +29,7 @@
               </div>
               <p><%= problem.title %></p>
             </div>
-            <p>Passer: <%= problem.completed_users %></p>
+            <p>Passer: <%= problem.completed_list.length %>명</p>
             <p>설명: <%= problem.description %></p>
           </article>
         </li>

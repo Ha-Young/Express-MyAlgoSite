@@ -9,7 +9,7 @@
     <script src="/codemirror/lib/codemirror.js"></script>
   </head>
   <body>
-    <%- include('partial/header') %>
+    <%- include("partial/header") %>
     <section class="solution-Info">
       <article class="user-code">
           <textarea id="code" name="submit_text"><%= userCode %></textarea>
@@ -36,6 +36,7 @@
               <div class="solution">
                 <%= result.solution %>
               </div>
+              <p>result value: <%= result.resultValue %></p>
             </li>
           <% }) %>
         </ul>

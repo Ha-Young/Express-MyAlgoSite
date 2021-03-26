@@ -9,23 +9,21 @@
     <script src="/codemirror/lib/codemirror.js"></script>
   </head>
   <body>
-    <%- include('partial/header') %>
+    <%- include("partial/header") %>
     <section class="problem-detail">
       <article class="detail-info">
         <div class="problem-header">
           <div class="problem-level">
-            <span>
-              <%= problem.difficulty_level %> level
-            </span>
+            <span><%= problem.difficulty_level %> level</span>
           </div>
           <p class="problem-title"><%= problem.title %></p>
         </div>
-        <p>정답자: <%= problem.completed_users %></p>
+        <p>정답자: <%= problem.completed_list.length %>명</p>
         문제 설명:
         <p><%= problem.description %></p>
       </article>
       <article class="codes">
-        <div class="input-code">
+        <div>
           <div class="problem-text">Solution:</div>
           <form id="submitText" action="/problems/<%= problem._id %>" method="POST">
             <textarea id="code" name="submit_text"></textarea>
@@ -38,7 +36,7 @@
               mode: "javascript",
               indentUnit: 2,
               identWithTabs: true,
-              theme: "gruvbox-dark"
+              theme: "gruvbox-dark",
             });
 
             editor.setValue(`function solution() {\n\n}`);

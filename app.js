@@ -1,13 +1,18 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
+const createError = require("http-errors");
 
 const passportConfig = require("./config/passport");
 const mongooseConfig = require("./config/mongoose");
 
 const indexRouter = require("./routes/index");
 
+const ERROR = require("./constants/errorConstants");
+
 const app = express();
+
+require("dotenv").config();
 
 passportConfig(app);
 mongooseConfig();
@@ -23,10 +28,7 @@ app.use(bodyParser.json());
 app.use("/", indexRouter);
 
 app.use(function(req, res, next) {
-  const err = new Error("Not Found");
-
-  err.status = 404;
-  next(err);
+  next(createError(404, ERROR.NOT_FOUND));
 });
 
 app.use(function(err, req, res, next) {
