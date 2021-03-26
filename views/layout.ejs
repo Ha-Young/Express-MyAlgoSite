@@ -8,10 +8,8 @@
     <title>Codewars</title>
   </head>
   <body>
-    <div class="wrapper">
-      <%- include('./partial/header') %>
-      <main><%- body %></main>
-    </div>
+    <%- include('./partial/header') %>
+    <main><%- body %></main>
 
     <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.css">
@@ -19,6 +17,9 @@
     <script type="text/javascript"
       src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.js">
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.22.2/mode/meta.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.22.2/addon/mode/loadmode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.22.2/addon/mode/overlay.min.js"></script>
     <script src="/javascripts/index.js"></script>
   </body>
 </html>

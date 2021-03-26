@@ -1,11 +1,14 @@
-<h1>Fail</h1>
-<% result.forEach(function(data, index){ %>
-  <div>
-    <h3>TEST <%= index %></h3>
-    <%= data.isSuccess %>
-    Your answer is <%= data.answer %>
-    <%= data.solution %>
-  </div>
-<% }); %>
+<div class="result_container failure">
+  <h1>Fail</h1>
+  <% result.forEach(function(data, index){ %>
+    <div>
+      <span>TEST <%= index %></span>
+      <span>Your answer is <%= data %></span>
+      <span>Expected: <%= testCases[index].solution %></span>
+    </div>
+  <% }); %>
 
-<a href="/problems/<%= problemId %>">문제로 돌아가기</a>
+  <span class="goBack_btn routes">
+    <a href="/problems/<%= problemId %>">문제로 돌아가기</a>
+  </span>
+</div>

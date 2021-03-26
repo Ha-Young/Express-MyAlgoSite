@@ -1,5 +1,6 @@
 const Problem = require('../../models/Problem');
 const { getTestCaseById, updateCompletedUser } = require('../../util/QueryPlugin');
+const vm = require('vm');
 
 exports.getAll = async function (req, res) {
   await Problem.find().lean()
@@ -22,30 +23,30 @@ exports.getOne = async function (req, res) {
 };
 
 exports.post = async function (req, res) {
-  const checkTestCode = (test) => {
-    const resultValue = req.body.newFunction(test.arguments);
-
-    return {
-      answer: resultValue,
-      solution: test.solution,
-      isSuccess: resultValue == test.solution
-    };
-  };
+  res.locals.user = req.user;
+  res.locals.problemId = req.body.problemId;
 
   try {
-    res.locals.user = req.user;
-    res.locals.problemId = req.body.problemId;
     const testCases = await getTestCaseById(req.body.problemId);
-    const result = testCases.map(checkTestCode);
-    const checkResult = result.every(data => data.isSuccess === true);
+
+    const result = testCases.map(test => {
+      const code = req.body.code + test.code;
+      return vm.runInNewContext(code,
+        { timeout: 500, microtaskMode: 'afterEvaluate' }
+      );
+    });
+
+    const checkResult = testCases.every((data, index) => {
+      return data.solution === result[index];
+    });
 
     if (checkResult) {
       await updateCompletedUser(req.body.problemId, req.user._id);
       res.render('partial/success');
     } else {
-      res.render('partial/failure', { result });
+      res.render('partial/failure', { result, testCases });
     }
   } catch (err) {
-    res.render('partial/failure', { message: err.message });
+    res.render('error', err.message);
   }
 };

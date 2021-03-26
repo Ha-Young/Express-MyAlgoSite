@@ -3,19 +3,16 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../models/User');
 
 passport.serializeUser((user, done) => {
-  // done(err, id)
   done(null, user.id);
 });
 
 passport.deserializeUser((id, done) => {
-  // 누구아이디인지
   User.findById(id).then((user) => {
     done(null, user);
   }).catch((err) => console.log(err.message));
 });
 
 passport.use(new GoogleStrategy({
-    // options for the google start
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: '/auth/google/redirect'
@@ -39,7 +36,7 @@ passport.use(new GoogleStrategy({
           });
         } else {
           console.log('already exist user..');
-          done(null, user); // done: ok, go on to the next function -> serializeUser
+          done(null, user);
         }
       });
   }

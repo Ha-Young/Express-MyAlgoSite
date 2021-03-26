@@ -7,10 +7,9 @@ if (problemForm) {
   codeMirror = CodeMirror.fromTextArea(problemTextArea, {
     mode: 'javascript',
     tabSize: 2,
-    theme: 'material-palenight',
+    lineNumbers: true,
     matchBrackets: true,
     lineWrapping: true,
-    lineNumbers: true,
     smartIndent: true,
     lint: {
       esversion: 6,

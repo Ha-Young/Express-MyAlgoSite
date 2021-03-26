@@ -1,34 +1,31 @@
-<div class="problem_container">
+<div class="problemView_container">
   <form
     action="/problems/result"
     method="POST"
     class="problem_form"
+    target="resultView"
   >
-    <input
-      name="problemId"
-      value="<%= problem.id %>"
-      readonly
-    />
-    <div class="problem_details">
-      <%= problem.title %>
-      <%= problem.description %>
+    <div class="problemView_info">
+      <input
+        name="problemId"
+        value="<%= problem.id %>"
+        readonly
+      />
+      <div><%= problem.title %></div>
+      <div><%= problem.description %></div>
     </div>
-    <textarea
-      class="problem_textarea"
-      name="code"
-    >
-    function solution(v) {
-      let bottomup = [];
-      bottomup[0] = 0;
-      bottomup[1] = 1;
-      bottomup[2] = 1;
-      for (let i = 3; i <= v; i++) {
-      bottomup[i] = (bottomup[i-1]%1234567 + bottomup[i-2]%1234567);
+    <textarea class="problem_textarea" name="code">
+      function solution(v) {
+        let bottomup = [];
+        bottomup[0] = 0;
+        bottomup[1] = 1;
+        bottomup[2] = 1;
+        for (let i = 3; i <= v; i++) {
+        bottomup[i] = (bottomup[i-1]%1234567 + bottomup[i-2]%1234567);
+        }
+        return bottomup[v];
       }
-      return bottomup[v];
-    }
     </textarea>
-    <input type="submit" value="SUBMIT">
+    <input class="problemView_btn" type="submit" value="SUBMIT">
   </form>
 </div>
-

@@ -1,6 +1,6 @@
 const Problem = require('../models/Problem');
-const mockProblems = require('../models/sample_problems.json');
 const User = require('../models/User');
+const mockProblems = require('../models/sample_problems.json');
 
 const dbCheck = async () => {
   await Problem.find({})
@@ -27,17 +27,7 @@ const getTestCaseById = async (problemId) => {
   return await Problem.findOne({ id: problemId })
     .exec()
     .then(problem => {
-      return problem.tests.map(test => {
-        const { code, solution } = test;
-        const startIndex = code.indexOf('(');
-        const endIndex = code.indexOf(')');
-        const testArguments = code.slice(startIndex + 1, endIndex).split(',');
-
-        return {
-          arguments: testArguments,
-          solution
-        };
-      });
+      return problem.tests;
     });
 };
 
