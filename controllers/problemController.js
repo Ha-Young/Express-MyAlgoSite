@@ -1,7 +1,6 @@
 const Problem = require("../models/Problem");
 const createHttpError = require("http-errors");
 const { getSolution, getArgument, getResultList, getUserAnwerList } = require("../utils/solution");
-const { path } = require("path");
 
 exports.home = async (req, res, next) => {
   try {
