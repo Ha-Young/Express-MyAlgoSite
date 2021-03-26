@@ -1,31 +1,26 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const findOrCreate = require("mongoose-findorcreate");
 
-/*
-
-  TODO: Fill in the model specification
-
- */
-const userSchema = new mongoose.Schema({
-  googleId: Number,
+const UserSchema = new mongoose.Schema({
+  google_id: {
+    type: Number,
+    require: true
+  },
   email: {
     type: String,
-    required: true
+    required: true,
+    trim: true
   },
   username: {
     type: String,
-    required: true
+    required: true,
+    trim: true
   },
   photo_url: {
-    type: String,
-    required: true
-  },
-  solved_count: {
-    type: Number,
-    required: true
+    type: String
   },
 });
 
-userSchema.plugin(findOrCreate);
+UserSchema.plugin(findOrCreate);
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', UserSchema);
