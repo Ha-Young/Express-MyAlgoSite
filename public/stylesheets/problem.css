@@ -44,24 +44,28 @@ body {
   margin-right: 20px;
 }
 
+.level {
+  font-weight: bold;
+}
+
 .level1 {
-  color: #ffb348;
+  color: #4ec04f;
 }
 
 .level2 {
-  color: #fe883c;
+  color: #9ab648;
 }
 
 .level3 {
-  color: #fe6432;
+  color: #c9a33c;
 }
 
 .level4 {
-  color: #fe4128;
+  color: #f38848;
 }
 
 .level5 {
-  color: #fd1d1d;
+  color: #eb4941;
 }
 
 .example-output {
