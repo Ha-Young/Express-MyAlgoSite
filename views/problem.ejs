@@ -6,14 +6,12 @@
 <div>
   <form action="/problems/<%= problem.id %>" method="POST">
     <textarea id="code" name="code"><% if (problem.code) { %>
-<%= problem.code %>
-<% } else { %>
+<%= problem.code %><% } else { %>
 function solution(<%= problem.param %>) {
   let result;
 
   return result;
-}
-<% } %></textarea>
+}<% } %></textarea>
     <button class="button" type="submit">Submit</button>
   </form>
 </div>

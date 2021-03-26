@@ -41,7 +41,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 passportConfig();
 
-// app.use("/signup", signup);
 app.use("/auth", auth);
 app.use("/", index);
 app.use("/problems", problems);

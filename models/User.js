@@ -37,20 +37,17 @@ UserSchema.pre("save", async function (next) {
   next();
 });
 
+/**
+ * verify input password
+ * @param {string} candidatePassword submitted password
+ * @param {string} userPassword password stored in DB
+ * @returns {boolean} if password is correct
+ */
 UserSchema.methods.correctPassword = async function (
   candidatePassword,
   userPassword
 ) {
   return bcrypt.compare(candidatePassword, userPassword);
-};
-
-UserSchema.methods.updateProblems = async function (id, status, code) {
-  console.log(this);
-  // this.id = id;
-  // this.status = status;
-  // this.code = code;
-
-  // await this.save();
 };
 
 module.exports = mongoose.model('User', UserSchema);

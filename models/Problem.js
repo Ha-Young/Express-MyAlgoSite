@@ -28,24 +28,36 @@ const ProblemSchema = new mongoose.Schema({
   }]
 });
 
+/**
+ * check user submitted code
+ * @param {string} code your code
+ * @param {function} next callback function to error handling
+ * @returns "pass" or "fail" status and each results
+ */
 ProblemSchema.methods.checkCode = function (code, next) {
+  const vm = new VM({
+    sandbox: { solution: null },
+    timeout: 1000,
+  });
+  const results = [];
+  let status = "success";
+
+  vm.run(`solution = ${code}`);
+
   try {
-    const vm = new VM({ sandbox: { solution: null }});
-    const results = [];
-    let status = "success";
-
-    vm.run(`solution = ${code}`);
-
     for (const test of this.tests) {
+      const startedAt = Date.now();
       const actual = vm.run(test.code) ?? "undefined";
+      const time = Date.now() - startedAt;
       const expected = test.solution;
-      const testResult = (actual === expected) ? "pass" : "fail";
+      const testResult = (actual === expected) ? "Pass" : "Fail";
 
-      if (testResult === "fail") {
+      if (testResult === "Fail") {
         status = "failure";
       }
 
       results.push({
+        time,
         testResult,
         testCase: test.code,
         actual: JSON.stringify(actual),
@@ -59,7 +71,7 @@ ProblemSchema.methods.checkCode = function (code, next) {
 
     return { status, results };
   } catch (err) {
-    next(createError(400, "solution code is wrong."))
+    next(createError(400, err.message))
   }
 };
 

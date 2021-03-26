@@ -8,6 +8,7 @@ const DB = process.env.DATABASE.replace(
 mongoose.set("useCreateIndex", true);
 mongoose.connect(
   DB,
+  // process.env.DATABASE_LOCAL,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -29,7 +30,7 @@ if (process.env.NODE_ENV === "development") {
     }
   };
   mock();
-  console.log("Success");
+  console.log("✅ Mock data is uploaded to DB Successfully.");
 }
 
 const db = mongoose.connection;
