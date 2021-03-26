@@ -1,8 +1,8 @@
 const Problem = require('../../models/Problem');
-const { getTestCaseById } = require('../../util/problem_db');
+const { getTestCaseById, updateCompletedUser } = require('../../util/QueryPlugin');
 
 exports.getAll = async function (req, res) {
-  Problem.find().lean()
+  await Problem.find().lean()
   .exec(function (err, problems) {
     if (err) {
       return next(err.message);
@@ -14,7 +14,7 @@ exports.getAll = async function (req, res) {
 };
 
 exports.getOne = async function (req, res) {
-  Problem.findOne({ id: req.params.problem_id })
+  await Problem.findOne({ id: req.params.problem_id })
   .lean()
   .exec(function (err, problem) {
     res.render('partial/problemView', { problem, user: req.user });
@@ -34,12 +34,13 @@ exports.post = async function (req, res) {
 
   try {
     res.locals.user = req.user;
-    res.locals.problemId = req.body.problemId
+    res.locals.problemId = req.body.problemId;
     const testCases = await getTestCaseById(req.body.problemId);
     const result = testCases.map(checkTestCode);
     const checkResult = result.every(data => data.isSuccess === true);
 
     if (checkResult) {
+      await updateCompletedUser(req.body.problemId, req.user._id);
       res.render('partial/success');
     } else {
       res.render('partial/failure', { result });

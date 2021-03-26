@@ -12,10 +12,11 @@
     <% problems.forEach(function(problem){ %>
       <% const { id, title, completed_users } = problem; %>
       <li>
-        <a href="/problems/<%= problem.id %>">
-          <%= title %>
-          <%= completed_users %>
-        </a>
+        <div>
+          <a href="/problems/<%= problem.id %>">
+            <%= title %>
+            <%= completed_users.length %></a>
+        </div>
       </li>
     <% }); %>
   </ul>

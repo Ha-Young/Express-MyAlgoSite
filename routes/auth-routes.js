@@ -16,7 +16,6 @@ router.get('/google', passport.authenticate('google', {
   scope: ['profile']
 }));
 
-// 받은 토큰으로 이제 유저 프로필을 받아오자.
 router.get('/google/redirect',
   passport.authenticate('google', { failureRedirect: '/login' }),
   function (req, res) {

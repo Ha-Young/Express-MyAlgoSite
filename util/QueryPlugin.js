@@ -1,14 +1,13 @@
 const Problem = require('../models/Problem');
 const mockProblems = require('../models/sample_problems.json');
+const User = require('../models/User');
 
 const dbCheck = async () => {
-  Problem.find({})
+  await Problem.find({})
     .exec((err, data) => {
       if (err) return next(err.message);
 
-      if (!data.length) {
-        storeMockProblems();
-      }
+      if (!data.length) storeMockProblems();
     });
 };
 
@@ -20,15 +19,15 @@ const storeMockProblems = async () => {
 
 const deleteAllProblems = async () => {
   await Problem.deleteMany({}, (err) => {
-    if (err) return next(err.message);
+    if (err) console.log(err.message);
   });
 };
 
 const getTestCaseById = async (problemId) => {
   return await Problem.findOne({ id: problemId })
     .exec()
-    .then(data => {
-      return data.tests.map(test => {
+    .then(problem => {
+      return problem.tests.map(test => {
         const { code, solution } = test;
         const startIndex = code.indexOf('(');
         const endIndex = code.indexOf(')');
@@ -40,12 +39,22 @@ const getTestCaseById = async (problemId) => {
         };
       });
     });
-}
+};
 
-const updateCompletedUser = async (id) => {
-  await Problem.findById()
-}
+const updateCompletedUser = async (problemId, userId) => {
+  try {
+    await Problem.findOneAndUpdate({ id: problemId },
+      { $addToSet: { completed_users: userId }},
+    );
+    await User.findOneAndUpdate({ _id: userId },
+      { $addToSet: { completed_problems: problemId }},
+    );
+  } catch (err) {
+    console.log(err.message);
+  }
+};
 
 exports.dbCheck = dbCheck;
 exports.deleteAllProblems = deleteAllProblems;
 exports.getTestCaseById = getTestCaseById;
+exports.updateCompletedUser = updateCompletedUser;
