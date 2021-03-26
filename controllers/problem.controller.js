@@ -22,7 +22,7 @@ async function getByEachId(req, res, next) {
   const { problemId } = res.locals;
   const problem = await Problem.findById(problemId);
   const tests = problem.tests.map(test => test.code);
-  
+
   res.render("eachProblem", {
     result: tests,
     code: TEXTS.DEFAULT_FUNCITION,
@@ -39,7 +39,7 @@ async function getTestResult(userCode, tests) {
     for (const test of tests) {
       const { code: testCode, solution } = test;
       const script = userCode + testCode;
-  
+
       result = await vm.run(script);
 
       if (result !== solution) {
@@ -73,12 +73,7 @@ async function postByEachId(req, res, next) {
     const { isCorrect, result } = await getTestResult(userCode, tests);
     
     if (isCorrect) {
-      try {
-        await problem.addCompletedUser(req.user._id);
-      } catch (error) {
-        next(createError(500));
-        return;
-      }
+      await problem.addCompletedUser(req.user._id);
     }
 
     res.render("eachProblem", {
@@ -87,11 +82,7 @@ async function postByEachId(req, res, next) {
       problem,
     });
   } catch (error) {
-    res.render("eachProblem", { 
-      code: userCode,
-      result: error,
-      problem,
-    });
+    next(createError(500));
   }
 }
 
