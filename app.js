@@ -13,7 +13,6 @@ const { authenticateUser, localMiddleware, loginedUser } = require("./middleware
 const homeRouter = require("./routes/homeRouter");
 const loginRouter = require("./routes/loginRouter");
 
-require("ejs");
 require("dotenv").config();
 
 const app = express();
