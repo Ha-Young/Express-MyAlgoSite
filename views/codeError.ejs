@@ -13,7 +13,6 @@
 
     <link rel="stylesheet" href="/codemirror/lib/codemirror.css">
     <link rel="stylesheet" href="/codemirror/theme/material-palenight.css">
-
     <% include ./partials/head %>
   </head>
   <body>
@@ -21,16 +20,15 @@
 
     <h2><%= title %></h2>
 
-    <form>
-      <textarea id="editor" name="userAnswer">
-<%= userAnswer %></textarea>
-    </form>
-
-    <h1>코드 에러!</h1>
-    <div>
-      <h2>에러: <%= errorName %></h4>
-      <h3>에러 메시지: <%= errorMessage %></h3>
-      <pre>에러 스택: <%= errorStack %></pre>
+    <div class="problem-container">
+      <div class="error-container">
+        <h1>코드 에러!</h1>
+        <div>
+          <h2>에러: <%= errorName %></h4>
+          <h3>에러 메시지: <%= errorMessage %></h3>
+          <pre>에러 스택: <%= errorStack %></pre>
+        </div>
+      </div>
     </div>
 
     <% include ./partials/footer %>

@@ -1,100 +1,28 @@
 const express = require('express');
-const passport = require('passport');
-const bcrypt = require('bcrypt');
 const router = express.Router();
-const User = require('../models/User');
-const Problem = require('../models/Problem');
 const forwardAuthenticated = require('./middlewares/forwardAuthenticated');
+const homeController = require('./controllers/home.controller');
+const signInController = require('./controllers/signIn.controller');
+const signOutController = require('./controllers/signOut.ocntroller');
+const signUpController = require('./controllers/signUp.controller');
+const deleteAccountController = require('./controllers/deleteAccount.controller');
 
 /* GET home page. */
-router.get('/', forwardAuthenticated, async (req, res, next) => {
-  try {
-    const problems = await Problem.find();
-    res.render('index', { data: problems });
-  } catch (e) {
-    next(e);
-  }
-});
+router.get('/', forwardAuthenticated, homeController.getAll);
 
-router.get('/sign-in', (req, res, next) => {
-  res.render('signIn');
-});
+router.get('/sign-in', signInController.get);
+router.post('/sign-in', signInController.postLocal);
 
-router.post('/sign-in', passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/sign-in',
-  failureFlash: true,
-}));
+router.get('/sign-in/github', signInController.getGithub);
+router.get('/sign-in/github/callback', signInController.postGithub);
 
-router.get('/sign-in/github', passport.authenticate('github', {
-  scope: [ 'user:email' ]
-}));
+router.get('/sign-out', forwardAuthenticated, signOutController.get);
+router.get('/sign-out/callback', forwardAuthenticated, signOutController.callback);
 
-router.get('/sign-in/github/callback', passport.authenticate('github', {
-  successRedirect: '/',
-  failureRedirect: '/sign-in',
-  failureFlash: true,
-}));
+router.get('/sign-up', signUpController.get);
+router.post('/sign-up', signUpController.post);
 
-router.get('/sign-out', forwardAuthenticated, (req, res, next) => {
-  res.render('signOut');
-});
-
-router.get('/sign-out/callback', forwardAuthenticated, (req, res, next) => {
-  if (req.session) {
-    try {
-      req.logOut();
-      req.session.destroy();
-      res.redirect('/sign-in');
-    } catch (e) {
-      next(e);
-    }
-  }
-});
-
-router.get('/sign-up', (req, res, next) => {
-  res.render('signUp');
-});
-
-router.post('/sign-up', async (req, res, next) => {
-  const email = await User.findOne({ email: req.body.email });
-
-  if (email) {
-    req.flash("usedEmail", "등록된 이메일입니다.");
-    res.redirect('/sign-in');
-
-    return;
-  }
-
-  try {
-    const hash = await bcrypt.hash(req.body.password, 10);
-
-    await User.create({
-      username: req.body.name,
-      email: req.body.email,
-      password: hash,
-    });
-
-    res.redirect('/sign-in');
-  } catch (e) {
-    next(e);
-  }
-});
-
-router.get('/delete-account', forwardAuthenticated, (req, res, next) => {
-  res.render('deleteAccount');
-});
-
-router.get('/delete-account/callback', forwardAuthenticated, async (req, res, next) => {
-  const email = req.session.passport.user.email;
-
-  try {
-    await User.deleteOne({ email: email });
-    req.session.destroy();
-    res.redirect('/sign-in');
-  } catch (e) {
-    next(e);
-  }
-});
+router.get('/delete-account', forwardAuthenticated, deleteAccountController.get);
+router.get('/delete-account/callback', forwardAuthenticated, deleteAccountController.callback);
 
 module.exports = router;

@@ -1,100 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const vm = require('vm');
-const Problem = require('../models/Problem');
 const forwardAuthenticated = require('./middlewares/forwardAuthenticated');
+const problemsController = require('./controllers/problems.controller');
 
-router.get('/:problems_id', forwardAuthenticated, async (req, res, next) => {
-  const { id, title, tests, description } = await Problem.findOne({ id: req.params.problems_id });
-  const { userAnswer } = req.body;
-  const codeParameter = findParameterType(tests[0].code);
-  res.render('problem', { id, title, codeParameter, tests, description, userAnswer });
-});
-
-router.post('/:problems_id/restart', forwardAuthenticated, async (req, res, next) => {
-  const { id, title, tests, description } = await Problem.findOne({ id: req.params.problems_id });
-  const { userAnswer } = req.body;
-  const codeParameter = findParameterType(tests[0].code);
-  res.render('problem', { id, title, codeParameter, tests, description, userAnswer });
-});
-
-router.post('/:problems_id', forwardAuthenticated, async (req, res, next) => {
-  const { id, title, tests } = await Problem.findOne({ id: req.params.problems_id });
-  const { userAnswer } = req.body;
-  const passOrFail = [];
-  let isAllPass = true;
-
-  const sandbox = { result: [] };
-  vm.createContext(sandbox);
-
-  try {
-    for (let i = 0; i < tests.length; i++) {
-      await vm.runInContext(userAnswer + `result.push(${tests[i].code});`, sandbox);
-      if (sandbox.result[i] !== tests[i].solution) {
-        passOrFail.push("fail");
-        isAllPass = false;
-      } else {
-        passOrFail.push("pass");
-      }
-    }
-  } catch (e) {
-    const interimResult = {
-      id,
-      title,
-      userAnswer
-    };
-
-    const codeError = {
-      errorMessage: e.message,
-      errorName: e.name,
-      errorStack: e.stack,
-    };
-
-    req.session.codeError = codeError;
-    req.session.interimResult = interimResult;
-    res.redirect('/problems/' + req.params.problems_id + '/codeError');
-
-    return;
-  }
-
-  const testResult = {
-    id,
-    title,
-    tests,
-    result: sandbox.result,
-    isAllPass,
-    userAnswer,
-    passOrFail,
-  };
-
-  req.session.testResult = testResult;
-  res.redirect('/problems/' + req.params.problems_id + '/result');
-});
-
-router.get('/:problems_id/result', forwardAuthenticated, async (req, res, next) => {
-  const { id, title, tests, result, isAllPass, userAnswer, passOrFail } = req.session.testResult;
-
-  res.render('result', { id, title, tests, result, isAllPass, userAnswer, passOrFail });
-});
-
-router.get('/:problems_id/codeError', forwardAuthenticated, async (req, res, next) => {
-  const { id, title, userAnswer } = req.session.interimResult;
-  const { errorMessage, errorName, errorStack } = req.session.codeError;
-
-  res.render('codeError', { errorMessage, errorName, errorStack, id, title, userAnswer });
-  req.session.codeError = null;
-});
-
-function findParameterType(solution) {
-  const param = solution.slice(9, 10);
-
-  if (param === "[") {
-    return "array";
-  }
-
-  if (typeof Number(param) === 'number') {
-    return "n";
-  }
-}
+router.get('/:problems_id', forwardAuthenticated, problemsController.get);
+router.post('/:problems_id', forwardAuthenticated, problemsController.post);
+router.post('/:problems_id/restart', forwardAuthenticated, problemsController.restart);
+router.get('/:problems_id/result', forwardAuthenticated, problemsController.getResult);
+router.get('/:problems_id/codeError', forwardAuthenticated, problemsController.getCodeError);
 
 module.exports = router;
