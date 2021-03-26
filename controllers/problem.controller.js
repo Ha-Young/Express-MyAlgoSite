@@ -6,7 +6,6 @@ const TEXTS = {
   DEFAULT_FUNCITION: "function solution() {}",
   RESULT: (wrong, correct) => `Wrong Answer: expected ${wrong} to be ${correct}`,
   CORRECT: "CORRECT!",
-
 }
 
 async function getAll(req, res, next) {
@@ -23,8 +22,7 @@ async function getByEachId(req, res, next) {
   const problem = await Problem.findById(problemId);
   const tests = problem.tests.map(test => test.code);
   
-  res.render("eachProblem", { 
-    title: "problems",
+  res.render("eachProblem", {
     result: tests,
     code: TEXTS.DEFAULT_FUNCITION,
     problem,
@@ -73,7 +71,6 @@ async function postByEachId(req, res, next) {
       problem,
     });
   } catch (error) {
-    console.log(error.code);
     res.render("eachProblem", { 
       result: error,
       problem,
