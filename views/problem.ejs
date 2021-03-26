@@ -5,6 +5,7 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/problem.css' />
     <link rel='stylesheet' href='/stylesheets/header.css' />
+    <%- include('partials/codemirror') %>
   </head>
   <body>
     <%- include('partials/header') %>
@@ -25,6 +26,5 @@ function solution(n) {
         <button class="button" type="submit">제출</button>
       </form>
     </div>
-    <%- include('partials/codemirror') %>
   </body>
 </html>
