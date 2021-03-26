@@ -51,6 +51,7 @@
   margin-bottom: 28px;
   font-size: 1.05rem;
   cursor: pointer;
+  transition: all ease-in-out 0.1s;
 }
 
 .level-item:last-child {
@@ -59,6 +60,7 @@
 
 .level-item:hover {
   color: #1e90ff;
+  transform: scale(1.02);
 }
 
 .ranking-container {
@@ -80,7 +82,7 @@
   justify-content: space-between;
   padding: 0 50px;
   margin-bottom: 18px;
-  font-size: 1.05rem;
+  font-size: 0.9rem;
 }
 
 .ranking-item:last-child {
