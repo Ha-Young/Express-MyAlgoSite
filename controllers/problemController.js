@@ -39,6 +39,7 @@ exports.postSelectedProblemSolution = async function(req, res, next) {
     } = req;
     const { _id, testcases } = await Problem.findOne({ problemId });
 
+
     if (!_id) {
       next(createError(500, "failed to get selectedProblem from db"));
       return;
@@ -55,7 +56,7 @@ exports.postSelectedProblemSolution = async function(req, res, next) {
       return;
     }
 
-    if (!isDuplicatedProblem(req.user.solvedProblems)) {
+    if (!isDuplicatedProblem(req.user.solvedProblems, _id)) {
       await User.findByIdAndUpdate(
         { _id: req.user._id },
         { $push: { solvedProblems: { solvedProblemObjectId: _id, userCode: codemirrorText }}}

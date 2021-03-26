@@ -22,8 +22,9 @@ exports.checkAllTestcasePassed = function(totalTestcaseResult) {
   return totalTestcaseResult.every((testcase) => testcase.isPassed === true);
 }
 
-exports.isDuplicatedProblem = function(solvedProblems) {
-  return solvedProblems.findIndex(problem => String(problem.solvedProblemObjectId) === String(_id)) === -1
-    ? false
-    : true
+exports.isDuplicatedProblem = function(solvedProblems, problemObjectId) {
+  return solvedProblems.findIndex(
+    problem => String(problem.solvedProblemObjectId) === String(problemObjectId)) === -1
+      ? false
+      : true
 }
