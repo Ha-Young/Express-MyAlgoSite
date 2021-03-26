@@ -33,20 +33,6 @@
         </div>
       </div>
     </div>
-    <script src="/codemirror/codemirror.js"></script>
-    <script src="/codemirror/javascript/javascript.js"></script>
-    <script src="/codemirror/closebrackets.js"></script>
-    <link rel="stylesheet" href="/codemirror/codemirror.css" />
-    <link rel="stylesheet" href="/codemirror/dracula.css" />
-    <script>
-      const editor = CodeMirror.fromTextArea(
-        document.getElementById("editor"), {
-          mode: "javascript",
-          theme: "dracula",
-          lineNumbers: true,
-          autoCloseBrackets: true,
-        });
-      editor.setSize("500", "400");
-    </script>
+    <%- include('partials/codemirror') %>
   </body>
 </html>
