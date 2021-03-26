@@ -18,7 +18,7 @@ exports.getProblem = async function (req, res, next) {
     const problem = await Problem.findById(problemId);
     res.render("problem", { problem: problem, user: req.user });
   } catch (err) {
-    next(createError(500, "Invalid server error"));
+    next(createError(500, "Internal Server Error"));
   }
 }
 
