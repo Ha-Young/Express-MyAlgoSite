@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const { VM } = require('vm2');
-const AppError = require('../utils/appError');
 const handleSchemaTypeError = require('../utils/handleSchemaTypeError');
 
 const ProblemSchema = new mongoose.Schema({
@@ -51,17 +50,27 @@ ProblemSchema.statics.validateSolution = async function (id, solutionString) {
   try {
     problem.tests.forEach(test => {
       const userSolution = vm.run(solutionString + test.code);
+      let status = 'success';
 
       if (userSolution !== test.solution) {
-        results.push('failed');
+        status = 'failed';
       }
 
-      results.push('success');
+      results.push({
+        status,
+        code: solutionString.trim(),
+        solution: userSolution
+      });
     });
 
     return results;
   } catch (err) {
-    results.push(err);
+    results.push({
+      status: 'failed',
+      code: solutionString.trim(),
+      solution: err.message
+    });
+
     return results;
   }
 }

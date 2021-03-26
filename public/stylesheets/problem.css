@@ -49,6 +49,12 @@
   overflow-y: scroll;
 }
 
+.link-container {
+  width: 40%;
+  background-color: #282828;
+  text-align: center;
+}
+
 .submit-container {
   display: flex;
   justify-content: center;
@@ -72,10 +78,16 @@
   font-weight: 400;
 }
 
+.final-result {
+  font-size: 30px;
+  font-weight: 800;
+}
+
 .success {
   color: blue;
 }
 
-.failed {
+.failed,
+.failure {
   color: red;
 }

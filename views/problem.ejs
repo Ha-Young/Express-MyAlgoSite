@@ -24,14 +24,20 @@
             <p class="description">
               <%= problem.description %>
             </p>
+            <% if (results) { %>
+              <p class="final-result  <%= finalResult.toLowerCase() %>">
+                <%= finalResult %>
+              </p>
+              <div class="link-container">
+                <a href="/">
+                  Back to Problem List
+                </a>
+              </div>
+              <% } %>
           </div>
           <div class="code-container">
             <textarea class="code" name="code">
-function solution(<%= problem.params.toString() %>) {
-  let result;
-
-  return result;
-}
+<%= problem.code %>
 </textarea>
             <div class="test-container">
               <p class="test-title">실행 결과: </p>
@@ -42,8 +48,8 @@ function solution(<%= problem.params.toString() %>) {
                     <p class="test">
                       <%= test.code %>
                     </p>
-                    <p class="result <%= results[i] %>">
-                      <%= results[i] %>
+                    <p class="result <%= results[i].status %>">
+                      <%= results[i].status %>
                     </p>
                     <% }); %>
                       <% } %>
