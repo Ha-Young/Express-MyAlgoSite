@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
+
 const problemsController = require("../routes/controllers/problems.controller");
-const { authenticateUser } = require("../routes/middlewares/authorization");
+const authenticateUser = require("./middlewares/authenticateUser");
 
 router.get("/:problem_id", authenticateUser, problemsController.getProblem);
 router.post("/:problem_id", authenticateUser, problemsController.postProblem);
