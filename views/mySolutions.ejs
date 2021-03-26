@@ -4,18 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap">
     <link rel="stylesheet" href="/stylesheets/global.css">
     <title><%= title %></title>
   </head>
 <body>
-    <%- include("./partials/header.ejs") %>
+  <%- include("./partials/header.ejs") %>
     <h1>내가 푼 문제</h1>
     <div>
       <% if (solutions.length) {%>
         <div class="list-wrapper">
           <% solutions.forEach(function (solution, idx) {%>
             <div class="solution-container">
-                <div><%= idx + 1 %></div><h1><%= solution.problemTitle %></h1>
+              <h1><%= solution.problemTitle %></h1>
               <div class="solution-desc">
                 <div>
                   <%= solution.mySolution %>
@@ -26,5 +28,6 @@
         </div>
       <%}%>
     </div>
+  <%- include("./partials/footer.ejs") %>
 </body>
 </html>

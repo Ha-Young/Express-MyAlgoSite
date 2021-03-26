@@ -37,10 +37,13 @@
   margin-top: 2vh;
 }
 
-button > a {
+.problem-list-link > a > h3 {
+  margin: 1vh 0;
   color: black;
 }
 
 .problem-list-link {
   margin-top: 2vh;
+  width: 12vw;
+  height: 6vh;
 }
