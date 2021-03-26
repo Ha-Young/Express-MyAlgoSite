@@ -1,3 +1,20 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Error!</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel='stylesheet' href='/stylesheets/error.css' />
+</head>
+<body>
+  <div class="error-box">
+    <h1><%= message %></h1>
+    <img class="sad-icon" src="/img/sad.png" alt="sadIcon">
+    <h1><%= error.status %></h2>
+    <button
+      class="home-button"
+      onclick="window.location.href='/'"
+    >Home</button>
+  </div>
+</body>
+</html>
+
