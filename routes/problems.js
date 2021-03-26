@@ -40,7 +40,7 @@ router.get("/:problem_id", async (req, res, next) => {
 router.post("/:problem_id", async (req, res, next) => {
   const { solution } = req.body;
   const { problem_id } = req.params;
-  const { _id, username } = req.user;
+  const { _id } = req.user;
   let tests;
 
   try {

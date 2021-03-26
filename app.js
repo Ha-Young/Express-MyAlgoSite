@@ -12,6 +12,7 @@ const index = require("./routes/index");
 const login = require("./routes/login");
 const logout = require("./routes/logout");
 const problems = require("./routes/problems");
+const checkLoginStatus = require("./utils/checkLoginStatus");
 const validateLoginStatus = require("./utils/validateLoginStatus");
 
 require("dotenv").config();
@@ -46,12 +47,11 @@ db.once("open", () => console.log("MongoDB Connected"));
 if (process.env.INITIALIZE_MONGODB === "true") {
   initializeMongoDB(data);
 }
-
+app.use(checkLoginStatus);
 app.use("/", index);
 app.use("/login", login);
 app.use("/logout", logout);
 app.use(validateLoginStatus);
-// app.use((req, res, next) => validateLoginStatus(req, res, next));
 app.use("/problems", problems);
 
 app.use(function (req, res, next) {
