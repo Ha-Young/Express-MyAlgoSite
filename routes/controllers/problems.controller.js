@@ -5,6 +5,7 @@ exports.get = async (req, res, next) => {
   const { id, title, tests, description } = await Problem.findOne({ id: req.params.problems_id });
   const { userAnswer } = req.body;
   const codeParameter = findParameterType(tests[0].code);
+
   res.render('problem', { id, title, codeParameter, tests, description, userAnswer });
 };
 
@@ -12,6 +13,7 @@ exports.restart = async (req, res, next) => {
   const { id, title, tests, description } = await Problem.findOne({ id: req.params.problems_id });
   const { userAnswer } = req.body;
   const codeParameter = findParameterType(tests[0].code);
+
   res.render('problem', { id, title, codeParameter, tests, description, userAnswer });
 };
 
@@ -40,7 +42,6 @@ exports.post = async (req, res, next) => {
       title,
       userAnswer
     };
-
     const codeError = {
       errorMessage: e.message,
       errorName: e.name,
