@@ -3,8 +3,8 @@ const router = express.Router();
 const { isAuth } = require("./middlewares/authorization");
 const problemsController = require("./controllers/problems.controller");
 
-router.get("/:problem_id", problemsController.getOneProblem);
+router.get("/:problem_id", isAuth, problemsController.getOneProblem);
 
-router.post("/:problem_id", problemsController.submitProblem);
+router.post("/:problem_id", isAuth, problemsController.submitProblem);
 
 module.exports = router;
