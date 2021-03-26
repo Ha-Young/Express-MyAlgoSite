@@ -14,5 +14,6 @@ router.get("/login/github/callback", authController.getGithubLoginCallback);
 
 router.get("/logout", isAuthenticated, authController.getLogout);
 router.get("/", isAuthenticated, problemController.getAllProblems);
+router.get("/difficulty_level/:difficulty_level", isAuthenticated, problemController.getAllProblems);
 
 module.exports = router;

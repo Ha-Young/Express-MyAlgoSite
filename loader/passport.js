@@ -1,10 +1,11 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const GitHubStrategy = require('passport-github').Strategy;
+const GitHubStrategy = require("passport-github").Strategy;
 
 const User = require("../models/User");
 const { ErrorHandler } = require("../util/error");
 const { compareHashPassword } = require("../services/userService");
+const { ERROR } = require("../constants/constants");
 
 passport.use(new LocalStrategy({
   usernameField: "username",
@@ -12,7 +13,7 @@ passport.use(new LocalStrategy({
 }, async (username, password, cb) => {
   try {
     if (!username || !password) {
-      throw new ErrorHandler(400, "Bad Request");
+      throw new ErrorHandler(400, ERROR.BAD_REQUEST);
     }
 
     const user = await User.findOne({ username });
@@ -62,6 +63,12 @@ passport.serializeUser((user, cb) => {
   cb(null, user)
 });
 
-passport.deserializeUser((user, cb) => {
+passport.deserializeUser(async (user, cb) => {
+  if (!user.username) {
+    cb(null, { username: user });
+
+    return;
+  }
+
   cb(null, user);
 });

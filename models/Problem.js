@@ -1,5 +1,6 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
+const { MODEL } = require("../constants/constants");
 /*
 
   TODO: Fill in the model specification
@@ -31,11 +32,7 @@ const ProblemSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  completed_users: {
-    type: Number,
-    required: true,
-  },
-  completed_user_list: [{ type: String, unique: true }],
+  completed_users: [{ type: String, unique: true }],
   description: {
     type: String,
     required: true,
@@ -43,4 +40,4 @@ const ProblemSchema = new mongoose.Schema({
   tests: [TestSchema],
 });
 
-module.exports = mongoose.model("Problem", ProblemSchema);
+module.exports = mongoose.model(MODEL.PROBLEM, ProblemSchema);

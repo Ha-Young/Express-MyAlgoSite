@@ -1,36 +1,55 @@
 const vm = require("vm");
 
-function checkSolution(tests, solution) {
-  const log = [];
-  let error;
+const { getCodeResult } = require("./helper");
+
+function checkUserCode(tests, solution) {
+  const resultLog = [];
+  let isCodeError = false;
 
   tests.forEach((test) => {
     try {
-      const script = solution + test.code;
-      const usingScript = vm.runInNewContext(script);
-
+      const script = new vm.Script(solution + test.code);
+      const usingScript = script.runInNewContext({});
+      const codeResult = getCodeResult(test, usingScript);
+      
       if (usingScript === test.solution) {
-        log.push({
+        resultLog.push({
           result: "SUCCESS",
-          case: test.code,
-          answer: usingScript,
+          ...codeResult,
         });
       } else {
-        log.push({
+        resultLog.push({
           result: "FAILURE",
-          case: test.code,
-          answer: test.solution,
-          wrongAnswer: usingScript,
+          ...codeResult,
         });
       }
-    } catch (err) {
-      error = err;
+    } catch (error) {
+      isCodeError = true;
+
+      resultLog.push({
+        result: "ERROR",
+        case: test.solution,
+        error,
+      });
     }
   });
 
-  const isPassed = log.every((data) => "SUCCESS" === data.result);
+  const isPassed = resultLog.every((data) => "SUCCESS" === data.result);
 
-  return { isPassed, log, error };
+  return { isPassed, resultLog, isCodeError };
 }
 
-exports.checkSolution = checkSolution;
+function checkIsFirstComplete(problem, username) {
+  const userIndex = problem.completed_users.indexOf(username);
+
+  if (userIndex === -1) {
+    problem.completed_users.push(username);
+
+    return problem;
+  }
+
+  return false;
+}
+
+exports.checkUserCode = checkUserCode;
+exports.checkIsFirstComplete = checkIsFirstComplete;

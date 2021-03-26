@@ -1,7 +1,15 @@
 <%- include("partials/header") %>
 <div class="main">
-  <div class="main-message">
-    <!-- <h2><%= message %></h2> -->
+  <div class="main-message-box">
+    <h2 class="main-message">
+      <!-- <%= title %> -->
+    </h2>
+  </div>
+  <div class="main-options">
+    <a class="main-options-button" link href="/">All</a>
+    <a class="main-options-button" link href="/difficulty_level/1">Level 1</a>
+    <a class="main-options-button" link href="/difficulty_level/2">Level 2</a>
+    <a class="main-options-button" link href="/difficulty_level/3">Level 3</a>
   </div>
   <div class="problem-board">
     <% problems.forEach((problem) => { %>
@@ -9,9 +17,11 @@
         <div class="problem-content">
           <div class="problem-content-title"><%= problem.title %></div>
           <div class="problem-content-level">Level: <%= problem.difficulty_level %></div>
-          <div class="problem-complited">complited: <%= problem.completed_users %></div>
+          <div class="problem-complited">completed: <%= problem.completed_users.length %></div>
         </div>
       </a>
     <% }) %>
   </div>
 </div>
+
+<%- include("partials/header") %>

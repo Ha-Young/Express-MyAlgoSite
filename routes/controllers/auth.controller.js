@@ -1,11 +1,12 @@
 const passport = require("passport");
 
 const { signUp } = require("../../services/userService");
-const { ErrorHandler } = require("../../util/error");
+
+const { PAGE, TITLE, PASSPORT } = require("../../constants/constants");
 
 exports.getLogin = (req, res, next) => {
   try {
-    res.status(200).render("login", { title: "Codewars" });
+    res.render(PAGE.LOGIN, { title: TITLE.CODEWARS });
   } catch (error) {
     next(error);
   }
@@ -13,7 +14,7 @@ exports.getLogin = (req, res, next) => {
 
 exports.getLocalJoin = (req, res, next) => {
   try {
-    res.status(200).render("join", { title: "Join" });
+    res.render(PAGE.JOIN, { title: TITLE.JOIN });
   } catch (error) {
     next(error);
   }
@@ -21,18 +22,18 @@ exports.getLocalJoin = (req, res, next) => {
 
 exports.postLocalJoin = async (req, res, next) => {
   try {
-    const { user, error } = await signUp(req.body);
+    const user = await signUp(req.body); // 타입 체크..
     
-    if (error) {
-      throw new ErrorHandler(error);
-    }
-    
-    if (user) {
-      await user.save();
-    }
+    await user.save();
 
     res.redirect("/login");
   } catch (error) {
+    if (error.status) {
+      next(error.status, error.message);
+
+      return;
+    }
+
     next(error);
   }
 };
@@ -42,8 +43,8 @@ exports.getLogout = (req, res, next) => {
   res.redirect("/login");
 };
 
-exports.postLogin = passport.authenticate("local", { failureRedirect: "/login", successRedirect: "/" });
+exports.postLogin = passport.authenticate(PASSPORT.LOCAL, { failureRedirect: "/login", successRedirect: "/" });
 
-exports.getGithubLogin = passport.authenticate("github");
+exports.getGithubLogin = passport.authenticate(PASSPORT.GITHUB);
 
-exports.getGithubLoginCallback = passport.authenticate("github", { failureRedirect: "/login", successRedirect: "/" });
+exports.getGithubLoginCallback = passport.authenticate(PASSPORT.GITHUB, { failureRedirect: "/login", successRedirect: "/" });

@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+const { MODEL } = require("../constants/constants");
 /*
 
   TODO: Fill in the model specification
@@ -26,4 +27,4 @@ const userSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model(MODEL.USER, userSchema);

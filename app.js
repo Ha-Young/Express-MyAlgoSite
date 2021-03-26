@@ -6,11 +6,9 @@ require("./loader/passport");
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const bodyParser = require("body-parser");
-const createError = require("http-errors");
 const session = require("express-session");
 const passport = require("passport");
 const MongoStore = require("connect-mongo")(session);
-const mongoose = require("mongoose");
 
 const path = require("path");
 
@@ -18,6 +16,10 @@ const global = require("./routes/global");
 const join = require("./routes/join");
 const problem = require("./routes/problem");
 const db = require('./loader/db');
+
+const { ErrorHandler } = require("./util/error");
+
+const { ERROR } = require("./constants/constants");
 
 const app = express();
 
@@ -50,21 +52,13 @@ app.use("/join", join);
 app.use("/problems", problem);
 
 app.use(function(req, res, next) {
-  next(createError(404));
+  next(new ErrorHandler(404, ERROR.NOT_FOUND));
 });
 
-app.use(function(err, req, res, next) {
-  if (err instanceof mongoose.CastError) {
-    err.message = "Internal Server Error";
-    err.status = 500;
-    err.stack = null;
-  }
-
-  // set locals, only providing error in development
-  res.locals.message = err.message || "Internal Server Error";
+app.use(function(err, req, res) {
+  res.locals.message = err.message || ERROR.INTERNAL_SERVER_ERROR;
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
-  // render the error page
   res.status(err.status || 500);
   res.render("error");
 });

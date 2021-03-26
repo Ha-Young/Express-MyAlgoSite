@@ -1,13 +1,21 @@
 const Problem = require("../../models/Problem");
 
-const { checkSolution } = require("../../services/problemService");
+const { checkUserCode, checkIsFirstComplete } = require("../../services/problemService");
+
+const { PAGE, TITLE, MESSAGE } = require("../../constants/constants");
 
 exports.getAllProblems = async (req, res, next) => {
   try {
-    const problems = await Problem.find().lean();
-    const { user } = req;
+    const {
+      user,
+      params: { difficulty_level },
+    } = req;
+    
+    const problems = await Problem.find(
+      difficulty_level && { difficulty_level }
+    ).lean();    
 
-    res.status(200).render("index", { message: "CodeWars", problems, user });
+    res.status(200).render(PAGE.INDEX, { title: TITLE.CODEWARS, problems, user });
   } catch (error) {
     next(error);
   }
@@ -21,7 +29,7 @@ exports.getProblem = async (req, res, next) => {
     } = req;
     const problem = await Problem.findById(problemId);
 
-    res.status(200).render("problem", { problem, user });
+    res.render(PAGE.PROBLEM, { problem, user });
   } catch (error) {
     next(error);
   }
@@ -36,44 +44,44 @@ exports.postSolution = async (req, res, next) => {
       },
       user,
     } = req;
-
+    
     const problem = await Problem.findById(problemId);
 
-    const { isPassed, log, error } = checkSolution(
+    const { isPassed, resultLog, isCodeError } = checkUserCode(
       problem.tests,
       userCode,
-      testCode
+      testCode,
     );
 
-    if (error) {
+    if (isCodeError || !isPassed) {
       res
-        .status(400) // 여기서도 400을 쏘아줘야 할 필요가 있나..?
-        .render("failure", {
-          message: "Failure",
-          error,
+        .render(PAGE.FAILURE, {
+          message: MESSAGE.FAILURE,
+          isCodeError,
           userCode,
           user,
           problem,
+          resultLog,
         });
+
       return;
     }
 
-    if (isPassed) {
-      res
-        .status(200)
-        .render("success", {
-          message: "Success",
-          log,
-          userCode,
-          user,
-          problem,
-        });
-      return;
+    const newProblem = checkIsFirstComplete(problem, user.username);
+
+    if (newProblem) {
+      await problem.save();
     }
 
     res
       .status(200)
-      .render("failure", { message: "Failure", log, userCode, user, problem });
+      .render(PAGE.SUCCESS, {
+        message: MESSAGE.SUCCESS,
+        resultLog,
+        userCode,
+        user,
+        problem,
+      });
   } catch (error) {
     next(error);
   }

@@ -23,15 +23,11 @@
           <h3>Result</h3>
         </div>
         <div class="result-table-user-result">
-          <% if (typeof error !== "undefined") { %>
-            <div><%= error %></div>
-          <% } else { %>
-            <% log.forEach((data, index) => { %>
+            <% resultLog.forEach((data, index) => { %>
               <div class="user-result-content">
                 <li><%= data.result %></li>
               </div>
             <% }) %>
-          <% } %>
         </div>
       </div>
     </div>
