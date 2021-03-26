@@ -38,34 +38,22 @@
             <span class="light-saber-icon right blue"></span>
           </p>
           <form id="code-form" action="<%= `/problems/${problem._id}` %>" method="POST">
-            <!-- <textarea id="editor" name="code">function solution(arg) {&#13;&#10; // Your code here.. &#13;&#10;}</textarea> -->
             <textarea id="editor" name="code">
-              <% if (submittedProblem.length > 0) { %>
-                <%= submittedProblem[0].code %>
+              <% if (submittedProblem) { %>
+                <%= submittedProblem.code %>
               <% } else { %>
                 function solution(arg) {&#13;&#10; // Your code here.. &#13;&#10;}
               <% } %>
             </textarea>
           </form>
         </div>
-        <div class="button-list">
-          <button class="button big blue" type="submit" form="code-form">SUBMIT</button>
-        </div>
+        <ul class="button-list">
+          <li><button class="button big yellow" type="submit" form="code-form">SUBMIT</button></li>
+          <li><a class="button big blue" href="/">GO TO PROBLEM LIST</a></li>
+        </ul>
       </div>
     </main>
     <%- include("./footer.ejs"); %>
   </body>
-  <script>
-    const editor = document.getElementById("editor");
-    let textareaValue = editor.value;
-    textareaValue = textareaValue.trim();
-    editor.value = textareaValue;
-
-    const codemirror = new CodeMirror.fromTextArea(editor, {
-      name: "javascript",
-      lineNumbers: true,
-      lineWrapping: true,
-      theme: "ayu-dark",
-    }).setValue(textareaValue);
-  </script>
+  <script src="/javascripts/codemirrorConfig.js"></script>
 </html>

@@ -23,9 +23,6 @@
             <span class="tooltip">TRY AGAIN...</span>
           </p>
         </div>
-        <!-- <div class="code-box">
-          <p class="code"><%= code %></p>
-        </div> -->
         <div class="editor-box">
           <form id="code-form" action="<%= `/problems/${id}` %>" method="POST">
             <textarea id="editor" name="code"><%= code %></textarea>
@@ -38,8 +35,8 @@
         </div>
         <% if (resultList) { %>
           <div class="code-box">
-            <ul class="test-list">
-              <% for (let i = 0; i < tests.length; i++) { %>
+            <% for (let i = 0; i < tests.length; i++) { %>
+              <ul class="test-list">
                 <li>// <%= i + 1%></li>
                 <li><%= tests[i].code %></li>
                 <li>solution: <%= tests[i].solution %> / return: <%= answerList[i] %></li>
@@ -48,8 +45,8 @@
                 <% } else { %>
                   <li class="success"><%= resultList[i] %></li>
                 <% } %>
-              <% } %>
-            </ul>
+              </ul>
+            <% } %>
           </div>
         <% } else { %>
             <div class="code-box">
@@ -67,13 +64,5 @@
     </main>
     <%- include("./footer.ejs"); %>
   </body>
-  <script>
-    const editor = document.getElementById("editor");
-    const codemirror = new CodeMirror.fromTextArea(editor, {
-      name: "javascript",
-      lineNumbers: true,
-      lineWrapping: true,
-      theme: "ayu-dark",
-    });
-  </script>
+  <script src="/javascripts/codemirrorConfig.js"></script>
 </html>
