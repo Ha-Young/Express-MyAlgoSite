@@ -18,6 +18,7 @@
           <p class="quiz-title">
             <span class="typewriter blue"><%= problem.title %></span>
           </p>
+          <p class="quiz-info">level: <%= problem.difficulty_level %> | completed_users: <%= problem.completed_users %></p>
           <p class="quiz-desc"><%= problem.description %></p>
           <p class="quiz-comment">
             /****** EXAMPLE ******/
@@ -37,7 +38,14 @@
             <span class="light-saber-icon right blue"></span>
           </p>
           <form id="code-form" action="<%= `/problems/${problem._id}` %>" method="POST">
-            <textarea id="editor" name="code">function solution(arg) {&#13;&#10; // Your code here.. &#13;&#10;}</textarea>
+            <!-- <textarea id="editor" name="code">function solution(arg) {&#13;&#10; // Your code here.. &#13;&#10;}</textarea> -->
+            <textarea id="editor" name="code">
+              <% if (submittedProblem.length > 0) { %>
+                <%= submittedProblem[0].code %>
+              <% } else { %>
+                function solution(arg) {&#13;&#10; // Your code here.. &#13;&#10;}
+              <% } %>
+            </textarea>
           </form>
         </div>
         <div class="button-list">
@@ -49,11 +57,15 @@
   </body>
   <script>
     const editor = document.getElementById("editor");
+    let textareaValue = editor.value;
+    textareaValue = textareaValue.trim();
+    editor.value = textareaValue;
+
     const codemirror = new CodeMirror.fromTextArea(editor, {
       name: "javascript",
       lineNumbers: true,
       lineWrapping: true,
       theme: "ayu-dark",
-    });
+    }).setValue(textareaValue);
   </script>
 </html>

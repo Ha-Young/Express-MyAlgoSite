@@ -16,12 +16,24 @@ exports.getProblems = async (req, res, next) => {
 };
 
 exports.getOneProblem = async (req, res, next) => {
-  const id = req.params.problem_id;
+  const problemId = req.params.problem_id;
+  const userId = req.user._id;
 
   try {
-    const problem = await Problem.findById(id);
+    const problem = await Problem.findById(problemId);
+    const user = await User.findOne({
+      _id: userId,
+    }, {
+      problems: {
+        $elemMatch: {
+          problem: problemId
+        }
+      }
+    });
+
     res.render("problem", {
       problem,
+      submittedProblem: user.problems,
       nickname: req.user.userNickname
     });
   } catch (err) {
