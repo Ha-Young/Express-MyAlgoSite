@@ -22,7 +22,7 @@ exports.getLocalJoin = (req, res, next) => {
 
 exports.postLocalJoin = async (req, res, next) => {
   try {
-    const user = await signUp(req.body); // 타입 체크..
+    const user = await signUp(req.body);
     
     await user.save();
 
@@ -47,4 +47,7 @@ exports.postLogin = passport.authenticate(PASSPORT.LOCAL, { failureRedirect: "/l
 
 exports.getGithubLogin = passport.authenticate(PASSPORT.GITHUB);
 
-exports.getGithubLoginCallback = passport.authenticate(PASSPORT.GITHUB, { failureRedirect: "/login", successRedirect: "/" });
+exports.getGithubLoginCallback = passport.authenticate(PASSPORT.GITHUB, {
+  failureRedirect: "/login",
+  successRedirect: "/",
+});

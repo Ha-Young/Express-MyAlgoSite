@@ -34,9 +34,23 @@ const MODEL = {
   USER: "User",
 };
 
+const USER_RESULT = {
+  SUCCESS: "SUCCESS",
+  FAILURE: "FAILURE",
+  ERROR: "ERROR",
+};
+
+const TIME = {
+  SECONDS: 60,
+  MINETES: 60,
+  SECOND: 1000,
+};
+
 module.exports.PAGE = PAGE;
 module.exports.PASSPORT = PASSPORT;
 module.exports.ERROR = ERROR;
 module.exports.MESSAGE = MESSAGE;
 module.exports.TITLE = TITLE;
 module.exports.MODEL = MODEL;
+module.exports.USER_RESULT = USER_RESULT;
+module.exports.TIME = TIME;

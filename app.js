@@ -19,7 +19,7 @@ const db = require('./loader/db');
 
 const { ErrorHandler } = require("./util/error");
 
-const { ERROR } = require("./constants/constants");
+const { ERROR, TIME } = require("./constants/constants");
 
 const app = express();
 
@@ -38,7 +38,7 @@ app.use(session({
   secret: process.env.SECRET_SESSION,
   resave: false,
   saveUninitialized: true,
-  cookie: { maxAge: 60 * 60 * 1000 },
+  cookie: { maxAge: TIME.SECONDS * TIME.MINETES * TIME.SECOND },
   store: new MongoStore({
     mongooseConnection: db,
   }),

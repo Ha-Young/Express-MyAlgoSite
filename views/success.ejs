@@ -25,7 +25,9 @@
         <div class="result-table-user-result">
             <% resultLog.forEach((data, index) => { %>
               <div class="user-result-content">
-                <li><%= data.result %></li>
+                <div class="user-result-success">
+                  <%= data.result %>
+                </div>
               </div>
             <% }) %>
         </div>
@@ -33,6 +35,6 @@
     </div>
   </div>
   <div class="result-table-button">
-    <a link href="/problems/<%= problem._id %>">return</a>
+    <a class="result-return-button" link href="/problems/<%= problem._id %>">return</a>
   </div>
 </div>

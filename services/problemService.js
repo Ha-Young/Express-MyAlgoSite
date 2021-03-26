@@ -1,6 +1,7 @@
 const { VM, VMScript } = require("vm2");
 
 const { getCodeResult } = require("./helper");
+const { USER_RESULT, TIME } = require("../constants/constants");
 
 function checkUserCode(tests, solution) {
   const resultLog = [];
@@ -8,19 +9,19 @@ function checkUserCode(tests, solution) {
 
   tests.forEach((test) => {
     try {
-      const vm = new VM();
+      const vm = new VM({ timeout: TIME.SECOND });
       const script = new VMScript(solution + test.code);
-      const usingScript = vm.run(script, { timeout: 1200 });
+      const usingScript = vm.run(script);
       const codeResult = getCodeResult(test, usingScript);
       
       if (usingScript === test.solution) {
         resultLog.push({
-          result: "SUCCESS",
+          result: USER_RESULT.SUCCESS,
           ...codeResult,
         });
       } else {
         resultLog.push({
-          result: "FAILURE",
+          result: USER_RESULT.FAILURE,
           ...codeResult,
         });
       }
@@ -28,13 +29,13 @@ function checkUserCode(tests, solution) {
       isCodeError = true;
 
       resultLog.push({
-        result: "ERROR",
+        result: USER_RESULT.ERROR,
         error,
       });
     }
   });
 
-  const isPassed = resultLog.every((data) => "SUCCESS" === data.result);
+  const isPassed = resultLog.every((data) => USER_RESULT.SUCCESS === data.result);
 
   return { isPassed, resultLog, isCodeError };
 }

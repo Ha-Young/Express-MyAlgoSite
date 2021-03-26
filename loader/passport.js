@@ -52,6 +52,7 @@ passport.use(new GitHubStrategy({
       }
       
       cb(null, user);
+      
       return;
     } catch (error) {
       cb(error);

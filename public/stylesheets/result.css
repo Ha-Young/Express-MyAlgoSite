@@ -54,6 +54,10 @@
   border-radius: 15px;
 }
 
+.result-return-button {
+  color: var(--theme-red);
+}
+
 .user-result-content {
   display: flex;
   margin: 15px;

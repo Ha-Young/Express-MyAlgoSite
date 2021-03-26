@@ -15,7 +15,7 @@ exports.getAllProblems = async (req, res, next) => {
       difficulty_level && { difficulty_level }
     ).lean();    
 
-    res.status(200).render(PAGE.INDEX, { title: TITLE.CODEWARS, problems, user });
+    res.render(PAGE.INDEX, { title: TITLE.CODEWARS, problems, user });
   } catch (error) {
     next(error);
   }
@@ -74,7 +74,6 @@ exports.postSolution = async (req, res, next) => {
     }
 
     res
-      .status(200)
       .render(PAGE.SUCCESS, {
         message: MESSAGE.SUCCESS,
         resultLog,
