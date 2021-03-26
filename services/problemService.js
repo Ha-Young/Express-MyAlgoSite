@@ -1,4 +1,4 @@
-const vm = require("vm");
+const { VM, VMScript } = require("vm2");
 
 const { getCodeResult } = require("./helper");
 
@@ -8,8 +8,9 @@ function checkUserCode(tests, solution) {
 
   tests.forEach((test) => {
     try {
-      const script = new vm.Script(solution + test.code);
-      const usingScript = script.runInNewContext({});
+      const vm = new VM();
+      const script = new VMScript(solution + test.code);
+      const usingScript = vm.run(script, { timeout: 1200 });
       const codeResult = getCodeResult(test, usingScript);
       
       if (usingScript === test.solution) {

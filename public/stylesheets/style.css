@@ -3,6 +3,7 @@
 @import "./main.css";
 @import "./problem.css";
 @import "./result.css";
+@import "./footer.css";
 
 :root {
   --theme-red: #b1361e;

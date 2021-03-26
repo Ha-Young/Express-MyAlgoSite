@@ -4,7 +4,7 @@
   height: 80%;
   flex-direction: column;
   font-family: "Noto Sans JP", sans-serif;
-  margin: 0px;
+  margin: 150px 0px 0px 0px;
   background-color: var(--theme-white);
   align-items: center;
   justify-content: center;
@@ -25,15 +25,6 @@
   text-decoration: none;
   border: 1px solid var(--theme-red);
   border-radius: 10px;
-}
-
-.main-message-box {
-  margin-top: 70px;
-  margin-bottom: 20px;
-}
-
-.main-message {
-  font-size: 40px;
 }
 
 .problem-board {
