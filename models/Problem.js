@@ -1,3 +1,4 @@
+const createError = require("http-errors");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
@@ -22,6 +23,7 @@ ProblemSchema.methods.addCompletedUser = async function (id) {
   
   this.completedUsers.push(id);
   await this.save();
+  return;
 }
 
 module.exports = mongoose.model("Problem", ProblemSchema);

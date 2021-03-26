@@ -1,5 +1,13 @@
+const createError = require("http-errors");
 const { VM } = require("vm2");
 const Problem = require("../models/Problem");
+
+const TEXTS = {
+  DEFAULT_FUNCITION: "function solution() {}",
+  RESULT: (wrong, correct) => `Wrong Answer: expected ${wrong} to be ${correct}`,
+  CORRECT: "CORRECT!",
+
+}
 
 async function getAll(req, res, next) {
   const problems = await Problem.find();
@@ -18,7 +26,7 @@ async function getByEachId(req, res, next) {
   res.render("eachProblem", { 
     title: "problems",
     result: tests,
-    code: "function solution() {}",
+    code: TEXTS.DEFAULT_FUNCITION,
     problem,
   });
 }
@@ -32,32 +40,40 @@ async function postByEachId(req, res, next) {
   let result;
   
   const vm = new VM({
-    timeout: 1000
+    timeout: 1000,
   });
 
   try {
     for (const test of tests) {
-      const script = userCode + test.code;
+      const { code: testCode, solution } = test;
+      const script = userCode + testCode;
+
       result = await vm.run(script);
 
-      if (result !== test.solution) {
+      if (result !== solution) {
         res.render("eachProblem", {
-          result: `wrong answer: expected ${result} to be ${test.solution}`,
-          problem,
+          result: TEXTS.RESULT(result, solution),
           code: userCode,
+          problem,
         });
         return;
       }
     }
 
-    await problem.addCompletedUser(req.user._id);
+    try {
+      await problem.addCompletedUser(req.user._id);
+    } catch (error) {
+      next(createError(500));
+      return;
+    }
 
     res.render("eachProblem", {
-      result: `CORRECT!`,
-      problem,
+      result: TEXTS.CORRECT,
       code: userCode,
+      problem,
     });
   } catch (error) {
+    console.log(error.code);
     res.render("eachProblem", { 
       result: error,
       problem,

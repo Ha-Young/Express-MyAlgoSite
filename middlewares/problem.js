@@ -4,7 +4,6 @@ function verifyProblemId (req, res, next) {
   const { problem_id: id } = req.params;
 
   if (!id) {
-    // add: handle error in detail!
     next(createError(404));
     return;
   }
