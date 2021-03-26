@@ -65,10 +65,16 @@ ProblemSchema.statics.validateSolution = async function (id, solutionString) {
 
     return results;
   } catch (err) {
-    results.push({
-      status: 'failed',
-      code: solutionString.trim(),
-      solution: err.message
+    problem.tests.forEach((test, i) => {
+      if (results[i]) {
+        return;
+      }
+
+      results.push({
+        status: 'failed',
+        code: solutionString.trim(),
+        solution: err.message
+      })
     });
 
     return results;
