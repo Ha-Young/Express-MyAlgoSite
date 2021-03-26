@@ -22,7 +22,7 @@
                 <h2><%= testcase.testCode %> expected <%= testcase.testSolution %></h2>
               </div>
               <div class="user-result-explain">
-                <h3>👉 Your Result:
+                <h3 class="user-result-text">👉 Your Result:
                   <%= testcase.userSolution === undefined ? "undefined"
                     : testcase.userSolution === null ? "null"
                       : testcase.userSolution %>
@@ -35,7 +35,7 @@
       <div class="final-result">
         <h1>Passed <%= passedCaseLength %> / <%= totalTestcaseResult.length %></h1>
       </div>
-      <div class="problem-list-link"><h3><a href="/">Go back to Problem list</a></h3></div>
+      <button class="problem-list-link button"><a href="/">Go back to Problem list</a></button>
     </div>
     <%- include("./partials/footer.ejs") %>
   </body>

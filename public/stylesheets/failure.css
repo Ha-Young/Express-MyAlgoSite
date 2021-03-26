@@ -29,6 +29,18 @@
   margin-top: 0;
 }
 
+.user-result-text {
+  margin: 0 0 2vh 0;
+}
+
 .final-result {
+  margin-top: 2vh;
+}
+
+button > a {
+  color: black;
+}
+
+.problem-list-link {
   margin-top: 2vh;
 }

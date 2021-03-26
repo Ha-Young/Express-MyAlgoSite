@@ -13,6 +13,7 @@ const home = require("./routes/home");
 const login = require("./routes/login");
 const logout = require("./routes/logout");
 const problems = require("./routes/problems");
+const mySolutions = require("./routes/mySolutions");
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.use("/", home);
 app.use("/login", login);
 app.use("/logout", logout);
 app.use("/problems", problems);
+app.use("/mysolutions", mySolutions);
 
 app.use(function(req, res, next) {
   next(createError(404, "Page Not Found"));
@@ -47,7 +49,7 @@ app.use(function(err, req, res, next) {
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
   res.status(err.status || 500);
-  res.render("error", { err });
+  res.render("error", { title: "Error", err });
 });
 
 module.exports = app;

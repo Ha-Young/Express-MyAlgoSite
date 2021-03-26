@@ -27,7 +27,7 @@ exports.getSelectedProblem = async function(req, res, next) {
   } catch(err) {
     next(err);
   }
-}
+};
 
 exports.postSelectedProblemSolution = async function(req, res, next) {
   try {
