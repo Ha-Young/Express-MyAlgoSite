@@ -40,12 +40,16 @@ const userSchema = new mongoose.Schema({
   },
   userPassword: {
     type: String,
-    required: true
+    required: true,
   },
   userEmail: {
     type: String,
     unique: true,
     required: true
+  },
+  userSide: {
+    type: String,
+    required: true,
   },
   problems: [ solvedProblemSchema ]
 });
