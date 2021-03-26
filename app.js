@@ -3,7 +3,6 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const expressEjsLayouts = require("express-ejs-layouts");
 const fs = require("fs");
-const helmet = require("helmet");
 const morgan = require("morgan");
 const path = require("path");
 const passport = require("./passport");
@@ -25,7 +24,6 @@ app.set("view engine", "ejs");
 
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(helmet());
 app.use(morgan("dev"));
 app.use(morgan("combined", {
   stream: fs.createWriteStream(path.join(__dirname, "app.log"), { flags: "a" }),
