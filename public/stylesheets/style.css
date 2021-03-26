@@ -47,7 +47,6 @@ header {
   left: 0;
   z-index: 10;
 }
-
 header > div {
   height: 100%;
   padding: 0 1em;
@@ -56,7 +55,6 @@ header > div {
   justify-content: space-between;
   background: #0a0a0c;
 }
-
 header h1 .logo {
   width: auto;
   height: 40px;
@@ -113,51 +111,6 @@ footer {
   z-index: 10;
 }
 
-.gradient-border {
-  width: 100%;
-  --borderWidth: 1px;
-  position: relative;
-}
-.gradient-border:after {
-  content: '';
-  position: absolute;
-  top: calc(-1 * var(--borderWidth));
-  left: calc(-1 * var(--borderWidth));
-  height: calc(100% + var(--borderWidth) * 2);
-  width: calc(100% + var(--borderWidth) * 2);
-  background: linear-gradient(60deg, #e3c001, #00b7ff, #f23d4c);
-  z-index: -1;
-  -webkit-animation: animatedgradient 3s ease alternate infinite;
-          animation: animatedgradient 3s ease alternate infinite;
-  background-size: 300% 300%;
-}
-
-
-@-webkit-keyframes animatedgradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
-}
-
-
-@keyframes animatedgradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
-}
-
 .button-list li {
   margin: 0 0 0.5em 0;
   box-sizing: border-box;
@@ -182,6 +135,7 @@ footer {
 }
 .button:hover {
   transition: 0.5s all;
+  cursor: pointer;
 }
 
 .button.yellow {
@@ -211,13 +165,36 @@ footer {
   color: #ffffff;
 }
 
-.button:hover {
-  cursor: pointer;
-}
-
 .icon {
   width: 50px;
   height: auto;
+}
+.shake {
+  animation: shake 1.3s infinite linear;
+}
+
+@keyframes shake {
+  0% {
+    transform: rotate(-45deg);
+  }
+  15% {
+    transform: rotate(-60deg);
+  }
+  30% {
+    transform: rotate(-75deg);
+  }
+  45% {
+    transform: rotate(-60deg);
+  }
+  60% {
+    transform: rotate(-45deg);
+  }
+  75% {
+    transform: rotate(-30deg);
+  }
+  100% {
+    transform: rotate(-45deg);
+  }
 }
 
 .light-saber-icon {
@@ -237,7 +214,10 @@ footer {
   width: 18px;
   height: 7px;
   display: inline-block;
-  background: linear-gradient(180deg, rgba(99,99,99,1) 0%, rgba(189,189,189,1) 21%, rgba(255,255,255,1) 50%, rgba(77,77,77,1) 92%);
+  background: linear-gradient(180deg, rgba(99,99,99,1) 0%,
+                                      rgba(189,189,189,1) 21%,
+                                      rgba(255,255,255,1) 50%,
+                                      rgba(77,77,77,1) 92%);
   position: absolute;
   left: 0;
 }
@@ -312,6 +292,49 @@ footer {
 @keyframes blink-caret-blue {
   from, to { border-color: transparent }
   50% { border-color: #00B7FF; }
+}
+
+.gradient-border {
+  width: 100%;
+  --borderWidth: 1px;
+  position: relative;
+}
+.gradient-border:after {
+  content: '';
+  position: absolute;
+  top: calc(-1 * var(--borderWidth));
+  left: calc(-1 * var(--borderWidth));
+  height: calc(100% + var(--borderWidth) * 2);
+  width: calc(100% + var(--borderWidth) * 2);
+  background: linear-gradient(60deg, #e3c001, #00b7ff, #f23d4c);
+  z-index: -1;
+  -webkit-animation: animatedgradient 3s ease alternate infinite;
+          animation: animatedgradient 3s ease alternate infinite;
+  background-size: 300% 300%;
+}
+
+@-webkit-keyframes animatedgradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+@keyframes animatedgradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 .success h1 {
