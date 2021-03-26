@@ -17,7 +17,7 @@
         <h3 id="problem-title"><%=problem.title%></h3>
         <article id="description">문제 설명 : <%=problem.description%></article>
         <span>레벨 : <%=problem.difficulty_level%></span>
-        <span>맞은 사람 수 : <%=problem.completed_count%></span>
+        <span>맞은 사람 수 : <%=passed %> </span>
       </div>
       <div id="sandbox-container">
         <% const address =`/problems/${problem.id}`%>

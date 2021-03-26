@@ -8,7 +8,6 @@ function judgeSolution (testcases, solution) {
     const code = testcases[i].code;
     const answer = testcases[i].solution;
 
-
     try {
       const sandbox = { result: "" };
       const context = vm.createContext(sandbox);

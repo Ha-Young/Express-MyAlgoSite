@@ -3,15 +3,20 @@
   <head>
     <title>Codewars</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/utils/getPercentage.js"></script>
   </head>
   <body>
    <%-include("title"); %>
    <%-include("menu"); %>
     <ul id="problems">
-      <% for (let i = 0; i < allTitle.length; i++) { %>
-        <% const address =`/problems/${allTitle[i].id}`%>
+      <% for (let i = 0; i < problem.length; i++) { %>
+        <% const address =`/problems/${problem[i].id}`%>
         <a href=<%=address %>>
-          <li id="problem"><%= allTitle[i].title %></li>
+          <li id="problem">
+            <div><%= problem[i].title %></div>
+            <span>푼 사람 수 : <%= problem[i].completed_count %></span>
+            <span>정답률 : <%= problem[i].passRate %>%</span>
+          </li>
         </a>
       <% } %>
     </ul>
