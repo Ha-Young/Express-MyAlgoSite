@@ -18,7 +18,7 @@ router.get("/", async (req, res, next) => {
 
     if (!problems) throw new Error();
 
-    res.render("problems", { problems: problems });
+    res.render("problems", { problems: problems, userName: req.user.username });
   } catch (err) {
     next(createError(500, "there are problems :("));
   }
@@ -28,10 +28,15 @@ router.get("/:problem_id", async (req, res, next) => {
   try {
     const { problem_id } = req.params;
     const problem = await getProblem(problem_id);
+    const { username, solution } = req.user;
 
     if (!problem) throw new Error();
 
-    res.render("problem", { problem: problem });
+    res.render("problem", {
+      problem: problem,
+      userName: req.user.username,
+      solution: solution,
+    });
   } catch (err) {
     next(createError(500, "There is no problem :("));
   }

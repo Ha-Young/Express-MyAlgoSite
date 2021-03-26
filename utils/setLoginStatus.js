@@ -1,4 +1,4 @@
-const checkLoginStatus = (req, res, next) => {
+const setLoginStatus = (req, res, next) => {
   if (req.isAuthenticated()) {
     res.locals.loginStatus = "login";
   } else {
@@ -8,4 +8,4 @@ const checkLoginStatus = (req, res, next) => {
   next();
 };
 
-module.exports = checkLoginStatus;
+module.exports = setLoginStatus;

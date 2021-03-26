@@ -16,7 +16,7 @@
         <p><%= `난이도: Level ${problem.difficulty_level}` %></p>
       </section>
       <form action=<%= `/problems/${problem.id}` %> method="post">
-        <textarea class="code-input" name="solution">function solution() {}</textarea>
+        <textarea class="code-input" name="solution"><%= `${solution}` %></textarea>
         <input type="submit" value="제출">
       </form>
     </div>
