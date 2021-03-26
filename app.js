@@ -6,6 +6,7 @@ const dotenv = require("dotenv");
 
 const passportLoader = require("./config/passport");
 const mongooseLoader = require("./config/mongooseLoader");
+const errorMessage = require("./constants/errorMessage");
 
 const app = express();
 app.set("view engine", "ejs");
@@ -38,17 +39,16 @@ app.use("/problem", problem);
 app.use("/problems", problems);
 
 app.use(function (req, res, next) {
-  const error = createError(404, "This page does not exist!");
-  res.status(404).render("error", { error });
+  const createdError = createError(404, errorMessage.PAGE_NOT_EXIST);
+  res.status(404).render("error", { createdError });
 });
 
 app.use(function (error, req, res, next) {
-  console.log(error);
   res.locals.message = error.message;
-  res.locals.erroror = req.app.get("env") === "development" ? error : {};
+  res.locals.error = req.app.get("env") === "development" ? error : {};
 
   res.status(error.status || 500);
-  res.render("erroror", { message: error });
+  res.render("error", { error });
 });
 
 module.exports = app;

@@ -1,3 +1,5 @@
+const createError = require("http-errors");
+
 const {
   registerValidation,
   loginValidation,
@@ -7,7 +9,8 @@ exports.register = function (req, res, next) {
   const { error } = registerValidation(req.body);
 
   if (error) {
-    return next(`${error.details[0].message}`);
+    const createdError = createError(400, error.message);
+    return next(createdError);
   }
 
   next();
