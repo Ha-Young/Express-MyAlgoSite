@@ -5,17 +5,38 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/stylesheets/style.css">
-  <link rel="stylesheet" href="/stylesheets/success.css">
+  <link rel='stylesheet' href='/stylesheets/submission.css'>
   <title>Document</title>
 </head>
 <body>
   <header>
     <% include ./header %>
   </header>
-  <div class="success-wrapper">
-    <div class="success-item">
-      <% for (const submission of history.codes) { %>
-        <div class="grid-item"><span><%= submission %></span></div>
+  <div class="grid-wrapper">
+    <div class="grid-container">
+      <div class="grid-item"><span>문제</span></div>
+      <div class="grid-item"><span>결과</span></div>
+      <div class="grid-item"><span>제출한 시간</span></div>
+      <% for (let i = 0; i < problems.length; i++) { %>
+        <div class="grid-item"><span><%= problems[i].difficulty_level %></span></div>
+        <div class="grid-item">
+          <span>
+            <a href="<%= `/problems/${problems[i].id}` %>">
+              <%= problems[i].title %>
+            </a>
+          </span>
+        </div>
+        <div class="grid-item"><span><%= problems[i].solver.length %></span></div>
+        <div class="grid-item"><span><%= problems[i].accepted %></span></div>
+        <div class="grid-item"><span><%= problems[i].submission %></span></div>
+        <div class="grid-item"><span><%= acceptedRatio[i] %>%</span></div>
+        <div class="grid-item">
+          <span>
+            <a href="<%= `/user/${userInfo._id}/${problems[i].id}` %>">
+              과거 제출 코드 확인하기
+            </a>
+          </span>
+        </div>
       <% } %>
     </div>
   </div>

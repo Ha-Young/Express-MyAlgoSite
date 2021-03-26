@@ -76,6 +76,7 @@ app.use(errorHandler);
 module.exports = app;
 
 function errorHandler(err, req, res, next) {
+  console.log(err)
   const message = err.customErrorMessage?.toLowerCase() || status[err.status];
 
   res.locals.message = message;

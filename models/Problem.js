@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const ProblemSchema = new mongoose.Schema({
-  id: { type: Number, unique: true, required: true },
+  id: { type: Number, unique: true, required: true, index: true },
   title: { type: String, required: true },
   solver: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   accepted: Number,

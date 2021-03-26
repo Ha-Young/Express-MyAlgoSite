@@ -2,6 +2,8 @@ const creatError = require('http-errors');
 const { VM } = require('vm2');
 const Problem = require('../../models/Problem');
 const User = require('../../models/User');
+const Submission = require('../../models/Submission');
+const { runCodeInVM } = require('../../utils');
 
 exports.getOneProblem = async function (req, res, next) {
   try {
@@ -20,37 +22,32 @@ exports.getOneAndUpdateProblem = async function (req, res, next) {
     const targetProblem = await Problem.findOne({ id: targetProblemId });
     const currentUser = await User.findById(req.user);
     const userSolution = req.body.solution;
-    const testResults = [];
-    const vm = new VM({
-      timeout: 500,
-      sandbox: {
-        tests: targetProblem.tests,
-        testResults,
-      }
-    });
+    const { testResults, err } = runCodeInVM(userSolution, targetProblem.tests);
 
     await targetProblem.addSubmissionCount();
     await currentUser.addTotalSubmissionCount();
 
-    try {
-      vm.run(`
-        ${userSolution}
+    if (err) {
+      const newSubmission = await Submission.create({
+        problem_id: targetProblemId,
+        code: userSolution,
+        result: err.message
+      });
 
-        for (let i = 0; i < tests.length; i++) {
-          const actualReturn = eval(tests[i].code);
+      await currentUser.addSubmissionHistory(newSubmission._id);
+      await currentUser.addFailedProblem(targetProblemId);
 
-          if (actualReturn === tests[i].solution) {
-            testResults.push({ actualReturn, result: true});
-          } else {
-            testResults.push({ actualReturn, result: false});
-          }
-        }
-      `);
-    } catch (err) {
       return res.render('failure', { err, problem: targetProblem, userSolution });
     }
 
     const isPassEveryTest = testResults.every(testCase => testCase.result === true);
+    const newSubmission = await Submission.create({
+      problem_id: targetProblemId,
+      code: userSolution,
+      result: isPassEveryTest ? '정답입니다!!' : '틀렸습니다.'
+    });
+
+    await currentUser.addSubmissionHistory(newSubmission._id);
 
     if (isPassEveryTest) {
       await targetProblem.addSolver(req.user);

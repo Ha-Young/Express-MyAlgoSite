@@ -46,4 +46,14 @@ UserSchema.methods.addFailedProblem = function (id) {
   return this.save();
 }
 
+UserSchema.methods.addSubmissionHistory = function (id) {
+  this.submission_history.push(id);
+
+  return this.save();
+}
+
+UserSchema.methods.getTargetProblemSubmissions = function (id) {
+  return this.submission_history.filter(submission => submission.problem_id === id);
+}
+
 module.exports = mongoose.model('User', UserSchema);
