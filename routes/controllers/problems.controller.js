@@ -49,7 +49,7 @@ exports.postProblem = async function (req, res, next) {
         isAllPassed,
         userCode: userCode,
         problem: problem,
-        user: req.user
+        user: req.user,
       });
 
       return;
@@ -62,7 +62,7 @@ exports.postProblem = async function (req, res, next) {
         message: errorMessage,
         userCode: userCode,
         problem: problem,
-        user: req.user
+        user: req.user,
       });
     } else {
       res.render("result", {
@@ -71,7 +71,7 @@ exports.postProblem = async function (req, res, next) {
         resultList,
         userCode: userCode,
         problem: problem,
-        user: req.user
+        user: req.user,
       });
     }
   } catch (err) {

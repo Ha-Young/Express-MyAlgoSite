@@ -14,7 +14,7 @@ const DB = configs.serverAddress.replace("<password>", configs.password);
 
 mongoose.connect(DB, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   }).then(() => console.log("server connect!!"));
 
 const db = mongoose.connection;
