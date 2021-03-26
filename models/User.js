@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const solvedProblemSchema = new mongoose.Schema({ //참조..
+const solvedProblemSchema = new mongoose.Schema({
   solvedProblemObjectId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Problem",

@@ -1,34 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
-    <link rel='stylesheet' href='/stylesheets/failure.css' />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap">
+    <link rel='stylesheet' href='/stylesheets/global.css'>
+    <link rel='stylesheet' href='/stylesheets/failure.css'>
     <title><%= title %></title>
-</head>
-<body>
-  <div>
+  </head>
+  <body>
     <%- include("./partials/header.ejs") %>
     <div class="fail-result-wrapper">
-    <h1> Sorry, It's Failed 👻</h1>
-    <% if (totalTestcaseResult.length) {%>
+      <h1> Sorry, It's Failed 👻</h1>
+      <% if (totalTestcaseResult.length) {%>
         <div class="testcases-wrapper">
           <% for (let testcase of totalTestcaseResult) {%>
             <div class="testcase-container <%= testcase.isPassed ? "passed" : "" %>">
-              <div class="testcase-explain"><h2><%= testcase.testCode %> expected <%= testcase.testSolution %></h2></div>
-              <div class="user-result-explain"><h3>👉 Your Result: <%= testcase.userSolution === undefined ? "undefined" : testcase.userSolution === null ? "null" : testcase.userSolution %></h3></div>
+              <div class="testcase-explain">
+                <h2><%= testcase.testCode %> expected <%= testcase.testSolution %></h2>
+              </div>
+              <div class="user-result-explain">
+                <h3>👉 Your Result:
+                  <%= testcase.userSolution === undefined ? "undefined"
+                    : testcase.userSolution === null ? "null"
+                      : testcase.userSolution %>
+                </h3>
+              </div>
             </div>
           <%}%>
         </div>
-    <%}%>
-      <div class="final-result"><h1>Passed <%= passedCaseLength %> / <%= totalTestcaseResult.length %></h1></div>
+      <%}%>
+      <div class="final-result">
+        <h1>Passed <%= passedCaseLength %> / <%= totalTestcaseResult.length %></h1>
+      </div>
       <div class="problem-list-link"><h3><a href="/">Go back to Problem list</a></h3></div>
     </div>
-  </div>
     <%- include("./partials/footer.ejs") %>
-  </div>
-</body>
+  </body>
 </html>

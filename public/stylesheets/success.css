@@ -1,108 +1,34 @@
-html,body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-    width: 100vw;
-    background-image: url("http://wallpapercave.com/wp/pEeUsp1.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    width: 100vw;
-    height: 100vh;
-    background-size: cover;
-    object-fit: cover;
-    font-family: 'Do Hyeon', sans-serif;
-    color: #fff;
-  }
-
-.nav-container {
-    display: flex;
-    justify-content: flex-end;
-    width:100vw;
-    color: #fff;
-}
-
-.indicator-wrapper {
-    display: flex;
-    width: 15vw;
-    margin: 0 2.5vw;
-    justify-content: space-around;
-    align-items: center;
-}
-
-
-/* h2 {
-    margin-bottom: 0;
-} */
-
-
-h3 {
-    margin-top: 0;
-    color: #fff
-}
-
 .success-result-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: 40vh;
-    margin-top: 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 40vh;
+  margin-top: 10vh;
 }
-
 
 .testcase-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    border: 2px solid green;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 2px solid green;
 }
 
 .testcases-wrapper {
-    width: 40vw;
-    /* border: 1px solid #fff */
+  width: 40vw;
 }
 
 .testcase-explain {
-    margin-left: 3vw;
+  margin-left: 3vw;
 }
 
+.testcase-explain > h2 {
+  margin: 1vh auto
+}
 
 .final-result-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-/* .problem-list-link {
-    background-color: blue;
-} */
-
-
-a:link {
-    text-decoration: none;
-}
-
-a {
-    color: #fff;
-    font-weight: 500;
-    font-family: 'Do Hyeon', sans-serif;
-}
-
-/* .passed {
-    border-color: green;
-} */
-
-footer {
-    position: fixed;
-    align-items: center;
-    bottom: 2vh;
-    margin-bottom: 3vh;
-    color: #fff
 }

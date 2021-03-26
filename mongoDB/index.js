@@ -22,9 +22,10 @@ mongoDb.on("err", (err) => {
 
 mongoDb.once("open", () => {
   console.log(`Mongodb connected, ${mongoDb.host}`);
-  //storeSampleProblems();
+  // storeSampleProblems();
 });
 
+// store data to mongoDB
 const storeSampleProblems = async () => {
   for (let i = 0; i < sampleProblems.length; i++) {
     try {

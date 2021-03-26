@@ -1,105 +1,39 @@
-html,body {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
-  background-image: url("http://wallpapercave.com/wp/pEeUsp1.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  width: 100vw;
-  height: 100vh;
-  background-size: cover;
-  object-fit: cover;
-  font-family: 'Do Hyeon', sans-serif;
-}
-
-
-.nav-container {
-    display: flex;
-    justify-content: flex-end;
-    width:100vw;
-    color: #fff;
-}
-
-.indicator-wrapper {
-    display: flex;
-    width: 15vw;
-    margin: 0 2.5vw;
-    justify-content: space-around;
-    align-items: center;
-}
-
-h2 {
-    color: #fff
-}
-
-
 .list-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin-top: 5vh;
-    width: 60vw;
-    height: 30vh;
-    /* background-color: chartreuse */
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 60vw;
+  height: 30vh;
 }
 
 .problem-list {
-    /* background-color: tomato; */
-    width: 100vw;
+  width: 100vw;
 }
 
 .home-text {
-    color: #fff;
-    margin-top: 6vh;
+  margin-top: 6vh;
+  color: #fff;
 }
 
 .problem-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 1vh 1vw;
-    background-color: pink;
-    border: 1px solid black;
-
-    box-shadow: 6px 10px 0px 0px #ff55c3;
-    background-color:#5df1f7;
-    border-radius:2px;
-    display:inline-block;
-    border: none;
-    width: 30%;
-    margin: 1vw 1vh;
-}
-/* #f675ef */
-/* :#f9ed04; */
-
-
-a:link{
-    text-decoration: none;
+  display:inline-block;
+  width: 30%;
+  margin: 1vw 1vh;
+  padding: 1vh 1vw;
+  background-color: pink;
+  border: 1px solid black;
+  box-shadow: 6px 10px 0px 0px #ff55c3;
+  background-color:#5df1f7;
+  border-radius:2px;
+  border: none;
+  color: black;
 }
 
-
-a {
-    color: black;
-    font-weight: 500;
-    font-family: 'Do Hyeon', sans-serif;
+.problem-container > a > h1 {
+  color: black;
 }
 
 .problem-container:hover {
   background-color: #a0fffe;
   box-shadow: inset 0 0 0 4px #f675ef, 0 0 1px transparent;
-}
-
-footer {
-    position: fixed;
-    bottom: 2vh;
-    margin-bottom: 3vh;
-    color: #fff
 }

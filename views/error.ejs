@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-  <div>
-    <h1>Ooops! Something went wrong.. 👾</h1>
-    <h1><%= err.message %></h1>
-    <h2><%= err.status %></h2>
-  </div>
-</body>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap">
+    <link rel="stylesheet" href="/stylesheets/global.css">
+    <link rel="stylesheet" href="/stylesheets/error.css">
+    <title>Error</title>
+  </head>
+  <body>
+    <div class="error-wrapper">
+      <div><h1>Ooops! Something went wrong.. 👾</h1></div>
+      <div><h1><%= err.message %></h1></div>
+      <div><h2><%= err.status %></h2></div>
+      <div class="back-to-home-link button"><a href="/">Go Back to Home</a></div>
+    </div>
+    <%- include("./partials/footer.ejs") %>
+  </body>
 </html>

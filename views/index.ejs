@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/index.css' />
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap">
+    <link rel="stylesheet" href="/stylesheets/global.css">
+    <link rel='stylesheet' href='/stylesheets/index.css'>
+    <title><%= title %></title>
   </head>
   <body>
     <%- include("./partials/header.ejs") %>
@@ -12,15 +13,15 @@
       <% if (problems.length) {%>
         <div class="list-wrapper">
           <% for (let problem of problems) {%>
-         
             <div class="problem-container">
-              <a href="/problems/<%= problem.problemId %>"><h1><%= problem.title %></h1></a>
+              <a href="/problems/<%= problem.problemId %>">
+                <h1><%= problem.title %></h1>
+              </a>
               <div class="problem-desc">
                 <h4>Level: <%= problem.level %></h4>
                 <h4>Completed Users: <%= problem.completedUsers.length %></h4>
               </div>
             </div>
-         
           <%}%>
         </div>
       <%}%>

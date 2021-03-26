@@ -1,0 +1,13 @@
+.error-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+
+.back-to-home-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
