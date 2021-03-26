@@ -9,8 +9,13 @@ html, body {
 }
 
 body {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #f1f0f0;
 }
 
 a {
