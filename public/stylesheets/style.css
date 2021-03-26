@@ -16,6 +16,11 @@ header {
   background: #282828;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .logo {
   width: 300px;
   height: auto;
@@ -38,8 +43,6 @@ header {
   padding: 1em;
   position: absolute;
   right: 26px;
-  text-decoration: none;
-  color: inherit;
 }
 
 .login {

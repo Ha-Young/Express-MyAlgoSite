@@ -1,7 +1,26 @@
-<h1>
-  <%= message %>
-</h1>
-<h2>
-  <%= error.status %>
-</h2>
-<pre><%= error.stack %></pre>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Codewars</title>
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <link rel="stylesheet" href="/stylesheets/error.css" />
+</head>
+
+<body class="error-container">
+  <div class="error-message-container">
+    <h1>
+      <%= message %>
+    </h1>
+    <div class="link-container">
+      <a href="/">
+        Back to Home
+      </a>
+    </div class="link-container">
+  </div>
+  <div>
+    <pre><%= error.stack %></pre>
+  </div>
+</body>
+
+</html>

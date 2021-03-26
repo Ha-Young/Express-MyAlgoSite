@@ -1,0 +1,24 @@
+.error-container {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.error-message-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  width: 85%;
+}
+
+.link-container {
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  text-align: center;
+  transition: 0.5s all ease-in-out;
+}
+
+.link-container:hover {
+  background-color: black;
+}

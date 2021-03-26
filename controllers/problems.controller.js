@@ -1,7 +1,7 @@
 const Problem = require('../models/Problem');
 const AppError = require('../utils/appError');
 const catchAsync = require('../middlewares/catchAsync');
-const generateHeaderData = require('../utils/generateHeaderData');
+const generateHeaderData = require('../utils/generateStatusData');
 
 exports.get = catchAsync(async (req, res, next) => {
   const headerData = generateHeaderData(req.isAuthenticated(), req.user);

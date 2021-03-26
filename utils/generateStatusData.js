@@ -1,10 +1,10 @@
 /**
- * Used to render header.ejs file based on authentication status
+ * generate status data on authentication status to render ejs files
  * @param {boolean} isAuthenticated - boolean value to determin the authentication status
  * @param {object} user - user Object that contains data
- * @return {Object} return header data to render header.ejs
+ * @return {Object} return status data
  */
-const generateHeaderData = (isAuthenticated, user) => {
+const generateStatusData = (isAuthenticated, user) => {
   if (isAuthenticated) {
     return {
       user,
@@ -24,4 +24,4 @@ const generateHeaderData = (isAuthenticated, user) => {
   };
 };
 
-module.exports = generateHeaderData;
+module.exports = generateStatusData;

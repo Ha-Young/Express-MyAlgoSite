@@ -1,16 +1,16 @@
 const passport = require('passport');
 const User = require('../models/User');
 const catchAsync = require('../middlewares/catchAsync');
-const generateHeaderData = require('../utils/generateHeaderData');
 const validateEmail = require('../utils/validateEmail');
+const generateStatusData = require('../utils/generateStatusData');
 
 exports.getLoginForm = (req, res) => {
-  const headerData = generateHeaderData(req.isAuthenticated(), req.user);
+  const statusData = generateStatusData(req.isAuthenticated(), req.user);
   const title = 'Log In';
   const message = req.flash('error');
 
   res.render('login', {
-    ...headerData,
+    ...statusData,
     title,
     message,
   });
@@ -18,17 +18,17 @@ exports.getLoginForm = (req, res) => {
 
 exports.authenticateLocal = passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: '/auth',
+  failureRedirect: '/auth/login',
   failureFlash: true
 });
 
 exports.getSignUpForm = (req, res) => {
-  const headerData = generateHeaderData(req.isAuthenticated(), req.user);
+  const statusData = generateStatusData(req.isAuthenticated(), req.user);
   const title = 'Sign Up';
   const message = req.flash('info');
 
   res.render('signup', {
-    ...headerData,
+    ...statusData,
     title,
     message,
   });

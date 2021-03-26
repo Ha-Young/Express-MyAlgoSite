@@ -3,12 +3,12 @@
 
 <head>
   <title>Codewars</title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-  <link rel='stylesheet' href='/stylesheets/problemBlock.css' />
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <link rel="stylesheet" href="/stylesheets/problemBlock.css" />
 </head>
 
 <body>
-  <%- include('partials/header', {loginStatus}) %>
+  <%- include("partials/header", {loginStatus}) %>
 
     <main>
       <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
@@ -22,7 +22,7 @@
 
         <ul class="problems">
           <% for (const problem of problemData) { %>
-            <%- include('partials/problemBlock', {problem}) %>
+            <%- include("partials/problemBlock", {problem}) %>
               <% } %>
         </ul>
         <% } %>

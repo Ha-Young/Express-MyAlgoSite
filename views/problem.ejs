@@ -2,14 +2,14 @@
 <html>
 
 <head>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-  <link rel='stylesheet' href='/stylesheets/problem.css' />
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <link rel="stylesheet" href="/stylesheets/problem.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/theme/monokai.min.css" />
 </head>
 
 <body>
-  <%- include('partials/header', {loginStatus}) %>
+  <%- include("partials/header", {loginStatus}) %>
 
     <main>
       <form class="problem" action="/problems/<%= problem.id %>" method="post">
