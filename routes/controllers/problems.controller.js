@@ -52,9 +52,7 @@ exports.submitProblem = async (req, res, next) => {
   const code = req.body.code;
 
   try {
-    const currentUser = req.user;
     const solvedProblems = currentUser.problems;
-
     const problem = await Problem.findById(problemId);
     const tests = problem.tests;
     const result = checkSolution(tests, code);

@@ -6,7 +6,7 @@ const createError = require("http-errors");
 const initialize = (passport) => {
   const customFields = {
     usernameField: "userId",
-    passwordField: "userPassword",
+    passwordField: "userPassword"
   };
 
   const authenticateUser = async (id, password, done) => {
@@ -19,9 +19,11 @@ const initialize = (passport) => {
 
     try {
       if (await bcrypt.compare(password, user.userPassword)) {
-        return done(null, user);
+        done(null, user);
+        return;
       } else {
-        return done(null, false, { message: "Password incorrect" });
+        done(null, false, { message: "Password incorrect" });
+        return;
       }
     } catch (err) {
       done(createError(500, "Internal Server Error"));
