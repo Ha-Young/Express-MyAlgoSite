@@ -1,19 +1,23 @@
 const express = require("express");
 const passport = require("passport");
 const cookieParser = require("cookie-parser");
-const passportConfig = require("./config/passport");
-const app = express();
-app.use(express.static("public"));
+const createError = require("http-errors");
+const dotenv = require("dotenv");
 
+const passportLoader = require("./config/passport");
+const mongooseLoader = require("./config/mongooseLoader");
+
+const app = express();
 app.set("view engine", "ejs");
+app.use(cookieParser(process.env.JWT_SECRET_KEY));
+app.use(express.static("public"));
 app.use(express.json());
+app.use(passport.initialize());
 app.use(
   express.urlencoded({
     extended: true,
   })
 );
-
-app.use(passport.initialize());
 
 const index = require("./routes/index");
 const signIn = require("./routes/signIn");
@@ -21,21 +25,10 @@ const login = require("./routes/login");
 const logout = require("./routes/logout");
 const problem = require("./routes/problem");
 const problems = require("./routes/problems");
-const dotenv = require("dotenv");
 
 dotenv.config();
-passportConfig();
-
-app.use(cookieParser(process.env.JWT_SECRET_KEY));
-
-const mongoose = require("mongoose");
-mongoose
-  .connect(process.env.DB_CONNECT, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("Successfully connected to mongodb"))
-  .catch((error) => console.error(error)); // 에러분기 처리
+mongooseLoader();
+passportLoader();
 
 app.use("/", index);
 app.use("/signIn", signIn);
@@ -44,21 +37,18 @@ app.use("/logout", logout);
 app.use("/problem", problem);
 app.use("/problems", problems);
 
-//404 handler
 app.use(function (req, res, next) {
-  res.status(404).send("404 error");
+  const error = createError(404, "This page does not exist!");
+  res.status(404).render("error", { error });
 });
 
-// Global error handler
-app.use(function (err, req, res, next) {
-  console.log(err);
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
+app.use(function (error, req, res, next) {
+  console.log(error);
+  res.locals.message = error.message;
+  res.locals.erroror = req.app.get("env") === "development" ? error : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render("error", { message: err });
+  res.status(error.status || 500);
+  res.render("erroror", { message: error });
 });
 
 module.exports = app;

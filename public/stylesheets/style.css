@@ -1,16 +1,21 @@
 @import "footer.css";
 @import "header.css";
-@import "titlePage.css";
+@import "title.css";
 @import "signIn.css";
-@import "problems.css";
 @import "problem.css";
+@import "result.css";
+@import "error.css";
+
+:root {
+  --main-bg-color: #242526;
+}
 
 body,
 html {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: #242526;
+  background: var(--main-bg-color);
 
   margin: 0;
   padding: 0;

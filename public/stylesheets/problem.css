@@ -1,3 +1,43 @@
+.problems-card-board {
+  padding: 20px;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+
+  height: 100%;
+  background-color: #303133;
+}
+
+.problem-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  background-color: #242526;
+
+  border-radius: 7px;
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.14);
+
+  margin-top: 100px;
+
+  height: 750px;
+  width: 100%;
+}
+
+.problem-card > a {
+  text-decoration: none;
+
+  color: #e32c2c;
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.problem-card-level {
+  color: #8c8c8c;
+}
+
 .problem-wrapper {
   position: relative;
 
@@ -19,24 +59,29 @@
 }
 
 .problem-info-board {
-  font-size: large;
   color: antiquewhite;
-
   margin-bottom: 50px;
-  font-weight: lighter;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  font-style: italic;
-  font-weight: lighter;
 }
 
 .problem-solution-wrapper {
   width: 100%;
   height: 100%;
-
   padding: 0;
   margin: 0;
+  border-left: tomato 20px solid;
+}
 
-  border-left: tomato 30px solid;
+.problem-info-font {
+  color: antiquewhite;
+
+  font-size: 20px;
+  font-weight: 900;
+  font-style: italic;
+}
+
+.problem-info-font-wrapper {
+  padding-left: 60px;
+  padding-bottom: 6rem;
 }
 
 .problem-title-board {
@@ -70,10 +115,17 @@
 }
 
 .problem-submit-button {
-  position: absolute;
-  background-color: #e32c2c;
-  border-radius: 50px;
+  cursor: pointer;
 
-  top: 70%;
-  left: 32%;
+  background-color: transparent;
+
+  font-weight: 600;
+
+  width: 15%;
+  height: 30px;
+
+  color: antiquewhite;
+
+  font-size: 20px;
+  font-weight: 900;
 }

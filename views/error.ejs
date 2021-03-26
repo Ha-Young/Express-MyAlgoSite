@@ -1,1 +1,15 @@
-<h1><%= message %></h1>
+<link rel="stylesheet" href="/stylesheets/style.css" />
+
+<div class="flex-wrapper">
+  <% include header.ejs %>
+
+  <main class="error-wrapper">
+    <div class="error-result-board">
+      <span class="error-title">Error!</span>
+      <span class="error-message-font">
+        <%= error.message %>
+      </span>
+    </div>
+
+  </main>
+</div>

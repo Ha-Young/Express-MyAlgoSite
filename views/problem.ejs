@@ -12,17 +12,20 @@
     <div class="problem-board">
 
       <div class="problem-info-wrapper">
-        <div class="problem-title-board">
-          <span><%= problem.title %> </span>
+        <div class="problem-info-font-wrapper">
+          <div class="problem-title-board">
+            <span><%= problem.title %> </span>
+          </div>
+          <div class="problem-info-board">
+            Difficulty level <span class="problem-info-font"><%= problem.difficulty_level %></span>
+            /
+            Completed user <span class="problem-info-font"><%= problem.completed_users %></span>
+          </div>
+          <p class="problem-description-board">
+            <%= problem.description %>
+          </p>
+          <button class="problem-submit-button" type="submit" form="solution-board">제출!</button>
         </div>
-        <div class="problem-info-board">
-          Difficulty level <%= problem.difficulty_level %>
-          /
-          Completed user <%= problem.completed_users %>
-        </div>
-        <p class="problem-description-board">
-          <%= problem.description %>
-        </p>
       </div>
 
       <div class="problem-solution-wrapper">
@@ -34,7 +37,7 @@
     </div>
 
 
-    <button class="problem-submit-button" type="submit" form="solution-board">Submit</button>
+    
 
   </main>
 
