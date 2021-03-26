@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const TestcaseSchema = new mongoose.Schema({ // 테케 아이디를 안가져도 되는가?
+const TestcaseSchema = new mongoose.Schema({
   code: {
     type: String,
     required: true,

@@ -33,7 +33,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 
-// 다 모은 라우터로 대체
 app.use('/', home);
 app.use("/login", login);
 app.use("/logout", logout);

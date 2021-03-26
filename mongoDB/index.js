@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
+const Problem = require("../models/Problem");
+const sampleProblems= require("./sample_problems.json");
 const DB_APP_URL = process.env.DB_APP_URL.replace("<DB_PASSWORD>", process.env.DB_PASSWORD);
+const mongoDb = mongoose.connection;
 
 mongoose.connect(
   DB_APP_URL,
@@ -9,11 +12,6 @@ mongoose.connect(
     useFindAndModify: false,
   },
 );
-
-const mongoDb = mongoose.connection;
-
-const Problem = require("../models/Problem");
-const sampleProblems= require("./sample_problems.json");
 
 mongoDb.on("err", (err) => {
   console.warn(`db connection is failed, ${err}`);

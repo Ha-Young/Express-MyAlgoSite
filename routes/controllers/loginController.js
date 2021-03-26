@@ -10,4 +10,6 @@ exports.getLoginPage = async function(req, res, next) {
 };
 
 exports.authenticateUserThroughGoogle = passport.authenticate("google", { scope: ["profile"] });
-exports.directUserToRelevantPage = passport.authenticate("google", { failureRedirect: "/login", successRedirect: "/" });
+exports.directUserToRelevantPage = passport.authenticate(
+  "google", { failureRedirect: "/login", successRedirect: "/" }
+);
