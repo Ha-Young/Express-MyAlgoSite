@@ -1,20 +1,20 @@
-const express = require('express');
-const passport = require('passport');
+const express = require("express");
+const passport = require("passport");
 const router = express.Router();
 
 router.get(
-  '/google',
-  passport.authenticate('google', {
+  "/google",
+  passport.authenticate("google", {
     scope: ["profile", "email"]
   })
 );
 
 router.get(
-  '/google/callback',
+  "/google/callback",
   passport.authenticate(
-    'google', {
-      successRedirect: '/',
-      failureRedirect: 'auth/google/'
+    "google", {
+      successRedirect: "/",
+      failureRedirect: "auth/google/"
     }
   )
 );

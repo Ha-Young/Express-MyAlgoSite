@@ -5,7 +5,7 @@ const verifyUser = (req, res, next) => {
     next();
   } else {
 
-    res.status(301).redirect('/login');
+    res.status(301).redirect("/login");
   }
 };
 

@@ -32,9 +32,9 @@ describe("test home route", () => {
   });
 });
 
-describe('should render page with response', function() {
+describe("should render page with response", function() {
 
-  it('should render login page', () => {
+  it("should render login page", () => {
     const req = {};
     const res = {
       render: sinon.spy()
