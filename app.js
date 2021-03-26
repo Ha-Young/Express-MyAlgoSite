@@ -20,18 +20,14 @@ require("dotenv").config();
 const app = express();
 
 app.use(bodyParser.urlencoded());
-
 app.set("view engine", "ejs");
-
 app.use(express.static(path.join(__dirname, "public")));
-
 app.use(
   cookieSession({
     maxAge: 24 * 60 * 60 * 1000,
     keys: [process.env.COOKIE_KEY],
   }),
 );
-
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -47,6 +43,7 @@ db.once("open", () => console.log("MongoDB Connected"));
 if (process.env.INITIALIZE_MONGODB === "true") {
   initializeMongoDB(data);
 }
+
 app.use(setLoginStatus);
 app.use("/", index);
 app.use("/login", login);
@@ -61,6 +58,9 @@ app.use(function (req, res, next) {
 });
 
 app.use(function (err, req, res, next) {
+  let userName = "";
+  const loginStatus = res.locals.loginStatus;
+
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
@@ -71,7 +71,9 @@ app.use(function (err, req, res, next) {
   }
 
   res.status(err.status || 500);
-  res.render("error", { err });
+
+  if (req.user) userName = req.user.username;
+  res.render("error", { err, userName, loginStatus });
 });
 
 module.exports = app;

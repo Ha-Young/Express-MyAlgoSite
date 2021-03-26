@@ -16,8 +16,8 @@
         <p><%= `난이도: Level ${problem.difficulty_level}` %></p>
       </section>
       <form action=<%= `/problems/${problem.id}` %> method="post">
+        <input class="submit-btn" type="submit" value="제출">
         <textarea class="code-input" name="solution"><%= `${solution}` %></textarea>
-        <input type="submit" value="제출">
       </form>
     </div>
     <script type="text/javascript" src="/codemirror/lib/codemirror.js"></script>

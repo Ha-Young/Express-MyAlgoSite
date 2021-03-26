@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { findById } = require("../../models/Problem");
 const Problem = require("../../models/Problem");
 
 async function getProblems() {
@@ -13,8 +14,21 @@ async function getProblem(id) {
   return await Problem.find({ id }).then((docs) => docs[0]);
 }
 
-async function saveUserSolution(model, id, solution) {
-  return await model.findByIdAndUpdate(id, { solution }, { new: true });
+async function saveUserSolution(model, id, problemId, solutionFunction) {
+  const user = await model.findById(id, "solution");
+  const solutions = user.solution;
+
+  const solution = solutions.find(
+    (solution) => solution.problemId === parseInt(problemId, 10),
+  );
+
+  if (solution) {
+    solution.solutionFunction = solutionFunction;
+  } else {
+    solutions.push({ problemId, solutionFunction });
+  }
+
+  user.save();
 }
 
 module.exports = {

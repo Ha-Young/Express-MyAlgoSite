@@ -25,3 +25,19 @@
   width: 80%;
   height: 20%;
 }
+
+.submit-btn {
+  width: 10%;
+  height: 10%;
+  margin: 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: #E3D26F;
+  font-family: 'Single Day', cursive;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.submit-btn:hover {
+  background-color: #4357AD;
+}
