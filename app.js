@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
+const compression = require('compression');
 
 const app = express();
 
@@ -33,6 +34,7 @@ if (process.env.NODE_ENV === 'development') {
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
+app.use(compression());
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
