@@ -25,19 +25,16 @@ h1 {
   align-items: center;
   z-index: 5;
 }
-
 h1 .logo {
   width: 250px;
   height: auto;
   padding: 0.5em 0 0 0;
 }
-
 h1 .icon {
   width: 50px;
   height: auto;
   margin: 0 1.5em 0 0;
 }
-
 h1 .title {
   text-shadow: -2px 0 #f23d4c, 0 2px #f23d4c, 2px 0 #f23d4c, 0 -2px #f23d4c;
   font-size: 4em;
@@ -45,7 +42,6 @@ h1 .title {
 }
 
 .form-box {
-  z-index: 5;
   width: 300px;
   height: auto;
   padding: 1em;
@@ -81,11 +77,9 @@ legend {
 .input-box:last-child {
   margin: 0;
 }
-
 .input-box label {
   display: none;
 }
-
 .input-box input {
   width: 100%;
   margin: 0 0 0.5em 0;
@@ -96,7 +90,6 @@ legend {
   font-size: 1.1em;
   color: #ffffff;
 }
-
 .input-box select {
   width: 100%;
   margin: 0 0 0.5em 0;
