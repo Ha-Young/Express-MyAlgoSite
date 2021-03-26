@@ -31,7 +31,8 @@ function convertDescStrToHTMLStr() {
 
   const htmlStr = descElement.innerHTML
     .replaceAll("&lt;", "<")
-    .replaceAll("&gt;", ">");
+    .replaceAll("&gt;", ">")
+    .replaceAll("&amp;quot;", '"');
 
   descElement.innerHTML = htmlStr;
 }
@@ -60,7 +61,6 @@ function getSolveReqBody(mode) {
   };
 
   if (mode === "testcase") {
-    console.log('testCaseInputElement.textContent', testCaseInputElement.value);
     solveReqBody.testCases = convertTestCaseStrToList(testCaseInputElement.value);
   }
 

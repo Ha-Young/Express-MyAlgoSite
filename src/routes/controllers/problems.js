@@ -16,7 +16,6 @@ exports.viewProblem = async function (req, res, next) {
 };
 
 exports.solveProblem = async function (req, res, next) {
-  console.log('get post', req.body);
   const { problem_id: problemId } = req.params;
 
   const {
@@ -34,19 +33,15 @@ exports.solveProblem = async function (req, res, next) {
 
     switch (mode) {
       case "testcase": {
-        console.log('before parse', testCases);
         checkAnswerCases = testCases;
         break;
       }
       case "answer":
       default: {
-        console.log('here', problem.tests);
         checkAnswerCases = problem.tests;
         break;
       }
     }
-
-    console.log(userCode, checkAnswerCases);
 
     checkAnswerCases.forEach((testCase, index) => {
       if (!testCase) {
@@ -107,20 +102,7 @@ exports.solveProblem = async function (req, res, next) {
 
     res.json(result);
 
-    // switch (mode) {
-    //   case "testcase": {
-    //     res.render("pages/problem", { problem, result: { testcase: caseResult } });
-    //     break;
-    //   }
-
-    //   case "answer":
-    //   default: {
-    //     res.render("pages/problem", { problem, result: { answercase: caseResult } });
-    //     break;
-    //   }
-    // }
   } catch (err) {
-    console.log(err);
     return next(err);
   }
 };
