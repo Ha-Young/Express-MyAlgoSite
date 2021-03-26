@@ -32,7 +32,7 @@ mongooseLoader();
 passportLoader();
 
 app.use("/", index);
-app.use("/signIn", signIn);
+app.use("/signin", signIn);
 app.use("/login", login);
 app.use("/logout", logout);
 app.use("/problem", problem);
