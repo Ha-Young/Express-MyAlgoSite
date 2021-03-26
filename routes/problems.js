@@ -1,12 +1,11 @@
 const router = require("express").Router();
 
-const { renderMain, renderEachProblem, testUserCode } = require("../controllers/problem.controller");
+const problemsController = require("../controllers/problem.controller");
 const { verifyProblemId } = require("../middlewares/problem");
 
-router.get("/", renderMain);
+router.get("/", problemsController.getAll);
+router.get("/:problem_id", verifyProblemId, problemsController.getByEachId);
 
-router.get("/:problem_id", verifyProblemId, renderEachProblem);
-
-router.post("/:problem_id", verifyProblemId, testUserCode);
+router.post("/:problem_id", verifyProblemId, problemsController.postByEachId);
 
 module.exports = router;

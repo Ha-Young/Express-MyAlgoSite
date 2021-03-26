@@ -1,7 +1,7 @@
 const { VM } = require("vm2");
 const Problem = require("../models/Problem");
 
-async function renderMain(req, res, next) {
+async function getAll(req, res, next) {
   const problems = await Problem.find();
 
   res.render("problems", { 
@@ -10,7 +10,7 @@ async function renderMain(req, res, next) {
   });
 }
 
-async function renderEachProblem(req, res, next) {
+async function getByEachId(req, res, next) {
   const { problemId } = res.locals;
   const problem = await Problem.findById(problemId);
   const tests = problem.tests.map(test => test.code);
@@ -23,7 +23,7 @@ async function renderEachProblem(req, res, next) {
   });
 }
 
-async function testUserCode(req, res, next) {
+async function postByEachId(req, res, next) {
   const { problemId } = res.locals;
   const { userCode } = req.body;
 
@@ -66,6 +66,6 @@ async function testUserCode(req, res, next) {
   }
 }
 
-exports.renderMain = renderMain;
-exports.renderEachProblem = renderEachProblem;
-exports.testUserCode = testUserCode;
+exports.getAll = getAll;
+exports.getByEachId = getByEachId;
+exports.postByEachId = postByEachId;
