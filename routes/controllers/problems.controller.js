@@ -47,37 +47,25 @@ exports.verifyUserCode = (req, res, next) => {
     failure: null,
   };
 
-  const contexts = tests.map(() => ({}));
-  const testScripts = tests.map(test => new vm.Script(`
-      ${userCode};
-      var time = 0;
-        const start = Date.now();
-        var userSolution = "" + ${test.code} || "undefined";
-        time = Date.now() - start;
-      var solution = "${test.solution}";
-  `));
-
   try {
+    const contexts = tests.map(() => ({}));
+    const testScripts = tests.map(test => new vm.Script(`
+        ${userCode}
+        var userSolution = "" + ${test.code} || "undefined";
+        var solution = "${test.solution}";
+    `));
+
     const testOptions = {
-      timeout: tests.length * 1000,
+      timeout: 1000,
       microtaskMode: "afterEvaluate",
     };
     contexts.forEach((context, index) => {
       testScripts[index].runInNewContext(context, testOptions);
     });
 
-    for (const { userSolution, solution, time } of contexts) {
-      if (time >= 1000) {
-        const failure = {
-          solution,
-          userSolution,
-          time: "Time Limit Exceed",
-        };
-        Object.assign(res.locals, { failure });
-
-        return res.render("problem");
-      } else if (userSolution !== solution) {
-        const failure = { solution, userSolution, time };
+    for (const { userSolution, solution } of contexts) {
+      if (userSolution !== solution) {
+        const failure = { solution, userSolution };
         Object.assign(res.locals, { failure });
 
         return res.render("problem");

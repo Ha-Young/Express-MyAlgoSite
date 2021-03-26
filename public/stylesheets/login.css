@@ -1,0 +1,17 @@
+.login-container {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
+
+h1 {
+  width: 200px;
+  height: 70px;
+  display: flex;
+  background-color: rgb(148, 147, 147);
+  justify-content: center;
+  align-items: center;
+}

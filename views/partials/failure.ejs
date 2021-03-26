@@ -4,6 +4,5 @@
   <% } else { %>
     <p>예상 결과: <%= failure.solution %></p>
     <p>실제 결과: <%= failure.userSolution %></p>
-    <p>시간: <%- Number.isNaN(Number(failure.time)) ? failure.time : failure.time + "ms" %></p>
   <% } %>
 </div>
