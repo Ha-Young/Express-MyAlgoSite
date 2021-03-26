@@ -13,6 +13,7 @@ const { authenticateUser, localMiddleware, loginedUser } = require("./middleware
 const homeRouter = require("./routes/homeRouter");
 const loginRouter = require("./routes/loginRouter");
 
+require("ejs");
 require("dotenv").config();
 
 const app = express();
@@ -65,7 +66,7 @@ app.use((err, req, res, next) => {
 
   // render the error page
   res.status(err.status || 500);
-  res.json({error: err});
+  res.render("error", { title: "ERROR" });
 });
 
 module.exports = app;
