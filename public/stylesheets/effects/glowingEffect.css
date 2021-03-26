@@ -8,7 +8,7 @@
   0px -8px 20px rgba(100,100,255,1),
   0px -12px 30px rgba(50,50,255,1),
   0px -18px 42px rgba(0,0,255,1);
-  animation:fire 2s ease infinite,colorSpin 10s linear infinite;
+  animation:fire 2s ease infinite, colorSpin 10s linear infinite;
 }
 
 @keyframes fire{

@@ -6,3 +6,24 @@
   width: 100vw;
   height: 90vh;
 }
+
+.main__Logo {
+  font-size: 400px;
+  animation: fadeUp 2s ease;
+}
+
+.main__Title {
+  font-size: 80px;
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
