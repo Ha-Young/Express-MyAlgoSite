@@ -32,6 +32,8 @@ const viewsDirectoryPath = path.join(__dirname, './views');
 app.set('view engine', 'ejs');
 app.set('views', viewsDirectoryPath);
 app.use(express.static(publicDirectoryPath));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 app.use(sassMiddleware({
   src: path.join(__dirname, './scss'),
@@ -39,8 +41,7 @@ app.use(sassMiddleware({
   indentedSyntax : false,
   outputStyle: 'compressed'
 }));
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(session({
   secret: process.env.COOKIE_SECRET,
@@ -52,22 +53,11 @@ app.use(session({
     collection: "sessions"
   }),
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-const index = require('./routes/index');
-const login = require('./routes/login');
-const auth = require('./routes/auth');
-const problems = require('./routes/problems');
-const user = require('./routes/user');
-const { verifyUser } = require('./routes/middlewares/verifyUser');
-
-app.use('/login', login);
-app.use('/auth', auth);
-app.use(verifyUser);
-app.use('/', index);
-app.use('/problems', problems);
-app.use('/user', user);
+app.use(require('./routes'));
 
 app.use(function(req, res, next) {
   next(creatError(404));

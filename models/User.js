@@ -39,7 +39,7 @@ UserSchema.methods.addSolvedProblem = function (id) {
 }
 
 UserSchema.methods.addFailedProblem = function (id) {
-  if (!this.solved_problem.includes(id)) {
+  if (!this.solved_problem.includes(id) && !this.failed_problem.includes(id)) {
     this.failed_problem.push(id);
   }
 
