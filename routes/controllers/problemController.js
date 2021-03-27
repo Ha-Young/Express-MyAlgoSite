@@ -4,15 +4,19 @@ const Problem = require("../../models/Problem");
 const User = require("../../models/User");
 
 exports.getAllProblems = async (req, res, next) => {
-  const problems = await Problem.find();
+  try {
+    const problems = await Problem.find();
 
-  res.locals.problems = problems;
-  next();
+    res.locals.problems = problems;
+    next();
+  } catch (err) {
+    next(createError(500, "Error occurs during Problem.find()."));
+  }
 };
 
 exports.getProblems = async (req, res, next) => {
   try {
-    const level = req.params.level;
+    const { level } = req.params;
     const problems = await Problem.find({ difficultyLevel: level });
 
     res.locals.problems = problems;
@@ -43,7 +47,7 @@ exports.renderResult = async (req, res, next) => {
         {
           "problems.$.status": status,
           "problems.$.code": req.body.code,
-        }
+        },
       );
     }
 

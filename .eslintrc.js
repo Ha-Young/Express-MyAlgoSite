@@ -4,6 +4,7 @@ module.exports = {
     commonjs: true,
     es2021: true,
     node: true,
+    mocha: true,
   },
   extends: [
     "airbnb-base",
@@ -22,5 +23,10 @@ module.exports = {
     "func-names": "off",
     "consistent-return": "off",
     "no-underscore-dangle": "off",
+    "no-shadow": "off",
+    "object-curly-spacing": ["error", "always", {
+      arraysInObjects: false,
+      objectsInObjects: false,
+    }],
   },
 };
