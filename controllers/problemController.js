@@ -8,14 +8,20 @@ exports.home = async (req, res, next) => {
 
     res.render("home", { title: "Problems", problems });
   } catch (err) {
+    console.log(err);
     next(createHttpError(500));
   }
 };
 
-exports.getProblemById = async (req, res, next) => {
+exports.getProblemsByLevel = async (req, res, next) => {
   try {
     const { level } = req.params;
-    const problems = await Problem.find({ difficultyLevel: level });
+    const problems = await Problem.find({ difficultyLevel: level }).lean();
+
+    if (!problems.length) {
+      next(createHttpError(404));
+      return;
+    }
 
     res.render("home", { title: `Level ${level}`, problems });
   } catch (err) {
@@ -26,12 +32,11 @@ exports.getProblemById = async (req, res, next) => {
 exports.getProblemDetail = async (req, res, next) => {
   try {
     const id = Number(req.params.id);
-    let problem;
+    const problem = await Problem.findOne({ id }).lean();
 
-    try {
-      problem = await Problem.findOne({ id }).lean();
-    } catch (err) {
-      next(createHttpError(500));
+    if (!problem) {
+      next(createHttpError(404));
+      return;
     }
 
     res.render("problemDetail", {
@@ -39,7 +44,8 @@ exports.getProblemDetail = async (req, res, next) => {
       parameter: "arg",
     });
   } catch (err) {
-    next(createHttpError(404));
+    console.log(err);
+    next(createHttpError(500));
   }
 };
 
@@ -55,6 +61,7 @@ exports.postSolution = async (req, res, next) => {
     try {
       problem = await Problem.findOne({ id }).lean();
     } catch (err) {
+      console.log(err);
       next(createHttpError(500));
     }
 
@@ -71,6 +78,7 @@ exports.postSolution = async (req, res, next) => {
     try {
       userAnswerList = getUserAnwerList(problemArgList, userSolution);
     } catch (err) {
+      console.log(err);
       res.render("failure", {
         layout: "../views/layouts/result",
         resultList: err,

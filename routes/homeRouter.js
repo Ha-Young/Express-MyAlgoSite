@@ -1,5 +1,5 @@
 const express = require("express");
-const { home, getProblemDetail, postSolution, getProblemById } = require("../controllers/problemController");
+const { home, getProblemDetail, postSolution, getProblemsByLevel } = require("../controllers/problemController");
 const { logout } = require("../controllers/userController");
 const homeRouter = express.Router();
 
@@ -8,7 +8,7 @@ homeRouter.get("/", home);
 
 homeRouter.get("/logout", logout);
 
-homeRouter.get("/problems/level/:level", getProblemById);
+homeRouter.get("/problems/level/:level", getProblemsByLevel);
 
 homeRouter.get("/problems/:id", getProblemDetail);
 homeRouter.post("/problems/:id", postSolution);
