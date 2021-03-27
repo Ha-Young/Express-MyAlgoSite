@@ -23,7 +23,6 @@ mongoDb.once("open", () => {
   // storeSampleProblems();
 });
 
-// store data to mongoDB
 const storeSampleProblems = async () => {
   for (let i = 0; i < sampleProblems.length; i++) {
     try {
