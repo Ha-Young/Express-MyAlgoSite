@@ -20,7 +20,7 @@ mongoDb.on("err", (err) => {
 
 mongoDb.once("open", () => {
   console.log(`Mongodb connected, ${mongoDb.host}`);
-  //storeSampleProblems();
+  // storeSampleProblems();
 });
 
 const storeSampleProblems = async () => {

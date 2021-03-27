@@ -8,21 +8,12 @@ passport.use(new GoogleStrategy({
   callbackURL: "/login/google/callback",
   proxy: true,
 },
-  async (accessToken, refreshToken, profile, done) => {
-    const { id, displayName } = profile;
-    const newUser = { googleId: id, displayName: displayName };
+  function(token, tokenSecret, profile, done) {
+    User.findOrCreate({ googleId: profile.id }, function (err, user) {
+      const newUser = { googleId: user.id, displayName: user.displayName };
 
-    try {
-      let user = await User.findOne({ googleId: id });
-
-      if (!user) {
-        user = await User.create(newUser);
-      }
-
-      done(null, user);
-    } catch (err) {
-      done(err);
-    }
+      return done(err, newUser);
+    });
   }
 ));
 
