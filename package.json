@@ -10,6 +10,7 @@
     "bcrypt": "^5.0.1",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
+    "date-fns": "^2.19.0",
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
     "express": "^4.17.1",
@@ -22,7 +23,8 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "serve-favicon": "~2.4.5",
-    "vm2": "^3.9.2"
+    "vm2": "^3.9.2",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",

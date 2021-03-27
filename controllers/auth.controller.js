@@ -2,13 +2,6 @@ const bcrypt = require("bcrypt");
 const passport = require("passport");
 
 const User = require("../models/User");
-const initializePassport = require("../config/passport");
-
-initializePassport(
-  passport,
-  email => User.find({ email }),
-  id => User.findById(id),
-);
 
 function getLogin(req, res, next) {
   res.render("login", { title: "login" });
