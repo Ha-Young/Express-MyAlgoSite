@@ -31,5 +31,6 @@ module.exports = {
     }],
     "no-restricted-syntax": ["off", "ForOfStatement"],
     "no-use-before-define": ["error", { functions: false }],
+    "no-await-in-loop": "off",
   },
 };
