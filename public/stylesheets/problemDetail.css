@@ -1,0 +1,69 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch ;
+  background-color: #CCD6E0;
+  color: var(--dark);
+}
+
+header {
+  position: relative;
+  top: -20px;
+  left: 100px;
+}
+
+.problem-container {
+  display: flex;
+}
+
+.problem-detail {
+  margin-left: 150px;
+  margin-bottom:50px;
+}
+
+.title {
+  font-size: 70px;
+}
+.solver, .level {
+  font-size: 25px;
+  margin: 5px;
+  line-height: 25px;
+}
+.level {
+  font-family: "Cinzel", serif;
+}
+p {
+  width: 450px;
+  font-size: 16px;
+}
+
+.solution-container {
+  display: flex;
+  flex-direction: column;
+}
+
+iframe {
+  width: 800px;
+  height: 200px;
+  border: none;
+  background-color: #090a0f;
+}
+
+.subtitle {
+  font-family: "Cinzel", serif;
+  font-size: 25px;
+  font-weight: 800;
+}
+
+button {
+  font-family: "Cinzel", serif;
+  font-size: 25px;
+  font-weight: 800;
+  margin-top: 20px;
+  opacity: 0.8;
+}
+
+button:hover {
+  opacity: 1;
+}

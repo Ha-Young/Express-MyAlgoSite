@@ -5,9 +5,9 @@
   <% } else { %>
     <% for (const result of resultList) { %>
       <% if (result.output) { %>
-        <div class="true">Test Passed: Value == <%= result.got %></div>
+        <div class="true message">Test Passed: Value == <%= result.got %></div>
       <% } else { %>
-        <div class="false">expected: <%= result.expected %> instead got: <%= result.got %></div>
+        <div class="false message">expected: <%= result.expected %> instead got: <%= result.got %></div>
       <% } %>
     <% } %>
   <% } %>

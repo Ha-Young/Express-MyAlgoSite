@@ -1,0 +1,82 @@
+body {
+  display: flex;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 5fr 4fr;
+  width: 100%;
+}
+
+header {
+  position: relative;
+  top: -70px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 6vw 6vw 10vw;
+  background: #F7E9E7;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 14px;
+  color: var(--dark);
+  line-height: 1.3;
+  -webkit-font-smoothing: antialiased;
+}
+
+.title {
+  font-size: 9vw;
+  letter-spacing: -0.8vw;
+  line-height: 0;
+  font-family: "Cinzel", serif;
+  font-weight: 400;
+  margin: 50px;
+  margin-bottom: 100px;
+}
+
+.tabs {
+  list-style: none;
+  order: 1;
+  max-width: 40vw;
+  margin: 0 0 1vw 32vw;
+  font-family: "Cinzel", serif;
+  font-size: 30px;
+}
+
+.tabs > li:hover {
+  text-decoration: underline;
+}
+
+.problem-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(../image/problem-1.webp);
+  background-size: cover;
+  overflow: auto;
+}
+
+.problem {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 30vw;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: var(--dark);
+  list-style: none;
+  opacity: 0.9;
+  font-size: 16px;
+}
+
+.problem:hover {
+  opacity: 1;
+  transition: opacity 0.3s linear;
+}
+
+.problem > a {
+  width: 100%;
+  padding: 20px;
+}

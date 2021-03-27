@@ -4,4 +4,4 @@ const myCodeMirror = CodeMirror.fromTextArea(document.getElementById("editor"), 
   theme: "moxer",
 });
 
-myCodeMirror.setSize(500, 400);
+myCodeMirror.setSize(800, 400);

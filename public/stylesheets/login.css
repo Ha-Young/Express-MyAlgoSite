@@ -1,0 +1,59 @@
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: #C0D7D9;
+  color: #242423;
+}
+
+img {
+  position: absolute;
+  width: 45%;
+  max-width: 20vw;
+  height: auto;
+}
+
+.image-1 {
+  z-index: 2;
+  left: 10%;
+  bottom: 35%;
+}
+
+.image-2 {
+  z-index: 1;
+  left: 25%;
+  bottom: 40%;
+}
+
+.title {
+  z-index: 3;
+  display: block;
+  text-align: end;
+  position: relative;
+  top: 20%;
+  right: 10%;
+  line-height: 1;
+  font-family: "Cinzel", serif;
+  font-weight: 400;
+  -webkit-text-size-adjust: 100%;
+  font-size: 15vw;
+  letter-spacing: -2.3vw;
+}
+
+.login-bottom {
+  z-index: 3;
+  font-family: "Cinzel", serif;
+  position: relative;
+  left: 50%;
+}
+
+.social-login {
+  position: relative;
+  top: 20px;
+  padding: 20px;
+  font-size: 1.2em;
+}
+
+p {
+  width: 33%;
+  font-size: 1.1em;
+}

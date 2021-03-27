@@ -26,9 +26,10 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 50px;
-  width: 494px;
+  padding-top: 20px;
+  width: 794px;
   height: 100%;
+  font-size: 16px;
   background-color: #090a0f;
 }
 .success-box {
@@ -43,4 +44,13 @@ body {
 }
 .false {
   color: #a85140;
+}
+
+.message {
+  margin: 10px 0;
+}
+.success-message {
+  margin: 15px;
+  padding: 5px;
+  border: 1px #67b04b dashed;
 }

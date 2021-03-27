@@ -1,31 +1,42 @@
-<%- include("./partial/header") %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="/stylesheets/problemDetail.css">
+  <title>Document</title>
+</head>
+<body>
+  <%- include("./partial/header") %>
 
-<div class="problem-container">
-  <div class="problem-detail">
-    <h2><%= problem.title %></h2>
-    <div>정답자 <%= problem.completedUsers %>명</div>
-    <div>Level <%= problem.difficultyLevel %></div>
-    <p><%= problem.description %></p>
-  </div>
-  <div class="solution-container">
-    <div class="solution-column">
-      <div class="">Solution:</div>
-      <form action="/problems/<%= problem.id %>" method="POST" id="submit" target="result-viewer">
-        <textarea id="editor" name="solution">
+  <div class="problem-container">
+    <div class="problem-detail">
+      <h2 class="title"><%= problem.title %></h2>
+      <div class="solver">정답자 <%= problem.completedUsers %>명</div>
+      <div class="level">Level <%= problem.difficultyLevel %></div>
+      <p><%= problem.description %></p>
+    </div>
+    <div class="solution-container">
+      <div class="solution-column">
+        <div class="subtitle">Solution:</div>
+        <form action="/problems/<%= problem.id %>" method="POST" id="submit" target="result-viewer">
+          <textarea id="editor" name="solution">
 function solution(<%= parameter %>) {
 
 }
-        </textarea>
-      </form>
-    </div>
-    <div class="result-viewer-container solution-column">
-      <div class="">Result:</div>
-      <iframe id="result-viewer" name="result-viewer"></iframe>
+          </textarea>
+        </form>
+      </div>
+      <div class="result-viewer-container solution-column">
+        <div class="subtitle">Result:</div>
+        <iframe id="result-viewer" name="result-viewer"></iframe>
+      </div>
+      <button form="submit">ATTEMPT</button>
     </div>
   </div>
-  <button form="submit">ATTEMPT</button>
-</div>
 
-<script type="text/javascript" src="/javascripts/codemirror@5.60.0/codemirror.min.js"></script>
-<script type="text/javascript" src="/javascripts/codemirror@5.60.0/javascript.min.js"></script>
-<script type="text/javascript" src="/javascripts/codemirror@5.60.0/init.js"></script>
+  <script type="text/javascript" src="/javascripts/codemirror@5.60.0/codemirror.min.js"></script>
+  <script type="text/javascript" src="/javascripts/codemirror@5.60.0/javascript.min.js"></script>
+  <script type="text/javascript" src="/javascripts/codemirror@5.60.0/init.js"></script></body>
+</html>

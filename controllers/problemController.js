@@ -6,7 +6,7 @@ exports.home = async (req, res, next) => {
   try {
     const problems = await Problem.find().lean();
 
-    res.render("home", { problems });
+    res.render("home", { title: "Problems", problems });
   } catch (err) {
     next(createHttpError(500));
   }
@@ -17,7 +17,7 @@ exports.getProblemById = async (req, res, next) => {
     const { level } = req.params;
     const problems = await Problem.find({ difficultyLevel: level });
 
-    res.render("home", { problems });
+    res.render("home", { title: `Level ${level}`, problems });
   } catch (err) {
     next(createHttpError(500));
   }
