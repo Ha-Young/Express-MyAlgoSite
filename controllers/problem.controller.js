@@ -5,7 +5,8 @@ const Problem = require("../models/Problem");
 
 const TEXTS = {
   DEFAULT_FUNCITION: "function solution() {}",
-  RESULT: (wrong, correct) => `Wrong Answer: expected ${wrong} to be ${correct}`,
+  RESULT: (wrong, correct) => `Wrong Answer: expected ${wrong} to be ${correct}.`,
+  TEST: (test, answer) => `assertEquals(${test}, ${answer}); \n`,
   CORRECT: "CORRECT!",
 };
 
@@ -21,7 +22,10 @@ async function getAll(req, res, next) {
 async function getByEachId(req, res, next) {
   const { problemId } = res.locals;
   const problem = await Problem.findById(problemId);
-  const tests = problem.tests.map(test => test.code);
+
+  const tests = problem.tests.reduce((acc, test) => {
+    return acc + TEXTS.TEST(test.code, test.solution);
+  }, "");
 
   res.render("eachProblem", {
     result: tests,
