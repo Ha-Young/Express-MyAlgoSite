@@ -4,20 +4,12 @@ const LocalStrategy = require("passport-local").Strategy;
 
 const User = require("../models/User");
 
-async function getUserByEmail(email) {
-  return await User.find({ email });
-}
-
-async function getUserById(id) {
-  return await User.findById(id);
-}
-
 function initialize() {
   async function authenticateUser(email, password, done) {
     try {
-      const [ user ] = await getUserByEmail(email);
+      const [ user ] = await User.find({ email });
 
-      if (user === null) {
+      if (!user) {
         return done(null, false, { message: "unknown email" });
       }
 
@@ -38,9 +30,10 @@ function initialize() {
   }, authenticateUser));
 
   passport.serializeUser((user, done) => done(null, user.id));
+
   passport.deserializeUser(async (id, done) => {
     try {
-      return done(null, await getUserById(id));
+      return done(null, await User.findById(id));
     } catch (error) {
       return done(error, null, { message: "Error failed to find user" });
     }
