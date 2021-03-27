@@ -1,32 +1,33 @@
 const passport = require("passport");
-const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const LocalStrategy = require("passport-local").Strategy;
 
-function getUserByEmail(email) {
-  return User.find({ email });
+const User = require("../models/User");
+
+async function getUserByEmail(email) {
+  return await User.find({ email });
 }
 
-function getUserById(id) {
-  return User.findById(id);
+async function getUserById(id) {
+  return await User.findById(id);
 }
 
 function initialize() {
   async function authenticateUser(email, password, done) {
-    const [ user ] = await getUserByEmail(email);
-    
-    if (user === null) {
-      return done(null, false, { message: "unknown email" });
-    }
-
     try {
+      const [ user ] = await getUserByEmail(email);
+
+      if (user === null) {
+        return done(null, false, { message: "unknown email" });
+      }
+
       const hasUser = await bcrypt.compare(password, user.password);
 
       if (hasUser) {
         return done(null, user);
-      } else {
-        return done(null, false, { message: "wrong password" });
       }
+
+      return done(null, false, { message: "wrong password" });
     } catch (error) {
       return done(error);
     }
@@ -37,7 +38,13 @@ function initialize() {
   }, authenticateUser));
 
   passport.serializeUser((user, done) => done(null, user.id));
-  passport.deserializeUser(async (id, done) => done(null, await getUserById(id)));
+  passport.deserializeUser(async (id, done) => {
+    try {
+      return done(null, await getUserById(id));
+    } catch (error) {
+      return done(error, null, { message: "Error failed to find user" });
+    }
+  });
 }
 
 module.exports = initialize;
