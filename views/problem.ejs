@@ -3,6 +3,8 @@
   <head>
     <title>Codewars</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/codeMirror/lib/codemirror.css" />
+    <link rel="stylesheet" href="/codeMirror/theme/material-darker.css" />
   </head>
   <body>
     <% if (problem) { %>
@@ -14,12 +16,15 @@
         <p>Solution Code</p>
         <textarea
           name="submissionCode"
-          rows="35"
-          cols="100"
-        >function solution() {}</textarea>
+          class="editor"
+        ></textarea>
         <button type="submit">제출</button>
       </form>
     <% } %>
+    <script src="/codeMirror/lib/codemirror.js"></script>
+    <script src="/codeMirror/addon/edit/closebrackets.js"></script>
+    <script src="/codeMirror/addon/edit/matchbrackets.js"></script>
+    <script src="/codeMirror/addon/selection/active-line.js"></script>
+    <script src="/javascripts/editor.js"></script>
   </body>
 </html>
-
