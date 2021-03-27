@@ -39,7 +39,7 @@ app.use(session({
   secret: process.env.SECRET_CODE,
   cookie: { maxAge: 60 * 60 * 1000 },
   resave: true,
-  saveUninitialized: false
+  saveUninitialized: false,
 }));
 app.use(passport.initialize());
 app.use(passport.session());

@@ -2,14 +2,15 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: stretch ;
-  background-color: #CCD6E0;
+  align-items: stretch;
+  overflow: auto;
+  background-color: #ccd6e0;
   color: var(--dark);
 }
 
 header {
   position: relative;
-  top: -20px;
+  top: 30px;
   left: 100px;
 }
 
@@ -19,13 +20,15 @@ header {
 
 .problem-detail {
   margin-left: 150px;
-  margin-bottom:50px;
+  margin-bottom: 50px;
 }
 
 .title {
+  margin-top: 100px;
   font-size: 70px;
 }
-.solver, .level {
+.solver,
+.level {
   font-size: 25px;
   margin: 5px;
   line-height: 25px;

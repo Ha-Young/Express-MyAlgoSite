@@ -10,6 +10,7 @@ passport.use(new GoogleStrategy(
     callbackURL: `http://localhost:${process.env.PORT}/login/google/callback`
   },
   async (accessToken, refreshToken, profile, done) => {
+    console.log(accessToken, refreshToken, profile)
     const isUser = await User.exists({ googleId: Number(profile.id) });
     const {
       displayName: name,
@@ -26,6 +27,7 @@ passport.use(new GoogleStrategy(
         });
       }
     } catch (err) {
+      console.log(err);
       throw new Error("failed join");
     }
 
@@ -38,6 +40,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((user, done) => {
+  console.log("request!!")
   done(null, user);
 });
 
