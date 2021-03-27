@@ -82,7 +82,7 @@ async function postByEachId(req, res, next) {
       problem,
     });
   } catch (error) {
-    next(createError(500));
+    next(createError(500, error));
   }
 }
 

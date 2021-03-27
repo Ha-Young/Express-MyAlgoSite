@@ -4,7 +4,7 @@ function verifyProblemId (req, res, next) {
   const { problem_id: id } = req.params;
 
   if (!id) {
-    next(createError(404));
+    next(createError(404, "Not Found Error"));
     return;
   }
 
