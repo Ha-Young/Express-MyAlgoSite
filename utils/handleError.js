@@ -5,7 +5,7 @@ const ERROR_MESSAGE = require("../constants/errorConstants");
 
 function handleError(errorStatus, error) {
   if (error instanceof mongoose.CastError) {
-    console.log(ERROR_MESSAGE.MONGOOSE_ERROR);
+    console.log(error.message);
     return createError(500, ERROR_MESSAGE.SERVER_ERROR);
   }
 
