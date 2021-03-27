@@ -48,9 +48,8 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-app.use(function errorLogger(err, req, res, next) {
-  console.log("error here");
-  const errObj = {
+app.use(function(err, req, res, next) {
+  const errorInfo = {
     req: {
       headers: req.headers,
       query: req.query,
@@ -65,7 +64,7 @@ app.use(function errorLogger(err, req, res, next) {
     user: req.user,
   };
 
-  logger.error(format(new Date(), "yyyy-MM-dd HH:mm:SS"), errObj);
+  logger.error(format(new Date(), "yyyy-MM-dd HH:mm:SS"), errorInfo);
 
   next(err, req);
 });
