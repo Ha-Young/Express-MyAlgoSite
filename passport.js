@@ -19,7 +19,7 @@ passport.use(new GoogleStrategy(
 
     try {
       if (!isUser) {
-        User.create({
+        await User.create({
           name,
           avatalUrl,
           googleId,
@@ -27,7 +27,7 @@ passport.use(new GoogleStrategy(
       }
     } catch (err) {
       console.log(err);
-      throw new Error("failed join");
+      throw new Error("Failed Create User");
     }
 
     done(null, profile);
