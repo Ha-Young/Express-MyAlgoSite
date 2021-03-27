@@ -1,4 +1,3 @@
-// import { TweenMax, Elastic } from "/node_modules/gsap/all.js";
 const canvas = document.getElementById("scene");
 const ctx = canvas.getContext("2d");
 const particles = [];
@@ -57,4 +56,3 @@ const png = new Image();
 png.crossOrigin = "anonymous";
 png.onload = drawScene;
 png.src = "/images/codewars.png";
-// "https://cdn.icon-icons.com/icons2/2622/PNG/128/brand_codewars_icon_158954.png";

@@ -6,4 +6,3 @@ let cm = new CodeMirror.fromTextArea(document.getElementById("editor"), {
 });
 
 cm.setSize("100%", "100%");
-console.log(cm);
