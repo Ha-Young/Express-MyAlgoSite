@@ -25,6 +25,7 @@ exports.getProblemsByLevel = async (req, res, next) => {
 
     res.render("home", { title: `Level ${level}`, problems });
   } catch (err) {
+    console.log(err);
     next(createHttpError(500));
   }
 };
