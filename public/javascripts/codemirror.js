@@ -1,4 +1,4 @@
-let cm = new CodeMirror.fromTextArea(document.getElementById("editor"), {
+const cm = new CodeMirror.fromTextArea(document.getElementById("editor"), {
   lineNumbers: true,
   mode: "javascript",
   theme: "dracula",
