@@ -1,31 +1,30 @@
-const createError = require("http-errors");
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const { VM } = require("vm2");
 
 const ProblemSchema = new mongoose.Schema({
-  "id": {
+  id: {
     type: Number,
     index: true,
     unique: [true, "id should be unique."],
   },
-  "title": String,
-  "completedUsers": {
+  title: String,
+  completedUsers: {
     type: Number,
     default: 0,
   },
-  "difficultyLevel": {
+  difficultyLevel: {
     type: Number,
     require: [true, "provide problem level."],
   },
-  "description": {
+  description: {
     type: String,
     require: [true, "provide problem description."],
   },
-  "param": mongoose.Schema.Types.Mixed,
-  "tests": [{
-    "code": String,
-    "solution": mongoose.Schema.Types.Mixed,
-  }]
+  param: mongoose.Schema.Types.Mixed,
+  tests: [{
+    code: String,
+    solution: mongoose.Schema.Types.Mixed,
+  }],
 });
 
 /**
@@ -78,4 +77,4 @@ ProblemSchema.methods.checkCode = function (code, next) {
   return { status, results };
 };
 
-module.exports = mongoose.model('Problem', ProblemSchema);
+module.exports = mongoose.model("Problem", ProblemSchema);

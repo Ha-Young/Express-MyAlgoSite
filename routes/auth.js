@@ -1,11 +1,9 @@
-const express = require("express");
-const router = express.Router();
+const router = require("express").Router();
 const passport = require("passport");
 
 const authController = require("./controllers/authController");
 
-
-router.get("/", function (req, res) {
+router.get("/", (req, res) => {
   res.locals.isLogIn = req.isAuthenticated();
   res.render("auth");
 });
@@ -13,7 +11,7 @@ router.get("/", function (req, res) {
 router.get("/signup", authController.renderSignup);
 router.post("/signup", authController.signup);
 
-router.get("/logout", function (req, res) {
+router.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/auth");
 });
@@ -23,12 +21,12 @@ router.post(
   passport.authenticate("local", {
     failureRedirect: "/auth",
     successRedirect: "/",
-  })
+  }),
 );
 
 router.get(
   "/github",
-  passport.authenticate("github")
+  passport.authenticate("github"),
 );
 
 router.get(
@@ -36,7 +34,7 @@ router.get(
   passport.authenticate("github", {
     failureRedirect: "/auth",
     successRedirect: "/",
-  })
+  }),
 );
 
 module.exports = router;

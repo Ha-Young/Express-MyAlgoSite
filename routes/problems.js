@@ -10,18 +10,18 @@ router.get(
   "/:id",
   authenticateUser,
   async (req, res, next) => {
-    const id = req.params.id;
+    const { id } = req.params;
     const problem = await Problem.findOne({ id }).lean();
     const userProblem = await User.aggregate([
       {
-        $match: { _id: mongoose.Types.ObjectId(req.user.id) }
+        $match: { _id: mongoose.Types.ObjectId(req.user.id) },
       },
       {
-        $unwind: "$problems"
+        $unwind: "$problems",
       },
       {
-        $match: { "problems.id": Number(id) }
-      }
+        $match: { "problems.id": Number(id) },
+      },
     ]);
 
     if (userProblem.length !== 0) {
@@ -30,7 +30,7 @@ router.get(
 
     res.locals.problem = problem;
     res.render("problem");
-  }
+  },
 );
 
 router.post(

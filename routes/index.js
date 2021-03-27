@@ -1,5 +1,4 @@
-const express = require('express');
-const router = express.Router();
+const router = require("express").Router();
 
 const authenticateUser = require("./middlewares/authenticateUser");
 const problemController = require("./controllers/problemController");
@@ -10,7 +9,7 @@ router.get(
   problemController.getAllProblems,
   (req, res, next) => {
     res.render("index");
-  }
+  },
 );
 
 router.get(
@@ -19,7 +18,7 @@ router.get(
   problemController.getProblems,
   (req, res, next) => {
     res.render("index");
-  }
+  },
 );
 
 module.exports = router;

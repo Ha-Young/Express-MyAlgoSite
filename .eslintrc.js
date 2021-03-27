@@ -16,7 +16,8 @@ module.exports = {
   rules: {
     semi: ["error", "always"],
     quotes: ["error", "double"],
-    indent: ["error", 2],
+    indent: ["error", 2, { SwitchCase: 1 }],
+    "no-plusplus": "off",
     "comma-dangle": ["error", "always-multiline"],
     "no-unused-vars": ["warn", { argsIgnorePattern: "req|res|next|val" }],
     "quote-props": ["error", "as-needed"],
@@ -28,5 +29,7 @@ module.exports = {
       arraysInObjects: false,
       objectsInObjects: false,
     }],
+    "no-restricted-syntax": ["off", "ForOfStatement"],
+    "no-use-before-define": ["error", { functions: false }],
   },
 };
