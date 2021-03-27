@@ -7,7 +7,7 @@ passport.use(new GoogleStrategy(
   {
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: `http://localhost:${process.env.PORT}/login/google/callback`
+    callbackURL: `http://localhost:3000/login/google/callback`
   },
   async (accessToken, refreshToken, profile, done) => {
     const isUser = await User.exists({ googleId: Number(profile.id) });
