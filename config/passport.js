@@ -1,11 +1,12 @@
 const passport = require("passport");
 const passportJWT = require("passport-jwt");
-const ExtractJWT = passportJWT.ExtractJwt;
-const JWTStrategy = passportJWT.Strategy;
 const LocalStrategy = require("passport-local").Strategy;
 const GitHubStrategy = require("passport-github").Strategy;
 
 const User = require("../models/User");
+
+const ExtractJWT = passportJWT.ExtractJwt;
+const JWTStrategy = passportJWT.Strategy;
 
 module.exports = () => {
   passport.use(new LocalStrategy(
@@ -13,7 +14,7 @@ module.exports = () => {
       usernameField: "email",
       passwordField: "password",
     },
-    async function (email, password, done) {
+    async (email, password, done) => {
       try {
         const user = await User.findOne({ email }).select("+password");
         const correct = await user?.correctPassword(password, user.password);
@@ -30,7 +31,7 @@ module.exports = () => {
       } catch (err) {
         return done(err);
       }
-    }
+    },
   ));
 
   passport.use(new JWTStrategy(
@@ -38,7 +39,7 @@ module.exports = () => {
       jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
       secretOrKey: process.env.JWT_SECRET,
     },
-    async function (jwtPayload, done) {
+    async (jwtPayload, done) => {
       try {
         const user = await User.findOneById(jwtPayload.id);
 
@@ -46,16 +47,16 @@ module.exports = () => {
       } catch (err) {
         return done(err);
       }
-    }
+    },
   ));
 
   passport.use(new GitHubStrategy(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: "https://sungjin-vaco-codewars.herokuapp.com/auth/github/callback"
+      callbackURL: "https://sungjin-vaco-codewars.herokuapp.com/auth/github/callback",
     },
-    async function (accessToken, refreshToken, profile, done) {
+    async (accessToken, refreshToken, profile, done) => {
       try {
         let user = await User.findOne({
           githubId: profile.id,
@@ -73,11 +74,11 @@ module.exports = () => {
       } catch (err) {
         return done(err);
       }
-    }
+    },
   ));
 
   passport.serializeUser((user, done) => {
-    done(null, {id: user._id, name: user.name});
+    done(null, { id: user._id, name: user.name });
   });
 
   passport.deserializeUser((user, done) => {
