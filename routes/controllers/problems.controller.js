@@ -1,6 +1,7 @@
 const Problem = require("../../models/Problem");
 const testFetchedCode = require("../../utils/testFetchedCode");
 const updateSuccessUser = require("../../utils/updateSuccessUser");
+const handleError = require("../../utils/handleError");
 
 const PROBLEM = require("../../constants/problemConstants");
 
@@ -12,7 +13,7 @@ Controller.getAll = async function (req, res, next) {
 
     res.render("index", { problems });
   } catch (error) {
-    next(error);
+    next(handleError(500, error));
   }
 };
 
@@ -22,9 +23,9 @@ Controller.detail = async function (req, res, next) {
   try {
     const problem = await Problem.findById(problemId);
 
-    res.render("problems", { problem });
+    res.render("problem", { problem });
   } catch (error) {
-    next(error);
+    next(handleError(500, error));
   }
 };
 
@@ -37,10 +38,9 @@ Controller.checkCode = async function (req, res, next) {
     const problem = await Problem.findById(problemId);
     const testCases = problem.tests;
 
-    let results;
     let isFail = false;
 
-    results = testFetchedCode(fetchedCode, testCases);
+    const results = testFetchedCode(fetchedCode, testCases);
 
     if (results.hasOwnProperty(PROBLEM.ERROR)) {
       return res.render("failure",
@@ -77,8 +77,8 @@ Controller.checkCode = async function (req, res, next) {
       }
     );
   } catch (error) {
-    next(error);
+    next(handleError(500, error));
   }
-}
+};
 
 module.exports = Controller;

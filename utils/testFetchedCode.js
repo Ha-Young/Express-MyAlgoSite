@@ -1,6 +1,6 @@
 const { VM } = require("vm2");
 
-const validationResult = require("./validationResult");
+const checkTestResult = require("./checkTestResult");
 
 function testFetchedCode(fetchedCode, testCases) {
   const vm = new VM({
@@ -22,7 +22,7 @@ function testFetchedCode(fetchedCode, testCases) {
         ${testCase.code};`
       );
 
-      resultList.push(validationResult(result, testCase));
+      resultList.push(checkTestResult(result, testCase));
     } catch (userSolutionError) {
       return {
         error: userSolutionError.message,

@@ -1,8 +1,8 @@
 const PROBLEM = require("../constants/problemConstants");
 
-function validationResult(result, runningCode) {
-  const testCode = runningCode.code;
-  const correntValue = runningCode.solution;
+function checkTestResult(result, testCase) {
+  const testCode = testCase.code;
+  const correntValue = testCase.solution;
 
   if (result !== correntValue) {
     const failTestCode = {
@@ -23,4 +23,4 @@ function validationResult(result, runningCode) {
   return successTestCode;
 }
 
-module.exports = validationResult;
+module.exports = checkTestResult;
