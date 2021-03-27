@@ -24,5 +24,5 @@ exports.checkAllTestcasePassed = function(totalTestcaseResult) {
 
 exports.isDuplicatedProblem = function(solvedProblems, problemObjectId) {
   return solvedProblems.findIndex(
-    problem => String(problem.solvedProblemObjectId) === String(problemObjectId)) === -1
+    problem => String(problem.solvedProblemObjectId) === String(problemObjectId)) !== -1;
 };
