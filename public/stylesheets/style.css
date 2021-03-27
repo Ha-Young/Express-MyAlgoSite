@@ -53,3 +53,7 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+.CodeMirror {
+  font-size: 1.1rem;
+}
