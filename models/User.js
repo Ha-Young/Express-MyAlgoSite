@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const solvedProblemSchema = require("./subSchema/SolvedProblem");
+const findOrCreate = require("mongoose-findorcreate");
 
 const userSchema = new mongoose.Schema({
   googleId: {
@@ -15,4 +16,5 @@ const userSchema = new mongoose.Schema({
   solvedProblems: [solvedProblemSchema]
 }, { timestamps: true });
 
+userSchema.plugin(findOrCreate);
 module.exports = mongoose.model("User", userSchema);

@@ -18,6 +18,7 @@
     "express-session": "^1.17.1",
     "http-errors": "^1.8.0",
     "mongoose": "^5.12.2",
+    "mongoose-findorcreate": "^3.0.0",
     "morgan": "~1.9.0",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
