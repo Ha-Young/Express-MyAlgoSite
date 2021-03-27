@@ -6,6 +6,7 @@ if (!isProduction) {
 
 const express = require("express");
 const { format } = require("date-fns");
+const createError = require("http-errors");
 const session = require("express-session");
 const flash = require("express-flash");
 const passport = require("passport");
@@ -43,9 +44,7 @@ app.use(require("./routes"));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  const err = new Error("Not Found");
-  err.status = 404;
-  next(err);
+  next(createError(404));
 });
 
 app.use(function(err, req, res, next) {
