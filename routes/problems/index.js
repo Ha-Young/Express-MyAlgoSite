@@ -5,7 +5,7 @@ const authenticateUser = require("../middlewares/autheticate");
 
 const router = express.Router();
 
-router.get("/:problem_id", authenticateUser, problemController.detail);
+router.get("/:problem_id", authenticateUser, problemController.showProblem);
 
 router.post("/:problem_id", authenticateUser, problemController.checkCode);
 

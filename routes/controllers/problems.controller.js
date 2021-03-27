@@ -17,7 +17,7 @@ Controller.getAll = async function (req, res, next) {
   }
 };
 
-Controller.detail = async function (req, res, next) {
+Controller.showProblem = async function (req, res, next) {
   const problemId = req.params.problem_id;
 
   try {
