@@ -12,20 +12,8 @@
     <%- include("partial/header") %>
     <section class="solution-Info">
       <article class="user-code">
-          <textarea id="code" name="submit_text"><%= userCode %></textarea>
-        <script>
-          const editor = CodeMirror.fromTextArea(
-            document.getElementById("code"),
-            {
-              lineNumbers: true,
-              styleActiveLine: true,
-              mode: "javascript",
-              indentUnit: 2,
-              identWithTabs: true,
-              theme: "gruvbox-dark",
-            }
-          );
-        </script>
+        <textarea id="code" name="submit_text"><%= userCode %></textarea>
+        <script src="/javascript/codeMirrorEditor.js"></script>
         <p class="title-box">Error Comment: </p>
         <article class="error-comment">
         </article>
