@@ -2,7 +2,7 @@ const { VM } = require("vm2");
 
 const validationResult = require("./validationResult");
 
-function testFetchCode(fetchedCode, testCases) {
+function testFetchedCode(fetchedCode, testCases) {
   const vm = new VM({
     sandbox: {},
     timeout: 10000,
@@ -33,4 +33,4 @@ function testFetchCode(fetchedCode, testCases) {
   return resultList;
 }
 
-module.exports = testFetchCode;
+module.exports = testFetchedCode;

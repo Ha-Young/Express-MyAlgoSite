@@ -1,5 +1,5 @@
 const Problem = require("../../models/Problem");
-const testFetchCode = require("../../utils/testFetchCode");
+const testFetchedCode = require("../../utils/testFetchedCode");
 const updateSuccessUser = require("../../utils/updateSuccessUser");
 
 const PROBLEM = require("../../constants/problemConstants");
@@ -40,7 +40,7 @@ Controller.checkCode = async function (req, res, next) {
     let results;
     let isFail = false;
 
-    results = testFetchCode(fetchedCode, testCases);
+    results = testFetchedCode(fetchedCode, testCases);
 
     if (results.hasOwnProperty(PROBLEM.ERROR)) {
       return res.render("failure",
