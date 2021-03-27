@@ -15,8 +15,8 @@ const methodOverride = require("method-override");
 const morgan = require("morgan");
 
 const { stream, logger } = require("./config/winston");
-const initializePassport = require("./config/passport");
 const initializeDB = require("./config/db");
+const initializePassport = require("./loader/passport");
 
 const app = express();
 
