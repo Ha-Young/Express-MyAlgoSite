@@ -57,3 +57,10 @@ body {
 .CodeMirror {
   font-size: 1.1rem;
 }
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}

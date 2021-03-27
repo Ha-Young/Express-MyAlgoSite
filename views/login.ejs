@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <%- include ./partials/head.ejs %>
-  <body>
+  <body class="wave-bg">
     <%- include ./partials/nav.ejs %>
     <div class="container login-container jumbotron">
       <h3 class="display-4">LOGIN</h3>
@@ -28,5 +28,6 @@
         <strong>If not a member?</strong> <a href="/auth/register">Register Here</a>
       </div>
     </div>
+    <%- include ./partials/wave.ejs %>
   </body>
 </html>
