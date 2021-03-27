@@ -15,7 +15,7 @@ const ProblemSchema = new mongoose.Schema({
   ],
 });
 
-ProblemSchema.methods.addCompletedUser = async function (id) {
+ProblemSchema.methods.addCompletedUser = async function(id) {
   if (this.completedUsers.find(userId => userId.toString() === id.toString())) {
     return;
   }
