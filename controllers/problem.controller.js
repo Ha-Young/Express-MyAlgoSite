@@ -7,7 +7,7 @@ const TEXTS = {
   DEFAULT_FUNCITION: "function solution() {}",
   RESULT: (wrong, correct) => `Wrong Answer: expected ${wrong} to be ${correct}`,
   CORRECT: "CORRECT!",
-}
+};
 
 async function getAll(req, res, next) {
   const problems = await Problem.find();
