@@ -12,6 +12,7 @@ exports.getUserSubmissions = async function (req, res, next) {
     const userId = req.params['user_id'];
     const currentUser = await User.findById(userId).populate('submission_history');
     const targetProblemSubmissions = await currentUser.getTargetProblemSubmissions(targetProblemId);
+    targetProblemSubmissions.reverse();
 
     res.render('submission', { submissions: targetProblemSubmissions });
   } catch (err) {
@@ -24,7 +25,7 @@ exports.getSubmissionedCode = async function (req, res, next) {
     const targetSubmissionId = req.params['submission_id'];
     const submission = await Submission.findById(targetSubmissionId);
 
-    res.render('submissionDetail', {submission});
+    res.render('submissionDetail', { submission });
   } catch (err) {
     next(creatError(500, err));
   }

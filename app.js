@@ -48,6 +48,7 @@ app.use(session({
   saveUninitialized: true,
   store: MongoStore.create({
     mongoUrl: process.env.MONGODB_URL,
+    dbName: "codeWars",
     collection: "sessions"
   }),
 }));
@@ -77,7 +78,6 @@ app.use(errorHandler);
 module.exports = app;
 
 function errorHandler(err, req, res, next) {
-  console.log(err)
   const message = err.customErrorMessage?.toLowerCase() || status[err.status];
 
   res.locals.message = message;

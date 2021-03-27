@@ -5,34 +5,35 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/stylesheets/style.css">
-  <link rel="stylesheet" href="/stylesheets/success.css">
+  <link rel="stylesheet" href="/stylesheets/user.css">
   <title>Document</title>
 </head>
 <body>
   <header>
     <% include ./header %>
   </header>
-  <div class="success-wrapper">
-    <div>
-      Accepted: <%= userInfo.accepted_submission %>
+  <div class="user-wrapper">
+    <div class="user-left">
+      <div class="user-item">
+        Accepted: <%= userInfo.accepted_submission %>
+      </div>
+      <div class="user-item">
+        Submission: <%= userInfo.total_submission %>
+      </div>
     </div>
-    <div>
-      Submission: <%= userInfo.total_submission %>
-    </div>
-  </div>
-  <div class="">
-    <div class="">맞은문제</div>
-    <div class="">
-      <% for (const test of userInfo.solved_problem) { %>
-        <a href="/problems/<%= test %>"><%= test %></a>
-      <% } %>
-    </div>
-    <div class="">공백예정</div>
-    <div class="">시도했지만 틀린문제</div>
-    <div class="">
-      <% for (const test of userInfo.failed_problem) { %>
-        <a href="/problems/<%= test %>"><%= test %></a>
-      <% } %>
+    <div class="user-right">
+      <div class="user-item">맞은문제</div>
+      <div class="user-item">
+        <% for (const test of userInfo.solved_problem) { %>
+          <a href="/problems/<%= test %>"><%= test %></a>
+        <% } %>
+      </div>
+      <div class="user-item">시도했지만 틀린문제</div>
+      <div class="user-item">
+        <% for (const test of userInfo.failed_problem) { %>
+          <a href="/problems/<%= test %>"><%= test %></a>
+        <% } %>
+      </div>
     </div>
   </div>
 </body>
