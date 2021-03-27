@@ -10,12 +10,12 @@ exports.getAllProblems = async (req, res, next) => {
       user,
       params: { difficulty_level },
     } = req;
-    
+
     const problems = await Problem.find(
       difficulty_level && { difficulty_level }
-    ).lean();    
+    ).lean();
 
-    res.render(PAGE.INDEX, { title: TITLE.CODEWARS, problems, user });
+    res.status(200).render(PAGE.INDEX, { title: TITLE.CODEWARS, problems, user });
   } catch (error) {
     next(error);
   }
@@ -29,7 +29,7 @@ exports.getProblem = async (req, res, next) => {
     } = req;
     const problem = await Problem.findById(problemId);
 
-    res.render(PAGE.PROBLEM, { problem, user });
+    res.status(200).render(PAGE.PROBLEM, { problem, user });
   } catch (error) {
     next(error);
   }
@@ -44,7 +44,7 @@ exports.postSolution = async (req, res, next) => {
       },
       user,
     } = req;
-    
+
     const problem = await Problem.findById(problemId);
 
     const { isPassed, resultLog, isCodeError } = checkUserCode(
@@ -55,6 +55,7 @@ exports.postSolution = async (req, res, next) => {
 
     if (isCodeError || !isPassed) {
       res
+        .status(200)
         .render(PAGE.FAILURE, {
           message: MESSAGE.FAILURE,
           isCodeError,
@@ -74,6 +75,7 @@ exports.postSolution = async (req, res, next) => {
     }
 
     res
+      .status(200)
       .render(PAGE.SUCCESS, {
         message: MESSAGE.SUCCESS,
         resultLog,

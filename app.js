@@ -36,8 +36,8 @@ app.set("layout", "layout");
 
 app.use(session({
   secret: process.env.SECRET_SESSION,
-  resave: false,
-  saveUninitialized: true,
+  resave: true,
+  saveUninitialized: false,
   cookie: { maxAge: TIME.SECONDS * TIME.MINETES * TIME.SECOND },
   store: new MongoStore({
     mongooseConnection: db,
