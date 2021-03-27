@@ -1,5 +1,6 @@
 const createError = require("http-errors");
 const Problem = require("../models/Problem");
+const { ERROR_MESSAGE } = require("../utils/constants");
 
 async function verifyProblemId (req, res, next) {
   try {
@@ -12,7 +13,7 @@ async function verifyProblemId (req, res, next) {
       return;
     }
 
-    next(createError(404, "Page Not Found"));
+    next(createError(404, ERROR_MESSAGE.PAGE_NOT_FOUND));
   } catch(err) {
     next(err);
   }

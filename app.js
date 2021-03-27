@@ -14,6 +14,7 @@ const login = require("./routes/login");
 const logout = require("./routes/logout");
 const problems = require("./routes/problems");
 const mySolutions = require("./routes/mySolutions");
+const { ERROR_MESSAGE } = require("./utils/constants");
 
 const app = express();
 
@@ -41,7 +42,7 @@ app.use("/problems", problems);
 app.use("/mysolutions", mySolutions);
 
 app.use(function(req, res, next) {
-  next(createError(404, "Page Not Found"));
+  next(createError(404, ERROR_MESSAGE.PAGE_NOT_FOUND));
 });
 
 app.use(function(err, req, res, next) {
