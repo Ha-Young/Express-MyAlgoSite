@@ -7,14 +7,14 @@
 }
 
 .main-title {
+  font-family: "Noto Sans", sans-serif;
   font-size: 80px;
-  font-weight: 900;
   color: #c7c0c0;
 }
 
 .main-title-description {
+  font-family: "Source Sans Pro", sans-serif;
   font-size: 20px;
-  font-weight: 200;
   font-style: italic;
   color: #c7c0c0;
 }

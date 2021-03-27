@@ -4,6 +4,7 @@
 @import "problem.css";
 @import "result.css";
 @import "error.css";
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Source+Sans+Pro:wght@300&display=swap");
 
 :root {
   --main-bg-color: #242526;
