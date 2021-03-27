@@ -17,13 +17,21 @@ exports.createUser = async function (req, res, next) {
       next(createdErr);
     }
 
-    const salt = bcrypt.genSalt(10);
-    const hashedPassword = bcrypt.hash(req.body.password, salt);
+    console.log("password is", req.body.password);
+    console.log("password type is", typeof req.body.password);
+
+    // const salt = bcrypt.genSalt(10);
+    // const hashedPassword = bcrypt.hash(req.body.password, salt);
+    const userPassword = req.body.password;
+    const saltValue = 10;
+    const encryptedPassword = await encryptPassword(saltValue, userPassword);
+
+    console.log("encryted", encryptedPassword);
 
     const user = new User({
       name: req.body.name,
       email: req.body.email,
-      password: hashedPassword,
+      password: encryptedPassword,
     });
 
     try {
@@ -38,3 +46,15 @@ exports.createUser = async function (req, res, next) {
     next(createdErr);
   }
 };
+
+async function encryptPassword(saltValue, userPassword) {
+  try {
+    const salt = await bcrypt.genSalt(saltValue);
+    const hashedPassword = await bcrypt.hash(userPassword, salt);
+
+    return hashedPassword;
+  } catch (error) {
+    const createdErr = createError(500, errorMessage.SERVER_ERROR);
+    return createdErr;
+  }
+}
