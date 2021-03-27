@@ -14,7 +14,7 @@ async function verifyProblemId (req, res, next) {
 
     next(createError(404, "Page Not Found"));
   } catch(err) {
-    next(err)
+    next(err);
   }
 }
 

@@ -1,5 +1,5 @@
-require("dotenv").config({ path: "./.env"});
-require("./config/mongoDB")
+require("dotenv").config({ path: "./.env" });
+require("./config/mongoDB");
 require("./config/passport/googlePassport");
 
 const express = require("express");

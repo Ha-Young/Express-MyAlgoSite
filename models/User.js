@@ -9,7 +9,8 @@ const userSchema = new mongoose.Schema({
   },
   displayName: {
     type: String,
-    trime: true,
+    trim: true,
+    required: true,
   },
   solvedProblems: [solvedProblemSchema]
 }, { timestamps: true });
