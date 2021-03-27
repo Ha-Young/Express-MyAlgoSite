@@ -17,6 +17,10 @@ passport.use(new GoogleStrategy(
       username: profile.displayName,
       photo_url: profile.photos[0].value,
     }, (err, user) => {
+      if (err) {
+        return done(err);
+      }
+
       user.save();
       return done(null, user);
     });
