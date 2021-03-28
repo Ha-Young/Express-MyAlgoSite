@@ -5,12 +5,14 @@ const checkTestResult = require("./checkTestResult");
 const PROBLEM = require("../constants/problemConstants");
 
 function testUserSubmitCode(submitCode, testCases) {
-  const vm = new VM({
-    sandbox: {},
-    timeout: 10000,
-    fixAsync: true,
-    wasm: false,
-  });
+  const vm = new VM(
+    {
+      sandbox: {},
+      timeout: 10000,
+      fixAsync: true,
+      wasm: false,
+    }
+  );
 
   const resultList = testCases.map(testCase => {
     try {
@@ -25,7 +27,7 @@ function testUserSubmitCode(submitCode, testCases) {
       return {
         solution: testCase.code,
         resultValue: userSolutionError.message,
-        status: PROBLEM.ERROR,
+        status: PROBLEM.FAIL,
       };
     }
   });

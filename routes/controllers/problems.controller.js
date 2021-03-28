@@ -40,19 +40,6 @@ Controller.checkCode = async function (req, res, next) {
 
     const results = testuserSubmitCode(userSubmitCode, testCases);
 
-    const isError = results.some(result =>
-      result.status === PROBLEM.ERROR
-    );
-
-    if (isError) {
-      return res.render("failure",
-        {
-          userCode: userSubmitCode,
-          testCase: results,
-        }
-      );
-    }
-
     const isFail = results.some(result =>
       result.status === PROBLEM.FAIL
     );
@@ -61,7 +48,7 @@ Controller.checkCode = async function (req, res, next) {
       return res.render("failure",
         {
           userCode: userSubmitCode,
-          testCase: results,
+          results,
         }
       );
     }
@@ -71,7 +58,7 @@ Controller.checkCode = async function (req, res, next) {
     res.render("success",
       {
         userCode: userSubmitCode,
-        testCase: results,
+        results,
       }
     );
   } catch (error) {
