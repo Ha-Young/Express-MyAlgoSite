@@ -1,10 +1,9 @@
 const createError = require("http-errors");
 const { readdir, readFile, rename } = require("fs/promises");
-const { ROOT_PATH } = require(`${__dirname}/../constants/constants`);
 
 const uploadAndRenameFile = (path, Model) => {
   return async (req, res, next) => {
-    const uploadFolderPath = `${ROOT_PATH}/upload/${path}`;
+    const uploadFolderPath = `${__dirname}/../upload/${path}`;
     let datum = [];
 
     try {

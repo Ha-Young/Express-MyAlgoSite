@@ -1,5 +1,7 @@
 const passport = require("passport");
+const createError = require("http-errors");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const User = require("../models/User");
 
 const {
   GOOGLE_CLIENT_ID,
@@ -13,9 +15,30 @@ const googleStrategy = new GoogleStrategy(
     clientSecret: GOOGLE_CLIENT_SECRET,
     callbackURL: AUTH_CALLBACK_URL,
   },
-  (accessToken, refreshToken, profile, done) => {
-    done(null, profile);
-  },
+  async (accessToken, refreshToken, params, profile, done) => {
+    try {
+      const user = await User.findOne({google_id: profile.id});
+
+      if (user) {
+        done(null, user);
+      } else {
+        const newUser = {
+          google_id: profile.id,
+          email: profile.emails[0].value,
+          user_name: profile.displayName,
+          problems: {
+            succeed_problems: [],
+            solving_problems: [],
+          },
+        };
+
+        done(null, await User.create(newUser));
+      }
+    } catch (error) {
+      console.error(error);
+      done(createError(500));
+    }
+  }
 );
 
 passport.use(googleStrategy);

@@ -1,12 +1,17 @@
 const passport = require("passport");
 
-exports.getLogin = (req, res, next) => res.render("login");
+exports.getLogin = (req, res, next) => {
+  res.render("login");
+}
 
 exports.getAuthWithGoogle
   = passport.authenticate("google", { scope: ["profile", "email"] });
 
 exports.getAuthCallbackWithGoogle
-  = passport.authenticate("google", { failureRedirect: "/login" });
+  = passport.authenticate(
+      "google",
+      { failureRedirect : '/login'},
+    );
 
 exports.getSuccessfulAuthWithGoogle
   = (req, res, next) => res.redirect("/");

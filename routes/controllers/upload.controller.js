@@ -1,13 +1,10 @@
 require("dotenv").config();
 
-const { ROOT_PATH }
-  = require(`${__dirname}/../../constants/constants`);
-
-require(`${ROOT_PATH}/database/atlas`);
+require(`${__dirname}/../../database/atlas`);
 
 const uploadAndRenameFile
-  = require(`${ROOT_PATH}/middlewares/uploadAndRenameFile`);
+  = require(`${__dirname}/../../middlewares/uploadAndRenameFile`);
 
-const Problem = require(`${ROOT_PATH}/models/Problem`);
+const Problem = require(`${__dirname}/../../models/Problem`);
 
 exports.uploadProblems = uploadAndRenameFile("problems", Problem);

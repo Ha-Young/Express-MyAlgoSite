@@ -31,6 +31,6 @@ const ProblemSchema = new mongoose.Schema({
       required: [true, "test solution is required"],
     },
   }],
-}, { timestamps: true });
+}, {createdAt: "create_at", updatedAt: "updated_at"});
 
 module.exports = mongoose.model("Problem", ProblemSchema);
