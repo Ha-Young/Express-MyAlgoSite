@@ -201,3 +201,7 @@ section p {
   right: 15vw;
   background-color: #C84630;
 }
+
+.error img {
+  width: 100%;
+}

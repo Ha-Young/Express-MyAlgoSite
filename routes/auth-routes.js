@@ -3,8 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 
 router.get('/login', (req, res) => {
-  res.locals.user = req.user;
-  res.render('partial/login');
+  res.render('partial/login', { user: req.user });
 });
 
 router.get('/logout', (req, res, next) => {

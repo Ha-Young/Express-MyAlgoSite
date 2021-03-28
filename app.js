@@ -7,7 +7,6 @@ const cookieSession = require('cookie-session');
 const passportSetup = require('./config/passport-setup');
 const passport = require('passport');
 const expressLayouts = require('express-ejs-layouts');
-const createError = require('http-errors');
 
 const QueryPlugin = require('./util/QueryPlugin');
 
@@ -54,15 +53,18 @@ app.use('/auth', authRoutes);
 app.use('/problems', problemsRoutes);
 
 app.use((req, res, next) => {
-  next(createError(404));
+  const err = new Error("Not Found");
+  err.status = 404;
+  next(err);
 });
 
 app.use(function(err, req, res, next) {
+  res.locals.user = req.user;
   res.locals.message = err.status ? err.message : '';
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   res.status(err.status || 500);
-  res.render('error', { error: err });
+  res.render('error');
 });
 
 module.exports = app;

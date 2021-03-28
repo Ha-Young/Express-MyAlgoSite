@@ -3,7 +3,7 @@ const vm = require('vm');
 const Problem = require('../../models/Problem');
 const { getTestCaseById, updateCompletedUser } = require('../../util/QueryPlugin');
 
-exports.getAll = async function (req, res) {
+exports.getAll = async function (req, res, next) {
   await Problem.find().lean()
   .exec(function (err, problems) {
     if (err) {
