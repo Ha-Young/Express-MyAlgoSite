@@ -38,8 +38,6 @@ Controller.checkCode = async function (req, res, next) {
     const problem = await Problem.findById(problemId);
     const testCases = problem.tests;
 
-    let isFail = false;
-
     const results = testuserSubmitCode(userSubmitCode, testCases);
 
     if (results.hasOwnProperty(PROBLEM.ERROR)) {
@@ -52,11 +50,9 @@ Controller.checkCode = async function (req, res, next) {
       );
     }
 
-    results.forEach(result => {
-      if (result.status === PROBLEM.FAIL) {
-        isFail = true;
-      }
-    });
+    const isFail = results.some(result =>
+      result.status === PROBLEM.FAIL
+    );
 
     if (isFail) {
       return res.render("failure",

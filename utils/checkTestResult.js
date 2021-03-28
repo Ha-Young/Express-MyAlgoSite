@@ -4,23 +4,11 @@ function checkTestResult(result, testCase) {
   const testCode = testCase.code;
   const currentValue = testCase.solution;
 
-  if (result !== currentValue) {
-    const failTestCode = {
-      solution: testCode,
-      resultValue: String(result),
-      status: PROBLEM.FAIL,
-    };
-
-    return failTestCode;
-  }
-
-  const successTestCode = {
+  return {
     solution: testCode,
     resultValue: String(result),
-    status: PROBLEM.SUCCESS,
-  };
-
-  return successTestCode;
+    status: result !== currentValue ? PROBLEM.FAIL : PROBLEM.SUCCESS
+  }
 }
 
 module.exports = checkTestResult;
