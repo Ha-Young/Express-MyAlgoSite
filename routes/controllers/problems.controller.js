@@ -6,6 +6,7 @@ const getResult = require("../../utils/getResult");
 exports.getAll = async function (req, res, next) {
   try {
     const problems = await Problem.find();
+    res.status(200);
     res.render("index", { problems: problems, user: req.user });
   } catch (err) {
     next(createError(500, "Internal Server Error"));
@@ -16,6 +17,7 @@ exports.getProblem = async function (req, res, next) {
   try {
     const problemId = req.params.problem_id;
     const problem = await Problem.findById(problemId);
+    res.status(200);
     res.render("problem", { problem: problem, user: req.user });
   } catch (err) {
     next(createError(500, "Internal Server Error"));
@@ -44,7 +46,7 @@ exports.postProblem = async function (req, res, next) {
         { $addToSet: { completed_users: [ userId ] } },
       );
 
-      res.render("result", {
+      res.status(200).render("result", {
         isAllPassed,
         userCode: userCode,
         problem: problem,
@@ -54,7 +56,7 @@ exports.postProblem = async function (req, res, next) {
       return;
     }
 
-    res.render("result", {
+    res.status(200).render("result", {
       isAllPassed,
       solutionError: hasSolutionError
         ? { message: solutionErrorMessage}

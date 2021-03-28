@@ -8,12 +8,12 @@ const authenticateUser = require("./middlewares/authenticateUser");
 router.get("/", authenticateUser, problemsController.getAll);
 
 router.get("/login", (req, res, next) => {
-  res.render("login");
+  res.status(200).render("login");
 });
 
 router.get("/logout", (req, res, next) => {
   req.logout();
-  res.redirect("/");
+  res.status(301).redirect("/");
 });
 
 router.get("/auth/google",
