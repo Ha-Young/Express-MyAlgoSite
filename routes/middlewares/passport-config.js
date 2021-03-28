@@ -20,10 +20,8 @@ const initialize = (passport) => {
     try {
       if (await bcrypt.compare(password, user.password)) {
         done(null, user);
-        return;
       } else {
         done(null, false, { message: "Password incorrect" });
-        return;
       }
     } catch (err) {
       done(createError(500, "Internal Server Error"));
