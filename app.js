@@ -1,6 +1,6 @@
 require("dotenv").config();
-require(`${__dirname}/database/atlas.js`);
-require(`${__dirname}/authentication/passport`);
+require("./database/loader.js");
+require("./authentication/passport");
 
 const express = require('express');
 const fs = require("fs");
@@ -30,7 +30,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-const redirectByUnAuth = require(`${__dirname}/middlewares/redirectByUnAuth`);
+const authenticateUser = require(`${__dirname}/middlewares/authenticateUser`);
 
 const index = require(`${__dirname}/routes`);
 const login = require(`${__dirname}/routes/login`);
@@ -39,7 +39,7 @@ const problems = require(`${__dirname}/routes/problems`);
 const logout = require(`${__dirname}/routes/logout`);
 
 app.use("/login", login);
-app.use(redirectByUnAuth);
+app.use(authenticateUser);
 app.use("/upload", upload);
 app.use("/", index);
 app.use("/problems", problems);

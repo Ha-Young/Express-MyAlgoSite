@@ -23,6 +23,6 @@ const UserSchema = new mongoose.Schema({
       user_code: String,
     }]
   },
-}, { createdAt: "create_at", updatedAt: "updated_at" });
+}, { timestamps: { createdAt: "create_at", updatedAt: "updated_at" } });
 
 module.exports = mongoose.model("User", UserSchema);

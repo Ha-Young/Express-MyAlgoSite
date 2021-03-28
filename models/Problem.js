@@ -11,9 +11,9 @@ const ProblemSchema = new mongoose.Schema({
     min: 0,
   },
   difficulty_level: {
-    type: Number,
-    default: 1,
-    min: 1,
+    type: String,
+    required: [true, "difficulty_level is required"],
+    enum: ["1", "2", "3"],
   },
   description: {
     type: String,
@@ -31,6 +31,6 @@ const ProblemSchema = new mongoose.Schema({
       required: [true, "test solution is required"],
     },
   }],
-}, {createdAt: "create_at", updatedAt: "updated_at"});
+}, { timestamps: { createdAt: "create_at", updatedAt: "updated_at" } });
 
 module.exports = mongoose.model("Problem", ProblemSchema);

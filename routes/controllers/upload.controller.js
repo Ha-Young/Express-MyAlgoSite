@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-require(`${__dirname}/../../database/atlas`);
+require(`${__dirname}/../../database/loader`);
 
 const uploadAndRenameFile
   = require(`${__dirname}/../../middlewares/uploadAndRenameFile`);

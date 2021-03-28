@@ -4,7 +4,6 @@ const { readdir, readFile, rename } = require("fs/promises");
 const uploadAndRenameFile = (path, Model) => {
   return async (req, res, next) => {
     const uploadFolderPath = `${__dirname}/../upload/${path}`;
-    let datum = [];
 
     try {
       const fileNames = await readdir(uploadFolderPath);
@@ -16,32 +15,39 @@ const uploadAndRenameFile = (path, Model) => {
         );
       }
 
-      for (const fileName of fileNames) {
-        const file
-          = await readFile(`${uploadFolderPath}/${fileName}`, "utf8");
-        const data = JSON.parse(file);
-        datum.push(data);
-      }
+      const readFiles = fileNames.map(async fileName => {
+        const file = await readFile(`${uploadFolderPath}/${fileName}`, "utf8");
 
-      for (const data of datum) {
-        for (const document of data) {
+        return JSON.parse(file);
+      });
+
+      const datum = await Promise.all(readFiles);
+      const uploads = datum.map(data => {
+        const docs = data.map(document => {
           delete document.id;
-          await new Model(document).save();
-        }
-      }
+
+          return new Model(document).save();
+        });
+
+        return Promise.all(docs);
+      });
+
+      await Promise.all(uploads);
 
       const uploadedFolderPath = `${__dirname}/../upload/uploaded`;
 
-      for (const fileName of fileNames) {
-        await rename(
+      const renameFiles = fileNames.map(fileName => {
+        return rename(
           `${uploadFolderPath}/${fileName}`,
           `${uploadedFolderPath}/${fileName}`,
         );
-      }
+      });
 
-      res.locals = { title: "success", fileNames };
+      await Promise.all(renameFiles);
 
-      return res.render("upload");
+      const renderProps = { title: "success", fileNames };
+
+      return res.render("upload", renderProps);
     } catch (error) {
       console.error(error);
 
