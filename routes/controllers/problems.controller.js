@@ -1,18 +1,18 @@
 const Problem = require("../../models/Problem");
 const User = require("../../models/User");
 const createError = require("http-errors");
-const checkSolution = reqruie("../../util");
+const { getResultOfCode } = require("../../util");
 
 exports.getProblems = async (req, res, next) => {
-  const currentUser = req.user;
+  const { user } = req;
 
   try {
     const problems = await Problem.find();
     res.render("index", {
       problems,
       user: {
-        nickname: currentUser.nickname,
-        side: currentUser.side
+        nickname: user.nickname,
+        side: user.side
       }
     });
   } catch (err) {
@@ -21,27 +21,27 @@ exports.getProblems = async (req, res, next) => {
 };
 
 exports.getProblem = async (req, res, next) => {
-  const problemId = req.params.problem_id;
-  const currentUser = req.user;
+  const { problem_id } = req.params;
+  const { user } = req;
 
   try {
-    const problem = await Problem.findById(problemId);
-    const user = await User.findOne({
-      _id: currentUser._id,
+    const problem = await Problem.findById(problem_id);
+    const currentUser = await User.findOne({
+      _id: user._id,
     }, {
-      problems: {
+      solved_problems: {
         $elemMatch: {
-          problem: problemId
+          problem: problem_id
         }
       }
     });
 
     res.render("problem", {
       problem,
-      submittedProblem: user.problems[0],
+      submittedProblem: currentUser.solved_problems[0],
       user: {
-        nickname: currentUser.nickname,
-        side: currentUser.side
+        nickname: user.nickname,
+        side: user.side
       }
     });
   } catch (err) {
@@ -50,21 +50,21 @@ exports.getProblem = async (req, res, next) => {
 };
 
 exports.saveProblem = async (req, res, next) => {
-  const problemId = req.params.problem_id;
-  const currentUser = req.user;
-  const code = req.body.code;
+  const { problem_id } = req.params;
+  const { user } = req;
+  const { code } = req.body;
 
   try {
-    const solvedProblems = currentUser.problems;
-    const problem = await Problem.findById(problemId);
+    const solvedProblems = user.solved_problems;
+    const problem = await Problem.findById(problem_id);
     const tests = problem.tests;
-    const result = checkSolution(tests, code);
+    const testResult = getResultOfCode(tests, code);
 
-    if (solvedProblems.findIndex(obj => obj.problem.toString() === problemId) === -1) {
-      await User.findByIdAndUpdate(currentUser._id, {
+    if (solvedProblems.findIndex(obj => obj.problem.toString() === problem_id) === -1) {
+      await User.findByIdAndUpdate(user._id, {
         $push: {
           solved_problems: {
-            problem: problemId,
+            problem: problem_id,
             code,
             isSolved: false
           }
@@ -72,26 +72,26 @@ exports.saveProblem = async (req, res, next) => {
       });
     } else {
       await User.findOneAndUpdate({
-        _id: currentUser._id,
-        "problems.problem": problemId
+        _id: user._id,
+        "problems.problem": problem_id
       }, {
         "problems.$.code": code
       });
     }
 
-    if (Array.isArray(result.resultList)) {
-      const isFailed = result.resultList.includes("failure");
+    if (Array.isArray(testResult.resultList)) {
+      const isFailed = testResult.resultList.includes("failure");
 
       if (isFailed) {
         res.render("solutionResult", {
-          id: problemId,
+          id: problem_id,
           code,
           tests,
-          resultList: result.resultList,
-          answerList: result.answerList,
+          resultList: testResult.resultList,
+          answerList: testResult.answerList,
           user: {
-            nickname: currentUser.nickname,
-            side: currentUser.side
+            nickname: user.nickname,
+            side: user.side
           }
         });
         return;
@@ -99,11 +99,11 @@ exports.saveProblem = async (req, res, next) => {
 
       const userInfo = await User.findOne({
         _id: req.user._id,
-        "problems.problem": problemId
+        "problems.problem": problem_id
       });
 
       if (!userInfo.problems[0].isSolved) {
-        await Problem.findByIdAndUpdate(problemId, {
+        await Problem.findByIdAndUpdate(problem_id, {
           $inc: {
             completed_users: 1
           }
@@ -112,7 +112,7 @@ exports.saveProblem = async (req, res, next) => {
 
       await User.findOneAndUpdate({
         _id: req.user._id,
-        "solved_problems.problem": problemId
+        "solved_problems.problem": problem_id
       }, {
         "solved_problems.$.isSolved": true
       });
@@ -120,8 +120,8 @@ exports.saveProblem = async (req, res, next) => {
       res.render("success", {
         message: "SUCCESS",
         user: {
-          nickname: currentUser.nickname,
-          side: currentUser.side
+          nickname: user.nickname,
+          side: user.side
         }
       });
 
@@ -129,17 +129,18 @@ exports.saveProblem = async (req, res, next) => {
     }
 
     res.render("solutionResult", {
-      id: problemId,
+      id: problem_id,
       code,
       resultList: null,
       answerList: null,
-      error: result,
+      error: testResult,
       user: {
-        nickname: currentUser.nickname,
-        side: currentUser.side
+        nickname: user.nickname,
+        side: user.side
       }
     });
   } catch(err) {
+    console.log(err);
     next(createError(500, "Internal Server Error"));
   }
 };
