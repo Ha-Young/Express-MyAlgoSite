@@ -8,7 +8,7 @@ exports.getAll = async function (req, res, next) {
     const problems = await Problem.find();
     res.render("index", { problems: problems, user: req.user });
   } catch (err) {
-    next(err);
+    next(createError(500, "Internal Server Error"));
   }
 };
 
@@ -75,6 +75,6 @@ exports.postProblem = async function (req, res, next) {
       });
     }
   } catch (err) {
-    next(err);
+    next(createError(500, "Internal Server Error"));
   }
 }
