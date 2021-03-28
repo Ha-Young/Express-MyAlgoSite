@@ -7,7 +7,7 @@ function checkTestResult(result, testCase) {
   return {
     solution: testCode,
     resultValue: String(result),
-    status: result !== currentValue ? PROBLEM.FAIL : PROBLEM.SUCCESS
+    status: result !== currentValue ? PROBLEM.FAIL : PROBLEM.SUCCESS,
   }
 }
 

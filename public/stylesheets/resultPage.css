@@ -13,7 +13,7 @@
   margin: 10px;
 }
 
-.error-comment {
+.result-comment {
   height: 187px;
   padding: 10px;
   background: #151718;
@@ -54,6 +54,10 @@
   background: #2ecc71;
 }
 
+.success {
+  color: #2ecc71;
+}
+
 .fail-circle {
   display: inline-block;
   width: 15px;
@@ -69,16 +73,8 @@
   height: 30px;
 }
 
-.end-comment {
-  display: block;
-  width: 1000px;
-  height: 70px;
-  margin: 0 auto;
-  margin-top: 150px;
-  font-size: 30px;
-  text-align: center;
-}
-
 .home-button {
-  margin-left: 100px;
+  display: block;
+  margin-top: 10px;
+  margin-right: 10px;
 }

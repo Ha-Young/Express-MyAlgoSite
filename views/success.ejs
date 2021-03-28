@@ -14,8 +14,12 @@
       <article class="user-code">
         <textarea id="code" name="submit_text"><%= userCode %></textarea>
         <script src="/javascript/codeMirrorEditor.js"></script>
-        <p class="title-box">Error Comment: </p>
-        <article class="error-comment">
+        <p class="title-box">result Comment: </p>
+        <article class="result-comment success">
+          전부 통과했습니다. 고생하셨습니다.
+          <form action="/" method="GET">
+            <button class="home-button" type="submit">홈으로</button>
+          </form>
         </article>
       </article>
       <article class="result-boxes">
@@ -33,9 +37,5 @@
         </ul>
       </article>
     </section>
-    <p class="end-comment">전부 통과했습니다. 고생하셨습니다.</p>
-    <form action="/" method="GET">
-      <button class="home-button" type="submit">홈으로</button>
-    </form>
   </body>
 </html>

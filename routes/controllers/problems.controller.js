@@ -40,12 +40,15 @@ Controller.checkCode = async function (req, res, next) {
 
     const results = testuserSubmitCode(userSubmitCode, testCases);
 
-    if (results.hasOwnProperty(PROBLEM.ERROR)) {
+    const isError = results.some(result =>
+      result.status === PROBLEM.ERROR
+    );
+
+    if (isError) {
       return res.render("failure",
         {
           userCode: userSubmitCode,
-          testCase: [],
-          error: results.error,
+          testCase: results,
         }
       );
     }
@@ -59,7 +62,6 @@ Controller.checkCode = async function (req, res, next) {
         {
           userCode: userSubmitCode,
           testCase: results,
-          error: null,
         }
       );
     }
@@ -70,7 +72,6 @@ Controller.checkCode = async function (req, res, next) {
       {
         userCode: userSubmitCode,
         testCase: results,
-        error: null,
       }
     );
   } catch (error) {

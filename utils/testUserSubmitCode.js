@@ -2,6 +2,8 @@ const { VM } = require("vm2");
 
 const checkTestResult = require("./checkTestResult");
 
+const PROBLEM = require("../constants/problemConstants");
+
 function testUserSubmitCode(submitCode, testCases) {
   const vm = new VM({
     sandbox: {},
@@ -21,7 +23,9 @@ function testUserSubmitCode(submitCode, testCases) {
       return checkTestResult(result, testCase);
     } catch (userSolutionError) {
       return {
-        error: userSolutionError.message,
+        solution: testCase.code,
+        resultValue: userSolutionError.message,
+        status: PROBLEM.ERROR,
       };
     }
   });

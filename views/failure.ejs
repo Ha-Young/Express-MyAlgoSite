@@ -14,9 +14,12 @@
       <article class="user-code">
         <textarea id="code" name="submit_text"><%= userCode %></textarea>
         <script src="/javascript/codeMirrorEditor.js"></script>
-        <p class="title-box">Error Comment: </p>
-        <article class="error-comment">
-          <%= error %>
+        <p class="title-box">Result Comment: </p>
+        <article class="result-comment">
+          테스트에 통과하지 못했습니다.
+          <form action="/" method="GET">
+            <button class="home-button" type="submit">홈으로</button>
+          </form>
         </article>
       </article>
       <article class="result-boxes">
@@ -24,7 +27,7 @@
         <ul class="result-info">
           <% testCase.forEach(result => { %>
             <li class="result-box">
-              <% if (result.status === "fail") { %>
+              <% if (result.status !== "success") { %>
                 <div class="fail-circle"></div>
                 <div class="solution">
                   <%= result.solution %>
@@ -41,9 +44,5 @@
         </ul>
       </article>
     </section>
-    <p class="end-comment">테스트에 통과하지 못했습니다.</p>
-    <form action="/" method="GET">
-      <button class="home-button" type="submit">홈으로</button>
-    </form>
   </body>
 </html>
