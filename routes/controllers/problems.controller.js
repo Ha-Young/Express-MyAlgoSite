@@ -32,7 +32,6 @@ exports.postProblem = async function (req, res, next) {
     const problem = await Problem.findById(problemId);
 
     const solutionResult = getResult(userCode, problem.tests);
-
     const { isAllPassed } = solutionResult;
 
     if (isAllPassed) {
