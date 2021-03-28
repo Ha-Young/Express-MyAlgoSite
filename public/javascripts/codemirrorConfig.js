@@ -1,6 +1,5 @@
 const editor = document.getElementById("editor");
-let textareaValue = editor.value;
-textareaValue = textareaValue.trim();
+const textareaValue = editor.value.trim();
 editor.value = textareaValue;
 
 const codemirror = new CodeMirror.fromTextArea(editor, {
