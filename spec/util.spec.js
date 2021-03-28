@@ -1,7 +1,6 @@
 const { expect } = require("chai");
 const getResult = require("../utils/getResult");
 
-
 const userCode = "function solution(n) { return n }";
 const tests = [
   {
