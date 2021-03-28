@@ -2,6 +2,7 @@ const User = require("../../models/User");
 const createError = require("http-errors");
 
 exports.signUp = async (req, res, next) => {
+  console.log(req.body);
   const user = new User(req.body);
 
   try {
@@ -10,13 +11,13 @@ exports.signUp = async (req, res, next) => {
   } catch (err) {
     if (err.code === 11000) {
       switch (Object.keys(err.keyValue)[0]) {
-        case "userId":
+        case "id":
           req.flash("validation", "duplicate ID");
           break;
-        case "userNickname":
+        case "nickname":
           req.flash("validation", "duplicate nickname");
           break;
-        case "userEmail":
+        case "email":
           req.flash("validation", "duplicate email");
           break;
         default :
@@ -26,7 +27,6 @@ exports.signUp = async (req, res, next) => {
       res.redirect("/users/signup");
       return;
     }
-
-    next(createError(500, "Internal Server Error"));
+    next(createError(500, "Internal Server"));
   }
 };
