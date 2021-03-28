@@ -24,7 +24,7 @@ exports.signUp = async (req, res, next) => {
           break;
       }
 
-      res.redirect("/users/signup");
+      res.status(422).redirect("/users/signup");
       return;
     }
     next(createError(500, "Internal Server"));
