@@ -52,7 +52,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  solved_problems: [solvedProblemSchema]
+  submitted_problems: [solvedProblemSchema]
 });
 
 userSchema.pre("save", async function (next) {

@@ -17,19 +17,17 @@ const testSchema = new mongoose.Schema({
   }
 });
 
-const completedUserSchema = new mongoose.Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User"
-  }
-})
-
 const ProblemSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true
   },
-  completed_users: [completedUserSchema],
+  completed_users: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
+    }
+  ],
   difficulty_level: {
     type: Number,
     required: true
