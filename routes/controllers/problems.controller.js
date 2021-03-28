@@ -11,15 +11,17 @@ exports.getProblems = async (req, res, next) => {
     const problems = await Problem.find();
     res.render("index", {
       problems,
-      nickname: currentUser.userNickname,
-      side: currentUser.userSide
+      user: {
+        nickname: currentUser.nickname,
+        side: currentUser.side
+      }
     });
   } catch (err) {
     next(createError(500, "Internal Server Error"));
   }
 };
 
-exports.getOneProblem = async (req, res, next) => {
+exports.getProblem = async (req, res, next) => {
   const problemId = req.params.problem_id;
   const currentUser = req.user;
 
@@ -38,8 +40,10 @@ exports.getOneProblem = async (req, res, next) => {
     res.render("problem", {
       problem,
       submittedProblem: user.problems[0],
-      nickname: currentUser.userNickname,
-      side: currentUser.userSide
+      user: {
+        nickname: currentUser.nickname,
+        side: currentUser.side
+      }
     });
   } catch (err) {
     next(createError(500, "Internal Server Error"));
@@ -86,8 +90,10 @@ exports.submitProblem = async (req, res, next) => {
           tests,
           resultList: result.resultList,
           answerList: result.answerList,
-          nickname: currentUser.userNickname,
-          side: currentUser.userSide
+          user: {
+            nickname: currentUser.nickname,
+            side: currentUser.side
+          }
         });
         return;
       }
@@ -114,8 +120,10 @@ exports.submitProblem = async (req, res, next) => {
 
       res.render("success", {
         message: "SUCCESS",
-        nickname: req.user.userNickname,
-        side: req.user.userSide
+        user: {
+          nickname: currentUser.nickname,
+          side: currentUser.side
+        }
       });
 
       return;
@@ -127,8 +135,10 @@ exports.submitProblem = async (req, res, next) => {
       resultList: null,
       answerList: null,
       error: result,
-      nickname: req.user.userNickname,
-      side: req.user.userSide
+      user: {
+        nickname: currentUser.nickname,
+        side: currentUser.side
+      }
     });
   } catch(err) {
     next(createError(500, "Internal Server Error"));

@@ -8,12 +8,12 @@
     <div class="right">
       <ul class="profile-list">
         <li class="nickname">
-          <% if (side === "LIGHT SIDE") { %>
+          <% if (user.side === "LIGHT SIDE") { %>
             <span class="light-saber-icon shake diagonal blue"></span>
           <% } else { %>
             <span class="light-saber-icon shake diagonal red"></span>
           <% } %>
-          <span>Hello, <%= nickname %></span>
+          <span>Hello, <%= user.nickname %></span>
         </li>
         <li class="logout">
           <form method="GET" action="/users/logout">
