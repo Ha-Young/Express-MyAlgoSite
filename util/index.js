@@ -8,6 +8,7 @@ exports.getResultOfCode = (tests, code) => {
     timeout: 5000,
     require: { external: false }
   });
+  let failureCount = 0;
 
   try {
     const resultList = [];
@@ -21,14 +22,15 @@ exports.getResultOfCode = (tests, code) => {
       if (compareResult) {
         resultList.push("success");
       } else {
+        failureCount++;
         resultList.push("failure");
       }
 
       answerList.push(result);
     }
 
-    return { resultList, answerList };
+    return { resultList, answerList, failureCount };
   } catch (err) {
-    return err;
+    return { err };
   }
 };

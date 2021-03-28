@@ -17,7 +17,7 @@
           <a class="problem-box" href="<%= `/problems/${problem._id}` %>">
             <p class="title"><%= problem.title %></p>
             <ul>
-              <li class="completed-users">completed_users: <%= problem.completed_users %></li>
+              <li class="completed-users">completed_users: <%= problem.completed_users.length %></li>
               <li class="level">level: <%= problem.difficulty_level %></li>
             </ul>
           </a>

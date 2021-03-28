@@ -29,7 +29,7 @@ exports.getProblem = async (req, res, next) => {
     const currentUser = await User.findOne({
       _id: user._id,
     }, {
-      solved_problems: {
+      submitted_problems: {
         $elemMatch: {
           problem: problem_id
         }
@@ -38,7 +38,7 @@ exports.getProblem = async (req, res, next) => {
 
     res.render("problem", {
       problem,
-      submittedProblem: currentUser.solved_problems[0],
+      submittedProblem: currentUser.submitted_problems[0],
       user: {
         nickname: user.nickname,
         side: user.side
@@ -55,34 +55,33 @@ exports.saveProblem = async (req, res, next) => {
   const { code } = req.body;
 
   try {
-    const solvedProblems = user.solved_problems;
+    const submittedProblems = user.submitted_problems;
     const problem = await Problem.findById(problem_id);
     const tests = problem.tests;
     const testResult = getResultOfCode(tests, code);
+    const isSubmitted = submittedProblems.find(obj => obj.problem.toString() === problem_id);
 
-    if (solvedProblems.findIndex(obj => obj.problem.toString() === problem_id) === -1) {
+    if (isSubmitted) {
+      await User.findOneAndUpdate({
+        _id: user._id,
+        "submitted_problems.problem": problem_id
+      }, {
+        "submitted_problems.$.code": code
+      });
+    } else {
       await User.findByIdAndUpdate(user._id, {
         $push: {
-          solved_problems: {
+          submitted_problems: {
             problem: problem_id,
             code,
             isSolved: false
           }
         }
       });
-    } else {
-      await User.findOneAndUpdate({
-        _id: user._id,
-        "problems.problem": problem_id
-      }, {
-        "problems.$.code": code
-      });
     }
 
-    if (Array.isArray(testResult.resultList)) {
-      const isFailed = testResult.resultList.includes("failure");
-
-      if (isFailed) {
+    if (testResult.resultList) {
+      if (testResult.failureCount > 0) {
         res.render("solutionResult", {
           id: problem_id,
           code,
@@ -98,23 +97,23 @@ exports.saveProblem = async (req, res, next) => {
       }
 
       const userInfo = await User.findOne({
-        _id: req.user._id,
-        "problems.problem": problem_id
+        _id: user._id,
+        "submitted_problems.problem": problem_id
       });
 
-      if (!userInfo.problems[0].isSolved) {
+      if (!userInfo.submitted_problems[0].isSolved) {
         await Problem.findByIdAndUpdate(problem_id, {
-          $inc: {
-            completed_users: 1
+          $push: {
+            completed_users: user._id
           }
         });
       }
 
       await User.findOneAndUpdate({
-        _id: req.user._id,
-        "solved_problems.problem": problem_id
+        _id: user._id,
+        "submitted_problems.problem": problem_id
       }, {
-        "solved_problems.$.isSolved": true
+        "submitted_problems.$.isSolved": true
       });
 
       res.render("success", {
@@ -133,7 +132,7 @@ exports.saveProblem = async (req, res, next) => {
       code,
       resultList: null,
       answerList: null,
-      error: testResult,
+      error: testResult.err,
       user: {
         nickname: user.nickname,
         side: user.side
