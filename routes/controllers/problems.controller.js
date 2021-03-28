@@ -42,7 +42,6 @@ exports.postProblem = async function (req, res, next) {
       await Problem.findOneAndUpdate(
         { _id: problemId },
         { $addToSet: { completed_users: [ userId ] } },
-        { new: true }
       );
 
       res.render("result", {
