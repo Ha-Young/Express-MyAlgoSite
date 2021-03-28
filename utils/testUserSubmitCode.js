@@ -2,7 +2,7 @@ const { VM } = require("vm2");
 
 const checkTestResult = require("./checkTestResult");
 
-function testUserSubmitCode(fetchedCode, testCases) {
+function testUserSubmitCode(submitCode, testCases) {
   const vm = new VM({
     sandbox: {},
     timeout: 10000,
@@ -10,25 +10,21 @@ function testUserSubmitCode(fetchedCode, testCases) {
     wasm: false,
   });
 
-  let resultList = [];
-
-  for (let i = 0; i < testCases.length; i++) {
-    const testCase = testCases[i];
-
+  const resultList = testCases.map(testCase => {
     try {
       const result = vm.run(
-        `solution = ${fetchedCode};
+        `solution = ${submitCode}
 
         ${testCase.code};`
       );
 
-      resultList.push(checkTestResult(result, testCase));
+      return checkTestResult(result, testCase);
     } catch (userSolutionError) {
       return {
         error: userSolutionError.message,
       };
     }
-  }
+  });
 
   return resultList;
 }
