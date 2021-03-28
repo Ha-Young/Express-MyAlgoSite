@@ -22,10 +22,8 @@ function getResult(userCode, tests) {
       resultList.push(result);
     }
 
-    const isAllPassed = resultList.every(result => result.isPassed);
-
     return {
-      isAllPassed,
+      isAllPassed: resultList.every(result => result.isPassed),
       resultList,
       solutionError: false,
     }
