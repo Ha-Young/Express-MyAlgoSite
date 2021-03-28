@@ -1,7 +1,7 @@
 const { VM } = require("vm2");
 const deepEqual = require("fast-deep-equal");
 
-export default checkSolution = (tests, code) => {
+exports.getResultOfCode = (tests, code) => {
   const vm = new VM({
     console: "inherit",
     compiler: "javascript",
