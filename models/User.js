@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Problem = require("./Problem");
 const bcrypt = require("bcrypt");
 
 /*
@@ -9,7 +10,7 @@ const bcrypt = require("bcrypt");
 const solvedProblemSchema = new mongoose.Schema({
   problem: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: "Problem",
     required: true
   },
   code: {
@@ -24,57 +25,49 @@ const solvedProblemSchema = new mongoose.Schema({
 })
 
 const userSchema = new mongoose.Schema({
-  userName: {
+  name: {
     type: String,
     required: true
   },
-  userNickname: {
-    type: String,
-    unique: true,
-    required: true
-  },
-  userId: {
+  nickname: {
     type: String,
     unique: true,
     required: true
   },
-  userPassword: {
+  id: {
+    type: String,
+    unique: true,
+    required: true
+  },
+  password: {
     type: String,
     required: true,
   },
-  userEmail: {
+  email: {
     type: String,
     unique: true,
     required: true
   },
-  userSide: {
+  side: {
     type: String,
     required: true,
   },
-  problems: [ solvedProblemSchema ]
+  problems: [solvedProblemSchema]
 });
 
-userSchema.pre("save", function(next) {
+userSchema.pre("save", async function (next) {
   const user = this;
 
-  if (user.isModified("userPassword")) {
-    bcrypt.genSalt(10, (err, salt) => {
-      if (err) {
-        next(err);
-        return;
-      }
-
-      bcrypt.hash(user.userPassword, salt, (err, hash) => {
-        if (err) {
-          next(err);
-          return;
-        }
-
-        user.userPassword = hash;
-        next();
-      });
-    });
+  if (user.isModified("password")) {
+    try {
+      const salt = bcrypt.genSaltSync(10);
+      const hash = bcrypt.hashSync(user.password, salt);
+      user.password = hash;
+      next();
+    } catch (err) {
+      next(err);
+    }
   }
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model("User", userSchema);

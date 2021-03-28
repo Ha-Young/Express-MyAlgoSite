@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const User = require("./User");
 
 /*
 
@@ -16,20 +17,19 @@ const testSchema = new mongoose.Schema({
   }
 });
 
+const completedUserSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  }
+})
+
 const ProblemSchema = new mongoose.Schema({
-  id: {
-    type: Number,
-    unique: true,
-    required: true
-  },
   title: {
     type: String,
     required: true
   },
-  completed_users: {
-    type: Number,
-    required: true
-  },
+  completed_users: [completedUserSchema],
   difficulty_level: {
     type: Number,
     required: true
@@ -38,7 +38,7 @@ const ProblemSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  tests: [ testSchema ]
+  tests: [testSchema]
 });
 
-module.exports = mongoose.model('Problem', ProblemSchema);
+module.exports = mongoose.model("Problem", ProblemSchema);
