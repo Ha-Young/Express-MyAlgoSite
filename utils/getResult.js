@@ -21,7 +21,7 @@ function getResult(userCode, problem) {
       if (result.testResult === result.expectedResult) {
         result.isPassed = true;
       } else {
-        result.isFailed = true;
+        result.isPassed = false;
       }
 
       resultList.push(result);

@@ -6,7 +6,7 @@
   <div class="failure-container">
     <% resultList.forEach(result => { %>
       <div>
-        <% if (result.isFailed) { %>
+        <% if (!result.isPassed) { %>
           <span class="fail">
             Expected: <%= result.expectedResult %>
           </span>
