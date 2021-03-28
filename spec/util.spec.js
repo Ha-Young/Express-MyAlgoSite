@@ -1,4 +1,3 @@
-const request = require("supertest");
 const { expect } = require("chai");
 const getResult = require("../utils/getResult");
 
