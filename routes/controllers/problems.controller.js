@@ -33,12 +33,7 @@ exports.postProblem = async function (req, res, next) {
 
     const solutionResult = getResult(userCode, problem);
 
-    const {
-      isAllPassed,
-      hasSolutionError,
-      resultList,
-      solutionErrorMessage,
-    } = solutionResult;
+    const { isAllPassed } = solutionResult;
 
     if (isAllPassed) {
       await Problem.findOneAndUpdate(
@@ -57,15 +52,11 @@ exports.postProblem = async function (req, res, next) {
     }
 
     res.status(200).render("result", {
-      isAllPassed,
-      solutionError: hasSolutionError
-        ? { message: solutionErrorMessage}
-        : null,
-      resultList: hasSolutionError ? null : resultList,
+      ...solutionResult,
       userCode,
       problem,
       user: req.user,
-    });
+    })
   } catch (err) {
     next(createError(500, "Internal Server Error"));
   }

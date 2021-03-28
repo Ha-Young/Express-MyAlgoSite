@@ -32,13 +32,15 @@ function getResult(userCode, problem) {
     return {
       isAllPassed,
       resultList,
-      hasSolutionError: false,
+      hasSolutionError: null,
+      solutionError: false,
     }
   } catch (err) {
     return {
-      solutionErrorMessage: err.message,
-      hasSolutionError: true,
       isAllPassed: false,
+      resultList: null,
+      hasSolutionError: true,
+      solutionError: err,
     }
   }
 }
