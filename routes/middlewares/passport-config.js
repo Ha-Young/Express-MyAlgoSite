@@ -5,12 +5,12 @@ const createError = require("http-errors");
 
 const initialize = (passport) => {
   const customFields = {
-    usernameField: "userId",
-    passwordField: "userPassword"
+    usernameField: "id",
+    passwordField: "password"
   };
 
   const authenticateUser = async (id, password, done) => {
-    const user = await User.findOne({ userId: id });
+    const user = await User.findOne({ id: id });
 
     if (user === null) {
       done(null, false, { message: "You're not our member" });
@@ -18,7 +18,7 @@ const initialize = (passport) => {
     }
 
     try {
-      if (await bcrypt.compare(password, user.userPassword)) {
+      if (await bcrypt.compare(password, user.password)) {
         done(null, user);
         return;
       } else {
@@ -38,7 +38,7 @@ const initialize = (passport) => {
 
   passport.deserializeUser(async (id, done) => {
     try {
-      const user = await User.findById(id);
+      const user = await User.findOne({ id });
       done(null, user);
     } catch (err) {
       done(createError(500, "Internal Server Error"));
