@@ -5,6 +5,6 @@ const problemsController = require("./controllers/problems.controller");
 
 router.get("/:problem_id", isAuth, problemsController.getProblem);
 
-router.post("/:problem_id", isAuth, problemsController.submitProblem);
+router.post("/:problem_id", isAuth, problemsController.saveProblem);
 
 module.exports = router;
