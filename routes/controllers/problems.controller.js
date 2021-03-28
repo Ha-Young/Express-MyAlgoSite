@@ -1,12 +1,14 @@
+const createError = require('http-errors');
+const vm = require('vm');
 const Problem = require('../../models/Problem');
 const { getTestCaseById, updateCompletedUser } = require('../../util/QueryPlugin');
-const vm = require('vm');
 
 exports.getAll = async function (req, res) {
   await Problem.find().lean()
   .exec(function (err, problems) {
     if (err) {
-      return next(err.message);
+      next(createError(err.status));
+      return;
     }
 
     res.locals.user = req.user;
@@ -14,12 +16,21 @@ exports.getAll = async function (req, res) {
   });
 };
 
-exports.getOne = async function (req, res) {
-  await Problem.findOne({ id: req.params.problem_id })
-  .lean()
-  .exec(function (err, problem) {
-    res.render('partial/problemView', { problem, user: req.user });
-  });
+exports.getOne = async function (req, res, next) {
+  try {
+    const problem = await Problem.find({ id: req.params.problem_id }).lean();
+    if (!problem.length) {
+      next(createError(404));
+      return;
+    }
+
+    res.render('partial/problemView', {
+      problem: problem[0],
+      user: req.user
+    });
+  } catch (err) {
+    next(createError(500));
+  }
 };
 
 exports.post = async function (req, res) {
@@ -47,6 +58,6 @@ exports.post = async function (req, res) {
       res.render('partial/failure', { result, testCases });
     }
   } catch (err) {
-    res.render('error', err.message);
+    next(createError(500));
   }
 };

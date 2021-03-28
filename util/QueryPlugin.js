@@ -19,7 +19,7 @@ const storeMockProblems = async () => {
 
 const deleteAllProblems = async () => {
   await Problem.deleteMany({}, (err) => {
-    if (err) console.log(err.message);
+    if (err) throw new Error(err.message);
   });
 };
 
@@ -40,7 +40,7 @@ const updateCompletedUser = async (problemId, userId) => {
       { $addToSet: { completed_problems: problemId }},
     );
   } catch (err) {
-    console.log(err.message);
+    throw new Error(err.message);
   }
 };
 

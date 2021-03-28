@@ -1,10 +1,8 @@
 const problemForm = document.querySelector('.problem_form');
 const problemTextArea = document.querySelector('.problem_textarea');
 
-let codeMirror;
-
 if (problemForm) {
-  codeMirror = CodeMirror.fromTextArea(problemTextArea, {
+  CodeMirror.fromTextArea(problemTextArea, {
     mode: 'javascript',
     tabSize: 2,
     lineNumbers: true,

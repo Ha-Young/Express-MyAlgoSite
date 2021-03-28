@@ -8,19 +8,29 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
   googleId: {
     type: String,
-    index: true
+    index: true,
+    unique: true,
+    required: true
   },
   name: {
-    familyName: String,
-    givenName: String
+    familyName: {
+      type: String,
+      required: true
+    },
+    givenName: {
+      type: String,
+      required: true
+    }
   },
-  photos: [{}],
-  locale: String,
-  completed_problems: [Number],
-  publishedAt: {
-    type: Date,
-    default: Date.now
-  }
-});
+  photos: [{ String }],
+  locale: {
+    type: String,
+    default: 'kr'
+  },
+  completed_problems: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Problem'
+  }],
+}, {timestamps: true});
 
 module.exports = mongoose.model('User', userSchema);

@@ -76,6 +76,8 @@ yarn run dev or npm run dev
 * Deploy your Express application
 * Deploy your MongoDB using cloud services: [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/lp/general)
 
+  - [ ] `/problems/:problem_id` 에러 처리
+
 #### Resources
 
 - [Unit Testing Express Controller Part 1](https://www.techighness.com/post/unit-testing-expressjs-controller-part-1/)
