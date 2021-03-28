@@ -2,9 +2,9 @@ const PROBLEM = require("../constants/problemConstants");
 
 function checkTestResult(result, testCase) {
   const testCode = testCase.code;
-  const correntValue = testCase.solution;
+  const currentValue = testCase.solution;
 
-  if (result !== correntValue) {
+  if (result !== currentValue) {
     const failTestCode = {
       solution: testCode,
       resultValue: String(result),

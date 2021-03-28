@@ -2,7 +2,7 @@ const { VM } = require("vm2");
 
 const checkTestResult = require("./checkTestResult");
 
-function testFetchedCode(fetchedCode, testCases) {
+function testUserSubmitCode(fetchedCode, testCases) {
   const vm = new VM({
     sandbox: {},
     timeout: 10000,
@@ -33,4 +33,4 @@ function testFetchedCode(fetchedCode, testCases) {
   return resultList;
 }
 
-module.exports = testFetchedCode;
+module.exports = testUserSubmitCode;

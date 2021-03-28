@@ -1,5 +1,5 @@
 const Problem = require("../../models/Problem");
-const testFetchedCode = require("../../utils/testFetchedCode");
+const testuserSubmitCode = require("../../utils/testuserSubmitCode");
 const updateSuccessUser = require("../../utils/updateSuccessUser");
 const handleError = require("../../utils/handleError");
 
@@ -32,7 +32,7 @@ Controller.showProblem = async function (req, res, next) {
 Controller.checkCode = async function (req, res, next) {
   const currentUserId = req.user.id;
   const problemId = req.params.problem_id;
-  const fetchedCode = req.body.submit_text;
+  const userSubmitCode = req.body.submit_text;
 
   try {
     const problem = await Problem.findById(problemId);
@@ -40,12 +40,12 @@ Controller.checkCode = async function (req, res, next) {
 
     let isFail = false;
 
-    const results = testFetchedCode(fetchedCode, testCases);
+    const results = testuserSubmitCode(userSubmitCode, testCases);
 
     if (results.hasOwnProperty(PROBLEM.ERROR)) {
       return res.render("failure",
         {
-          userCode: fetchedCode,
+          userCode: userSubmitCode,
           testCase: [],
           error: results.error,
         }
@@ -61,7 +61,7 @@ Controller.checkCode = async function (req, res, next) {
     if (isFail) {
       return res.render("failure",
         {
-          userCode: fetchedCode,
+          userCode: userSubmitCode,
           testCase: results,
           error: null,
         }
@@ -72,7 +72,7 @@ Controller.checkCode = async function (req, res, next) {
 
     res.render("success",
       {
-        userCode: fetchedCode,
+        userCode: userSubmitCode,
         testCase: results,
       }
     );
