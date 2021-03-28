@@ -2,25 +2,22 @@ const vm = require("vm");
 
 function getResult(userCode, tests) {
   try {
-    const resultList = [];
     const context = { result: 0 };
 
     vm.createContext(context);
 
-    for (let i = 0; i < tests.length; i++) {
-      const code = userCode + "result=" + tests[i].code;
+    const resultList = tests.map(test => {
+      const code = userCode + "result=" + test.code;
       const script = new vm.Script(code);
 
       script.runInContext(context);
 
-      const result = {
+      return {
         testResult: context.result,
-        expectedResult: tests[i].solution,
-        isPassed: context.result === tests[i].solution,
+        expectedResult: test.solution,
+        isPassed: context.result === test.solution,
       };
-
-      resultList.push(result);
-    }
+    });
 
     return {
       isAllPassed: resultList.every(result => result.isPassed),
