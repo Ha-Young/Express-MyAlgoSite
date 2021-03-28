@@ -10,6 +10,4 @@ const editor = CodeMirror.fromTextArea(
   },
 );
 
-editor.setValue(`function solution() {\n\n}`);
-
 module.exports = editor;

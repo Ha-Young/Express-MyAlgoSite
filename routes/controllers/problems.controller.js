@@ -70,6 +70,7 @@ Controller.checkCode = async function (req, res, next) {
       {
         userCode: userSubmitCode,
         testCase: results,
+        error: null,
       }
     );
   } catch (error) {

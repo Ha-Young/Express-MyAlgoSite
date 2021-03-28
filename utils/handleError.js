@@ -13,9 +13,6 @@ function handleError(errorStatus, error) {
     case 404:
       return createError(404, ERROR_MESSAGE.NOT_FOUND);
 
-    case 500:
-      return createError(500, ERROR_MESSAGE.SERVER_ERROR);
-
     default:
       return createError(500, ERROR_MESSAGE.SERVER_ERROR);
   }
