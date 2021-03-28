@@ -35,7 +35,7 @@ exports.postProblem = async function (req, res, next) {
       isAllPassed,
       hasSolutionError,
       resultList,
-      errorMessage
+      solutionErrorMessage,
     } = solutionResult;
 
     if (isAllPassed) {
@@ -54,25 +54,16 @@ exports.postProblem = async function (req, res, next) {
       return;
     }
 
-    if (hasSolutionError) {
-      res.render("result", {
-        isAllPassed: false,
-        hasSolutionError,
-        message: errorMessage,
-        userCode: userCode,
-        problem: problem,
-        user: req.user,
-      });
-    } else {
-      res.render("result", {
-        isAllPassed,
-        hasSolutionError: false,
-        resultList,
-        userCode: userCode,
-        problem: problem,
-        user: req.user,
-      });
-    }
+    res.render("result", {
+      isAllPassed,
+      solutionError: hasSolutionError
+        ? { message: solutionErrorMessage}
+        : null,
+      resultList: hasSolutionError ? null : resultList,
+      userCode,
+      problem,
+      user: req.user,
+    });
   } catch (err) {
     next(createError(500, "Internal Server Error"));
   }

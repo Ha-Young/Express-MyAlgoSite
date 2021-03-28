@@ -36,8 +36,10 @@ function getResult(userCode, problem) {
     }
   } catch (err) {
     return {
-      errorMessage: err.message,
+      solutionErrorMessage: err.message,
+      error: err,
       hasSolutionError: true,
+      isAllPassed: false,
     }
   }
 }

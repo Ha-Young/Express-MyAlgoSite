@@ -1,6 +1,6 @@
-<% if (hasSolutionError) { %>
+<% if (solutionError) { %>
   <div class="code-error">
-    <p><%= message %></p>
+    <p><%= solutionError.message %></p>
   </div>
 <%} else {%>
   <div class="failure-container">
