@@ -32,14 +32,12 @@ function getResult(userCode, tests) {
     return {
       isAllPassed,
       resultList,
-      hasSolutionError: null,
       solutionError: false,
     }
   } catch (err) {
     return {
       isAllPassed: false,
       resultList: null,
-      hasSolutionError: true,
       solutionError: err,
     }
   }
