@@ -16,13 +16,8 @@ function getResult(userCode, tests) {
       const result = {
         testResult: context.result,
         expectedResult: tests[i].solution,
+        isPassed: context.result === tests[i].solution,
       };
-
-      if (result.testResult === result.expectedResult) {
-        result.isPassed = true;
-      } else {
-        result.isPassed = false;
-      }
 
       resultList.push(result);
     }
