@@ -1,8 +1,7 @@
 const Problem = require("../../models/Problem");
 const User = require("../../models/User");
 const createError = require("http-errors");
-const { VM } = require("vm2");
-const deepEqual = require("fast-deep-equal");
+const checkSolution = reqruie("../../util");
 
 exports.getProblems = async (req, res, next) => {
   const currentUser = req.user;
@@ -50,7 +49,7 @@ exports.getProblem = async (req, res, next) => {
   }
 };
 
-exports.submitProblem = async (req, res, next) => {
+exports.saveProblem = async (req, res, next) => {
   const problemId = req.params.problem_id;
   const currentUser = req.user;
   const code = req.body.code;
@@ -64,7 +63,7 @@ exports.submitProblem = async (req, res, next) => {
     if (solvedProblems.findIndex(obj => obj.problem.toString() === problemId) === -1) {
       await User.findByIdAndUpdate(currentUser._id, {
         $push: {
-          problems: {
+          solved_problems: {
             problem: problemId,
             code,
             isSolved: false
@@ -113,9 +112,9 @@ exports.submitProblem = async (req, res, next) => {
 
       await User.findOneAndUpdate({
         _id: req.user._id,
-        "problems.problem": problemId
+        "solved_problems.problem": problemId
       }, {
-        "problems.$.isSolved": true
+        "solved_problems.$.isSolved": true
       });
 
       res.render("success", {
@@ -144,35 +143,3 @@ exports.submitProblem = async (req, res, next) => {
     next(createError(500, "Internal Server Error"));
   }
 };
-
-function checkSolution (tests, code) {
-  const vm = new VM({
-    console: "inherit",
-    compiler: "javascript",
-    timeout: 5000,
-    require: { external: false }
-  });
-
-  try {
-    const resultList = [];
-    const answerList = [];
-
-    for (const test of tests) {
-      const testCode = code + test.code;
-      const result = vm.run(testCode);
-      const compareResult = deepEqual(result, test.solution);
-
-      if (compareResult) {
-        resultList.push("success");
-      } else {
-        resultList.push("failure");
-      }
-
-      answerList.push(result);
-    }
-
-    return { resultList, answerList };
-  } catch (err) {
-    return err;
-  }
-}
