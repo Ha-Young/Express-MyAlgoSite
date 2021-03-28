@@ -31,13 +31,12 @@ function getResult(userCode, problem) {
 
     return {
       isAllPassed,
-      resultList: resultList,
+      resultList,
       hasSolutionError: false,
     }
   } catch (err) {
     return {
       solutionErrorMessage: err.message,
-      error: err,
       hasSolutionError: true,
       isAllPassed: false,
     }

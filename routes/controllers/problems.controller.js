@@ -7,7 +7,7 @@ exports.getAll = async function (req, res, next) {
   try {
     const problems = await Problem.find();
     res.status(200);
-    res.render("index", { problems: problems, user: req.user });
+    res.render("index", { problems, user: req.user });
   } catch (err) {
     next(createError(500, "Internal Server Error"));
   }
@@ -18,7 +18,7 @@ exports.getProblem = async function (req, res, next) {
     const problemId = req.params.problem_id;
     const problem = await Problem.findById(problemId);
     res.status(200);
-    res.render("problem", { problem: problem, user: req.user });
+    res.render("problem", { problem, user: req.user });
   } catch (err) {
     next(createError(500, "Internal Server Error"));
   }
@@ -48,8 +48,8 @@ exports.postProblem = async function (req, res, next) {
 
       res.status(200).render("result", {
         isAllPassed,
-        userCode: userCode,
-        problem: problem,
+        userCode,
+        problem,
         user: req.user,
       });
 
