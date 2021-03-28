@@ -8,7 +8,7 @@ const authenticateUser = require("./middlewares/autheticate");
 
 const router = express.Router();
 
-router.get("/", authenticateUser, problemsController.getAll);
+router.get("/", authenticateUser, problemsController.getAllProblems);
 
 router.use("/login", authRouter);
 

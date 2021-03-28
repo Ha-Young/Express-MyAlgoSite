@@ -7,7 +7,7 @@ const PROBLEM = require("../../constants/problemConstants");
 
 const Controller = {};
 
-Controller.getAll = async function (req, res, next) {
+Controller.getAllProblems = async function (req, res, next) {
   try {
     const problems = await Problem.find();
 
