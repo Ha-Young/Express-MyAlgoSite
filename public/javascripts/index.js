@@ -2,14 +2,18 @@ const canvas = document.getElementById("scene");
 const ctx = canvas.getContext("2d");
 const particles = [];
 
+const png = new Image();
+png.crossOrigin = "anonymous";
+png.src = "/images/codewars.png";
+
 function drawScene() {
   canvas.width = png.width * 3.5;
   canvas.height = png.height * 3.5;
   ctx.drawImage(png, 0, 0);
-  const my_gradient = ctx.createLinearGradient(0, 170, 170, 0);
-  my_gradient.addColorStop(1, "#e32c2c");
+  const myGradient = ctx.createLinearGradient(0, 170, 170, 0);
+  myGradient.addColorStop(1, "#e32c2c");
 
-  ctx.fillStyle = my_gradient;
+  ctx.fillStyle = myGradient;
   const data = ctx.getImageData(0, 0, png.width, png.height);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   for (let y = 0, y2 = data.height; y < y2; y++) {
@@ -52,7 +56,4 @@ const render = function () {
   requestAnimationFrame(render);
 };
 
-const png = new Image();
-png.crossOrigin = "anonymous";
 png.onload = drawScene;
-png.src = "/images/codewars.png";

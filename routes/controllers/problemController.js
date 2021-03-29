@@ -3,6 +3,7 @@ const createError = require("http-errors");
 
 const Problem = require("../../models/Problem");
 const errorMessage = require("../../constants/errorMessage");
+const User = require("../../models/User");
 
 exports.renderProblemPageById = async function (req, res, next) {
   try {
@@ -16,24 +17,31 @@ exports.renderProblemPageById = async function (req, res, next) {
 };
 
 exports.getUserScript = async function (req, res, next) {
+  console.log(req.user);
   try {
     const requestedId = req.params.id;
     const fetchedProblem = await Problem.findById(requestedId);
     const fetchedTests = fetchedProblem.tests;
-    const userScript = req.body.solution;
 
+    const userScript = req.body.solution;
     const testResults = runTest(fetchedTests, userScript);
 
-    isAllPassed(testResults)
-      ? res.status(200).render("sucess", { testResults: testResults })
-      : res.status(200).render("failure", { testResults: testResults });
+    if (isAllPassed(testResults)) {
+      const findedUser = await User.findById(req.user._id);
+      await findedUser.completedProblems.push(fetchedProblem);
+      await findedUser.save();
+
+      return res.status(200).render("sucess", { testResults });
+    }
+
+    res.status(200).render("failure", { testResults });
   } catch (error) {
     const createdError = createError(500, errorMessage.SERVER_ERROR);
     next(createdError);
   }
 };
 
-function checkUserSolution(userSolutionResult, testSolutionResult) {
+function isPassedTest(userSolutionResult, testSolutionResult) {
   return userSolutionResult === testSolutionResult ? true : false;
 }
 
@@ -56,10 +64,7 @@ function runTest(fetchedTests, userScript) {
       const userSolution = userScript + testScript;
       const userSolutionResult = vm2.run(userSolution);
 
-      const testResult = checkUserSolution(
-        userSolutionResult,
-        testSolutionResult
-      );
+      const testResult = isPassedTest(userSolutionResult, testSolutionResult);
 
       testResults.push(testResult);
     });

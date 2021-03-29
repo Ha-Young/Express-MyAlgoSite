@@ -1,9 +1,11 @@
+const { string } = require("joi");
 const mongoose = require("mongoose");
 
 const ProblemSchema = new mongoose.Schema({
   id: {
     type: Number,
     required: true,
+    unique: true,
   },
   title: {
     type: String,
@@ -23,7 +25,12 @@ const ProblemSchema = new mongoose.Schema({
     max: 1024,
   },
   tests: {
-    type: Array,
+    type: [
+      {
+        code: String,
+        solution: String,
+      },
+    ],
   },
 });
 

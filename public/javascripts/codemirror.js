@@ -1,8 +1,8 @@
-const cm = new CodeMirror.fromTextArea(document.getElementById("editor"), {
+const editor = new CodeMirror.fromTextArea(document.getElementById("editor"), {
   lineNumbers: true,
   mode: "javascript",
   theme: "dracula",
   lineWrapping: false,
 });
 
-cm.setSize("100%", "100%");
+editor.setSize("100%", "100%");

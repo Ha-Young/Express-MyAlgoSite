@@ -10,13 +10,7 @@ dotenv.config();
 const UserModel = require("../models/User");
 
 const extractCookie = (req) => {
-  let jwt = null;
-
-  if (req && req.cookies) {
-    jwt = req.cookies["jwt"];
-  }
-
-  return jwt;
+  return req.cookies ? req.cookies["jwt"] : null;
 };
 
 module.exports = () => {
