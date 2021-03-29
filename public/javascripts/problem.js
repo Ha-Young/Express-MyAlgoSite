@@ -30,9 +30,9 @@ function convertDescStrToHTMLStr() {
   const descElement = document.querySelector(".problem-desc");
 
   const htmlStr = descElement.innerHTML
-    .replaceAll("&lt;", "<")
-    .replaceAll("&gt;", ">")
-    .replaceAll("&amp;quot;", '"');
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(/&amp;quot;/gi, '"');
 
   descElement.innerHTML = htmlStr;
 }
