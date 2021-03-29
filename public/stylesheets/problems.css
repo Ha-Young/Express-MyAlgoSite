@@ -85,3 +85,56 @@
   width: 1em;
   height: 1em;
 }
+
+.problem-list-filter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.filter-lv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+}
+
+.filter-lv a {
+  text-decoration: none;
+}
+
+.filter-item {
+  padding: 10px;
+  color:#4ec7f3;
+  cursor: pointer;
+  position: relative;
+}
+
+.filter-item:hover {
+  color: rgba(78, 199, 243, 0.8);
+}
+
+.effect-underline:after {
+	content: '';
+  position: absolute;
+  left: 0;
+  top: 10;
+  display: inline-block;
+  height: 1em;
+  width: 100%;
+  border-bottom: 1px solid;
+  margin-top: 10px;
+  opacity: 0;
+	-webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+	transition: opacity 0.35s, transform 0.35s;
+	-webkit-transform: scale(0,1);
+	transform: scale(0,1);
+}
+
+.effect-underline:hover:after {
+  opacity: 1;
+	-webkit-transform: scale(1);
+	transform: scale(1);
+}
