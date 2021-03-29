@@ -24,7 +24,9 @@
         </div>
 
         <textarea class="test-case-area"><% for (const test of problem.tests) { %>
-  <%= test.code %> : <%= test.solution %><% } %></textarea>
+          <% if (test) { %>
+            <%= test.code %> : <%= test.solution %><% } %></textarea>
+          <% } %>
       </div>
     </div>
     <div class="horizontal-split-bar"></div>
