@@ -9,6 +9,7 @@ const joiUserSchema = joi.object({
   email: joi.string().email().required(),
   password: joi.string().required(),
   name: joi.string().required(),
+  isAdmin: joi.boolean(),
 });
 
 const UserSchema = new mongoose.Schema(joigoose.convert(joiUserSchema));
