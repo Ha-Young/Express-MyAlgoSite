@@ -1,14 +1,17 @@
 const { Router } = require("express");
 
 const ProblemController = require("./controllers/problems");
+const adminCheck = require("./middlewares/adminCheck");
 const loginCheck = require("./middlewares/loginCheck");
 
 const route = Router();
 
-module.exports = function authRouter(app) {
+module.exports = function problemRouter(app) {
   app.use('/problems', loginCheck, route);
 
+  route.get("/create", adminCheck, ProblemController.viewCreateProblem);
   route.get("/:problem_id", ProblemController.viewProblem);
 
   route.post("/:problem_id", ProblemController.solveProblem);
+  route.post("/create", adminCheck, ProblemController.createProblem);
 };

@@ -43,8 +43,6 @@ exports.solveProblem = async function (req, res, next) {
       }
     }
 
-    console.log(checkAnswerCases);
-
     checkAnswerCases.forEach((testCase, index) => {
       if (!testCase) {
         return;
@@ -107,4 +105,13 @@ exports.solveProblem = async function (req, res, next) {
   } catch (err) {
     return next(err);
   }
+};
+
+exports.viewCreateProblem = function (req, res, next) {
+  res.render("pages/problemCreate");
+};
+
+exports.createProblem = function (req, res, next) {
+  console.log('here');
+  console.log('createProblem', req.body);
 };

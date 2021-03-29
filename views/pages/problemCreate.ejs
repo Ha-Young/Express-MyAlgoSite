@@ -1,0 +1,25 @@
+<div class="form_wrapper">
+  <form class="form-common" action="/problems/create" method="POST">
+    <h3>Create Problem</h3>
+    <h4>input problem information</h4>
+
+    <fieldset>
+      <input placeholder="Problem Title" name="title" type="text" tabindex="2" required>
+    </fieldset>
+    <fieldset>
+      <input placeholder="Level" name="level" type="number" tabindex="3" required>
+    </fieldset>
+    <fieldset>
+      <textarea id="simpleMDE" class="problem-desc" name="description"tabindex="4" required>Description</textarea>
+    </fieldset>
+    <fieldset>
+      <button type="submit">Create</button>
+    </fieldset>
+    <fieldset>
+      <a href="/"><button type="button" class="cancel-btn">Cancel</button></a>
+    </fieldset>
+  </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+<script src="/javascripts/problemCreate.js"></script>

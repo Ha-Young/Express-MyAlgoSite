@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="/stylesheets/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.6.0/codemirror.min.css" />
     <link rel="stylesheet" href="https://codemirror.net/theme/base16-light.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+
     <script src="https://kit.fontawesome.com/112b878a37.js" crossorigin="anonymous"></script>
     <title>Code Wars</title>
   </head>
@@ -27,11 +29,11 @@
           </div>
         </div>
       </div>
-      <div class="user-info">
+      <div class="user-info header-column align-right">
         <% if (user.isAdmin) {%>
-          <a href="/problem/create"><button class="problem-create-btn">Add Problem</button></a>
+          <a href="/problems/create"><button class="problem-create-btn">Add Problem</button></a>
         <% } %>
-        <form class="user-info-form header-column" action="/logout" method="POST">
+        <form class="user-info-form " action="/logout" method="POST">
           <% if (user.name) {%>
             <h3>Hello, <span class="user-name"><%= user.name %></span></h3>
             <button class="logout-btn" type="submit">logout</button>
