@@ -120,6 +120,7 @@ exports.createProblem = async function (req, res, next) {
     description,
     testcase,
     argument,
+    img,
     result_type,
   } = req.body;
 
@@ -133,6 +134,7 @@ exports.createProblem = async function (req, res, next) {
       tests,
       argument,
       result_type,
+      img,
       completed_users: 0,
     });
 
@@ -144,8 +146,6 @@ exports.createProblem = async function (req, res, next) {
 
 exports.deleteProblem = async function (req, res, next) {
   const { problem_id: problemId } = req.params;
-
-  console.log('hi');
 
   try {
     await Problem.findByIdAndDelete(problemId);
