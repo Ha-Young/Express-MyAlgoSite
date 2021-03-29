@@ -1,14 +1,16 @@
 const { VM } = require("vm2");
+const marked = require("marked");
 
 const Problem = require("../../models/Problem");
 
 exports.viewProblem = async function (req, res, next) {
   const { problem_id: problemId } = req.params;
+  const isAdmin = req.user.isAdmin || false;
 
   try {
-    const problem = await Problem.findOne({ id: problemId }).lean();
+    const problem = await Problem.findOne({ _id: problemId }).lean();
 
-    res.render("pages/problem", { problem, result: {} });
+    res.render("pages/problem", { problem, result: {}, isAdmin });
 
   } catch (err) {
     next(err);
@@ -25,7 +27,7 @@ exports.solveProblem = async function (req, res, next) {
   } = req.body;
 
   try {
-    const problem = await Problem.findOne({ id: problemId }).lean();
+    const problem = await Problem.findOne({ _id: problemId }).lean();
 
     const caseResultList = [];
     let collectCaseCount = 0;
@@ -111,7 +113,54 @@ exports.viewCreateProblem = function (req, res, next) {
   res.render("pages/problemCreate");
 };
 
-exports.createProblem = function (req, res, next) {
-  console.log('here');
-  console.log('createProblem', req.body);
+exports.createProblem = async function (req, res, next) {
+  const {
+    title,
+    difficulty_level,
+    description,
+    testcase,
+    argument,
+    result_type,
+  } = req.body;
+
+  const tests = convertTestCaseStrToList(testcase);
+
+  try {
+    const newProblem = await Problem.create({
+      title,
+      difficulty_level: Number(difficulty_level),
+      description: marked(description),
+      tests,
+      argument,
+      result_type,
+      completed_users: 0,
+    });
+
+    res.redirect("/");
+  } catch (err) {
+    next(err);
+  }
 };
+
+function convertTestCaseStrToList(testCaseStr) {
+  const testCaseStrList = testCaseStr.split("\n");
+
+  return testCaseStrList.map(str => {
+    const [code, solution] = str.split(":");
+
+    if (!code || !solution) {
+      return null;
+    }
+
+    return {
+      code: code.trim(),
+      solution: getValueOfType(solution),
+    };
+  });
+}
+
+function getValueOfType(solution) {
+  return solution.indexOf('"') > -1
+    ? solution.trim()
+    : JSON.parse(solution);
+}

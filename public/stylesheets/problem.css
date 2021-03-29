@@ -261,3 +261,12 @@ td[colspan="2"] {
 .failed {
   color: #DC143C;
 }
+
+
+.delete-problem-btn {
+  box-sizing: border-box;
+  padding: 10px;
+  background: deeppink;
+  text-decoration: none;
+  color: white;
+}

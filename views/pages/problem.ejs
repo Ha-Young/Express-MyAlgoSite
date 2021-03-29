@@ -2,6 +2,9 @@
   <div class="windowbar">
     <span>File</span><span>Editing</span><span>Search</span><span>Show</span><span>Navigation</span><span>Development</span><span>Tools</span><span>Help</span>
     <div class="controls">
+      <% if (isAdmin) { %>
+        <a class="delete-problem-btn" href="/problems/delete/<%= problem._id %>">Delete</a>
+      <% } %>
       <a class="close" href="/">X</a>
     </div>
   </div>

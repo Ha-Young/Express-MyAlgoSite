@@ -12,6 +12,6 @@ module.exports = function problemRouter(app) {
   route.get("/create", adminCheck, ProblemController.viewCreateProblem);
   route.get("/:problem_id", ProblemController.viewProblem);
 
-  route.post("/:problem_id", ProblemController.solveProblem);
   route.post("/create", adminCheck, ProblemController.createProblem);
+  route.post("/:problem_id", ProblemController.solveProblem);
 };

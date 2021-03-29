@@ -8,7 +8,6 @@ const testSchema = joi.object().keys({
 });
 
 const joiProblemSchema = joi.object({
-  id: joi.number().required(),
   title: joi.string().required(),
   completed_users: joi.number().required(),
   difficulty_level: joi.number().required(),

@@ -1,5 +1,5 @@
-<div class="form_wrapper">
-  <form class="form-common" action="/problems/create" method="POST">
+<div class="form_wrapper" id="problem-create-form">
+  <form class="form-common wide-width" action="/problems/create" method="POST">
     <h3>Create Problem</h3>
     <h4>input problem information</h4>
 
@@ -7,13 +7,55 @@
       <input placeholder="Problem Title" name="title" type="text" tabindex="2" required>
     </fieldset>
     <fieldset>
-      <input placeholder="Level" name="level" type="number" tabindex="3" required>
+      <input placeholder="Level" name="difficulty_level" type="number" tabindex="3" required>
     </fieldset>
     <fieldset>
-      <textarea id="simpleMDE" class="problem-desc" name="description"tabindex="4" required>Description</textarea>
+      <textarea id="simpleMDE" class="problem-desc" name="description"tabindex="4" required>Description (Support Mark Down Format)</textarea>
     </fieldset>
     <fieldset>
-      <button type="submit">Create</button>
+      <label class="result-type-label" for="result_type">Return Type</label>
+      <select class="result-type" name="result_type" tabindex="4" required>
+        <option value="number">number</option>
+        <option value="string">string</option>
+        <option value="boolean">boolean</option>
+      </select>
+    </fieldset>
+    <fieldset>
+      <label class="result-type-label" for="argument">Default Argument (문제 화면에서 초기 argument로 들어감)</label>
+      <input type="text" name="argument" placeholder="ex) n -> solution(n){ }  /  index => solution(index){ }" required>
+    </fieldset>
+    <fieldset>
+      <label class="result-type-label" for="img">Img URL</label>
+      <input type="text" name="img" placeholder="img url" required value="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Orange_question_mark.svg/1200px-Orange_question_mark.svg.png">
+    </fieldset>
+    <div class="test-list-content-wrapper">
+      <span class="test-list-title">test List</span>
+      <div class="test-list-input">
+        <label for="test-code">
+          <span class="test-list-label">Test Code</span>
+          <input type="text" id="test-code" placeholder='ex) solution(["Park", "Kim", "Choi"])'/>
+        </label>
+        <label for="test-solution">
+          <span class="test-list-label">Solution</span>
+          <input type="text" id="test-solution" placeholder='ex) "김서방은 1에 있습니다."'/>
+        </label>
+        <button id="test-add" class="test-list-add-btn" type="button">
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+      <div class="test-list-wrapper">
+        <ul class="test-list">
+          <li class=test-item>
+            <span class="testcase">solution(["Park", "Kim", "Choi"]) : "김서방은 1에 있습니다."</span>
+            <button class="test-remove">
+              <i class="fas fa-minus"></i>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <fieldset>
+      <button type="submit" id="problem-create">Create</button>
     </fieldset>
     <fieldset>
       <a href="/"><button type="button" class="cancel-btn">Cancel</button></a>
