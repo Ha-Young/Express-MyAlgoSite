@@ -33,7 +33,8 @@ a {
 }
 
 .header-column {
-  width: 110px;
+  display: flex;
+  width: 33%;
   margin: 0 30px;
 }
 
@@ -46,7 +47,10 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 70px;
+}
+
+.align-right {
+  justify-content: flex-end;
 }
 
 .user-info-form {
@@ -54,6 +58,7 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-left: 20px;
 }
 
 .user-name {
