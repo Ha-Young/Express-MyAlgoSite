@@ -10,6 +10,7 @@ module.exports = function problemRouter(app) {
   app.use('/problems', loginCheck, route);
 
   route.get("/create", adminCheck, ProblemController.viewCreateProblem);
+  route.get("/delete/:problem_id", ProblemController.deleteProblem);
   route.get("/:problem_id", ProblemController.viewProblem);
 
   route.post("/create", adminCheck, ProblemController.createProblem);

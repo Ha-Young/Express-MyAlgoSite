@@ -142,6 +142,20 @@ exports.createProblem = async function (req, res, next) {
   }
 };
 
+exports.deleteProblem = async function (req, res, next) {
+  const { problem_id: problemId } = req.params;
+
+  console.log('hi');
+
+  try {
+    await Problem.findByIdAndDelete(problemId);
+
+    res.redirect("/");
+  } catch (err) {
+    next(err);
+  }
+};
+
 function convertTestCaseStrToList(testCaseStr) {
   const testCaseStrList = testCaseStr.split("\n");
 
