@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
   userId: {
     google: {
+      user: { type: String, unique: true },
       type: String,
       required: [true, "userId is required if someone is logged in"],
       unique: true,

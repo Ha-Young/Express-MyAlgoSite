@@ -9,7 +9,7 @@
   <body>
     <% if (problem) { %>
       <h1><%= problem.title %></h1>
-      <div>정답자 수 : <%= problem.completed_users %></div>
+      <div>정답자 수 : <%= problem.completed_users.length %></div>
       <div>난이도 : <%= problem.difficulty_level %></div>
       <div>Instructions : <%= problem.description %></div>
       <form action="/problems/<%= problem._id %>" method="post">

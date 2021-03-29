@@ -1,6 +1,7 @@
 const Problem = require("../../models/Problem");
 const { VM } = require("vm2");
 const createError = require("http-errors");
+const User = require("../../models/User");
 
 exports.getAll = async function (req, res, next) {
   await Problem.find()
@@ -36,6 +37,8 @@ exports.checkCode = async function (req, res, next) {
       if (err) next(createError(400, err, { message: "invalid article id" }));
       try {
         const { tests } = problem;
+        const currentUserId = req.user.id;
+
         const testResults = tests.reduce(
           (results, test) => {
             const { code, solution } = test;
@@ -54,6 +57,7 @@ exports.checkCode = async function (req, res, next) {
         if (testResults.includes("Failure")) {
           res.render("failure", { testResults });
         } else {
+          updateCompletedUsers(currentUserId, problemId);
           res.render("success", { testResults });
         }
       } catch (err) {
@@ -61,3 +65,12 @@ exports.checkCode = async function (req, res, next) {
       }
     });
 };
+
+async function updateCompletedUsers(userId, problemId) {
+  const user = await User.findOne({ userId: { google: userId } });
+  const { _id: completedUserId } = user;
+
+  await Problem.findByIdAndUpdate(problemId, {
+    $push: { completed_users : completedUserId }
+  }).exec();
+}
