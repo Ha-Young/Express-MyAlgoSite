@@ -120,7 +120,7 @@ post로 테스트케이스 확인, 제출 및 체점기능을 하고 그 결과�
     - 성공, 실패 유무 판단
 
 ### 404 page
-![404](./readME_asset/404page.gif)
+![404page](./readME_asset/404Page.gif)
 
 ### error page
 ![500page](./readME_asset/500page.gif)
